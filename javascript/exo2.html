@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Apprendre JavaScript / Exercice 1</title>
+    <link rel="stylesheet" href="ressources/froggie.css" />
+  </head>
+  <body>
+    <div class="exercice">
+      <h1>Apprendre JavaScript / Exercice 2</h1>
+
+      <div id="log-container"></div>
+    </div>
+    <div class="froggiesplaining">
+      <span> Froggiesplaining :</span>
+
+      <ul>
+        <li>
+          <strong> prompt() ?</strong> est utilisée pour afficher une boîte de
+          dialogue modale qui permet à l'utilisateur de saisir une entrée. C'est
+          un moyen simple de capturer des informations directement à partir de
+          l'utilisateur pendant l'exécution d'un script.
+        </li>
+        <li>
+          <strong>printlog ? </strong>est une manière personnalisée d'afficher
+          des messages directement sur une page web en manipulant le DOM
+          (Document Object Model), plutôt que d'utiliser console.log() qui
+          affiche uniquement dans la console du navigateur.
+        </li>
+      </ul>
+
+      <img src="ressources/exo2.png" alt="" class="img-responsive" />
+      <img src="ressources/froggie-300.png" alt="Froggie" class="overfrog" />
+    </div>
+
+    <script>
+      //affiche une boite de dialogue :
+      let str = prompt("Quel est votre prénom ?");
+      //on détermine les voyelles :
+      let voyelles = ["a", "e", "é", "ëRapha", "i", "o", "u"];
+      //on initialise le compteur à 0 :
+      let count = 0;
+      //on incrémente de 1 à chaque voyelle trouvée dans la chaine de caractère
+      for (let i = 0; i < str.length; i++) {
+        if (voyelles.includes(str[i].toLowerCase())) {
+          count++;
+        }
+      }
+      // Fonction pour afficher le log dans la page dans l'id log-container
+      function printLog(message) {
+        let logContainer = document.getElementById("log-container");
+        logContainer.innerHTML += message + "<br>";
+      }
+      printLog("Bonjour, " + str + " &#128522;");
+      printLog(
+        "votre prénom contient <strong style='color: #68caff;'>" +
+          count +
+          " voyelles </strong>"
+      );
+    </script>
+  </body>
+</html>

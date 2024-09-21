@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Apprendre JavaScript / Exercice 1</title>
+    <link rel="stylesheet" href="ressources/froggie.css" />
+  </head>
+  <body>
+    <div class="exercice">
+      <h1>Apprendre JavaScript / Exercice 1</h1>
+
+      <button id="myButton">Cliquez ici</button>
+      <p id="message">(Le message apparaîtra ici.)</p>
+    </div>
+    <div class="froggiesplaining">
+      <span>Froggiesplaining :</span>
+
+      <ul>
+        <li>
+          <strong> où est le JavaScript ?</strong> Le code JavaScript est inclus
+          dans la balise "script" tout en bas de cette page html
+        </li>
+        <li>
+          <strong>getElementById() ? </strong>Sélectionne les éléments HTML par
+          leur id.
+        </li>
+        <li>
+          <strong>addEventListener('click', showMessage) ? </strong>Ajoute un
+          événement pour détecter (il "écoute"/ "listener") le clic sur le
+          bouton.
+        </li>
+        <li>
+          <strong> showMessage() :</strong> Cette fonction est exécutée lorsque
+          l'utilisateur clique sur le bouton et affiche le texte du paragraphe.
+        </li>
+      </ul>
+
+      <img src="ressources/exo1.png" alt="" class="img-responsive" />
+      <img src="ressources/froggie-300.png" alt="Froggie" class="overfrog" />
+    </div>
+
+    <script>
+      // Sélectionne le bouton et le paragraphe
+      const button = document.getElementById("myButton");
+      const message = document.getElementById("message");
+
+      // Fonction qui change le texte du paragraphe
+      function showMessage() {
+        message.textContent = "Bonjour, vous avez cliqué sur le bouton!";
+      }
+
+      // Ajoute un écouteur d'événement pour détecter les clics sur le bouton
+      button.addEventListener("click", showMessage);
+    </script>
+  </body>
+</html>

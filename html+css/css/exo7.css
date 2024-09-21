@@ -1,0 +1,44 @@
+@media screen and (min-width: 800px) {
+  .testqueries1 {
+    display: block;
+  }
+
+  .testqueries2 {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 799px) {
+  .testqueries1 {
+    display: none;
+  }
+
+  .testqueries2 {
+    display: block;
+  }
+  .testqueries3 {
+    background-color: aqua !important;
+  }
+}
+
+.testqueries1,
+.testqueries2,
+.testqueries3 {
+  background-color: rgba(60, 60, 92, 0.532);
+  margin: 8px;
+  padding: 8px;
+  text-align: center;
+}
+
+strong {
+  color: orange;
+}
+
+/* rendre responsive une image */
+
+.img-responsive {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: auto;
+}

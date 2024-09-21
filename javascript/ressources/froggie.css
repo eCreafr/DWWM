@@ -1,10 +1,10 @@
 @font-face {
   font-family: "Poppins";
-  src: url("../font/Poppins-Regular.ttf");
+  src: url("Poppins-Regular.ttf");
 }
 @font-face {
   font-family: "Poppins thin";
-  src: url("../font/Poppins-Thin.ttf");
+  src: url("Poppins-Thin.ttf");
 }
 
 * {
@@ -32,15 +32,10 @@
   position: relative;
   margin-top: 150px;
   box-shadow: 0px 4px 16px rgba(114, 21, 190, 0.5);
-  text-align: left;
 }
 .froggiesplaining span {
   font-family: "Poppins thin";
   font-size: 32px;
-}
-
-.froggiesplaining strong {
-  color: #68caff;
 }
 
 .overfrog {

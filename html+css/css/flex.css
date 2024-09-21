@@ -1,3 +1,7 @@
+* {
+  font-family: "Poppins";
+}
+
 body {
   background-color: rgb(22, 49, 83);
 }
@@ -45,7 +49,7 @@ body {
 }
 header,
 footer {
-  background: lightcoral;
+  background: rgb(20, 48, 56);
   padding: 20px;
   text-align: center;
 }
@@ -56,12 +60,12 @@ footer {
 .sidebar-left,
 .sidebar-right {
   flex-basis: 150px;
-  background: lightgrey;
+  background: rgb(173, 216, 207);
   padding: 20px;
 }
 main {
   flex-grow: 1;
-  background: lightyellow;
+  background: rgb(213, 222, 232);
   padding: 20px;
 }
 

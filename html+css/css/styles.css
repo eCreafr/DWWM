@@ -13,8 +13,6 @@
 }
 
 * {
-  margin: 0;
-  padding: 0;
   font-family: "Poppins";
   cursor: default;
 }
@@ -45,15 +43,21 @@ header {
 
 h1 {
   font-size: 4em;
+  margin: 0;
+  padding: 0;
   width: 100%;
   font-family: "Poppins Light";
 }
 h2 {
   font-family: "Poppins Bold";
-  font-size: 4em;
+  font-size: 2em;
   margin-top: 16px;
 }
-
+h3 {
+  font-size: 1em;
+  margin: 0;
+  padding: 0;
+}
 .animate-title1 {
   animation: slideInFromBottom 1s ease-out forwards;
 }
