@@ -1,0 +1,200 @@
+@font-face {
+  font-family: "Poppins Bold";
+  src: url("../font/Poppins-Bold.ttf");
+}
+@font-face {
+  font-family: "Poppins";
+  src: url("../font/Poppins-Regular.ttf");
+}
+
+@font-face {
+  font-family: "Poppins Light";
+  src: url("../font/Poppins-ExtraLight.ttf");
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  font-family: "Poppins";
+  cursor: default;
+}
+
+body {
+  text-align: center;
+  margin: 0;
+  padding: 0;
+  background: rgb(147, 20, 244);
+  background: linear-gradient(
+    180deg,
+    rgba(147, 20, 244, 1) 0%,
+    rgb(255, 255, 255) 30%
+  );
+}
+
+header {
+  height: 150px;
+  margin: 16px auto;
+  max-width: 800px;
+  background-color: #1f00a7;
+  background-image: url("../img/grenouille-header-800x150.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  color: #f8f0fd;
+  box-shadow: 0px 5px 15px rgba(75, 7, 131, 0.5);
+}
+
+h1 {
+  font-size: 4em;
+  width: 100%;
+  font-family: "Poppins Light";
+}
+h2 {
+  font-family: "Poppins Bold";
+  font-size: 4em;
+  margin-top: 16px;
+}
+
+.animate-title1 {
+  animation: slideInFromBottom 1s ease-out forwards;
+}
+.animate-title2 {
+  animation: slideInFromBottom 1.5s ease-out forwards;
+}
+
+/* Animation du titre */
+@keyframes slideInFromBottom {
+  0% {
+    opacity: 0;
+    transform: translateY(100px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+main {
+  margin: 16px auto;
+  max-width: 800px;
+  border: 1px solid #9189a5;
+  background-color: #ffffff;
+  text-align: center;
+  box-shadow: 0px 4px 15px rgba(114, 21, 190, 0.5);
+}
+
+footer {
+  color: #897592;
+  font-size: 14px;
+}
+
+p {
+  font-size: 14px;
+  color: #1f00a7;
+  text-align: center;
+  max-width: 400px;
+  margin: 16px auto;
+}
+
+/* rendre responsive une image */
+
+.img-responsive {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: auto;
+}
+
+/* un dégradé dans un texte (titrage)  */
+
+.gradient {
+  font-family: "Poppins Bold";
+  color: var(--fgColor-done, var(--color-done-fg));
+  background: linear-gradient(260deg, #1f00a7 30%, #01c4ff 50%, #e100ff 80%),
+    #f8f0fd;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  cursor: default;
+}
+
+/*  un dégradé dans un boutton  */
+
+.button-cta {
+  color: #f8f0fd;
+  font: 500 12px "Poppins Bold";
+  background: linear-gradient(90deg, #c082ff 0, #6325ff 100%) !important;
+  margin: 10px 0px;
+  border: none;
+  width: 200px;
+}
+
+.button-cta2nd {
+  color: #6325ff;
+  font: 500 12px "Poppins Bold";
+  background: #f8f0fd;
+  border: 1px solid #6325ff;
+  width: 200px;
+}
+
+.button-sta {
+  color: #897592;
+  font: 500 12px "Poppins";
+  background: #f8f0fd;
+  border: 1px solid #897592;
+  width: 200px;
+}
+
+/*
+
+ICI les CSS DU FORMULAIRE
+
+*/
+
+button {
+  cursor: pointer;
+  padding: 8px 24px;
+  border-radius: 30px;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+  box-shadow: 0px 4px 16px rgba(114, 21, 190, 0.5);
+}
+button:hover {
+  transform: scale(0.9);
+  box-shadow: 0px 1px 2px rgba(114, 21, 190, 0.5);
+}
+
+input {
+  border: 2px dashed #dac7ec;
+}
+
+.animation {
+  transition: 1s ease-out;
+}
+.animation:hover {
+  scale: 0.5;
+}
+
+#basdepage {
+  height: 360px;
+  background-image: url("../img/grenouille-footer-800.jpg");
+}
+
+#bulle,
+#textebasdepage {
+  width: 800px;
+  height: 360px;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#bulle {
+  z-index: 1000;
+}
+#bulle img {
+  padding-top: 27px;
+  width: 300px;
+}
+#textebasdepage {
+  z-index: 2202;
+  line-height: 15px;
+}

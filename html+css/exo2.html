@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>html suite du cours</title>
+    <link rel="stylesheet" href="css/styles.css" />
+        <link rel="stylesheet" href="css/froggie.css" />
+  </head>
+
+  <body>
+    <header>
+      <h1 class="animate-title1">TITRE SITE</h1>
+      <h3 class="animate-title2">sous titre moins important</h3>
+    </header>
+    <main>
+      <h2 class="gradient">Titre de la page en Dégradé et bold</h2>
+      <img
+        src="img/blend3.png"
+        alt="illustration avec des dégradés"
+        width="400px"
+        class="animation img-responsive"
+      />
+      <p lang="la">
+        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nemo
+        voluptatem iste consequuntur necessitatibus itaque officia dolores modi
+        neque, praesentium voluptas. Hic esse molestias recusandae alias
+        similique vitae asperiores magni quasi?
+      </p>
+
+      <p lang="la">
+        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nemo
+        voluptatem iste consequuntur necessitatibus itaque officia dolores modi
+        neque, praesentium voluptas. Hic esse molestias recusandae alias
+        similique vitae asperiores magni quasi?
+      </p>
+
+      <form id="simpleForm">
+        <label for="name">Nom :</label>
+        <input type="text" id="name" name="name" required /><br /><br />
+
+        <label for="email">Email :</label>
+        <input type="email" id="email" name="email" required /><br /><br />
+
+        <button class="button-cta" type="submit">Envoyer</button>
+      </form>
+
+      <a href="https://www.afpa.fr">afpa</a>
+
+      <div id="result"></div>
+
+      <br />
+      <br />
+      <br />
+      <br />
+
+      <button type="button" class="button-cta2nd">Je clique ici</button>
+      <br />
+      <button type="button" class="button-cta">ou peut-être ici</button>
+      <br />
+      <button type="button" class="button-sta">mais pas trop ici</button>
+
+      <br />
+
+      <div id="basdepage">
+        <div id="bulle"><img src="img/bulle.png" alt="bulle" /></div>
+
+        <div id="textebasdepage">
+          C'est fini pour <br />
+          aujourd'hui ! &#128522;
+        </div>
+      </div>
+    </main>
+    <footer>un message ou un lien de contact</footer>
+
+    <script>
+      document
+        .getElementById("simpleForm")
+        .addEventListener("submit", function (event) {
+          event.preventDefault(); // Empêche l'envoi du formulaire
+
+          // Récupérer les données du formulaire
+          const name = document.getElementById("name").value;
+          const email = document.getElementById("email").value;
+
+          // Afficher les données dans l'élément "result"
+          document.getElementById("result").innerHTML =
+            "<h3>Données soumises au formulaire :</h3><p>Nom : " +
+            name +
+            "</p><p>Email : " +
+            email +
+            "</p>";
+        });
+    </script>
+
+
+
+
+    <div class="froggiesplaining">
+      <span> Froggiesplaining :</span>
+      <p><br />
+      Dans cette première leçon, on découvre les "BALISES" d'un document HTML
+      :<br />
+      <ul>
+        <li>!doctype :</li>
+        <li>html</li>
+        <li>
+          head
+          <ul>
+            <li>utf8</li>
+            <li>title</li>
+            <li>viewport</li>
+          </ul>
+        </li>
+        <li>
+          body
+          <ul>
+            <li>header</li>
+            <li>nav</li>
+            <li>main</li>
+            <li>section</li>
+            <li>article</li>
+            <li>footer</li>
+          </ul>
+        </li>
+      </ul>
+      <br />
+      on découvre aussi en commentant le code html et css, les balises H1 à H6, 
+      comment intégrer une image,<br />
+      un paragraphe, lier une feuille de style,
+      une typographie, faire un lien vers une url,  constuire une liste comme ceci :      <img src="img/exo1-2.png" alt="" class="img-responsive" /><br />et un tableau comme cela :
+
+      <img src="img/exo1-1.png" alt="" class="img-responsive" /></p>
+      <img src="img/froggie-300.png" alt="Froggie" class="overfrog" />
+    </div>
+
+
+
+
+
+  </body>
+</html>

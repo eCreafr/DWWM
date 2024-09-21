@@ -1,0 +1,94 @@
+@font-face {
+  font-family: "titrage";
+  src: url("../font/Poppins-Thin.ttf");
+}
+
+@font-face {
+  font-family: "main";
+  src: url("../font/Poppins-Regular.ttf");
+}
+
+* {
+  font-family: "main";
+}
+
+body {
+  background-color: rgb(255, 255, 255);
+}
+
+h1 {
+  color: #333333;
+  font-size: 50px;
+  padding: 8px;
+  margin: 8px;
+  text-align: center;
+}
+#titre {
+  color: blueviolet;
+}
+.titrage {
+  font-family: "titrage";
+}
+/* css de l'image d'accueil*/
+#orelsan {
+  float: left;
+  margin-left: 16px;
+}
+
+.puce {
+  list-style: none;
+}
+
+p {
+  padding: 8px;
+}
+
+p::first-letter {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.surligne {
+  background-color: yellow;
+  font-style: italic;
+}
+
+a {
+  font-weight: bold;
+  text-decoration: none;
+  font-size: 1rem;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+/*
+a:visited {
+  color: #333333;
+}
+*/
+
+table {
+  margin: 16px;
+}
+
+th {
+  color: rgb(10, 198, 255);
+  font-family: main;
+  font-size: 2em;
+  padding: 0 16px;
+}
+td {
+  background-color: rgb(10, 198, 255);
+  padding: 8px;
+  text-align: center;
+  color: #fff;
+}
+
+footer {
+  width: 100%;
+  text-align: center;
+  display: inline-block;
+  color: #555;
+  font-size: 0.8rem;
+}
