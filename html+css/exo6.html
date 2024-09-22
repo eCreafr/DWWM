@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Exercice 6 | exemples de Display</title>
+    <link rel="stylesheet" href="css/exo6.css" />
+    <link rel="stylesheet" href="css/froggie.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Exemples de Balises Display</h1>
+
+      <!-- Display inline -->
+      <h3>Display Inline</h3>
+      <div class="box inline">Inline 1</div>
+      <div class="box inline">Inline 2</div>
+
+      <!-- Display block -->
+      <h3>Display Block</h3>
+      <div class="box block">Block 1</div>
+      <div class="box block">Block 2</div>
+
+      <!-- Display inline-block -->
+      <h3>Display Inline-block</h3>
+      <div class="box inline-block">Inline-block 1</div>
+      <div class="box inline-block">Inline-block 2</div>
+
+      <!-- Display flex -->
+      <h3>Display Flex</h3>
+      <div class="box flex">
+        <div>Flex 1</div>
+        <div>Flex 2</div>
+      </div>
+
+      <!-- Display inline-flex -->
+      <h3>Display Inline-flex</h3>
+      <div class="box inline-flex">
+        <div>Inline-flex 1</div>
+        <div>Inline-flex 2</div>
+      </div>
+
+      <!-- Display grid -->
+      <h3>Display Grid</h3>
+      <div class="box grid">
+        <div>Grid 1</div>
+        <div>Grid 2</div>
+        <div>Grid 3</div>
+      </div>
+
+      <!-- Display none -->
+      <h3>Display None (Caché)</h3>
+      <div class="box none">Caché (None)</div>
+    </div>
+
+    <div class="froggiesplaining">
+      <span> Froggiesplaining :</span>
+      <p>
+        <br />
+        inline : L'élément est affiché dans le flux en ligne, sans rupture de
+        ligne. <br />
+        block : L'élément occupe toute la largeur disponible et commence sur une
+        nouvelle ligne. <br />
+        inline-block : L'élément est en ligne mais accepte des propriétés de
+        dimensionnement comme un élément bloc. <br />
+        flex : Utilise un conteneur flexbox pour disposer ses éléments enfants
+        de manière flexible. <br />
+        inline-flex : Combine flex avec le comportement inline. <br />
+        grid : Définit un conteneur de mise en page en grille (nouveau en
+        HTML5). <br />
+        none : Cache l'élément. <br />
+        <br />
+        <br />
+
+        <br />
+        <span> Avec le framework Bootstrap :</span> <br />
+        il suffira d'ecrire : <br />
+        La classe d-inline permet de rendre un élément inline. <br />
+        La classe d-inline-block permet de rendre un élément inline-block.
+        <br />
+        La classe d-block force un élément à se comporter comme un block.<br />
+        La classe d-flex active un conteneur flexbox. <br />
+        La classe d-inline-flex combi ne le comportement inline avec flexbox.<br />
+        grid : Définit un conteneur de mise en page en grille (nouveau en
+        HTML5). <br />
+        La classe d-none masque l'élément.
+      </p>
+      <img
+        src="img/froggie-300.png"
+        alt="Froggie explain"
+        class="overfrog"
+        id="Froggie"
+      />
+    </div>
+
+    <a href="#Froggie"
+      ><div id="goToFroggie">
+        <img src="img/froggie-300.png" width="50px" /><br />↓
+      </div></a
+    >
+  </body>
+</html>

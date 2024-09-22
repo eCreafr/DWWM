@@ -48,7 +48,7 @@ body {
 }
 header,
 footer {
-  background: rgb(20, 48, 56);
+  background: rgb(102, 189, 212);
   padding: 20px;
   text-align: center;
 }
@@ -59,7 +59,7 @@ footer {
 .sidebar-left,
 .sidebar-right {
   flex-basis: 150px;
-  background: rgb(173, 216, 207);
+  background: rgb(135, 65, 214);
   padding: 20px;
 }
 main {
