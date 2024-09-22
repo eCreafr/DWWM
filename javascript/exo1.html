@@ -4,14 +4,15 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Apprendre JavaScript / Exercice 1</title>
-    <link rel="stylesheet" href="ressources/froggie.css" />
+    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="stylesheet" href="css/froggie.css" />
   </head>
   <body>
     <div class="exercice">
       <h1>Apprendre JavaScript / Exercice 1</h1>
 
       <button id="myButton">Cliquez ici</button>
-      <p id="message">(Le message apparaîtra ici.)</p>
+      <p id="message"></p>
     </div>
     <div class="froggiesplaining">
       <span>Froggiesplaining :</span>
@@ -47,7 +48,7 @@
 
       // Fonction qui change le texte du paragraphe
       function showMessage() {
-        message.textContent = "Bonjour, vous avez cliqué sur le bouton!";
+        message.textContent = "Bonjour, vous avez cliqué sur le bouton !";
       }
 
       // Ajoute un écouteur d'événement pour détecter les clics sur le bouton

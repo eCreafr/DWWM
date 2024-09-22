@@ -6,13 +6,15 @@ body {
   background-color: rgb(22, 49, 83);
 }
 
+/* FLEX EXO 3 */
+
 .container {
   display: flex;
   flex-direction: column;
 }
 .box {
   background: rgb(71, 88, 94);
-  padding: 20px;
+  padding: 40px;
   margin: 10px;
   text-align: center;
   color: rgb(212, 0, 255);
@@ -25,22 +27,19 @@ body {
 .navbar {
   display: flex;
   align-items: center;
-  padding: 10px;
+  flex-direction: row;
+  padding: 16px;
   background: rgb(255, 255, 255);
+  margin-bottom: 10px;
 }
 .menu {
   display: flex;
   list-style: none;
-  margin-left: auto;
-}
-.menu li {
-  margin-left: 20px;
-}
-.auth {
-  margin-left: 20px;
+  gap: 50px;
+  font-size: 1.5em;
 }
 
-/* FLEX PART 2*/
+/* FLEX PART EXO 4*/
 
 .layout {
   display: flex;
@@ -69,7 +68,7 @@ main {
   padding: 20px;
 }
 
-/* PART 3*/
+/* FLEX EXO 5*/
 
 .container3 {
   display: flex;
