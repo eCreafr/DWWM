@@ -40,6 +40,7 @@
   text-align: center;
   cursor: pointer;
   z-index: 100;
+  border-radius: 5px;
 }
 
 .froggiesplaining {
@@ -51,6 +52,7 @@
   margin-top: 150px;
   box-shadow: 0px 4px 16px rgba(114, 21, 190, 0.5);
   text-align: left;
+  border-radius: 5px;
 }
 .froggiesplaining span {
   font-family: "Poppins thin";
