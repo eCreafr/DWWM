@@ -20,14 +20,19 @@
         alt="illustration avec des dégradés"
         width="400px"
         class="animation img-responsive"
-      />
+      /> <br>cette image (png transparent) à un effet "mouse hover" <br><strong>en CSS</strong> qui joue sur sa taille
       <p lang="la">
         Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nemo
         voluptatem iste consequuntur necessitatibus itaque officia dolores modi
         neque, praesentium voluptas. Hic esse molestias recusandae alias
         similique vitae asperiores magni quasi?
       </p>
-<img src="img/froggie-300.png" alt="FroggieColor"  id="FroggieColor"/>
+
+      <img  src="img/froggie-300.png" alt="FroggieColor"  id="FroggieColor"/><br>
+      cette image (png transparent) à un effet "mouse hover" <br> <strong>en javascript</strong> qui la remplace par une autre image
+
+
+
       <p lang="la">
         Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nemo
         voluptatem iste consequuntur necessitatibus itaque officia dolores modi
@@ -115,15 +120,15 @@
     <a href="#Froggie"><div id="goToFroggie"><img src="img/froggie-300.png" width="50px"/><br>↓</div></a>
 
   <script>
-        // Sélectionne l'image
+        // Sélectionne l'image à changer, ici Id FroggieColor :
         const img = document.getElementById('FroggieColor');
 
-        // Change l'image au survol
+        // Change l'image au survol de la souris, par une image similaire, a part la couleur :
         img.addEventListener('mouseover', () => {
             img.src = 'img/froggie-300-hover.png';
         });
 
-        // Rétablit l'image d'origine lorsqu'on ne survole plus
+        // quand la souris quitte l'image, on remet l'image d'origine
         img.addEventListener('mouseout', () => {
             img.src = 'img/froggie-300.png';
         });

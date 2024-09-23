@@ -16,11 +16,10 @@ body {
   background: rgb(71, 88, 94);
   padding: 40px;
   margin: 10px;
-  text-align: center;
-  color: rgb(212, 0, 255);
+  text-align: left;
+  color: rgb(255, 255, 255);
   font-weight: bolder;
-  font-size: 25px;
-  font-family: Verdana, sans-serif;
+  font-size: 1em;
 }
 
 /* NAVBAR */
@@ -44,41 +43,43 @@ body {
 .layout {
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
+  min-height: 100vh; /* pour Paul ^^, ça veut dire 100% de la hauteur de l'ecran */
 }
 header,
 footer {
-  background: rgb(102, 189, 212);
+  background: rgb(40, 114, 38);
   padding: 20px;
   text-align: center;
+  color: aliceblue;
 }
 .main-content {
   display: flex;
-  flex-grow: 1;
+  flex-grow: 1; /* pas vital ici, marche sans */
+  color: aliceblue;
 }
 .sidebar-left,
 .sidebar-right {
-  flex-basis: 150px;
-  background: rgb(135, 65, 214);
+  flex-basis: 300px;
+  background: rgba(35, 94, 58, 0.637);
   padding: 20px;
+  color: aliceblue;
 }
 main {
   flex-grow: 1;
-  background: rgb(213, 222, 232);
+  background: rgb(134, 185, 138);
   padding: 20px;
 }
 
 /* FLEX EXO 5*/
 
-.container3 {
+.containerExo5 {
   display: flex;
-  height: 500px;
-  background: lightblue;
+  height: 800px;
+  background: rgb(67, 151, 179);
 }
-.box3 {
+.boxExo5 {
   text-align: center;
-  background: rgb(182, 39, 14);
+  background: rgb(202, 124, 23);
   padding: 10px;
   margin: 0px;
-  height: 50px;
 }

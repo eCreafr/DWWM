@@ -24,9 +24,14 @@
 .testqueries1,
 .testqueries2,
 .testqueries3 {
-  background-color: rgba(60, 60, 92, 0.532);
+  background-color: rgba(89, 56, 151, 0.532);
   margin: 8px;
   padding: 8px;
+  text-align: center;
+}
+
+header,
+footer {
   text-align: center;
 }
 
