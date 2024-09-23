@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Exercice 2 | découverte CSS</title>
-    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="stylesheet" href="css/exo2.css" />
         <link rel="stylesheet" href="css/froggie.css" />
   </head>
 
@@ -27,7 +27,7 @@
         neque, praesentium voluptas. Hic esse molestias recusandae alias
         similique vitae asperiores magni quasi?
       </p>
-
+<img src="img/froggie-300.png" alt="FroggieColor"  id="FroggieColor"/>
       <p lang="la">
         Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nemo
         voluptatem iste consequuntur necessitatibus itaque officia dolores modi
@@ -114,7 +114,20 @@
 
     <a href="#Froggie"><div id="goToFroggie"><img src="img/froggie-300.png" width="50px"/><br>↓</div></a>
 
+  <script>
+        // Sélectionne l'image
+        const img = document.getElementById('FroggieColor');
 
+        // Change l'image au survol
+        img.addEventListener('mouseover', () => {
+            img.src = 'img/froggie-300-hover.png';
+        });
+
+        // Rétablit l'image d'origine lorsqu'on ne survole plus
+        img.addEventListener('mouseout', () => {
+            img.src = 'img/froggie-300.png';
+        });
+    </script>
 
   </body>
 </html>

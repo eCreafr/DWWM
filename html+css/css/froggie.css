@@ -9,7 +9,7 @@
 
 * {
   font-family: "Poppins";
-  scroll-behavior: smooth; /* Ajoute l'animation de scroll en douceur */
+  scroll-behavior: smooth; /*Ajoute l'animation de scroll en douceur */
 }
 
 .img-responsive {
@@ -69,6 +69,7 @@
   max-width: 100%;
   font-size: 16px;
 }
+
 .overfrog {
   position: absolute;
   top: -110px;

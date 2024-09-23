@@ -1,17 +1,14 @@
 .gradient-hover {
-  background: linear-gradient(45deg, rgb(208, 217, 255), rgb(255, 255, 255));
+  background: linear-gradient(45deg, rgb(95, 108, 165), rgb(255, 255, 255));
   background-size: 200% 200%;
   transition: background-position 0.5s ease;
   color: blueviolet;
   padding: 20px;
   border-radius: 10px;
-  text-align: center;
-  border: 1px solid transparent;
 }
 
 .gradient-hover:hover {
   background-position: 100% 0;
-  border-color: rgba(0, 0, 0, 0.2); /* Ajoute une bordure légère au survol */
   cursor: pointer;
 }
 
