@@ -62,11 +62,6 @@ a {
 a:hover {
   text-decoration: underline;
 }
-/*
-a:visited {
-  color: #333333;
-}
-*/
 
 table {
   margin: 16px;

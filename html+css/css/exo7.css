@@ -1,3 +1,5 @@
+/* CSS exo 07 A */
+
 @media screen and (min-width: 800px) {
   .testqueries1 {
     display: block;
@@ -46,4 +48,43 @@ strong {
   max-width: 100%;
   height: auto;
   margin: auto;
+}
+
+/* CSS exo 07 B */
+
+/* Style de base pour le conteneur */
+.container7b {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: lightgray;
+}
+
+/* Conteneur adaptable en fonction de la taille */
+.box7b {
+  background-color: lightblue;
+  padding: 80px 20px;
+  text-align: center;
+}
+
+/* Container query pour modifier le style de .box si le conteneur parent fait au moins 500px de largeur */
+@container (min-width: 500px) {
+  .box7b {
+    background-color: lightgreen;
+    font-size: 1.5rem;
+  }
+}
+
+/* Container query pour modifier le style de .box si le conteneur parent fait au moins 700px de largeur */
+@container (min-width: 700px) {
+  .box7b {
+    background-color: coral;
+    font-size: 2rem;
+  }
+}
+
+/* Activer les container queries */
+.container7b {
+  container-type: inline-size;
 }
