@@ -1,5 +1,7 @@
 /* CSS exo 07 A */
-
+body {
+  text-align: center;
+}
 @media screen and (min-width: 800px) {
   .testqueries1 {
     display: block;
@@ -19,14 +21,15 @@
     display: block;
   }
   .testqueries3 {
-    background-color: aqua !important;
+    background-color: rgba(35, 15, 39, 0.221) !important;
+    color: aliceblue !important;
   }
 }
 
 .testqueries1,
 .testqueries2,
 .testqueries3 {
-  background-color: rgba(89, 56, 151, 0.532);
+  background-color: rgba(89, 56, 151, 0.096);
   margin: 8px;
   padding: 8px;
   text-align: center;
@@ -58,22 +61,20 @@ strong {
   max-width: 800px;
   margin: 0 auto;
   padding: 0px;
-  background-color: lightgray;
 }
 
 /* Conteneur adaptable en fonction de la taille */
 .box7b {
-  background-color: lightblue;
+  background-color: rgba(173, 216, 230, 0.274);
   padding: 80px 0px;
   text-align: center;
   margin: 0 auto;
-  width: 90%;
 }
 
 /* Container query pour modifier le style de .box si le conteneur parent fait au moins 500px de largeur */
 @container (min-width: 500px) {
   .box7b {
-    background-color: lightgreen;
+    background-color: rgba(255, 127, 80, 0.352);
     font-size: 1.5rem;
   }
 }
@@ -81,7 +82,7 @@ strong {
 /* Container query pour modifier le style de .box si le conteneur parent fait au moins 700px de largeur */
 @container (min-width: 700px) {
   .box7b {
-    background-color: coral;
+    background-color: rgba(144, 238, 144, 0.272);
     font-size: 2rem;
   }
 }

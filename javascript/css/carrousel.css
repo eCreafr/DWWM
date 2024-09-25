@@ -1,16 +1,5 @@
 * {
-  margin: 0;
-  padding: 0;
   box-sizing: border-box;
-}
-body {
-  background: rgb(147, 20, 244);
-  background: linear-gradient(
-    90deg,
-    rgba(147, 20, 244, 1) 0%,
-    rgba(9, 9, 121, 1) 25%,
-    rgba(0, 212, 255, 1) 100%
-  );
 }
 
 .carrousel-container {

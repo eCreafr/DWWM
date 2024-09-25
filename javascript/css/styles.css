@@ -1,4 +1,37 @@
 #message {
-  color: orange;
+  color: #68caff;
   font-weight: bold;
+}
+.container {
+  min-height: 400px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.box,
+.box p {
+  text-align: center;
+}
+
+#log-container {
+  border-radius: 16px;
+  background-color: rgba(255, 255, 255, 0.146);
+  padding: 30px;
+}
+
+button {
+  color: #f8f0fd;
+  background: linear-gradient(90deg, #c082ff 0, #6325ff 100%) !important;
+  margin: 10px 0px;
+  border: none;
+  width: 200px;
+  cursor: pointer;
+  padding: 8px 24px;
+  border-radius: 30px;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+  box-shadow: 0px 4px 16px rgba(114, 21, 190, 0.5);
+}
+button:hover {
+  transform: scale(0.9);
+  box-shadow: 0px 1px 2px rgba(114, 21, 190, 0.5);
 }

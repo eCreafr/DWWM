@@ -1,0 +1,46 @@
+body {
+  text-align: center;
+}
+
+#anime {
+  width: 150px;
+  height: 150px;
+  margin: 3em auto;
+  background-color: #ffffff00;
+  border: 20px solid #ffffff;
+  border-radius: 30px;
+  transition: border-radius 2s, border-color 3s;
+  /* transition when the mouse leave */
+}
+
+#anime:hover {
+  border-color: rgb(163, 25, 255);
+  transform: rotate(1080deg);
+  border-radius: 50%;
+  transition: all 2s;
+  /* transition when the mouse over */
+}
+
+#anime:after {
+  content: "eCrea.fr 😜";
+  position: relative;
+  top: 40px;
+  font-size: 30px;
+  font-family: helvetica, arial, sans-serif;
+  color: #888;
+  opacity: 0;
+  transition: opacity 2s;
+}
+
+#anime:hover:after {
+  opacity: 1;
+  transition: opacity 1s 1s;
+}
+
+h2 {
+  font-family: "Open Sans", "Segeo UI", Helvetica, Arial, sans-serif;
+  font-size: 10px;
+  margin-top: 200px;
+  color: #aaa;
+  text-transform: uppercase;
+}

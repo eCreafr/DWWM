@@ -3,13 +3,16 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Apprendre JavaScript / Exercice 1</title>
-    <link rel="stylesheet" href="ressources/froggie.css" />
+    <title>Apprendre JavaScript | Exercice 2</title>
+    <link rel="stylesheet" href="css/froggie.css" />
+    <link rel="stylesheet" href="css/styles.css" />
   </head>
   <body>
     <div class="exercice">
-      <h1>Apprendre JavaScript / Exercice 2</h1>
+      <h1>Apprendre JavaScript | Exercice 2</h1>
+    </div>
 
+    <div class="container">
       <div id="log-container"></div>
     </div>
     <div class="froggiesplaining">
@@ -38,7 +41,7 @@
       //affiche une boite de dialogue :
       let str = prompt("Quel est votre prénom ?");
       //on détermine les voyelles :
-      let voyelles = ["a", "e", "é", "ëRapha", "i", "o", "u"];
+      let voyelles = ["a", "e", "é", "ë", "i", "o", "u"];
       //on initialise le compteur à 0 :
       let count = 0;
       //on incrémente de 1 à chaque voyelle trouvée dans la chaine de caractère
@@ -56,7 +59,7 @@
       printLog(
         "votre prénom contient <strong style='color: #68caff;'>" +
           count +
-          " voyelles </strong>"
+          " voyelle(s)bob </strong>"
       );
     </script>
   </body>

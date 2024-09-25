@@ -19,6 +19,7 @@
 .flex {
   background-color: #17a2b8;
   display: flex;
+  justify-content: space-evenly;
 }
 .inline-flex {
   background-color: #ffc107;

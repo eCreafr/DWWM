@@ -3,10 +3,15 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Carrousel</title>
+    <title>Apprendre JavaScript | Exercice 6</title>
     <link rel="stylesheet" href="css/carrousel.css" />
+    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="stylesheet" href="css/froggie.css" />
   </head>
   <body>
+    <div class="exercice">
+      <h1>Apprendre JavaScript | Exercice 6</h1>
+    </div>
     <div class="carrousel-container">
       <div class="carrousel-slide">
         <img src="ressources/carrousel1.jpg" alt="Image 1" />
@@ -21,11 +26,32 @@
     <button id="nextBtn">⟶</button>
 
     <script src="js/carrousel.js"></script>
-    <p>
-      <br /><br />
-      <a target="_blank" href="https://www.bing.com/images/create?FORM=GENILP">
-        credit photo copilot bing
-      </a>
-    </p>
+
+    <div class="froggiesplaining">
+      <span>Froggiesplaining :</span>
+
+      <ul>
+        <li>
+          <strong> où est le JavaScript ?</strong> Le code JavaScript est inclus
+          dans la balise "script" tout en bas de cette page html
+        </li>
+        <li>
+          <strong>getElementById() ? </strong>Sélectionne les éléments HTML par
+          leur id.
+        </li>
+        <li>
+          <strong>addEventListener('click', showMessage) ? </strong>Ajoute un
+          événement pour détecter (il "écoute"/ "listener") le clic sur le
+          bouton.
+        </li>
+        <li>
+          <strong> showMessage() :</strong> Cette fonction est exécutée lorsque
+          l'utilisateur clique sur le bouton et affiche le texte du paragraphe.
+        </li>
+      </ul>
+
+      <img src="ressources/exo1.png" alt="" class="img-responsive" />
+      <img src="ressources/froggie-300.png" alt="Froggie" class="overfrog" />
+    </div>
   </body>
 </html>

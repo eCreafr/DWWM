@@ -1,0 +1,45 @@
+body {
+  text-align: center;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  margin: 0 auto;
+}
+
+.box {
+  padding: 32px;
+  margin: 16px;
+  border-radius: 8px;
+  background-color: rgba(255, 255, 255, 0.422);
+}
+
+.slide1 {
+  animation: slideInFromBottom 1s ease-out forwards;
+}
+.slide2 {
+  animation: slideInFromBottom 2s ease-out forwards;
+}
+.slide3 {
+  animation: slideInFromBottom 3s ease-out forwards;
+}
+.slide4 {
+  animation: slideInFromBottom 4s ease-out forwards;
+}
+.slide5 {
+  animation: slideInFromBottom 5s ease-out forwards;
+}
+
+/* Animation des divs */
+@keyframes slideInFromBottom {
+  0% {
+    opacity: 0;
+    transform: translateY(100px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
