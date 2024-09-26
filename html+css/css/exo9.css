@@ -1,6 +1,10 @@
 .gradient-hover {
-  background: linear-gradient(45deg, rgba(95, 108, 165, 0), rgb(255, 255, 255));
-  background-size: 300% 300%;
+  background: linear-gradient(
+    45deg,
+    rgba(255, 255, 255, 0),
+    rgb(243, 241, 245)
+  );
+  background-size: 400% 400%;
   transition: background-position 1s ease;
   color: blueviolet;
   padding: 20px;

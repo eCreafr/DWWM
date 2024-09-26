@@ -74,7 +74,8 @@ main {
 
 .containerExo5 {
   display: flex;
-  height: 800px;
+  justify-content: space-between;
+  height: 100vh;
   background: rgb(67, 151, 179);
 }
 .boxExo5 {
