@@ -16,12 +16,12 @@
 body {
   width: 100%;
   background-color: #f4f4f6;
-  background-image: radial-gradient(at 2% 78%, #b8b7e1 0px, transparent 50%),
-    radial-gradient(at 50% 7%, #f4c071 0px, transparent 50%),
-    radial-gradient(at 89% 10%, #ff8a66 0px, transparent 50%),
-    radial-gradient(at 77% 85%, #413ee5 0px, transparent 50%),
-    radial-gradient(at 0% 100%, #9999ff 0px, transparent 50%),
-    radial-gradient(at 0% 0%, #f4f4f6 0px, transparent 50%);
+  background-image: radial-gradient(at 2% 78%, #ffffff 0px, transparent 50%),
+    radial-gradient(at 50% 7%, #68caff 0px, transparent 50%),
+    radial-gradient(at 89% 10%, #003cff 0px, transparent 50%),
+    radial-gradient(at 77% 85%, #c928fa 0px, transparent 50%),
+    radial-gradient(at 0% 100%, #0d2d72 0px, transparent 50%),
+    radial-gradient(at 0% 0%, #d8ffff 0px, transparent 50%);
   background-repeat: no-repeat;
   background-position: 50% 0;
   margin: 0;

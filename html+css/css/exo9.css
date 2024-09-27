@@ -7,8 +7,9 @@
   background-size: 400% 400%;
   transition: background-position 1s ease;
   color: blueviolet;
-  padding: 20px;
-  border-radius: 10px;
+  padding: 8px;
+  border-radius: 8px;
+  font-size: 12px;
 }
 
 .gradient-hover:hover {
@@ -21,23 +22,23 @@
   max-width: 1200px; /* Largeur maximale personnalisée */
 }
 
-body {
-  width: 100%;
-  background-color: #f4f4f6;
-  background-image: radial-gradient(at 2% 78%, #b8b7e1 0px, transparent 50%),
-    radial-gradient(at 50% 7%, #0bceff 0px, transparent 50%),
-    radial-gradient(at 89% 10%, #2522ca 0px, transparent 50%),
-    radial-gradient(at 77% 85%, #e92af0 0px, transparent 50%),
-    radial-gradient(at 0% 100%, #9999ff 0px, transparent 50%),
-    radial-gradient(at 0% 0%, #f4f4f6 0px, transparent 50%);
-  background-repeat: no-repeat;
-  background-position: 50% 0;
-}
-
 a {
   text-decoration: none;
 }
 
 .nav-link {
   color: #f4f4f6;
+}
+
+@container (width > 500px) {
+  .gradient-hover {
+    padding: 16px;
+    border-radius: 16px;
+    font-size: 18px;
+  }
+}
+
+/* Activer les container queries */
+footer {
+  container-type: inline-size;
 }
