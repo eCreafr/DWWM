@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Apprendre JavaScript | Exercice 1</title>
+    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="stylesheet" href="../html+css/css/froggie.css" />
+  </head>
+  <body>
+    <div class="exercice">
+      <h1>Apprendre JavaScript | Exercice 1 application (suite) :</h1>
+    </div>
+
+    <div class="container">
+      <div id="message" style="text-align: center">
+        <div id="cacheCache" style="display: none">
+          <h1>Bienvenue sur cette page</h1>
+          (vous pouvez masquer ce message)
+        </div>
+        <br />
+        <span id="bouton" class="smallButton">VOIR</span>
+      </div>
+      <div></div>
+    </div>
+
+    <div class="froggiesplaining">
+      <span>Froggiesplaining :</span>
+
+      <ul>
+        <li>
+          <strong> Effet "Toggle"</strong> Nous venons de réaliser un "effet
+          Toggle", comme pour afficher une legende au clic sous une image ou
+          ouvrir un menur en cliquant sur un burgermenu par exemple
+        </li>
+      </ul>
+      <br />
+      <img src="ressources/exo1tp2-1.png" alt="" />
+
+      <img src="ressources/froggie-300.png" alt="Froggie" class="overfrog" />
+    </div>
+
+    <script>
+      // on détermine 2 variables : le bouton et l'élément texte à afficher/masquer
+      const bouton = document.getElementById("bouton");
+      const texte = document.getElementById("cacheCache");
+
+      // on initialise l'état de l'élément texte au chargement de la page
+      let visible = false; // Initialement caché donc false
+
+      function toggleMessage() {
+        // on fait une condition if et else , pour vérifier si l'élément est visible ou non
+        if (visible === false) {
+          // "Si" le texte est masqué, alors on l'affiche
+          texte.style.display = "block";
+          bouton.innerText = "PAS VOIR"; // on modifie le contenu du bouton au passage
+          visible = true; // sans oublier de mettre à jour l'état visible à vrai
+        } else {
+          // ou "sinon" le texte est visible, alors on le masque :
+          texte.style.display = "none";
+          bouton.innerText = "VOIR"; // on modifie le contenu du bouton au passage
+          visible = false; // sans oublier de mettre à jour l'état visible à faux
+        }
+      }
+
+      // on ajoute ensuite un EventListener au bouton pour écouter les clics :
+      bouton.addEventListener("click", toggleMessage);
+    </script>
+  </body>
+</html>

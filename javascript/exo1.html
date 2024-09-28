@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Apprendre JavaScript | Exercice 1</title>
     <link rel="stylesheet" href="css/styles.css" />
-    <link rel="stylesheet" href="css/froggie.css" />
+    <link rel="stylesheet" href="../html+css/css/froggie.css" />
   </head>
   <body>
     <div class="exercice">
@@ -15,7 +15,7 @@
     <div class="container">
       <div>
         <button id="myButton">
-          <p id="message">Ne cliquez pas sinon...</p>
+          <p id="message">Ne cliquez pas sinon ...</p>
         </button>
       </div>
     </div>
@@ -42,8 +42,25 @@
           l'utilisateur clique sur le bouton et affiche le texte du paragraphe.
         </li>
       </ul>
+      <br />
 
       <img src="ressources/exo1.png" alt="" class="img-responsive" />
+      <br /><br />
+      <strong>Exercice :</strong> <br />
+      sur la base de cet exemple, essayez de l'adapter à votre tour et d'ecrire
+      un script similaire : <br />
+      <ul>
+        <li>
+          Cette fois il s'agit d'effacer un texte existant au chargement de la
+          page, si on clique sur cette image <i class="bi bi-eye-slash"></i>
+        </li>
+        <li>
+          et la faire revenir si on clique sur cette image
+          <i class="bi bi-eye-fill"></i>
+        </li>
+      </ul>
+      <br />
+
       <img src="ressources/froggie-300.png" alt="Froggie" class="overfrog" />
     </div>
 
@@ -57,7 +74,7 @@
         message.textContent = "Vous avez cliqué sur le bouton ! 😮";
       }
 
-      // Ajoute un écouteur d'événement pour détecter les clics sur le bouton
+      // Ajoute un "écouteur d'événement" pour détecter les clics sur le bouton
       button.addEventListener("click", showMessage);
     </script>
   </body>

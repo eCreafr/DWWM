@@ -15,17 +15,42 @@
 }
 body {
   width: 100%;
-  background-color: #f4f4f6;
-  background-image: radial-gradient(at 2% 78%, #ffffff 0px, transparent 50%),
-    radial-gradient(at 50% 7%, #68caff 0px, transparent 50%),
-    radial-gradient(at 89% 10%, #003cff 0px, transparent 50%),
-    radial-gradient(at 77% 85%, #c928fa 0px, transparent 50%),
-    radial-gradient(at 0% 100%, #0d2d72 0px, transparent 50%),
-    radial-gradient(at 0% 0%, #d8ffff 0px, transparent 50%);
+  background-color: #e9f3fc;
+  background-image: radial-gradient(at 2% 78%, #e9f3fc 0px, transparent 50%),
+    radial-gradient(at 50% 7%, #584cb4 0px, transparent 50%),
+    radial-gradient(at 89% 10%, #15acff 0px, transparent 50%),
+    radial-gradient(at 77% 85%, #ba8ce4 0px, transparent 50%),
+    radial-gradient(at 0% 100%, #2a185d 0px, transparent 50%),
+    radial-gradient(at 0% 0%, #e9f3fc 0px, transparent 50%);
   background-repeat: no-repeat;
   background-position: 50% 0;
   margin: 0;
   padding: 0;
+}
+
+@media screen and (max-width: 650px) {
+  body {
+    width: 100%;
+    background-color: #2a185d;
+    background-image: radial-gradient(at 0% 0%, #15acff 0px, transparent 50%),
+      radial-gradient(at 30% 0%, #584cb4 0px, transparent 50%),
+      radial-gradient(at 97% 50%, #15acff 0px, transparent 50%),
+      radial-gradient(at 50% 50%, #ba8ce4 0px, transparent 50%),
+      radial-gradient(at 0% 100%, #2a185d 0px, transparent 50%),
+      radial-gradient(at 0% 0%, #2a185d 0px, transparent 50%);
+    background-repeat: no-repeat;
+    background-position: 50% 0;
+    margin: 0;
+    padding: 0;
+    color: #e9f3fc;
+  }
+  #goToFroggie {
+    display: none;
+  }
+  h3,
+  main {
+    color: #e9f3fc !important;
+  }
 }
 
 .img-responsive {
@@ -40,12 +65,18 @@ body {
   border: thin solid #282a36;
   text-align: left;
 }
+.exercice::before {
+  content: url("../../javascript/ressources/froggie-100.png");
+  position: relative;
+  float: left;
+  top: -28px;
+}
 
 .froggiesplaining {
-  background-color: #282a36;
+  background-color: #232659;
   padding: 16px;
   margin: 16px;
-  color: #68caff;
+  color: #15acff;
   position: relative;
   margin-top: 150px;
   box-shadow: 0px 4px 16px rgba(114, 21, 190, 0.5);
@@ -55,14 +86,15 @@ body {
 .froggiesplaining span {
   font-family: "Poppins thin";
   font-size: 32px;
+  color: #ba8ce4;
 }
 
 .froggiesplaining strong {
-  color: #68caff;
+  color: #ba8ce4;
 }
 
 .froggiesplaining p {
-  color: #68caff;
+  color: #15acff;
   text-align: left;
   max-width: 100%;
   font-size: 16px;
@@ -82,10 +114,10 @@ body {
   position: absolute;
   top: 0px;
   right: 0px;
-  background-color: #282a36;
+  background-color: #232659;
   padding: 8px;
   margin: 8px;
-  color: #68caff;
+  color: #ba8ce4;
   font-weight: bold;
   font-size: 2em;
   line-height: 0.7em;
@@ -113,4 +145,23 @@ body {
   text-align: center;
   font-size: 16px;
   margin-bottom: 16px;
+}
+
+.slideFromBottom1S {
+  animation: slideInFromBottom 1s ease-out forwards;
+}
+.slideFromBottom2S {
+  animation: slideInFromBottom 2s ease-out forwards;
+}
+
+/* Animation des divs */
+@keyframes slideInFromBottom {
+  0% {
+    opacity: 0;
+    transform: translateY(100px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
