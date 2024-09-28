@@ -60,10 +60,14 @@ body {
 }
 
 .exercice {
-  padding: 16px;
-  margin: 16px;
+  padding: 8px;
+  margin: 24px;
   border: thin solid #282a36;
   text-align: left;
+}
+.exercice h1 {
+  line-height: 16px;
+  font-size: 16px;
 }
 .exercice::before {
   content: url("../../javascript/ressources/froggie-100.png");
@@ -73,7 +77,7 @@ body {
 }
 
 .froggiesplaining {
-  background-color: #232659;
+  background-color: #282836;
   padding: 16px;
   margin: 16px;
   color: #15acff;

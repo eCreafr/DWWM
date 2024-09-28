@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Apprendre JavaScript | Exercice 2</title>
+    <link rel="stylesheet" href="../html+css/css/froggie.css" />
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body>
+    <div class="exercice">
+      <h1>Apprendre JavaScript | Exercice 2 application</h1>
+    </div>
+
+    <div class="container">
+      <div id="log-container"></div>
+    </div>
+    <div class="froggiesplaining">
+      <span> Froggiesplaining :</span>
+
+      <img src="ressources/exo2tp1.png" alt="" class="img-responsive" />
+      <br /><br />
+
+      <img src="ressources/froggie-300.png" alt="Froggie" class="overfrog" />
+    </div>
+
+    <script>
+      //on affiche encore ici une boite de dialogue "popup" pour demander le mail :
+      let mail = prompt("Saisissez votre email pour vérification svp :");
+      //on détermine les domaines classique des emails dans un tableau :
+      const domaine = [".com", ".fr", ".net", ".de"];
+      //on initialise notre mail à invalide par defaut :
+      let bonMail = "invalide !";
+      //deja on fait un if s'il y a un "@" inclus dans la string mail :
+      if (mail.includes("@")) {
+        //si oui on controle si mail termine par l'une des extensions du tableau domaine
+        let testExtension = domaine.some((domaines) => mail.endsWith(domaines));
+        // si oui, alors on change la variable texte du mail à "valide"
+        if (testExtension === true) {
+          bonMail = "valide !";
+        }
+      }
+      // cette section reste inchangée : on ecrit une fonction pour afficher le log dans la page dans l'id "log-container"
+      function printLog(message) {
+        let logContainer = document.getElementById("log-container");
+        logContainer.innerText = message;
+      }
+      // et on imprime le log adapté au message autour de l'email valide ou non :
+      printLog("Le mail : \n" + mail + "\n semble " + bonMail);
+    </script>
+  </body>
+</html>

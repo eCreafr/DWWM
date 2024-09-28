@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Apprendre JavaScript | Exercice 2</title>
-    <link rel="stylesheet" href="css/froggie.css" />
+    <link rel="stylesheet" href="../html+css/css/froggie.css" />
     <link rel="stylesheet" href="css/styles.css" />
   </head>
   <body>
@@ -34,32 +34,43 @@
       </ul>
 
       <img src="ressources/exo2.png" alt="" class="img-responsive" />
+      <br /><br />
+      <strong>Exercice :</strong> <br />
+      à partir de ce code, essayez de vous l'approprier en détournant son usage
+      : demandez un email au visiteur et controlez s'il semble etre valide en
+      cherchant des extensions de domaines connus (.fr, .com etc ...) et aussi
+      l'@ <br />
+      il faudra utiliser du if includes(), ou du if endsWith() pour vérifier
+      l'email.
+
       <img src="ressources/froggie-300.png" alt="Froggie" class="overfrog" />
     </div>
 
     <script>
-      //affiche une boite de dialogue :
-      let str = prompt("Quel est votre prénom ?");
-      //on détermine les voyelles :
-      let voyelles = ["a", "e", "é", "ë", "i", "o", "u"];
-      //on initialise le compteur à 0 :
-      let count = 0;
-      //on incrémente de 1 à chaque voyelle trouvée dans la chaine de caractère
-      for (let i = 0; i < str.length; i++) {
-        if (voyelles.includes(str[i].toLowerCase())) {
-          count++;
+      //on affiche une boite de dialogue "popup" :
+      let prenom = prompt("Quel est votre prénom ?");
+      //on détermine les voyelles dans un tableau :
+      let voyelleS = ["a", "e", "é", "ë", "i", "o", "u"];
+      //on initialise notre compteur à 0 :
+      let compteur = 0;
+      //on incrémente de 1 à chaque voyelle trouvée dans la chaine de caractère "prenom"
+      for (let voyelle = 0; voyelle < prenom.length; voyelle++) {
+        if (voyelleS.includes(prenom[voyelle].toLowerCase())) {
+          compteur++;
         }
       }
-      // Fonction pour afficher le log dans la page dans l'id log-container
+      // enfin on ecrit une fonction pour afficher le log dans la page dans l'id "log-container"
       function printLog(message) {
         let logContainer = document.getElementById("log-container");
-        logContainer.innerHTML += message + "<br>";
+        logContainer.innerText = message;
       }
-      printLog("Bonjour, " + str + " &#128522;");
+      // et on imprime le log :
       printLog(
-        "votre prénom contient <strong style='color: #68caff;'>" +
-          count +
-          " voyelle(s)</strong>"
+        "Bonjour " +
+          prenom +
+          "\n votre prénom contient " +
+          compteur +
+          " voyelle(s)"
       );
     </script>
   </body>
