@@ -17,8 +17,8 @@ body {
   width: 100%;
   background-color: #e9f3fc;
   background-image: radial-gradient(at 2% 78%, #e9f3fc 0px, transparent 50%),
-    radial-gradient(at 50% 7%, #584cb4 0px, transparent 50%),
-    radial-gradient(at 89% 10%, #15acff 0px, transparent 50%),
+    radial-gradient(at 50% 7%, #15acff 0px, transparent 50%),
+    radial-gradient(at 89% 10%, #584cb4 0px, transparent 50%),
     radial-gradient(at 77% 85%, #ba8ce4 0px, transparent 50%),
     radial-gradient(at 0% 100%, #2a185d 0px, transparent 50%),
     radial-gradient(at 0% 0%, #e9f3fc 0px, transparent 50%);
@@ -51,6 +51,12 @@ body {
   main {
     color: #e9f3fc !important;
   }
+  .exercice {
+    padding: 8px;
+    margin: 24px;
+    border: thin solid #e9f3fc !important;
+    text-align: left;
+  }
 }
 
 .img-responsive {
@@ -63,7 +69,7 @@ body {
   padding: 8px;
   margin: 24px;
   border: thin solid #282a36;
-  text-align: left;
+  float: none;
 }
 .exercice h1 {
   line-height: 16px;
@@ -72,8 +78,9 @@ body {
 .exercice::before {
   content: url("../../javascript/ressources/froggie-100.png");
   position: relative;
-  float: left;
   top: -28px;
+  z-index: 2;
+  float: left;
 }
 
 .froggiesplaining {

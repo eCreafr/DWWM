@@ -13,6 +13,11 @@
       <h1>Exercice 11 | intégration d'une librairie CSS + JavaScript</h1>
     </div>
 
+    <!--a propos de ce clear both : froggy en float left dans la div et le H1 "exercice",
+     causait un décalage important de toute la section flex ci après
+     mettre une div vide, avec un style css "clear both" rétablit le flux a 0 -->
+    <div style="clear: both"></div>
+
     <div class="flex">
       <div class="space">
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia,
@@ -154,8 +159,18 @@
           une petite librairie gratuite d'animation CSS et JS de div qui
           réagissent au scroll
         </li>
-        <li><strong>Démo : </strong> https://michalsnik.github.io/aos/</li>
-        <li><strong>Github : </strong>https://github.com/michalsnik/aos</li>
+        <li>
+          <strong>Démo : </strong
+          ><a href="https://michalsnik.github.io/aos/" target="_blank">
+            https://michalsnik.github.io/aos/</a
+          >
+        </li>
+        <li>
+          <strong>Github : </strong
+          ><a href="https://github.com/michalsnik/aos" target="_blank"
+            >https://github.com/michalsnik/aos</a
+          >
+        </li>
       </ul>
 
       <br /><br />
