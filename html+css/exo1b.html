@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Exercice 1b | Les selecteurs CSS</title>
+    <title>Exercice 1b | Les selecteurs CSS & les priorités</title>
     <link rel="stylesheet" href="css/exo1b.css" />
     <link rel="stylesheet" href="css/froggie.css" />
   </head>
@@ -100,6 +100,20 @@
       <span>Froggiesplaining :</span> <br />Les différents selecteurs :<br /><br />
       <img src="img/exo1b.png" alt="" /> <br />
       <img src="img/exo1b-2.png" alt="" />
+
+      <br /><br />
+
+      <strong
+        >attention, les navigateurs donnent une priorités au selecteurs
+        :</strong
+      >
+      <ol>
+        <li>L'inline (dans la balise HMTL div style="...")</li>
+        <li>les #ID</li>
+        <li>les .classes</li>
+        <li>les éléments (body, img, br, footer)</li>
+      </ol>
+
       <img
         id="Froggie"
         class="overfrog"

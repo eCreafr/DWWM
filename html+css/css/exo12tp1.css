@@ -1,0 +1,31 @@
+.container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 50px;
+}
+.btn {
+  background-color: blueviolet;
+  border-radius: 8px;
+  width: 240px;
+  text-align: center;
+  border: 1px solid #fff;
+  color: beige;
+}
+.turquoise {
+  background-color: aqua;
+  color: #000;
+}
+.bleu {
+  background-color: blue;
+}
+.vertCanard {
+  background-color: rgb(2, 135, 122);
+}
+.pilule {
+  border-radius: 50px;
+}
+.petit {
+  width: 120px;
+  border: none;
+}

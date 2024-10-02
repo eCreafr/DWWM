@@ -23,6 +23,8 @@ h1 {
 /* selection par Id */
 #orelsan {
   border: 3px solid #000;
+  float: left;
+  margin-right: 50px;
 }
 
 /* selection par class */

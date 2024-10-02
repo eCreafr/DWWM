@@ -1,0 +1,16 @@
+/*mon bloc */
+.maintitle {
+  display: flex;
+  justify-content: center;
+}
+/*mes éléments*/
+.maintitle__logo {
+  background-color: blueviolet;
+}
+.maintitle__h1 {
+  height: 2em;
+}
+/*un modificateur*/
+.maintitle__h1--violet {
+  color: blueviolet;
+}

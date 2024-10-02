@@ -1,0 +1,51 @@
+.container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 30px;
+}
+.btn {
+  background-color: blueviolet;
+  margin: 10px;
+}
+.turquoise {
+  width: 240px;
+  background-color: aqua;
+  border-radius: 8px;
+  text-align: center;
+  margin: 10px;
+  border: 1px solid #fff;
+}
+.bleu {
+  width: 240px;
+  background-color: blue;
+  border-radius: 8px;
+  text-align: center;
+  margin: 10px;
+  color: beige;
+  border: 1px solid #fff;
+}
+.vertCanard {
+  width: 240px;
+  background-color: rgb(2, 135, 122);
+  border-radius: 8px;
+  text-align: center;
+  margin: 10px;
+  color: beige;
+  border: 1px solid #fff;
+}
+.pilule {
+  width: 240px;
+  border-radius: 50px;
+  text-align: center;
+  margin: 10px;
+  color: beige;
+  border: 1px solid #fff;
+}
+.petit {
+  width: 120px;
+  border-radius: 8px;
+  margin: 10px;
+  color: beige;
+  text-align: center;
+}
