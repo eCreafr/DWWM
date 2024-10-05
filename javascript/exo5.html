@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>progression scroll</title>
+    <link rel="stylesheet" href="css/exo5.css" />
+    <link rel="stylesheet" href="../html+css/css/froggie.css" />
+    <script>
+      // on cree une fonction pour calculer et afficher la progression du scroll :
+      function updateScrollProgress() {
+        // on récupére la position actuelle du scroll
+        const scrollPosition =
+          window.pageYOffset || document.documentElement.scrollTop;
+
+        // on calcule la hauteur totale scrollable :
+        const scrollHeight =
+          document.documentElement.scrollHeight -
+          document.documentElement.clientHeight;
+
+        // on compare la position actuelle et la hauteur totale en pourcentage :
+        const scrollPercentage = (scrollPosition / scrollHeight) * 100;
+
+        // on arrondie pour faire propre :
+        const roundedPercentage = Math.round(scrollPercentage * 100) / 100;
+
+        // on renvoie l'info avec un textContent dans le DOM un élément HTML id scroll-progress
+        document.getElementById(
+          "scroll-progress"
+        ).textContent = `Progression : ${roundedPercentage}%`;
+      }
+
+      // on écoute l'événement de scroll
+      window.addEventListener("scroll", updateScrollProgress);
+
+      //  on itinialise au chargement
+      updateScrollProgress();
+    </script>
+  </head>
+  <body>
+    <div id="scroll-progress"></div>
+
+    <div class="spacer"></div>
+    <div class="spacer"></div>
+
+    <div class="froggiesplaining">
+      <span> Froggiesplaining :</span>
+      Ce script fonctionne de la manière suivante : <br /><br />
+      <strong>La fonction updateScrollProgress() </strong> calcule la position
+      actuelle du scroll et la hauteur totale scrollable. <br />
+      Elle détermine ensuite le pourcentage de progression en divisant la
+      position actuelle par la hauteur totale scrollable. <br />
+      Le pourcentage est arrondi à deux décimales pour une meilleure lisibilité.
+      <br />
+      La progression est affichée dans un élément HTML avec l'ID
+      "scroll-progress". <br />
+      Un écouteur d'événement est ajouté à la fenêtre pour détecter les
+      événements de scroll et mettre à jour la progression en temps réel.
+      <br />
+      La fonction est également appelée au chargement de la page pour afficher
+      la progression initiale. <br />
+
+      <img src="ressources/exo5.png" alt="" class="img-responsive" />
+      <br /><br />
+      <strong>Exercice :</strong> <br />
+      à partir de ce code, essayez de vous l'approprier en améliorant son usage
+      : composez une "progression bar" colorée et sticky dans le header. <br />
+      + Quand 100% est atteint affichez un smiley
+
+      <img src="ressources/froggie-300.png" alt="Froggie" class="overfrog" />
+    </div>
+  </body>
+</html>

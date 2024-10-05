@@ -1,0 +1,14 @@
+#scroll-progress {
+  color: blanchedalmond;
+  text-align: center;
+  font-size: 16px;
+  line-height: 32px;
+  background-color: blueviolet;
+  position: sticky;
+  z-index: 5;
+  top: 0px;
+}
+
+.spacer {
+  height: 100vh;
+}

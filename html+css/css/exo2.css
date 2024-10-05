@@ -112,8 +112,8 @@ p {
 .gradient {
   font-family: "Poppins Bold";
   color: var(--fgColor-done, var(--color-done-fg));
-  background: linear-gradient(260deg, #1f00a7 30%, #01c4ff 50%, #e100ff 80%),
-    #f8f0fd;
+  background: linear-gradient(120deg, #24265d 30%, #5952b2 50%, #26bffb 80%),
+    #e9f3fc;
   -webkit-text-fill-color: transparent;
   background-clip: text;
   cursor: default;
