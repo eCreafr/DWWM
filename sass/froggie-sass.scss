@@ -11,11 +11,11 @@ $color5: #e9f3fc;
 
 @font-face {
   font-family: "Poppins";
-  src: url("../font/Poppins-Regular.ttf");
+  src: url("../html/font/Poppins-Regular.ttf");
 }
 @font-face {
   font-family: "Poppins thin";
-  src: url("../font/Poppins-Thin.ttf");
+  src: url("../html/font/Poppins-Thin.ttf");
 }
 
 * {
@@ -56,11 +56,10 @@ nav {
 .froggiesplaining {
   background-color: $color1;
   padding: 16px;
-  margin: 16px;
   color: $color4;
   position: relative;
   margin-top: 150px;
-  box-shadow: 0px 4px 16px $color2;
+  box-shadow: 0px 4px 12px $color2;
   text-align: left;
   border-radius: 5px;
   span {
@@ -81,7 +80,7 @@ nav {
 
 .overfrog {
   position: absolute;
-  top: -110px;
+  top: -115px;
   left: 30px;
   width: 200px;
   height: auto;
@@ -126,7 +125,7 @@ nav {
 #footerGit {
   text-align: center;
   font-size: 16px;
-  margin-bottom: 16px;
+  margin: 16px auto;
 }
 
 .slideFromBottom1S {
