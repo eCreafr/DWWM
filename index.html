@@ -1,64 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Git eCrea</title>
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
-      crossorigin="anonymous"
-    />
-    <link rel="stylesheet" href="html+css/css/froggie.css" />
-    <style>
-      .gradient-hover {
-        background: linear-gradient(
-          45deg,
-          rgba(233, 243, 252, 0),
-          rgb(233, 243, 252, 15)
-        );
-        background-size: 400% 400%;
-        transition: background-position 1s ease;
-        color: #232659;
-        padding: 8px;
-        border-radius: 8px;
-        font-size: 12px;
-      }
-
-      .gradient-hover:hover {
-        background-position: 100% 0;
-        cursor: pointer;
-        font-weight: bold;
-        color: #ba8ce4;
-      }
-
-      .max-width-custom {
-        max-width: 1000px;
-      }
-      h1 {
-        color: #e9f3fc;
-      }
-      h3,
-      main {
-        color: #232659;
-      }
-      a {
-        text-decoration: none;
-      }
-
-      @container (width > 500px) {
-        .gradient-hover {
-          padding: 16px;
-          border-radius: 16px;
-          font-size: 18px;
-        }
-      }
-      /* Activer les container queries */
-      nav {
-        container-type: inline-size;
-      }
-    </style>
+    <link rel="stylesheet" href="css/froggie-sass.min.css" />
   </head>
   <body>
     <div class="container max-width-custom">
@@ -74,11 +20,11 @@
 
       <nav class="container-fluid text-center my-4 slideFromBottom1S">
         <ul
-          class="d-flex justify-content-center list-group list-group-horizontal gap-3"
+          class="d-flex justify-content-center list-group list-group-horizontal gap-5"
         >
-          <a href="html+css/">
+          <a href="html/">
             <li class="list-group-item border-1 rounded gradient-hover">
-              HTML CSS
+              HTML & CSS
             </li></a
           >
           <a href="javascript/"
@@ -87,13 +33,7 @@
             </li></a
           >
           <li class="list-group-item border-1 rounded gradient-hover">
-            à venir
-          </li>
-          <li class="list-group-item border-1 rounded gradient-hover">
-            à venir
-          </li>
-          <li class="list-group-item border-1 rounded gradient-hover">
-            à venir
+            PHP à venir
           </li>
         </ul>
       </nav>
@@ -101,7 +41,7 @@
       <main class="row slideFromBottom2S">
         <div class="col-12 col-md-4 p-4">
           <img
-            src="html+css/img/rond-formation.png"
+            src="html/img/rond-formation.png"
             alt="ecrea formation web et print"
             class="img-fluid"
           />
@@ -136,40 +76,40 @@
           >
         </div>
       </main>
+
+      <div class="froggiesplaining">
+        <span>Froggiesplaining :</span>
+        <p>
+          <br />
+          <strong>Froggie <i class="bi bi-heart"></i></strong> sera la en bas de
+          page pour apporter quelques informations complémentaires
+        </p>
+
+        <img
+          src="html/img/froggie-300.png"
+          alt="Froggie explain"
+          class="overfrog"
+          id="Froggie"
+        />
+      </div>
+
+      <a href="#Froggie"
+        ><div id="goToFroggie">
+          <img src="html/img/froggie-300.png" width="50px" /><br /><i
+            class="bi bi-arrow-bar-down"
+          ></i></div
+      ></a>
+
+      <footer id="footerGit">
+        <a href="https://github.com/eCreafr/DWWM" target="_blank"
+          ><i class="bi bi-github">GitHub - eCrea</i></a
+        >
+      </footer>
     </div>
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
       crossorigin="anonymous"
     ></script>
-
-    <div class="froggiesplaining">
-      <span> Froggiesplaining :</span>
-      <p>
-        <br />
-        <strong>Froggie <i class="bi bi-heart"></i></strong> sera la en bas de
-        page pour apporter quelques informations complémentaires
-      </p>
-
-      <img
-        src="html+css/img/froggie-300.png"
-        alt="Froggie explain"
-        class="overfrog"
-        id="Froggie"
-      />
-    </div>
-
-    <a href="#Froggie"
-      ><div id="goToFroggie">
-        <img src="html+css/img/froggie-300.png" width="50px" /><br /><i
-          class="bi bi-arrow-bar-down"
-        ></i></div
-    ></a>
-
-    <footer id="footerGit">
-      <a href="https://github.com/eCreafr/DWWM" target="_blank"
-        ><i class="bi bi-github">GitHub - eCrea</i></a
-      >
-    </footer>
   </body>
 </html>

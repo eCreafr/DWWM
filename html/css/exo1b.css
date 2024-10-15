@@ -1,0 +1,67 @@
+/* selection totale */
+* {
+}
+
+/* selection d'une balise unique  */
+body {
+  background-color: burlywood;
+}
+
+h1 {
+  width: 200px;
+  background-color: black;
+  text-align: center;
+}
+
+/* selection de plusieurs balises pour le meme CSS */
+img,
+div,
+h1 {
+  border-radius: 30px;
+}
+
+/* selection par Id */
+#orelsan {
+  border: 3px solid #000;
+  float: left;
+  margin-right: 50px;
+}
+
+/* selection par class */
+.pointer {
+  cursor: none;
+}
+.violet {
+  color: blueviolet;
+}
+
+/* un descendant */
+header span {
+  background-color: aqua;
+}
+/* parents > enfants */
+h2 > span {
+  color: aliceblue;
+}
+/* adjacents */
+div + h2 {
+  text-decoration: line-through;
+}
+
+/* selection d'element encapsulés */
+ul li li {
+  color: #000;
+}
+
+li.violet > ul > li:nth-child(4) {
+  color: chocolate;
+}
+
+/* selection after, first letter */
+ul::after {
+  content: "😀";
+}
+
+p::first-letter {
+  font-size: 75px;
+}
