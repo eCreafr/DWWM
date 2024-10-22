@@ -1,0 +1,63 @@
+@font-face {
+  font-family: "Poppins";
+  src: url("../html/font/Poppins-Regular.ttf");
+}
+@font-face {
+  font-family: "Poppins thin";
+  src: url("../html/font/Poppins-Thin.ttf");
+}
+
+$font: "Poppins";
+$font-thin: "Poppins thin";
+$color1: #2a185d;
+$color2: #584cb4;
+$color3: #ba8ce4;
+$color4: #15acff;
+$color5: #e9f3fc;
+
+* {
+  font-family: $font;
+}
+a {
+  text-decoration: none;
+}
+
+.header {
+  display: flex;
+  background-color: $color3;
+
+  &__nav {
+    background-color: $color5;
+    color: $color2;
+    &--blue {
+      background-color: $color4;
+      @media (max-width: 500px) {
+        color: $color5 !important;
+      }
+    }
+  }
+}
+
+@mixin gradient($start-color, $end-color, $orientation) {
+  color: $color5;
+  text-transform: uppercase;
+  background: $start-color;
+
+  @if $orientation == "vertical" {
+    background: linear-gradient(to bottom, $start-color, $end-color);
+  } @else if $orientation == "horizontal" {
+    background: linear-gradient(to right, $start-color, $end-color);
+  } @else {
+    background: radial-gradient(ellipse at center, $start-color, $end-color);
+  }
+}
+
+.bg-gradient {
+  @include gradient($color3, $color2, vertical);
+}
+.bg-gradient-pink {
+  @include gradient($color3, $color5, horizontal);
+}
+.bg-gradient-blue {
+  @include gradient($color4, $color5, blabla);
+}
