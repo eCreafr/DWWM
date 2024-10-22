@@ -15,32 +15,6 @@ $color3: #ba8ce4;
 $color4: #15acff;
 $color5: #e9f3fc;
 
-<<<<<<< HEAD
-=======
-* {
-  font-family: $font;
-}
-a {
-  text-decoration: none;
-}
-
-.header {
-  display: flex;
-  background-color: $color3;
-
-  &__nav {
-    background-color: $color5;
-    color: $color2;
-    &--blue {
-      background-color: $color4;
-      @media (max-width: 500px) {
-        color: $color5 !important;
-      }
-    }
-  }
-}
-
->>>>>>> 38f240cc1363b327940b34f767333ea8a230bf66
 @mixin gradient($start-color, $end-color, $orientation) {
   color: $color5;
   text-transform: uppercase;
@@ -55,7 +29,6 @@ a {
   }
 }
 
-<<<<<<< HEAD
 * {
   font-family: $font;
 }
@@ -88,14 +61,4 @@ a {
       @include gradient($color4, $color5, blabla);
     }
   }
-=======
-.bg-gradient {
-  @include gradient($color3, $color2, vertical);
-}
-.bg-gradient-pink {
-  @include gradient($color3, $color5, horizontal);
-}
-.bg-gradient-blue {
-  @include gradient($color4, $color5, blabla);
->>>>>>> 38f240cc1363b327940b34f767333ea8a230bf66
 }
