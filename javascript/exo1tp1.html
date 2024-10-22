@@ -14,15 +14,18 @@
 
     <div class="container">
       <div id="message" style="text-align: center">
+        <h1>Bienvenue sur cette page</h1>
         <p>
-         <h1>Bienvenue sur cette page</h1>
           (vous pouvez masquer ce message)<br /><br />
+          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quaerat
+          illum eum ratione nisi neque, quidem natus unde quod, atque cupiditate
+          rerum quibusdam eos dicta minus sed cumque explicabo facere at!
+          <br /><br />
           <span id="myButton" class="smallButton">
             <i class="bi bi-eye-slash"></i>
           </span>
         </p>
       </div>
-      <div></div>
     </div>
 
     <div class="froggiesplaining">
@@ -30,17 +33,25 @@
 
       <ul>
         <li>
-          <strong>Comment faire ?</strong> nous remplaçons le "texte A" de départ, par un "texte B", qui au clic rappellera un  nouveau "texte A bis" , similaire au texte A pour créer l'illusion de boucle. <br>  Ce script fonctionne mais c'est un "peu lourd" et de plus "innerHTML" est à eviter. <br><br>
+          <strong>Comment faire ?</strong> nous remplaçons le "texte A" de
+          départ, par un "texte B", qui au clic rappellera un nouveau "texte A
+          bis" , similaire au texte A pour créer l'illusion de boucle. <br />
+          Ce script fonctionne mais c'est un "peu lourd" et de plus "innerHTML"
+          est à eviter. <br /><br />
         </li>
         <li>
-          <strong>innerHTML ? </strong> injecter du code html est une faille de sécurité, il faut eviter de l'utiliser. D'ailleurs cette proprieté empeche souvent de passer les validateurs js
-        </li> 
+          <strong>innerHTML ? </strong> injecter du code html est une faille de
+          sécurité, il faut eviter de l'utiliser. D'ailleurs cette proprieté
+          empeche souvent de passer les validateurs js
+        </li>
       </ul>
-      <br>
-      <img src="ressources/exo1tp1-1.png" alt="">
-      <br>
       <br />
-    nous allons donc tester une autre méthode pour le même effet dans l'exercice suivant. Un effet toggle en jouant sur la classe display none / block de l'element sera plus élégant, optimisé, sécure. 
+      <img src="ressources/exo1tp1-1.png" alt="" />
+      <br />
+      <br />
+      nous allons donc tester une autre méthode pour le même effet dans
+      l'exercice suivant. Un effet toggle en jouant sur la classe display none /
+      block de l'element sera plus élégant, optimisé, sécure.
 
       <img src="ressources/froggie-300.png" alt="Froggie" class="overfrog" />
     </div>
@@ -60,7 +71,7 @@
       // puis une autre fonction qui change le texte du paragraphe sur un état initiale
       function showMessage2() {
         message.innerHTML =
-          ' <p><h1>Bienvenue sur cette page</h1>(vous pouvez masquer ce message)<br /><br /><span id="myButton" class="smallButton">            <i class="bi bi-eye-slash"></i></span></p>';
+          ' <h1>Bienvenue sur cette page</h1><p>(vous pouvez masquer ce message)<br><br> Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quaerat illum eum ratione nisi neque, quidem natus unde quod, atque cupiditate rerum quibusdam eos dicta minus sed cumque explicabo facere at!<br><br><span id="myButton" class="smallButton"><i class="bi bi-eye-slash"></i></span></p>';
         button = document.getElementById("myButton");
         button.addEventListener("click", showMessage1);
       }
@@ -68,9 +79,5 @@
       // on ajoute un "écouteur d'événement" commun pour détecter les clics sur le bouton
       button.addEventListener("click", showMessage1);
     </script>
-
-
-
-
   </body>
 </html>

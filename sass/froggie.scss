@@ -14,7 +14,6 @@ $color5: #e9f3fc;
   font-family: "Poppins thin";
   src: url("../html/font/Poppins-Thin.ttf");
 }
-
 * {
   font-family: $font;
   scroll-behavior: smooth;
@@ -46,7 +45,6 @@ body {
     color: $color5;
   }
 }
-
 main {
   color: $color1;
   @media (max-width: 650px) {
@@ -89,14 +87,11 @@ main {
     }
   }
 }
-
-/* Activer les container queries */
 .navbarmenu {
   container-type: inline-size;
   box-shadow: inset 0 4px 7px -5px rgba($color1, 0.3);
   background: rgba($color1, 0.025);
 }
-
 .froggiefooter {
   background-color: $color1;
   padding: 16px;
@@ -120,7 +115,6 @@ main {
     font-size: 32px;
     color: $color3;
   }
-
   &__text {
     color: $color4;
     text-align: left;
@@ -132,8 +126,6 @@ main {
     }
   }
 }
-
-/* Animation de la petite froggie du haut */
 @keyframes slideInFromTop {
   0% {
     opacity: 0;
@@ -144,21 +136,17 @@ main {
     transform: translateY(0);
   }
 }
-
 .gitfooter {
   text-align: center;
   font-size: 16px;
   margin: 16px auto;
 }
-
 .slideFromBottom1S {
   animation: slideInFromBottom 1s ease-out forwards;
 }
 .slideFromBottom2S {
   animation: slideInFromBottom 2s ease-out forwards;
 }
-
-/* Animation des divs menu et colonnes centrales */
 @keyframes slideInFromBottom {
   0% {
     opacity: 0;

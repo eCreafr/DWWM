@@ -15,7 +15,7 @@
     <div class="container">
       <div>
         <button id="myButton">
-          <p id="message">Ne cliquez pas sinon ...</p>
+          <p id="message">Ne cliquez pas svp ...</p>
         </button>
       </div>
     </div>
@@ -42,6 +42,7 @@
           l'utilisateur clique sur le bouton et affiche le texte du paragraphe.
         </li>
       </ul>
+
       <br />
 
       <img src="ressources/exo1.png" alt="" class="img-responsive" />
@@ -61,11 +62,28 @@
       </ul>
       <br />
 
+      indices : <br />
+      <ul>
+        il y a plusieurs façons pour répondre à ça :
+        <li>
+          une méthode serait d'agir au clic sur le "style" du bloc a faire
+          disparaitre, avec : <br />
+          message.style.display = "block"; <br />
+          message.style.display = "none";
+        </li>
+        <li>
+          Une autre méthode serait d'injecter du html avec "innerHTML" :
+          message.innerHTML = 'ici mes balises html avec le bouton2';
+          <br />(c'est ok pour un exercice local, mais cette méthode n'est pas
+          recommandé en prod car faille de sécurité)
+        </li>
+      </ul>
+
       <img src="ressources/froggie-300.png" alt="Froggie" class="overfrog" />
     </div>
 
     <script>
-      // Sélectionne le bouton et le paragraphe
+      // on fait 2 variables, qui sélectionnent le bouton et le paragraphe
       const button = document.getElementById("myButton");
       const message = document.getElementById("message");
 
@@ -74,7 +92,7 @@
         message.textContent = "Vous avez cliqué sur le bouton ! 😮";
       }
 
-      // Ajoute un "écouteur d'événement" pour détecter les clics sur le bouton
+      // Ajoute un "écouteur d'événement" pour détecter les clics sur le bouton et lancer la fonction
       button.addEventListener("click", showMessage);
     </script>
   </body>

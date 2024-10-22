@@ -16,14 +16,15 @@
       <div id="log-container"></div>
     </div>
     <div class="froggiesplaining">
-      <span> Froggiesplaining :</span>
+      <span>Froggiesplaining :</span>
 
       <ul>
         <li>
-          <strong> prompt() ?</strong> est utilisée pour afficher une boîte de
+          <strong>prompt() ?</strong> est utilisée pour afficher une boîte de
           dialogue modale qui permet à l'utilisateur de saisir une entrée. C'est
           un moyen simple de capturer des informations directement à partir de
-          l'utilisateur pendant l'exécution d'un script.
+          l'utilisateur pendant l'exécution d'un script. mais c'est assez
+          agressif en terme d'UX donc à eviter
         </li>
         <li>
           <strong>printlog ? </strong>est une manière personnalisée d'afficher
@@ -48,9 +49,9 @@
 
     <script>
       //on affiche une boite de dialogue "popup" :
-      let prenom = prompt("Quel est votre prénom ?");
+      const prenom = prompt("Quel est votre prénom ?");
       //on détermine les voyelles dans un tableau :
-      let voyelleS = ["a", "e", "é", "ë", "i", "o", "u"];
+      const voyelleS = ["a", "e", "é", "ë", "i", "o", "u"];
       //on initialise notre compteur à 0 :
       let compteur = 0;
       //on incrémente de 1 à chaque voyelle trouvée dans la chaine de caractère "prenom"

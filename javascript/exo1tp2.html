@@ -16,10 +16,16 @@
       <div id="message" style="text-align: center">
         <div id="cacheCache" style="display: none">
           <h1>Bienvenue sur cette page</h1>
-          (vous pouvez masquer ce message)
+          (vous pouvez masquer ce message) <br />
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. <br />
+          Reprehenderit, quaerat. Repellendus adipisci facilis maxime deleniti?
+          <br />
+          Fugit reiciendis consectetur ad nulla cumque eligendi eius earum eaque
+          <br />
+          inventore porro, odit mollitia sed. <br />
         </div>
         <br />
-        <span id="bouton" class="smallButton">VOIR</span>
+        <span id="bouton" class="smallButton">X</span>
       </div>
       <div></div>
     </div>
@@ -48,23 +54,23 @@
       // on initialise l'état de l'élément texte au chargement de la page
       let visible = false; // Initialement caché donc false
 
-      function toggleMessage() {
+      function showMessage() {
         // on fait une condition if et else , pour vérifier si l'élément est visible ou non
         if (visible === false) {
           // "Si" le texte est masqué, alors on l'affiche
           texte.style.display = "block";
-          bouton.innerText = "PAS VOIR"; // on modifie le contenu du bouton au passage
+          bouton.innerText = "X"; // on modifie le contenu du bouton au passage
           visible = true; // sans oublier de mettre à jour l'état visible à vrai
         } else {
           // ou "sinon" le texte est visible, alors on le masque :
           texte.style.display = "none";
-          bouton.innerText = "VOIR"; // on modifie le contenu du bouton au passage
+          bouton.innerText = "en savoir +"; // on modifie le contenu du bouton au passage
           visible = false; // sans oublier de mettre à jour l'état visible à faux
         }
       }
 
       // on ajoute ensuite un EventListener au bouton pour écouter les clics :
-      bouton.addEventListener("click", toggleMessage);
+      bouton.addEventListener("click", showMessage);
     </script>
   </body>
 </html>
