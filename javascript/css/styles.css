@@ -47,3 +47,11 @@ button:hover {
   transition: transform 0.3s ease, background-color 0.3s ease;
   box-shadow: 0px 4px 16px rgba(114, 21, 190, 0.5);
 }
+
+.contenant-cible {
+  text-align: center;
+}
+.boutonjs {
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+}
