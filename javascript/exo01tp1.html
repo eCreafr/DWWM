@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Apprendre JavaScript | Exercice 1</title>
+    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="stylesheet" href="../html/css/froggie.css" />
+  </head>
+  <body>
+    <div class="exercice">
+      <h1>Apprendre JavaScript / Exercice 1</h1>
+    </div>
+
+    <div class="contenant-cible">
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus
+        est eum harum consequatur doloremque recusandae ad amet omnis, provident
+        expedita a similique cupiditate earum rem pariatur corporis quae
+        adipisci iusto labore fuga consectetur quo nesciunt hic temporibus!
+        Totam incidunt, error nesciunt, dolore quod iste placeat ab aspernatur
+        illum quisquam doloribus harum expedita magnam nulla vitae molestiae.
+        Vel a tenetur libero accusantium nemo esse fugit ea deleniti, quibusdam,
+        ullam minima, amet ab alias nostrum inventore labore. Nesciunt aperiam
+        veniam numquam animi saepe dolor inventore itaque velit. Voluptate rerum
+        voluptatem quis labore, cupiditate incidunt vel aspernatur sed culpa
+        ipsa. Eaque, illo sunt.
+      </p>
+      <br />
+    </div>
+
+    <div class="froggiesplaining">
+      <span>Froggiesplaining :</span>
+
+      <ul>
+        <li>
+          <strong>addEventListener "DOMContentLoaded" ?</strong> autre façon
+          d'attendre que la page soit chargée pour lancer la fonction
+        </li>
+        <li>
+          <strong>conteneur.addEventListener("mouseover", () => {}); ?</strong>
+          on ajoute un écouteur sur le mouvement de la souris
+        </li>
+      </ul>
+
+      <br />
+
+      <img src="ressources/exo01-02.png" alt="" class="img-responsive" />
+      <br /><br />
+      <strong>Exercice :</strong> <br />
+      sur la base de cet exemple, essayez de l'adapter à votre tour et d'ecrire
+      un script similaire : <br />
+      <ul>
+        <li>
+          Cette fois il s'agit d'afficher un boutton "en savoir plus" au survol
+          de la souris sur une zone de texte ou une image.
+        </li>
+      </ul>
+      <br />
+
+      indices : <br />
+      <ul>
+        <li>
+          On pourrait utiliser un écouteur d'evenement :
+          nomdemazone.addEventListener('mouseover', () => {
+          myButton.style.display = 'block'; // Afficher le bouton });
+        </li>
+      </ul>
+
+      <img src="ressources/froggie-300.png" alt="Froggie" class="overfrog" />
+    </div>
+
+    <script>
+      // On lance cette fonction seulement quand la page est complètement chargée
+      document.addEventListener("DOMContentLoaded", () => {
+        // On crée un bouton dans la div qui a la classe container
+        // On fait nos 3 variables :
+        const conteneur = document.querySelector(".contenant-cible");
+        const bouton = document.createElement("button");
+        bouton.className = "boutonjs"; // optionnel pour l'animation fade d'entrée
+        const bouton_text = document.createTextNode("En Savoir +");
+        // Ajout du texte au bouton
+        bouton.appendChild(bouton_text);
+        // Ajout d'un écouteur d'événement pour le survol du conteneur de texte ".contenant-cible"
+        conteneur.addEventListener("mouseover", () => {
+          // Ajout du bouton au conteneur
+          conteneur.appendChild(bouton);
+          bouton.offsetHeight; // optionnel pour l'animation fade d'entrée
+          bouton.style.opacity = "1"; // optionnel pour l'animation fade d'entrée
+        });
+      });
+    </script>
+  </body>
+</html>
