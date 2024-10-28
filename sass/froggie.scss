@@ -6,6 +6,11 @@ $color3: #ba8ce4;
 $color4: #15acff;
 $color5: #e9f3fc;
 
+title {
+  color: red;
+  font: 12px tahoma;
+}
+
 @font-face {
   font-family: "Poppins";
   src: url("../html/font/Poppins-Regular.ttf");
@@ -177,3 +182,6 @@ main {
     font-size: 18px;
   }
 }
+
+// Import Bootstrap :
+@import "../node_modules/bootstrap/scss/bootstrap.scss";

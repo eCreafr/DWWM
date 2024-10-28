@@ -4,7 +4,6 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Git eCrea</title>
-    <link rel="stylesheet" href="css/bootstrap.min.css" />
     <link rel="stylesheet" href="css/froggie.min.css" />
   </head>
   <body>
@@ -13,7 +12,7 @@
         <div class="row align-items-center my-3">
           <div class="col-12 text-center">
             <h1 class="header__title">
-              <i class="bi bi-github"></i>
+              <img src="node_modules/bootstrap-icons/icons/github.svg" alt="" />
               Github | eCrea Formations
             </h1>
             <h5 class="header__subtitle">CDUI & DWWM La Teste 2024</h5>
@@ -75,8 +74,11 @@
           </div>
           <div class="col-12 col-md-4 p-3">
             <h5>
-              <i class="bi bi-person-workspace"></i> On retrouve ici nos
-              archives de supports de cours, d'exercices pratiques et de tests.
+              <img
+                src="node_modules/bootstrap-icons/icons/person-circle.svg"
+                alt=""
+              /> On retrouve ici nos archives de supports de cours, d'exercices
+              pratiques et de tests.
             </h5>
             <br />
             Vous pouvez ainsi revenir voir et tester les codes.
@@ -86,21 +88,29 @@
           </div>
           <div class="col-12 col-md-4 p-3 rounded bg-light bg-opacity-25">
             <h5>
-              <i class="bi bi-info-circle"></i> Tout est récupérable sur github
-              :
+              <img
+                src="node_modules/bootstrap-icons/icons/github.svg"
+                alt=""
+              /> Tout est récupérable sur github :
             </h5>
             <br />
             <a
               class="border-1 rounded gradient-hover"
               href="https://github.com/eCreafr/DWWM"
               target="_blank"
-              ><i class="bi bi-github"> GitHub - eCrea</i></a
+            >
+              <img src="node_modules/bootstrap-icons/icons/github.svg" alt="" />
+              GitHub - eCrea</a
             ><br />
             <br />ou directement :<br /><br />
             <a
               class="border-1 rounded gradient-hover"
               href="https://github.com/eCreafr/DWWM/archive/refs/heads/main.zip"
-              ><i class="bi bi-download"></i> téléchargez Le ZIP complet ici</a
+              ><img
+                src="node_modules/bootstrap-icons/icons/download.svg"
+                alt=""
+              />
+              téléchargez Le ZIP complet ici</a
             >
           </div>
         </div>
@@ -136,5 +146,24 @@
       integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
       crossorigin="anonymous"
     ></script>
+    <script
+      src="https://code.jquery.com/jquery-3.7.1.min.js"
+      integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+      crossorigin="anonymous"
+    ></script>
+    <script>
+      //jquery blink title :
+      const orginalTitle = $(document).prop("title");
+      const newTitle = "😀 eh ! Revenez ici !";
+
+      $(function changeTitle() {
+        $(window).blur(function () {
+          $("title").text(newTitle);
+        });
+        $(window).focus(function () {
+          $("title").text(orginalTitle);
+        });
+      });
+    </script>
   </body>
 </html>
