@@ -44,3 +44,32 @@ h2 {
   color: #aaa;
   text-transform: uppercase;
 }
+
+.typing-effect-container {
+  width: 380px; /* important que la taille du conteneur corresponde a la taille du texte avec effet */
+  margin: auto;
+}
+.typing-effect {
+  font-size: 2em;
+  font-weight: 700;
+  color: #f2f0f0;
+  border-right: 2px solid;
+  white-space: nowrap;
+  overflow: hidden;
+  width: 0;
+  animation: typing 1s steps(23) forwards,
+    blink 0.5s step-end infinite alternate;
+}
+@keyframes typing {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+@keyframes blink {
+  50% {
+    border-color: transparent;
+  }
+}
