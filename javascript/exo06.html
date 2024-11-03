@@ -40,7 +40,7 @@
       // Bouton suivant
       nextBtn.addEventListener("click", () => {
         if (counter >= images.length - 1) return; // Empêche de sortir des limites
-        carrouselSlide.style.transition = "transform 0.4s ease-in-out";
+        carrouselSlide.style.transition = "transform 1s ease-in-out";
         counter++;
         carrouselSlide.style.transform =
           "translateX(" + -size * counter + "px)";
@@ -48,7 +48,7 @@
       // Bouton précédent
       prevBtn.addEventListener("click", () => {
         if (counter <= 0) return; // Empêche de sortir des limites
-        carrouselSlide.style.transition = "transform 0.4s ease-in-out";
+        carrouselSlide.style.transition = "transform 1s ease-in-out";
         counter--;
         carrouselSlide.style.transform =
           "translateX(" + -size * counter + "px)";

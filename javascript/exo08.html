@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Apprendre JavaScript | Exercice 8</title>
+    <link rel="stylesheet" href="../html/css/froggie.css" />
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body>
+    <div class="exercice">
+      <h1>Apprendre JavaScript | Exercice 8 incrementation d'un compteur</h1>
+    </div>
+    <br /><br /><br /><br />
+    <div>
+      <p id="counterDisplay">Compteur : 0</p>
+      <button id="incrementButton">Incrémenter</button>
+    </div>
+
+    <script>
+      // Initialisation du compteur à 0
+      let counter = 0;
+
+      // Sélection des éléments HTML
+      const counterDisplay = document.getElementById("counterDisplay");
+      const incrementButton = document.getElementById("incrementButton");
+
+      // Ajout d'un événement au clic sur le bouton
+      incrementButton.addEventListener("click", () => {
+        // Incrémentation du compteur
+        counter++;
+
+        // Mise à jour de l'affichage du compteur
+        counterDisplay.textContent = `Compteur : ${counter}`;
+      });
+    </script>
+    <div class="froggiesplaining">
+      <span>Froggiesplaining :</span>
+      <strong>Explications détaillées :</strong>
+      <br /><br />
+      <ul>
+        <li>
+          <strong>let counter = 0;</strong>Initialise la variable counter à 0.
+        </li>
+        <li>
+          <strong>Sélection des éléments : getElementById() </strong>permet de
+          lier le JavaScript aux éléments HTML du DOM.
+        </li>
+        <li>
+          <strong>addEventListener("click", ...)</strong>Ajoute un gestionnaire
+          d'événements pour que le compteur s'incrémente à chaque clic
+        </li>
+        <li>
+          <strong>counterDisplay.textContent = `Compteur : ${counter}`;</strong
+          >Mise à jour de l'affichage : Modifie le contenu texte de l'élément
+          pour afficher la valeur actuelle du compteur.
+        </li>
+      </ul>
+      <p>
+        <img src="ressources/froggie-300.png" alt="Froggie" class="overfrog" />
+      </p>
+    </div>
+  </body>
+</html>

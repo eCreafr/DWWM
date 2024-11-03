@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Apprendre JavaScript | Exercice 8</title>
+    <link rel="stylesheet" href="../html/css/froggie.css" />
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body>
+    <div class="exercice">
+      <h1>Apprendre JavaScript | Exercice 8 incrementation d'un compteur</h1>
+    </div>
+    <br /><br /><br /><br />
+    <div>
+      <p id="counterDisplay">Compteur : 0</p>
+      <button id="incrementButton">Incrémenter</button>
+      <button id="decrementButton">Décrémenter</button>
+      <button id="resetButton">Réinitialiser</button>
+    </div>
+
+    <script>
+      // Initialisation du compteur à 0
+      let counter = 0;
+
+      // Sélection des éléments HTML
+      const counterDisplay = document.getElementById("counterDisplay");
+      const incrementButton = document.getElementById("incrementButton");
+      const decrementButton = document.getElementById("decrementButton");
+      const resetButton = document.getElementById("resetButton");
+
+      // Fonction pour mettre à jour l'affichage du compteur
+      function updateDisplay() {
+        counterDisplay.textContent = `Compteur : ${counter}`;
+      }
+
+      // Ajout d'un événement au clic sur le bouton d'incrémentation
+      incrementButton.addEventListener("click", () => {
+        counter++;
+        updateDisplay();
+      });
+
+      // Ajout d'un événement au clic sur le bouton de décrémentation
+      decrementButton.addEventListener("click", () => {
+        counter--;
+        updateDisplay();
+      });
+
+      // Ajout d'un événement au clic sur le bouton de réinitialisation
+      resetButton.addEventListener("click", () => {
+        counter = 0;
+        updateDisplay();
+      });
+    </script>
+    <div class="froggiesplaining">
+      <span>Froggiesplaining :</span>
+      <strong>Explications détaillées :</strong>
+      <br /><br />
+      <ul>
+        <li><strong>Bouton de décrémentation :  counter--;
+        updateDisplay();</strong>Permet de diminuer la valeur du compteur de 1 à chaque clic.</li>
+        <li><strong>Bouton de réinitialisation :   counter = 0;
+        updateDisplay();</strong>Remet la valeur du compteur à 0.</li>
+        <li><strong>Fonction updateDisplay() :</strong>Une fonction dédiée pour mettre à jour l'affichage, utilisée par chaque événement pour éviter la répétition de code.</li>
+        <li><strong></strong></li>
+        <li><strong></strong></li>
+      </ul>
+      
+    
+        <img src="ressources/froggie-300.png" alt="Froggie" class="overfrog" />
+      </p>
+    </div>
+  </body>
+</html>

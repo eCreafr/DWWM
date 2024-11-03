@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Apprendre JavaScript | Exercice 6</title>
+    <link rel="stylesheet" href="css/carrousel.css" />
+    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="stylesheet" href="../html/css/froggie.css" />
+  </head>
+  <body>
+    <div class="exercice">
+      <h1>Apprendre JavaScript | Exercice 6</h1>
+    </div>
+    <div style="clear: both"></div>
+    <div class="carrousel-container">
+      <div class="carrousel-slide">
+        <img src="ressources/carrousel1.jpg" alt="Image 1" />
+        <img src="ressources/carrousel2.jpg" alt="Image 2" />
+        <img src="ressources/carrousel3.jpg" alt="Image 3" />
+        <img src="ressources/carrousel4.jpg" alt="Image 4" />
+      </div>
+    </div>
+
+    <!-- Boutons pour naviguer -->
+    <button id="prevBtn">⟵</button>
+    <button id="nextBtn">⟶</button>
+
+    <script>
+      // Sélection des éléments du DOM
+      const carrouselSlide = document.querySelector(".carrousel-slide");
+      const images = document.querySelectorAll(".carrousel-slide img");
+      const prevBtn = document.getElementById("prevBtn");
+      const nextBtn = document.getElementById("nextBtn");
+      let counter = 0;
+      const size = images[0].clientWidth;
+
+      // Fonction pour mettre à jour la position du carrousel
+      function updateCarrouselPosition(transition = true) {
+        carrouselSlide.style.transition = transition
+          ? "transform 0.5s ease-in-out"
+          : "none";
+        carrouselSlide.style.transform = `translateX(${-size * counter}px)`;
+      }
+
+      // Fonction pour aller à l'image suivante
+      function nextSlide() {
+        if (counter >= images.length - 1) {
+          counter = -1; // Retour au début pour un défilement infini
+        }
+        counter++;
+        updateCarrouselPosition();
+      }
+
+      // Fonction pour aller à l'image précédente
+      function prevSlide() {
+        if (counter <= 0) {
+          counter = images.length; // Aller à la fin pour un défilement infini
+        }
+        counter--;
+        updateCarrouselPosition();
+      }
+
+      // Écouteurs d'événements pour les boutons
+      nextBtn.addEventListener("click", nextSlide);
+      prevBtn.addEventListener("click", prevSlide);
+
+      // Gestion du défilement infini
+      carrouselSlide.addEventListener("transitionend", () => {
+        if (images[counter].id === "lastClone") {
+          carrouselSlide.style.transition = "none";
+          counter = images.length - 2;
+          updateCarrouselPosition(false);
+        }
+        if (images[counter].id === "firstClone") {
+          carrouselSlide.style.transition = "none";
+          counter = images.length - counter;
+          updateCarrouselPosition(false);
+        }
+      });
+
+      // Fonction pour la lecture automatique
+      let autoPlayInterval;
+
+      function startAutoPlay() {
+        autoPlayInterval = setInterval(nextSlide, 3000);
+      }
+
+      function stopAutoPlay() {
+        clearInterval(autoPlayInterval);
+      }
+
+      // Démarrer la lecture automatique
+      startAutoPlay();
+
+      // Gestion du hover
+      carrouselSlide.addEventListener("mouseenter", stopAutoPlay);
+      carrouselSlide.addEventListener("mouseleave", startAutoPlay);
+
+      // Gestion du redimensionnement de la fenêtre
+      window.addEventListener("resize", () => {
+        clearInterval(autoPlayInterval);
+        const newSize = images[0].clientWidth;
+        if (newSize !== size) {
+          // Mettre à jour la taille et repositionner le carrousel
+          size = newSize;
+          updateCarrouselPosition(false);
+          startAutoPlay();
+        }
+      });
+
+      // Initialisation
+      updateCarrouselPosition(false);
+    </script>
+
+    <div class="froggiesplaining">
+      <span>Froggiesplaining :</span>
+
+      <ul>
+        <li></li>
+      </ul>
+      <img src="ressources/froggie-300.png" alt="Froggie" class="overfrog" />
+    </div>
+  </body>
+</html>
