@@ -12,37 +12,38 @@
       <h1>Apprendre JavaScript | Exercice 4 conditions TP1</h1>
     </div>
     <br /><br /><br /><br />
-    <div id="qcm">
+    <div id="qcm" class="contenant-cible">
       <p>Quelle est la capitale de la France ?</p>
       <input type="radio" name="q1" value="correct" /> Paris<br />
       <input type="radio" name="q1" value="incorrect" /> Lyon<br />
       <input type="radio" name="q1" value="incorrect" /> Marseille<br />
+      <br />
 
       <p>2 + 2 = ?</p>
       <input type="radio" name="q2" value="incorrect" /> 3<br />
       <input type="radio" name="q2" value="correct" /> 4<br />
-      <input type="radio" name="q2" value="incorrect" /> 5<br />
+      <input type="radio" name="q2" value="incorrect" /> 5<br /><br />
 
       <p>Quel est l'océan le plus grand ?</p>
       <input type="radio" name="q3" value="correct" /> Océan Pacifique<br />
       <input type="radio" name="q3" value="incorrect" /> Océan Atlantique<br />
-      <input type="radio" name="q3" value="incorrect" /> Océan Indien<br />
+      <input type="radio" name="q3" value="incorrect" /> Océan Indien<br /><br />
 
       <p>L'année de la bataille de marignan ?</p>
       <input type="radio" name="q4" value="incorrect" /> 1414<br />
       <input type="radio" name="q4" value="correct" /> 1515<br />
       <input type="radio" name="q4" value="incorrect" /> 1616<br />
-      <input type="radio" name="q4" value="incorrect" /> 1717<br />
+      <input type="radio" name="q4" value="incorrect" /> 1717<br /><br />
 
       <p>La couleur du cheval blanc d'Henri IV ?</p>
       <input type="radio" name="q5" value="incorrect" /> Pie<br />
       <input type="radio" name="q5" value="correct" /> Blanc<br />
       <input type="radio" name="q5" value="incorrect" /> Noir<br />
-      <input type="radio" name="q5" value="incorrect" /> Alezan<br />
-    </div>
-    <button onclick="evaluerQCM()">Soumettre</button>
-    <p id="result"></p>
+      <input type="radio" name="q5" value="incorrect" /> Alezan<br /><br />
 
+      <button onclick="evaluerQCM()">Soumettre</button>
+      <p id="result"></p>
+    </div>
     <script>
       function classifierNote(score) {
         let mention;

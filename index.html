@@ -174,7 +174,7 @@
         }
 
         gradients.forEach((gradient, index) => {
-          const size = 300 + Math.random() * 200; // Taille aléatoire entre 300 et 500px
+          const size = 200 + Math.random() * 400; // Taille aléatoire entre 300 et 500px
 
           gradient.style.width = `${size}px`;
           gradient.style.height = `${size}px`;
@@ -190,7 +190,7 @@
               duration: duration,
               x: newPos.x,
               y: newPos.y,
-              scale: 0.8 + Math.random() * 0.4, // Échelle aléatoire entre 0.8 et 1.2
+              scale: 0.8 + Math.random() * 0.6, // Échelle aléatoire entre 0.8 et 1.2
               ease: "sine.inOut",
               onComplete: animateGradient,
             });
