@@ -29,11 +29,10 @@
 
       const domaine = [".com", ".fr", ".net", ".de"];
 
+      let testExtension = domaine.some((domaines) => mail.endsWith(domaines));
       let bonMail = "invalide !";
 
       if (mail.includes("@")) {
-        let testExtension = domaine.some((domaines) => mail.endsWith(domaines));
-
         if (testExtension === true) {
           bonMail = "valide !";
         }

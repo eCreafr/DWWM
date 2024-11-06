@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Apprendre JavaScript | Exercice 9 QUIZ !</title>
+    <link rel="stylesheet" href="../html/css/froggie.css" />
+    <link rel="stylesheet" href="css/styles.css" />
+    <style>
+      #qcm {
+        margin-left: 200px;
+      }
+      .question p {
+        font-weight: bold;
+      }
+      .background {
+        position: fixed;
+        z-index: -1;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+      }
+      .gradient {
+        position: absolute;
+        width: 500px;
+        height: 500px;
+        border-radius: 50%;
+        opacity: 0.7;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="background"></div>
+    <div class="exercice">
+      <h1>Apprendre JavaScript | Exercice 9 QUIZ !</h1>
+    </div>
+    <br /><br /><br /><br />
+
+    <div id="qcm">
+      <!-- Questions -->
+      <div class="question">
+        <p>
+          1. Quel mot-clé est utilisé pour déclarer une variable en JavaScript ?
+        </p>
+        <input type="radio" name="q1" value="correct" /> a) const<br />
+        <input type="radio" name="q1" value="incorrect" /> b) int<br />
+        <input type="radio" name="q1" value="incorrect" /> c) string<br />
+        <input type="radio" name="q1" value="incorrect" /> d) def<br />
+      </div>
+      <div class="question">
+        <p>2. Comment afficher un message dans la console du navigateur ?</p>
+        <input type="radio" name="q2" value="incorrect" /> a) print()<br />
+        <input type="radio" name="q2" value="correct" /> b) console.log()<br />
+        <input type="radio" name="q2" value="incorrect" /> c) echo()<br />
+        <input type="radio" name="q2" value="incorrect" /> d) write()<br />
+      </div>
+      <div class="question">
+        <p>3. Quel Objet Math me donne un entier sans l’arrondir ?</p>
+        <input type="radio" name="q3" value="incorrect" /> a) Math.round<br />
+        <input type="radio" name="q3" value="incorrect" /> b) Math.min<br />
+        <input type="radio" name="q3" value="incorrect" /> c) Math.random<br />
+        <input type="radio" name="q3" value="correct" /> d) Math.trunc<br />
+      </div>
+      <div class="question">
+        <p>
+          4. Quelle est la syntaxe correcte pour appeler une fonction nommée
+          `myFunction` ?
+        </p>
+        <input type="radio" name="q4" value="incorrect" /> a) call
+        myFunction()<br />
+        <input type="radio" name="q4" value="incorrect" /> b) myFunction<br />
+        <input type="radio" name="q4" value="correct" /> c) myFunction()<br />
+        <input type="radio" name="q4" value="incorrect" /> d) function
+        myFunction()<br />
+      </div>
+      <div class="question">
+        <p>
+          5. Quel symbole est utilisé pour les commentaires sur une seule ligne
+          ?
+        </p>
+        <input type="radio" name="q5" value="correct" /> a) // <br />
+        <input type="radio" name="q5" value="incorrect" /> b) # <br />
+        <input type="radio" name="q5" value="incorrect" /> c) &lt;!-- <br />
+        <input type="radio" name="q5" value="incorrect" /> d) $$ <br />
+      </div>
+      <div class="question">
+        <p>6. Quelle est la bonne façon de créer un tableau en JavaScript ?</p>
+        <input type="radio" name="q6" value="correct" /> a) `let arr = [1, 2,
+        3];`<br />
+        <input type="radio" name="q6" value="incorrect" /> b) `let arr = {1, 2,
+        3};`<br />
+        <input type="radio" name="q6" value="incorrect" /> c) `let arr = (1, 2,
+        3);`<br />
+        <input type="radio" name="q6" value="incorrect" /> d) `let arr = "1, 2,
+        3";`<br />
+      </div>
+      <div class="question">
+        <p>7. Pour ouvrir une boîte de dialogue je dois écrire ?</p>
+        <input type="radio" name="q7" value="incorrect" /> a) print <br />
+        <input type="radio" name="q7" value="correct" /> b) prompt <br />
+        <input type="radio" name="q7" value="incorrect" /> c) echo <br />
+        <input type="radio" name="q7" value="incorrect" /> d) console.log <br />
+      </div>
+      <div class="question">
+        <p>8. Quel est l'opérateur d'égalité stricte en JavaScript ?</p>
+        <input type="radio" name="q8" value="incorrect" /> a) == <br />
+        <input type="radio" name="q8" value="correct" /> b) === <br />
+        <input type="radio" name="q8" value="incorrect" /> c) != <br />
+        <input type="radio" name="q8" value="incorrect" /> d) = <br />
+      </div>
+      <div class="question">
+        <p>
+          9. Quelle méthode est utilisée pour convertir une chaîne de caractères
+          en nombre entier ?
+        </p>
+        <input type="radio" name="q9" value="correct" /> a) parseInt() <br />
+        <input type="radio" name="q9" value="incorrect" /> b) toNumber() <br />
+        <input type="radio" name="q9" value="incorrect" /> c) int() <br />
+        <input type="radio" name="q9" value="incorrect" /> d) NumberFormat()
+        <br />
+      </div>
+      <div class="question">
+        <p>10. Que signifie `NaN` en JavaScript ?</p>
+        <input type="radio" name="q10" value="incorrect" /> a) Not a Name <br />
+        <input type="radio" name="q10" value="correct" /> b) Not a Number <br />
+        <input type="radio" name="q10" value="incorrect" /> c) Not a Null <br />
+        <input type="radio" name="q10" value="incorrect" /> d) Not a Namespace
+        <br />
+      </div>
+      <div class="question">
+        <p>
+          11. Comment accéder au deuxième élément du tableau suivant : `let arr
+          = [10, 20, 30];` ?
+        </p>
+        <input type="radio" name="q11" value="incorrect" /> a) arr[0] <br />
+        <input type="radio" name="q11" value="correct" /> b) arr[1] <br />
+        <input type="radio" name="q11" value="incorrect" /> c) arr[2] <br />
+        <input type="radio" name="q11" value="incorrect" /> d) arr[3] <br />
+      </div>
+      <div class="question">
+        <p>12. Que fait l'instruction `alert("Bonjour !");` ?</p>
+        <input type="radio" name="q12" value="incorrect" /> a) Affiche "Bonjour
+        !" dans la console <br />
+        <input type="radio" name="q12" value="correct" /> b) Affiche "Bonjour !"
+        dans une boîte de dialogue <br />
+        <input type="radio" name="q12" value="incorrect" /> c) Affiche "Bonjour
+        !" en bas de la page <br />
+        <input type="radio" name="q12" value="incorrect" /> d) Affiche "Bonjour
+        !" dans un fichier journal <br />
+      </div>
+      <div class="question">
+        <p>13. Comment déclarer une fonction en JavaScript ?</p>
+        <input type="radio" name="q13" value="correct" /> a) `let myFunction =
+        function() { ... }`<br />
+        <input type="radio" name="q13" value="incorrect" /> b) `function:
+        myFunction { ... }`<br />
+        <input type="radio" name="q13" value="incorrect" /> c) `create
+        myFunction() { ... }`<br />
+        <input type="radio" name="q13" value="incorrect" /> d) `define
+        myFunction() { ... }`<br />
+      </div>
+      <div class="question">
+        <p>14. Quelle est la sortie de `console.log(2 + "2");` ?</p>
+        <input type="radio" name="q14" value="incorrect" /> a) 4 <br />
+        <input type="radio" name="q14" value="correct" /> b) "22" <br />
+        <input type="radio" name="q14" value="incorrect" /> c) undefined <br />
+        <input type="radio" name="q14" value="incorrect" /> d) NaN <br />
+      </div>
+      <div class="question">
+        <p>15. Que signifie `===` en JavaScript ?</p>
+        <input type="radio" name="q15" value="correct" /> a) Égalité stricte
+        <br />
+        <input type="radio" name="q15" value="incorrect" /> b) Assignation
+        <br />
+        <input type="radio" name="q15" value="incorrect" /> c) Comparaison de
+        type seulement <br />
+        <input type="radio" name="q15" value="incorrect" /> d) Comparaison de
+        valeur seulement <br />
+      </div>
+      <div class="question">
+        <p>16. Que faut-il écrire pour ajouter un écouteur ?</p>
+        <input type="radio" name="q16" value="incorrect" /> a) getElementById
+        <br />
+        <input type="radio" name="q16" value="incorrect" /> b) querySelectorAll
+        <br />
+        <input type="radio" name="q16" value="correct" /> c) addEventListener
+        <br />
+        <input type="radio" name="q16" value="incorrect" /> d) forEach <br />
+      </div>
+      <div class="question">
+        <p>17. Quel est le résultat de `Boolean(0);` ?</p>
+        <input type="radio" name="q17" value="incorrect" /> a) true <br />
+        <input type="radio" name="q17" value="correct" /> b) false <br />
+        <input type="radio" name="q17" value="incorrect" /> c) 0 <br />
+        <input type="radio" name="q17" value="incorrect" /> d) NaN <br />
+      </div>
+      <div class="question">
+        <p>
+          18. Que fait `let x = y || 10;` si `y` est `null` ou `undefined` ?
+        </p>
+        <input type="radio" name="q18" value="incorrect" /> a) x prend la valeur
+        de y <br />
+        <input type="radio" name="q18" value="incorrect" /> b) x prend la valeur
+        0 <br />
+        <input type="radio" name="q18" value="correct" /> c) x prend la valeur
+        10 <br />
+        <input type="radio" name="q18" value="incorrect" /> d) x reste undefined
+        <br />
+      </div>
+      <div class="question">
+        <p>
+          19. Quelle boucle est utilisée pour parcourir chaque élément d'un
+          tableau ?
+        </p>
+        <input type="radio" name="q19" value="incorrect" /> a) for...each <br />
+        <input type="radio" name="q19" value="correct" /> b) for...of <br />
+        <input type="radio" name="q19" value="incorrect" /> c) for...in <br />
+        <input type="radio" name="q19" value="incorrect" /> d) each...in <br />
+      </div>
+
+      <div class="question">
+        <p>20. Comment ajouter un commentaire multi-lignes en JavaScript ?</p>
+        <input type="radio" name="q20" value="incorrect" /> a) // <br />
+        <input type="radio" name="q20" value="incorrect" /> b) ## <br />
+        <input type="radio" name="q20" value="correct" /> c) /* */ <br />
+        <input type="radio" name="q20" value="incorrect" /> d) /** <br />
+      </div>
+
+      <button onclick="evaluerQCM()">Soumettre</button>
+    </div>
+
+    <div class="froggiesplaining">
+      <span>Froggiesplaining :</span>
+      <strong id="resultat" class="result"></strong>
+
+      <img src="ressources/froggie-300.png" alt="Froggie" class="overfrog" />
+    </div>
+
+    <script>
+      // Fonction pour évaluer le QCM
+      function evaluerQCM() {
+        let bonnesReponses = 0;
+        const nombreQuestions = 20; // Total des questions
+
+        // Boucle sur chaque question
+        for (let i = 1; i <= nombreQuestions; i++) {
+          const reponse = document.querySelector(`input[name="q${i}"]:checked`);
+          if (reponse && reponse.value === "correct") {
+            bonnesReponses++;
+          }
+        }
+
+        // Calcule le score en pourcentage
+        const score = (bonnesReponses / nombreQuestions) * 100;
+
+        // Affiche le résultat en fonction du score
+        let message;
+        if (score === 100) {
+          message = "Excellent ! Vous avez tout juste.";
+        } else if (score >= 80) {
+          message = "Bravo ! Très bon score.";
+        } else if (score >= 50) {
+          message = "Pas mal, mais vous pouvez faire mieux.";
+        } else {
+          message = "Révisez un peu, ça ira mieux la prochaine fois.";
+        }
+
+        document.getElementById(
+          "resultat"
+        ).textContent = `Score : ${score}%. ${message}`;
+      }
+    </script>
+    <script src="../js/gsap.min.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const background = document.querySelector(".background");
+        const colors = ["#ba8ce4", "#15acff", "#584cb4", "#e9f3fc", "#ba8ce4"];
+        const gradients = [];
+
+        // Créer plusieurs gradients
+        for (let i = 0; i < 5; i++) {
+          const gradient = document.createElement("div");
+          gradient.classList.add("gradient");
+          gradient.style.background = `radial-gradient(circle, ${colors[i]} 0%, transparent 50%)`;
+          background.appendChild(gradient);
+          gradients.push(gradient);
+        }
+
+        // Fonction pour obtenir une position aléatoire
+        function randomPosition() {
+          return {
+            x: Math.random() * window.innerWidth,
+            y: Math.random() * window.innerHeight,
+          };
+        }
+
+        gradients.forEach((gradient, index) => {
+          const size = 200 + Math.random() * 400; // Taille aléatoire entre 300 et 500px
+
+          gradient.style.width = `${size}px`;
+          gradient.style.height = `${size}px`;
+          gradient.style.background = `radial-gradient(ellipse ${
+            size * 0.8
+          }px ${size * 0.6}px, ${colors[index]} 0%, transparent 50%)`;
+
+          function animateGradient() {
+            const duration = 5 + Math.random() * 5;
+            const newPos = randomPosition();
+
+            gsap.to(gradient, {
+              duration: duration,
+              x: newPos.x,
+              y: newPos.y,
+              scale: 0.8 + Math.random() * 0.6, // Échelle aléatoire entre 0.8 et 1.2
+              ease: "sine.inOut",
+              onComplete: animateGradient,
+            });
+          }
+
+          animateGradient();
+        });
+      });
+    </script>
+  </body>
+</html>
