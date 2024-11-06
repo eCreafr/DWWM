@@ -31,14 +31,11 @@
 
       let bonMail = "invalide !";
 
-      if (mail.includes("@")) {
-        let testExtension = domaine.some((domaines) => mail.endsWith(domaines));
-
-        if (testExtension === true) {
-          bonMail = "valide !";
-        }
+      if (mail.includes("@") && mail.includes(domaine)) {
+        bonMail = "valide !";
       }
 
+      // cette section reste inchangée : on ecrit une fonction pour afficher le log dans la page dans l'id "log-container"
       function printLog(message) {
         let logContainer = document.getElementById("log-container");
         logContainer.innerText = message;
