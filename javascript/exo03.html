@@ -51,7 +51,7 @@
       //on affiche une boite de dialogue "popup" :
       const prenom = prompt("Quel est votre prénom ?");
       //on détermine les voyelles dans un tableau :
-      const voyelleS = ["a", "e", "é", "ë", "i", "o", "u"];
+      const voyelleS = ["a", "e", "é", "ë", "i", "o", "u", "y"];
       //on initialise notre compteur à 0 :
       let compteur = 0;
       //on incrémente de 1 à chaque voyelle trouvée dans la chaine de caractère "prenom"
@@ -61,18 +61,18 @@
         }
       }
       // enfin on ecrit une fonction pour afficher le log dans la page dans l'id "log-container"
-      function printLog(message) {
-        let logContainer = document.getElementById("log-container");
-        logContainer.innerText = message;
-      }
-      // et on imprime le log :
-      printLog(
-        "Bonjour " +
+      function printLog() {
+        const logContainer = document.getElementById("log-container");
+        logContainer.textContent =
+          "Bonjour " +
           prenom +
           "\n votre prénom contient " +
           compteur +
-          " voyelle(s)"
-      );
+          " voyelle(s)";
+      }
+
+      // Appel de la fonction printLog
+      printLog();
     </script>
   </body>
 </html>

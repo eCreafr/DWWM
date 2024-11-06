@@ -11,18 +11,27 @@
     <div class="exercice">
       <h1>Apprendre JavaScript | Exercice 4 conditions</h1>
     </div>
-    <h1>Froggie te donne un avis sur ta note</h1>
+    <div class="contenant">
+      <h1>Froggie te donne un avis sur ta note</h1>
+      <br />
 
-    <label for="noteInput">Entrez une note en math entre 0 et 100 :</label>
-    <input type="number" id="noteInput1" min="0" max="100" required />
-    <label for="noteInput">Entrez une note en histoire entre 0 et 100 :</label>
-    <input type="number" id="noteInput2" min="0" max="100" required />
-    <label for="noteInput">Entrez une note en géo entre 0 et 100 :</label>
-    <input type="number" id="noteInput3" min="0" max="100" required />
-    <button onclick="classifierNote()">ton avis Froggie ?</button>
-
-    <div id="result"></div>
-
+      <label for="noteInput">Entrez une note en math entre 0 et 100 :</label>
+      <input type="number" id="noteInput1" min="0" max="100" required /> <br />
+      <label for="noteInput"
+        >Entrez une note en histoire entre 0 et 100 :</label
+      >
+      <input type="number" id="noteInput2" min="0" max="100" required /> <br />
+      <label for="noteInput">Entrez une note en géo entre 0 et 100 :</label>
+      <input
+        type="number"
+        id="noteInput3"
+        min="0"
+        max="100"
+        required
+      /><br /><br />
+      <button onclick="classifierNote()">ton avis Froggie ?</button><br /><br />
+      <pre id="result"></pre>
+    </div>
     <script>
       function classifierNote() {
         const noteMath = parseInt(document.getElementById("noteInput1").value);
@@ -31,7 +40,7 @@
         );
         const noteGeo = parseInt(document.getElementById("noteInput3").value);
 
-        const note = (noteMath + noteHistoire + noteGeo) / 3;
+        const note = Math.round((noteMath + noteHistoire + noteGeo) / 3);
 
         // Stocke les notes et leurs labels dans un tableau
         const notes = [
@@ -41,7 +50,7 @@
         ];
 
         // on peut utiliser "Math.min" pour trouver la plus petite note
-        // const noteMin = Math.min(noteMath, noteHistoire, noteGeo);
+        //const noteMin = Math.min(noteMath, noteHistoire, noteGeo);
 
         // mais je vais passer par "reduce" pour trouver l’objet avec la valeur minimale dans le tableau, qui contient le nom de la matiere.
         const noteMin = notes.reduce((min, current) =>
@@ -62,10 +71,9 @@
           mention = "bah non c'est pas bon...";
         }
 
-        document.getElementById(
-          "result"
-        ).textContent = ` ${note} en moyenne : " ${mention}" 
-        (attention ${noteMin.label} en passant)`;
+        document.getElementById("result").textContent =
+          `${note} en moyenne : "${mention}"\n` +
+          `(attention ${noteMin.label} en passant)`;
       }
     </script>
     <div class="froggiesplaining">

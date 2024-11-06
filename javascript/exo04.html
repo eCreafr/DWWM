@@ -12,13 +12,13 @@
       <h1>Apprendre JavaScript | Exercice 4 conditions</h1>
     </div>
     <h1>Froggie te donne un avis sur ta note</h1>
+    <div class="contenant">
+      <label for="noteInput">Entrez une note entre 0 et 100 :</label>
+      <input type="number" id="noteInput" min="0" max="100" required />
+      <button onclick="classifierNote()">ton avis Froggie ?</button>
 
-    <label for="noteInput">Entrez une note entre 0 et 100 :</label>
-    <input type="number" id="noteInput" min="0" max="100" required />
-    <button onclick="classifierNote()">ton avis Froggie ?</button>
-
-    <div id="result"></div>
-
+      <div id="result"></div>
+    </div>
     <script>
       function classifierNote() {
         const note = parseInt(document.getElementById("noteInput").value);
