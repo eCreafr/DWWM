@@ -45,8 +45,8 @@
           let x = e.clientX - elRect.x;
           let y = e.clientY - elRect.y;
 
-          let midCardWidth = elRect.x / 2;
-          let midCardHeight = elRect.y / 2;
+          let midCardWidth = elRect.width / 2;
+          let midCardHeight = elRect.height / 2;
 
           let angleY = (x - midCardWidth) / 8;
           let angleX = (midCardHeight - y) / 8; // on inverse le calcul par rapport a la video de front end, pour un effet de poids de la souris plus naturel sur la carte !
