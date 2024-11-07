@@ -6,46 +6,6 @@
     <title>progression scroll</title>
     <link rel="stylesheet" href="css/exo5tp1.css" />
     <link rel="stylesheet" href="../html/css/froggie.css" />
-    <script>
-      // on cree une fonction pour calculer et afficher la progression du scroll :
-      function updateScrollProgress() {
-        // on récupére la position actuelle du scroll
-        const scrollPosition =
-          window.pageYOffset || document.documentElement.scrollTop;
-
-        // on calcule la hauteur totale scrollable :
-        const scrollHeight =
-          document.documentElement.scrollHeight -
-          document.documentElement.clientHeight;
-
-        // on compare la position actuelle et la hauteur totale en pourcentage :
-        const scrollPercentage = (scrollPosition / scrollHeight) * 100;
-
-        // on arrondie pour faire propre :
-        const roundedPercentage = Math.round(scrollPercentage * 100) / 100;
-
-        //on met a jour la largeur du width css de notre progress bar de la barre de progression
-        const progressBar = document.getElementById("progress-bar");
-        progressBar.style.width = `${scrollPercentage}%`;
-
-        // Préparer le texte à afficher
-        let progressText = `${roundedPercentage}%`;
-
-        // Ajouter un smiley si 100% est atteint
-        if (roundedPercentage >= 100) {
-          progressText += " 😊";
-        }
-
-        // Afficher la progression dans un élément HTML
-        document.getElementById("scroll-progress").textContent = progressText;
-      }
-
-      // on écoute l'événement de scroll
-      window.addEventListener("scroll", updateScrollProgress);
-
-      //  on itinialise au chargement
-      updateScrollProgress();
-    </script>
   </head>
   <body>
     <div id="progress-container">
@@ -70,5 +30,45 @@
 
       <img src="ressources/froggie-300.png" alt="Froggie" class="overfrog" />
     </div>
+    <script>
+      // on cree une fonction pour calculer et afficher la progression du scroll :
+      function updateScrollProgress() {
+        // on récupére la position actuelle du scroll
+        const scrollPosition =
+          window.pageYOffset || document.documentElement.scrollTop;
+
+        // on calcule la hauteur totale scrollable :
+        const scrollHeight =
+          document.documentElement.scrollHeight -
+          document.documentElement.clientHeight;
+
+        // on compare la position actuelle et la hauteur totale en pourcentage :
+        const scrollPercentage = (scrollPosition / scrollHeight) * 100;
+
+        // on arrondie pour faire propre :
+        const roundedPercentage = Math.round(scrollPercentage * 100) / 100;
+
+        //on met a jour la largeur du width css de notre progress bar de la barre de progression
+        document.getElementById("progress-bar").style.width =
+          scrollPercentage + "%";
+
+        // Préparer le texte à afficher
+        let progressText = `${roundedPercentage}%`;
+
+        // Ajouter un smiley si 100% est atteint
+        if (roundedPercentage >= 100) {
+          progressText += " 😊";
+        }
+
+        // Afficher la progression dans un élément HTML
+        document.getElementById("scroll-progress").textContent = progressText;
+      }
+
+      // on écoute l'événement de scroll
+      window.addEventListener("scroll", updateScrollProgress);
+
+      //  on itinialise au chargement
+      updateScrollProgress();
+    </script>
   </body>
 </html>
