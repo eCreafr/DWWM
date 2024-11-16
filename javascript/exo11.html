@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Apprendre JavaScript | Exercice 11</title>
+    <link rel="stylesheet" href="../html/css/froggie.css" />
+    <link rel="stylesheet" href="css/styles.css" />
+    <style>
+      .big-title span {
+        display: inline-block;
+        opacity: 0;
+        transition: transform 0.3s ease;
+      }
+
+      .big-title span.show {
+        opacity: 1;
+      }
+
+      .overlap {
+        --overlap: 0.15ch;
+        --shadow-offset: 0.1ch;
+        --shadow-blur: 0.2ch;
+        --shadow-color: #0000004e;
+        letter-spacing: calc(var(--overlap) * -2.2);
+        isolation: isolate;
+        font-size: 10em;
+        color: rgb(76, 62, 153);
+        font-family: Arial, Helvetica, sans-serif;
+      }
+      .overlap-front {
+        --mult: 1;
+      }
+      .overlap-back {
+        --mult: -1;
+      }
+
+      .overlap > span {
+        position: relative;
+        z-index: calc(var(--index, 1) * var(--mult, 1));
+      }
+      .overlap-front > span:not(:first-of-type),
+      .overlap-back > span:not(:last-of-type) {
+        text-shadow: calc(var(--mult, 1) * var(--shadow-offset, 0) * -1) 0
+          var(--shadow-blur, 0) var(--shadow-color, #00000048);
+      }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/TextPlugin.min.js"></script>
+  </head>
+  <body>
+    <div class="exercice">
+      <h1>
+        Apprendre JavaScript | Exercice 11 Librairie Gsap et son plugin
+        Textplugin + du CSS
+      </h1>
+    </div>
+    <br /><br />
+    <div class="contenant-cible">
+      <h1 class="big-title overlap overlap-front">La Teste 2024</h1>
+    </div>
+
+    <div class="froggiesplaining">
+      <span>Froggiesplaining :</span>
+      <br />
+      <img src="ressources/exo11.png" alt="" /><br />
+      <strong>Explications détaillées :</strong>
+      <br /><br />
+
+      En JavaScript on récupere le contenu texte du H1, et on le découpe en une
+      balise span par lettre, on peut ensuite appliquer une bonne dose de CSS
+      sur ces span pour le z-index, l'ombre, rappocher les lettres. <br />
+      l'animation, le changement de lettre sont réalisé avec la librairie gsap
+
+      <p>
+        <img src="ressources/froggie-300.png" alt="Froggie" class="overfrog" />
+      </p>
+    </div>
+    <script>
+      gsap.registerPlugin(TextPlugin);
+
+      document.addEventListener("DOMContentLoaded", () => {
+        const title = document.querySelector(".big-title");
+
+        // Transformer le texte en spans
+        const chars = [...title.textContent];
+        title.innerHTML = "";
+        chars.forEach((char, index) => {
+          const span = document.createElement("span");
+          span.textContent = char;
+          span.style.setProperty("--index", index);
+          title.append(span);
+        });
+
+        const spans = title.querySelectorAll("span");
+
+        // Définir l'état initial
+        gsap.set(spans, { opacity: 0, y: 50, rotationX: 90 });
+
+        // Créer une timeline pour séquencer les animations
+        const tltitle = gsap.timeline();
+
+        // Animation d'apparition des caractères
+        tltitle.to(spans, {
+          duration: 1,
+          opacity: 1,
+          y: 0,
+          rotationX: 0,
+          stagger: 0.05,
+          ease: "power2.out",
+        });
+
+        // Étape intermédiaire avec des caractères aléatoires
+        spans.forEach((span, index) => {
+          tltitle.to(
+            span,
+            {
+              duration: 0.3,
+              text: {
+                value: "#",
+              },
+              repeat: 2,
+              yoyo: true,
+              ease: "power1.inOut",
+            },
+            index * 0.05 // Décalage de l'animation pour chaque caractère
+          );
+        });
+
+        // Animation du changement de texte final
+        tltitle.to(spans, {
+          duration: 1,
+          text: {
+            value: (i) => chars[i],
+          },
+          ease: "power1.inOut",
+          stagger: 0.05,
+        });
+      });
+    </script>
+  </body>
+</html>
