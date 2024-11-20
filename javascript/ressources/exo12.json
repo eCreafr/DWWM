@@ -1,0 +1,50 @@
+[
+  {
+    "artist": "L'impératrice",
+    "price": 38,
+    "date": "2025-06-15",
+    "time": "19:00",
+    "ticketsSold": 999,
+    "description": "L'impératrice est un groupe français aux influences disco, pop et funk. Leur musique mêle des rythmes entraînants avec des sonorités nostalgiques des années 70 et 80, créant une ambiance unique et dansante."
+  },
+  {
+    "artist": "Kavinsky",
+    "price": 45,
+    "date": "2025-06-15",
+    "time": "21:30",
+    "ticketsSold": 1000,
+    "description": "Kavinsky, connu pour son hit 'Nightcall', est un artiste français de musique électronique. Sa musique est souvent associée aux thèmes de la synthwave et s'inspire des films des années 80, avec des sons puissants et des ambiances cinématographiques."
+  },
+  {
+    "artist": "M83",
+    "price": 32,
+    "date": "2025-06-16",
+    "time": "19:00",
+    "ticketsSold": 600,
+    "description": "M83, dirigé par Anthony Gonzalez, est un projet de musique électronique français. Connu pour des titres comme 'Midnight City', M83 crée des paysages sonores épiques et émotionnels, combinant synthétiseurs et sons atmosphériques."
+  },
+  {
+    "artist": "Wax Taylor",
+    "price": 29,
+    "date": "2025-06-16",
+    "time": "22:00",
+    "ticketsSold": 350,
+    "description": "Wax Taylor est un producteur français de trip-hop et de hip-hop. Il mélange habilement des samples vintage avec des rythmes modernes, créant une musique cinématographique qui explore des thèmes variés et poétiques."
+  },
+  {
+    "artist": "Bonobo",
+    "price": 50,
+    "date": "2025-06-17",
+    "time": "20:30",
+    "ticketsSold": 780,
+    "description": "Bonobo, alias Simon Green, est un artiste britannique de musique électronique. Connu pour ses sons downtempo, Bonobo crée des morceaux atmosphériques et immersifs, souvent influencés par le jazz, le trip-hop et les musiques du monde."
+  },
+  {
+    "artist": "Chinese Man",
+    "price": 27,
+    "date": "2025-06-17",
+    "time": "22:00",
+    "ticketsSold": 640,
+    "description": "Chinese Man est un collectif de producteurs français de musique électro et hip-hop. Leur style unique mélange des influences allant du reggae au jazz, avec des beats puissants et des samples originaux, offrant une expérience musicale riche et dynamique."
+  }
+]

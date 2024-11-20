@@ -1,25 +1,30 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>PHP 001 | variable, echo ...</title>
 <link rel="stylesheet" href="../html/css/froggie.css" /> 
+   <style>.cadre{ border: #000 solid 1px; 
+    margin:10px;
+    padding:10px;}</style>
 </head>
 <body>
 <div>
-<div>
+<div class="cadre">
 <strong>Afficher un message, du html avec echo</strong><br><br>
 <?php     // echo :
     echo("coucou");  // on affiche coucou dans le html
     echo("<br><strong>coucou</strong>"); // on affiche du code html  ?>
+
 <br><br>
 
-<strong>Une variable:</strong> <br><br>
+<strong>Une variable:</strong> 
+
+<br><br>
+
     <?php
     
-
-
     // on defini des variables  
 
 $client = "user";            //on charge le nom d'une variable dans une variable
@@ -31,7 +36,7 @@ echo($$client);            //affiche bob
 echo("<br>");
 echo("$$client <br>");        //affiche $user
 echo("{${$client }}<br>");    //affiche bob
-echo("{${'user'}}<br>");  
+echo("{${'user'}}<br>");  //affiche bob
 
 ?><br><br>
 <strong>Le nom d'une variable:</strong> <br><br>
@@ -49,85 +54,56 @@ echo("{${'user'}}<br>");
 	$var3 = true;
 	$var4 = Null;
 	$var5 = array("Manon","Julien","Sebastien","Ayman","Paul","Thomas");
-	var_dump($var0,$var1,$var2,$var3,$var4,$var5);
+
+	var_dump($var0,$var1,$var2,$var3,$var4,$var5); //var_dump() affiche les informations structurées d'une variable, y compris son type et sa valeur. Les tableaux et les objets sont explorés récursivement, avec des indentations, pour mettre en valeur leur structure.
 ?>
 </div>
 
-<div>
+<div class="cadre">
+    <h1>Générer Dynamiquement des variables</h1>
+    
+    
+<?php
 
+$questions = []; // Initialiser un tableau pour stocker les valeurs
 
-<br><br>
+for ($i = 0; $i < 10; $i++) {
+    $key = "quest" . $i; // Générer la clé pour chaque entrée
+    $questions[$key] = "valeur".$i; // Ajouter la valeur au tableau
 
-
-$_GET	Il contient les valeurs passées par url ou par la méthode GET d'un formulaire.
-Les noms des champs de formulaire sont les clés de ce tableau.<br><br>
-$_POST	Il contient les valeurs passées par la méthode POST d'un formulaire.
-Les noms des champs de formulaire sont les clés de ce tableau.<br><br>
-$_SERVER il contient les informations sur le serveur , la navigateur, version de php, etc
-<br><br>
-
-<strong>Ici une fonction va afficher le navigateur client et son système d'exploitation</strong> <br><br>
-
-
-<?php echo $_SERVER['PHP_SELF'];
-
-
-function getBrowserAndOS() {
-    $user_agent = $_SERVER['HTTP_USER_AGENT'];
-    $browser = "Inconnu";
-    $os = "Inconnu";
-
-    // Détection du navigateur
-    if (preg_match('/MSIE/i', $user_agent) && !preg_match('/Opera/i', $user_agent)) {
-        $browser = 'Internet Explorer';
-    } elseif (preg_match('/Firefox/i', $user_agent)) {
-        $browser = 'Mozilla Firefox';
-    } elseif (preg_match('/Chrome/i', $user_agent)) {
-        $browser = 'Google Chrome';
-    } elseif (preg_match('/Safari/i', $user_agent)) {
-        $browser = 'Apple Safari';
-    } elseif (preg_match('/Opera/i', $user_agent)) {
-        $browser = 'Opera';
-    } elseif (preg_match('/Netscape/i', $user_agent)) {
-        $browser = 'Netscape';
-    }
-
-    // Détection du système d'exploitation
-    if (preg_match('/windows|win32/i', $user_agent)) {
-        $os = 'Windows';
-    } elseif (preg_match('/macintosh|mac os x/i', $user_agent)) {
-        $os = 'MacOS';
-    } elseif (preg_match('/linux/i', $user_agent)) {
-        $os = 'Linux';
-    }
-
-    return "Navigateur : $browser, Système d'exploitation : $os";
+    echo "$key = {$questions[$key]}<br>"; // Afficher la clé et la valeur
 }
-
-echo getBrowserAndOS();
 
 ?>
+
+
+</div>
+
+<div class="froggiesplaining">
+      <span> Froggiesplaining :</span> <br>
+      <img src="img/001-3.png" alt="">
+
+
+      <img src="../html/img/froggie-300.png" alt="Froggie" class="overfrog" />
+    </div>
+
+
+
+
+<div class="cadre">
+
+
 <br><br>
-<strong>Ici une fonction va afficher l'adresse IP du navigateur client</strong> <br><br>
 
-<?php 
-
-function getIp() {
-  if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
-    $ip = $_SERVER['HTTP_CLIENT_IP'];
-  } elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
-    $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
-  } else {
-    $ip = $_SERVER['REMOTE_ADDR'];
-  }
-  return $ip;
-}
-
-echo "Votre adresse IP est : " . getIp();
- ?>
 
 </div>
 
 </div>
+<div class="froggiesplaining">
+      <span> Froggiesplaining :</span>
+
+
+      <img src="../html/img/froggie-300.png" alt="Froggie" class="overfrog" />
+    </div>
 </body>
 </html>
