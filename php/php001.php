@@ -3,13 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PHP 001 | variable, echo ...</title>
+    <title>PHP 001 | variable, echo ...<?php //je pourrais mettre du php ici ?> </title>
 <link rel="stylesheet" href="../html/css/froggie.css" /> 
    <style>.cadre{ border: #000 solid 1px; 
     margin:10px;
     padding:10px;}</style>
 </head>
 <body>
+
+<?php //ou ici ?>
+
+
+<? //existe ?>
+<?php //mais c'est cette forme la plus correcte ?> 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <div>
 <div class="cadre">
 <strong>Afficher un message, du html avec echo</strong><br><br>
@@ -59,11 +79,27 @@ echo("{${'user'}}<br>");  //affiche bob
 ?>
 </div>
 
+
+
+
+
+</div>
+<div class="froggiesplaining">
+      <span> Froggiesplaining :</span>
+      <br>
+      <img src="img/001-2.png" alt="">
+
+
+      <img src="../html/img/froggie-300.png" alt="Froggie" class="overfrog" />
+    </div>
+
+
 <div class="cadre">
     <h1>Générer Dynamiquement des variables</h1>
     
     
 <?php
+
 
 $questions = []; // Initialiser un tableau pour stocker les valeurs
 
@@ -90,20 +126,5 @@ for ($i = 0; $i < 10; $i++) {
 
 
 
-<div class="cadre">
-
-
-<br><br>
-
-
-</div>
-
-</div>
-<div class="froggiesplaining">
-      <span> Froggiesplaining :</span>
-
-
-      <img src="../html/img/froggie-300.png" alt="Froggie" class="overfrog" />
-    </div>
 </body>
 </html>
