@@ -28,6 +28,22 @@ $laurene = ['Laurène Castor', 'laurene.castor@exemple.com', 'P4ssw0rD', 28];
 $users = [$mickael, $mathieu, $laurene]; // tableau de tableau !
 
 echo $users[1][1]; // "mathieu.nebra@exemple.com"
+
+
+// avec boucle for each
+
+foreach ($users as $value) {
+    echo $value[0];
+    echo $value[1];
+    echo $value[2];
+}
+
+
+if (in_array($mathieu, $users))
+{
+    echo 'Mathieu fait bien partie des utilisateurs enregistrés !';
+}
+
 ?>
 <br><br>
 <img src="img/012-3.webp" alt="" width="300px"> <br><br>
@@ -41,6 +57,12 @@ while ($lines <= 200) {
     echo ' '. $lines .' - j\'irais plus vite a copier 200 lignes en php. <br />';
     $lines++; // revient à ecrire $lines = $lines + 1
 }
+
+
+
+
+
+
 ?>
     
 </body>
