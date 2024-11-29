@@ -1,14 +1,16 @@
 [
   {
     "artist": "L'impératrice",
+    "img": "imperatrice.jpg",
     "price": 38,
     "date": "2025-06-15",
     "time": "19:00",
-    "ticketsSold": 999,
+    "ticketsSold": 1000,
     "description": "L'impératrice est un groupe français aux influences disco, pop et funk. Leur musique mêle des rythmes entraînants avec des sonorités nostalgiques des années 70 et 80, créant une ambiance unique et dansante."
   },
   {
     "artist": "Kavinsky",
+    "img": "kavinsky.jpg",
     "price": 45,
     "date": "2025-06-15",
     "time": "21:30",
@@ -17,6 +19,7 @@
   },
   {
     "artist": "M83",
+    "img": "m83.jpg",
     "price": 32,
     "date": "2025-06-16",
     "time": "19:00",
@@ -25,6 +28,7 @@
   },
   {
     "artist": "Wax Taylor",
+    "img": "waxtaylor.jpg",
     "price": 29,
     "date": "2025-06-16",
     "time": "22:00",
@@ -33,6 +37,7 @@
   },
   {
     "artist": "Bonobo",
+    "img": "bonobo.jpg",
     "price": 50,
     "date": "2025-06-17",
     "time": "20:30",
@@ -41,6 +46,7 @@
   },
   {
     "artist": "Chinese Man",
+    "img": "chineseman.jpg",
     "price": 27,
     "date": "2025-06-17",
     "time": "22:00",

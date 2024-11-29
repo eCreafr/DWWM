@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fetch JSON avec javascript et mise en forme version innerHTML</title>
+    <link rel="stylesheet" href="../html/css/froggie.css" />
+    <style>
+      * {
+        font-family: sans-serif;
+      }
+      .container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+        justify-content: center;
+        padding: 20px;
+        margin: 0 auto;
+        max-width: 1200px;
+      }
+
+      .card {
+        background-color: #e8ffff;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        width: 300px;
+        padding: 20px;
+        box-shadow: 0 4px 6px rgba(69, 66, 70, 0.346);
+      }
+
+      .card h3 {
+        padding: 0;
+        margin: 0;
+        color: #fff;
+        position: relative;
+        z-index: 2;
+        transform: translate(15px, -30px);
+        font-size: 32px;
+        line-height: 0;
+      }
+
+      .card img {
+        width: 100%;
+        max-height: 150px;
+        object-fit: cover;
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
+      }
+
+      .card p {
+        margin: 5px 0;
+        color: #555;
+      }
+
+      .card .price {
+        font-weight: bold;
+        color: #15acff;
+      }
+
+      .card .horaire {
+        font-style: italic;
+      }
+
+      .filter-buttons {
+        display: flex;
+        justify-content: center;
+        margin: 20px;
+        gap: 10px;
+      }
+
+      .filter-buttons button {
+        padding: 10px 20px;
+        font-size: 1rem;
+        cursor: pointer;
+        border: none;
+        border-radius: 4px;
+        background-color: #fd55b7;
+        color: white;
+        transition: background-color 0.3s ease;
+      }
+
+      .filter-buttons button:hover {
+        background-color: #0d8cd1;
+      }
+      .progress-bar {
+        width: 300px;
+        margin: 1.5rem auto;
+        background-color: #ddd;
+        border-radius: 6px;
+        height: 24px;
+      }
+      .progress {
+        width: 0;
+        border-radius: 6px;
+        height: 24px;
+        text-align: right;
+        position: relative;
+        background-color: #15acff;
+        animation: bounce 3s ease-in-out;
+      }
+      .progress span {
+        font-size: 14px;
+        line-height: 24px;
+        display: inline-block;
+        position: absolute;
+        top: 0px;
+        right: 10px;
+        color: #fff;
+      }
+      .container button {
+        padding: 10px 10px;
+        font-size: 1rem;
+        cursor: pointer;
+        border: none;
+        border-radius: 4px;
+        background-color: #fd55b7;
+        color: white;
+        transition: background-color 0.7s ease-in-out;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Fetch JSON avec javascript et mise en forme version innerHTML</h1>
+    <div class="filter-buttons">
+      <button data-date="all">Toutes les dates</button>
+      <button data-date="2025-06-15">15 juin 2025</button>
+      <button data-date="2025-06-16">16 juin 2025</button>
+      <button data-date="2025-06-17">17 juin 2025</button>
+    </div>
+    <div id="concerts-container" class="container"></div>
+
+    <br /><br /><br />
+    <div class="froggiesplaining">
+      <span>Froggiesplaining :</span>
+      <br />
+      <strong>Explications détaillées :</strong>
+      <br /><br />
+      à venir ! <br />
+
+      <p>
+        <img src="ressources/froggie-300.png" alt="Froggie" class="overfrog" />
+      </p>
+    </div>
+    <script src="../js/gsap.min.js"></script>
+    <script>
+      const concertsContainer = document.getElementById("concerts-container");
+
+      // Charger les données JSON
+      fetch("ressources/exo12.json")
+        .then((response) => response.json())
+        .then((data) => {
+          const allConcerts = data;
+          const maxCapacity = 1000;
+          // Fonction pour afficher les concerts selon la date
+          function displayConcerts(date) {
+            concertsContainer.innerHTML = ""; // tout supprimer avant de recharger uniquement les cards filtrées
+
+            const filteredConcerts =
+              date === "all"
+                ? allConcerts // Affiche tous les concerts si "all" est sélectionné
+                : allConcerts.filter((concert) => concert.date === date);
+
+            filteredConcerts.forEach((concert) => {
+              const percentageSold = (
+                (concert.ticketsSold / maxCapacity) *
+                100
+              ).toFixed(0);
+
+              const card = document.createElement("div");
+              card.classList.add("card");
+
+              card.innerHTML = `
+
+      <img src="ressources/${concert.img}" alt="${concert.artist}">
+                 <h3>${concert.artist}</h3>
+                 <p class="description">${concert.description}</p>
+                 <p class="price">Prix : ${concert.price}€</p>
+                 <p class="date">Date : ${concert.date}</p>
+                 <p class="horaire">Horaire : ${concert.time}</p>
+                 <strong> Déjà ${concert.ticketsSold} places vendues ! </strong>
+               <span style="color:#fd55b7;">
+  ${
+    concert.ticketsSold >= 1000
+      ? "SOLD OUT"
+      : `<a target="_blank" href="https://www.ticketmaster.fr/fr/resultat?ipSearch=${encodeURIComponent(concert.artist)}">
+         <button>Réserver</button>
+       </a>`
+  }
+</span>
+
+                 <div class="progress-bar">
+                   <div class="progress">
+                     <span>${percentageSold}% </span>
+                   </div>
+
+
+                 </div>
+               `;
+
+              concertsContainer.appendChild(card);
+
+              // Animation dynamique pour chaque barre de progression
+              const progressBar = card.querySelector(".progress");
+
+              // Appliquer une animation avec GSAP pour un contrôle précis
+              gsap.to(progressBar, {
+                width: `${percentageSold}%`,
+                duration: (percentageSold / 100) * 3, // Ajuste la durée proportionnellement
+                ease: "power3.out",
+                onUpdate: function () {
+                  const currentWidth = parseFloat(progressBar.style.width);
+                  progressBar.querySelector("span").textContent = `${Math.round(
+                    currentWidth
+                  )}%`;
+                },
+              });
+
+              // Changer la couleur si plus de 90% des places sont vendues
+              if (percentageSold > 90) {
+                progressBar.style.backgroundColor = "#fb55b7";
+              }
+            });
+          }
+
+          // Ajouter les événements sur les boutons
+          document
+            .querySelectorAll(".filter-buttons button")
+            .forEach((button) => {
+              button.addEventListener("click", () => {
+                const date = button.getAttribute("data-date");
+                displayConcerts(date);
+              });
+            });
+
+          // Afficher tous les concerts par défaut
+          displayConcerts("all");
+        });
+    </script>
+  </body>
+</html>

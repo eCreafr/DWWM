@@ -27,7 +27,7 @@ https://www.php.net/manual/fr/reserved.variables.get.php</a></p>
     
 <?php
 
-if (isset($_GET["name"]) && $_GET["name"] !== '') { //on détermine ici si la variable est déclaré, si elle est differente de null
+if (isset($_GET["name"]) && $_GET["name"] !== '') { //on détermine ici si la variable est déclaré, si elle est differente de vide (null)
 
 echo '<h2>Bonjour ' . htmlspecialchars($_GET["name"]) . '!</h2>'; //on récupère le contenu de name et on l'affiche en charactere HTML
 
@@ -41,7 +41,13 @@ echo '<h2>Bonjour ' . htmlspecialchars($_GET["name"]) . '!</h2>'; //on récupèr
 http://localhost:3000/php/php004.php?name=Sullivan%20range%20ta%20chambre
 
 </a>
-<br><br></div><br><div class="froggiesplaining">
+<br><br>nb : parler des abus possible avec cette méthode vulnérable à l'interception et à la manipulation et de htmlspecialchars</div>
+
+<!--  
+<div+style%3D"color%3A%23FF0000"><strong>Alerte%20!</strong>Sébastien%20il%20vous%20reste%202%20jours%20pour%20verser%20les%20derniers%20500€%20<br>qui%20garantissent%20votre%20certification%20DWWWM,%20<br>merci%20d%27appeler%20le%2006%2000%2000%2000%2000%20pour%20le%20dernier%20versement,<br>%20ou%20<a%20href="https://www.paypal.com/paypalme/ecrea/500">cliquez%20ici</a></div>
+-->
+
+<br><div class="froggiesplaining">
       <span> Froggiesplaining :</span>
 <br><img src="img/004-1.png" alt="">
 
