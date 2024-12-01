@@ -8,7 +8,7 @@
         $lines = 1;
 
         while ($lines <= $_POST["count"]) {
-            echo ' ' . $lines . '<p class="simpsons">' . htmlspecialchars($_POST["sentence"]) . '!</p><br>';
+            echo ' ' . $lines . '- <span class="simpsons">' . htmlspecialchars($_POST["sentence"]) . '!</span><br>';
             $lines++;
         }
     } else {
