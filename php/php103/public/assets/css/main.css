@@ -39,7 +39,7 @@ header > a {
   padding: 20px;
   max-width: 500px;
   background: white;
-  border-radius: 16px;
+  border-radius: 8px;
   transition-property: box-shadow, opacity;
   box-shadow:
     0 3px 1px -2px rgba(0, 0, 0, 0.2),
@@ -47,7 +47,7 @@ header > a {
     0 1px 5px 0 rgba(0, 0, 0, 0.12);
 }
 .carg img {
-  border-radius: 16px;
+  border-radius: 8px !important;
 }
 
 .btn {
@@ -118,7 +118,7 @@ textarea {
   font-family: inherit;
   font-size: inherit;
   line-height: inherit;
-  border-radius: 16px;
+  border-radius: 8px;
 }
 
 *,
