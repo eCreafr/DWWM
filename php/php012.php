@@ -1,69 +1,107 @@
-
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Boucles et tableaux</title>
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../html/css/froggie.css" />
+    <style>
+        .cadre {
+            border: #000 solid 1px;
+            margin: 10px;
+            padding: 10px;
+        }
+
+        .spacer {
+            height: 25vh;
+        }
+    </style>
 </head>
+
 <body>
+    <br><br>
+    <div class="cadre">
 
-while et tableaux
+        <h1>TABLEAUX</h1><br><br>
 
-<?php
+        <?php
 
-// tableau
-$user1 = ['Mickaël Andrieu', 'email', 'S3cr3t', 34];
+        // tableau
+        $user1 = ['Ayman', 'ayman@exemple.com', 'password123', 21];
 
-echo $user1[0]; // "Mickaël Andrieu"
-echo $user1[1]; // "email"
-echo $user1[3]; // 34
+        echo $user1[0]; // "Ayman"
+        echo $user1[1]; // "ayman@exemple.com"
+        echo $user1[3]; // 21
 
-// tableau de tableau !
+        // tableau de tableau !
 
-$mickael = ['Mickaël Andrieu', 'mickael.andrieu@exemple.com', 'S3cr3t', 34];
-$mathieu = ['Mathieu Nebra', 'mathieu.nebra@exemple.com', 'devine', 33];
-$laurene = ['Laurène Castor', 'laurene.castor@exemple.com', 'P4ssw0rD', 28];
+        $ayman = ['Ayman', 'ayman@exemple.com', 'password123', 21];
+        $manon = ['Manon', 'manon@exemple.com', '12345', 21];
+        $paul = ['Paul', 'paul@exemple.com', 'lateste', 21];
 
-$users = [$mickael, $mathieu, $laurene]; // tableau de tableau !
+        $users = [$ayman, $manon, $paul]; // tableau de tableau !
 
-echo $users[1][1]; // "mathieu.nebra@exemple.com"
-
-
-// avec boucle for each
-
-foreach ($users as $value) {
-    echo $value[0];
-    echo $value[1];
-    echo $value[2];
-}
+        echo $users[1][1]; // "manon@exemple.com"
 
 
-if (in_array($mathieu, $users))
-{
-    echo 'Mathieu fait bien partie des utilisateurs enregistrés !';
-}
+        // avec boucle for each
 
-?>
-<br><br>
-<img src="img/012-3.webp" alt="" width="300px"> <br><br>
-<?php
-// while / boucle
+        foreach ($users as $value) {
+            echo "$value[0]<br>";
+            echo "$value[1]<br>";
+            echo "$value[2]<br><br><br>";
+        }
 
 
-$lines = 1;
+        if (in_array($manon, $users)) {
+            echo 'manon fait bien partie des utilisateurs enregistrés !';
+        }
 
-while ($lines <= 200) { 
-    echo ' '. $lines .' - j\'irais plus vite a copier 200 lignes en php. <br />';
-    $lines++; // revient à ecrire $lines = $lines + 1
-}
+        ?>
+    </div>
+
+    <div class="froggiesplaining">
+        <span> Froggiesplaining :</span>
+        <br>
+
+        <img src="../html/img/froggie-300.png" alt="Froggie" class="overfrog" />
+    </div>
+
+    <div class="spacer"></div>
+    <br><br>
+    <div class="cadre">
+        <h1>BOUCLE WHILE</h1>
+        <br><br>
+        <img src="img/012-3.webp" alt="" width="450px"> <br><br>
+        <?php
+        // while / boucle
+
+
+        $lines = 1;
+
+        while ($lines <= 200) {
+            echo ' ' . $lines . ' - j\'irais plus vite a copier 200 lignes en php. <br />';
+            $lines++; // revient à ecrire $lines = $lines + 1
+        }
 
 
 
 
 
 
-?>
-    
+        ?>
+    </div>
+    <div class="froggiesplaining">
+        <span> Froggiesplaining :</span>
+        <br>
+
+        <img src="../html/img/froggie-300.png" alt="Froggie" class="overfrog" />
+    </div>
+
+    <div class="spacer"></div>
+
 </body>
+
 </html>

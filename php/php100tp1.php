@@ -33,7 +33,7 @@ $matches = [
         'resume' => 'Nice a surpris Rennes avec une défense solide et trois contre-attaques fulgurantes.',
         'is_active' => false,
     ],
-        [
+    [
         'sport' => 'football',
         'equipe1' => ['name' => 'Paris Saint-Germain', 'color' => '#004170'],
         'equipe2' => ['name' => 'Olympique de Marseille', 'color' => '#0083ca'],
@@ -89,10 +89,12 @@ function getActiveMatches(array $matches): array
 ?>
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <title>Résultats des matchs de football</title>
     <link href="../css/bootstrap.min.css" rel="stylesheet">
 </head>
+
 <body style="background: #F8F9F9;">
     <div class="container text-center">
         <img src="img/equipe.png" alt="">
@@ -114,11 +116,14 @@ function getActiveMatches(array $matches): array
                     </span>
                 </h3>
                 <!-- Affiche le score -->
+
                 <p><strong>Score : </strong><?php echo $match['score']; ?></p>
+
                 <!-- Affiche le résumé du match -->
                 <div><?php echo $match['resume']; ?></div>
             </article>
         <?php endforeach; ?>
     </div>
 </body>
+
 </html>

@@ -66,3 +66,23 @@ $matches = [
         'is_active' => true,
     ],
 ];
+
+
+// Définir une liste d'utilisateurs abonnées
+$abonnes = [
+    [
+        'nom' => 'Thomas Martin',
+        'email' => 'thomas@exemple.com',
+        'mdp' => '12345',
+    ],
+    [
+        'nom' => 'walker Texas Ranger',
+        'email' => 'sebastien@exemple.com',
+        'mdp' => '6789',
+    ],
+    [
+        'nom' => 'Julien Boudigues',
+        'email' => 'jul@exemple.com',
+        'mdp' => '10111',
+    ],
+];

@@ -20,4 +20,28 @@ function getActiveMatches(array $matches): array
 
     return $active_matches;
 }
-?>
+
+// creation du cookie pour le prénom
+
+if (!empty($_REQUEST['firstname'])) {
+    // Stocker le prénom dans un cookie pour 7 jours
+    setcookie('firstname', htmlspecialchars($_REQUEST['firstname']), time() + (7 * 24 * 60 * 60), "/");
+}
+
+// redirige apres le login
+function redirectToUrl(string $url): never
+{
+    header("Location: {$url}");
+    exit();
+}
+
+
+// deconnexion
+
+// Vérifier si l'action est "logout"
+if (isset($_GET['action']) && $_GET['action'] === 'logout') {
+    // Détruire la session
+    session_destroy();
+    header("Location:php102-index.php");
+    exit();
+}
