@@ -104,7 +104,7 @@ function getActiveMatches(array $matches): array
         <?php
         // Afficher les matchs actifs
         foreach (getActiveMatches($matches) as $match) : ?>
-            <article class="card my-3 p-5 bg-secondary bg-opacity-25 w-25">
+            <article class="col-12 col-md-3 card my-3 p-5 bg-secondary bg-opacity-25">
                 <!-- Affiche les équipes avec leur couleur -->
                 <h3>
                     <span style="color: <?php echo $match['equipe1']['color']; ?>">

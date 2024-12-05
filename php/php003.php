@@ -8,7 +8,11 @@
 </head>
 
 <body>
-    <p>Aujourd'hui nous sommes le <strong><?php echo date('d/m/Y h:i:s'); ?></strong>. <br> <br> ( page vers la fonction date / heure <a href="https://www.php.net/manual/fr/function.date.php">https://www.php.net/manual/fr/function.date.php</a>)</p>
+    <p>Aujourd'hui nous sommes le <strong>
+        
+    <?php echo date('d/m/Y h:i:s'); ?>
+
+</strong>. <br> <br> ( page vers la fonction date / heure <a href="https://www.php.net/manual/fr/function.date.php">https://www.php.net/manual/fr/function.date.php</a>)</p>
     <br><br>
 
     <p>Aujourd'hui nous sommes le <strong>
@@ -27,6 +31,8 @@
     </p>
 
     <br><br>
+    Bonne version amha :
+
     <p>Aujourd'hui nous sommes le <strong>
             <?php
             // Définir le fuseau horaire
@@ -39,7 +45,7 @@
             // $date->modify('+1 hour');
 
             // Afficher la date formatée
-            echo $date->format('d/m/Y H:i:s');
+            echo $date->format('D/M/Y H:i:s');
             ?></strong></p>
 
     <br><br>

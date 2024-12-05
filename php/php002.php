@@ -27,8 +27,8 @@
 	//Affectation de $jcvd
 	$jcvd="Jean Claude Van Damme";
 
-	/*Affichage du contenu de $jcvd
-	********************************/
+	/* Affichage du contenu de $jcvd 
+	******************************* */
 	echo "Thomas a apprécié le jeu d'acteur de $jcvd dans streetfighter le film";
 	
 ?>
@@ -52,6 +52,7 @@
 
 	//Un echo sur plusieurs lignes
 	echo "Cet echo se
+
 	répartit sur plusieurs lignes. C'est au
 	choix de chacun d'utiliser une ou
 	plusiers lignes. <br>";
@@ -61,11 +62,12 @@
 
 	// Afficher les contenus des variables avec echo()
 	$Mission = "Ranges ta chambre";
-	$name = "Sullivan";
+	$name = "Sebastien";
+
 	echo "La variable \$Mission contient \"$Mission\", hein $name."."<br>"; 
 
 	// Vous pouvez aussi utiliser des tableaux
-	$quoi = array("value" => "chaud", "name" => "Paul");
+	$quoi = array("value" => "ballec", "name" => "Paul");
 	echo "{$quoi['name']} a dit un jour : Le php c'est {$quoi['value']} !"."<br>"; 
 
 	// Les guillemets simples annulent le déférencement des variables
@@ -75,7 +77,7 @@
 	echo 'Cette ', 'chaîne ', 'a été ', 'faite ', 'avec plusieurs paramètres.'.'<br>';
 
 	// Avec la concaténation
-	echo 'Cette ' . 'chaîne ' . 'a été ' . 'faite ' . 'avec la concaténation.<br>';
+	echo 'Cette ' . $name . ' chaîne ' . 'a été ' . 'faite ' . 'avec la concaténation.<br>';
 	
 	// On exécute une méthode dans le echo
 	echo "Cette chaîne est en ".strtoupper('majuscules').".";
@@ -105,6 +107,11 @@ $f3="Sebastien";
 <td> <?php echo $f1; ?> </td>
 <td> <?php echo $f2; ?> </td>
 <td> <?php echo $f3; ?> </td>
+</tr>
+<tr>
+<td> 20</td>
+<td>20 </td>
+<td>20 </td>
 </tr>
 </table>
 </div>

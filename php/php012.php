@@ -35,6 +35,10 @@
         echo $user1[1]; // "ayman@exemple.com"
         echo $user1[3]; // 21
 
+        ?>
+        <br><br>
+        <?php
+
         // tableau de tableau !
 
         $ayman = ['Ayman', 'ayman@exemple.com', 'password123', 21];
@@ -44,19 +48,24 @@
         $users = [$ayman, $manon, $paul]; // tableau de tableau !
 
         echo $users[1][1]; // "manon@exemple.com"
+?>
 
+<br><br><br>
+
+<?php
 
         // avec boucle for each
 
-        foreach ($users as $value) {
-            echo "$value[0]<br>";
-            echo "$value[1]<br>";
-            echo "$value[2]<br><br><br>";
+        foreach ($users as $keyUser) {
+            echo "$keyUser[0]<br>";
+            echo "$keyUser[1]<br>";
+            echo "$keyUser[3]<br>";
+            echo "$keyUser[2]<br><br><br>";
         }
 
 
         if (in_array($manon, $users)) {
-            echo 'manon fait bien partie des utilisateurs enregistrés !';
+            echo 'manon fait bien partie des utilisateurs enregistrés !';   
         }
 
         ?>
@@ -83,7 +92,7 @@
 
         while ($lines <= 200) {
             echo ' ' . $lines . ' - j\'irais plus vite a copier 200 lignes en php. <br />';
-            $lines++; // revient à ecrire $lines = $lines + 1
+            $lines++; 
         }
 
 

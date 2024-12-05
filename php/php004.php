@@ -62,6 +62,20 @@ $_POST	Il contient les valeurs passées par la méthode POST d'un formulaire.
 Les noms des champs de formulaire sont les clés de ce tableau.</p><p> en savoir plus sur la doc officielle : 
     <a href="https://www.php.net/manual/fr/reserved.variables.post.php">https://www.php.net/manual/fr/reserved.variables.post.php</a></p>
 <br>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <?php
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST["name"]) && $_POST["name"] !== '') {
     echo '<h2>Bonjour ' . htmlspecialchars($_POST["name"]) . '!</h2>';
@@ -75,6 +89,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST["name"]) && $_POST["na
         <input type="text" id="name" name="name" required>
         <button type="submit">Envoyer</button>
     </form>
+
+
+
+
 
 
 <br><br></div>
@@ -113,7 +131,7 @@ function getBrowserAndOS() {
     } elseif (preg_match('/Firefox/i', $user_agent)) {
         $browser = 'Mozilla Firefox';
     } elseif (preg_match('/Chrome/i', $user_agent)) {
-        $browser = 'Google Chrome';
+        $browser = 'Google Chrome ou assimilé chromium';
     } elseif (preg_match('/Safari/i', $user_agent)) {
         $browser = 'Apple Safari';
     } elseif (preg_match('/Opera/i', $user_agent)) {

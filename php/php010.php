@@ -1,4 +1,5 @@
 <?php
+
 $number = 2 + 4; // $number prend la valeur 6
 $number = 5 - 1; // $number prend la valeur 4
 $number = 3 * 5; // $number prend la valeur 15

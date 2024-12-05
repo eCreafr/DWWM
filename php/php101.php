@@ -11,8 +11,8 @@
 <body>
     <div class="container-fluid d-flex flex-column justify-content-center ">
 
-
-        <?php require_once(__DIR__ . '/php101header.php'); ?>
+        <?php require(__DIR__ . '/php101header.php');
+        //__DIR__ retourne le chemin absolu du fichier  ?>
 
         <!-- Le corps -->
 
@@ -28,9 +28,10 @@
         </div>
 
         <!-- Le pied de page -->
-
-        <?php require_once(__DIR__ . '/php101footer.php'); ?>
-
+        <?php require_once('php101footer.php'); 
+        // once impose de l'appeler une fois
+        // pas de DIR donc chemin relatif 
+        ?>
 
     </div>
 

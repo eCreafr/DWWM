@@ -47,10 +47,13 @@
     
     // on defini des variables  
 
+    $name = "Ayman";
+
 $client = "user";            //on charge le nom d'une variable dans une variable
 $$client = "bob";            //on charge la valeur "bob" dans la variable $user
 
 // on appelle ces variabkes avec echo de differente façon :
+echo "$name";
 echo("<br>$user<br>");        //affiche bob
 echo($$client);            //affiche bob
 echo("<br>");

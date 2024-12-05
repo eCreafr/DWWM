@@ -137,6 +137,13 @@ function getRecipes(array $recettesDeMamie): array
 }
 
 ?>
+
+
+
+
+
+
+
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -154,7 +161,7 @@ function getRecipes(array $recettesDeMamie): array
         <?php
         // Parcourt toutes les recettes valides et les affiche sous forme de cartes
         foreach (getRecipes($recettesDeMamie) as $recipe) : ?>
-            <article class="card my-3 p-5 bg-secondary bg-opacity-10 w-25">
+            <article class="col-12 col-md-4 card my-3 p-5 bg-secondary bg-opacity-10">
                 <!-- Affiche le titre de la recette -->
                 <h3><?php echo $recipe['title']; ?></h3>
                 <!-- Affiche les instructions de la recette -->
