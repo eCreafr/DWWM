@@ -1,14 +1,10 @@
-<?php
-/* session_start(); */
-require_once(__DIR__ . '/php102/variables.php');
-require_once(__DIR__ . '/php102/functions.php');
-?>
+
 
 <!DOCTYPE html>
 <html lang="fr">
 
 <head>
-    <?php require_once(__DIR__ . '/php102/head.php'); ?>
+    <?php require_once(__DIR__ . '/head.php'); ?>
     <title>structure site PHP par section / bloc</title>
 </head>
 
@@ -16,16 +12,17 @@ require_once(__DIR__ . '/php102/functions.php');
     <div style="background: #F8F9F9;" class="container-fluid d-flex flex-column justify-content-center ">
 
 
-        <?php require_once(__DIR__ . '/php102/header.php'); ?>
+        <?php require_once(__DIR__ . '/header.php'); ?>
 
         <!-- Le corps -->
 
         <div class="container text-center">
 
-            <h1>Résultats des matchs de football pour toi <?php echo htmlspecialchars($_COOKIE['firstname'] ?? ''); ?>
+        <!-- on appelle avec un cookie et pas get ou Post :  -->
+            <h1>Résultats des matchs de football pour toi <?php echo htmlspecialchars($_COOKIE['firstname'] ?? 'ici votre prénom'); ?>
             </h1>
         </div>
-        <?php /* if (isset($_SESSION['LOGGED_USER'])) : */ ?>
+        <?php  if (isset($_SESSION['LOGGED_USER'])) :  ?>
         <div class="container d-flex flex-wrap gap-5 justify-content-center">
             <?php
             // Afficher les matchs actifs
@@ -48,8 +45,8 @@ require_once(__DIR__ . '/php102/functions.php');
                 </article>
 
             <?php endforeach; ?>
-            <?php /* else : */ ?>
-            <!--   <div class="container d-flex flex-wrap gap-5 justify-content-center">
+            <?php  else :  ?>
+               <div class="container d-flex flex-wrap gap-5 justify-content-center">
                     <div> <br>
                         <br>
                         <br>
@@ -57,13 +54,13 @@ require_once(__DIR__ . '/php102/functions.php');
                         <br>
                         <h2>Sorry</h2>les résultats sont reservés aux abonnés<br><br><br><br><br><br>
                     </div>
-                </div> -->
-            <?php /* endif; */ ?>
+                </div>
+            <?php  endif;  ?>
         </div>
 
         <!-- Le pied de page -->
 
-        <?php require_once(__DIR__ . '/php102/footer.php'); ?>
+        <?php require_once(__DIR__ . '/footer.php'); ?>
     </div>
 
 </body>
