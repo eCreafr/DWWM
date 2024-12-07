@@ -9,7 +9,7 @@ include('php050connect.php');
 $getData = $_GET;
 
 if (!isset($getData['id']) || !is_numeric($getData['id'])) {
-    echo ('Il faut un identifiant de news pour la modifier. http://wamp.fr/git/php/php053.php?id=5 ');
+    echo ('Il faut un identifiant de news pour la modifier. http://lateste.fr/git/php/php053.php?id=5 ');
     return;
 }
 

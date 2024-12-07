@@ -2,14 +2,10 @@
 
 include('php050connect.php');
 
-/**
- * On ne traite pas les super globales provenant de l'utilisateur directement,
- * ces données doivent être testées et vérifiées.
- */
 $getData = $_GET;
 
 if (!isset($getData['id']) || !is_numeric($getData['id'])) {
-    echo ('Il faut un identifiant pour supprimer un article. http://wamp.fr/git/php/php052.php?id=5 ');
+    echo ('Il faut un identifiant pour supprimer un article. http://lateste.fr/git/php/php052.php?id=9 ');
     return;
 }
 ?>

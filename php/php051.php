@@ -19,7 +19,7 @@ include('php050connect.php');
     <div class="container">
 
 
-        <h1>Ajouter une recette</h1>
+        <h1>Ajouter un article</h1>
         <form action="php051post.php" method="POST">
             <div class="mb-3">
                 <label for="auteur" class="form-label">Auteur de l'article</label>

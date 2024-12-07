@@ -28,8 +28,8 @@ $insertcontenu->execute([
     'titre' => $titre,
     'contenu' => $contenu,
     'auteur' => $auteur,
-    'date_publication' => date('Y-m-d'), // Génère la date au format YYYY-MM-DD
-    'match_id' => 0,
+    'date_publication' => date('Y-m-d'), // Génère automatiquement la date au format YYYY-MM-DD
+    'match_id' => 0, // pour l'instant on met 0 mais ça pouurait lier ici l'article a un match 
 
 ]);
 
