@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -18,11 +16,11 @@
 
         <div class="container text-center">
 
-        <!-- on appelle avec un cookie et pas get ou Post :  -->
+            <!-- on appelle avec un cookie et pas get ou Post :  -->
             <h1>Résultats des matchs de football pour toi <?php echo htmlspecialchars($_COOKIE['firstname'] ?? 'ici votre prénom'); ?>
             </h1>
         </div>
-        <?php  if (isset($_SESSION['LOGGED_USER'])) :  ?>
+
         <div class="container d-flex flex-wrap gap-5 justify-content-center">
             <?php
             // Afficher les matchs actifs
@@ -45,17 +43,8 @@
                 </article>
 
             <?php endforeach; ?>
-            <?php  else :  ?>
-               <div class="container d-flex flex-wrap gap-5 justify-content-center">
-                    <div> <br>
-                        <br>
-                        <br>
-                        <br>
-                        <br>
-                        <h2>Sorry</h2>les résultats sont reservés aux abonnés<br><br><br><br><br><br>
-                    </div>
-                </div>
-            <?php  endif;  ?>
+
+
         </div>
 
         <!-- Le pied de page -->

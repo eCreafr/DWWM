@@ -16,21 +16,8 @@
 
         <div class="container text-center">
 
-            <h1>
-
-                <?php
-
-     /*            if (isset($_GET["firstname"]) && $_GET["firstname"] !== '') {
-                    echo htmlspecialchars($_GET["firstname"]);
-                } elseif ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST["firstname"]) && $_POST["firstname"] !== '') {
-                    echo htmlspecialchars($_POST["firstname"]);
-                } else {
-                    echo '';
-                } */
-                ?>
-                <?php if (isset($_SESSION['LOGGED_USER'])) : echo $_SESSION['LOGGED_USER']['nom'];
-                endif; ?>
-                 bienvenue sur le site de l'équipe</h1>
+            <h1><?php if (isset($_SESSION['LOGGED_USER'])) : echo $_SESSION['LOGGED_USER']['nom'];
+                endif; ?>bienvenue sur le site de l'équipe</h1>
             <h2>à la une :</h2>
         </div>
 
@@ -40,19 +27,19 @@
             <div class="card col-12 col-md-4 p-3"><img src="img/102-card.jpeg" class="img-fluid" alt="">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor modi similique quia numquam ad, facilis perspiciatis possimus quam laboriosam dolorem unde voluptatem minus nisi quas quidem officia quis expedita omnis.</div>
 
             <!-- Formulaire de connexion -->
-            <?php  require_once(__DIR__ . '/login.php');  ?>
+            <?php require_once(__DIR__ . '/login.php');  ?>
 
-            <?php  if (isset($_SESSION['LOGGED_USER'])) :  ?>
+            <?php if (isset($_SESSION['LOGGED_USER'])) :  ?>
 
 
-            <div class="card col-12 col-md-4 p-3"><img src="img/102-card.jpeg" class="img-fluid" alt="">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor modi similique quia numquam ad, facilis perspiciatis possimus quam laboriosam dolorem unde voluptatem minus nisi quas quidem officia quis expedita omnis.</div>
-            <div class="card col-12 col-md-4 p-3"><img src="img/102-card.jpeg" class="img-fluid" alt="">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor modi similique quia numquam ad, facilis perspiciatis possimus quam laboriosam dolorem unde voluptatem minus nisi quas quidem officia quis expedita omnis.</div>
-            <div class="card col-12 col-md-4 p-3"><img src="img/102-card.jpeg" class="img-fluid" alt="">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor modi similique quia numquam ad, facilis perspiciatis possimus quam laboriosam dolorem unde voluptatem minus nisi quas quidem officia quis expedita omnis.</div>
-            <div class="card col-12 col-md-4 p-3"><img src="img/102-card.jpeg" class="img-fluid" alt="">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor modi similique quia numquam ad, facilis perspiciatis possimus quam laboriosam dolorem unde voluptatem minus nisi quas quidem officia quis expedita omnis.</div>
-            <div class="card col-12 col-md-4 p-3"><img src="img/102-card.jpeg" class="img-fluid" alt="">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor modi similique quia numquam ad, facilis perspiciatis possimus quam laboriosam dolorem unde voluptatem minus nisi quas quidem officia quis expedita omnis.</div>
-            <div class="card col-12 col-md-4 p-3"><img src="img/102-card.jpeg" class="img-fluid" alt="">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor modi similique quia numquam ad, facilis perspiciatis possimus quam laboriosam dolorem unde voluptatem minus nisi quas quidem officia quis expedita omnis.</div>
+                <div class="card col-12 col-md-4 p-3"><img src="img/102-card.jpeg" class="img-fluid" alt="">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor modi similique quia numquam ad, facilis perspiciatis possimus quam laboriosam dolorem unde voluptatem minus nisi quas quidem officia quis expedita omnis.</div>
+                <div class="card col-12 col-md-4 p-3"><img src="img/102-card.jpeg" class="img-fluid" alt="">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor modi similique quia numquam ad, facilis perspiciatis possimus quam laboriosam dolorem unde voluptatem minus nisi quas quidem officia quis expedita omnis.</div>
+                <div class="card col-12 col-md-4 p-3"><img src="img/102-card.jpeg" class="img-fluid" alt="">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor modi similique quia numquam ad, facilis perspiciatis possimus quam laboriosam dolorem unde voluptatem minus nisi quas quidem officia quis expedita omnis.</div>
+                <div class="card col-12 col-md-4 p-3"><img src="img/102-card.jpeg" class="img-fluid" alt="">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor modi similique quia numquam ad, facilis perspiciatis possimus quam laboriosam dolorem unde voluptatem minus nisi quas quidem officia quis expedita omnis.</div>
+                <div class="card col-12 col-md-4 p-3"><img src="img/102-card.jpeg" class="img-fluid" alt="">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor modi similique quia numquam ad, facilis perspiciatis possimus quam laboriosam dolorem unde voluptatem minus nisi quas quidem officia quis expedita omnis.</div>
+                <div class="card col-12 col-md-4 p-3"><img src="img/102-card.jpeg" class="img-fluid" alt="">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor modi similique quia numquam ad, facilis perspiciatis possimus quam laboriosam dolorem unde voluptatem minus nisi quas quidem officia quis expedita omnis.</div>
 
-            <?php  endif;  ?>
+            <?php endif;  ?>
         </div>
 
         <!-- Le pied de page -->

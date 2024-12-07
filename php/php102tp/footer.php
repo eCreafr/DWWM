@@ -17,9 +17,7 @@
 
         mon bas de page 2024® | liens vers reseaux sociaux 1 | reseau 2
     </p>
-    <p><?php
-        echo htmlspecialchars($_GET["firstname"] ?? $_POST["firstname"] ?? '');
-        ?>
+    <p>
         Abonnez-vous !</p>
 
 </div>

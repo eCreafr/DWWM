@@ -40,8 +40,9 @@ function redirectToUrl(string $url): never
 
 // Vérifier si l'action est "logout"
 if (isset($_GET['action']) && $_GET['action'] === 'logout') {
-    // Détruire la session
-    session_destroy();
+    session_start();
+    session_unset(); // Supprime toutes les variables de session
+    session_destroy(); // Détruit la session
     header("Location:php102-index.php");
     exit();
 }

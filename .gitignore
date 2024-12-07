@@ -3,3 +3,4 @@ eslint.config.mjs
 package-lock.json
 package.json
 php/php005.php
+.prettierrc
