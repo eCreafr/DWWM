@@ -1,5 +1,5 @@
 <div class="card">
-    <img src="public/assets/img/bart.webp" alt="" width="100%">
+    <img src="assets/img/bart.webp" class="rounded" alt="" width="100%">
 
     <?php
     if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST["sentence"]) && $_POST["sentence"] !== '') {
@@ -8,7 +8,7 @@
         $lines = 1;
 
         while ($lines <= $_POST["count"]) {
-            echo ' ' . $lines . '- <span class="simpsons">' . htmlspecialchars($_POST["sentence"]) . '!</span><br>';
+            echo '<span class="simpsons"> ' . $lines . ' ' . htmlspecialchars($_POST["sentence"]) . '</span><br>';
             $lines++;
         }
     } else {

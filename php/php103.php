@@ -1,3 +1,3 @@
 <?php
-header("Location: php103/");
+header("Location: php103/public/");
 exit;

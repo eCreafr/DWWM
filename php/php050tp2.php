@@ -5,9 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link
-        href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
-        rel="stylesheet">
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
 </head>
 
 <body>
@@ -52,8 +50,8 @@ DESC; ';
 
                 </p><br><br>
                 <div>
-                    If Admin : <br><a class="btn btn-outline-success" role="button" href="http://lateste.fr/git/php/php053.php?id=<?php echo $new['id']; ?>">MODIFIER</a> 
-                    <a class="btn btn-outline-danger" role="button" href="http://lateste.fr/git/php/php052.php?id=<?php echo $new['id']; ?>">SUPPRIMER</a> <br>
+                    If Admin : <br><a class="btn btn-outline-success rounded-start-pill" role="button" href="http://lateste.fr/git/php/php053.php?id=<?php echo $new['id']; ?>">MODIFIER</a>
+                    <a class="btn btn-outline-danger rounded-end-pill" role="button" href="http://lateste.fr/git/php/php052.php?id=<?php echo $new['id']; ?>">SUPPRIMER</a> <br>
 
                 </div>
 

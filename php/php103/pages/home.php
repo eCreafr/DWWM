@@ -13,7 +13,7 @@
 
         <div class="form-group">
             <label for="sentence">Phrase à écrire : </label>
-            <input type="text" class="form-control" name="sentence" value="Je ne copie pas le code sur Julien">
+            <input type="text" class="form-control" name="sentence" value="Je ne copie pas le code sur Julien !">
         </div>
 
         <input type="submit" value="recopier la punition sans effort" class="btn btn-danger ma-auto">
