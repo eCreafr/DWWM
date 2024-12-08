@@ -11,9 +11,10 @@ include('../common/header.php');
 if (isset($_GET['page']) && array_key_exists($_GET['page'], $whitelist)) {
     $title = $whitelist[$_GET['page']]; // Titre spécifique à la page
     include("../pages/" . $_GET['page'] . '.php');
-} else {
-
+} elseif (!isset($_GET['page'])) {
     include('../pages/home.php');
+} else {
+    echo "Vous êtes perdu ?";
 }
 
 
