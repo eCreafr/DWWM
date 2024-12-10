@@ -31,7 +31,7 @@ if (!isset($getData['id']) || !is_numeric($getData['id'])) {
                 <input type="hidden" class="form-control" id="id" name="id" value="<?php echo $getData['id']; ?>">
             </div>
 
-            <button type="submit" class="btn btn-danger">La suppression est définitive</button>
+            <button type="submit" class="btn btn-danger">La suppression est définitive</button> <a class="btn btn-primary" role="button" href="php050tp2.php">RETOUR</a>
         </form>
         <br />
     </div>

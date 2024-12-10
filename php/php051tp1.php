@@ -58,8 +58,10 @@
                 </div>
             </div>
 
-            <button type="submit" class="btn btn-primary">Envoyer</button>
+            <button type="submit" class="btn btn-primary">Envoyer</button> <a class="btn btn-primary" role="button" href="php050tp2.php">RETOUR</a>
         </form>
+
+
 
         <script>
             document.getElementById('ajouterMatch').addEventListener('change', function() {

@@ -79,6 +79,8 @@ $insertArticle->execute([
 
 // Préparer les données du match pour l'affichage
 $matchInfo = '';
+
+
 if ($match_id > 0) {
     $matchInfo = "<div class='card mt-3'>
         <div class='card-body'>
@@ -115,6 +117,8 @@ if ($match_id > 0) {
         </div>
         <?php echo $matchInfo; ?>
     </div>
+
+    <a class="btn btn-primary" role="button" href="php050tp2.php">RETOUR</a>
 </body>
 
 </html>

@@ -11,7 +11,10 @@
 <body>
 
 
-    <div class="container d-flex flex-wrap">
+
+    <div class="container d-flex flex-wrap justify-content-center">
+        <div class="p-3 m-3 col-12 text-center">
+            <?php echo '<a class="btn btn-outline-primary rounded-pill" role="button" href="php051tp1.php">AJOUTER UN NOUVEL ARTICLE</a>'; ?></div>
 
 
         <?php
@@ -23,7 +26,7 @@
         $sqlQuery = '
 SELECT a.id, a.titre, a.contenu, a.date_publication, r.score, r.lieu
 FROM s2_articles_presse a
-JOIN s2_resultats_sportifs r ON a.match_id = r.id 
+LEFT JOIN s2_resultats_sportifs r ON a.match_id = r.id 
 ORDER BY `a`.`date_publication` 
 DESC; ';
         $newsFraiches = $mysqlClient->prepare($sqlQuery);
@@ -44,23 +47,48 @@ DESC; ';
 
 
         ?>
-            <div class="card p-3 m-3 col-lg-3">
-                <p>-<?php echo $new['date_publication']; ?> <strong><?php echo $new['titre']; ?> :</strong><strong style="color:#FF0000"> <?php echo $new['score']; ?></strong> (lieu : <?php echo $new['lieu']; ?>)
-                    <br><?php echo truncateString($new['contenu'], 99); ?>(...) <a href="php050tp2article.php?id=<?php echo $new['id']; ?>">lire la suite</a>
+            <div class="p-3 m-3 col-lg-3">
+                <div class="card">
+                    <img src="https://picsum.photos/300/150?random=<?php echo $new['id']; ?>" class="card-img-top" alt="<?php echo $new['titre']; ?>">
+                    <div class="card-body">
+                        <p>
+                            <mark> <?php echo $new['date_publication']; ?> </mark>
+                            <br>
+                        <h5 class="card-title"><?php echo $new['titre']; ?></h5>
+                        <?php echo $new['score'] ? "<strong style=\"color:#FF0000\">Score : {$new['score']}</strong>" : "" ?>
 
-                </p><br><br>
-                <div>
-                    If Admin : <br><a class="btn btn-outline-success rounded-start-pill" role="button" href="http://lateste.fr/git/php/php053.php?id=<?php echo $new['id']; ?>">MODIFIER</a>
-                    <a class="btn btn-outline-danger rounded-end-pill" role="button" href="http://lateste.fr/git/php/php052.php?id=<?php echo $new['id']; ?>">SUPPRIMER</a> <br>
-                    * fin de ifadmin
+                        <?php echo $new['lieu'] ? "<p>à {$new['lieu']}</p>" : "" ?>
+
+
+
+
+
+
+
+
+
+                        <p class="card-text"><?php echo truncateString($new['contenu'], 200); ?> </p>
+
+
+                        <a class="btn btn-primary rounded-pill" href="php050tp2article.php?id=<?php echo $new['id']; ?>">Voir l'article complet</a>
+
+
+                    </div>
+                </div>
+
+                <div class="col-12 mt-2 text-center">
+                    <a class="btn btn-outline-success rounded-start-pill" role="button" href="http://lateste.fr/git/php/php053.php?id=<?php echo $new['id']; ?>">MODIFIER</a>
+                    <a class="btn btn-outline-danger rounded-end-pill" role="button" href="http://lateste.fr/git/php/php052.php?id=<?php echo $new['id']; ?>">SUPPRIMER</a>
                 </div>
 
             </div>
+
         <?php
         }
         ?>
-        <div class="card p-3 m-3 col-12">
-            <?php echo '<a class="btn btn-outline-primary" role="button" href="php051.php">AJOUTER UN NOUVEL ARTICLE</a>'; ?></div>
+        <div class="p-3 m-3 col-12 text-center">
+            <?php echo '<a class="btn btn-outline-primary rounded-pill" role="button" href="php051tp1.php">AJOUTER UN NOUVEL ARTICLE</a>'; ?></div>
+
     </div>
 </body>
 

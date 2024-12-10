@@ -33,7 +33,8 @@ include('php050connect.php');
                 <label for="contenu" class="form-label">contenu de l'article</label>
                 <textarea class="form-control" placeholder="Seulement du contenu vous appartenant ou libre de droits." id="contenu" name="contenu"></textarea>
             </div>
-            <button type="submit" class="btn btn-primary">Envoyer</button>
+            <button type="submit" class="btn btn-primary">Envoyer</button> <br> <a class="btn btn-primary" role="button" href="php050tp2.php">ou RETOUR</a>
+
         </form>
     </div>
 
