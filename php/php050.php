@@ -13,10 +13,11 @@ $news = $newsFraiches->fetchAll();
 // On affiche chaque recette une à une
 foreach ($news as $new) {
 
-    // Tronquer à 20 caractères
-    $truncatedContent = substr($new['contenu'], 0, 50) . '...';
+    // Tronquer à 150 caractères
+    $truncatedContent = substr($new['contenu'], 0, 150) . '...';
+
 ?>
-    <p> <strong><?php echo $new['titre']; ?></strong>
+    <p> <strong><?php echo $new['titre']; ?></strong><br>
         (<?php echo $new['date_publication']; ?>) <br><?php echo $truncatedContent; ?> <a href="#">lire la suite</a></p><br><br>
 
 
