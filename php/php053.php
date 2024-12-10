@@ -52,7 +52,9 @@ $article = $retrieveArticleStatement->fetch(PDO::FETCH_ASSOC);
 
             <div class="mb-3">
                 <label for="contenu" class="form-label">Contenu</label>
-                <textarea class="form-control" placeholder="" id="contenu" name="contenu"><?php echo $article['contenu']; ?></textarea>
+                <textarea class="form-control" placeholder="" id="contenu" name="contenu">
+                    <?php echo $article['contenu']; ?>
+                </textarea>
             </div>
 
             <button type="submit" class="btn btn-primary">Envoyer</button>

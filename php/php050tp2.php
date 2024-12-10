@@ -52,7 +52,7 @@ DESC; ';
                 <div>
                     If Admin : <br><a class="btn btn-outline-success rounded-start-pill" role="button" href="http://lateste.fr/git/php/php053.php?id=<?php echo $new['id']; ?>">MODIFIER</a>
                     <a class="btn btn-outline-danger rounded-end-pill" role="button" href="http://lateste.fr/git/php/php052.php?id=<?php echo $new['id']; ?>">SUPPRIMER</a> <br>
-
+                    * fin de ifadmin
                 </div>
 
             </div>

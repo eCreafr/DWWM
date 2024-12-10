@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Bouton share</title>
+    </head>
+    <body>
+        on utilise une API web share dispo sur les mobiles et certain navigateur <br /><br />
+        <!-- HTML -->
+        <button id="shareButton" class="share-button">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="18" cy="5" r="3" />
+                <circle cx="6" cy="12" r="3" />
+                <circle cx="18" cy="19" r="3" />
+                <line x1="8.59" y1="13.51" x2="15.42" y2="17.49" />
+                <line x1="15.41" y1="6.51" x2="8.59" y2="10.49" />
+            </svg>
+            <span>Partager</span>
+        </button>
+        <div id="alertMessage" class="alert-message"></div>
+
+        <!-- CSS -->
+        <style>
+            .share-button {
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                padding: 8px 16px;
+                color: white;
+                background-color: #2563eb;
+                border: none;
+                border-radius: 8px;
+                cursor: pointer;
+                transition: background-color 0.2s;
+            }
+
+            .share-button:hover {
+                background-color: #1d4ed8;
+            }
+
+            .alert-message {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                margin-top: 8px;
+                padding: 12px;
+                background-color: #f3f4f6;
+                border: 1px solid #e5e7eb;
+                border-radius: 8px;
+                text-align: center;
+            }
+
+            .alert-message.show {
+                display: block;
+            }
+        </style>
+
+        <!-- JavaScript -->
+        <script>
+            class ShareButton {
+                constructor() {
+                    this.button = document.getElementById('shareButton');
+                    this.alert = document.getElementById('alertMessage');
+                    this.button.addEventListener('click', () => this.handleShare());
+                }
+
+                async handleShare() {
+                    const shareData = {
+                        title: 'Titre de votre contenu',
+                        text: 'Description de votre contenu',
+                        url: window.location.href,
+                    };
+
+                    try {
+                        if (navigator.share) {
+                            // Utilise l'API Web Share si disponible (principalement sur mobile)
+                            await navigator.share(shareData);
+                        } else {
+                            // Copie l'URL dans le presse-papier si Web Share n'est pas disponible
+                            await navigator.clipboard.writeText(window.location.href);
+                            this.showAlert('Lien copié dans le presse-papier !');
+                        }
+                    } catch (error) {
+                        this.showAlert('Une erreur est survenue lors du partage');
+                    }
+                }
+
+                showAlert(message) {
+                    this.alert.textContent = message;
+                    this.alert.classList.add('show');
+                    setTimeout(() => {
+                        this.alert.classList.remove('show');
+                    }, 3000);
+                }
+            }
+
+            // Initialiser le bouton de partage
+            document.addEventListener('DOMContentLoaded', () => {
+                new ShareButton();
+            });
+        </script>
+    </body>
+</html>

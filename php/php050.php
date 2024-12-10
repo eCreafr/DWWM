@@ -5,7 +5,10 @@ include('php050connect.php');
 
 // On récupère tout le contenu de la table sport articles
 $sqlQuery = '
-SELECT titre, date_publication, contenu FROM `s2_articles_presse` ORDER BY `date_publication` DESC;';
+SELECT titre, date_publication, contenu
+FROM `s2_articles_presse`
+ORDER BY `date_publication`
+DESC;';
 $newsFraiches = $mysqlClient->prepare($sqlQuery);
 $newsFraiches->execute();
 $news = $newsFraiches->fetchAll();
@@ -14,10 +17,11 @@ $news = $newsFraiches->fetchAll();
 foreach ($news as $new) {
 
     // Tronquer à 150 caractères
-    $truncatedContent = substr($new['contenu'], 0, 150) . '...';
+    $truncatedContent = substr($new['contenu'], 0, 150) . ' ...';
+    $truncatedTitle = substr($new['titre'], 0, 50) . ' ...';
 
 ?>
-    <p> <strong><?php echo $new['titre']; ?></strong><br>
+    <p> <strong><?php echo $truncatedTitle; ?></strong><br>
         (<?php echo $new['date_publication']; ?>) <br><?php echo $truncatedContent; ?> <a href="#">lire la suite</a></p><br><br>
 
 

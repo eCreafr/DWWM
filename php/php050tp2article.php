@@ -44,9 +44,19 @@
         } else {
             echo "<p>Identifiant d'article manquant ou invalide.</p>";
         } ?>
+        <button
+            id="shareButton"
+            class="btn btn-primary share-button"
+            data-title="<?php echo htmlspecialchars($article['titre']); ?>"
+            data-text="<?php echo htmlspecialchars($article['score']); ?>"
+            data-url="php050tp2article.php?id=<?php echo ($_GET['id']); ?>">
+            Partager
+        </button>
+        <div id="shareAlert" class="alert"></div>
 
         <a class="btn btn-primary" role="button" href="php050tp2.php">RETOUR</a>
     </div>
+    <script src="js/share.js"></script>
 </body>
 
 </html>
