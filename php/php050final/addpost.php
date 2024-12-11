@@ -1,5 +1,5 @@
 <?php
-include('php050connect.php');
+include('db.php');
 
 $postData = $_POST;
 
@@ -102,7 +102,7 @@ if ($match_id > 0) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Article ajouté</title>
-    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../css/bootstrap.min.css" rel="stylesheet">
 </head>
 
 <body class="d-flex flex-column min-vh-100">
@@ -118,7 +118,7 @@ if ($match_id > 0) {
         <?php echo $matchInfo; ?>
     </div>
 
-    <a class="btn btn-primary" role="button" href="php050tp2.php">RETOUR</a>
+    <a class="btn btn-primary" role="button" href="./">RETOUR</a>
 </body>
 
 </html>

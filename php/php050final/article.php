@@ -1,5 +1,5 @@
  <?php
-    include('php050connect.php');
+    include('db.php');
 
     // Check if an ID is provided
     if (isset($_GET['id']) && is_numeric($_GET['id'])) {
@@ -7,10 +7,10 @@
 
         // Fetch the article by ID
         $sqlQuery = '
-    SELECT a.titre, a.contenu, a.date_publication, r.score, r.lieu
-    FROM s2_articles_presse a
-    LEFT JOIN s2_resultats_sportifs r ON a.match_id = r.id 
-    WHERE a.id = :id';
+            SELECT a.titre, a.contenu, a.date_publication, r.score, r.lieu
+            FROM s2_articles_presse a
+            LEFT JOIN s2_resultats_sportifs r ON a.match_id = r.id 
+            WHERE a.id = :id';
         $statement = $mysqlClient->prepare($sqlQuery);
         $statement->bindParam(':id', $articleId, PDO::PARAM_INT);
         $statement->execute();
@@ -30,7 +30,7 @@
                             echo $article['score'] ? "{$article['score']} " : "";
                             echo $article['titre'];
                             ?></title>
-         <link href="../css/bootstrap.min.css" rel="stylesheet">
+         <link href="../../css/bootstrap.min.css" rel="stylesheet">
      </head>
 
      <body>
@@ -64,17 +64,17 @@
                  class="btn btn-primary share-button"
                  data-title="<?php echo $article['titre'] ? "{$article['titre']} " : ""; ?>"
                  data-text="<?php echo $article['titre'] ? "{$article['titre']} " : ""; ?>"
-                 data-url="php050tp2article.php?id=<?php echo ($_GET['id']); ?>"><img src="img/share.svg" alt="partager <?php echo $article['titre']; ?>" width="24px">
+                 data-url="article.php?id=<?php echo ($_GET['id']); ?>"><img src="../img/share.svg" alt="partager <?php echo $article['titre']; ?>" width="24px">
              </button>
 
-             <a class="btn btn-primary" role="button" href="php050tp2.php">RETOUR</a>
+             <a class="btn btn-primary" role="button" href="./">RETOUR</a>
 
              <div id="shareAlert" class="alert"></div>
          </div>
 
 
          </div>
-         <script src="js/share.js"></script>
+         <script src="../js/share.js"></script>
      </body>
 
      </html>
