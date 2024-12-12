@@ -1,3 +1,8 @@
+<?php
+include('db.php');
+include('functions.php');
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -19,9 +24,6 @@
 
         <?php
 
-        include('db.php');
-        // Si tout va bien, on peut continuer :
-
         // On récupère tout le contenu de la table sport articles
         $sqlQuery = '
             SELECT a.id, a.titre, a.contenu, a.date_publication, r.score, r.lieu
@@ -34,14 +36,7 @@
         $news = $newsFraiches->fetchAll();
 
 
-        // Tronquer fonction
-        function truncateString($string, $length = 20)
-        {
-            if (strlen($string) > $length) {
-                return substr($string, 0, $length) . '...';
-            }
-            return $string;
-        }
+
         // On affiche chaque recette une à une
         foreach ($news as $new) {
 
@@ -65,12 +60,15 @@
 
                         <p class="card-text"><?php echo truncateString($new['contenu'], 200); ?></p>
 
-                        <a class="btn btn-primary rounded-pill" href="article.php?id=<?php echo $new['id']; ?>">Voir l'article complet</a>
+                        <?php $url = createArticleUrl($new['id'], $new['titre'], $new['score']); ?>
+
+                        <a class="btn btn-primary rounded-pill" href="https://lateste.fr/git/php/php050final<?= $url; ?>">Voir l'article complet</a>
+
 
                     </div>
                 </div>
 
-                <div class="col-12 mt-2 text-center">
+                <div class=" col-12 mt-2 text-center">
                     <a class="btn btn-outline-success rounded-start-pill" role="button" href="edit.php?id=<?php echo $new['id']; ?>">MODIFIER</a>
                     <a class="btn btn-outline-danger rounded-end-pill" role="button" href="delete.php?id=<?php echo $new['id']; ?>">SUPPRIMER</a>
                 </div>

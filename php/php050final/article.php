@@ -1,7 +1,8 @@
  <?php
     include('db.php');
+    include('functions.php');
 
-    // Check if an ID is provided
+
     if (isset($_GET['id']) && is_numeric($_GET['id'])) {
         $articleId = $_GET['id'];
 
@@ -30,7 +31,7 @@
                             echo $article['score'] ? "{$article['score']} " : "";
                             echo $article['titre'];
                             ?></title>
-         <link href="../../css/bootstrap.min.css" rel="stylesheet">
+         <link href="../../../css/bootstrap.min.css" rel="stylesheet">
      </head>
 
      <body>
@@ -62,19 +63,19 @@
              <button
                  id="shareButton"
                  class="btn btn-primary share-button"
-                 data-title="<?php echo $article['titre'] ? "{$article['titre']} " : ""; ?>"
-                 data-text="<?php echo $article['titre'] ? "{$article['titre']} " : ""; ?>"
-                 data-url="article.php?id=<?php echo ($_GET['id']); ?>"><img src="../img/share.svg" alt="partager <?php echo $article['titre']; ?>" width="24px">
+                 data-title="<?= $article['titre'] ? "{$article['titre']} " : ""; ?>"
+                 data-text="<?= $article['titre'] ? "{$article['titre']} " : ""; ?>"
+                 data-url="article.php?id=<?= ($_GET['id']); ?>"><img src="../../img/share.svg" alt="partager <?= $article['titre']; ?>" width="24px">
              </button>
 
-             <a class="btn btn-primary" role="button" href="./">RETOUR</a>
+             <a class="btn btn-primary" role="button" href="../">RETOUR</a>
 
              <div id="shareAlert" class="alert"></div>
          </div>
 
 
          </div>
-         <script src="../js/share.js"></script>
+         <script src="../../js/share.js"></script>
      </body>
 
      </html>
