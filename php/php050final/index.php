@@ -62,7 +62,7 @@ include('functions.php');
 
                         <?php $url = createArticleUrl($new['id'], $new['titre'], $new['score']); ?>
 
-                        <a class="btn btn-primary rounded-pill" href="https://lateste.fr/git/php/php050final<?= $url; ?>">Voir l'article complet</a>
+                        <a class="btn btn-primary rounded-pill" href="http://lateste.fr/git/php/php050final<?= $url; ?>">Voir l'article complet</a>
 
 
                     </div>

@@ -1,0 +1,8 @@
+RewriteEngine On
+
+# on s'occupe des articles en premier sinon la seconde regle va l'ignorer
+RewriteRule ^article/([0-9]+)-([a-zA-Z0-9-]+)\.html$ index.php?page=article&id=$1 [L,QSA]
+
+# Règle générale pour tous les autres cas
+RewriteCond %{REQUEST_URI} !index.php
+RewriteRule (.*).html index.php?page=$1 [L,QSA]
