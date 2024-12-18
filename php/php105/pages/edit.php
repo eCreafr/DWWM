@@ -78,7 +78,7 @@ $article = $retrieveArticleStatement->fetch(PDO::FETCH_ASSOC);
                 </div>
                 <div class="mb-3">
                     <label for="resume" class="form-label">Commentaire sur le match</label>
-                    <textarea class="form-control" id="resume" name="resume">     <?= $article['resume']; ?></textarea>
+                    <textarea class="form-control" id="resume" name="resume"><?= $article['resume']; ?></textarea>
                 </div>
             </div>
 

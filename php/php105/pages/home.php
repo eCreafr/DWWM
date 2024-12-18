@@ -69,10 +69,51 @@ AJOUTER UN NOUVEL ARTICLE</a>'; ?></div>
 
             <div class=" col-12 text-center">
                 <a class="btn btn-outline-success rounded-pill" role="button" href="edit.html?id=<?= $new['id']; ?>"><img src="assets/img/pencil-square.svg" alt=""></a>
-                <a class="btn btn-outline-danger rounded-pill" role="button" href="delete.html?id=<?= $new['id']; ?>"><img src="assets/img/trash.svg" alt=""></a>
+
+                <button type="button" class="btn btn-outline-danger rounded-pill" data-bs-toggle="modal" data-bs-target="#Modal<?= $new['id']; ?>"><img src="assets/img/trash.svg" alt=""></button>
+
             </div>
 
         </div>
+
+        <!-- Modal pop up pour delete -->
+        <div class="modal fade" id="Modal<?= $new['id']; ?>" tabindex="-1" aria-labelledby="ModalLabel<?= $new['id']; ?>" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <form action="deletepost.html" method="POST">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="ModalLabel<?= $new['id']; ?>">Suppression Article #<?= $new['id']; ?></h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+
+                            <div class="mb-3 visually-hidden">
+                                <label for="id" class="form-label">Identifiant de l'article</label>
+                                <input type="hidden" class="form-control" id="id" name="id" value="<?= $new['id']; ?>">
+                            </div>
+
+
+                            <!-- Nouvelle case à cocher pour le match -->
+                            <div class="mb-3 form-check">
+                                <input type="checkbox" class="form-check-input" id="supprimerMatch" name="supprimerMatch">
+                                <label class="form-check-label" for="supprimerMatch">Voulez-vous aussi supprimer les résultats du match associé ?</label>
+                            </div>
+
+
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                            <button type="submit" class="btn btn-danger">Supprimer</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+
+
+
 
     <?php
     }

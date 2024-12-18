@@ -16,7 +16,7 @@ if (!isset($getData['id']) || !is_numeric($getData['id'])) {
 
         <form action="deletepost.html" method="POST">
             <div class="mb-3 visually-hidden">
-                <label for="id" class="form-label">Identifiant de la recette</label>
+                <label for="id" class="form-label">Identifiant de l'article</label>
                 <input type="hidden" class="form-control" id="id" name="id" value="<?= $getData['id']; ?>">
             </div>
 
