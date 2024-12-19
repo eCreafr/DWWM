@@ -7,9 +7,7 @@
     <title><?= htmlspecialchars($title); ?></title>
     <link rel="stylesheet" href="<?= BASE_URL ?>/assets/css/main.css">
     <link rel="stylesheet" href="<?= BASE_URL ?>/assets/css/bootstrap.min.css">
-
-
-    <!-- idée evolution mettre résumé tronqué des articles dans meta description -->
+    <meta name="description" content="<?= htmlspecialchars($metadesc); ?>">
 </head>
 
 <body>

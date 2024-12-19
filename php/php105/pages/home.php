@@ -22,7 +22,7 @@ AJOUTER UN NOUVEL ARTICLE</a>'; ?></div>
 
     // On récupère tout le contenu de la table sport articles
     $sqlQuery = '
-            SELECT a.id, a.titre, a.contenu, a.date_publication, r.score, r.lieu
+            SELECT a.id, a.titre, a.contenu, a.date_publication, a.match_id, r.score, r.lieu
             FROM s2_articles_presse a
             LEFT JOIN s2_resultats_sportifs r ON a.match_id = r.id 
             ORDER BY `a`.`date_publication` 
@@ -92,13 +92,15 @@ AJOUTER UN NOUVEL ARTICLE</a>'; ?></div>
                                 <input type="hidden" class="form-control" id="id" name="id" value="<?= $new['id']; ?>">
                             </div>
 
+                            Êtes-vous sur ?
 
-                            <!-- Nouvelle case à cocher pour le match -->
-                            <div class="mb-3 form-check">
-                                <input type="checkbox" class="form-check-input" id="supprimerMatch" name="supprimerMatch">
-                                <label class="form-check-label" for="supprimerMatch">Voulez-vous aussi supprimer les résultats du match associé ?</label>
-                            </div>
-
+                            <?php if ($new['match_id'] > 0): ?>
+                                <!-- case à cocher pour le match -->
+                                <div class="mb-3 form-check">
+                                    <input type="checkbox" class="form-check-input" id="supprimerMatch" name="supprimerMatch">
+                                    <label class="form-check-label" for="supprimerMatch">Voulez-vous aussi supprimer les résultats du match associé ?</label>
+                                </div>
+                            <?php endif; ?>
 
 
                         </div>

@@ -10,6 +10,8 @@ include('../common/variables.php');
 
 
 $title = "L'Actu avec Sport 2000"; // Titre par défaut
+$metadesc = "L'Actu avec Sport 2000 : c'est les meilleurs journalistes sportifs spécialisés qui..."; // meta description par défaut
+
 
 // Gestion de l'affichage de la page demandée mixe rewrite htaccess + méthode get
 
@@ -17,6 +19,7 @@ $title = "L'Actu avec Sport 2000"; // Titre par défaut
 if (isset($_GET['page']) && $_GET['page'] === 'article' && isset($_GET['id'])) {
     include('../common/dbArticle.php');
     $title = $article['titre'];
+    $metadesc = $article['titre'] . ", " . truncateString($article['contenu'], 80);
     include('../common/header.php');
     include("../pages/article.php");
 
