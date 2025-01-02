@@ -1,181 +1,185 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-    <style>
-      .container {
-        width: 100%;
-        height: 100vh;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
-      }
-      .equalizer {
-        display: flex;
-        align-items: flex-end;
-        gap: 7px;
-        height: 120px;
-        width: 50%;
-        margin: 0 auto;
-      }
-      .reverse-equalizer {
-        display: flex;
-        align-items: flex-start;
-        gap: 7px;
-        height: 120px;
-        width: 50%;
-        margin: 0 auto;
-      }
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <style>
+            body {
+                background-color: black;
+            }
+            .container {
+                width: 100%;
+                height: 100vh;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-direction: column;
+            }
 
-      .bar {
-        width: 16px;
-        background-color: #15acff;
-        animation: bounce 1s infinite ease-in-out;
-      }
+            .equalizer {
+                display: flex;
+                align-items: flex-end;
+                gap: 8px;
+                height: 120px;
+                width: 50%;
+                margin: 0 auto;
+            }
+            .reverse-equalizer {
+                display: flex;
+                align-items: flex-start;
+                gap: 8px;
+                height: 120px;
+                width: 50%;
+                margin: 0 auto;
+            }
 
-      .reverse-equalizer .bar {
-        width: 16px;
-        background-color: #eb15ff;
-        animation: bounce 1s infinite ease-in-out;
-      }
+            .bar {
+                width: 16px;
+                background: linear-gradient(to top, #97c4de, #15acff);
+                border-radius: 4px;
+                animation: bounce 1s infinite ease-in-out;
+                filter: blur(2px);
+            }
 
-      /* Animation pour les barres */
-      @keyframes bounce {
-        0%,
-        100% {
-          height: 20%;
-        }
-        50% {
-          height: 100%;
-        }
-      }
+            .reverse-equalizer .bar {
+                background: linear-gradient(to top, #eb15ff, #97c4de);
+            }
 
-      .equalizer .bar:nth-child(1),
-      .reverse-equalizer .bar:nth-child(1),
-      .equalizer .bar:nth-child(6),
-      .reverse-equalizer .bar:nth-child(6),
-      .equalizer .bar:nth-child(11),
-      .reverse-equalizer .bar:nth-child(11),
-      .equalizer .bar:nth-child(16),
-      .reverse-equalizer .bar:nth-child(16),
-      .equalizer .bar:nth-child(21),
-      .reverse-equalizer .bar:nth-child(21) {
-        animation-delay: 0s;
-      }
+            /* Animation pour les barres */
+            @keyframes bounce {
+                0%,
+                100% {
+                    height: 20%;
+                }
+                50% {
+                    height: 100%;
+                }
+            }
 
-      .equalizer .bar:nth-child(3),
-      .reverse-equalizer .bar:nth-child(3),
-      .equalizer .bar:nth-child(8),
-      .reverse-equalizer .bar:nth-child(8),
-      .equalizer .bar:nth-child(13),
-      .reverse-equalizer .bar:nth-child(13),
-      .equalizer .bar:nth-child(18),
-      .reverse-equalizer .bar:nth-child(18),
-      .equalizer .bar:nth-child(23),
-      .reverse-equalizer .bar:nth-child(23) {
-        animation-delay: 0.4s;
-      }
+            .equalizer .bar:nth-child(1),
+            .reverse-equalizer .bar:nth-child(1),
+            .equalizer .bar:nth-child(6),
+            .reverse-equalizer .bar:nth-child(6),
+            .equalizer .bar:nth-child(11),
+            .reverse-equalizer .bar:nth-child(11),
+            .equalizer .bar:nth-child(16),
+            .reverse-equalizer .bar:nth-child(16),
+            .equalizer .bar:nth-child(21),
+            .reverse-equalizer .bar:nth-child(21) {
+                animation-delay: 0s;
+            }
 
-      .equalizer .bar:nth-child(7),
-      .reverse-equalizer .bar:nth-child(7),
-      .equalizer .bar:nth-child(12),
-      .reverse-equalizer .bar:nth-child(12),
-      .equalizer .bar:nth-child(2),
-      .reverse-equalizer .bar:nth-child(2),
-      .equalizer .bar:nth-child(17),
-      .reverse-equalizer .bar:nth-child(17),
-      .equalizer .bar:nth-child(22),
-      .reverse-equalizer .bar:nth-child(22) {
-        animation-delay: 0.2s;
-      }
+            .equalizer .bar:nth-child(3),
+            .reverse-equalizer .bar:nth-child(3),
+            .equalizer .bar:nth-child(8),
+            .reverse-equalizer .bar:nth-child(8),
+            .equalizer .bar:nth-child(13),
+            .reverse-equalizer .bar:nth-child(13),
+            .equalizer .bar:nth-child(18),
+            .reverse-equalizer .bar:nth-child(18),
+            .equalizer .bar:nth-child(23),
+            .reverse-equalizer .bar:nth-child(23) {
+                animation-delay: 0.4s;
+            }
 
-      .equalizer .bar:nth-child(15),
-      .reverse-equalizer .bar:nth-child(15),
-      .equalizer .bar:nth-child(5),
-      .reverse-equalizer .bar:nth-child(5),
-      .equalizer .bar:nth-child(20),
-      .reverse-equalizer .bar:nth-child(20),
-      .equalizer .bar:nth-child(25),
-      .reverse-equalizer .bar:nth-child(25),
-      .equalizer .bar:nth-child(10),
-      .reverse-equalizer .bar:nth-child(10) {
-        animation-delay: 0.3s;
-      }
+            .equalizer .bar:nth-child(7),
+            .reverse-equalizer .bar:nth-child(7),
+            .equalizer .bar:nth-child(12),
+            .reverse-equalizer .bar:nth-child(12),
+            .equalizer .bar:nth-child(2),
+            .reverse-equalizer .bar:nth-child(2),
+            .equalizer .bar:nth-child(17),
+            .reverse-equalizer .bar:nth-child(17),
+            .equalizer .bar:nth-child(22),
+            .reverse-equalizer .bar:nth-child(22) {
+                animation-delay: 0.2s;
+            }
 
-      .equalizer .bar:nth-child(19),
-      .reverse-equalizer .bar:nth-child(19),
-      .equalizer .bar:nth-child(14),
-      .reverse-equalizer .bar:nth-child(14),
-      .equalizer .bar:nth-child(24),
-      .reverse-equalizer .bar:nth-child(24),
-      .equalizer .bar:nth-child(4),
-      .reverse-equalizer .bar:nth-child(4),
-      .equalizer .bar:nth-child(9),
-      .reverse-equalizer .bar:nth-child(9) {
-        animation-delay: 0.1s;
-      }
-    </style>
-  </head>
-  <body>
-    <div class="container">
-      <div class="equalizer">
-        <div class="bar"></div>
-        <div class="bar"></div>
-        <div class="bar"></div>
-        <div class="bar"></div>
-        <div class="bar"></div>
-        <div class="bar"></div>
-        <div class="bar"></div>
-        <div class="bar"></div>
-        <div class="bar"></div>
-        <div class="bar"></div>
-        <div class="bar"></div>
-        <div class="bar"></div>
-        <div class="bar"></div>
-        <div class="bar"></div>
-        <div class="bar"></div>
-        <div class="bar"></div>
-        <div class="bar"></div>
-        <div class="bar"></div>
-        <div class="bar"></div>
-        <div class="bar"></div>
-        <div class="bar"></div>
-        <div class="bar"></div>
-        <div class="bar"></div>
-        <div class="bar"></div>
-        <div class="bar"></div>
-      </div>
+            .equalizer .bar:nth-child(15),
+            .reverse-equalizer .bar:nth-child(15),
+            .equalizer .bar:nth-child(5),
+            .reverse-equalizer .bar:nth-child(5),
+            .equalizer .bar:nth-child(20),
+            .reverse-equalizer .bar:nth-child(20),
+            .equalizer .bar:nth-child(25),
+            .reverse-equalizer .bar:nth-child(25),
+            .equalizer .bar:nth-child(10),
+            .reverse-equalizer .bar:nth-child(10) {
+                animation-delay: 0.3s;
+            }
 
-      <div class="reverse-equalizer">
-        <div class="bar"></div>
-        <div class="bar"></div>
-        <div class="bar"></div>
-        <div class="bar"></div>
-        <div class="bar"></div>
-        <div class="bar"></div>
-        <div class="bar"></div>
-        <div class="bar"></div>
-        <div class="bar"></div>
-        <div class="bar"></div>
-        <div class="bar"></div>
-        <div class="bar"></div>
-        <div class="bar"></div>
-        <div class="bar"></div>
-        <div class="bar"></div>
-        <div class="bar"></div>
-        <div class="bar"></div>
-        <div class="bar"></div>
-        <div class="bar"></div>
-        <div class="bar"></div>
-        <div class="bar"></div>
-        <div class="bar"></div>
-        <div class="bar"></div>
-        <div class="bar"></div>
-        <div class="bar"></div>
-      </div>
-    </div>
-  </body>
+            .equalizer .bar:nth-child(19),
+            .reverse-equalizer .bar:nth-child(19),
+            .equalizer .bar:nth-child(14),
+            .reverse-equalizer .bar:nth-child(14),
+            .equalizer .bar:nth-child(24),
+            .reverse-equalizer .bar:nth-child(24),
+            .equalizer .bar:nth-child(4),
+            .reverse-equalizer .bar:nth-child(4),
+            .equalizer .bar:nth-child(9),
+            .reverse-equalizer .bar:nth-child(9) {
+                animation-delay: 0.1s;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <div class="equalizer">
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+            </div>
+
+            <div class="reverse-equalizer">
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+            </div>
+        </div>
+    </body>
 </html>

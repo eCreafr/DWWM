@@ -27,7 +27,7 @@
             data-url="article.php?id=<?= ($_GET['id']); ?>"><img src="<?= BASE_URL ?>/assets/img/share.svg" alt="partager <?= $article['titre']; ?>" width="24px">
         </button>
 
-        <a class="btn btn-primary" role="button" href="<?= BASE_URL ?>/">RETOUR</a>
+        <a class="btn btn-primary" role="button" href="<?= BASE_URL ?>/home.html">RETOUR</a>
 
         <div id="shareAlert" class="alert"></div>
     </div>

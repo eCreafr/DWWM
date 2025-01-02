@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Card animé de gradient gsap</title>
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+            crossorigin="anonymous"
+        />
+        <style>
+            body {
+                background-color: rgb(41, 20, 65);
+                height: 100vh;
+            }
+            .background-gradient {
+                height: 75vh;
+                background-color: beige;
+                z-index: 1;
+                position: relative;
+                overflow: hidden; /* Pour contenir les gradients */
+            }
+            .gradient {
+                position: absolute; /* Position absolue par rapport au parent */
+                pointer-events: none; /* Permet de ne pas interférer avec les interactions */
+            }
+            .card-content {
+                z-index: 10;
+                position: relative;
+                font-size: 1.5em;
+                backdrop-filter: blur(50px);
+                background-color: rgba(223, 235, 248, 0);
+                height: 100%;
+                width: 100%;
+            }
+
+            .glow {
+                z-index: 9;
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                transition: all 0.15s ease-out;
+                background: radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 0.2), transparent);
+            }
+            .loading {
+                width: 100px;
+                animation: rotate 4s linear infinite;
+            }
+            @keyframes rotate {
+                0% {
+                    transform: rotate(0deg);
+                }
+                50% {
+                    transform: rotate(180deg) scale(0.8);
+                }
+                100% {
+                    transform: rotate(360deg);
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container-fluid d-flex justify-content-center align-items-center">
+            <div class="card background-gradient my-5 rounded col-3">
+                <div class="card-content text-center d-flex flex-column justify-content-center align-items-center">
+                    <img src="../html/img/icons/arrow-repeat.svg" alt="" class="loading" />
+                    <h1>Patience</h1>
+
+                    Votre contenu est <br />
+                    en cours de création
+                </div>
+                <div class="glow"></div>
+            </div>
+        </div>
+        <script src="../js/gsap.min.js"></script>
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                const background = document.querySelector('.background-gradient');
+                const colors = [
+                    '#ba8ce4',
+                    '#15acff',
+                    '#584cb4',
+                    '#e9f3fc',
+                    '#15acff',
+                    '#ba8ce4',
+                    '#15acff',
+                    '#584cb4',
+                    '#e9f3fc',
+                    '#15acff',
+                ];
+                const gradients = [];
+
+                // Créer plusieurs gradients
+                for (let i = 0; i < 10; i++) {
+                    const gradient = document.createElement('div');
+                    gradient.classList.add('gradient');
+                    gradient.style.background = `radial-gradient(circle, ${colors[i]} 0%, transparent 50%)`;
+                    background.appendChild(gradient);
+                    gradients.push(gradient);
+                }
+
+                // Fonction pour obtenir une position aléatoire dans les limites de background-gradient
+                function randomPosition() {
+                    const bounds = background.getBoundingClientRect();
+                    return {
+                        x: Math.random() * bounds.width,
+                        y: Math.random() * bounds.height,
+                    };
+                }
+
+                gradients.forEach((gradient, index) => {
+                    const size = 500 + Math.random() * 500; // Taille réduite pour mieux s'adapter à la card
+
+                    gradient.style.width = `${size}px`;
+                    gradient.style.height = `${size}px`;
+                    gradient.style.background = `radial-gradient(ellipse ${size * 0.8}px ${size * 0.6}px, ${colors[index]} 0%, transparent 50%)`;
+
+                    // Position initiale
+                    const initialPos = randomPosition();
+                    gradient.style.left = '0';
+                    gradient.style.top = '0';
+
+                    function animateGradient() {
+                        const duration = 5 + Math.random() * 5;
+                        const newPos = randomPosition();
+
+                        gsap.to(gradient, {
+                            duration: duration,
+                            left: newPos.x - size / 2, // Centrer le gradient
+                            top: newPos.y - size / 2, // Centrer le gradient
+                            scale: 0.8 + Math.random() * 0.4, // Échelle légèrement réduite
+                            ease: 'sine.inOut',
+                            onComplete: animateGradient,
+                        });
+                    }
+
+                    animateGradient();
+                });
+
+                //glow effect :
+
+                const card = document.querySelectorAll('.card');
+                card.forEach((el) => {
+                    el.addEventListener('mousemove', (e) => {
+                        let elRect = el.getBoundingClientRect();
+
+                        // Element.getBoundingClientRect() method retourne la taille d'un élémént par rappoart a l'ecran du client
+
+                        let x = e.clientX - elRect.x;
+                        let y = e.clientY - elRect.y;
+
+                        let midCardWidth = elRect.width / 2;
+                        let midCardHeight = elRect.height / 2;
+
+                        let angleY = (x - midCardWidth) / 8;
+                        let angleX = (midCardHeight - y) / 8; // on inverse le calcul par rapport a la video de front end, pour un effet de poids de la souris plus naturel sur la carte !
+
+                        let glowX = (x / elRect.width) * 100;
+                        let glowY = (y / elRect.height) * 100;
+
+                        // el.children[1].style.transform = `rotateX(${angleX}deg) rotateY(${angleY}deg) scale(1.1)`;
+                        el.children[1].style.background = `radial-gradient(circle at ${glowX}% ${glowY}%, rgba(255, 255, 255, 0.5), transparent)`;
+                    });
+
+                    el.addEventListener('mouseleave', () => {
+                        el.children[1].style.transform = `rotateX(0) rotateY(0) scale(1)`;
+                    });
+                });
+            });
+        </script>
+    </body>
+</html>

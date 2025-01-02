@@ -1,5 +1,5 @@
-$font: "Poppins";
-$font-thin: "Poppins thin";
+$font: 'Poppins';
+$font-thin: 'Poppins thin';
 $color1: #2a185d;
 $color2: #584cb4;
 $color3: #ba8ce4;
@@ -7,191 +7,195 @@ $color4: #15acff;
 $color5: #e9f3fc;
 
 title {
-  color: red;
-  font: 12px tahoma;
+    color: red;
+    font: 12px tahoma;
+}
+
+@view-transition {
+    navigation: auto;
 }
 
 @font-face {
-  font-family: "Poppins";
-  src: url("../html/font/Poppins-Regular.ttf");
+    font-family: 'Poppins';
+    src: url('../html/font/Poppins-Regular.ttf');
 }
 @font-face {
-  font-family: "Poppins thin";
-  src: url("../html/font/Poppins-Thin.ttf");
+    font-family: 'Poppins thin';
+    src: url('../html/font/Poppins-Thin.ttf');
 }
 * {
-  font-family: $font;
-  scroll-behavior: smooth;
+    font-family: $font;
+    scroll-behavior: smooth;
 }
 a {
-  text-decoration: none !important;
+    text-decoration: none !important;
 }
 body {
-  background-color: $color5;
-  background-image: radial-gradient(at 2% 78%, $color5 0px, transparent 50%),
-    radial-gradient(at 50% 7%, $color4 0px, transparent 50%),
-    radial-gradient(at 89% 10%, $color2 0px, transparent 50%),
-    radial-gradient(at 77% 85%, $color3 0px, transparent 50%),
-    radial-gradient(at 0% 100%, $color1 0px, transparent 50%),
-    radial-gradient(at 0% 0%, $color5 0px, transparent 50%);
-  margin: 0;
-  padding: 0;
-  @media (max-width: 650px) {
-    background-color: $color1;
-    background-image: radial-gradient(at 2% 78%, $color1 0px, transparent 50%),
-      radial-gradient(at 50% 7%, $color2 0px, transparent 90%),
-      radial-gradient(at 89% 10%, $color2 0px, transparent 50%),
-      radial-gradient(at 77% 85%, $color3 0px, transparent 50%),
-      radial-gradient(at 0% 100%, $color1 0px, transparent 50%),
-      radial-gradient(at 0% 0%, $color4 0px, transparent 50%);
-  }
+    background-color: $color5;
+    background-image: radial-gradient(at 2% 78%, $color5 0px, transparent 50%),
+        radial-gradient(at 50% 7%, $color4 0px, transparent 50%),
+        radial-gradient(at 89% 10%, $color2 0px, transparent 50%),
+        radial-gradient(at 77% 85%, $color3 0px, transparent 50%),
+        radial-gradient(at 0% 100%, $color1 0px, transparent 50%),
+        radial-gradient(at 0% 0%, $color5 0px, transparent 50%);
+    margin: 0;
+    padding: 0;
+    @media (max-width: 650px) {
+        background-color: $color1;
+        background-image: radial-gradient(at 2% 78%, $color1 0px, transparent 50%),
+            radial-gradient(at 50% 7%, $color2 0px, transparent 90%),
+            radial-gradient(at 89% 10%, $color2 0px, transparent 50%),
+            radial-gradient(at 77% 85%, $color3 0px, transparent 50%),
+            radial-gradient(at 0% 100%, $color1 0px, transparent 50%),
+            radial-gradient(at 0% 0%, $color4 0px, transparent 50%);
+    }
 }
 main {
-  color: $color1;
-  @media (max-width: 650px) {
-    color: $color5 !important;
-  }
+    color: $color1;
+    @media (max-width: 650px) {
+        color: $color5 !important;
+    }
 }
 
 .background {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
 }
 .gradient {
-  position: absolute;
-  width: 500px; /* Augmentez cette valeur */
-  height: 500px; /* Augmentez cette valeur */
-  border-radius: 50%;
-  opacity: 0.7;
+    position: absolute;
+    width: 500px; /* Augmentez cette valeur */
+    height: 500px; /* Augmentez cette valeur */
+    border-radius: 50%;
+    opacity: 0.7;
 }
 .header {
-  &__title {
-    color: $color5;
-  }
-  &__subtitle {
-    color: $color1;
-    @media (max-width: 650px) {
-      color: $color5 !important;
+    &__title {
+        color: $color5;
     }
-  }
-  &__gotofooter {
-    position: absolute;
-    top: 0px;
-    right: 0px;
-    background-color: $color1;
-    padding: 8px;
-    margin: 8px;
-    color: $color3;
-    font-weight: bold;
-    font-size: 2em;
-    line-height: 0.7em;
-    box-shadow: 0px 4px 16px $color2;
-    text-align: center;
-    cursor: pointer;
-    z-index: 100;
-    border-radius: 5px;
-    animation: slideInFromTop 1.5s ease-out forwards;
-    img {
-      width: 50px;
+    &__subtitle {
+        color: $color1;
+        @media (max-width: 650px) {
+            color: $color5 !important;
+        }
     }
-    @media (max-width: 650px) {
-      display: none;
+    &__gotofooter {
+        position: absolute;
+        top: 0px;
+        right: 0px;
+        background-color: $color1;
+        padding: 8px;
+        margin: 8px;
+        color: $color3;
+        font-weight: bold;
+        font-size: 2em;
+        line-height: 0.7em;
+        box-shadow: 0px 4px 16px $color2;
+        text-align: center;
+        cursor: pointer;
+        z-index: 100;
+        border-radius: 5px;
+        animation: slideInFromTop 1.5s ease-out forwards;
+        img {
+            width: 50px;
+        }
+        @media (max-width: 650px) {
+            display: none;
+        }
     }
-  }
 }
 .navbarmenu {
-  container-type: inline-size;
-  box-shadow: inset 0 4px 7px -5px rgba($color1, 0.3);
-  background: rgba($color1, 0.025);
+    container-type: inline-size;
+    box-shadow: inset 0 4px 7px -5px rgba($color1, 0.3);
+    background: rgba($color1, 0.025);
 }
 .froggiefooter {
-  background-color: $color1;
-  padding: 16px;
-  color: $color4;
-  position: relative;
-  margin-top: 150px;
-  box-shadow: 0px 4px 12px $color2;
-  text-align: left;
-  border-radius: 5px;
-  &__overfrog {
-    position: absolute;
-    top: -115px;
-    left: 30px;
-    width: 200px;
-    height: auto;
-    z-index: 10;
-    pointer-events: none;
-  }
-  &__title {
-    font-family: $font-thin;
-    font-size: 32px;
-    color: $color3;
-  }
-  &__text {
+    background-color: $color1;
+    padding: 16px;
     color: $color4;
+    position: relative;
+    margin-top: 150px;
+    box-shadow: 0px 4px 12px $color2;
     text-align: left;
-    max-width: 100%;
-    font-size: 16px;
-    &--keyword {
-      color: $color3;
-      font-weight: bold;
+    border-radius: 5px;
+    &__overfrog {
+        position: absolute;
+        top: -115px;
+        left: 30px;
+        width: 200px;
+        height: auto;
+        z-index: 10;
+        pointer-events: none;
     }
-  }
+    &__title {
+        font-family: $font-thin;
+        font-size: 32px;
+        color: $color3;
+    }
+    &__text {
+        color: $color4;
+        text-align: left;
+        max-width: 100%;
+        font-size: 16px;
+        &--keyword {
+            color: $color3;
+            font-weight: bold;
+        }
+    }
 }
 @keyframes slideInFromTop {
-  0% {
-    opacity: 0;
-    transform: translateY(-100px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
+    0% {
+        opacity: 0;
+        transform: translateY(-100px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 .gitfooter {
-  text-align: center;
-  font-size: 16px;
-  margin: 16px auto;
+    text-align: center;
+    font-size: 16px;
+    margin: 16px auto;
 }
 .slideFromBottom1S {
-  animation: slideInFromBottom 1s ease-out forwards;
+    animation: slideInFromBottom 1s ease-out forwards;
 }
 .slideFromBottom2S {
-  animation: slideInFromBottom 2s ease-out forwards;
+    animation: slideInFromBottom 2s ease-out forwards;
 }
 @keyframes slideInFromBottom {
-  0% {
-    opacity: 0;
-    transform: translateY(100px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
+    0% {
+        opacity: 0;
+        transform: translateY(100px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 .gradient-hover {
-  background: linear-gradient(45deg, $color5, $color4);
-  background-size: 400% 400%;
-  transition: background-position 1s ease;
-  color: $color1;
-  padding: 8px;
-  border-radius: 8px;
-  font-size: 12px;
-  font-weight: bold;
-  &:hover {
-    background-position: 100% 0;
-    cursor: pointer;
-    color: $color5;
-  }
-  @container (width > 600px) {
-    padding: 16px;
-    border-radius: 16px;
-    font-size: 18px;
-  }
+    background: linear-gradient(45deg, $color5, $color4);
+    background-size: 400% 400%;
+    transition: background-position 1s ease;
+    color: $color1;
+    padding: 8px;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: bold;
+    &:hover {
+        background-position: 100% 0;
+        cursor: pointer;
+        color: $color5;
+    }
+    @container (width > 600px) {
+        padding: 16px;
+        border-radius: 16px;
+        font-size: 18px;
+    }
 }
 
 // Import Bootstrap :
-@import "../node_modules/bootstrap/scss/bootstrap.scss";
+@import '../node_modules/bootstrap/scss/bootstrap.scss';

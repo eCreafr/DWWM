@@ -3,6 +3,10 @@
     src: url(../fonts/Simpsonfont.otf);
 }
 
+@view-transition {
+    navigation: auto;
+}
+
 body {
     padding: 0;
     margin: 0;

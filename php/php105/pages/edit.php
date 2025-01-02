@@ -83,7 +83,7 @@ $article = $retrieveArticleStatement->fetch(PDO::FETCH_ASSOC);
             </div>
 
             <button type="submit" class="btn btn-primary">Envoyer</button>
-            <a class="btn btn-primary" role="button" href="./">RETOUR</a>
+            <a class="btn btn-primary" role="button" href="home.html">RETOUR</a>
         </form>
         <br />
     </div>
