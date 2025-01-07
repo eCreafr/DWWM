@@ -9,10 +9,10 @@
 
 <body>
     <p>Aujourd'hui nous sommes le <strong>
-        
-    <?php echo date('d/m/Y h:i:s'); ?>
 
-</strong>. <br> <br> ( page vers la fonction date / heure <a href="https://www.php.net/manual/fr/function.date.php">https://www.php.net/manual/fr/function.date.php</a>)</p>
+            <?php echo date('d/m/Y h:i:s'); ?>
+
+        </strong>. <br> <br> ( page vers la fonction date / heure <a href="https://www.php.net/manual/fr/function.date.php">https://www.php.net/manual/fr/function.date.php</a>)</p>
     <br><br>
 
     <p>Aujourd'hui nous sommes le <strong>
@@ -49,8 +49,26 @@
             ?></strong></p>
 
     <br><br>
+    et pour avoir une version formatée a la française : <br><br>
+    Nous sommes le <?php
+
+                    date_default_timezone_set('Europe/Paris');
+
+                    // Create an IntlDateFormatter instance for French locale
+                    $formatter = new IntlDateFormatter(
+                        'fr_FR',
+                        IntlDateFormatter::LONG,
+                        IntlDateFormatter::NONE,
+                        'Europe/Paris',
+                        IntlDateFormatter::GREGORIAN,
+                        'EEEE d MMMM yyyy \'et il est\' HH\'h\'mm'
+                    );
+
+                    // Format the current date and time
+                    echo $formatter->format(new DateTime());
 
 
+                    ?>
 
 </body>
 
