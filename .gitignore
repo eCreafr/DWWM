@@ -4,4 +4,7 @@ package-lock.json
 package.json
 php/php005.php
 .prettierrc
-
+php/composer/vendor
+php/symfony/vendor
+todolist.txt
+php/php070/sauvegarde
