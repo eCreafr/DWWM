@@ -1,0 +1,16 @@
+<!-- initialise le mécanisme d'environnement de test -->
+<phpunit bootstrap="vendor/autoload.php" colors="true">
+
+
+    <testsuites>
+        <testsuite name="CRUD Tests">
+            <directory>tests</directory>
+        </testsuite>
+    </testsuites>
+    <php>
+        <env name="DB_HOST" value="localhost"/>
+        <env name="DB_NAME" value="sport_2000"/>
+        <env name="DB_USER" value="root"/>
+        <env name="DB_PASS" value=""/>
+    </php>
+</phpunit>

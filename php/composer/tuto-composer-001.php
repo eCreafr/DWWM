@@ -1,4 +1,8 @@
 <?php
+
+/* on appelle l'autoload de composer, puis les fonctions d'emailvalidator d'egulias */
+
+
 require 'vendor/autoload.php';
 
 use Egulias\EmailValidator\EmailValidator;
@@ -11,15 +15,20 @@ $multipleValidations = new MultipleValidationWithAnd([
     new RFCValidation(),
     new DNSCheckValidation()
 ]);
-// Premier email
+
+
+// on teste le Premier email
+echo "pastropunmail@mail.afpa\n";
 $isValid1 = $validator->isValid("pastropunmail@mail.afpa", new RFCValidation());
 var_dump($isValid1);
 
-// Premier email avec validation DNS
-$isValid1dns = $validator->isValid("pastropunmail@mail.afpa", $multipleValidations);
-var_dump($isValid1dns);
+// Premier email avec validation DNS en plus !
+echo "pastropunmail@mail.afpa\n";
+$isValid1AvecDns = $validator->isValid("pastropunmail@mail.afpa", $multipleValidations);
+var_dump($isValid1AvecDns);
 
 
 // Second email
+echo "raphael@ecrea.fr\n";
 $isValid2 = $validator->isValid("raphael@ecrea.fr", $multipleValidations); //true
 var_dump($isValid2);
