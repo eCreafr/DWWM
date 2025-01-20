@@ -201,7 +201,7 @@ class Deployer
         echo "✓ Import de la base de données OK\n";
 
         echo "\n<span class='success'>Déploiement terminé avec succès!</span>\n";
-        echo "<a href='/'>Le site est accessible ici</a>\n";
+        echo "<a href='./'>Le site est accessible ici</a>\n";
 
         echo "\n<span class='warning'>Suppression des fichiers de déploiement...</span>\n";
         $this->cleanupFiles();
