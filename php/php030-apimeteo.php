@@ -13,6 +13,12 @@
     <div class="container container-meteo d-flex flex-column justify-content-center align-items-center p-5">
         <div class="card col-md-5 my-5 p-5 rounded bg-light bg-opacity-10 text-center">
             <?php
+
+            //ne fonctionne qu'avec un vrai certificat SSL, donc en ligne sur votre ovh par exemple
+            // voir démo live ici de ce tp https://ecrea.fr/php/apimeteo.php
+            // ou tp final https://meteo.ecrea.fr/ 
+
+
             // Clé API et emplacement
             $apiKey = "votrecléAPI";
             $lat = "44.60954984533323";
