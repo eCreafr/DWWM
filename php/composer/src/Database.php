@@ -1,7 +1,5 @@
 <?php
 
-// lot de tests pour la classe Database CRUD (Create, Read, Update, Delete)
-
 namespace App;
 
 class Database
@@ -30,6 +28,10 @@ class Database
         }
     }
 
+    public function lastInsertId()
+    {
+        return $this->pdo->lastInsertId();
+    }
 
     public function create($table, $data)
     {
