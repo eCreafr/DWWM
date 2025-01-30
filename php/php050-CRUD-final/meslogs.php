@@ -27,7 +27,7 @@ if ($logs === null) {
 function afficher_log($log)
 {
     echo "<div style='border:1px solid #ccc; margin:10px; padding:10px;'>";
-    echo "<strong>Timestamp :</strong> " . htmlspecialchars($log['timestamp']) . "<br>";
+    echo "<strong style='background-color:#FF0; padding:5px;'> " . htmlspecialchars($log['timestamp']) . "</strong><br>";
     echo "<strong>Action :</strong> " . htmlspecialchars($log['action']) . "<br>";
     echo "<strong>IP :</strong> " . htmlspecialchars($log['ip']) . "<br>";
     echo "<strong>User Agent :</strong> " . htmlspecialchars($log['user_agent']) . "<br>";

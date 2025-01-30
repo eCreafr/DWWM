@@ -1,6 +1,51 @@
 <?php
 include('db.php');
 
+
+
+
+
+// Initialisation du logger
+class JsonLogger
+{
+    private $logFile;
+
+    public function __construct($filename = 'articles_logs.json')
+    {
+        $this->logFile = $filename;
+        if (!file_exists($this->logFile)) {
+            file_put_contents($this->logFile, '[]');
+        }
+    }
+
+    public function log($action, $data = [])
+    {
+        $logEntry = [
+            'timestamp' => date('Y-m-d H:i:s'),
+            'action' => $action,
+            'data' => $data,
+            'ip' => $_SERVER['REMOTE_ADDR'] ?? 'unknown',
+            'user_agent' => $_SERVER['HTTP_USER_AGENT'] ?? 'unknown'
+        ];
+
+        $logs = json_decode(file_get_contents($this->logFile), true) ?? [];
+        $logs[] = $logEntry;
+        file_put_contents($this->logFile, json_encode($logs, JSON_PRETTY_PRINT));
+    }
+}
+
+$logger = new JsonLogger();
+
+
+
+// fin de l'initialisation du logger
+
+
+
+
+
+
+
 $postData = $_POST;
 
 if (!isset($postData['id']) || !is_numeric($postData['id'])) {
@@ -34,6 +79,14 @@ $deleteArticleStatement = $mysqlClient->prepare('DELETE FROM s2_articles_presse 
 $deleteArticleStatement->execute([
     'id' => (int)$postData['id'],
 ]);
+
+
+// Log du succès de la mise à jour de l'article
+$logger->log('delete_article_success', [
+    'id' => (int)$postData['id'],
+]);
+
+
 ?>
 
 

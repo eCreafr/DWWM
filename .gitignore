@@ -9,3 +9,4 @@ php/symfony/vendor
 todolist.txt
 php/php070/sauvegarde
 prestashop/.vscode
+php/composer/.phpunit.result.cache

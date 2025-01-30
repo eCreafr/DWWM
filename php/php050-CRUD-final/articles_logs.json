@@ -96,5 +96,160 @@
         },
         "ip": "127.0.0.1",
         "user_agent": "Mozilla\/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit\/537.36 (KHTML, like Gecko) Chrome\/131.0.0.0 Safari\/537.36"
+    },
+    {
+        "timestamp": "2025-01-30 08:26:39",
+        "action": "update_article_start",
+        "data": {
+            "post_data": {
+                "id": "23",
+                "titre": "Classe virtuelle",
+                "contenu": "coucou                c'est nous",
+                "equipe1": "",
+                "equipe2": "",
+                "score": "",
+                "lieu": "",
+                "resume": "     "
+            }
+        },
+        "ip": "127.0.0.1",
+        "user_agent": "Mozilla\/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit\/537.36 (KHTML, like Gecko) Chrome\/132.0.0.0 Safari\/537.36"
+    },
+    {
+        "timestamp": "2025-01-30 08:26:39",
+        "action": "update_article_attempt",
+        "data": {
+            "id": 23,
+            "titre": "Classe virtuelle",
+            "contenu_length": 32
+        },
+        "ip": "127.0.0.1",
+        "user_agent": "Mozilla\/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit\/537.36 (KHTML, like Gecko) Chrome\/132.0.0.0 Safari\/537.36"
+    },
+    {
+        "timestamp": "2025-01-30 08:26:39",
+        "action": "update_article_success",
+        "data": {
+            "id": 23,
+            "rows_affected": 1
+        },
+        "ip": "127.0.0.1",
+        "user_agent": "Mozilla\/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit\/537.36 (KHTML, like Gecko) Chrome\/132.0.0.0 Safari\/537.36"
+    },
+    {
+        "timestamp": "2025-01-30 08:53:38",
+        "action": "update_article_start",
+        "data": {
+            "post_data": {
+                "id": "1",
+                "titre": "Le PSG triomphe face \u00e0 Stuttgart ",
+                "contenu": "                    Le Paris Saint-Germain a offert une performance dominante avec un score de 3-1 contre l'OM. Les supporters \u00e9taient en liesse.                ",
+                "equipe1": "Paris Saint-Germain",
+                "equipe2": "Olympique de Marseille",
+                "score": "3-1",
+                "lieu": "Paris",
+                "resume": "     Match intense avec des buts spectaculaires et une domination globale du PSG."
+            }
+        },
+        "ip": "127.0.0.1",
+        "user_agent": "Mozilla\/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit\/537.36 (KHTML, like Gecko) Chrome\/132.0.0.0 Safari\/537.36"
+    },
+    {
+        "timestamp": "2025-01-30 08:53:38",
+        "action": "update_article_attempt",
+        "data": {
+            "id": 1,
+            "titre": "Le PSG triomphe face \u00e0 Stuttgart",
+            "contenu_length": 126
+        },
+        "ip": "127.0.0.1",
+        "user_agent": "Mozilla\/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit\/537.36 (KHTML, like Gecko) Chrome\/132.0.0.0 Safari\/537.36"
+    },
+    {
+        "timestamp": "2025-01-30 08:53:38",
+        "action": "update_article_success",
+        "data": {
+            "id": 1,
+            "rows_affected": 1
+        },
+        "ip": "127.0.0.1",
+        "user_agent": "Mozilla\/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit\/537.36 (KHTML, like Gecko) Chrome\/132.0.0.0 Safari\/537.36"
+    },
+    {
+        "timestamp": "2025-01-30 09:58:30",
+        "action": "update_article_start",
+        "data": {
+            "post_data": {
+                "id": "24",
+                "titre": "marseille perd salement",
+                "contenu": "                    bhh                ",
+                "equipe1": "",
+                "equipe2": "",
+                "score": "",
+                "lieu": "",
+                "resume": "     "
+            }
+        },
+        "ip": "127.0.0.1",
+        "user_agent": "Mozilla\/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit\/537.36 (KHTML, like Gecko) Chrome\/132.0.0.0 Safari\/537.36"
+    },
+    {
+        "timestamp": "2025-01-30 09:58:30",
+        "action": "update_article_attempt",
+        "data": {
+            "id": 24,
+            "titre": "marseille perd salement",
+            "contenu_length": 3
+        },
+        "ip": "127.0.0.1",
+        "user_agent": "Mozilla\/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit\/537.36 (KHTML, like Gecko) Chrome\/132.0.0.0 Safari\/537.36"
+    },
+    {
+        "timestamp": "2025-01-30 09:58:30",
+        "action": "update_article_success",
+        "data": {
+            "id": 24,
+            "rows_affected": 0
+        },
+        "ip": "127.0.0.1",
+        "user_agent": "Mozilla\/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit\/537.36 (KHTML, like Gecko) Chrome\/132.0.0.0 Safari\/537.36"
+    },
+    {
+        "timestamp": "2025-01-30 09:58:34",
+        "action": "update_article_start",
+        "data": {
+            "post_data": {
+                "id": "24"
+            }
+        },
+        "ip": "127.0.0.1",
+        "user_agent": "Mozilla\/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit\/537.36 (KHTML, like Gecko) Chrome\/132.0.0.0 Safari\/537.36"
+    },
+    {
+        "timestamp": "2025-01-30 09:59:58",
+        "action": "delete_article_success",
+        "data": {
+            "id": null
+        },
+        "ip": "127.0.0.1",
+        "user_agent": "Mozilla\/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit\/537.36 (KHTML, like Gecko) Chrome\/132.0.0.0 Safari\/537.36"
+    },
+    {
+        "timestamp": "2025-01-30 09:59:58",
+        "action": "delete_article_success",
+        "data": {
+            "id": null
+        },
+        "ip": "127.0.0.1",
+        "user_agent": "Mozilla\/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit\/537.36 (KHTML, like Gecko) Chrome\/132.0.0.0 Safari\/537.36"
+    },
+    {
+        "timestamp": "2025-01-30 10:01:15",
+        "action": "delete_article_success",
+        "data": {
+            "id": 26
+        },
+        "ip": "127.0.0.1",
+        "user_agent": "Mozilla\/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit\/537.36 (KHTML, like Gecko) Chrome\/132.0.0.0 Safari\/537.36"
     }
 ]
