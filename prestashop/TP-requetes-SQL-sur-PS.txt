@@ -1,0 +1,428 @@
+quelques requetes pour s'entrainer en SQL  sur la BDD de presta
+
+
+
+
+***********************************************************************************
+*****  A / LES REQUETES SELECT POUR AFFICHER DES CLASSEMENT, DES STATS ************
+***********************************************************************************
+
+
+
+
+
+/////////////////////////////////////////////////////////////////////////
+TP 1 / Simple SELECT avec WHERE pour récupérer tous les produits actifs
+/////////////////////////////////////////////////////////////////////
+
+SELECT id_product, price, reference 
+FROM ps_product 
+WHERE active = 1;
+
+
+
+///////////////////////////////////////////////////////////////////////
+TP 2 / SELECT avec ORDER BY pour Lister des catégories triées par nom
+/////////////////////////////////////////////////////////////////////
+
+SELECT id_category, name 
+FROM ps_category_lang 
+WHERE id_lang = 2
+ORDER BY name ASC;
+
+
+
+
+////////////////////////////////////////////////////////////////
+TP 3 / INNER JOIN des Produits avec leurs catégories en français
+////////////////////////////////////////////////////////////////
+
+
+SELECT pl.name as product_name, cl.name as category_name
+FROM ps_product_lang pl
+INNER JOIN ps_product p ON pl.id_product = p.id_product
+INNER JOIN ps_category_lang cl ON p.id_category_default = cl.id_category
+WHERE pl.id_lang = 2 AND cl.id_lang = 2
+ORDER BY pl.name ASC
+
+
+
+/////////////////////////////////////////////////////////////////////
+TP 4 /  Agrégation avec GROUP BY "Nombre de produits par catégorie"
+////////////////////////////////////////////////////////////////////
+
+SELECT cl.name as category_name, COUNT(p.id_product) as product_count
+FROM ps_category_lang cl
+LEFT JOIN ps_product p ON cl.id_category = p.id_category_default
+WHERE cl.id_lang = 2
+GROUP BY cl.id_category, cl.name;
+
+
+
+
+////////////////////////////////////////////////////////////////
+TP 5 / HAVING après GROUP BY Catégories ayant plus de 5 produits
+////////////////////////////////////////////////////////////////
+
+
+SELECT cl.name as category_name, COUNT(p.id_product) as product_count
+FROM ps_category_lang cl
+LEFT JOIN ps_product p ON cl.id_category = p.id_category_default
+WHERE cl.id_lang = 2
+GROUP BY cl.id_category, cl.name
+HAVING COUNT(p.id_product) > 5;
+
+
+
+/////////////////////////////////////////////////////////////////////////////
+TP 6 /  Sous-requête dans SELECT Prix des produits par rapport à la moyenne
+///////////////////////////////////////////////////////////////////////////
+
+
+SELECT 
+    pl.name,
+    p.price,
+    (SELECT AVG(price) FROM ps_product) as average_price,
+    price - (SELECT AVG(price) FROM ps_product) as difference_from_average
+
+FROM ps_product p
+INNER JOIN ps_product_lang pl ON pl.id_product = p.id_product
+
+WHERE p.active = 1 AND pl.id_lang = 2
+ORDER BY `difference_from_average` ASC;
+
+
+
+///////////////////////////////////////////////////////////////////////////////////
+TP 7 / Multiple JOINS avec conditions Commandes avec détails clients et produits
+/////////////////////////////////////////////////////////////////////////////////////
+
+
+SELECT 
+    o.reference as order_ref,
+    CONCAT(c.firstname, ' ', c.lastname) as customer_name,
+    pl.name as product_name,
+    od.product_quantity,
+    od.product_price
+FROM ps_orders o
+INNER JOIN ps_customer c ON o.id_customer = c.id_customer
+INNER JOIN ps_order_detail od ON o.id_order = od.id_order
+INNER JOIN ps_product_lang pl ON od.product_id = pl.id_product
+WHERE pl.id_lang = 2;
+
+
+
+//////////////////////////////////////////////////////////////////////////////////////////
+TP 8 / UNION avec filtres complexes Produits les plus chers et les moins chers par catégorie
+/////////////////////////////////////////////////////////////////////////////////////
+
+SELECT 
+    cl.name as category_name,
+    pl.name as product_name,
+    p.price,
+    'Plus cher' as type
+FROM ps_product p
+INNER JOIN ps_product_lang pl ON p.id_product = pl.id_product
+INNER JOIN ps_category_lang cl ON p.id_category_default = cl.id_category
+WHERE p.price = (
+    SELECT MAX(price)
+    FROM ps_product
+    WHERE id_category_default = p.id_category_default
+)
+AND pl.id_lang = 2 AND cl.id_lang = 2
+UNION
+SELECT 
+    cl.name as category_name,
+    pl.name as product_name,
+    p.price,
+    'Moins cher' as type
+FROM ps_product p
+INNER JOIN ps_product_lang pl ON p.id_product = pl.id_product
+INNER JOIN ps_category_lang cl ON p.id_category_default = cl.id_category
+WHERE p.price = (
+    SELECT MIN(price)
+    FROM ps_product
+    WHERE id_category_default = p.id_category_default
+)
+AND pl.id_lang = 2 AND cl.id_lang = 2
+ORDER BY category_name, type;
+
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////
+TP 9 / Window Functions Classement des produits par prix dans chaque catégorie
+///////////////////////////////////////////////////////////////////////////////////
+
+
+SELECT 
+    cl.name as category_name,
+    pl.name as product_name,
+    p.price,
+    RANK() OVER (PARTITION BY p.id_category_default ORDER BY p.price DESC) as price_rank
+FROM ps_product p
+INNER JOIN ps_product_lang pl ON p.id_product = pl.id_product
+INNER JOIN ps_category_lang cl ON p.id_category_default = cl.id_category
+WHERE pl.id_lang = 2 AND cl.id_lang = 2  
+ORDER BY `category_name` ASC;
+
+
+
+
+////////////////////////////////////////////////////////////////////////////////
+TP / 10 Requête complexe avec plusieurs niveaux de sous-requêtes : 
+Analyse des ventes par catégorie avec comparaison à la moyenne
+////////////////////////////////////////////////////////////////////////////////
+
+
+SELECT 
+    cl.name as category_name,
+    COUNT(DISTINCT o.id_order) as number_of_orders,
+    SUM(od.product_quantity) as total_products_sold,
+    ROUND(AVG(od.product_price), 2) as avg_product_price,
+    (
+        SELECT ROUND(AVG(od2.product_price), 2)
+        FROM ps_order_detail od2
+        INNER JOIN ps_product p2 ON od2.product_id = p2.id_product
+        WHERE p2.id_category_default = p.id_category_default
+    ) as category_avg_price,
+    (
+        SELECT COUNT(DISTINCT o2.id_order)
+        FROM ps_orders o2
+        INNER JOIN ps_order_detail od2 ON o2.id_order = od2.id_order
+        INNER JOIN ps_product p2 ON od2.product_id = p2.id_product
+        WHERE p2.id_category_default = p.id_category_default
+        AND o2.current_state = 4
+    ) as completed_orders
+FROM ps_category_lang cl
+LEFT JOIN ps_product p ON cl.id_category = p.id_category_default
+LEFT JOIN ps_product_lang pl ON p.id_product = pl.id_product
+LEFT JOIN ps_order_detail od ON p.id_product = od.product_id
+LEFT JOIN ps_orders o ON od.id_order = o.id_order
+WHERE cl.id_lang = 2 AND pl.id_lang = 2
+GROUP BY cl.id_category, cl.name
+HAVING number_of_orders > 0
+ORDER BY number_of_orders DESC;
+
+
+
+
+
+
+***********************************************************************************
+*****  B / LES REQUETES UPDATE POUR MODIFIER MASSIVEMENT DES ARTICLES  ************
+***********************************************************************************
+
+
+
+///////////////////////////////////////////////////////////////////////////
+TP 1 / UPDATE tout simple : Augmentation de tous les prix de 1€
+///////////////////////////////////////////////////////////////
+
+UPDATE ps_product
+SET price = price + 1;
+
+
+
+//////////////////////////////////////////////////////////////////////////
+TP 2 / UPDATE avec WHERE : Augmentation de 10% des prix pour une catégorie spécifique
+//////////////////////////////////////////////////////////////////////////////
+
+UPDATE ps_product
+SET price = price * 1.10
+WHERE id_category_default = 2;
+
+
+
+
+
+//////////////////////////////////////////////////////////////////////////
+TP 3 / UPDATE avec JOIN : Mise à jour des prix des produits en rupture de stock
+/////////////////////////////////////////////////////////////////////////
+
+UPDATE ps_product p
+INNER JOIN ps_stock_available sa ON p.id_product = sa.id_product
+SET p.price = p.price * 0.85
+WHERE sa.quantity <= 0;
+
+
+
+
+
+///////////////////////////////////////////////////////////////////////////
+TP 4/ UPDATE avec sous-requête : Ajustement des prix pour les produits les plus vendus
+/////////////////////////////////////////////////////////////////////////////
+
+
+UPDATE ps_product
+SET price = price * 1.15
+WHERE id_product IN (
+    SELECT product_id
+    FROM ps_order_detail
+    GROUP BY product_id
+    HAVING SUM(product_quantity) > 1
+);
+
+
+
+//////////////////////////////////////////////////////////////////////////////
+TP 5 /  UPDATE complexe avec multiple conditions et calculs (
+    on augmente fort avec du stock 
+    on augmente peu quand faible stock 
+    on baisse quand peu de vente et peu de stock)
+////////////////////////////////////////////////////////////////////////
+
+UPDATE ps_product p
+INNER JOIN ps_stock_available sa ON p.id_product = sa.id_product
+INNER JOIN (
+    SELECT product_id, SUM(product_quantity) as total_sold
+    FROM ps_order_detail
+    GROUP BY product_id
+) sales ON p.id_product = sales.product_id
+SET p.price = CASE
+    WHEN sales.total_sold > 100 AND sa.quantity > 50 THEN p.price * 1.20 
+    WHEN sales.total_sold > 100 AND sa.quantity <= 50 THEN p.price * 1.30  
+    WHEN sales.total_sold <= 100 AND sa.quantity <= 20 THEN p.price * 0.90  
+    ELSE p.price * 1.05
+END
+WHERE p.active = 1
+
+
+
+
+
+
+
+/////////////////////////////////////////////////////////////////////////////////
+TP 6 / rechercher et remplacer chaine de caractères
+////////////////////////////////////////////////////////////////////////////
+
+
+///////////////// D'abord, vérifions les tables concernées avec un SELECT
+
+
+SELECT 
+    id_product,
+    name,
+    description,
+    description_short
+FROM ps_product_lang
+WHERE id_lang = 2
+    AND (
+        name LIKE '%mug%'
+        OR description LIKE '%mug%'
+        OR description_short LIKE '%mug%'
+    );
+
+/////////////////// puis , Mise à jour dans la table ps_product_lang, categoy_lang, cms_lang :
+
+
+UPDATE ps_product_lang
+SET 
+    name = REPLACE(name, 'mug', 'tasse'),
+    description = REPLACE(description, 'mug', 'tasse'),
+    description_short = REPLACE(description_short, 'mug', 'tasse')
+WHERE id_lang = 2
+    AND (
+        name LIKE '%mug%'
+        OR description LIKE '%mug%'
+        OR description_short LIKE '%mug%'
+    );
+
+UPDATE ps_category_lang
+SET 
+    name = REPLACE(name, 'mug', 'tasse'),
+    description = REPLACE(description, 'mug', 'tasse')
+WHERE id_lang = 2
+    AND (
+        name LIKE '%mug%'
+        OR description LIKE '%mug%'
+    );
+
+UPDATE ps_cms_lang
+SET 
+    content = REPLACE(content, 'mug', 'tasse'),
+    meta_title = REPLACE(meta_title, 'mug', 'tasse'),
+    meta_description = REPLACE(meta_description, 'mug', 'tasse')
+WHERE id_lang = 2
+    AND (
+        content LIKE '%mug%'
+        OR meta_title LIKE '%mug%'
+        OR meta_description LIKE '%mug%'
+    );
+
+
+
+/////////////////////////////////////////////////////////////// 
+Limite et precaution d'un rechercher remplacer en SQL : 
+Attention aux mots composés, si un mot contient mug avec LIKE '%mug%', comme du "Muguet" il deviendra "tasseuet" "Mugir" => "tasseir"
+
+Attiention aussi a la casse ou ou autre variations (mug/Mug/MUG)
+
+si on ecrit LIKE '%mug%' sans les % la requete ne retourne que les champs avec uniquement mug et rien d'autre (donc inutile ici)
+il faut donc utiliser une fonction spécifique avancée sur MySQL 8.0+:
+
+
+
+
+////////////////////////////////////////
+V2  avec REGEXP  plutot que LIKE
+///////////////////////// 
+
+//////// D'abord, vérifions à nouveau avec un SELECT :
+
+
+SELECT 
+    name,
+    description,
+    description_short
+FROM ps_product_lang
+WHERE id_lang = 2
+    AND (
+        name REGEXP '\\bmug\\b' 
+        OR description REGEXP  '\\bmug\\b'
+        OR description_short REGEXP  '\\bmug\\b'
+    );
+
+////////////////////// Puis passons à l'UPDATE :
+
+
+UPDATE ps_product_lang
+SET 
+    name = REPLACE(name, ' mug ', ' tasse '),
+    name = REPLACE(name, 'mug ', 'tasse '),
+    name = REPLACE(name, ' mug', ' tasse'),
+    description = REPLACE(description, ' mug ', ' tasse '),
+    description = REPLACE(description, 'mug ', 'tasse '),
+    description = REPLACE(description, ' mug', ' tasse'),
+    description_short = REPLACE(description_short, ' mug ', ' tasse '),
+    description_short = REPLACE(description_short, 'mug ', 'tasse '),
+    description_short = REPLACE(description_short, ' mug', ' tasse')
+WHERE id_lang = 2
+    AND (
+        name REGEXP '\\bmug\\b' 
+        OR description REGEXP  '\\bmug\\b'
+        OR description_short REGEXP  '\\bmug\\b'
+    );
+
+
+////////////////// et reproduire la meme chose avec une majuscule
+
+    UPDATE ps_product_lang
+SET 
+    name = REPLACE(name, ' Mug ', ' Tasse '),
+    name = REPLACE(name, 'Mug ', 'Tasse '),
+    name = REPLACE(name, ' Mug', ' Tasse'),
+    description = REPLACE(description, ' Mug ', ' Tasse '),
+    description = REPLACE(description, 'Mug ', 'Tasse '),
+    description = REPLACE(description, ' Mug', ' Tasse'),
+    description_short = REPLACE(description_short, ' Mug ', ' Tasse '),
+    description_short = REPLACE(description_short, 'Mug ', 'Tasse '),
+    description_short = REPLACE(description_short, ' Mug', ' Tasse')
+WHERE id_lang = 2
+    AND (
+        name REGEXP '\\bMug\\b' 
+        OR description REGEXP  '\\bMug\\b'
+        OR description_short REGEXP  '\\bMug\\b'
+    );

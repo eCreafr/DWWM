@@ -6,7 +6,10 @@ php/php005.php
 .prettierrc
 php/composer/vendor
 php/symfony/vendor
+php/symfony/
 todolist.txt
 php/php070/sauvegarde
 prestashop/.vscode
 php/composer/.phpunit.result.cache
+php/misc
+FEPAE/
