@@ -1,11 +1,10 @@
 <?php
 
 
-// exo demo fonctions librairie GD à finaliser
 
 
 // Charger l'image source
-$source = "image.jpg";
+$source = "img/102-card.jpeg";
 $image = imagecreatefromjpeg($source);
 
 // Effet miroir horizontal
@@ -38,7 +37,7 @@ function addText($image, $text)
 
     // Position du texte en bas de l'image
     $textWidth = strlen($text) * imagefontwidth($font);
-    $x = ($width - $textWidth) / 2;
+    $x = (int)(($width - $textWidth) / 2); // Conversion explicite en entier
     $y = $height - 20;
 
     imagestring($image, $font, $x, $y, $text, $white);
@@ -48,12 +47,12 @@ function addText($image, $text)
 // Application des effets
 $mirrorImage = mirrorImage($image);
 $bwImage = blackAndWhite(imagecreatefromjpeg($source));
-$textImage = addText(imagecreatefromjpeg($source), "Mon texte");
+$textImage = addText(imagecreatefromjpeg($source), "Mon titre ajouté");
 
 // Sauvegarder les images
-imagejpeg($mirrorImage, 'mirror.jpg');
-imagejpeg($bwImage, 'bw.jpg');
-imagejpeg($textImage, 'text.jpg');
+imagejpeg($mirrorImage, 'php013-mirror.jpg');
+imagejpeg($bwImage, 'php013-bw.jpg');
+imagejpeg($textImage, 'php013-text.jpg');
 
 // Libérer la mémoire
 imagedestroy($image);

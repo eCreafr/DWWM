@@ -1,6 +1,6 @@
 <?php
 
-include('php050connect.php');
+include('php050-connect.php');
 
 /**
  * On ne traite pas les super globales provenant de l'utilisateur directement,

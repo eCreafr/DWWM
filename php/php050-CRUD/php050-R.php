@@ -1,5 +1,7 @@
 <?php
 
+echo '<h1>étape 2 / on affiche une boucle de news contenues dans la BDD avec un SQL qui LEFT JOIN</h1>';
+
 include('php050connect.php');
 // Si tout va bien, on peut continuer :
 

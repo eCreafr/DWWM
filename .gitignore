@@ -13,3 +13,5 @@ prestashop/.vscode
 php/composer/.phpunit.result.cache
 php/misc
 FEPAE/
+FEPAE_v2/
+javascript/test-vue
