@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+      }
+
+      #container {
+        width: 100%;
+        height: 100vh;
+        position: absolute;
+        top: 0;
+        left: 0;
+        overflow: hidden;
+      }
+
+      .panel {
+        position: absolute;
+        will-change: transform;
+        height: 100vh;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 4rem;
+        font-weight: bold;
+      }
+
+      .blue {
+        background-color: #3498db;
+      }
+
+      .red {
+        background-color: #e74c3c;
+      }
+
+      .orange {
+        background-color: #e67e22;
+      }
+
+      .purple {
+        background-color: #9b59b6;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .description {
+        padding: 2rem;
+        text-align: center;
+      }
+
+      .scroll-down {
+        margin-top: 2rem;
+        animation: bounce 2s infinite;
+      }
+
+      .arrow {
+        width: 20px;
+        height: 20px;
+        border-right: 3px solid white;
+        border-bottom: 3px solid white;
+        transform: rotate(45deg);
+        margin: 0 auto;
+      }
+
+      @keyframes bounce {
+        0%,
+        20%,
+        50%,
+        80%,
+        100% {
+          transform: translateY(0);
+        }
+        40% {
+          transform: translateY(-20px);
+        }
+        60% {
+          transform: translateY(-10px);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="container">
+      <div class="description panel blue">
+        <div>
+          <h1>Layered pinning from bottom</h1>
+          <p>A simple example where overlapping panels reveal from the bottom.</p>
+          <div class="scroll-down">
+            Scroll down
+            <div class="arrow"></div>
+          </div>
+        </div>
+      </div>
+
+      <section class="panel red">
+        <div>ONE</div>
+      </section>
+
+      <section class="panel orange">
+        <div>TWO</div>
+      </section>
+
+      <section class="panel purple">THREE</section>
+    </div>
+
+    <!-- Inclure les bibliothèques GSAP correctement -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+    <script src="js/bundle.js" defer></script>
+    <script>
+      // Enregistrer le plugin ScrollTrigger
+      gsap.registerPlugin(ScrollTrigger)
+
+      // Animation des panneaux
+      gsap.to('.panel:not(:last-child)', {
+        yPercent: -100,
+        ease: 'none',
+        stagger: 0.5,
+        scrollTrigger: {
+          trigger: '#container',
+          start: 'top top',
+          end: '+=300%',
+          scrub: true,
+          pin: true,
+          markers: true // Activer les marqueurs pour le débogage (à supprimer en production)
+        }
+      })
+
+      // Définir le z-index pour l'ordre d'empilement
+      gsap.set('.panel', { zIndex: (i, target, targets) => targets.length - i })
+    </script>
+  </body>
+</html>

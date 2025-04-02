@@ -25,13 +25,13 @@ $deleteArticleStatement->execute([
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../css/bootstrap.min.css" rel="stylesheet">
 </head>
 
 <body>
     <p>c'est supprimé </p> <br>
 
-    <a class="btn btn-primary" role="button" href="php050tp2.php">RETOUR</a>
+    <a class="btn btn-primary" role="button" href="php050-R.php">RETOUR</a>
 </body>
 
 </html>

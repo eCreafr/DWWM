@@ -54,11 +54,11 @@ $insertcontenu->execute([
         <div class="card">
 
             <div class="card-body">
-                <h5 class="card-title"><?php echo $titre; ?></h5>
+                <h5 class="card-title"><?= $titre; ?></h5>
                 <p class="card-text"><b>Par <?php echo $auteur; ?></b> </p>
                 <p class="card-text"> <?php echo $contenu; ?></p>
             </div>
-        </div> <a class="btn btn-primary" role="button" href="php050tp2.php">RETOUR</a>
+        </div> <a class="btn btn-primary" role="button" href="php050-R.php">RETOUR</a>
     </div>
 </body>
 
