@@ -1,0 +1,33 @@
+header {
+    background-color: #191b22;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    font-family: Courier New, monospace;
+}
+
+header>h1 {
+    color: white;
+}
+
+.link-header {
+    color: white;
+}
+
+#left-header {
+    color: white;
+    display: flex;
+    gap: 1rem;
+}
+
+#left-header>img {
+    height: 2rem;
+}
+
+header > nav > ul {
+    list-style-type: none;
+}
+
+header > nav > ul li {
+    display: inline;
+}

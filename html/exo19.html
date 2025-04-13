@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Bento d'Images Responsive avec Bootstrap</title>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet" />
+        <style>
+            .bento-container {
+                max-width: 1200px;
+                margin: 0 auto;
+            }
+
+            .bento-item {
+                position: relative;
+                overflow: hidden;
+                border-radius: 8px;
+                margin-bottom: 15px;
+            }
+
+            .bento-item img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                transition: transform 0.3s ease;
+            }
+
+            .bento-item:hover img {
+                transform: scale(1.05);
+            }
+
+            .bento-small {
+                height: 190px;
+            }
+
+            .bento-medium {
+                height: 300px;
+            }
+
+            .bento-large {
+                height: 415px;
+            }
+
+            @media (max-width: 767.98px) {
+                .bento-small,
+                .bento-medium,
+                .bento-large {
+                    height: 250px;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container py-4">
+            <h1 class="text-center mb-4">Bento d'Images</h1>
+
+            <div class="bento-container">
+                <div class="row g-3">
+                    <!-- Première ligne -->
+                    <div class="col-md-8">
+                        <div class="bento-item bento-large">
+                            <img src="img/bento-logo.webp" alt="Image grande 1" />
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="row g-3">
+                            <div class="col-12">
+                                <div class="bento-item bento-small">
+                                    <img src="img/bento-visit-cards.webp" alt="Image petite 1" />
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="bento-item bento-small">
+                                    <img src="img/bento-fonts.webp" alt="Image petite 2" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Deuxième ligne -->
+                    <div class="col-md-4">
+                        <div class="bento-item bento-medium">
+                            <img src="img/bento-stickers.webp" alt="Image moyenne 1" />
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="bento-item bento-medium">
+                            <img src="img/bento-wallpaper.webp" alt="Image moyenne 2" />
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="bento-item bento-medium">
+                            <img src="img/bento-colors.png" alt="Image moyenne 3" />
+                        </div>
+                    </div>
+
+                    <!-- Troisième ligne -->
+                    <div class="col-md-6">
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <div class="bento-item bento-small">
+                                    <img src="img/bento-apps.webp" alt="Image petite 3" />
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="bento-item bento-small">
+                                    <img src="img/bento-logo.webp" alt="Image petite 4" />
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="bento-item bento-small">
+                                    <img src="img/bento-fonts.webp" alt="Image petite 5" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="bento-item bento-large">
+                            <img src="img/bento-display.webp" alt="Image grande 2" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    </body>
+</html>
