@@ -18,15 +18,17 @@
 
 <body>
 
-    <?php //ou ici 
+    <?php // ou ici 
     ?>
 
 
-    <? //existe 
-    ?>
-    <?php //mais c'est cette forme la plus correcte 
+    <? // existe  /* coucou */
     ?>
 
+    <?php // mais c'est cette forme la plus 
+    /* correcte  */
+    ?>
+    <!-- commentaire html -->
 
 
 
@@ -44,9 +46,13 @@
         <div class="cadre">
             <strong>Afficher un message, du html avec echo</strong><br><br>
             <?php     // echo :
-            echo ("coucou");  // on affiche coucou dans le html
+            echo "coucou 1";
+            echo 'coucou 2<br>';
+            echo ("coucou 3<br>");  // on affiche coucou dans le html
             echo ("<br><strong>coucou</strong>"); // on affiche du code html  
             ?>
+
+            <?= "coucou raccourci"; ?>
 
             <br><br>
 
@@ -64,8 +70,8 @@
             $$client = "bob";            //on charge la valeur "bob" dans la variable $user
 
             // on appelle ces variabkes avec echo de differente façon :
-            echo "$name";
-            echo ("<br>$user<br>");        //affiche bob
+            echo $name;
+            echo "<br>$user<br>";        //affiche bob
             echo ($$client);            //affiche bob
             echo ("<br>");
             echo ("$$client <br>");        //affiche $user
@@ -92,7 +98,6 @@
             var_dump($var0, $var1, $var2, $var3, $var4, $var5); //var_dump() affiche les informations structurées d'une variable, y compris son type et sa valeur. Les tableaux et les objets sont explorés récursivement, avec des indentations, pour mettre en valeur leur structure.
             ?>
         </div>
-
 
 
 
