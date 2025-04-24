@@ -28,7 +28,7 @@
         <p>
 
             <?php
-            if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST["name"]) && $_POST["name"] !== '') {
+            if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST["name"]) && $_POST["name"] !== ''  && $_POST["firstname"] !== ''  && $_POST["email"] !== '') {
 
 
                 echo '<div class="card" style="width: 18rem;">

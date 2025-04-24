@@ -4,6 +4,8 @@
 
 <?php
 
+// regex = expression régulière
+
 $etat = "digestion";
 
 if ($etat === "digestion") {
@@ -32,13 +34,10 @@ $etat = "fatigué";
 
 if ($etat === "digestion") {
     echo ("Hourra, je suis $etat!");
-
 } elseif ($etat === "fatigué") {
     echo ("Oups, je suis $etat");
-
 } elseif ($etat === "en pleine forme") {
     echo ("Whou, je suis $etat");
-
 } else {
     echo ("Bon, je suis $etat");
 }
@@ -50,6 +49,8 @@ if ($etat === "digestion") {
 
 
 <br><br><br><br>
+
+
 <?php
 
 $pays = "FR";
@@ -76,6 +77,8 @@ switch ($pays) {
         break;
 }
 ?>
+
+
 <br><br><br>
 
 <?php
