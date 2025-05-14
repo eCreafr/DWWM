@@ -3,8 +3,6 @@
 // controleur avec des fonctions en POO
 
 
-
-
 class RecipeController
 {
     private $recipeModel;

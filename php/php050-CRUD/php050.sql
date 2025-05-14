@@ -2,6 +2,18 @@
 CREATE DATABASE IF NOT EXISTS sport_2000;
 USE sport_2000;
 
+
+-- Table des résultats sportifs
+CREATE TABLE resultats_sportifs (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    equipe1 VARCHAR(100) NOT NULL,
+    equipe2 VARCHAR(100) NOT NULL,
+    score VARCHAR(10) NOT NULL,
+    resume TEXT NOT NULL,
+    lieu VARCHAR(100) NOT NULL,
+    date_match DATE NOT NULL
+);
+
 -- Table des articles de presse sur des matchs
 CREATE TABLE articles_presse (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -34,16 +46,7 @@ CREATE TABLE abonnes (
     date_fin_abonnement DATE NOT NULL
 );
 
--- Table des résultats sportifs
-CREATE TABLE resultats_sportifs (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    equipe1 VARCHAR(100) NOT NULL,
-    equipe2 VARCHAR(100) NOT NULL,
-    score VARCHAR(10) NOT NULL,
-    resume TEXT NOT NULL,
-    lieu VARCHAR(100) NOT NULL,
-    date_match DATE NOT NULL
-);
+
 
 -- Insertion des résultats sportifs
 INSERT INTO resultats_sportifs (equipe1, equipe2, score, resume, lieu, date_match) VALUES

@@ -260,5 +260,112 @@
         },
         "ip": "127.0.0.1",
         "user_agent": "Mozilla\/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit\/537.36 (KHTML, like Gecko) Chrome\/134.0.0.0 Safari\/537.36"
+    },
+    {
+        "timestamp": "2025-05-13 09:52:23",
+        "action": "update_article_start",
+        "data": {
+            "post_data": {
+                "id": "29",
+                "titre": "Test",
+                "contenu": "                    teste du 12 05 2025   rhsrhs             ",
+                "equipe1": "",
+                "equipe2": "",
+                "score": "",
+                "lieu": "",
+                "resume": "     "
+            }
+        },
+        "ip": "127.0.0.1",
+        "user_agent": "Mozilla\/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit\/537.36 (KHTML, like Gecko) Chrome\/136.0.0.0 Safari\/537.36"
+    },
+    {
+        "timestamp": "2025-05-13 09:52:23",
+        "action": "update_article_attempt",
+        "data": {
+            "id": 29,
+            "titre": "Test",
+            "contenu_length": 28
+        },
+        "ip": "127.0.0.1",
+        "user_agent": "Mozilla\/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit\/537.36 (KHTML, like Gecko) Chrome\/136.0.0.0 Safari\/537.36"
+    },
+    {
+        "timestamp": "2025-05-13 09:52:23",
+        "action": "update_article_success",
+        "data": {
+            "id": 29,
+            "rows_affected": 1
+        },
+        "ip": "127.0.0.1",
+        "user_agent": "Mozilla\/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit\/537.36 (KHTML, like Gecko) Chrome\/136.0.0.0 Safari\/537.36"
+    },
+    {
+        "timestamp": "2025-05-13 09:52:29",
+        "action": "delete_article_success",
+        "data": {
+            "id": 29
+        },
+        "ip": "127.0.0.1",
+        "user_agent": "Mozilla\/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit\/537.36 (KHTML, like Gecko) Chrome\/136.0.0.0 Safari\/537.36"
+    },
+    {
+        "timestamp": "2025-05-13 11:44:39",
+        "action": "update_article_start",
+        "data": {
+            "post_data": {
+                "id": "2",
+                "titre": "Monaco et Lyon se neutralisent",
+                "contenu": " Un match captivant entre l'AS Monaco et l'Olympique Lyonnais, se soldant par un score de 2-2. Deux \u00e9galisations incroyables ont marqu\u00e9 ce duel.                ",
+                "modifierMatch": "on",
+                "equipe1": "AS Monaco",
+                "equipe2": "Olympique Lyonnais",
+                "score": "2-2",
+                "lieu": "Monaco",
+                "resume": "     Un match \u00e9quilibr\u00e9 avec deux \u00e9galisations spectaculaires."
+            }
+        },
+        "ip": "127.0.0.1",
+        "user_agent": "Mozilla\/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit\/537.36 (KHTML, like Gecko) Chrome\/136.0.0.0 Safari\/537.36"
+    },
+    {
+        "timestamp": "2025-05-13 11:44:39",
+        "action": "update_article_attempt",
+        "data": {
+            "id": 2,
+            "titre": "Monaco et Lyon se neutralisent",
+            "contenu_length": 145
+        },
+        "ip": "127.0.0.1",
+        "user_agent": "Mozilla\/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit\/537.36 (KHTML, like Gecko) Chrome\/136.0.0.0 Safari\/537.36"
+    },
+    {
+        "timestamp": "2025-05-13 11:44:39",
+        "action": "update_article_success",
+        "data": {
+            "id": 2,
+            "rows_affected": 0
+        },
+        "ip": "127.0.0.1",
+        "user_agent": "Mozilla\/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit\/537.36 (KHTML, like Gecko) Chrome\/136.0.0.0 Safari\/537.36"
+    },
+    {
+        "timestamp": "2025-05-13 11:44:39",
+        "action": "update_match_attempt",
+        "data": {
+            "article_id": 2
+        },
+        "ip": "127.0.0.1",
+        "user_agent": "Mozilla\/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit\/537.36 (KHTML, like Gecko) Chrome\/136.0.0.0 Safari\/537.36"
+    },
+    {
+        "timestamp": "2025-05-13 11:44:39",
+        "action": "update_match_success",
+        "data": {
+            "match_id": 2,
+            "rows_affected": 0
+        },
+        "ip": "127.0.0.1",
+        "user_agent": "Mozilla\/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit\/537.36 (KHTML, like Gecko) Chrome\/136.0.0.0 Safari\/537.36"
     }
 ]

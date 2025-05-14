@@ -39,11 +39,11 @@
 ">Résultats des matchs</a>
                 </li>
                 <li class="list-inline-item">
-                    <a href="#?firstname=<?php echo htmlspecialchars($_GET["firstname"] ?? $_POST["firstname"] ?? ''); ?>
+                    <a href="?firstname=<?php echo htmlspecialchars($_GET["firstname"] ?? $_POST["firstname"] ?? ''); ?>
 ">menu 3</a>
                 </li>
                 <li class="list-inline-item">
-                    <a href="#?firstname=<?php echo htmlspecialchars($_GET["firstname"] ?? $_POST["firstname"] ?? ''); ?>
+                    <a href="?firstname=<?php echo htmlspecialchars($_GET["firstname"] ?? $_POST["firstname"] ?? ''); ?>
 ">menu 4</a>
                 </li>
                 <li class="list-inline-item">

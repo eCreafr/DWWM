@@ -41,12 +41,11 @@
         foreach ($news as $new) {
 
         ?>
-            id unique : <?php echo $new['id']; ?>
+            id unique : <?= $new['id']; ?>
             <h2><?php echo truncateString($new['titre'], 20); ?> :</h2><strong style="color:#FF0000"> <?php echo $new['score']; ?></strong> (lieu : <?php echo $new['lieu']; ?>)
             <?php echo truncateString($new['contenu'], 100); ?>
             <p>-<?php echo $new['date_publication']; ?>
             </p><br><br><br><br>
-
             <hr>
         <?php
         }
