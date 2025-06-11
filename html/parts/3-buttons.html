@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>3 Boutons pimpés</title>
+
+        <style>
+            button {
+                display: block;
+                border-radius: 16px;
+                margin-bottom: 8px;
+                padding: 4px 0;
+                width: 150px;
+                border: none;
+                transition: 0.3s ease-out;
+                box-shadow: 0 1px 3px #464646;
+            }
+            button:hover {
+                scale: 0.95;
+                box-shadow: 0 0px 1px #b2b2b2;
+            }
+            .cta-primary {
+                font-weight: bolder;
+                border: 2px dotted blueviolet;
+                color: blueviolet;
+                animation: blinker 1.5s infinite;
+            }
+            .cta-secondary {
+                background: linear-gradient(135deg, #ae45ff 0, #00e5ff 100%);
+                color: #fff;
+                box-shadow: 0 1px 2px #ae45ff;
+            }
+            .ctna {
+                font-style: italic;
+                color: rgb(102, 107, 107);
+            }
+            @keyframes blinker {
+                0% {
+                    opacity: 1;
+                }
+                70% {
+                    opacity: 0.5;
+                }
+                100% {
+                    opacity: 0;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <button class="cta-primary">Vite ! Je clique ici</button>
+        <button class="cta-secondary">ou peut-être ici</button><button class="ctna">mais pas trop ici</button>
+    </body>
+</html>

@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Effet de machine a ecrire</title>
+        <style>
+            .typing-container {
+                width: 600px;
+            }
+            .typing-effect {
+                font-size: 64px;
+                white-space: nowrap;
+                overflow: hidden;
+                border-right: 2px solid;
+                width: 0;
+                animation:
+                    typing 2s steps(24) forwards,
+                    blinker 1s step-end infinite alternate;
+            }
+            @keyframes typing {
+                0% {
+                    width: 0;
+                }
+                100% {
+                    width: 100%;
+                }
+            }
+            @keyframes blinker {
+                50% {
+                    border-color: transparent;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <div class="typing-container">
+            <h1 class="typing-effect">ce site est en français </h1>
+        </div>
+        <p lang="la">
+            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Doloremque consequatur et quos impedit beatae
+            voluptates quis, cupiditate quidem nesciunt, voluptatum odit! Quisquam saepe, ipsam laboriosam doloribus
+            impedit ea illum eum?
+        </p>
+    </body>
+</html>

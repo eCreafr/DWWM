@@ -20,7 +20,6 @@ if (isset($postData['email']) && isset($postData['mdp'])) {
                     'email' => $user['mail'],
                     'nom' => $user['nom'],
                     'prenom' => $user['prenom'],
-                    'mdp' => $user['pswd'],
                 ];
             }
         }

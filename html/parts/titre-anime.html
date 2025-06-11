@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Titre Animé apparition vers le haut uniquement en css</title>
+
+        <style>
+            header {
+                background-color: aquamarine;
+            }
+
+            h1,
+            h2 {
+                text-transform: capitalize;
+                text-align: center;
+            }
+            .animated-2 {
+                animation: deHautenBas 2s ease-out forwards;
+            }
+
+            .animated-3 {
+                animation: deHautenBas 3s ease-out forwards;
+            }
+
+            @keyframes deHautenBas {
+                0% {
+                    opacity: 0;
+                    transform: translateY(150px);
+                    color: blueviolet;
+                }
+                100% {
+                    opacity: 1;
+                    transform: translateY(0);
+                    color: blue;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <header>
+            <h1 class="animated-2">Mon titre qui est joli</h1>
+            <h2 class="animated-3">et son petit frère</h2>
+        </header>
+    </body>
+</html>
