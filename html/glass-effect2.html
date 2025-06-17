@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Glass effect qui tue</title>
+
+        <style>
+            body {
+                background: url('img/fondglass.jpg') no-repeat center / cover;
+                height: 100vh;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+            .glass {
+                width: 300px;
+                padding: 64px;
+                color: aliceblue;
+                text-align: center;
+                font-size: 32px;
+                font-family: Cambria, Cochin, serif;
+                border: 1px solid #ffffff88;
+                border-radius: 16px;
+                /*  background-color: rgba(255, 255, 255, 0.318); */
+                backdrop-filter: blur(10px);
+                background-image: linear-gradient(#ffffff78, #cfcfcf23),
+                    linear-gradient(-37deg, #ffffff15 30%, #ffffff5c 37%, #ffffff1d 40%),
+                    linear-gradient(-45deg, #ffffff15 40%, #ffffffbb 43%, #ffffff1d 45%),
+                    linear-gradient(-53deg, #ffffff15 45%, #ffffff5c 48%, #ffffff1d 55%);
+                box-shadow: 0 8px 32px #ffffffba;
+            }
+            h1 {
+                font-size: 32px;
+                font-weight: bold;
+                text-align: center;
+                font-family: sans-serif;
+                color: aliceblue;
+                text-shadow: 0 8px 32px #00bfff;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="glass"><h1>La div de glace</h1></div>
+    </body>
+</html>

@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Glass Effect Contest</title>
+
+        <style>
+            body {
+                background-image: linear-gradient(rgba(95, 67, 237, 0.88), rgba(0, 191, 255, 0.943));
+                margin: 0;
+                height: 100vh;
+                font-family: sans-serif;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+            .rond {
+            }
+            .glass-box {
+                position: absolute;
+                z-index: 2;
+                /* Dimensions et position */
+                width: 300px;
+                padding: 20px;
+                margin: auto;
+                background-image: linear-gradient(rgba(255, 255, 255, 0.321), rgba(255, 255, 255, 0.1)),
+                    linear-gradient(
+                        -45deg,
+                        rgba(255, 255, 255, 0.192) 10%,
+                        rgba(229, 229, 229, 0.4) 12%,
+                        rgba(193, 193, 193, 0.1) 14%
+                    ),
+                    linear-gradient(
+                        -45deg,
+                        rgba(255, 255, 255, 0.192) 30%,
+                        rgba(229, 229, 229, 0.4) 35%,
+                        rgba(193, 193, 193, 0.1) 40%
+                    ),
+                    linear-gradient(
+                        -45deg,
+                        rgba(255, 255, 255, 0.192) 60%,
+                        rgba(229, 229, 229, 0.4) 65%,
+                        rgba(193, 193, 193, 0.1) 67%
+                    );
+
+                /* Effet flou en arrière-plan */
+                backdrop-filter: blur(12px);
+                -webkit-backdrop-filter: blur(12px); /* Pour compatibilité Safari...  */
+
+                /* Bordure fine et semi-transparente */
+                border: 1px solid rgba(255, 255, 255, 0.3);
+
+                /* Coins arrondis */
+                border-radius: 16px;
+
+                /* Ombre portée douce */
+                box-shadow: 0 8px 32px rgba(20, 20, 20, 0.658);
+                color: white;
+                text-align: center;
+                text-shadow: slategrey;
+                overflow: hidden;
+            }
+            .flare {
+                position: absolute;
+                top: 0;
+                left: -50%;
+                width: 4px;
+                height: 300%;
+                background: linear-gradient(45deg, transparent 0%, rgba(255, 255, 255, 0.4) 50%, transparent 100%);
+                transform: rotate(45deg);
+                pointer-events: none;
+            }
+            .glass-box:hover {
+                animation: down 0.5s ease-in forwards;
+                box-shadow: 0 8px 32px rgba(5, 5, 5, 0.658);
+            }
+            .glass-box:hover .flare {
+                animation: slide 1s linear infinite;
+            }
+
+            @keyframes slide {
+                from {
+                    left: -150%;
+                }
+                to {
+                    left: 150%;
+                }
+            }
+            @keyframes down {
+                from {
+                    scale: 1;
+                }
+                to {
+                    scale: 0.97;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <div class="rond"><img src="img/rond.png" alt="" /></div>
+        <div class="glass-box">
+            <div class="flare"></div>
+            <h2>Contenu en Glass Effect</h2>
+            <p>Voici un exemple de boîte avec un effet verre en CSS.</p>
+        </div>
+    </body>
+</html>

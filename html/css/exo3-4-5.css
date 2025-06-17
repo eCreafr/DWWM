@@ -1,86 +1,87 @@
 * {
-  font-family: "Poppins";
+    font-family: 'Poppins';
 }
 
 body {
-  background-color: rgb(22, 49, 83);
+    background-color: rgb(22, 49, 83);
 }
 
 /* FLEX EXO 3 */
 
 .container {
-  display: flex;
-  flex-direction: column;
+    display: flex;
+    flex-direction: column;
 }
 .box {
-  background: rgb(71, 88, 94);
-  padding: 40px;
-  margin: 10px;
-  text-align: left;
-  color: rgb(255, 255, 255);
-  font-weight: bolder;
-  font-size: 1em;
+    background: rgb(71, 88, 94);
+    padding: 40px;
+    margin: 10px;
+    text-align: left;
+    color: rgb(255, 255, 255);
+    font-weight: bolder;
+    font-size: 1em;
 }
 
 /* NAVBAR */
 .navbar {
-  display: flex;
-  align-items: center;
-  flex-direction: row;
-  padding: 16px;
-  background: rgb(255, 255, 255);
-  margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+
+    padding: 16px;
+    background: rgb(255, 255, 255);
+    margin-bottom: 10px;
 }
 .menu {
-  display: flex;
-  list-style: none;
-  gap: 50px;
-  font-size: 1.5em;
+    display: flex;
+    list-style: none;
+    gap: 50px;
+    font-size: 1.5em;
 }
 
 /* FLEX PART EXO 4*/
 
 .layout {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh; /* pour Paul ^^, ça veut dire 100% de la hauteur de l'ecran */
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* pour Paul ^^, ça veut dire 100% de la hauteur de l'ecran */
 }
 header,
 footer {
-  background: rgb(40, 114, 38);
-  padding: 20px;
-  text-align: center;
-  color: aliceblue;
+    background: rgb(40, 114, 38);
+    padding: 20px;
+    text-align: center;
+    color: aliceblue;
 }
 .main-content {
-  display: flex;
-  flex-grow: 1; /* pas vital ici, marche sans */
-  color: aliceblue;
+    display: flex;
+    flex-grow: 1; /* pas vital ici, marche sans */
+    color: aliceblue;
 }
 .sidebar-left,
 .sidebar-right {
-  flex-basis: 300px;
-  background: rgba(35, 94, 58, 0.637);
-  padding: 20px;
-  color: aliceblue;
+    flex-basis: 300px;
+    background: rgba(35, 94, 58, 0.637);
+    padding: 20px;
+    color: aliceblue;
 }
 main {
-  flex-grow: 1;
-  background: rgb(134, 185, 138);
-  padding: 20px;
+    flex-grow: 1;
+    background: rgb(134, 185, 138);
+    padding: 20px;
 }
 
 /* FLEX EXO 5*/
 
 .containerExo5 {
-  display: flex;
-  justify-content: space-between;
-  height: 100vh;
-  background: rgb(67, 151, 179);
+    display: flex;
+    justify-content: space-between;
+    height: 100vh;
+    background: rgb(67, 151, 179);
 }
 .boxExo5 {
-  text-align: center;
-  background: rgb(202, 124, 23);
-  padding: 10px;
-  margin: 0px;
+    text-align: center;
+    background: rgb(202, 124, 23);
+    padding: 10px;
+    margin: 0px;
 }
