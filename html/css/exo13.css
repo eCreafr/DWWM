@@ -1,16 +1,42 @@
 /*mon bloc */
 .maintitle {
-  display: flex;
-  justify-content: center;
+    display: flex;
+    justify-content: center;
 }
 /*mes éléments*/
 .maintitle__logo {
-  background-color: blueviolet;
+    background-color: blueviolet;
 }
 .maintitle__h1 {
-  height: 2em;
+    height: 2em;
 }
 /*un modificateur*/
 .maintitle__h1--violet {
-  color: blueviolet;
+    color: blueviolet;
+}
+
+/* mon bloc pour B*/
+.navbar {
+    margin-top: 16px;
+}
+
+/* mes elements pour E*/
+.navbar__menulist {
+    list-style-type: none;
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+}
+
+.navbar__menulink {
+    border: 1px solid #fff;
+    border-radius: 4px;
+    padding: 8px;
+    margin: 8px;
+}
+/* mon M pour modifier*/
+.navbar__menulink--custom {
+    font-weight: bold;
+    color: #ff0000;
+    background: #fff;
 }
