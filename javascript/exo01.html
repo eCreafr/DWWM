@@ -1,83 +1,75 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="fr">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Apprendre JavaScript | Exercice 1</title>
-    <link rel="stylesheet" href="css/styles.css" />
-    <link rel="stylesheet" href="../html/css/froggie.css" />
-  </head>
-  <body>
-    <div class="exercice">
-      <h1>Apprendre JavaScript / Exercice 1</h1>
-    </div>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Apprendre JavaScript | Exercice 1</title>
+        <link rel="stylesheet" href="css/styles.css" />
+        <link rel="stylesheet" href="../html/css/froggie.css" />
+    </head>
+    <body>
+        <div class="exercice">
+            <h1>Apprendre JavaScript / Exercice 1</h1>
+        </div>
 
-    <div class="container"></div>
+        <div class="container"></div>
 
-    <div class="froggiesplaining">
-      <span>Froggiesplaining :</span>
+        <div class="froggiesplaining">
+            <span>Froggiesplaining :</span>
 
-      <ul>
-        <li>
-          <strong> où est le JavaScript ?</strong> Le code JavaScript est inclus
-          dans la balise "script" tout en bas de cette page html
-        </li>
+            <ul>
+                <li>
+                    <strong> où est le JavaScript ?</strong> Le code JavaScript est inclus dans la balise "script" tout
+                    en bas de cette page html
+                </li>
 
-        <li>
-          <strong>window.onload ?</strong> Attend que la page soit chargée pour
-          lancer la fonction
-        </li>
-        <li>
-          <strong>document.querySelector(".container"); ?</strong>Cherche et
-          sélectionne l'éléments HTML (ici par sa classe).
-        </li>
-        <li>
-          <strong>document.createElement("button"); ?</strong> commande qui va
-          créer l'element html button.
-        </li>
-      </ul>
+                <li><strong>window.onload ?</strong> Attend que la page soit chargée pour lancer la fonction</li>
+                <li>
+                    <strong>document.querySelector(".container"); ?</strong>Cherche et sélectionne l'éléments HTML (ici
+                    par sa classe).
+                </li>
+                <li>
+                    <strong>document.createElement("button"); ?</strong> commande qui va créer l'element html button.
+                </li>
+            </ul>
 
-      <br />
+            <br />
 
-      <img src="ressources/exo01-01.png" alt="" class="img-responsive" />
-      <br /><br />
-      <strong>Exercice :</strong> <br />
-      sur la base de cet exemple, essayez de l'adapter à votre tour et d'ecrire
-      un script similaire : <br />
-      <ul>
-        <li>
-          Cette fois il s'agit d'afficher un bouton "en savoir plus" au survol
-          de la souris sur une zone de texte ou une image.
-        </li>
-      </ul>
-      <br />
+            <img src="ressources/exo01-01.png" alt="" class="img-responsive" />
+            <br /><br />
+            <strong>Exercice :</strong> <br />
+            sur la base de cet exemple, essayez de l'adapter à votre tour et d'ecrire un script similaire : <br />
+            <ul>
+                <li>
+                    Cette fois il s'agit d'afficher un bouton "en savoir plus" au survol de la souris sur une zone de
+                    texte ou une image.
+                </li>
+            </ul>
+            <br />
 
-      indices : <br />
-      <ul>
-        <li>
-          On pourrait utiliser un écouteur d'evenement :
-          nomdemazone.addEventListener('mouseover', () => {
-          myButton.style.display = 'block'; // Afficher le bouton });
-        </li>
-      </ul>
+            indices : <br />
+            <ul>
+                <li>
+                    On pourrait utiliser un écouteur d'evenement : nomdemazone.addEventListener('mouseover', () => {
+                    myButton.style.display = 'block'; // Afficher le bouton });
+                </li>
+            </ul>
 
-      <img src="ressources/froggie-300.png" alt="Froggie" class="overfrog" />
-    </div>
+            <img src="ressources/froggie-300.png" alt="Froggie" class="overfrog" />
+        </div>
 
-    <script>
-      // on lance cette fonction seulement quand la page est full chargée
-      window.onload = function () {
-        // on cree un bouton dans la div qui a la class container :
-        // on fait nos 3 variables :
-        const conteneur = document.querySelector(".container");
-        const bouton = document.createElement("button");
-        const bouton_text = document.createTextNode(
-          "Mon bouton créé par javascript"
-        );
-        //Ajoute l'élément HTML enfant en dernière position de l'élément parent.
-        conteneur.appendChild(bouton);
-        bouton.appendChild(bouton_text);
-      };
-    </script>
-  </body>
+        <script>
+            // on lance cette fonction seulement quand la page est full chargée
+            window.onload = function () {
+                // on cree un bouton dans la div qui a la class container :
+                // on fait nos 3 variables :
+                const conteneur = document.querySelector('.container');
+                const bouton = document.createElement('button');
+                const bouton_text = document.createTextNode('Mon bouton créé par javascript');
+                //Ajoute l'élément HTML enfant en dernière position de l'élément parent.
+                conteneur.appendChild(bouton);
+                bouton.appendChild(bouton_text);
+            };
+        </script>
+    </body>
 </html>

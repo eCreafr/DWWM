@@ -37,29 +37,29 @@
         <img src="ressources/froggie-300.png" alt="Froggie" class="overfrog" />
       </p>
     </div>   <script>
-
-
-
+      
+      
+      
       // Initialisation du compteur à 0
       let counter = 0;
-
+      
       // Sélection des éléments HTML
       const counterDisplay = document.getElementById("counterDisplay");
       const incrementButton = document.getElementById("incrementButton");
       const decrementButton = document.getElementById("decrementButton");
       const resetButton = document.getElementById("resetButton");
-
+      
       // Fonction pour mettre à jour l'affichage du compteur
       function updateDisplay() {
         counterDisplay.textContent = `Compteur : ${counter}`;
       }
-
+      
       // Ajout d'un événement au clic sur le bouton d'incrémentation
       incrementButton.addEventListener("click", () => {
         counter++;
         updateDisplay();
       });
-
+      
       // Ajout d'un événement au clic sur le bouton de décrémentation
       decrementButton.addEventListener("click", () => {
         counter--;

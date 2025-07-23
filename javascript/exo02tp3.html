@@ -1,45 +1,43 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="fr">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Apprendre JavaScript | Exercice 1</title>
-    <link rel="stylesheet" href="css/styles.css" />
-    <link rel="stylesheet" href="../html/css/froggie.css" />
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Apprendre JavaScript | Exercice 1</title>
+        <link rel="stylesheet" href="css/styles.css" />
+        <link rel="stylesheet" href="../html/css/froggie.css" />
 
-    <style>
-      .hidden {
-        display: none;
-      }
-    </style>
-  </head>
-  <body>
-    <div class="exercice">
-      <h1>Apprendre JavaScript / Exercice 2</h1>
-    </div>
+        <style>
+            .hidden {
+                display: none;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="exercice">
+            <h1>Apprendre JavaScript / Exercice 2</h1>
+        </div>
 
-    <div class="container" style="display: flex; justify-content: center">
-      <p id="lorem" class="hidden">
-        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quas,
-        molestias natus. Doloribus dolore reprehenderit sequi neque non
-        temporibus dignissimos architecto, perferendis animi ut unde cupiditate
-        explicabo aliquam ea consequuntur dolor.
-      </p>
-    </div>
-    <button id="toggleButton" style="text-align: center">Afficher</button>
+        <div class="container" style="display: flex; justify-content: center">
+            <p id="lorem" class="hidden red coucou">
+                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quas, molestias natus. Doloribus dolore
+                reprehenderit sequi neque non temporibus dignissimos architecto, perferendis animi ut unde cupiditate
+                explicabo aliquam ea consequuntur dolor.
+            </p>
+        </div>
 
-    <script>
-      const toggleButton = document.getElementById("toggleButton");
-      const message = document.getElementById("lorem");
-      function toggleMessage() {
-        // Bascule la classe "hidden" pour afficher ou masquer le paragraphe
-        message.classList.toggle("hidden");
-        // Bascule le texte du bouton entre "Afficher" et "Cacher"
-        toggleButton.textContent = message.classList.contains("hidden")
-          ? "Afficher"
-          : "Cacher";
-      }
-      toggleButton.addEventListener("click", toggleMessage);
-    </script>
-  </body>
+        <button id="toggleButton" style="text-align: center">Afficher</button>
+
+        <script>
+            const toggleButton = document.getElementById('toggleButton');
+            const message = document.getElementById('lorem');
+
+            function toggleMessage() {
+                message.classList.toggle('hidden');
+                toggleButton.textContent = message.classList.contains('hidden') ? 'Afficher' : 'Cacher';
+            }
+
+            toggleButton.addEventListener('click', toggleMessage);
+        </script>
+    </body>
 </html>

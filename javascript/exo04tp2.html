@@ -1,143 +1,130 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="fr">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Apprendre JavaScript | Exercice 4</title>
-    <link rel="stylesheet" href="../html/css/froggie.css" />
-    <link rel="stylesheet" href="css/styles.css" />
-  </head>
-  <body>
-    <div class="exercice">
-      <h1>Apprendre JavaScript | Exercice 4 conditions TP1</h1>
-    </div>
-    <br /><br /><br /><br />
-    <div id="qcm" class="contenant-cible">
-      <p>Quelle est la capitale de la France ?</p>
-      <input type="radio" name="q1" value="correct" /> Paris<br />
-      <input type="radio" name="q1" value="incorrect" /> Lyon<br />
-      <input type="radio" name="q1" value="incorrect" /> Marseille<br />
-      <br />
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Apprendre JavaScript | Exercice 4</title>
+        <link rel="stylesheet" href="../html/css/froggie.css" />
+        <link rel="stylesheet" href="css/styles.css" />
+    </head>
+    <body>
+        <div class="exercice">
+            <h1>Apprendre JavaScript | Exercice 4 conditions TP1</h1>
+        </div>
+        <br /><br /><br /><br />
 
-      <p>2 + 2 = ?</p>
-      <input type="radio" name="q2" value="incorrect" /> 3<br />
-      <input type="radio" name="q2" value="correct" /> 4<br />
-      <input type="radio" name="q2" value="incorrect" /> 5<br /><br />
+        <div id="qcm" class="contenant-cible">
+            <p>Quelle est la capitale de la France ?</p>
+            <input type="radio" name="q1" value="correct" /> Paris<br />
+            <input type="radio" name="q1" value="incorrect" /> Lyon<br />
+            <input type="radio" name="q1" value="incorrect" /> Marseille<br />
+            <br />
 
-      <p>Quel est l'océan le plus grand ?</p>
-      <input type="radio" name="q3" value="correct" /> Océan Pacifique<br />
-      <input type="radio" name="q3" value="incorrect" /> Océan Atlantique<br />
-      <input type="radio" name="q3" value="incorrect" /> Océan Indien<br /><br />
+            <p>2 + 2 = ?</p>
+            <input type="radio" name="q2" value="incorrect" /> 3<br />
+            <input type="radio" name="q2" value="correct" /> 4<br />
+            <input type="radio" name="q2" value="incorrect" /> 5<br /><br />
 
-      <p>L'année de la bataille de marignan ?</p>
-      <input type="radio" name="q4" value="incorrect" /> 1414<br />
-      <input type="radio" name="q4" value="correct" /> 1515<br />
-      <input type="radio" name="q4" value="incorrect" /> 1616<br />
-      <input type="radio" name="q4" value="incorrect" /> 1717<br /><br />
+            <p>Quel est l'océan le plus grand ?</p>
+            <input type="radio" name="q3" value="correct" /> Océan Pacifique<br />
+            <input type="radio" name="q3" value="incorrect" /> Océan Atlantique<br />
+            <input type="radio" name="q3" value="incorrect" /> Océan Indien<br /><br />
 
-      <p>La couleur du cheval blanc d'Henri IV ?</p>
-      <input type="radio" name="q5" value="incorrect" /> Pie<br />
-      <input type="radio" name="q5" value="correct" /> Blanc<br />
-      <input type="radio" name="q5" value="incorrect" /> Noir<br />
-      <input type="radio" name="q5" value="incorrect" /> Alezan<br /><br />
+            <p>L'année de la bataille de marignan ?</p>
+            <input type="radio" name="q4" value="incorrect" /> 1414<br />
+            <input type="radio" name="q4" value="correct" /> 1515<br />
+            <input type="radio" name="q4" value="incorrect" /> 1616<br />
+            <input type="radio" name="q4" value="incorrect" /> 1717<br /><br />
 
-      <button onclick="evaluerQCM()">Soumettre</button>
-      <div id="result"></div>
-    </div>
-    <script>
-      function classifierNote(score) {
-        let mention;
+            <p>La couleur du cheval blanc d'Henri IV ?</p>
+            <input type="radio" name="q5" value="incorrect" /> Pie<br />
+            <input type="radio" name="q5" value="correct" /> Blanc<br />
+            <input type="radio" name="q5" value="incorrect" /> Noir<br />
+            <input type="radio" name="q5" value="incorrect" /> Alezan<br /><br />
 
-        if (score >= 90) {
-          mention = "Croah c'est excellent !!!";
-        } else if (score >= 80) {
-          mention = "Bravo c'est très bien !!";
-        } else if (score >= 65) {
-          mention = "bien joué !";
-        } else if (score >= 50) {
-          mention = "c'est ok... mais il faudrait réviser pour renforcer";
-        } else {
-          mention = "bah non... c'est pas bon...";
-        }
+            <button onclick="evaluerQCM()">Soumettre</button>
+            <div id="result"></div>
+        </div>
+        <script>
+            function classifierNote(score) {
+                let mention;
 
-        document.getElementById(
-          "result"
-        ).textContent = ` - Froggie : "${score}% ! ${mention}"`;
-      }
+                if (score >= 90) {
+                    mention = "Croah c'est excellent !!!";
+                } else if (score >= 80) {
+                    mention = "Bravo c'est très bien !!";
+                } else if (score >= 65) {
+                    mention = 'bien joué !';
+                } else if (score >= 50) {
+                    mention = "c'est ok... mais il faudrait réviser pour renforcer";
+                } else {
+                    mention = "bah non... c'est pas bon...";
+                }
 
-      function evaluerQCM() {
-        // Sélectionne tous les éléments <p> à l'intérieur de l'élément #qcm (représentant chaque question).
-        const questions = document.querySelectorAll("#qcm p");
+                document.getElementById('result').textContent = ` - Froggie : "${score}% ! ${mention}"`;
+            }
 
-        // Initialise un compteur pour suivre le nombre de réponses correctes.
-        let correctAnswers = 0;
+            function evaluerQCM() {
+                // Sélectionne tous les éléments <p> à l'intérieur de l'élément #qcm (représentant chaque question).
+                const questions = document.querySelectorAll('#qcm p');
 
-        // cherche chaque question à l'aide de la méthode forEach.
-        questions.forEach((_, index) => {
-          // Sélectionne l'input radio coché pour la question actuelle (basé sur l'index).
-          // `input[name="q${index + 1}"]:checked` sélectionne l'option choisie pour la question correspondante.
-          const selected = document.querySelector(
-            `input[name="q${index + 1}"]:checked`
-          );
+                // Initialise un compteur pour suivre le nombre de réponses correctes.
+                let correctAnswers = 0;
 
-          // Vérifie si une option a été sélectionnée et si sa valeur est "correct".
-          if (selected && selected.value === "correct") {
-            // Incrémente le compteur de réponses correctes.
-            correctAnswers++;
-          }
-        });
+                // cherche chaque question à l'aide de la méthode forEach.
+                questions.forEach((_, index) => {
+                    // Sélectionne l'input radio coché pour la question actuelle (basé sur l'index).
+                    // `input[name="q${index + 1}"]:checked` sélectionne l'option choisie pour la question correspondante.
+                    const selected = document.querySelector(`input[name="q${index + 1}"]:checked`);
 
-        const score = (correctAnswers / questions.length) * 100;
-        classifierNote(score);
-      }
-    </script>
-    <div class="froggiesplaining">
-      <span>Froggiesplaining :</span>
-      <strong>Explications détaillées de function evaluerQCM():</strong>
-      <br /><br />
-      <ul>
-        <li>
-          <strong>
-            const questions = document.querySelectorAll("#qcm p");</strong
-          >Sélectionne tous les éléments < p > à l'intérieur de l'élément avec
-          l'ID #qcm. Chaque < p > représente une question dans le QCM
-        </li>
-        <li>
-          <strong>let correctAnswers = 0;</strong>Initialise une variable
-          correctAnswers à 0. Cette variable sera utilisée pour compter le
-          nombre de réponses correctes.
-        </li>
-        <li>
-          <strong>questions.forEach((_, index) => { ... });</strong>Utilise la
-          méthode forEach pour parcourir chaque élément de la liste des
-          questions.
-        </li>
-        <li>
-          <strong>Le paramètre _ est utilisé</strong>car le contenu de l'élément
-          < p > n'est pas nécessaire, seulement l'index de la question est
-          utilisé.
-        </li>
-        <li>
-          <strong
-            >const selected = document.querySelector(input[name="q${index + 1}"]
-            );</strong
-          >Sélectionne l'input radio qui est coché pour la question
-          correspondant à l'index. Les inputs sont sélectionnés en utilisant un
-          attribut name dynamique (q1, q2, etc.). :checked permet de cibler
-          uniquement l'option sélectionnée par l'utilisateur.
-        </li>
-        <li>
-          enfin ,
-          <strong
-            >if (selected && selected.value === "correct") { correctAnswers++;
-            }</strong
-          >Vérifie si une option a été sélectionnée (selected n'est pas null) et
-          si la valeur de cette option est "correct". Si c'est le cas, le
-          compteur correctAnswers est incrémenté de 1.
-        </li>
-      </ul>
+                    // Vérifie si une option a été sélectionnée et si sa valeur est "correct".
+                    if (selected && selected.value === 'correct') {
+                        // Incrémente le compteur de réponses correctes.
+                        correctAnswers++;
+                    }
+                });
 
-      <img src="ressources/froggie-300.png" alt="Froggie" class="overfrog" />
-    </div>
-  </body>
+                const score = (correctAnswers / questions.length) * 100;
+                classifierNote(score);
+            }
+        </script>
+        <div class="froggiesplaining">
+            <span>Froggiesplaining :</span>
+            <strong>Explications détaillées de function evaluerQCM():</strong>
+            <br /><br />
+            <ul>
+                <li>
+                    <strong> const questions = document.querySelectorAll("#qcm p");</strong>Sélectionne tous les
+                    éléments < p > à l'intérieur de l'élément avec l'ID #qcm. Chaque < p > représente une question dans
+                    le QCM
+                </li>
+                <li>
+                    <strong>let correctAnswers = 0;</strong>Initialise une variable correctAnswers à 0. Cette variable
+                    sera utilisée pour compter le nombre de réponses correctes.
+                </li>
+                <li>
+                    <strong>questions.forEach((_, index) => { ... });</strong>Utilise la méthode forEach pour parcourir
+                    chaque élément de la liste des questions.
+                </li>
+                <li>
+                    <strong>Le paramètre _ est utilisé</strong>car le contenu de l'élément < p > n'est pas nécessaire,
+                    seulement l'index de la question est utilisé.
+                </li>
+                <li>
+                    <strong>const selected = document.querySelector(input[name="q${index + 1}"] );</strong>Sélectionne
+                    l'input radio qui est coché pour la question correspondant à l'index. Les inputs sont sélectionnés
+                    en utilisant un attribut name dynamique (q1, q2, etc.). :checked permet de cibler uniquement
+                    l'option sélectionnée par l'utilisateur.
+                </li>
+                <li>
+                    enfin ,
+                    <strong>if (selected && selected.value === "correct") { correctAnswers++; }</strong>Vérifie si une
+                    option a été sélectionnée (selected n'est pas null) et si la valeur de cette option est "correct".
+                    Si c'est le cas, le compteur correctAnswers est incrémenté de 1.
+                </li>
+            </ul>
+
+            <img src="ressources/froggie-300.png" alt="Froggie" class="overfrog" />
+        </div>
+    </body>
 </html>

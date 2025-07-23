@@ -1,83 +1,79 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="fr">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Apprendre JavaScript | Exercice 1</title>
-    <link rel="stylesheet" href="css/styles.css" />
-    <link rel="stylesheet" href="../html/css/froggie.css" />
-  </head>
-  <body>
-    <div class="exercice">
-      <h1>Apprendre JavaScript | Exercice 1 application :</h1>
-    </div>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Apprendre JavaScript | Exercice 2</title>
+        <link rel="stylesheet" href="css/styles.css" />
+        <link rel="stylesheet" href="../html/css/froggie.css" />
+    </head>
+    <body>
+        <div class="exercice">
+            <h1>Apprendre JavaScript | Exercice 2 application :</h1>
+        </div>
 
-    <div class="container">
-      <div id="message" style="text-align: center">
-        <h1>Bienvenue sur cette page</h1>
-        <p>
-          (vous pouvez masquer ce message)<br /><br />
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quaerat
-          illum eum ratione nisi neque, quidem natus unde quod, atque cupiditate
-          rerum quibusdam eos dicta minus sed cumque explicabo facere at!
-          <br /><br />
-          <span id="myButton" class="smallButton">
-            <i class="bi bi-eye-slash"></i>
-          </span>
-        </p>
-      </div>
-    </div>
+        <div class="container">
+            <div id="message" style="text-align: center">
+                <h1>Bienvenue sur cette page</h1>
+                <p>
+                    (vous pouvez masquer ce message)<br /><br />
+                    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quaerat illum eum ratione nisi neque,
+                    quidem natus unde quod, atque cupiditate rerum quibusdam eos dicta minus sed cumque explicabo facere
+                    at!
+                    <br /><br />
+                    <span id="myButton" class="smallButton">
+                        <i class="bi bi-eye-slash"></i>
+                    </span>
+                </p>
+            </div>
+        </div>
 
-    <div class="froggiesplaining">
-      <span>Froggiesplaining :</span>
+        <div class="froggiesplaining">
+            <span>Froggiesplaining :</span>
 
-      <ul>
-        <li>
-          <strong>Comment faire ?</strong> nous remplaçons le "texte A" de
-          départ, par un "texte B", qui au clic rappellera un nouveau "texte A
-          bis" , similaire au texte A pour créer l'illusion de boucle. <br />
-          Ce script fonctionne mais c'est un "peu lourd" et de plus "innerHTML"
-          est à eviter. <br /><br />
-        </li>
-        <li>
-          <strong>innerHTML ? </strong> injecter du code html est une faille de
-          sécurité, il faut eviter de l'utiliser. D'ailleurs cette proprieté
-          empeche souvent de passer les validateurs js
-        </li>
-      </ul>
-      <br />
-      <img src="ressources/exo1tp1-1.png" alt="" />
-      <br />
-      <br />
-      nous allons donc tester une autre méthode pour le même effet dans
-      l'exercice suivant. Un effet toggle en jouant sur la classe display none /
-      block de l'element sera plus élégant, optimisé, sécure.
+            <ul>
+                <li>
+                    <strong>Comment faire ?</strong> nous remplaçons le "texte A" de départ, par un "texte B", qui au
+                    clic rappellera un nouveau "texte A bis" , similaire au texte A pour créer l'illusion de boucle.
+                    <br />
+                    Ce script fonctionne mais c'est un "peu lourd" et de plus "innerHTML" est à eviter. <br /><br />
+                </li>
+                <li>
+                    <strong>innerHTML ? </strong> injecter du code html est une faille de sécurité, il faut eviter de
+                    l'utiliser. D'ailleurs cette proprieté empeche souvent de passer les validateurs js
+                </li>
+            </ul>
+            <br />
+            <img src="ressources/exo1tp1-1.png" alt="" />
+            <br />
+            <br />
+            nous allons donc tester une autre méthode pour le même effet dans l'exercice suivant. Un effet toggle en
+            jouant sur la classe display none / block de l'element sera plus élégant, optimisé, sécure.
 
-      <img src="ressources/froggie-300.png" alt="Froggie" class="overfrog" />
-    </div>
+            <img src="ressources/froggie-300.png" alt="Froggie" class="overfrog" />
+        </div>
 
-    <script>
-      // On sélectionne le bouton et le paragraphe
-      let button = document.getElementById("myButton");
-      const message = document.getElementById("message");
+        <script>
+            // On sélectionne le bouton et le paragraphe
+            let button = document.getElementById('myButton');
+            const message = document.getElementById('message');
 
-      // on écrit une fonction qui change le texte du paragraphe
-      function showMessage1() {
-        message.innerHTML =
-          '<span id="myButton2"  class="smallButton"><i class="bi bi-eye-fill"></i></span>';
-        button = document.getElementById("myButton2");
-        button.addEventListener("click", showMessage2);
-      }
-      // puis une autre fonction qui change le texte du paragraphe sur un état initiale
-      function showMessage2() {
-        message.innerHTML =
-          ' <h1>Bienvenue sur cette page</h1><p>(vous pouvez masquer ce message)<br><br> Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quaerat illum eum ratione nisi neque, quidem natus unde quod, atque cupiditate rerum quibusdam eos dicta minus sed cumque explicabo facere at!<br><br><span id="myButton" class="smallButton"><i class="bi bi-eye-slash"></i></span></p>';
-        button = document.getElementById("myButton");
-        button.addEventListener("click", showMessage1);
-      }
+            // on écrit une fonction qui change le texte du paragraphe
+            function showMessage1() {
+                message.innerHTML = '<span id="myButton2"  class="smallButton"><i class="bi bi-eye-fill"></i></span>';
+                button = document.getElementById('myButton2');
+                button.addEventListener('click', showMessage2);
+            }
+            // puis une autre fonction qui change le texte du paragraphe sur un état initiale
+            function showMessage2() {
+                message.innerHTML =
+                    ' <h1>Bienvenue sur cette page</h1><p>(vous pouvez masquer ce message)<br><br> Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quaerat illum eum ratione nisi neque, quidem natus unde quod, atque cupiditate rerum quibusdam eos dicta minus sed cumque explicabo facere at!<br><br><span id="myButton" class="smallButton"><i class="bi bi-eye-slash"></i></span></p>';
+                button = document.getElementById('myButton');
+                button.addEventListener('click', showMessage1);
+            }
 
-      // on ajoute un "écouteur d'événement" commun pour détecter les clics sur le bouton
-      button.addEventListener("click", showMessage1);
-    </script>
-  </body>
+            // on ajoute un "écouteur d'événement" commun pour détecter les clics sur le bouton
+            button.addEventListener('click', showMessage1);
+        </script>
+    </body>
 </html>

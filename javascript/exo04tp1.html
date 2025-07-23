@@ -1,86 +1,76 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="fr">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Apprendre JavaScript | Exercice 4</title>
-    <link rel="stylesheet" href="../html/css/froggie.css" />
-    <link rel="stylesheet" href="css/styles.css" />
-  </head>
-  <body>
-    <div class="exercice">
-      <h1>Apprendre JavaScript | Exercice 4 conditions</h1>
-    </div>
-    <div class="contenant">
-      <h1>Froggie te donne un avis sur ta note</h1>
-      <br />
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Apprendre JavaScript | Exercice 4</title>
+        <link rel="stylesheet" href="../html/css/froggie.css" />
+        <link rel="stylesheet" href="css/styles.css" />
+    </head>
+    <body>
+        <div class="exercice">
+            <h1>Apprendre JavaScript | Exercice 4 conditions</h1>
+        </div>
+        <div class="contenant">
+            <h1>Froggie te donne un avis sur ta note</h1>
+            <br />
 
-      <label for="noteInput">Entrez une note en math entre 0 et 100 :</label>
-      <input type="number" id="noteInput1" min="0" max="100" required /> <br />
-      <label for="noteInput"
-        >Entrez une note en histoire entre 0 et 100 :</label
-      >
-      <input type="number" id="noteInput2" min="0" max="100" required /> <br />
-      <label for="noteInput">Entrez une note en géo entre 0 et 100 :</label>
-      <input
-        type="number"
-        id="noteInput3"
-        min="0"
-        max="100"
-        required
-      /><br /><br />
-      <button onclick="classifierNote()">ton avis Froggie ?</button><br /><br />
-      <pre id="result"></pre>
-    </div>
-    <script>
-      function classifierNote() {
-        const noteMath = parseInt(document.getElementById("noteInput1").value);
-        const noteHistoire = parseInt(
-          document.getElementById("noteInput2").value
-        );
-        const noteGeo = parseInt(document.getElementById("noteInput3").value);
+            <label for="noteInput">Entrez une note en math entre 0 et 100 :</label>
+            <input type="number" id="noteInput1" min="0" max="100" required /> <br />
+            <label for="noteInput">Entrez une note en histoire entre 0 et 100 :</label>
+            <input type="number" id="noteInput2" min="0" max="100" required /> <br />
+            <label for="noteInput">Entrez une note en géo entre 0 et 100 :</label>
+            <input type="number" id="noteInput3" min="0" max="100" required /><br /><br />
 
-        const note = Math.round((noteMath + noteHistoire + noteGeo) / 3);
+            <button onclick="classifierNote()">ton avis Froggie ?</button><br /><br />
 
-        // Stocke les notes et leurs labels dans un tableau
-        const notes = [
-          { valeur: noteMath, label: "aux Maths" },
-          { valeur: noteHistoire, label: "à ton Histoire" },
-          { valeur: noteGeo, label: "à ta Geo" },
-        ];
+            <pre id="result"></pre>
+        </div>
+        <script>
+            function classifierNote() {
+                const noteMath = parseInt(document.getElementById('noteInput1').value);
+                const noteHistoire = parseInt(document.getElementById('noteInput2').value);
+                const noteGeo = parseInt(document.getElementById('noteInput3').value);
 
-        // on peut utiliser "Math.min" pour trouver la plus petite note
-        //const noteMin = Math.min(noteMath, noteHistoire, noteGeo);
+                const note = Math.round((noteMath + noteHistoire + noteGeo) / 3);
 
-        // mais je vais passer par "reduce" pour trouver l’objet avec la valeur minimale dans le tableau, qui contient le nom de la matiere.
-        const noteMin = notes.reduce((min, current) =>
-          current.valeur < min.valeur ? current : min
-        );
+                // Stocke les notes et leurs labels dans un tableau
+                const notes = [
+                    { valeur: noteMath, label: 'aux Maths' },
+                    { valeur: noteHistoire, label: 'à ton Histoire' },
+                    { valeur: noteGeo, label: 'à ta Geo' },
+                ];
 
-        let mention;
+                // on peut utiliser "Math.min" pour trouver la plus petite note
+                //const noteMin = Math.min(noteMath, noteHistoire, noteGeo);
 
-        if (note >= 90) {
-          mention = "Croah c'est excellent";
-        } else if (note >= 80) {
-          mention = "Bravo c'est très bien";
-        } else if (note >= 65) {
-          mention = "bien joué";
-        } else if (note >= 50) {
-          mention = "c'est ok... mais il faudrait réviser pour renforcer";
-        } else {
-          mention = "bah non c'est pas bon...";
-        }
+                // mais je vais passer par "reduce" pour trouver l’objet avec la valeur minimale dans le tableau, qui contient le nom de la matiere.
+                const noteMin = notes.reduce((min, current) => (current.valeur < min.valeur ? current : min));
 
-        document.getElementById("result").textContent =
-          `${note} en moyenne : "${mention}"\n` +
-          `(attention ${noteMin.label} en passant)`;
-      }
-    </script>
-    <div class="froggiesplaining">
-      <span>Froggiesplaining :</span>
-      <br /><br />pas le time
+                let mention;
 
-      <img src="ressources/froggie-300.png" alt="Froggie" class="overfrog" />
-    </div>
-  </body>
+                if (note >= 90) {
+                    mention = "Croah c'est excellent";
+                } else if (note >= 80) {
+                    mention = "Bravo c'est très bien";
+                } else if (note >= 65) {
+                    mention = 'bien joué';
+                } else if (note >= 50) {
+                    mention = "c'est ok... mais il faudrait réviser pour renforcer";
+                } else {
+                    mention = "bah non c'est pas bon...";
+                }
+
+                document.getElementById('result').textContent =
+                    `${note} en moyenne : "${mention}"\n` +
+                    `(attention, ${noteMin.valeur} c'est pas ouf, travaille ton  ${noteMin.label}  en passant)`;
+            }
+        </script>
+        <div class="froggiesplaining">
+            <span>Froggiesplaining :</span>
+            <br /><br />pas le time
+
+            <img src="ressources/froggie-300.png" alt="Froggie" class="overfrog" />
+        </div>
+    </body>
 </html>

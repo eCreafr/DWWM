@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>hover invert effect</title>
+        <style>
+            .container:has(:hover) .card:not(:hover) {
+                filter: grayscale(1) brightness(0.6);
+                transform: scale(0.95);
+            }
+            .card:hover {
+                transform: scale(1.05);
+            }
+            img {
+                width: 200px;
+                border-radius: 16px;
+            }
+            .container {
+                display: flex;
+                justify-content: space-evenly;
+            }
+
+            .card {
+                transition: all 0.3s ease-in-out;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <div class="card card1"><img src="img/bento-stickers.webp" alt="" /></div>
+            <div class="card card2"><img src="img/bento-colors.png" alt="" /></div>
+            <div class="card card3"><img src="img/bento-fonts.webp" alt="" /></div>
+            <div class="card card4"><img src="img/bento-apps.webp" alt="" /></div>
+        </div>
+    </body>
+</html>

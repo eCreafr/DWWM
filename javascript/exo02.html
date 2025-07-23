@@ -1,99 +1,93 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="fr">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Apprendre JavaScript | Exercice 1</title>
-    <link rel="stylesheet" href="css/styles.css" />
-    <link rel="stylesheet" href="../html/css/froggie.css" />
-  </head>
-  <body>
-    <div class="exercice">
-      <h1>Apprendre JavaScript / Exercice 1</h1>
-    </div>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Apprendre JavaScript | Exercice 2</title>
+        <link rel="stylesheet" href="css/styles.css" />
+        <link rel="stylesheet" href="../html/css/froggie.css" />
+    </head>
+    <body>
+        <div class="exercice">
+            <h1>Apprendre JavaScript / Exercice 2</h1>
+        </div>
 
-    <div class="container">
-      <div>
-        <button id="myButton">
-          <p id="message">Ne cliquez pas svp ...</p>
-        </button>
-      </div>
-    </div>
+        <div class="container">
+            <div>
+                <button id="myButton">
+                    <p id="message">Ne cliquez pas svp ...</p>
+                </button>
+            </div>
+        </div>
 
-    <div class="froggiesplaining">
-      <span>Froggiesplaining :</span>
+        <div class="froggiesplaining">
+            <span>Froggiesplaining :</span>
 
-      <ul>
-        <li>
-          <strong> où est le JavaScript ?</strong> Le code JavaScript est inclus
-          dans la balise "script" tout en bas de cette page html
-        </li>
-        <li>
-          <strong>getElementById() ? </strong>Sélectionne les éléments HTML par
-          leur id.
-        </li>
-        <li>
-          <strong>addEventListener('click', showMessage) ? </strong>Ajoute un
-          événement pour détecter (il "écoute"/ "listener") le clic sur le
-          bouton.
-        </li>
-        <li>
-          <strong>showMessage() :</strong> Cette fonction est exécutée lorsque
-          l'utilisateur clique sur le bouton et affiche le texte du paragraphe.
-        </li>
-      </ul>
+            <ul>
+                <li>
+                    <strong> où est le JavaScript ?</strong> Le code JavaScript est inclus dans la balise "script" tout
+                    en bas de cette page html
+                </li>
+                <li><strong>getElementById() ? </strong>Sélectionne les éléments HTML par leur id.</li>
+                <li>
+                    <strong>addEventListener('click', showMessage) ? </strong>Ajoute un événement pour détecter (il
+                    "écoute"/ "listener") le clic sur le bouton.
+                </li>
+                <li>
+                    <strong>showMessage() :</strong> Cette fonction est exécutée lorsque l'utilisateur clique sur le
+                    bouton et affiche le texte du paragraphe.
+                </li>
+            </ul>
 
-      <br />
+            <br />
 
-      <img src="ressources/exo1.png" alt="" class="img-responsive" />
-      <br /><br />
-      <strong>Exercice :</strong> <br />
-      sur la base de cet exemple, essayez de l'adapter à votre tour et d'ecrire
-      un script similaire : <br />
-      <ul>
-        <li>
-          Cette fois il s'agit d'effacer un texte existant au chargement de la
-          page, si on clique sur cette image <i class="bi bi-eye-slash"></i>
-        </li>
-        <li>
-          et la faire revenir si on clique sur cette image
-          <i class="bi bi-eye-fill"></i>
-        </li>
-      </ul>
-      <br />
+            <img src="ressources/exo1.png" alt="" class="img-responsive" />
+            <br /><br />
+            <strong>Exercice :</strong> <br />
+            sur la base de cet exemple, essayez de l'adapter à votre tour et d'ecrire un script similaire : <br />
+            <ul>
+                <li>
+                    Cette fois il s'agit d'effacer un texte existant au chargement de la page, si on clique sur cette
+                    image <i class="bi bi-eye-slash"></i>
+                </li>
+                <li>
+                    et la faire revenir si on clique sur cette image
+                    <i class="bi bi-eye-fill"></i>
+                </li>
+            </ul>
+            <br />
 
-      indices : <br />
-      <ul>
-        il y a plusieurs façons pour répondre à ça :
-        <li>
-          une méthode serait d'agir au clic sur le "style" du bloc a faire
-          disparaitre, avec : <br />
-          message.style.display = "block"; <br />
-          message.style.display = "none";
-        </li>
-        <li>
-          Une autre méthode serait d'injecter du html avec "innerHTML" :
-          message.innerHTML = 'ici mes balises html avec le bouton2';
-          <br />(c'est ok pour un exercice local, mais cette méthode n'est pas
-          recommandé en prod car faille de sécurité)
-        </li>
-      </ul>
+            indices : <br />
+            <ul>
+                il y a plusieurs façons pour répondre à ça :
+                <li>
+                    une méthode serait d'agir au clic sur le "style" du bloc a faire disparaitre, avec : <br />
+                    message.style.display = "block"; <br />
+                    message.style.display = "none";
+                </li>
+                <li>
+                    Une autre méthode serait d'injecter du html avec "innerHTML" : message.innerHTML = 'ici mes balises
+                    html avec le bouton2';
+                    <br />(c'est ok pour un exercice local, mais cette méthode n'est pas recommandé en prod car faille
+                    de sécurité)
+                </li>
+            </ul>
 
-      <img src="ressources/froggie-300.png" alt="Froggie" class="overfrog" />
-    </div>
+            <img src="ressources/froggie-300.png" alt="Froggie" class="overfrog" />
+        </div>
 
-    <script>
-      // on fait 2 variables, qui sélectionnent le bouton et le paragraphe
-      const button = document.getElementById("myButton");
-      const message = document.getElementById("message");
+        <script>
+            // on fait 2 variables, qui sélectionnent le bouton et le paragraphe
+            const button = document.getElementById('myButton');
+            const message = document.getElementById('message');
 
-      // Fonction qui change le texte du paragraphe
-      function showMessage() {
-        message.textContent = "Vous avez cliqué sur le bouton ! 😮";
-      }
+            // Fonction qui change le texte du paragraphe
+            function showMessage() {
+                message.textContent = 'Vous avez cliqué sur le bouton ! 😮';
+            }
 
-      // Ajoute un "écouteur d'événement" pour détecter les clics sur le bouton et lancer la fonction
-      button.addEventListener("click", showMessage);
-    </script>
-  </body>
+            // Ajoute un "écouteur d'événement" pour détecter les clics sur le bouton et lancer la fonction
+            button.addEventListener('click', showMessage);
+        </script>
+    </body>
 </html>

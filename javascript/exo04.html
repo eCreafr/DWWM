@@ -1,71 +1,88 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="fr">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Apprendre JavaScript | Exercice 4</title>
-    <link rel="stylesheet" href="../html/css/froggie.css" />
-    <link rel="stylesheet" href="css/styles.css" />
-  </head>
-  <body>
-    <div class="exercice">
-      <h1>Apprendre JavaScript | Exercice 4 conditions</h1>
-    </div>
-    <h1>Froggie te donne un avis sur ta note</h1>
-    <div class="contenant">
-      <label for="noteInput">Entrez une note entre 0 et 100 :</label>
-      <input type="number" id="noteInput" min="0" max="100" required />
-      <button onclick="classifierNote()">ton avis Froggie ?</button>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Apprendre JavaScript | Exercice 4</title>
+        <link rel="stylesheet" href="../html/css/froggie.css" />
+        <link rel="stylesheet" href="css/styles.css" />
+    </head>
+    <body>
+        <div class="exercice">
+            <h1>Apprendre JavaScript | Exercice 4 conditions</h1>
+        </div>
+        <h1>Froggie te donne un avis sur ta note</h1>
+        <div class="contenant">
+            <label for="noteInput">Entrez une note entre 0 et 100 :</label>
+            <input type="number" id="noteInput" min="0" max="100" required />
+            <button onclick="classifierNote()">ton avis Froggie ?</button>
 
-      <div id="result"></div>
-    </div>
-    <script>
-      function classifierNote() {
-        const note = parseInt(document.getElementById("noteInput").value);
-        let mention;
+            <div id="result"></div>
+        </div>
+        <script>
+            function classifierNote() {
+                const note = parseInt(document.getElementById('noteInput').value);
+                let mention;
 
-        if (note >= 90) {
-          mention = "Croah c'est excellent";
-        } else if (note >= 80) {
-          mention = "Bravo c'est très bien";
-        } else if (note >= 65) {
-          mention = "bien joué";
-        } else if (note >= 50) {
-          mention = "c'est ok... mais il faudrait réviser pour renforcer";
-        } else {
-          mention = "bah non c'est pas bon...";
-        }
+                // condition avec if et else :
 
-        document.getElementById(
-          "result"
-        ).textContent = ` - Froggie : " ${mention}"`;
-      }
-    </script>
-    <div class="froggiesplaining">
-      <span>Froggiesplaining :</span>
+                if (note >= 90) {
+                    mention = "Croah c'est excellent";
+                } else if (note >= 80) {
+                    mention = "Bravo c'est très bien";
+                } else if (note >= 65) {
+                    mention = 'bien joué';
+                } else if (note >= 50) {
+                    mention = "c'est ok... mais il faudrait réviser pour renforcer";
+                } else {
+                    mention = "bah non c'est pas bon...";
+                }
 
-      <br /><br />
-      <strong>exercice : </strong> à vous de jouer !
+                /* 
+                // conditions avec switch case 
 
-      <ul>
-        <li>
-          ajouter d'autres matieres (genre maths, histoire, géo...) et zone de
-          saisie pour mettre les notes
-        </li>
-        <li>
-          calculer la moyenne générale avec une constante moyenne et des
-          mathématique de base : <br />
-          variable1 + var2 + var3, le tout diviser par X matières.
-        </li>
-        <li>faire un commentaire texte sur la moyenne</li>
-        <li>
-          avec math.min afficher la note la plus basse après un commentaire
-          negatif : <br />
-          const noteMin = Math.min(noteMath, noteHistoire, noteGeo);
-        </li>
-        <li></li>
-      </ul>
-      <img src="ressources/froggie-300.png" alt="Froggie" class="overfrog" />
-    </div>
-  </body>
+                   switch (true) {
+                    case note >= 90:
+                        mention = "Croah c'est excellent";
+                        break;
+                    case note >= 80:
+                        mention = "Bravo c'est très bien";
+                        break;
+                    case note >= 65:
+                        mention = 'bien joué';
+                        break;
+                    case note >= 50:
+                        mention = "c'est ok... mais il faudrait réviser pour renforcer";
+                        break;
+                    default:
+                        mention = "bah non c'est pas bon...";
+                } */
+
+                document.getElementById('result').textContent = ` - Froggie : " ${mention}"`;
+            }
+        </script>
+        <div class="froggiesplaining">
+            <span>Froggiesplaining :</span>
+
+            <br /><br />
+            <strong>exercice : </strong> à vous de jouer !
+
+            <ul>
+                <li>
+                    ajouter d'autres matieres (genre maths, histoire, géo...) et zone de saisie pour mettre les notes
+                </li>
+                <li>
+                    calculer la moyenne générale avec une constante moyenne et des mathématique de base : <br />
+                    variable1 + var2 + var3, le tout diviser par X matières.
+                </li>
+                <li>faire un commentaire texte sur la moyenne</li>
+                <li>
+                    avec math.min afficher la note la plus basse après un commentaire negatif : <br />
+                    const noteMin = Math.min(noteMath, noteHistoire, noteGeo);
+                </li>
+                <li></li>
+            </ul>
+            <img src="ressources/froggie-300.png" alt="Froggie" class="overfrog" />
+        </div>
+    </body>
 </html>
