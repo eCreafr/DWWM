@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compteur animé - 20 ans</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .container {
+            text-align: center;
+            position: relative;
+        }
+
+        h2 {
+            font-size: 8rem;
+            font-weight: 900;
+            margin: 0;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4);
+            background-size: 400% 400%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradientShift 3s ease-in-out infinite;
+            text-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            transform: scale(0.5);
+            opacity: 0;
+        }
+
+        .subtitle {
+            font-size: 2rem;
+            color: white;
+            margin-top: 20px;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .glow {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            opacity: 0;
+        }
+
+        .particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: white;
+            border-radius: 50%;
+            opacity: 0;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .start-btn {
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            color: white;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: transform 0.3s ease;
+            margin-top: 50px;
+        }
+
+        .start-btn:hover {
+            transform: translateY(-3px);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="glow"></div>
+        <div class="particles"></div>
+        <h2 id="counter">0</h2>
+        <div class="subtitle">ans d'excellence</div>
+        <button class="start-btn" onclick="startAnimation()">Démarrer l'animation</button>
+    </div>
+
+    <script>
+        let animationStarted = false;
+
+        function createParticles() {
+            const particlesContainer = document.querySelector('.particles');
+            for (let i = 0; i < 50; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.top = Math.random() * 100 + '%';
+                particlesContainer.appendChild(particle);
+            }
+        }
+
+        function animateParticles() {
+            const particles = document.querySelectorAll('.particle');
+            particles.forEach((particle, index) => {
+                gsap.to(particle, {
+                    opacity: Math.random() * 0.8 + 0.2,
+                    scale: Math.random() * 2 + 0.5,
+                    duration: Math.random() * 2 + 1,
+                    delay: index * 0.1,
+                    repeat: -1,
+                    yoyo: true,
+                    ease: "power2.inOut"
+                });
+            });
+        }
+
+        function startAnimation() {
+            if (animationStarted) return;
+            animationStarted = true;
+
+            const counter = document.getElementById('counter');
+            const h2 = document.querySelector('h2');
+            const subtitle = document.querySelector('.subtitle');
+            const glow = document.querySelector('.glow');
+            const button = document.querySelector('.start-btn');
+
+            // Masquer le bouton
+            gsap.to(button, {
+                opacity: 0,
+                y: 50,
+                duration: 0.5,
+                ease: "power2.in"
+            });
+
+            // Animation d'entrée du titre
+            gsap.to(h2, {
+                scale: 1,
+                opacity: 1,
+                duration: 1,
+                ease: "back.out(1.7)",
+                delay: 0.3
+            });
+
+            // Animation du glow
+            gsap.to(glow, {
+                opacity: 1,
+                scale: 1.5,
+                duration: 2,
+                ease: "power2.out",
+                delay: 0.5
+            });
+
+            // Compteur animé avec GSAP
+            let counterObj = { value: 0 };
+            
+            gsap.to(counterObj, {
+                value: 20,
+                duration: 3,
+                delay: 1,
+                ease: "power2.out",
+                onUpdate: function() {
+                    counter.textContent = Math.floor(counterObj.value);
+                },
+                onComplete: function() {
+                    // Animation finale quand on atteint 20
+                    gsap.to(h2, {
+                        scale: 1.2,
+                        duration: 0.3,
+                        yoyo: true,
+                        repeat: 1,
+                        ease: "power2.inOut"
+                    });
+                    
+                    // Afficher le sous-titre
+                    gsap.to(subtitle, {
+                        opacity: 1,
+                        y: 0,
+                        duration: 0.8,
+                        ease: "back.out(1.7)",
+                        delay: 0.5
+                    });
+                }
+            });
+
+            // Animer les particules
+            animateParticles();
+        }
+
+        // Initialiser les particules au chargement
+        window.addEventListener('load', () => {
+            createParticles();
+        });
+    </script>
+</body>
+</html>
