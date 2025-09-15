@@ -21,8 +21,8 @@
 
             // Clé API et emplacement
             $apiKey = "votrecléAPI";
-            $lat = "44.60954984533323";
-            $lon = "-1.1197549342861468";
+            $lat = "47.3974609854503";
+            $lon = "0.6993912716345368";
             $url = "https://api.openweathermap.org/data/2.5/weather?lon=$lon&lat=$lat&appid=$apiKey&units=metric&lang=fr";
 
             // Récupération des données

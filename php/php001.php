@@ -12,6 +12,8 @@
             border: #000 solid 1px;
             margin: 10px;
             padding: 10px;
+            <?php //je pourrais mettre du php ici 
+            ?>
         }
     </style>
 </head>
@@ -22,7 +24,10 @@
     ?>
 
 
-    <? // existe  /* coucou */
+    <? // existe 
+    /* coucou 
+multi lignes
+  */
     ?>
 
     <?php // mais c'est cette forme la plus 
@@ -49,10 +54,10 @@
             echo "coucou 1";
             echo 'coucou 2<br>';
             echo ("coucou 3<br>");  // on affiche coucou dans le html
-            echo ("<br><strong>coucou</strong>"); // on affiche du code html  
+            echo ("<br><strong>coucou</strong><br><br>"); // on affiche du code html  
             ?>
 
-            <?= "coucou raccourci"; ?>
+            <?= "coucou raccourci avec le = sans php et echo"; ?>
 
             <br><br>
 
@@ -64,7 +69,7 @@
 
             // on defini des variables  
 
-            $name = "Ayman";
+            $name = "Mayssa";
 
             $client = "user";            //on charge le nom d'une variable dans une variable
             $$client = "bob";            //on charge la valeur "bob" dans la variable $user
@@ -93,7 +98,7 @@
             $var2 = "La Teste";
             $var3 = true;
             $var4 = Null;
-            $var5 = array("Manon", "Julien", "Sebastien", "Ayman", "Paul", "Thomas");
+            $var5 = array("Manon", 12, "Sebastien", 34.4, "Paul", "Thomas");
 
             var_dump($var0, $var1, $var2, $var3, $var4, $var5); //var_dump() affiche les informations structurées d'une variable, y compris son type et sa valeur. Les tableaux et les objets sont explorés récursivement, avec des indentations, pour mettre en valeur leur structure.
             ?>
@@ -123,7 +128,7 @@
         $questions = []; // Initialiser un tableau pour stocker les valeurs
 
         for ($i = 0; $i < 10; $i++) {
-            $key = "quest" . $i; // Générer la clé pour chaque entrée
+            $key = "question " . $i; // Générer la clé pour chaque entrée
             $questions[$key] = "valeur" . $i; // Ajouter la valeur au tableau
 
             echo "$key = {$questions[$key]}<br>"; // Afficher la clé et la valeur

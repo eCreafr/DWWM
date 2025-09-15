@@ -13,11 +13,12 @@ if (isset($_GET['page']) && array_key_exists($_GET['page'], $whitelist)) {
     include('../common/header.php');
     include("../pages/" . $_GET['page'] . '.php');
 } elseif (!isset($_GET['page'])) {
+
     include('../common/header.php');
     include('../pages/home.php');
 } else {
     include('../common/header.php');
-    echo "Vous êtes perdu ?";
+    echo "Vous êtes perdu ou quoi ?";
 }
 
 

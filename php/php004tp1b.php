@@ -28,7 +28,14 @@
         <p>
 
             <?php
-            if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST["name"]) && $_POST["name"] !== ''  && $_POST["firstname"] !== ''  && $_POST["email"] !== '') {
+            if (
+                $_SERVER['REQUEST_METHOD'] === 'POST'
+                && isset($_POST["name"])
+                && $_POST["name"] !== ''
+                && isset($_POST["firstname"])
+                && $_POST["firstname"] !== ''
+                && $_POST["email"] !== ''
+            ) {
 
 
                 echo '<div class="card" style="width: 18rem;">
@@ -37,7 +44,7 @@
     <h5 class="card-title">Vous avez ... 1 .... Nouveau message...</h5>
     <p class="card-text">Bonjour, <br>' . htmlspecialchars($_POST["firstname"]) . ' ' . htmlspecialchars($_POST["name"]) . ' vient de vous écrire un message vital :
     <br><br>' . htmlspecialchars($_POST["message"]) . ' <br><br> Repondez lui sur</p>
-    <a href="mailo:' . htmlspecialchars($_POST["email"]) . '" class="btn btn-primary">' . htmlspecialchars($_POST["email"]) . '</a>
+    <a href="mailto:' . htmlspecialchars($_POST["email"]) . '" class="btn btn-primary">' . htmlspecialchars($_POST["email"]) . '</a>
     <br>ça a l\'air urgent ! non ?
   </div>
 </div>

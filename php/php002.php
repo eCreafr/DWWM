@@ -121,11 +121,12 @@
 				<td> <?php echo $f3; ?> </td>
 			</tr>
 			<tr>
-				<td> 20</td>
-				<td>20 </td>
-				<td>20 </td>
+				<td> 20 </td>
+				<td> 20 </td>
+				<td> 20 </td>
 			</tr>
 		</table>
+
 	</div>
 
 	<div class="froggiesplaining">

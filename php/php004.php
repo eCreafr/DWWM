@@ -37,7 +37,7 @@ https://www.php.net/manual/fr/reserved.variables.get.php">
 
             if (isset($_GET["name"]) && $_GET["name"] !== '') { //on détermine ici si la variable est déclaré, si elle est differente de vide (null)
 
-                echo '<h2>Bonjour ' . htmlspecialchars($_GET["name"]) . '!</h2>'; //on récupère le contenu de name et on l'affiche en charactere HTML
+                echo '<h2>Bonjour ' . htmlspecialchars($_GET["name"]) . ' stp !</h2>'; //on récupère le contenu de name et on l'affiche en charactere HTML
 
             } else {
                 echo '<strong>cliquez sur le lien :</strong>'; //en cas d'echec on invite a cliquer sur le lien
@@ -100,9 +100,14 @@ https://www.php.net/manual/fr/reserved.variables.get.php">
 
 
         <form action="php004.php" method="POST">
+
+
             <label for="name">Votre nom :</label>
             <input type="text" id="name" name="name" required>
             <button type="submit">Envoyer</button>
+
+
+
         </form>
 
 

@@ -1,105 +1,102 @@
 <!doctype html>
 <html lang="fr">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Fetch Json avec javascript et mise en forme</title>
-    <style>
-      .container {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 20px;
-        justify-content: center;
-        padding: 20px;
-      }
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Fetch Json avec javascript et mise en forme</title>
+        <style>
+            .container {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 20px;
+                justify-content: center;
+                padding: 20px;
+            }
 
-      .card {
-        background-color: #f9f9f9;
-        border: 1px solid #ddd;
-        border-radius: 8px;
-        width: 300px;
-        padding: 20px;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-      }
+            .card {
+                background-color: #f9f9f9;
+                border: 1px solid #ddd;
+                border-radius: 8px;
+                width: 300px;
+                padding: 20px;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            }
 
-      .card h3 {
-        margin: 0 0 10px;
-        color: #333;
-      }
+            .card h3 {
+                margin: 0 0 10px;
+                color: #333;
+            }
 
-      .card p {
-        margin: 5px 0;
-        color: #555;
-      }
+            .card p {
+                margin: 5px 0;
+                color: #555;
+            }
 
-      .card .price {
-        font-weight: bold;
-        color: #15acff;
-      }
+            .card .price {
+                font-weight: bold;
+                color: #15acff;
+            }
 
-      .card .horaire {
-        font-style: italic;
-      }
-      .progress-bar {
-        width: 300px;
-        margin: 1.5rem auto;
-        background-color: #ddd;
-        border-radius: 6px;
-        height: 24px;
-      }
-      .progress {
-        width: 0;
-        border-radius: 6px;
-        height: 24px;
-        text-align: right;
-        position: relative;
-        background-color: #15acff;
-        animation: bounce 3s ease-in-out;
-      }
-      .progress span {
-        font-size: 14px;
-        line-height: 24px;
-        display: inline-block;
-        position: absolute;
-        top: 0px;
-        right: 10px;
-        color: #fff;
-      }
+            .card .horaire {
+                font-style: italic;
+            }
+            .progress-bar {
+                width: 300px;
+                margin: 1.5rem auto;
+                background-color: #ddd;
+                border-radius: 6px;
+                height: 24px;
+            }
+            .progress {
+                width: 0;
+                border-radius: 6px;
+                height: 24px;
+                text-align: right;
+                position: relative;
+                background-color: #15acff;
+                animation: bounce 3s ease-in-out;
+            }
+            .progress span {
+                font-size: 14px;
+                line-height: 24px;
+                display: inline-block;
+                position: absolute;
+                top: 0px;
+                right: 10px;
+                color: #fff;
+            }
 
-      /* Animation pour les barres */
-      @keyframes bounce {
-        0% {
-          width: 0%;
-        }
-        100% {
-          width: 100%;
-        }
-      }
-    </style>
-  </head>
-  <body>
-    <div id="concerts-container" class="container"></div>
+            /* Animation pour les barres */
+            @keyframes bounce {
+                0% {
+                    width: 0%;
+                }
+                100% {
+                    width: 100%;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <div id="concerts-container" class="container"></div>
 
-    <script>
-      fetch("ressources/exo12.json")
-        .then((response) => response.json())
-        .then((data) => {
-          const container = document.getElementById("concerts-container");
-          const maxCapacity = 1000; // Capacité maximale des concerts
+        <script>
+            fetch('ressources/exo12.json')
+                .then((response) => response.json())
+                .then((data) => {
+                    const container = document.getElementById('concerts-container');
+                    const maxCapacity = 1000; // Capacité maximale des concerts
 
-          data.forEach((concert) => {
-            // Calculer le pourcentage de places vendues
-            const percentageSold = (
-              (concert.ticketsSold / maxCapacity) *
-              100
-            ).toFixed(0);
+                    data.forEach((concert) => {
+                        // Calculer le pourcentage de places vendues
+                        const percentageSold = ((concert.ticketsSold / maxCapacity) * 100).toFixed(0);
 
-            // Créer l'élément card
-            const card = document.createElement("div");
-            card.classList.add("card");
+                        // Créer l'élément card
+                        const card = document.createElement('div');
+                        card.classList.add('card');
 
-            // Créer le contenu de la card
-            card.innerHTML = `
+                        // Créer le contenu de la card
+                        card.innerHTML = `
         <h3>${concert.artist}</h3>
         <p class="description">${concert.description}</p>
         <p class="price">Prix : ${concert.price}€</p>
@@ -112,18 +109,16 @@
         <div class="progress-bar">
           <div class="progress"
                style="width:${percentageSold}%; 
-                      background-color: ${
-                        percentageSold > 90 ? "#FF0000" : ""
-                      };">
+                      background-color: ${percentageSold > 90 ? '#FF0000' : ''};">
             <span>${percentageSold}%</span>
           </div>
         </div>
       `;
 
-            // Ajouter la card au container
-            container.appendChild(card);
-          });
-        });
-    </script>
-  </body>
+                        // Ajouter la card au container
+                        container.appendChild(card);
+                    });
+                });
+        </script>
+    </body>
 </html>

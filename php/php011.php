@@ -6,6 +6,28 @@
 
 // regex = expression régulière
 
+// tester si chaine de carac est bien un email
+
+$email = "test@example.com";
+
+if (preg_match("/^[\w.-]+@[\w.-]+\.[a-zA-Z]{2,6}$/", $email)) {
+    echo "Email valide.";
+} else {
+    echo "Email invalide.";
+}
+
+// tester si chaine uniquement en chiffres
+
+$chaine = "12345";
+
+if (preg_match("/^[0-9]+$/", $chaine)) {
+    echo "La chaîne contient uniquement des chiffres.";
+} else {
+    echo "La chaîne contient autre chose que des chiffres.";
+}
+
+// regex tres simple :
+
 $etat = "digestion";
 
 if ($etat === "digestion") {
@@ -15,7 +37,9 @@ if ($etat === "digestion") {
 
 <br><br>
 
+
 <?php
+
 $etat = "digestion";
 
 if ($etat === "digestion") {
@@ -44,7 +68,7 @@ if ($etat === "digestion") {
 ?>
 
 
-<?php // condition switch
+<?php // condition switch case
 ?>
 
 
