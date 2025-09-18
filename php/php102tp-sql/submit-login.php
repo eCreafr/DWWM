@@ -7,6 +7,7 @@ include(__DIR__ . '/functions.php');
 $postData = $_POST;
 
 // Validation du formulaire
+
 if (isset($postData['email']) && isset($postData['mdp'])) {
     if (!filter_var($postData['email'], FILTER_VALIDATE_EMAIL)) {
         $_SESSION['LOGIN_ERROR_MESSAGE'] = 'Gars ! Il faut un email valide pour soumettre le formulaire, c\'est la base.';

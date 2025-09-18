@@ -367,5 +367,53 @@
         },
         "ip": "127.0.0.1",
         "user_agent": "Mozilla\/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit\/537.36 (KHTML, like Gecko) Chrome\/136.0.0.0 Safari\/537.36"
+    },
+    {
+        "timestamp": "2025-09-15 08:47:43",
+        "action": "update_article_start",
+        "data": {
+            "post_data": {
+                "id": "32",
+                "titre": "marseille perd salement mais ils ont le soleil",
+                "contenu": "                    blabla                ",
+                "equipe1": "marseille",
+                "equipe2": "Lille",
+                "score": "0-76",
+                "lieu": "marseille",
+                "resume": "     bof"
+            }
+        },
+        "ip": "::1",
+        "user_agent": "Mozilla\/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit\/537.36 (KHTML, like Gecko) Chrome\/140.0.0.0 Safari\/537.36"
+    },
+    {
+        "timestamp": "2025-09-15 08:47:43",
+        "action": "update_article_attempt",
+        "data": {
+            "id": 32,
+            "titre": "marseille perd salement mais ils ont le soleil",
+            "contenu_length": 6
+        },
+        "ip": "::1",
+        "user_agent": "Mozilla\/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit\/537.36 (KHTML, like Gecko) Chrome\/140.0.0.0 Safari\/537.36"
+    },
+    {
+        "timestamp": "2025-09-15 08:47:43",
+        "action": "update_article_success",
+        "data": {
+            "id": 32,
+            "rows_affected": 1
+        },
+        "ip": "::1",
+        "user_agent": "Mozilla\/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit\/537.36 (KHTML, like Gecko) Chrome\/140.0.0.0 Safari\/537.36"
+    },
+    {
+        "timestamp": "2025-09-15 08:48:08",
+        "action": "delete_article_success",
+        "data": {
+            "id": 31
+        },
+        "ip": "::1",
+        "user_agent": "Mozilla\/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit\/537.36 (KHTML, like Gecko) Chrome\/140.0.0.0 Safari\/537.36"
     }
 ]

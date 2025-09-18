@@ -69,8 +69,13 @@ include('functions.php');
                 </div>
 
                 <div class=" col-12 mt-2 text-center">
-                    <a class="btn btn-outline-success rounded-start-pill" role="button" href="edit.php?id=<?php echo $new['id']; ?>">MODIFIER</a>
-                    <a class="btn btn-outline-danger rounded-end-pill" role="button" href="delete.php?id=<?php echo $new['id']; ?>">SUPPRIMER</a>
+
+                    <a class="btn btn-outline-success rounded-start-pill" role="button"
+                        href="edit.php?id=<?= $new['id']; ?>">MODIFIER</a>
+
+                    <a class="btn btn-outline-danger rounded-end-pill" role="button"
+                        href="delete.php?id=<?= $new['id']; ?>">SUPPRIMER</a>
+
                 </div>
 
             </div>

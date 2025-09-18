@@ -48,11 +48,11 @@
         $users = [$ayman, $manon, $paul]; // tableau de tableau !
 
         echo $users[1][1]; // "manon@exemple.com"
-?>
+        ?>
 
-<br><br><br>
+        <br><br><br>
 
-<?php
+        <?php
 
         // avec boucle for each
 
@@ -65,7 +65,7 @@
 
 
         if (in_array($manon, $users)) {
-            echo 'manon fait bien partie des utilisateurs enregistrés !';   
+            echo 'manon fait bien partie des utilisateurs enregistrés !';
         }
 
         ?>
@@ -85,14 +85,17 @@
         <br><br>
         <img src="img/012-3.webp" alt="" width="450px"> <br><br>
         <?php
+
         // while / boucle
 
 
-        $lines = 1;
+        $lines = -5;
 
         while ($lines <= 200) {
+
             echo ' ' . $lines . ' - j\'irais plus vite a copier 200 lignes en php. <br />';
-            $lines++; 
+
+            $lines++;
         }
 
 

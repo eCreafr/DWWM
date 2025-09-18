@@ -17,7 +17,8 @@
         <div class="container text-center">
 
             <!-- on appelle avec un cookie et pas get ou Post :  -->
-            <h1>Résultats des matchs de football pour toi <?php echo htmlspecialchars($_COOKIE['firstname'] ?? 'ici votre prénom'); ?>
+            <h1>Résultats des matchs de football pour toi
+                <?php echo htmlspecialchars($_COOKIE['firstname'] ?? 'ici votre prénom'); ?>
             </h1>
         </div>
 

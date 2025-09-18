@@ -11,10 +11,6 @@
         <?php endif; ?>
 
 
-
-
-
-
         mon bas de page 2024® | liens vers reseaux sociaux 1 | reseau 2
     </p>
     <p>

@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -21,7 +19,7 @@
             <h1>Contactez-nous</h1>
             <h2>formulaire :</h2>
         </div>
-    
+
         <div class="container">
             <form method="post" action="submit-contact.php">
                 <div class="mb-3">
@@ -33,7 +31,7 @@
                 <div class="mb-3">
                     <label for="message" class="form-label">Votre message</label>
                     <textarea class="form-control" placeholder="    <?php if (isset($_SESSION['LOGGED_USER'])) : echo $_SESSION['LOGGED_USER']['nom'];
-                endif; ?>
+                                                                    endif; ?>
  que pensez vous du classement du PSG en ce moment ?" id="message" name="message"></textarea>
                 </div>
                 <button type="submit" class="btn btn-primary">Envoyer</button>

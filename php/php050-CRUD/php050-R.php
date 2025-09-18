@@ -17,7 +17,7 @@
 
         // On récupère tout le contenu de la table sport articles avec une requête SQL :
         $sqlQuery = '
-            SELECT a.id, a.titre, a.contenu, a.date_publication, r.score, r.lieu
+            SELECT a.id, a.titre, a.contenu, a.date_publication AS textequejeveux, r.score, r.lieu
             FROM s2_articles_presse a
             LEFT JOIN s2_resultats_sportifs r ON a.match_id = r.id 
             ORDER BY `a`.`date_publication` 
@@ -42,9 +42,10 @@
 
         ?>
             id unique : <?= $new['id']; ?>
-            <h2><?php echo truncateString($new['titre'], 20); ?> :</h2><strong style="color:#FF0000"> <?php echo $new['score']; ?></strong> (lieu : <?php echo $new['lieu']; ?>)
-            <?php echo truncateString($new['contenu'], 100); ?>
-            <p>-<?php echo $new['date_publication']; ?>
+            <h2><?= truncateString($new['titre'], 20); ?> :</h2>
+            <strong style="color:#FF0000"> <?= $new['score']; ?></strong> (lieu : <?= $new['lieu']; ?>)
+            <?= truncateString($new['contenu'], 100); ?>
+            <p>-<?= $new['textequejeveux']; ?>
             </p><br><br><br><br>
             <hr>
         <?php

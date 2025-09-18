@@ -2,9 +2,8 @@
 
 
 
-
 // Charger l'image source
-$source = "img/102-card.jpeg";
+$source = "../img/102-card.jpeg";
 $image = imagecreatefromjpeg($source);
 
 // Effet miroir horizontal

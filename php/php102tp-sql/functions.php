@@ -42,8 +42,6 @@ function redirectToUrl(string $url): never
 }
 
 
-
-
 // deconnexion
 
 // Vérifier si l'action est "logout"
@@ -74,8 +72,7 @@ $news = $newsbdd->fetchAll();
 
 
 // On récupère tous les abonnés
-$sqlQueryAbo = '
-SELECT * FROM `s2_abonnes`; ';
+$sqlQueryAbo = 'SELECT * FROM `s2_abonnes`';
 $abobdd = $mysqlClient->prepare($sqlQueryAbo);
 $abobdd->execute();
 $abonnes = $abobdd->fetchAll();
