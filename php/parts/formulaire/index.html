@@ -1,479 +1,173 @@
 <!doctype html>
 <html lang="fr">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Manon Goursaud</title>
-    <link rel="icon" type="mg logo2" href="/img/logo.png" />
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
-      crossorigin="anonymous"
-    />
-    <link rel="stylesheet" href="css/style.css" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Arima:wght@100..700&family=Fira+Sans+Condensed:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Oswald:wght@200..700&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
-      integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    />
-    <script src="https://www.google.com/recaptcha/api.js?render=6LdTiV0qAAAAAIqcwiOLEnwBLHxdSJRt8LQAXLec"></script>
-  </head>
-  <body>
-    <div class="background"></div>
-    <header class="sticky-top">
-      <div class="container-fluid">
-        <div class="container">
-          <nav class="navbar navbar-expand-lg">
-            <!--Logo-->
-            <a class="navbar-brand" href="#">
-              <img src="img/logo.png" alt="Manondeveloppement" />
-            </a>
-            <!--Bouton de menu responsive-->
-            <button
-              class="navbar-toggler"
-              type="button"
-              data-bs-toggle="collapse"
-              data-bs-target="#navbarNav"
-              aria-controls="navbarNav"
-              aria-expanded="false"
-              aria-label="Toggle navigation"
-            >
-              <span class="navbar-toggler-icon"></span>
-            </button>
-            <!--Liens de Navigation-->
-            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-              <ul class="navbar-nav">
-                <li class="nav-item">
-                  <a class="nav-link" href="#propos">A propos</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#compétences">Mes compétences</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#projets">Mes projets</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#services">Mes services</a>
-                </li>
-                <!-- Bouton cliquable -->
-                <a
-                  class="btn btn-custom ml-3"
-                  data-bs-toggle="offcanvas"
-                  data-bs-target="#offcanvasContact"
-                  role="button"
-                >
-                  Contact
-                  <i class="bi bi-arrow-right-circle-fill"></i>
-                </a>
-              </ul>
-            </div>
-          </nav>
-        </div>
-      </div>
-    </header>
-    <div class="spacer my-3"></div>
-    <div class="container">
-      <h2 class="text-center mb-3" id="propos">A propos</h2>
-    </div>
-    <div class="container-fluid d-flex justify-content-center">
-      <div class="row align-items-center d-flex container container-color">
-        <!--colonne pour l'image-->
-        <div class="col-md-6 justify-content-center d-flex my-3">
-          <img src="img/moi.jpg" alt="Ma photo" width="50%" class="img-fluid rounded" />
-        </div>
-        <!--colonne pour le texte-->
-        <div class="col-md-6">
-          <p>
-            <strong>Bonjour je suis Manon Goursaud</strong>
-            <br />
-            Je suis développeuse web, spécialisée dans la création de sites modernes, intuitifs et
-            performants. Autonome, rigoureuse et passionnée, je suis toujours avide de nouvelles
-            expériences et de défis à relever. Mon objectif est de mettre à profit mes compétences
-            et ma créativité pour concevoir des solutions sur mesure adaptées à vos besoins.
-            <br />
-            Que ce soit pour la création, l’optimisation ou la refonte de votre site web, je vous
-            accompagne avec professionnalisme et engagement afin de donner vie à vos projets.
-          </p>
-        </div>
-      </div>
-    </div>
-    <div class="spacer my-3"></div>
-    <div class="container">
-      <h2 class="text-center mt-5 mb-3" id="compétences">Mes compétences</h2>
-    </div>
-    <div class="container-fluid d-flex justify-content-center">
-      <div
-        class="container container-color row d-flex gap-1 gap-md-3 align-items-center justify-content-center"
-      >
-        <div class="card-custom rounded mt-3">
-          <img src="img/html2.png" alt="Html" class="img-fluid w-50 mt-3" />
-          <h3>Html</h3>
-        </div>
-        <div class="card-custom rounded mt-3">
-          <img src="img/css.png" alt="Css" class="img-fluid w-50 mt-3" />
-          <h3>Css</h3>
-        </div>
-        <div class="card-custom rounded mt-3">
-          <img src="img/js.png" alt="Java-script" class="img-fluid w-50 mt-3" />
-          <h3>Java-script</h3>
-        </div>
-        <div class="card-custom rounded mt-3">
-          <img src="img/php.png" alt="Php" class="img-fluid w-50 mt-3" />
-          <h3>Php</h3>
-        </div>
-        <div class="card-custom rounded mt-3">
-          <img src="img/figma.png" alt="Figma" class="img-fluid w-50 mt-3" />
-          <h3>Figma</h3>
-        </div>
-        <div class="card-custom rounded mt-3">
-          <img src="img/wordpress.png" alt="WordPress" class="img-fluid w-50 mt-3" />
-          <h3>WordPress</h3>
-        </div>
-        <div class="card-custom rounded mt-3">
-          <img src="img/bootstrap.png" alt="Bootstrap" class="img-fluid w-50 mt-3" />
-          <h3>Bootstrap</h3>
-        </div>
-        <div class="text-center my-4 justify-content-center">
-          <a href="cv/moncv.pdf" class="btn btn-custom" download>Télécharger mon CV</a>
-        </div>
-      </div>
-    </div>
-    <div class="spacer my-3"></div>
-    <div class="container">
-      <h2 class="text-center mt-5 mb-3" id="projets">Mes projets</h2>
-    </div>
-    <div class="container-fluid d-flex justify-content-center">
-      <div class="container container-color p-4">
-        <div class="row g-4 justify-content-center align-items-stretch">
-          <!-- Card 1 -->
-          <div class="col-md-4 d-flex">
-            <div class="card h-100">
-              <a href="https://manondeveloppement.github.io/DWWM-ECF1-Manon/" target="_blank">
-                <img
-                  src="img/festival de musique.png"
-                  class="img-card card-img-top"
-                  alt="Festival de musique"
-                />
-              </a>
-              <div class="card-body d-flex flex-column">
-                <h5 class="card-title">Festival de musique</h5>
-                <p class="card-text">
-                  Dans le cadre de ma formation en développement web, j'ai conçu et développé un
-                  site dédié à un festival de musique électronique. L'objectif de ce projet était de
-                  créer une plateforme immersive et fonctionnelle pour les festivaliers, avec une
-                  navigation fluide et un design moderne. J'ai utilisé HTML, CSS et JavaScript pour
-                  réaliser ce site, en mettant l'accent sur l'expérience utilisateur et la
-                  performance.
-                </p>
-                <div class="mt-auto d-flex justify-content-center">
-                  <a
-                    href="https://manondeveloppement.github.io/DWWM-ECF1-Manon/"
-                    class="btn btn-custom"
-                    target="_blank"
-                    >Voir le site</a
-                  >
-                  <button
-                    class="btn btn-custom en-savoir-plus ms-2"
-                    data-bs-toggle="modal"
-                    data-bs-target="#modalFestival"
-                  >
-                    En savoir plus
-                  </button>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>mon formulaire de contact</title>
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+            crossorigin="anonymous"
+        />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Arima:wght@100..700&family=Fira+Sans+Condensed:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Oswald:wght@200..700&display=swap"
+            rel="stylesheet"
+        />
+        <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+        />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+            integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"
+        />
+        <script src="https://www.google.com/recaptcha/api.js?render=votre-clef"></script>
+    </head>
+    <body>
+        <header class="sticky-top">
+            <div class="container-fluid">
+                <div class="container">
+                    <nav class="navbar navbar-expand-lg">
+                        <!--Logo-->
+                        <a class="navbar-brand" href="#">
+                           <h2>mon logo</h2> 
+                        </a>
+                        <!--Bouton de menu responsive-->
+                        <button
+                            class="navbar-toggler"
+                            type="button"
+                            data-bs-toggle="collapse"
+                            data-bs-target="#navbarNav"
+                            aria-controls="navbarNav"
+                            aria-expanded="false"
+                            aria-label="Toggle navigation"
+                        >
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <!--Liens de Navigation-->
+                        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                            <ul class="navbar-nav">
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#propos">A propos</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#compétences">Mes compétences</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#projets">Mes projets</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#services">Mes services</a>
+                                </li>
+                                <!-- Bouton cliquable -->
+                                <a
+                                    class="btn btn-primary ml-3"
+                                    data-bs-toggle="offcanvas"
+                                    data-bs-target="#offcanvasContact"
+                                    role="button"
+                                >
+                                    Contact
+                                    <i class="bi bi-arrow-right-circle-fill"></i>
+                                </a>
+                            </ul>
+                        </div>
+                    </nav>
                 </div>
-              </div>
             </div>
-          </div>
+        </header>
+        
+        <div class="spacer vh-100"></div>
+       
+        <footer>
+               <div class="text-center col-12">
+                    <small>votre site © 2024. Tous droits réservés.</small>
+                </div>
+            </div>
+        </footer>
 
-          <!-- Modal for Card 1 -->
-          <div
-            class="modal fade"
-            id="modalFestival"
+        <!-- Offcanvas Contact Form -->
+        <div
+            class="offcanvas offcanvas-end"
             tabindex="-1"
-            aria-labelledby="modalFestivalLabel"
-            aria-hidden="true"
-          >
-            <div class="modal-dialog">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="modalFestivalLabel">Festival de musique</h5>
-                  <button
-                    type="button"
-                    class="btn-close"
-                    data-bs-dismiss="modal"
-                    aria-label="Close"
-                  ></button>
-                </div>
-                <div class="modal-body">
-                  Dans le cadre de ma formation en développement web, j'ai conçu et développé un
-                  site dédié à un festival de musique électronique. L'objectif de ce projet était de
-                  créer une plateforme immersive et fonctionnelle pour les festivaliers, avec une
-                  navigation fluide et un design moderne. J'ai utilisé HTML, CSS et JavaScript pour
-                  réaliser ce site, en mettant l'accent sur l'expérience utilisateur et la
-                  performance. Découvrez mon travail et plongez dans l'univers festif de la musique
-                  électronique !
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-                    Fermer
-                  </button>
-                </div>
-              </div>
+            id="offcanvasContact"
+            aria-labelledby="offcanvasContactLabel"
+        >
+            <div class="offcanvas-header">
+                <h5 id="offcanvasContactLabel">Contact</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
             </div>
-          </div>
-
-          <!-- Card 2 -->
-          <div class="col-md-4 d-flex">
-            <div class="card h-100">
-              <a href="https://miniworldphoto.fr" target="_blank">
-                <img src="img/cynthia.jpg" class="img-card card-img-top" alt="Mini World Photo" />
-              </a>
-              <div class="card-body d-flex flex-column">
-                <h5 class="card-title">MiniWorldPhoto</h5>
-                <p class="card-text">
-                  MiniWorldPhoto est le site officiel de Cynthia Gaste, photographe professionnelle
-                  basée sur le bassin d’Arcachon. Passionnée par l’image, elle capture avec
-                  sensibilité et créativité chaque instant précieux. Son regard artistique et son
-                  souci du détail permettent de sublimer chaque prise de vue, offrant des clichés
-                  uniques et authentiques.
+            <div class="offcanvas-body">
+                <p>
+                    Bonjour, ravi de prendre contact avec vous !
+                    <br />
+                    Merci de renseigner tous les champs.
                 </p>
-                <div class="mt-auto d-flex justify-content-center">
-                  <a href="https://miniworldphoto.fr" class="btn btn-custom" target="_blank"
-                    >Voir le site</a
-                  >
-                  <button
-                    class="btn btn-custom en-savoir-plus ms-2"
-                    data-bs-toggle="modal"
-                    data-bs-target="#modalMiniWorld"
-                  >
-                    En savoir plus
-                  </button>
-                </div>
-              </div>
+                <form id="contactForm">
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Vos Prénom Nom :</label>
+                        <input type="text" class="form-control" id="name" name="name" required />
+                    </div>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Votre email :</label>
+                        <input type="email" class="form-control" id="email" name="email" required />
+                    </div>
+                    <div class="mb-3">
+                        <label for="phone" class="form-label">Votre téléphone :</label>
+                        <input type="tel" class="form-control" id="phone" name="phone" required />
+                    </div>
+                    <div class="mb-3">
+                        <label for="message" class="form-label">Votre message :</label>
+                        <textarea class="form-control" id="message" name="message" rows="3" required></textarea>
+                    </div>
+                    <input type="hidden" id="recaptcha_token" name="recaptcha_token" />
+                    <button type="submit" class="btn btn-primary">Envoyer</button>
+                </form>
+                <br />
+                <p id="formMessage"></p>
             </div>
-          </div>
-
-          <!-- Modal for Card 2 -->
-          <div
-            class="modal fade"
-            id="modalMiniWorld"
-            tabindex="-1"
-            aria-labelledby="modalMiniWorldLabel"
-            aria-hidden="true"
-          >
-            <div class="modal-dialog">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="modalMiniWorldLabel">MiniWorldPhoto</h5>
-                  <button
-                    type="button"
-                    class="btn-close"
-                    data-bs-dismiss="modal"
-                    aria-label="Close"
-                  ></button>
-                </div>
-                <div class="modal-body">
-                  MiniWorldPhoto est le site officiel de Cynthia Gaste, photographe professionnelle
-                  basée sur le bassin d’Arcachon. Passionnée par l’image, elle capture avec
-                  sensibilité et créativité chaque instant précieux. Son regard artistique et son
-                  souci du détail permettent de sublimer chaque prise de vue, offrant des clichés
-                  uniques et authentiques. À travers son objectif, elle met en lumière des instants
-                  de vie, transformant chaque photo en une véritable œuvre d’émotion et de
-                  spontanéité. J’ai conçu et développé ce site afin de mettre en avant son travail
-                  avec une navigation fluide et une présentation épurée, offrant une immersion
-                  totale dans son univers photographique.
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-                    Fermer
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
-      </div>
-    </div>
 
-    <div class="spacer my-3"></div>
-    <div class="container">
-      <h2 class="text-center mb-3 mt-5" id="services">Mes services</h2>
-    </div>
-    <div class="container-fluid d-flex justify-content-center">
-      <div class="container container-color py-5">
-        <div class="row justify-content-center g-3 align-items-stretch">
-          <div class="col-md-4 d-flex">
-            <div class="card h-100 d-flex flex-column" style="width: 100%">
-              <img src="img/webdesign.avif" class="img-card mt-3" alt="Web-design" />
-              <div class="card-body">
-                <h5 class="text-center">Site Web-design</h5>
-                <p class="text-center">
-                  Je vous propose mes services pour un site Web-design, utilisant HTML et CSS pour
-                  créer des interfaces esthétiques et fonctionnelles. Mon approche met l'accent sur
-                  l'expérience utilisateur, garantissant une navigation intuitive. Découvrez mon
-                  portfolio inspirant, et collaborons pour donner vie à votre vision !
-                </p>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="card" style="width: 100%">
-              <img src="img/sitevitrine.avif" class="img-card mt-3" alt="Site vitrine" />
-              <div class="card-body">
-                <h5 class="text-center">Site vitrine</h5>
-                <p class="text-center">
-                  Je vous propose de concevoir un site vitrine sur mesure, mettant en valeur votre
-                  marque avec un design moderne et professionnel. Mon objectif est de créer une
-                  interface intuitive qui capte l’attention de vos visiteurs et présente
-                  efficacement vos services. Ensemble, nous donnerons vie à votre vision et
-                  renforcerons votre présence en ligne !
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="spacer my-3"></div>
-    <footer>
-      <div class="container d-flex justify-content-center flex-wrap">
-        <div class="col-12 mt-3 mb-1 text-center">
-          <h2 id="suivez-moi">Suivez-moi</h2>
-        </div>
-        <div class="col-12 d-flex justify-content-center gap-3 flex-wrap">
-          <div>
-            <a
-              href="https://www.linkedin.com/in/manon-goursaud33138"
-              target="_blank"
-              class="text-black d-flex align-items-center justify-content-center"
-            >
-              <i class="bi bi-linkedin"></i>
-              Linkedin
-            </a>
-          </div>
-          <div>
-            <a
-              href="https://wa.me/+33649417013"
-              target="_blank"
-              class="text-black d-flex align-items-center justify-content-center"
-              title="WhatsApp"
-            >
-              <i class="bi bi-whatsapp"></i>
-              WhatsApp
-            </a>
-          </div>
-          <div>
-            <a
-              href="https://github.com/manondeveloppement"
-              target="_blank"
-              class="text-black d-flex align-items-center justify-content-center"
-              title="Github"
-            >
-              <i class="bi bi-github"></i>
-              GitHub
-            </a>
-          </div>
-        </div>
-        <div class="text-center col-12">
-          <small>Manon Goursaud © 2024. Tous droits réservés.</small>
-        </div>
-      </div>
-    </footer>
+        <script
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+            crossorigin="anonymous"
+        ></script>
+        <script src="script.js"></script>
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                const links = document.querySelectorAll('.nav-link');
+                const navbarCollapse = document.getElementById('navbarNav');
+                const toggleButton = document.querySelector('.navbar-toggler');
 
-    <!-- Offcanvas Contact Form -->
-    <div
-      class="offcanvas offcanvas-end"
-      tabindex="-1"
-      id="offcanvasContact"
-      aria-labelledby="offcanvasContactLabel"
-    >
-      <div class="offcanvas-header">
-        <h5 id="offcanvasContactLabel">Contact</h5>
-        <button
-          type="button"
-          class="btn-close"
-          data-bs-dismiss="offcanvas"
-          aria-label="Close"
-        ></button>
-      </div>
-      <div class="offcanvas-body">
-        <p>
-          Bonjour, je suis Manon, ravi de prendre contact avec vous !
-          <br />
-          Merci de renseigner tous les champs.
-        </p>
-        <form id="contactForm">
-          <div class="mb-3">
-            <label for="name" class="form-label">Vos Prénom Nom :</label>
-            <input type="text" class="form-control" id="name" name="name" required />
-          </div>
-          <div class="mb-3">
-            <label for="email" class="form-label">Votre email :</label>
-            <input type="email" class="form-control" id="email" name="email" required />
-          </div>
-          <div class="mb-3">
-            <label for="phone" class="form-label">Votre téléphone :</label>
-            <input type="tel" class="form-control" id="phone" name="phone" required />
-          </div>
-          <div class="mb-3">
-            <label for="message" class="form-label">Votre message :</label>
-            <textarea class="form-control" id="message" name="message" rows="3" required></textarea>
-          </div>
-          <input type="hidden" id="recaptcha_token" name="recaptcha_token" />
-          <button type="submit" class="btn btn-primary">Envoyer</button>
-        </form>
-        <br />
-        <p id="formMessage"></p>
-      </div>
-    </div>
+                links.forEach((link) => {
+                    link.addEventListener('click', function () {
+                        if (navbarCollapse && navbarCollapse.classList.contains('show')) {
+                            toggleButton.click();
+                        }
+                    });
+                });
+            });
+        </script>
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                const contactForm = document.getElementById('contactForm');
+                const formMessage = document.getElementById('formMessage');
 
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-      crossorigin="anonymous"
-    ></script>
-    <script src="script.js"></script>
-    <script>
-      document.addEventListener('DOMContentLoaded', function () {
-        const links = document.querySelectorAll('.nav-link')
-        const navbarCollapse = document.getElementById('navbarNav')
-        const toggleButton = document.querySelector('.navbar-toggler')
+                contactForm.addEventListener('submit', function (event) {
+                    event.preventDefault(); // Empêche l'envoi réel du formulaire
 
-        links.forEach(link => {
-          link.addEventListener('click', function () {
-            if (navbarCollapse && navbarCollapse.classList.contains('show')) {
-              toggleButton.click()
-            }
-          })
-        })
-      })
-    </script>
-    <script>
-      document.addEventListener('DOMContentLoaded', function () {
-        const contactForm = document.getElementById('contactForm')
-        const formMessage = document.getElementById('formMessage')
+                    // Affiche un message de confirmation
+                    formMessage.textContent = 'Votre message a été envoyé avec succes !';
+                    formMessage.style.color = 'black';
 
-        contactForm.addEventListener('submit', function (event) {
-          event.preventDefault() // Empêche l'envoi réel du formulaire
-
-          // Affiche un message de confirmation
-          formMessage.textContent = 'Votre message a été envoyé avec succes !'
-          formMessage.style.color = 'black'
-
-          // Réinitialise le formulaire
-          contactForm.reset()
-        })
-      })
-    </script>
-  </body>
+                    // Réinitialise le formulaire
+                    contactForm.reset();
+                });
+            });
+        </script>
+    </body>
 </html>

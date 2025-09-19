@@ -2,7 +2,7 @@
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $recaptchaToken = $_POST['recaptcha_token'];
-    $secretKey = '6LdTiV0qAAAAAGS3MBPXyld68aM5l4dyXo3OvpLo';
+    $secretKey = 'votre clé';
 
     // Vérifier le token reCAPTCHA avec Google
     $response = file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=$secretKey&response=$recaptchaToken");
@@ -21,7 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     /*     // Envoi de l'email php d'ovh
 
 
-    $to = 'raphael@ecrea.fr';
+    $to = 'votre@email.fr';
     $subject = 'Nouveau message de contact';
     $body = "Vous avez reçu un nouveau message de contact :\n\n".
             "Nom : $name\n".
@@ -31,8 +31,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             "Message : $message";
 
     // En-têtes
-    $headers = 'From: raphael@ecrea.fr' . "\r\n" .
-               'Reply-To: raphael@ecrea.fr' . "\r\n" .
+    $headers = 'From: votre@email.fr' . "\r\n" .
+               'Reply-To: votre@email.fr' . "\r\n" .
                'X-Mailer: PHP/' . phpversion();
   
    if (mail($to, $subject, $body, $headers)) {
@@ -46,17 +46,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Utilisation de l'API Mailchimp + Mandrill 
 
-    $mandrillKey = 'md-Qi_lFbvItMTq1LlbThse5g';
+    $mandrillKey = 'votre clé mandrill';
     $url = 'https://mandrillapp.com/api/1.0/messages/send.json';
 
     $data = [
         'key' => $mandrillKey,
         'message' => [
-            'from_email' => 'contact@manongoursaud.fr',
+            'from_email' => 'votre@email.fr',
             'to' => [
-                ['email' => 'contact@manongoursaud.fr', 'type' => 'to']
+                ['email' => 'votre@email.fr', 'type' => 'to']
             ],
-            'subject' => 'Nouveau message depuis manongoursaud.fr',
+            'subject' => 'Nouveau message depuis votresite.fr',
             'text' => "Nom : $name\nEmail : $email\nTéléphone : $phone\nMessage : $message\n"
         ]
     ];
