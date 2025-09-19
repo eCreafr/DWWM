@@ -5,6 +5,7 @@ package-lock.json
 package.json
 php/php005.php
 .prettierrc
+.vscode
 php/composer/vendor
 php/symfony/vendor
 php/symfony/
