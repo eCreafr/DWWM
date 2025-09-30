@@ -1,0 +1,21 @@
+# ============================================
+# Fichier .htaccess - Configuration Apache
+# Permet d'avoir des URLs propres (sans index.php)
+# ============================================
+
+# Active la réécriture d'URL
+RewriteEngine On
+
+# Définit le répertoire de base
+RewriteBase /git/php/kitdebase-sql+mvc+poo/
+
+# Si le fichier ou dossier existe réellement, on y accède directement
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# Sinon, on redirige tout vers index.php avec l'URL en paramètre
+# Exemple : users/modifier/5 devient index.php?url=users/modifier/5
+RewriteRule ^(.+)$ index.php?url=$1 [QSA,L]
+
+# Si aucune URL n'est fournie, on charge la page par défaut
+RewriteRule ^$ index.php [L]

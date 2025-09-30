@@ -1,6 +1,6 @@
 <?php
 
-/* on appelle l'autoload de composer, puis les fonctions d'emailvalidator d'egulias */
+/* on appelle l'autoload de composer, puis les fonctions d'email validator d'egulias */
 
 
 require 'vendor/autoload.php';
