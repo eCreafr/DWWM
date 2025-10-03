@@ -8,7 +8,7 @@
 
         // Fetch the article by ID
         $sqlQuery = '
-            SELECT a.titre, a.contenu, a.date_publication, r.score, r.lieu
+            SELECT a.id, a.titre, a.contenu, a.date_publication, r.score, r.lieu
             FROM s2_articles_presse a
             LEFT JOIN s2_resultats_sportifs r ON a.match_id = r.id 
             WHERE a.id = :id';
@@ -42,7 +42,20 @@
 
             if ($article) {
                 echo "<div class='card col-9 m-5 p-3'>";
-                echo "<img src=\"https://picsum.photos/800/150\" class=\"img-fluid rounded-top mb-2\" alt=\"\">";
+
+                // Vérifie si une image existe pour cet article dans le repertoire img
+                $imagePath = "img/" . $article['id'] . ".jpg";
+                if (file_exists($imagePath)) {
+                    $image = "../$imagePath";
+                    // j'ai du ajouter ../ car le fichier article.php est dans un sous dossier virtuel
+                } else {
+                    //sinon on affiche une image aléatoire
+                    $image = "https://picsum.photos/800/150";
+                }
+
+                echo "<img src=\"$image\" class=\"img-fluid rounded-top mb-2\" alt=\"" . htmlspecialchars($article['titre']) . "\">";
+
+
                 echo "<h1>{$article['titre']}</h1>";
                 echo "<p>Date: {$article['date_publication']}</p>";
                 echo $article['score'] ? "<strong style=\"color:#FF0000\">score : {$article['score']}</strong>" : "";

@@ -11,6 +11,15 @@ include('functions.php');
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PHP050 FINAL</title>
     <link href="../../css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        /* pour fixer la hauteur des vignettes des cards */
+        .img-h-fixed {
+            height: 100px;
+            object-fit: cover;
+            width: 100%;
+        }
+    </style>
 </head>
 
 <body>
@@ -29,22 +38,34 @@ include('functions.php');
             SELECT a.id, a.titre, a.contenu, a.date_publication, r.score, r.lieu
             FROM s2_articles_presse a
             LEFT JOIN s2_resultats_sportifs r ON a.match_id = r.id 
-            ORDER BY `a`.`date_publication` 
-            DESC; ';
+            ORDER BY `a`.`id` DESC; ';
         $newsFraiches = $mysqlClient->prepare($sqlQuery);
         $newsFraiches->execute();
         $news = $newsFraiches->fetchAll();
 
 
 
-        // On affiche chaque recette une à une
+        // On affiche chaque news sportives une à une
         foreach ($news as $new) {
-
 
         ?>
             <div class="p-3 m-3 col-lg-3">
                 <div class="card">
-                    <img src="https://picsum.photos/300/150?random=<?php echo $new['id']; ?>" class="card-img-top" alt="<?php echo $new['titre']; ?>">
+
+                    <?php
+                    // Vérifie si une image existe pour cet article dans le repertoire img
+                    $imagePath = "img/" . $new['id'] . ".jpg";
+                    if (file_exists($imagePath)) {
+                        $image = "$imagePath";
+                    } else {
+                        //sinon on affiche une image aléatoire
+                        $image = "https://picsum.photos/300/150?random=" . $new['id'] . "";
+                    }
+
+                    echo "<img src=\"$image\" class=\"card-img-top img-h-fixed\" alt=\"" . htmlspecialchars($new['titre']) . "\">";
+
+                    ?>
+
                     <div class="card-body">
                         <p>
                             <mark> <?php echo $new['date_publication']; ?> </mark>

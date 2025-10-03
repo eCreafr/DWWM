@@ -77,6 +77,25 @@ $insertArticle->execute([
     'match_id' => $match_id,
 ]);
 
+//recuperer l'id de l'article ajouté
+$article_id = $mysqlClient->lastInsertId();
+
+
+// Vérification de l'upload d'une image
+if (isset($_FILES['image']) && $_FILES['image']['error'] == 0) {
+    // Vérification du type MIME
+    $typeMime = mime_content_type($_FILES['image']['tmp_name']);
+
+    if ($typeMime === "image/jpeg") {
+        // Déplacement avec renommage (id.jpg)
+        $dossier = "img/";
+        $nomFichier = $article_id . ".jpg";
+        move_uploaded_file($_FILES['image']['tmp_name'], $dossier . $nomFichier);
+    } else {
+        echo "Erreur : seul le format JPG est accepté.";
+    }
+}
+
 // Préparer les données du match pour l'affichage
 $matchInfo = '';
 
@@ -113,6 +132,7 @@ if ($match_id > 0) {
                 <h5 class="card-title"><?php echo $titre; ?></h5>
                 <p class="card-text"><b>Par <?php echo $auteur; ?></b></p>
                 <p class="card-text"><?php echo $contenu; ?></p>
+                <img src="img/<?php echo $article_id; ?>.jpg" alt="<?php echo $titre; ?>" class="img-fluid">
             </div>
         </div>
         <?php echo $matchInfo; ?>

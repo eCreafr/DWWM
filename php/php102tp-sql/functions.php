@@ -77,7 +77,6 @@ $abobdd = $mysqlClient->prepare($sqlQueryAbo);
 $abobdd->execute();
 $abonnes = $abobdd->fetchAll();
 
-
 // On récupère tous les matches
 $sqlQueryMatches = '
 SELECT * FROM `s2_resultats_sportifs`; ';

@@ -1,3 +1,8 @@
+<!-- dans les fichiers add.php et addpost.php je souhaite ajouter un champs pour importer une image. l'image importé sera renommé avec l'id récupéré de l'article ajouté a la base de donnée. l'image sera stockée dans img/
+
+par exemple si l'auto incrementation donne a l'article l'id primaire 5 l'image importée sera alors img/5.jpg -->
+
+
 <!DOCTYPE html>
 <html>
 
@@ -13,7 +18,8 @@
     <div class="container">
 
         <h1>Ajouter un article</h1>
-        <form action="addpost.php" method="POST">
+        <form action="addpost.php" method="POST" enctype="multipart/form-data">
+            <!-- enctype="multipart/form-data" est indispensable pour charger l'image jpg -->
             <div class="mb-3">
                 <label for="auteur" class="form-label">Auteur de l'article</label>
                 <input type="text" class="form-control" id="auteur" name="auteur">
@@ -26,6 +32,10 @@
             <div class="mb-3">
                 <label for="contenu" class="form-label">Contenu de l'article</label>
                 <textarea class="form-control" placeholder="Seulement du contenu vous appartenant ou libre de droits." id="contenu" name="contenu"></textarea>
+            </div>
+            <div class="mb-3">
+                <label for="image">Importer votre image :</label>
+                <input class="form-control" type="file" name="image" id="image" accept=".jpg, .jpeg, image/jpeg">
             </div>
 
             <!-- Nouvelle case à cocher pour le match -->

@@ -25,6 +25,7 @@ if (isset($postData['email']) && isset($postData['mdp'])) {
             }
         }
 
+
         if (!isset($_SESSION['LOGGED_USER'])) {
             $_SESSION['LOGIN_ERROR_MESSAGE'] = sprintf(
                 'Les informations envoyées ne permettent pas de vous identifier : (%s/%s)',
