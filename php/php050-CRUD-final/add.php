@@ -1,7 +1,10 @@
-<!-- dans les fichiers add.php et addpost.php je souhaite ajouter un champs pour importer une image. l'image importé sera renommé avec l'id récupéré de l'article ajouté a la base de donnée. l'image sera stockée dans img/
-
-par exemple si l'auto incrementation donne a l'article l'id primaire 5 l'image importée sera alors img/5.jpg -->
-
+<!-- ============================================================
+     PAGE D'AJOUT D'UN ARTICLE - ADD.PHP
+     ============================================================
+     Cette page affiche un formulaire permettant d'ajouter
+     un nouvel article sportif avec image et résultats de match.
+     Les données seront envoyées à addpost.php pour traitement.
+     ============================================================ -->
 
 <!DOCTYPE html>
 <html>
@@ -18,64 +21,106 @@ par exemple si l'auto incrementation donne a l'article l'id primaire 5 l'image i
     <div class="container">
 
         <h1>Ajouter un article</h1>
+
+        <!-- Formulaire d'ajout d'article -->
+        <!-- action="addpost.php" : les données seront envoyées au fichier addpost.php -->
+        <!-- method="POST" : envoi sécurisé des données (non visible dans l'URL) -->
+        <!-- enctype="multipart/form-data" : OBLIGATOIRE pour envoyer des fichiers (images) -->
         <form action="addpost.php" method="POST" enctype="multipart/form-data">
-            <!-- enctype="multipart/form-data" est indispensable pour charger l'image jpg -->
+
+            <!-- Champ : Auteur de l'article -->
             <div class="mb-3">
                 <label for="auteur" class="form-label">Auteur de l'article</label>
+                <!-- name="auteur" : le nom qui sera utilisé dans $_POST['auteur'] -->
                 <input type="text" class="form-control" id="auteur" name="auteur">
             </div>
+
+            <!-- Champ : Titre de l'article -->
             <div class="mb-3">
                 <label for="titre" class="form-label">Titre de l'article</label>
                 <input type="text" class="form-control" id="titre" name="titre" aria-describedby="titre-help">
                 <div id="titre-help" class="form-text">Choisissez un titre percutant !</div>
             </div>
+
+            <!-- Champ : Contenu de l'article -->
             <div class="mb-3">
                 <label for="contenu" class="form-label">Contenu de l'article</label>
+                <!-- textarea pour un texte long sur plusieurs lignes -->
                 <textarea class="form-control" placeholder="Seulement du contenu vous appartenant ou libre de droits." id="contenu" name="contenu"></textarea>
             </div>
+
+            <!-- Champ : Upload d'image -->
             <div class="mb-3">
                 <label for="image">Importer votre image :</label>
+                <!-- type="file" : permet de sélectionner un fichier -->
+                <!-- accept : limite aux fichiers JPG/JPEG uniquement -->
+                <!-- L'image sera renommée avec l'id de l'article (ex: 5.jpg) dans addpost.php -->
                 <input class="form-control" type="file" name="image" id="image" accept=".jpg, .jpeg, image/jpeg">
             </div>
 
-            <!-- Nouvelle case à cocher pour le match -->
+            <!-- ============================================ -->
+            <!-- SECTION OPTIONNELLE : RÉSULTATS DU MATCH -->
+            <!-- ============================================ -->
+
+            <!-- Case à cocher pour afficher/masquer les champs du match -->
             <div class="mb-3 form-check">
+                <!-- Quand on coche cette case, les champs du match s'affichent (grâce au JavaScript en bas) -->
                 <input type="checkbox" class="form-check-input" id="ajouterMatch" name="ajouterMatch">
                 <label class="form-check-label" for="ajouterMatch">Voulez-vous saisir les résultats d'un match ?</label>
             </div>
 
-            <!-- Section pour les détails du match (cachée par défaut) -->
+            <!-- Section des détails du match (cachée par défaut avec display: none) -->
+            <!-- Elle devient visible quand on coche la case ci-dessus -->
             <div id="detailsMatch" style="display: none;">
+
+                <!-- Champ : Équipe 1 -->
                 <div class="mb-3">
                     <label for="equipe1" class="form-label">Équipe 1</label>
                     <input type="text" class="form-control" id="equipe1" name="equipe1">
                 </div>
+
+                <!-- Champ : Équipe 2 -->
                 <div class="mb-3">
                     <label for="equipe2" class="form-label">Équipe 2</label>
                     <input type="text" class="form-control" id="equipe2" name="equipe2">
                 </div>
+
+                <!-- Champ : Score du match -->
                 <div class="mb-3">
                     <label for="score" class="form-label">Score</label>
                     <input type="text" class="form-control" id="score" name="score">
                 </div>
+
+                <!-- Champ : Lieu du match -->
                 <div class="mb-3">
                     <label for="lieu" class="form-label">Lieu</label>
                     <input type="text" class="form-control" id="lieu" name="lieu">
                 </div>
+
+                <!-- Champ : Commentaire sur le match (facultatif) -->
                 <div class="mb-3">
                     <label for="resume" class="form-label">Commentaire sur le match (facultatif)</label>
                     <textarea class="form-control" id="resume" name="resume"></textarea>
                 </div>
             </div>
 
-            <button type="submit" class="btn btn-primary">Envoyer</button> <a class="btn btn-primary" role="button" href="./">RETOUR</a>
+            <!-- Boutons de soumission et retour -->
+            <button type="submit" class="btn btn-primary">Envoyer</button>
+            <a class="btn btn-primary" role="button" href="./">RETOUR</a>
         </form>
 
 
-
+        <!-- ============================================ -->
+        <!-- JAVASCRIPT : Afficher/masquer les champs du match -->
+        <!-- ============================================ -->
         <script>
+            // On écoute le changement d'état de la checkbox "ajouterMatch"
             document.getElementById('ajouterMatch').addEventListener('change', function() {
+                // On récupère la div contenant les détails du match
                 const detailsMatch = document.getElementById('detailsMatch');
+
+                // Si la case est cochée (this.checked = true), on affiche (block), sinon on cache (none)
+                // C'est un opérateur ternaire : condition ? si_vrai : si_faux
                 detailsMatch.style.display = this.checked ? 'block' : 'none';
             });
         </script>
