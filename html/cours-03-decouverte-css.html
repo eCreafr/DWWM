@@ -1,0 +1,177 @@
+<!DOCTYPE html> <!-- Déclaration du type de document HTML5 -->
+<html lang="fr"> <!-- Balise racine avec langue française -->
+  <head> <!-- En-tête contenant les métadonnées -->
+    <meta charset="UTF-8" /> <!-- Encodage des caractères en UTF-8 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /> <!-- Configuration pour affichage responsive (mobile) -->
+    <title>Exercice 03 | découverte CSS</title> <!-- Titre de la page affiché dans l'onglet du navigateur -->
+    <link rel="stylesheet" href="css/exo2.css" /> <!-- Lien vers la feuille de style principale -->
+        <link rel="stylesheet" href="css/froggie.css" /> <!-- Lien vers la feuille de style pour les éléments Froggie -->
+  </head>
+
+  <body> <!-- Corps du document -->
+    <!-- En-tête de page : zone généralement pour logo, titre principal et navigation -->
+    <header>
+      <h1 class="animate-title1">TITRE SITE</h1> <!-- Titre principal avec animation CSS -->
+      <h3 class="animate-title2">sous titre moins important</h3> <!-- Sous-titre de niveau 3 avec animation -->
+    </header>
+    <!-- Contenu principal de la page -->
+    <main>
+      <h2 class="gradient">Titre de la page en Dégradé et bold</h2> <!-- Titre de niveau 2 avec effet de dégradé CSS -->
+      <!-- Image avec effet d'animation au survol de la souris (hover) géré en CSS -->
+      <img
+        src="img/blend3.png"
+        alt="illustration avec des dégradés"
+        width="400px"
+        class="animation img-responsive"
+      /> <br>cette image (png transparent) à un effet "mouse hover" <br><strong>en CSS</strong> qui joue sur sa taille
+      <!-- Paragraphe avec attribut lang="la" indiquant du texte latin (Lorem ipsum) -->
+      <p lang="la">
+        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nemo
+        voluptatem iste consequuntur necessitatibus itaque officia dolores modi
+        neque, praesentium voluptas. Hic esse molestias recusandae alias
+        similique vitae asperiores magni quasi?
+      </p>
+
+      <!-- Image avec effet de changement au survol géré par JavaScript (voir script en bas de page) -->
+      <img  src="img/froggie-300.png" alt="FroggieColor"  id="FroggieColor"/><br>
+      cette image (png transparent) à un effet "mouse hover" <br> <strong>en javascript</strong> qui la remplace par une autre image
+
+
+
+      <p lang="la">
+        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nemo
+        voluptatem iste consequuntur necessitatibus itaque officia dolores modi
+        neque, praesentium voluptas. Hic esse molestias recusandae alias
+        similique vitae asperiores magni quasi?
+      </p>
+
+      <!-- Formulaire HTML avec identifiant pour interaction JavaScript -->
+      <form id="simpleForm">
+        <!-- Label (étiquette) associé au champ input via l'attribut "for" -->
+        <label for="name">Nom :</label>
+        <!-- Champ de saisie de texte, l'attribut "required" rend le champ obligatoire -->
+        <input type="text" id="name" name="name" required /><br /><br />
+
+        <label for="email">Email :</label>
+        <!-- Champ de saisie d'email avec validation automatique du format email -->
+        <input type="email" id="email" name="email" required /><br /><br />
+
+        <!-- Bouton de soumission du formulaire avec classe CSS "button-cta" (Call To Action) -->
+        <button class="button-cta" type="submit">Envoyer</button>
+      </form>
+
+      <a href="https://www.afpa.fr">afpa</a>
+
+      <!-- Division qui affichera le résultat de la soumission du formulaire (géré par JavaScript) -->
+      <div id="result"></div>
+
+      <br />
+      <br />
+      <br />
+      <br />
+
+      <!-- Exemples de boutons avec différentes classes CSS pour différents styles -->
+      <button type="button" class="button-cta2nd">Je clique ici</button>
+      <br />
+      <button type="button" class="button-cta">ou peut-être ici</button>
+      <br />
+      <button type="button" class="button-sta">mais pas trop ici</button>
+
+      <br />
+
+      <!-- Conteneur pour la zone de fin avec bulle et message -->
+      <div id="basdepage">
+        <div id="bulle"><img src="img/bulle.png" alt="bulle" /></div>
+
+        <div id="textebasdepage">
+          C'est fini pour <br />
+          aujourd'hui ! &#128522; <!-- &#128522; est le code HTML pour afficher un emoji sourire -->
+        </div>
+      </div>
+    </main>
+    <footer>un message ou un lien de contact</footer> <!-- Pied de page -->
+
+    <!-- Script JavaScript pour gérer la soumission du formulaire -->
+    <script>
+      // Sélectionne l'élément formulaire avec l'id "simpleForm"
+      document
+        .getElementById("simpleForm")
+        // Ajoute un écouteur d'événement sur la soumission du formulaire
+        .addEventListener("submit", function (event) {
+          event.preventDefault(); // Empêche l'envoi du formulaire (comportement par défaut)
+
+          // Récupère les valeurs saisies dans les champs du formulaire
+          const name = document.getElementById("name").value;
+          const email = document.getElementById("email").value;
+
+          // Affiche les données récupérées dans l'élément ayant l'id "result"
+          document.getElementById("result").innerHTML =
+            "<h3>Données soumises au formulaire :</h3><p>Nom : " +
+            name +
+            "</p><p>Email : " +
+            email +
+            "</p>";
+        });
+    </script>
+
+
+
+
+    <div class="froggiesplaining">
+      <span>Froggiesplaining :</span>
+      <p><br />
+      <strong>🎯 Objectifs de cet exercice :</strong><br />
+      Dans ce 2ème cours, vous allez découvrir les <strong>bases du CSS et du JavaScript</strong> pour rendre vos pages plus interactives et visuellement attractives.<br /><br />
+
+      <strong>🎨 Techniques CSS que vous allez apprendre :</strong><br />
+      <ul>
+        <li><strong>Les dégradés CSS (gradients)</strong> : créer des transitions de couleurs fluides avec <code>linear-gradient()</code></li>
+        <li><strong>Les box-shadow</strong> : ajouter des ombres portées autour des éléments pour créer de la profondeur</li>
+        <li><strong>Images en arrière-plan</strong> : utiliser <code>background-image</code> pour styliser vos conteneurs</li>
+        <li><strong>Animations CSS simples</strong> : créer des effets visuels avec <code>@keyframes</code> et <code>animation</code></li>
+        <li><strong>Effets hover</strong> : changer l'apparence des éléments au survol de la souris avec <code>:hover</code></li>
+        <li><strong>Z-index</strong> : gérer la superposition des éléments (quel élément apparaît au-dessus d'un autre)</li>
+      </ul>
+      <br />
+      <strong>⚡ JavaScript - Interactivité :</strong><br />
+      <ul>
+        <li><strong>Formulaire HTML + JavaScript</strong> : capturer les données saisies et les afficher dynamiquement</li>
+        <li><strong>addEventListener</strong> : écouter les événements utilisateur (clic, survol, soumission...)</li>
+        <li><strong>Changer une image au survol</strong> : deux méthodes sont présentées dans cette page
+          <ul>
+            <li>En <strong>CSS</strong> : changement de taille (transform: scale)</li>
+            <li>En <strong>JavaScript</strong> : changement de la source de l'image (img.src)</li>
+          </ul>
+        </li>
+      </ul>
+      <br />
+      <strong>💡 Conseil :</strong> Ouvrez le code source dans Visual Studio Code et essayez de modifier les couleurs, les tailles d'ombres ou les animations pour voir les effets en temps réel !
+      <br /></p><img src="img/froggie-300.png" alt="Froggie" class="overfrog" id="Froggie"/>
+    </div>
+
+
+     <!-- Lien d'ancrage vers l'élément Froggie en bas de page -->
+     <a href="#Froggie"><div id="goToFroggie"><img src="img/froggie-300.png" width="50px"/><br><i class="bi bi-arrow-bar-down"></i></div></a>
+
+
+ <!-- Pied de page avec lien GitHub qui s'ouvre dans un nouvel onglet -->
+ <div id="footerGit"><a href="https://github.com/eCreafr/DWWM" target="_blank"><i class="bi bi-github">GitHub - eCrea</i></a></div>
+
+  <!-- Script JavaScript pour changer l'image au survol de la souris -->
+  <script>
+        // Sélectionne l'image à modifier via son id "FroggieColor"
+        const img = document.getElementById('FroggieColor');
+
+        // Ajoute un écouteur d'événement "mouseover" (quand la souris passe au-dessus)
+        img.addEventListener('mouseover', () => {
+            img.src = 'img/froggie-300-hover.png'; // Change la source de l'image
+        });
+
+        // Ajoute un écouteur d'événement "mouseout" (quand la souris quitte l'image)
+        img.addEventListener('mouseout', () => {
+            img.src = 'img/froggie-300.png'; // Remet l'image d'origine
+        });
+    </script>
+
+  </body> <!-- Fin du corps du document -->
+</html> <!-- Fin du document HTML -->

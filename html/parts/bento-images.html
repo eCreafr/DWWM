@@ -1,0 +1,206 @@
+<!doctype html> <!-- Déclaration du type de document HTML5 -->
+<html lang="fr"> <!-- Balise racine avec langue française -->
+    <head> <!-- En-tête du document -->
+        <meta charset="UTF-8" /> <!-- Encodage des caractères en UTF-8 -->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" /> <!-- Configuration responsive pour mobile -->
+        <title>Bento d'Images Responsive avec Bootstrap</title> <!-- Titre affiché dans l'onglet du navigateur -->
+        <!-- Lien CDN vers Bootstrap 5.3.0 : framework CSS pour la mise en page -->
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet" />
+        <!-- CSS intégré pour le layout Bento (grille asymétrique moderne) -->
+        <style>
+            /* Conteneur principal du Bento avec largeur maximale */
+            .bento-container {
+                max-width: 1200px;
+                margin: 0 auto; /* Centre le conteneur */
+            }
+
+            /* Style pour chaque élément du Bento (carte d'image) */
+            .bento-item {
+                position: relative; /* Pour positionner les éléments enfants */
+                overflow: hidden; /* Cache le débordement lors du zoom au survol */
+                border-radius: 8px; /* Coins arrondis */
+                margin-bottom: 15px; /* Espacement entre les éléments */
+            }
+
+            /* Style pour les images à l'intérieur des cartes */
+            .bento-item img {
+                width: 100%; /* L'image prend toute la largeur du conteneur */
+                height: 100%; /* L'image prend toute la hauteur du conteneur */
+                object-fit: cover; /* Recadre l'image pour remplir le conteneur sans déformation */
+                transition: transform 0.3s ease; /* Animation fluide lors du zoom */
+            }
+
+            /* Effet de zoom au survol de la souris */
+            .bento-item:hover img {
+                transform: scale(1.05); /* Agrandit l'image de 5% */
+            }
+
+            /* Définition des différentes tailles d'éléments */
+            .bento-small {
+                height: 190px; /* Petite hauteur pour les petites cartes */
+            }
+
+            .bento-medium {
+                height: 300px; /* Hauteur moyenne pour les cartes moyennes */
+            }
+
+            .bento-large {
+                height: 415px; /* Grande hauteur pour les grandes cartes */
+            }
+
+            /* Media query pour les petits écrans (smartphones) */
+            @media (max-width: 767.98px) {
+                /* Sur mobile, toutes les cartes ont la même hauteur */
+                .bento-small,
+                .bento-medium,
+                .bento-large {
+                    height: 250px; /* Hauteur uniforme pour une meilleure expérience mobile */
+                }
+            }
+        </style>
+    </head> <!-- Fin de l'en-tête -->
+    <body> <!-- Corps du document -->
+        <!-- Conteneur Bootstrap avec padding vertical (py-4) -->
+        <div class="container py-4">
+            <!-- Titre principal centré avec marge en bas (mb-4) -->
+            <h1 class="text-center mb-4">Bento d'Images</h1>
+
+            <!-- Conteneur principal du layout Bento -->
+            <div class="bento-container">
+                <!-- row g-3 : ligne Bootstrap avec gutter (espacement) de 3 entre les colonnes -->
+                <div class="row g-3">
+                    <!-- ========== PREMIÈRE LIGNE ========== -->
+                    <!-- Grande carte occupant 8 colonnes sur 12 (66% de largeur sur desktop) -->
+                    <div class="col-md-8">
+                        <div class="bento-item bento-large">
+                            <img src="../img/bento-logo.webp" alt="Image grande 1" />
+                        </div>
+                    </div>
+                    <!-- Colonne de 4 unités (33% de largeur) contenant 2 petites cartes empilées -->
+                    <div class="col-md-4">
+                        <!-- Sous-grille pour empiler verticalement les petites cartes -->
+                        <div class="row g-3">
+                            <!-- Première petite carte (col-12 = 100% de la largeur disponible) -->
+                            <div class="col-12">
+                                <div class="bento-item bento-small">
+                                    <img src="../img/bento-visit-cards.webp" alt="Image petite 1" />
+                                </div>
+                            </div>
+                            <!-- Deuxième petite carte -->
+                            <div class="col-12">
+                                <div class="bento-item bento-small">
+                                    <img src="../img/bento-fonts.webp" alt="Image petite 2" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ========== DEUXIÈME LIGNE ========== -->
+                    <!-- Trois cartes moyennes de taille égale (4+4+4 = 12 colonnes = 100%) -->
+                    <div class="col-md-4">
+                        <div class="bento-item bento-medium">
+                            <img src="../img/bento-stickers.webp" alt="Image moyenne 1" />
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="bento-item bento-medium">
+                            <img src="../img/bento-wallpaper.webp" alt="Image moyenne 2" />
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="bento-item bento-medium">
+                            <img src="../img/bento-colors.png" alt="Image moyenne 3" />
+                        </div>
+                    </div>
+
+                    <!-- ========== TROISIÈME LIGNE ========== -->
+                    <!-- Colonne de gauche (6/12 = 50%) contenant 3 petites cartes en grille -->
+                    <div class="col-md-6">
+                        <!-- Sous-grille pour organiser les 3 petites cartes -->
+                        <div class="row g-3">
+                            <!-- Deux cartes côte à côte (col-md-6 = 50% chacune de l'espace disponible) -->
+                            <div class="col-md-6">
+                                <div class="bento-item bento-small">
+                                    <img src="../img/bento-apps.webp" alt="Image petite 3" />
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="bento-item bento-small">
+                                    <img src="../img/bento-logo.webp" alt="Image petite 4" />
+                                </div>
+                            </div>
+                            <!-- Carte pleine largeur en dessous (col-12 = 100%) -->
+                            <div class="col-12">
+                                <div class="bento-item bento-small">
+                                    <img src="../img/bento-fonts.webp" alt="Image petite 5" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Colonne de droite (6/12 = 50%) avec une grande carte -->
+                    <div class="col-md-6">
+                        <div class="bento-item bento-large">
+                            <img src="../img/bento-display.webp" alt="Image grande 2" />
+                        </div>
+                    </div>
+                </div> <!-- Fin de la grille principale -->
+            </div> <!-- Fin du conteneur Bento -->
+        </div> <!-- Fin du conteneur Bootstrap -->
+
+        <!-- Zone d'explication pédagogique "Froggiesplaining" -->
+        <div class="froggiesplaining" style="max-width: 1200px; margin: 40px auto; padding: 20px; background-color: #f8f9fa; border-radius: 8px;">
+            <span style="font-size: 1.5em; font-weight: bold; color: #2a185d;"> Froggiesplaining :</span>
+            <p>
+                <br />
+                <strong>🎯 Objectifs de cet exercice :</strong><br />
+                Découvrir le <strong>Bento Layout</strong> (ou grille Bento), un style de mise en page moderne et asymétrique popularisé par Apple et de nombreux sites de design contemporains.<br /><br />
+
+                <strong>🍱 Qu'est-ce qu'un Bento Layout ?</strong><br />
+                Le Bento Layout s'inspire des boîtes à bento japonaises (bentos) qui divisent un repas en compartiments de différentes tailles. En web design, c'est une <strong>grille asymétrique</strong> où les éléments ont des tailles variées, créant un design visuel dynamique et moderne.<br /><br />
+
+                <strong>💡 Caractéristiques du Bento Layout :</strong><br />
+                <ul>
+                    <li><strong>Grille asymétrique</strong> : Contrairement à une grille uniforme, les éléments ont des tailles différentes</li>
+                    <li><strong>Visuel attractif</strong> : Crée de l'intérêt visuel et guide l'œil à travers le contenu</li>
+                    <li><strong>Hiérarchie visuelle</strong> : Les grandes cartes attirent plus l'attention que les petites</li>
+                    <li><strong>Responsive</strong> : S'adapte aux différentes tailles d'écran</li>
+                    <li><strong>Moderne</strong> : Style populaire en 2024-2025 pour les portfolios, galeries et dashboards</li>
+                </ul>
+                <br />
+
+                <strong>🔧 Technologies et techniques utilisées :</strong><br />
+                <ul>
+                    <li><strong>Bootstrap Grid</strong> : Système de 12 colonnes pour créer la structure responsive</li>
+                    <li><code>col-md-*</code> : Définit les largeurs de colonnes sur écrans moyens et plus (≥768px)</li>
+                    <li><code>g-3</code> : Gutter (espacement) entre les colonnes</li>
+                    <li><strong>Grilles imbriquées</strong> : <code>row</code> à l'intérieur d'une autre <code>row</code> pour créer des subdivisions</li>
+                    <li><code>object-fit: cover</code> : Permet aux images de remplir leur conteneur sans déformation</li>
+                    <li><strong>Effet hover</strong> : <code>transform: scale(1.05)</code> pour un zoom subtil au survol</li>
+                    <li><strong>Media queries</strong> : Adapte les hauteurs pour mobile (toutes les cartes deviennent 250px)</li>
+                </ul>
+                <br />
+
+                <strong>🎨 Structure de cet exemple :</strong><br />
+                <ul>
+                    <li><strong>Ligne 1</strong> : Grande carte (8/12) + 2 petites cartes empilées (4/12)</li>
+                    <li><strong>Ligne 2</strong> : 3 cartes moyennes égales (4/12 + 4/12 + 4/12)</li>
+                    <li><strong>Ligne 3</strong> : 3 petites cartes en grille (6/12) + 1 grande carte (6/12)</li>
+                </ul>
+                <br />
+
+                <strong>🧪 Testez :</strong> Redimensionnez votre navigateur pour voir comment le layout s'adapte de desktop à mobile !<br /><br />
+
+                <strong>✨ Cas d'usage populaires :</strong><br />
+                <ul>
+                    <li><strong>Portfolios de designers</strong> : Présenter des projets avec différents niveaux d'importance</li>
+                    <li><strong>Galeries d'images</strong> : Créer des compositions visuelles attrayantes</li>
+                    <li><strong>Dashboards</strong> : Organiser widgets et statistiques de manière élégante</li>
+                    <li><strong>Pages d'accueil</strong> : Mettre en avant différents services ou fonctionnalités</li>
+                </ul>
+            </p>
+        </div>
+
+        <!-- Script JavaScript Bootstrap : nécessaire pour les composants interactifs -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    </body> <!-- Fin du corps du document -->
+</html> <!-- Fin du document HTML -->

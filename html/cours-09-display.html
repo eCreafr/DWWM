@@ -1,0 +1,114 @@
+<!DOCTYPE html> <!-- Déclaration du type de document HTML5 -->
+<html lang="fr"> <!-- Balise racine avec langue française -->
+  <head> <!-- En-tête du document -->
+    <meta charset="UTF-8" /> <!-- Encodage des caractères en UTF-8 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /> <!-- Configuration responsive pour mobile -->
+    <title>Exercice 09 | exemples de Display</title> <!-- Titre affiché dans l'onglet du navigateur -->
+    <link rel="stylesheet" href="css/exo6.css" /> <!-- Lien vers la feuille de style CSS -->
+    <link rel="stylesheet" href="css/froggie.css" /> <!-- Lien vers la feuille de style Froggie -->
+  </head>
+  <body> <!-- Corps du document -->
+    <!-- Conteneur principal pour les exemples -->
+    <div class="container">
+      <h1>Exemples de Balises Display</h1>
+
+      <!-- Exemple 1 : Display inline - Les éléments s'affichent sur la même ligne -->
+      <h3>Display Inline</h3>
+      <div class="box inline">Inline 1</div>
+      <div class="box inline">Inline 2</div>
+
+      <!-- Exemple 2 : Display block - Les éléments prennent toute la largeur disponible et créent un retour à la ligne -->
+      <h3>Display Block</h3>
+      <div class="box block">Block 1</div>
+      <div class="box block">Block 2</div>
+
+      <!-- Exemple 3 : Display inline-block - Les éléments sont en ligne mais acceptent largeur et hauteur -->
+      <h3>Display Inline-block</h3>
+      <div class="box inline-block">Inline-block 1</div>
+      <div class="box inline-block">Inline-block 2</div>
+
+      <!-- Exemple 4 : Display flex - Active Flexbox pour organiser les éléments enfants -->
+      <h3>Display Flex</h3>
+      <div class="box flex">
+        <div>Flex 1</div>
+        <div>Flex 2</div>
+      </div>
+
+      <!-- Exemple 5 : Display inline-flex - Flexbox avec comportement inline -->
+      <h3>Display Inline-flex</h3>
+      <div class="box inline-flex">
+        <div>Inline-flex 1</div>
+        <div>Inline-flex 2</div>
+      </div>
+
+      <!-- Exemple 6 : Display grid - Active CSS Grid pour créer des mises en page en grille -->
+      <h3>Display Grid</h3>
+      <div class="box grid">
+        <div>Grid 1</div>
+        <div>Grid 2</div>
+        <div>Grid 3</div>
+      </div>
+
+      <!-- Exemple 7 : Display none - L'élément est masqué et ne prend pas de place -->
+      <h3>Display None (Caché)</h3>
+      <div class="box none">Caché (None)</div>
+    </div>
+
+    <!-- Zone d'explication pédagogique "Froggiesplaining" -->
+    <div class="froggiesplaining">
+      <span> Froggiesplaining :</span>
+      <p>
+        <br />
+        <strong>🎯 Objectifs de cet exercice :</strong><br />
+        Comprendre les différentes valeurs de la propriété CSS <strong>display</strong> et leur impact sur le rendu des éléments.<br /><br />
+
+        <strong>📦 Les différentes valeurs de display :</strong><br />
+        <ul>
+          <li><strong>inline</strong> : L'élément est affiché dans le flux en ligne, sans rupture de ligne. Il ne prend que l'espace nécessaire à son contenu.</li>
+          <li><strong>block</strong> : L'élément occupe toute la largeur disponible et commence toujours sur une nouvelle ligne.</li>
+          <li><strong>inline-block</strong> : L'élément est en ligne mais accepte des propriétés de dimensionnement (largeur, hauteur) comme un élément bloc.</li>
+          <li><strong>flex</strong> : Active Flexbox - permet de disposer les éléments enfants de manière flexible et responsive.</li>
+          <li><strong>inline-flex</strong> : Combine flex avec le comportement inline (le conteneur lui-même est inline).</li>
+          <li><strong>grid</strong> : Active CSS Grid - système de mise en page bidimensionnel en grille (lignes et colonnes).</li>
+          <li><strong>none</strong> : Cache complètement l'élément - il n'occupe aucun espace dans la page.</li>
+        </ul>
+        <br />
+
+        <strong>🚀 Avec le framework Bootstrap :</strong><br />
+        Bootstrap propose des classes utilitaires pour gérer le display facilement :<br />
+        <ul>
+          <li><code>d-inline</code> : Rend un élément inline</li>
+          <li><code>d-inline-block</code> : Rend un élément inline-block</li>
+          <li><code>d-block</code> : Force un élément à se comporter comme un block</li>
+          <li><code>d-flex</code> : Active un conteneur flexbox</li>
+          <li><code>d-inline-flex</code> : Combine inline et flexbox</li>
+          <li><code>d-grid</code> : Active un conteneur grid</li>
+          <li><code>d-none</code> : Masque l'élément</li>
+        </ul>
+        <br />
+        <strong>💡 Conseil :</strong> Testez en redimensionnant votre navigateur et en inspectant le code avec les outils de développement (F12) pour voir comment chaque display se comporte !
+      </p>
+      <img
+        src="img/froggie-300.png"
+        alt="Froggie explain"
+        class="overfrog"
+        id="Froggie"
+      />
+    </div>
+
+    <!-- Lien d'ancrage vers Froggie -->
+    <a href="#Froggie"
+      ><div id="goToFroggie">
+        <img src="img/froggie-300.png" width="50px" /><br /><i
+          class="bi bi-arrow-bar-down"
+        ></i></div
+    ></a>
+
+    <!-- Pied de page avec lien GitHub -->
+    <div id="footerGit">
+      <a href="https://github.com/eCreafr/DWWM" target="_blank"
+        ><i class="bi bi-github">GitHub - eCrea</i></a
+      >
+    </div>
+  </body> <!-- Fin du corps du document -->
+</html> <!-- Fin du document HTML -->

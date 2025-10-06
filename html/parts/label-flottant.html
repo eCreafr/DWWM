@@ -1,9 +1,16 @@
 <!doctype html>
+<!-- Déclaration du type de document HTML5 -->
 <html lang="fr">
+    <!-- Balise racine avec langue française -->
     <head>
+        <!-- En-tête du document -->
         <meta charset="UTF-8" />
+        <!-- Encodage des caractères en UTF-8 -->
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Label flottant</title>
+        <!-- Configuration responsive pour mobile -->
+        <title>Label flottant, checkbox colorée</title>
+        <!-- Titre affiché dans l'onglet du navigateur -->
+        <!-- CSS intégré dans le HTML (inline styles) pour l'effet de label flottant -->
         <style>
             /* Conteneur pour aligner le label et l'input */
             .form-group {
@@ -64,12 +71,21 @@
         </style>
     </head>
     <body>
+        <!-- Corps du document -->
+        <!-- Formulaire avec label flottant (floating label) -->
         <form>
+            <!-- Groupe de formulaire avec label flottant -->
+            <!-- L'effet flottant : le label monte au-dessus du champ quand on clique ou saisit du texte -->
             <div class="form-group">
+                <!-- placeholder=" " (espace) : astuce pour détecter si le champ est rempli avec :placeholder-shown -->
                 <input type="text" id="name" placeholder=" " required />
+                <!-- Le label est positionné initialement à l'intérieur du champ -->
                 <label for="name">Votre nom</label>
             </div>
+
+            <!-- Exemples de checkboxes personnalisées -->
             <div>
+                <!-- Checkbox cochée par défaut avec couleur personnalisée (accent-color: cyan) -->
                 <input type="checkbox" id="1" name="1" class="checkbox" checked />
                 <label for="1">checkbox 1</label>
             </div>
@@ -79,5 +95,14 @@
                 <label for="2">checkbox 2</label>
             </div>
         </form>
+
+        <!-- Note pédagogique : -->
+        <!-- Cette technique de label flottant utilise : -->
+        <!-- - position: absolute pour le label -->
+        <!-- - :focus pour détecter quand l'input est actif -->
+        <!-- - :not(:placeholder-shown) pour détecter si le champ contient du texte -->
+        <!-- - transition pour animer le mouvement du label -->
     </body>
+    <!-- Fin du corps du document -->
 </html>
+<!-- Fin du document HTML -->

@@ -1,0 +1,133 @@
+<!doctype html>
+<!-- Déclaration du type de document HTML5 -->
+<html lang="fr">
+    <!-- Balise racine avec langue française -->
+    <head>
+        <!-- En-tête du document -->
+        <meta charset="UTF-8" />
+        <!-- Encodage des caractères en UTF-8 -->
+        <!-- Viewport : zone d'affichage visible. width=device-width adapte la largeur à l'écran, initial-scale=1.0 définit le zoom initial -->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Exercice 10 | viewport & Media Queries</title>
+        <!-- Titre affiché dans l'onglet du navigateur -->
+        <link rel="stylesheet" href="css/exo7.css" />
+        <!-- Lien vers la feuille de style CSS avec les media queries -->
+        <link rel="stylesheet" href="css/froggie.css" />
+        <!-- Lien vers la feuille de style Froggie -->
+    </head>
+
+    <body>
+        <!-- Corps du document -->
+        <header><h1>Les "Medias Queries"</h1></header>
+        <!-- En-tête de page -->
+        <main>
+            <!-- Contenu principal -->
+            <!-- Div visible uniquement sur écran large (défini dans le CSS avec @media) -->
+            <div class="testqueries1">
+                Cette div est visible sur <strong>ECRAN LARGE</strong>
+                <img class="img-responsive" src="img/ecran.png" alt="" />
+            </div>
+            <!-- Div visible uniquement sur mobile (défini dans le CSS avec @media) -->
+            <div class="testqueries2">
+                Cette div est visible sur <strong>MOBILE</strong
+                ><img class="img-responsive" src="img/smartphone.png" alt="" />
+            </div>
+            <!-- Div toujours visible mais change de couleur selon la taille d'écran -->
+            <div class="testqueries3">
+                Cette div est visible sur un écran large <br />et sur mobile mais juste elle change de couleur
+            </div>
+        </main>
+        <footer>à vous de jouer !</footer>
+        <!-- Pied de page -->
+
+        <!-- Zone d'explication pédagogique "Froggiesplaining" -->
+        <div class="froggiesplaining">
+            <span> Froggiesplaining :</span>
+            <img src="img/froggie-300.png" alt="Froggie" class="overfrog" id="Froggie" />
+
+            <br />
+            <strong>🎯 Objectifs de cet exercice :</strong><br />
+            Dans ce 7ème cours, vous allez découvrir le <strong>Viewport</strong> et les
+            <strong>Media Queries</strong> qui permettent le <strong>Responsive Web Design</strong> (design
+            adaptatif).<br /><br />
+
+            <strong>📱 Le VIEWPORT :</strong> <br />
+            <img src="img/exo7-1.png" alt="" /> <br />
+            Le viewport est la zone d'affichage visible du navigateur. La balise meta viewport est
+            <strong>essentielle pour le responsive design</strong> :<br />
+            <ul>
+                <li>
+                    <code>width=device-width</code> : Le viewport prend la largeur de l'écran de l'appareil (smartphone,
+                    tablette, PC...)
+                </li>
+                <li>
+                    <code>initial-scale=1.0</code> : Définit le niveau de zoom initial à 100% (évite le zoom automatique
+                    sur mobile)
+                </li>
+            </ul>
+            <br />
+
+            <strong>📺 Les MEDIA QUERIES :</strong><br />
+            Les media queries permettent d'appliquer des styles CSS différents selon les caractéristiques de
+            l'appareil.<br /><br />
+
+            <strong>Types de médias :</strong> <br />
+            On peut cibler tous les médias avec <code>all</code> ou en choisir un spécifique :
+            <ul>
+                <li><strong>screen</strong> : Les écrans (PC, laptop, tablettes, smartphones, TV...)</li>
+                <li><strong>print</strong> : Pour l'impression du site</li>
+                <li><strong>speech</strong> : Pour les lecteurs d'écran (accessibilité)</li>
+                <li><strong>all</strong> : Tous les périphériques (valeur par défaut)</li>
+            </ul>
+
+            <strong>🔧 Les propriétés principales :</strong>
+            <br />
+            <ul>
+                <li><strong>width</strong> : Largeur exacte de la fenêtre du navigateur</li>
+                <li>
+                    <strong>min-width</strong> : Largeur minimale (de la limite vers le haut) - Ex:
+                    <code>min-width: 768px</code> = à partir de 768px jusqu'à l'infini
+                </li>
+                <li>
+                    <strong>max-width</strong> : Largeur maximale (de la limite vers le bas) - Ex:
+                    <code>max-width: 767px</code> = de 0px à 767px
+                </li>
+                <li><strong>height</strong> : Hauteur exacte de la fenêtre</li>
+                <li><strong>min-height</strong> : Hauteur minimale de la fenêtre</li>
+                <li><strong>max-height</strong> : Hauteur maximale de la fenêtre</li>
+                <li>
+                    <strong>orientation</strong> : Orientation de l'écran - Valeurs : <code>portrait</code> (vertical)
+                    ou <code>landscape</code> (horizontal)
+                </li>
+                <li>
+                    <strong>device-width</strong> : Largeur de l'écran physique (et non la fenêtre). Accepte
+                    <code>min-</code> et <code>max-</code>
+                </li>
+                <li>
+                    <strong>device-height</strong> : Hauteur de l'écran physique. Accepte <code>min-</code> et
+                    <code>max-</code>
+                </li>
+            </ul>
+            <br />
+            <strong>💡 Exemple d'utilisation :</strong><br />
+            <code>@media screen and (max-width: 768px) { /* styles pour mobile */ }</code><br /><br />
+
+            <img src="img/exo7-2.png" alt="queries" /><br /><br />
+            <strong>🧪 Testez :</strong> Redimensionnez votre navigateur pour voir les éléments apparaître/disparaître
+            selon la taille de l'écran !
+        </div>
+
+        <!-- Lien d'ancrage vers Froggie -->
+        <a href="#Froggie"
+            ><div id="goToFroggie">
+                <img src="img/froggie-300.png" width="50px" /><br /><i class="bi bi-arrow-bar-down"></i></div
+        ></a>
+
+        <!-- Pied de page avec lien GitHub -->
+        <div id="footerGit">
+            <a href="https://github.com/eCreafr/DWWM" target="_blank"><i class="bi bi-github">GitHub - eCrea</i></a>
+        </div>
+    </body>
+    <!-- Fin du corps du document -->
+</html>
+<!-- Fin du document HTML -->

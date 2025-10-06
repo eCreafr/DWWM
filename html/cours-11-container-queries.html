@@ -1,0 +1,99 @@
+<!doctype html>
+<!-- Déclaration du type de document HTML5 -->
+<html lang="fr">
+    <!-- Balise racine avec langue française -->
+    <head>
+        <!-- En-tête du document -->
+        <meta charset="UTF-8" />
+        <!-- Encodage des caractères en UTF-8 -->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <!-- Configuration responsive pour mobile -->
+        <title>cours 11 | Exemple Container Queries</title>
+        <!-- Titre affiché dans l'onglet du navigateur -->
+        <link rel="stylesheet" href="css/froggie.css" />
+        <!-- Lien vers la feuille de style Froggie -->
+        <link rel="stylesheet" href="css/exo7.css" />
+        <!-- Lien vers la feuille de style avec container queries -->
+        <style></style>
+    </head>
+    <body>
+        <!-- Corps du document -->
+        <h1>Container queries</h1>
+        <!-- Titre principal -->
+
+        <!-- Conteneur parent avec container-type: inline-size défini dans le CSS -->
+        <div class="container7b">
+            <!-- Boîte enfant qui réagit à la taille de son conteneur parent -->
+            <div class="box7b">Contenu de la box</div>
+        </div>
+
+        <!-- Zone d'explication pédagogique "Froggiesplaining" -->
+        <div class="froggiesplaining">
+            <span> Froggiesplaining :</span>
+            <img src="img/froggie-300.png" alt="Froggie" class="overfrog" id="Froggie" />
+
+            <br />
+            <strong>🎯 Objectifs de cet exercice :</strong><br />
+            Dans ce 7ème cours, partie B, vous allez découvrir les <strong>Container Queries</strong> (requêtes de
+            conteneur).<br /><br />
+
+            <strong>📦 Différence avec les Media Queries :</strong><br />
+            <ul>
+                <li>
+                    <strong>Media Queries</strong> : Réagissent à la taille de la
+                    <strong>fenêtre du navigateur</strong> (viewport)
+                </li>
+                <li>
+                    <strong>Container Queries</strong> : Réagissent à la taille du <strong>conteneur parent</strong> de
+                    l'élément
+                </li>
+            </ul>
+            <br />
+
+            <strong>🔧 Comment ça fonctionne :</strong><br />
+            <ul>
+                <li>
+                    <code>container-type: inline-size</code> : Active les container queries sur le conteneur parent. La
+                    largeur du conteneur devient une référence pour les styles des éléments enfants.
+                </li>
+                <li>
+                    <code>@container (min-width: 500px)</code> : Similaire à <code>@media</code> mais basé sur la taille
+                    du conteneur parent plutôt que sur la fenêtre.
+                </li>
+            </ul>
+            <br />
+
+            <strong>💡 Exemple :</strong><br />
+            <ul>
+                <li>
+                    Si la largeur du conteneur parent atteint <strong>500px</strong>, le fond de la boîte devient
+                    <strong>vert</strong>
+                </li>
+                <li>
+                    Si la largeur atteint <strong>700px</strong>, le fond devient <strong>corail</strong> et la taille
+                    de police augmente
+                </li>
+            </ul>
+            <br />
+
+            <strong>⚠️ Compatibilité navigateurs :</strong> Fonctionne sur <strong>Chrome, Edge et Safari</strong> (pas
+            encore sur Firefox à ce jour)<br /><br />
+
+            <strong>🧪 Testez :</strong> Redimensionnez votre navigateur pour voir la boîte changer de couleur selon la
+            taille de son conteneur !
+        </div>
+
+        <!-- Lien d'ancrage vers Froggie -->
+        <a href="#Froggie"
+            ><div id="goToFroggie">
+                <img src="img/froggie-300.png" width="50px" /><br /><i class="bi bi-arrow-bar-down"></i></div
+        ></a>
+
+        <!-- Pied de page avec lien GitHub -->
+        <div id="footerGit">
+            <a href="https://github.com/eCreafr/DWWM" target="_blank"><i class="bi bi-github">GitHub - eCrea</i></a>
+        </div>
+    </body>
+    <!-- Fin du corps du document -->
+</html>
+<!-- Fin du document HTML -->

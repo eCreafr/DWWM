@@ -27,11 +27,9 @@ include('functions.php');
         /* Cela évite que les images aient des hauteurs différentes */
         .img-h-fixed {
             height: 100px;
-            /* Hauteur fixe de 100 pixels */
             object-fit: cover;
             /* Recadre l'image pour remplir l'espace sans déformation */
             width: 100%;
-            /* Largeur à 100% du conteneur */
         }
     </style>
 </head>
@@ -119,7 +117,7 @@ include('functions.php');
 
                             <br>
 
-                        <!-- Affichage du titre de l'article -->
+                            <!-- Affichage du titre de l'article -->
                         <h5 class="card-title"><?php echo $new['titre']; ?></h5>
 
                         <!-- Affichage conditionnel du score avec opérateur ternaire -->

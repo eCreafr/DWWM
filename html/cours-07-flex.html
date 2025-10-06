@@ -1,18 +1,24 @@
-<!DOCTYPE html>
-<html lang="fr">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Exercice 4 | Flex suite</title>
-    <link rel="stylesheet" href="css/exo3-4-5.css" />
-    <link rel="stylesheet" href="css/froggie.css" />
+<!DOCTYPE html> <!-- Déclaration du type de document HTML5 -->
+<html lang="fr"> <!-- Balise racine avec langue française -->
+  <head> <!-- En-tête du document -->
+    <meta charset="UTF-8" /> <!-- Encodage des caractères en UTF-8 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /> <!-- Configuration responsive pour mobile -->
+    <title>Exercice 07 | Flex suite</title> <!-- Titre affiché dans l'onglet du navigateur -->
+    <link rel="stylesheet" href="css/exo3-4-5.css" /> <!-- Lien vers la feuille de style CSS -->
+    <link rel="stylesheet" href="css/froggie.css" /> <!-- Lien vers la feuille de style Froggie -->
   </head>
-  <body>
+  <body> <!-- Corps du document -->
+    <!-- Conteneur principal utilisant Flexbox pour créer une mise en page (layout) -->
     <div class="layout">
-      <header><h1>Header</h1></header>
+      <header><h1>Header</h1></header> <!-- En-tête de page -->
+      <!-- Zone de contenu principal avec sidebar gauche, contenu central et sidebar droite -->
       <div class="main-content">
+        <!-- Barre latérale gauche avec largeur fixe définie par flex-basis -->
         <aside class="sidebar-left">Sidebar Left en "flex-basis"</aside>
-        <main> <h1>Main Content en   "flex-grow: 1"</h1><img  src="img/turtle.png"  style="float: left; width: 400px;"/><br>
+        <!-- Contenu principal qui prend tout l'espace disponible grâce à flex-grow: 1 -->
+        <main> <h1>Main Content en   "flex-grow: 1"</h1>
+          <!-- Image avec float:left pour que le texte s'enroule autour -->
+          <img  src="img/turtle.png"  style="float: left; width: 400px;"/><br>
 
            <br /><br />Lorem ipsum, dolor sit amet consectetur
           adipisicing elit. Maxime deleniti ullam accusantium laborum neque quia
@@ -60,11 +66,25 @@
           architecto eligendi magnam molestias cupiditate neque veritatis culpa.
           Minus dicta, qui dolores impedit nobis nisi veniam.
         </main>
+        <!-- Barre latérale droite avec largeur fixe définie par flex-basis -->
         <aside class="sidebar-right">Sidebar Right en "flex-basis"</aside>
       </div>
-      <footer>Footer 
+      <!-- Pied de page -->
+      <footer>Footer
+   <!-- Zone d'explication pédagogique "Froggiesplaining" -->
    <div class="froggiesplaining">
-        <span> Froggiesplaining :</span> <br />
+        <span> Froggiesplaining :</span> <br /><br />
+        <strong>🎯 Objectifs de cet exercice :</strong><br />
+        Créer une <strong>mise en page complète (layout)</strong> avec Flexbox : en-tête, contenu principal avec barres latérales, et pied de page.<br /><br />
+
+        <strong>📐 Propriétés Flexbox avancées :</strong><br />
+        <ul>
+          <li><strong>flex-basis</strong> : Définit la taille de base d'un élément flex avant que l'espace restant soit distribué</li>
+          <li><strong>flex-grow</strong> : Permet à un élément de grandir pour occuper l'espace disponible (ici le contenu principal avec flex-grow: 1)</li>
+          <li><strong>Layout en 3 colonnes</strong> : Sidebar gauche + Contenu central + Sidebar droite</li>
+        </ul>
+        <br />
+        <strong>💡 Astuce :</strong> L'image utilise <code>float: left</code> pour faire en sorte que le texte l'entoure. C'est une technique CSS classique !<br /><br />
 
         <img src="img/exo4.png" alt="" />
 
@@ -76,12 +96,14 @@
         />
       </div>
 
+    <!-- Lien d'ancrage vers Froggie -->
     <a href="#Froggie"><div id="goToFroggie"><img src="img/froggie-300.png" width="50px"/><br><i class="bi bi-arrow-bar-down"></i></div></a>
- 
 
+
+ <!-- Pied de page avec lien GitHub -->
  <div id="footerGit"><a href="https://github.com/eCreafr/DWWM" target="_blank"><i class="bi bi-github">GitHub - eCrea</i></a></div>
- 
+
     </div>   </footer>
 
-  </body>
-</html>
+  </body> <!-- Fin du corps du document -->
+</html> <!-- Fin du document HTML -->

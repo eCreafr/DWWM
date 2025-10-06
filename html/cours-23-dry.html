@@ -1,0 +1,69 @@
+<!DOCTYPE html> <!-- Déclaration du type de document HTML5 -->
+<html lang="fr"> <!-- Balise racine avec langue française -->
+  <head> <!-- En-tête du document -->
+    <meta charset="UTF-8" /> <!-- Encodage des caractères en UTF-8 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /> <!-- Configuration responsive pour mobile -->
+    <title>Exercice 23 | CSS et DRY "Don't Repeat Yourself"</title> <!-- Titre affiché dans l'onglet du navigateur -->
+    <link rel="stylesheet" href="css/froggie.css" /> <!-- Feuille de style Froggie -->
+    <link rel="stylesheet" href="css/exo12.css" /> <!-- Feuille de style personnalisée -->
+  </head>
+  <body> <!-- Corps du document -->
+    <div class="exercice">
+      <h1>Exercice 12 | CSS et DRY pour "Don't Repeat Yourself"</h1>
+    </div>
+
+    <!-- À propos de ce clear:both : Réinitialise le flux du document après un float -->
+    <div style="clear: both"></div>
+
+    <!-- Conteneur avec plusieurs boutons utilisant des classes multiples -->
+    <div class="container">
+      <!-- Classe .btn : Styles communs à tous les boutons (taille, padding, bordures...) -->
+      <!-- Classes additionnelles : Personnalisation spécifique de chaque bouton (couleur, forme...) -->
+      <div class="btn turquoise">Bouton 1</div>
+      <div class="btn bleu">Bouton 2</div>
+      <div class="btn vertCanard">Bouton 3</div>
+      <div class="btn pilule">Bouton 4</div>
+      <div class="btn petit">Bouton 5</div>
+    </div>
+
+    <!-- Zone d'explication pédagogique "Froggiesplaining" -->
+    <div class="froggiesplaining">
+      <span> Froggiesplaining :</span>
+
+      <p>
+        <br />
+        <strong>🎯 Objectifs de cet exercice :</strong><br />
+        Apprendre le principe <strong>DRY (Don't Repeat Yourself)</strong> pour écrire du CSS optimisé et maintenable.<br /><br />
+
+        <strong>📦 Qu'est-ce que le DRY ?</strong><br />
+        <strong>DRY = "Don't Repeat Yourself"</strong> (Ne vous répétez pas) ! C'est un <strong>principe fondamental en programmation</strong> :<br />
+        <ul>
+          <li>Éviter la duplication de code</li>
+          <li>Factoriser les styles communs</li>
+          <li>Créer des classes réutilisables</li>
+          <li>Faciliter la maintenance du code</li>
+        </ul>
+        <br />
+
+        <strong>💡 Exemple avec ces boutons :</strong><br />
+        Au lieu de répéter les mêmes propriétés CSS pour chaque bouton :<br />
+        <ul>
+          <li><strong>Avant DRY</strong> : Chaque bouton a toutes ses propriétés définies individuellement → Code répétitif et volumineux</li>
+          <li><strong>Après DRY</strong> : Classe <code>.btn</code> pour les styles communs + classes spécifiques pour les variations → Code optimisé et maintenable</li>
+        </ul>
+        <br />
+
+        <strong>🔧 Principe des classes multiples :</strong><br />
+        Un élément peut avoir plusieurs classes : <code>&lt;div class="btn turquoise"&gt;</code><br />
+        - <code>.btn</code> : Styles de base (padding, border-radius, cursor, etc.)<br />
+        - <code>.turquoise</code> : Couleur spécifique<br /><br />
+
+        <strong>✨ Exercice :</strong> <br />
+        Ouvrez le fichier <strong>exo12.css</strong> et faites le ménage pour optimiser ce code au maximum !<br />
+        <strong>Objectif :</strong> Passer de 51 lignes à 31 lignes de CSS pour le même rendu visuel.<br />
+      </p>
+      <img src="img/exo12.png" alt="Exemple code CSS" />
+      <img src="img/froggie-300.png" alt="Froggie" class="overfrog" />
+    </div>
+  </body> <!-- Fin du corps du document -->
+</html> <!-- Fin du document HTML -->

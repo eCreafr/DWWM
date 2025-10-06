@@ -1,0 +1,84 @@
+<!doctype html>
+<!-- Déclaration du type de document HTML5 -->
+<html lang="fr">
+    <!-- Balise racine avec langue française -->
+    <head>
+        <!-- En-tête du document -->
+        <meta charset="UTF-8" />
+        <!-- Encodage des caractères en UTF-8 -->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <!-- Configuration responsive pour mobile -->
+        <title>Exercice 08 | flex fin</title>
+        <!-- Titre affiché dans l'onglet du navigateur -->
+        <link rel="stylesheet" href="css/exo3-4-5.css" />
+        <!-- Lien vers la feuille de style CSS -->
+        <link rel="stylesheet" href="css/froggie.css" />
+        <!-- Lien vers la feuille de style Froggie -->
+    </head>
+    <body>
+        <!-- Corps du document -->
+        <!-- Conteneur Flexbox pour démontrer la propriété align-self -->
+        <div class="containerExo5">
+            <!-- Boîte alignée au début de l'axe transversal (cross axis) -->
+            <div class="boxExo5" style="align-self: flex-start">
+                <h1>Box "align-self: flex-start"</h1>
+            </div>
+            <!-- Boîte centrée sur l'axe transversal -->
+            <div class="boxExo5" style="align-self: center">
+                <h1>Box "align-self: center"</h1>
+            </div>
+            <!-- Boîte alignée à la fin de l'axe transversal -->
+            <div class="boxExo5" style="align-self: flex-end">
+                <h1>Box "align-self: flex-end"</h1>
+            </div>
+            <!-- Boîte étirée pour occuper toute la hauteur du conteneur -->
+            <div class="boxExo5" style="align-self: stretch">
+                <h1>Box "align-self: stretch"</h1>
+            </div>
+        </div>
+
+        <!-- Zone d'explication pédagogique "Froggiesplaining" -->
+        <div class="froggiesplaining">
+            <span> Froggiesplaining :</span> <br /><br />
+            <strong>🎯 Objectifs de cet exercice :</strong><br />
+            Comprendre la propriété <strong>align-self</strong> pour contrôler l'alignement individuel d'un élément
+            flex.<br /><br />
+
+            <strong>🔧 La propriété align-self :</strong><br />
+            <ul>
+                <li><strong>align-self: flex-start</strong> : Aligne l'élément au début de l'axe transversal (haut)</li>
+                <li><strong>align-self: center</strong> : Centre l'élément sur l'axe transversal (milieu)</li>
+                <li><strong>align-self: flex-end</strong> : Aligne l'élément à la fin de l'axe transversal (bas)</li>
+                <li><strong>align-self: stretch</strong> : Étire l'élément pour remplir toute la hauteur disponible</li>
+            </ul>
+            <br />
+            <strong>💡 À retenir :</strong> Contrairement à <code>align-items</code> qui s'applique à tous les éléments
+            du conteneur, <code>align-self</code> permet de contrôler l'alignement d'un élément spécifique
+            individuellement.<br /><br />
+
+            <img src="img/exo5.png" alt="" />
+
+            <br />
+            <strong>📚 Pour en savoir plus :</strong> <br /><a
+                href="https://developer.mozilla.org/fr/docs/Learn/CSS/CSS_layout/Flexbox"
+                target="_blank"
+                >Documentation MDN sur Flexbox</a
+            >
+
+            <img src="img/froggie-300.png" alt="Froggie explain" class="overfrog" id="Froggie" />
+        </div>
+
+        <!-- Lien d'ancrage vers Froggie -->
+        <a href="#Froggie"
+            ><div id="goToFroggie">
+                <img src="img/froggie-300.png" width="50px" /><br /><i class="bi bi-arrow-bar-down"></i></div
+        ></a>
+
+        <!-- Pied de page avec lien GitHub -->
+        <div id="footerGit">
+            <a href="https://github.com/eCreafr/DWWM" target="_blank"><i class="bi bi-github">GitHub - eCrea</i></a>
+        </div>
+    </body>
+    <!-- Fin du corps du document -->
+</html>
+<!-- Fin du document HTML -->

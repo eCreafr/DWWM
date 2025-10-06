@@ -1,0 +1,79 @@
+<!DOCTYPE html> <!-- Déclaration du type de document HTML5 -->
+<html lang="fr"> <!-- Balise racine avec langue française -->
+  <head> <!-- En-tête du document -->
+    <meta charset="UTF-8" /> <!-- Encodage des caractères en UTF-8 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /> <!-- Configuration responsive pour mobile -->
+    <title>Exercice 12 | les iFrames</title> <!-- Titre affiché dans l'onglet du navigateur -->
+    <link rel="stylesheet" href="css/exo8.css" /> <!-- Lien vers la feuille de style CSS -->
+    <link rel="stylesheet" href="css/froggie.css" /> <!-- Lien vers la feuille de style Froggie -->
+  </head>
+
+  <body> <!-- Corps du document -->
+    <header><h1 class="titrage" id="titre">Les iFrames</h1></header> <!-- En-tête de page -->
+    <main> <!-- Contenu principal -->
+      <!-- iFrame : permet d'intégrer un contenu externe (ici Google Maps) dans la page -->
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d8026.553123683482!2d-1.1778625207787072!3d44.66155254397604!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd549f118a0e4007%3A0x9eb725a268756560!2sJet%C3%A9e%20la%20Chapelle%20Croix%20des%20Marins!5e0!3m2!1sfr!2sfr!4v1727165517455!5m2!1sfr!2sfr"
+        allowfullscreen="" <!-- Permet le mode plein écran -->
+        loading="lazy" <!-- Chargement différé : l'iframe se charge uniquement quand elle devient visible -->
+        referrerpolicy="no-referrer-when-downgrade" <!-- Politique de référence pour la sécurité -->
+      ></iframe>
+    </main>
+
+    <footer></footer> <!-- Pied de page -->
+
+    <!-- Zone d'explication pédagogique "Froggiesplaining" -->
+    <div class="froggiesplaining">
+      <span> Froggiesplaining :</span>
+      <p>
+        <br />
+        <strong>🎯 Objectifs de cet exercice :</strong><br />
+        Découvrir la balise <strong>&lt;iframe&gt;</strong> (inline frame) pour intégrer du contenu externe dans une page HTML.<br /><br />
+
+        <strong>📦 Qu'est-ce qu'une iframe ?</strong><br />
+        Une iframe permet d'<strong>"encapsuler" un site ou contenu externe</strong> directement dans votre page web. C'est comme une fenêtre vers un autre site web.<br /><br />
+
+        <strong>💡 Usages courants :</strong><br />
+        <ul>
+          <li><strong>Google Maps</strong> : Intégrer une carte interactive</li>
+          <li><strong>Vidéos YouTube</strong> : Intégrer une vidéo sans héberger le fichier</li>
+          <li><strong>Réseaux sociaux</strong> : Intégrer des publications Facebook, Twitter...</li>
+          <li><strong>Formulaires externes</strong> : Intégrer des formulaires Google Forms, Typeform...</li>
+        </ul>
+        <br />
+
+        <strong>🔧 Attributs importants :</strong><br />
+        <ul>
+          <li><code>src</code> : URL du contenu à afficher dans l'iframe</li>
+          <li><code>allowfullscreen</code> : Autorise le mode plein écran</li>
+          <li><code>loading="lazy"</code> : Charge l'iframe uniquement quand elle devient visible (améliore les performances)</li>
+          <li><code>width</code> et <code>height</code> : Définissent les dimensions (peuvent être définies en CSS)</li>
+        </ul>
+        <br />
+
+        <strong>⚠️ Attention :</strong> Tous les sites n'autorisent pas l'intégration en iframe pour des raisons de sécurité.
+      </p>
+
+      <img
+        id="Froggie"
+        class="overfrog"
+        src="img/froggie-300.png"
+        alt="Froggie explain"
+      />
+    </div>
+    <!-- Lien d'ancrage vers Froggie -->
+    <a href="#Froggie"
+      ><div id="goToFroggie">
+        <img src="img/froggie-300.png" width="50px" /><br /><i
+          class="bi bi-arrow-bar-down"
+        ></i></div
+    ></a>
+
+    <!-- Pied de page avec lien GitHub -->
+    <div id="footerGit">
+      <a href="https://github.com/eCreafr/DWWM" target="_blank"
+        ><i class="bi bi-github">GitHub - eCrea</i></a
+      >
+    </div>
+  </body> <!-- Fin du corps du document -->
+</html> <!-- Fin du document HTML -->

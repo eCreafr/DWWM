@@ -1,0 +1,81 @@
+<!doctype html>
+<!-- Déclaration du type de document HTML5 -->
+<html lang="fr">
+    <!-- Balise racine avec langue française -->
+    <head>
+        <!-- En-tête du document -->
+        <meta charset="UTF-8" />
+        <!-- Encodage des caractères en UTF-8 -->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <!-- Configuration responsive pour mobile -->
+        <title>NavBar2000 le rêve de Seb réalisé</title>
+        <!-- Titre affiché dans l'onglet du navigateur -->
+        <link rel="stylesheet" href="../../css/navbar.css" />
+        <!-- Feuille de style pour la navbar responsive -->
+    </head>
+    <body>
+        <!-- Corps du document -->
+        <!-- En-tête avec navbar responsive (utilisant la convention BEM) -->
+        <header class="header">
+            <!-- Logo avec image et titre -->
+            <div class="header__logo">
+                <img class="header__logo-img" src="../img/logo-MS-2024.png" alt="" />
+                <h1 class="header__logo-title">NavBar2000</h1>
+            </div>
+
+            <!-- Navigation desktop : visible uniquement sur grands écrans -->
+            <div class="nav-bar">
+                <div class="nav-bar__item">A propos</div>
+
+                <div class="nav-bar__item">Lien 1</div>
+
+                <div class="nav-bar__item">Lien 2</div>
+
+                <!-- Élément avec modificateur pour style bouton bleu -->
+                <div class="nav-bar__item nav-bar__item--blue-button">Contact</div>
+            </div>
+
+            <!-- Navigation mobile : burger menu -->
+            <!-- Visible uniquement sur petits écrans (smartphones) -->
+            <div class="nav-bar-mobile">
+                <div>
+                    <!-- Bouton burger pour ouvrir/fermer le menu mobile -->
+                    <a class="nav-bar-mobile__button">
+                        <img src="../img/icons/bar-chart-fill.svg" alt="" class="nav-bar-mobile__icon" />
+                    </a>
+                </div>
+                <!-- Conteneur du menu mobile, caché par défaut (modificateur --hidden) -->
+                <div class="nav-bar-mobile__container nav-bar-mobile__container--hidden">
+                    <div class="nav-bar-mobile__item">A propos</div>
+
+                    <div class="nav-bar-mobile__item">Lien 1</div>
+
+                    <div class="nav-bar-mobile__item">Lien 2</div>
+
+                    <div class="nav-bar-mobile__item">Contact</div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Script JavaScript pour le menu burger (hamburger menu) -->
+        <script>
+            // Script du burger menu
+
+            // Attend que le DOM soit complètement chargé avant d'exécuter le script
+            document.addEventListener('DOMContentLoaded', function () {
+                // Sélectionne le bouton burger (premier élément avec cette classe)
+                const burger = document.getElementsByClassName('nav-bar-mobile__button')[0];
+                // Sélectionne le conteneur du menu mobile
+                const menubestof = document.getElementsByClassName('nav-bar-mobile__container')[0];
+
+                // Ajoute un écouteur d'événement sur le clic du burger
+                burger.addEventListener('click', function () {
+                    // Toggle (ajoute/retire) la classe --hidden pour afficher/masquer le menu
+                    menubestof.classList.toggle('nav-bar-mobile__container--hidden');
+                });
+            });
+        </script>
+    </body>
+    <!-- Fin du corps du document -->
+</html>
+<!-- Fin du document HTML -->

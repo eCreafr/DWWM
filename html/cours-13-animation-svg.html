@@ -1,0 +1,166 @@
+<!doctype html> <!-- Déclaration du type de document HTML5 -->
+<html lang="fr"> <!-- Balise racine avec langue française -->
+    <head> <!-- En-tête du document -->
+        <meta charset="UTF-8" /> <!-- Encodage des caractères en UTF-8 -->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" /> <!-- Configuration responsive pour mobile -->
+        <title>Exercice 13 | CSS animation timeline svg</title> <!-- Titre affiché dans l'onglet du navigateur -->
+        <link rel="stylesheet" href="css/froggie.css" /> <!-- Feuille de style Froggie -->
+        <!-- Lien CDN vers Bootstrap 5.3.3 : framework CSS pour la mise en page -->
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+            crossorigin="anonymous"
+        />
+        <!-- CSS intégré dans le HTML pour l'animation du smiley SVG -->
+        <style>
+            /* Style pour le chemin (path) de la bouche du smiley */
+            #expression {
+                /* d: propriété CSS pour définir la forme du chemin SVG (nouvelle fonctionnalité CSS) */
+                /* M = Move to (déplacer vers), Q = Quadratic Bezier curve (courbe de Bézier quadratique) */
+                /* M 50 90 Q 100 50 150 90 : bouche triste (courbe vers le bas) */
+                d: path('M 50 90 Q 100 50 150 90');
+                stroke: #2a185d; /* Couleur du trait : violet foncé */
+                stroke-width: 10px; /* Épaisseur du trait */
+                fill: none; /* Pas de remplissage, uniquement le contour */
+                animation: smile; /* Nom de l'animation à appliquer */
+                /* animation-timeline: scroll() : l'animation progresse en fonction du défilement de la page */
+                /* C'est une nouvelle fonctionnalité CSS qui élimine le besoin de JavaScript ! */
+                animation-timeline: scroll();
+            }
+            /* Définition de l'animation avec @keyframes */
+            @keyframes smile {
+                /* 'to' : état final de l'animation (quand on a scrollé jusqu'en bas) */
+                to {
+                    /* M 50 75 Q 100 125 150 75 : bouche souriante (courbe vers le haut) */
+                    d: path('M 50 75 Q 100 125 150 75');
+                }
+            }
+
+            /* Conteneur pour le SVG */
+            .svg-container {
+                width: 100px;
+                height: 100px;
+                margin: 0 auto; /* Centre le conteneur */
+            }
+
+            /* Style pour le cercle extérieur du visage */
+            #outer-circle {
+                stroke: #2a185d; /* Couleur du trait : violet foncé */
+                stroke-width: 10px; /* Épaisseur du trait */
+                fill: none; /* Pas de remplissage, uniquement le contour */
+            }
+        </style>
+    </head> <!-- Fin de l'en-tête -->
+    <body> <!-- Corps du document -->
+        <!-- Titre de l'exercice avec marge verticale Bootstrap (my-5) -->
+        <div class="exercice my-5">
+            <h1>Exercice 18 | animer smiley en CSS sans javascript</h1>
+        </div>
+
+        <!-- Div pour nettoyer les flottants (clear float) -->
+        <div style="clear: both"></div>
+
+        <!-- Conteneur Bootstrap avec Flexbox pour la mise en page -->
+        <div class="container d-flex">
+            <!-- Colonne de 3 unités (25% de la largeur) pour le smiley -->
+            <div class="col-3 d-flex justify-content-center align-items-center">
+                <div class="svg-container">
+                    <!-- SVG : graphique vectoriel pour dessiner le smiley -->
+                    <!-- viewBox="0 0 200 200" : définit la zone de dessin de 200x200 unités -->
+                    <svg viewBox="0 0 200 200">
+                        <!-- Cercle extérieur du visage -->
+                        <!-- cx, cy : coordonnées du centre (100, 100) -->
+                        <!-- r : rayon de 95 unités -->
+                        <circle id="outer-circle" cx="100" cy="100" r="95" />
+                        <!-- Groupe <g> pour déplacer les éléments du visage (yeux et bouche) -->
+                        <!-- transform="translate(0, 50)" : déplace le groupe de 50 unités vers le bas -->
+                        <g transform="translate(0, 50)">
+                            <!-- Chemin pour la bouche (animé par CSS) -->
+                            <path id="expression"></path>
+                            <!-- Œil gauche : ellipse centrée en (60, 20) -->
+                            <!-- rx, ry : rayons horizontal et vertical -->
+                            <ellipse cx="60" cy="20" rx="15" ry="20" fill="#2a185d" />
+                            <!-- Œil droit : ellipse centrée en (140, 20) -->
+                            <ellipse cx="140" cy="20" rx="15" ry="20" fill="#2a185d" />
+                        </g>
+                    </svg>
+                </div>
+            </div>
+            <!-- Colonne de 9 unités (75% de la largeur) pour le texte -->
+            <!-- Ce contenu long permet de créer du défilement (scroll) pour tester l'animation -->
+            <div class="col-9">
+                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sit, sunt. Repellat quisquam dolorem ea
+                laboriosam perferendis omnis quis recusandae alias accusamus cupiditate eaque praesentium aperiam
+                voluptates veniam veritatis expedita placeat debitis modi, iste sapiente facilis. Iure tenetur aut enim
+                incidunt magni laboriosam dolores ut consequatur, repellendus consectetur tempora assumenda nisi ullam
+                qui iusto, nihil reiciendis eos.
+                <br /><br />
+                Fugiat molestiae accusamus quasi reprehenderit expedita ducimus assumenda aliquam facilis mollitia, sed
+                impedit sunt odit pariatur voluptatem officia, delectus doloribus, natus nam doloremque non eaque odio?
+                Excepturi officiis provident nemo ducimus minima vitae. Exercitationem laborum unde suscipit officia ad
+                accusamus ipsam sint, repudiandae magni dicta quasi fugit minima possimus cupiditate accusantium
+                impedit.
+                <br /><br />
+                Ea quam dignissimos sapiente quos ullam eum dolore sunt, consequatur, libero ex aspernatur consequuntur
+                nostrum illum doloribus ipsum distinctio voluptatum modi sit quas, optio minima dolor. Ut laudantium
+                voluptatum laborum maiores iste quasi. Officia dicta deserunt libero. Alias aspernatur quas sit deserunt
+                obcaecati magnam cupiditate autem, itaque qui. Ipsa hic veritatis quod quasi.
+                <br /><br />
+                Fugiat molestiae accusamus quasi reprehenderit expedita ducimus assumenda aliquam facilis mollitia, sed
+                impedit sunt odit pariatur voluptatem officia, delectus doloribus, natus nam doloremque non eaque odio?
+                Excepturi officiis provident nemo ducimus minima vitae. Exercitationem laborum unde suscipit officia ad
+                accusamus ipsam sint, repudiandae magni dicta quasi fugit minima possimus cupiditate accusantium
+                impedit.<br /><br />
+                Ea quam dignissimos sapiente quos ullam eum dolore sunt, consequatur, libero ex aspernatur consequuntur
+                nostrum illum doloribus ipsum distinctio voluptatum modi sit quas, optio minima dolor. Ut laudantium
+                voluptatum laborum maiores iste quasi. Officia dicta deserunt libero. Alias aspernatur quas sit deserunt
+                obcaecati magnam cupiditate autem, itaque qui. Ipsa hic veritatis quod quasi ut.
+            </div>
+        </div> <!-- Fin du conteneur Bootstrap -->
+        <!-- Zone d'explication pédagogique "Froggiesplaining" -->
+        <div class="froggiesplaining">
+            <span> Froggiesplaining :</span>
+            <p>
+                <br />
+                <strong>🎯 Objectifs de cet exercice :</strong><br />
+                Découvrir les <strong>animations CSS pilotées par le défilement</strong> (scroll-driven animations) avec la propriété <code>animation-timeline: scroll()</code>, une fonctionnalité moderne qui élimine le besoin de JavaScript pour ce type d'effet.<br /><br />
+
+                <strong>🎨 Qu'est-ce qu'une animation pilotée par le scroll ?</strong><br />
+                Au lieu d'utiliser le temps comme référence pour l'animation, on utilise la <strong>position du défilement</strong> de la page. Plus on descend dans la page, plus l'animation progresse.<br /><br />
+
+                <strong>💡 Fonctionnement de cet exemple :</strong><br />
+                <ul>
+                    <li><strong>État initial (en haut de page)</strong> : Le smiley est triste avec une bouche courbée vers le bas</li>
+                    <li><strong>Pendant le défilement</strong> : La bouche se transforme progressivement</li>
+                    <li><strong>État final (en bas de page)</strong> : Le smiley est content avec une bouche souriante vers le haut</li>
+                </ul>
+                <br />
+
+                <strong>🔧 Technologies utilisées :</strong><br />
+                <ul>
+                    <li><code>animation-timeline: scroll()</code> : Lie l'animation au défilement de la page (pas au temps)</li>
+                    <li><code>@keyframes</code> : Définit les états de l'animation (début et fin)</li>
+                    <li><code>d: path()</code> : Propriété CSS permettant de modifier les chemins SVG directement en CSS</li>
+                    <li><strong>SVG</strong> : Format vectoriel pour dessiner le smiley (cercle, ellipses, path)</li>
+                    <li><strong>Courbes de Bézier</strong> : La commande <code>Q</code> (Quadratic) crée des courbes lisses pour la bouche</li>
+                </ul>
+                <br />
+
+                <strong>🧪 Testez :</strong> Faites défiler la page de haut en bas pour voir le smiley changer d'expression progressivement !<br /><br />
+
+                <strong>⚠️ Compatibilité navigateurs :</strong> Cette fonctionnalité est récente et fonctionne sur <strong>Chrome, Edge et Safari récents</strong>. Firefox ne la supporte pas encore complètement.<br /><br />
+
+                <strong>✨ Avantages :</strong><br />
+                <ul>
+                    <li><strong>Aucun JavaScript nécessaire</strong> : Le CSS gère tout !</li>
+                    <li><strong>Performant</strong> : Optimisé par le navigateur</li>
+                    <li><strong>Déclaratif</strong> : Code plus simple et maintenable</li>
+                </ul>
+            </p>
+            <img src="img/exo18-1.png" alt="Illustration de l'animation" />
+            <br />
+            <img src="img/froggie-300.png" alt="Froggie" class="overfrog" />
+        </div>
+    </body> <!-- Fin du corps du document -->
+</html> <!-- Fin du document HTML -->

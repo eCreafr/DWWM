@@ -1,21 +1,22 @@
-<!DOCTYPE html>
-<html lang="fr">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Exercice 11</title>
-    <link rel="stylesheet" href="css/froggie.css" />
-    <link rel="stylesheet" href="css/exo11.css" />
+<!DOCTYPE html> <!-- Déclaration du type de document HTML5 -->
+<html lang="fr"> <!-- Balise racine avec langue française -->
+  <head> <!-- En-tête du document -->
+    <meta charset="UTF-8" /> <!-- Encodage des caractères en UTF-8 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /> <!-- Configuration responsive pour mobile -->
+    <title>Exercice 30</title> <!-- Titre affiché dans l'onglet du navigateur -->
+    <link rel="stylesheet" href="css/froggie.css" /> <!-- Feuille de style Froggie -->
+    <link rel="stylesheet" href="css/exo11.css" /> <!-- Feuille de style personnalisée -->
+    <!-- Lien CDN vers AOS (Animate On Scroll) : librairie d'animations au scroll -->
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
   </head>
-  <body>
+  <body> <!-- Corps du document -->
     <div class="exercice">
-      <h1>Exercice 11 | intégration d'une librairie CSS + JavaScript</h1>
+      <h1>Exercice 30 | intégration d'une librairie CSS + JavaScript</h1>
     </div>
 
-    <!--a propos de ce clear both : froggy en float left dans la div et le H1 "exercice",
-     causait un décalage important de toute la section flex ci après
-     mettre une div vide, avec un style css "clear both" rétablit le flux a 0 -->
+    <!-- À propos de ce clear:both : Froggie est en float:left dans la div exercice,
+         ce qui causait un décalage de la section flex suivante.
+         Une div vide avec style="clear:both" rétablit le flux normal du document -->
     <div style="clear: both"></div>
 
     <div class="flex">
@@ -40,6 +41,10 @@
         saepe delectus sunt sed minus quaerat modi, dicta veniam et quia, nam
         error distinctio nobis perspiciatis, amet autem necessitatibus minima!
       </div>
+      <!-- Élément animé avec AOS (Animate On Scroll) -->
+      <!-- data-aos="fade-right" : Animation d'apparition depuis la droite -->
+      <!-- data-aos-duration="2000" : Durée de l'animation en millisecondes (2 secondes) -->
+      <!-- data-aos-anchor-placement="top-center" : Déclenchement quand l'élément atteint le centre en haut du viewport -->
       <div
         class="square"
         data-aos="fade-right"
@@ -150,39 +155,64 @@
         dolorem ab voluptates odio nam vero rem cumque
       </div>
     </div>
+    <!-- Zone d'explication pédagogique "Froggiesplaining" -->
     <div class="froggiesplaining">
       <span> Froggiesplaining :</span>
 
+      <p>
+        <br />
+        <strong>🎯 Objectifs de cet exercice :</strong><br />
+        Intégrer une <strong>librairie externe</strong> (AOS - Animate On Scroll) pour ajouter des animations au défilement de la page.<br /><br />
+
+        <strong>📦 Qu'est-ce qu'AOS ?</strong><br />
+        AOS (Animate On Scroll) est une <strong>librairie gratuite d'animations CSS et JavaScript</strong> qui permet d'animer des éléments lorsqu'ils apparaissent dans le viewport pendant le scroll.<br /><br />
+
+        <strong>🔧 Comment l'utiliser ?</strong><br />
+        <ul>
+          <li>Inclure le CSS et JS via CDN dans le &lt;head&gt; et avant &lt;/body&gt;</li>
+          <li>Initialiser AOS avec <code>AOS.init();</code></li>
+          <li>Ajouter l'attribut <code>data-aos="..."</code> sur les éléments à animer</li>
+          <li>Personnaliser avec des attributs : <code>data-aos-duration</code>, <code>data-aos-delay</code>, etc.</li>
+        </ul>
+        <br />
+
+        <strong>✨ Types d'animations disponibles :</strong><br />
+        <ul>
+          <li><code>fade-right</code>, <code>fade-left</code>, <code>fade-up</code>, <code>fade-down</code> : Apparitions avec fondu</li>
+          <li><code>zoom-in</code>, <code>zoom-out</code> : Effets de zoom</li>
+          <li><code>flip-left</code>, <code>flip-right</code>, <code>flip-up</code>, <code>flip-down</code> : Effets de rotation 3D</li>
+        </ul>
+        <br />
+
+        <strong>📚 Ressources :</strong><br />
+      </p>
       <ul>
         <li>
-          <strong>AOS ?</strong> on va mettre en place des éléments avec AOS,
-          une petite librairie gratuite d'animation CSS et JS de div qui
-          réagissent au scroll
-        </li>
-        <li>
-          <strong>Démo : </strong
+          <strong>Démo officielle : </strong
           ><a href="https://michalsnik.github.io/aos/" target="_blank">
             https://michalsnik.github.io/aos/</a
           >
         </li>
         <li>
-          <strong>Github : </strong
+          <strong>GitHub : </strong
           ><a href="https://github.com/michalsnik/aos" target="_blank"
             >https://github.com/michalsnik/aos</a
           >
         </li>
       </ul>
 
-      <br /><br />
-      <strong>Exercice :</strong> <br />
-      Faites vos propres tests pour jouer sur les paramètres
+      <br />
+      <strong>💡 Exercice :</strong> <br />
+      Faites vos propres tests en modifiant les valeurs de <code>data-aos</code>, <code>data-aos-duration</code> et <code>data-aos-anchor-placement</code> !
 
       <img src="img/froggie-300.png" alt="Froggie" class="overfrog" />
     </div>
 
+    <!-- Script JavaScript AOS via CDN -->
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <!-- Initialisation d'AOS : active les animations au scroll -->
     <script>
       AOS.init();
     </script>
-  </body>
-</html>
+  </body> <!-- Fin du corps du document -->
+</html> <!-- Fin du document HTML -->

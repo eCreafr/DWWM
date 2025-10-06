@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Exercice 24 | CSS et convention BEM</title>
+        <link rel="stylesheet" href="css/froggie.css" />
+        <link rel="stylesheet" href="css/exo13.css" />
+    </head>
+    <body>
+        <div class="exercice">
+            <h1>Exercice 24 | CSS et convention "B.E.M."</h1>
+        </div>
+
+        <!--a propos de ce clear both : froggy en float left dans la div et le H1 "exercice",
+     causait un décalage important de toute la section flex ci après
+     mettre une div vide, avec un style css "clear both" rétablit le flux a 0 -->
+        <div style="clear: both"></div>
+
+        <!-- méthode BEM -->
+
+        <div class="maintitle">
+            <img class="maintitle__logo" src="img/froggie-100.png" alt="..." />
+            <h1 class="maintitle__h1">À Propos : </h1>
+            <h1 class="maintitle__h1 maintitle__h1--violet">maintitle</h1>
+        </div>
+
+        <div class="navbar">
+            <ul class="navbar__menulist">
+                <li class="navbar__menulink navbar__menulink--custom">Accueil</li>
+                <li class="navbar__menulink">portfolio</li>
+                <li class="navbar__menulink">contact</li>
+                <li class="navbar__menulink">lien 2</li>
+                <li class="navbar__menulink">lien 3</li>
+            </ul>
+        </div>
+
+        <!-- fin méthode BEM -->
+
+        <!-- Zone d'explication pédagogique "Froggiesplaining" -->
+        <div class="froggiesplaining">
+            <span> Froggiesplaining :</span>
+
+            <p>
+                <br />
+                <strong>🎯 Objectifs de cet exercice :</strong><br />
+                Comprendre et appliquer la <strong>méthodologie BEM</strong> pour nommer les classes CSS de manière claire et maintenable.<br /><br />
+
+                <strong>📦 Qu'est-ce que BEM ?</strong><br />
+                <strong>BEM</strong> signifie <strong>"Block – Element – Modifier"</strong> (Bloc – Élément – Modificateur).<br />
+                C'est une <strong>convention de nommage CSS</strong> qui rend le code plus lisible, organisé et facile à maintenir.<br /><br />
+
+                <strong>🏗️ Les trois composants de BEM :</strong><br />
+                <ul>
+                    <li><strong>BLOCK (Bloc)</strong> : Le composant parent, autonome et réutilisable
+                        <ul>
+                            <li>Exemple : <code>.navbar</code>, <code>.header</code>, <code>.card</code></li>
+                            <li>C'est le conteneur principal d'un composant</li>
+                        </ul>
+                    </li>
+                    <li><strong>ELEMENT (Élément)</strong> : Une partie du bloc qui n'a pas de sens en dehors de ce bloc
+                        <ul>
+                            <li>Syntaxe : <code>block__element</code> (double underscore)</li>
+                            <li>Exemple : <code>.navbar__menulist</code>, <code>.navbar__menulink</code></li>
+                            <li>L'élément appartient toujours à un bloc parent</li>
+                        </ul>
+                    </li>
+                    <li><strong>MODIFIER (Modificateur)</strong> : Une variation ou un état du bloc ou de l'élément
+                        <ul>
+                            <li>Syntaxe : <code>block--modifier</code> ou <code>block__element--modifier</code> (double tiret)</li>
+                            <li>Exemple : <code>.button--large</code>, <code>.navbar__menulink--custom</code></li>
+                            <li>Change l'apparence, le comportement ou l'état</li>
+                        </ul>
+                    </li>
+                </ul>
+                <br />
+
+                <strong>✨ Exemple concret dans cette page :</strong><br />
+                <code>.maintitle</code> → Bloc parent<br />
+                <code>.maintitle__logo</code> → Élément logo du bloc maintitle<br />
+                <code>.maintitle__h1</code> → Élément h1 du bloc maintitle<br />
+                <code>.maintitle__h1--violet</code> → Élément h1 avec modificateur violet<br /><br />
+
+                <strong>💡 Avantages de BEM :</strong><br />
+                <ul>
+                    <li>✅ <strong>Clarté</strong> : On sait immédiatement où se situe chaque élément dans la structure</li>
+                    <li>✅ <strong>Maintenabilité</strong> : Plus facile de modifier le CSS sans casser d'autres éléments</li>
+                    <li>✅ <strong>Réutilisabilité</strong> : Les composants sont indépendants et réutilisables</li>
+                    <li>✅ <strong>Évite les conflits</strong> : Pas de problèmes de spécificité CSS</li>
+                </ul>
+                <br />
+
+                <strong>🔧 Exercice pratique :</strong><br />
+                Reprenez une page d'un exercice précédent avec un conteneur et plusieurs éléments "enfants" et appliquez la
+                convention BEM dessus !
+            </p>
+            <img src="img/froggie-300.png" alt="Froggie" class="overfrog" />
+        </div>
+    </body> <!-- Fin du corps du document -->
+</html> <!-- Fin du document HTML -->

@@ -1,0 +1,160 @@
+<!DOCTYPE html> <!-- Déclaration du type de document : indique au navigateur qu'il s'agit d'un fichier HTML5 -->
+<html lang="fr"> <!-- Balise racine du document HTML, l'attribut lang="fr" indique que la langue du contenu est le français -->
+  <head> <!-- En-tête du document : contient les métadonnées (informations sur la page) -->
+    <meta charset="UTF-8" /> <!-- Définit l'encodage des caractères en UTF-8 pour afficher correctement les accents et caractères spéciaux -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /> <!-- Configure l'affichage sur mobile : la largeur s'adapte à l'écran -->
+    <title>Exercice 01 | découverte HTML</title> <!-- Titre de la page qui apparaît dans l'onglet du navigateur -->
+    <link rel="stylesheet" href="css/exo1.css" /> <!-- Lien vers la feuille de style CSS externe pour la mise en forme -->
+    <link rel="stylesheet" href="css/froggie.css" /> <!-- Lien vers une deuxième feuille de style CSS pour les éléments "Froggie" -->
+  </head>
+
+   <body> <!-- Corps du document : contient tout le contenu visible de la page -->
+    <!-- Titre principal de niveau 1 avec une classe CSS "titrage" et un identifiant unique "titre" -->
+    <h1 class="titrage" id="titre">Bonjour</h1>
+
+    <!-- Image avec un identifiant "orelsan", un chemin source vers le fichier image et un texte alternatif -->
+    <img id="orelsan" src="img/orelsan.jpg" alt="Orelsan" />
+
+    <!-- Paragraphe avec une classe CSS personnalisée "typoperso" -->
+    <p class="typoperso">
+      Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+      <!-- La balise <strong> met le texte en gras (importance forte) -->
+      <strong> Esse ad distinctio recusandae</strong> enim ea magni perspiciatis
+      quis?
+    </p>
+
+    <!-- Deuxième paragraphe sans classe CSS -->
+    <p>
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat, iure,
+      beatae alias error dicta aut fuga corporis doloremque obcaecati recusandae
+      nisi dolor veritatis porro soluta non?
+      <!-- La balise <span> permet d'appliquer un style CSS à une portion de texte (ici classe "surligne") -->
+      <span class="surligne">
+        Rem obcaecati sit expedita soluta, hic delectus mollitia deleniti?
+        Facere nobis sequi laborum repudiandae.</span
+      >
+
+      Eius est error fugiat ratione nesciunt excepturi quidem, harum porro quo
+      molestias architecto reiciendis, perferendis natus ullam sint.
+      <br /><br /> <!-- Balise <br /> pour créer un saut de ligne -->
+      <!-- La balise <em> met le texte en italique (emphase) -->
+      <em>
+        Quod, a. In corrupti iusto perspiciatis! Consequuntur quisquam
+        doloremque temporibus ea mollitia quo odio veritatis eius expedita sunt
+        dolor, voluptates inventore incidunt earum, tempora rem ducimus!
+        <span class="surligne">Sequi</span> illo aut et labore veritatis nobis,
+        excepturi culpa tempore veniam, quas laborum laboriosam aperiam libero
+        earum! Nemo, temporibus!</em
+      >
+    </p>
+
+    <!-- Liste non ordonnée (à puces) -->
+    <ul>
+      <!-- Élément de liste avec classe CSS "puce" -->
+      <li class="puce">
+        <!-- Lien hypertexte : l'attribut href contient l'URL de destination -->
+        <a href="https://metis.afpa.fr">blabla de base 1</a>
+      </li>
+      <li class="puce">
+        <a href="https://afpa.fr"
+          ><span class="surligne">blabla</span> de base 2</a
+        >
+      </li>
+      <li class="puce">blabla de base 3</li>
+      <li class="puce">blabla de base 4</li>
+      <li class="puce">blabla de base 5</li>
+    </ul>
+
+    <!-- Tableau HTML : utilisé pour afficher des données sous forme de grille -->
+    <table>
+      <!-- Ligne de tableau (<tr> = table row) -->
+      <tr>
+        <!-- Cellule d'en-tête (<th> = table header) affichée en gras par défaut -->
+        <th>TITRE 1</th>
+        <th>TITRE 2</th>
+        <th>TITRE 3</th>
+      </tr>
+
+      <!-- Deuxième ligne avec des cellules de données -->
+      <tr>
+        <!-- Cellule de données (<td> = table data) -->
+        <td>coucou</td>
+        <td>coucou</td>
+        <td>coucou</td>
+      </tr>
+      <!-- Troisième ligne -->
+      <tr>
+        <td>coucou</td>
+        <td>coucou</td>
+        <td>coucou</td>
+      </tr>
+    </table>
+
+    <!-- Pied de page : zone dédiée aux informations de bas de page -->
+    <footer>
+      liens de bas page (footer), CGV, mentions légales...
+    </footer>
+
+    <!-- Zone d'explication pédagogique "Froggiesplaining" -->
+    <div class="froggiesplaining">
+      <span> Froggiesplaining :</span>
+      <p><br />
+      <strong>🎯 Objectifs de cet exercice :</strong><br />
+      Dans ce premier cours, vous allez découvrir la <strong>structure de base d'un document HTML</strong>.<br /><br />
+
+      <strong>📋 Les balises HTML essentielles :</strong><br />
+      <ul>
+        <li><strong>&lt;!DOCTYPE html&gt;</strong> : Indique au navigateur qu'il s'agit d'un document HTML5</li>
+        <li><strong>&lt;html lang="fr"&gt;</strong> : Balise racine qui englobe tout le document</li>
+        <li>
+          <strong>&lt;head&gt;</strong> : En-tête du document (métadonnées invisibles)
+          <ul>
+            <li><strong>charset UTF-8</strong> : Permet d'afficher correctement les accents et caractères spéciaux</li>
+            <li><strong>&lt;title&gt;</strong> : Titre affiché dans l'onglet du navigateur</li>
+            <li><strong>viewport</strong> : Configuration pour un affichage responsive (adapté aux mobiles)</li>
+            <li><strong>&lt;link rel="stylesheet"&gt;</strong> : Lien vers la feuille de style CSS</li>
+          </ul>
+        </li>
+        <li>
+          <strong>&lt;body&gt;</strong> : Corps du document (contenu visible)
+          <ul>
+            <li><strong>&lt;header&gt;</strong> : En-tête de page</li>
+            <li><strong>&lt;nav&gt;</strong> : Menu de navigation</li>
+            <li><strong>&lt;main&gt;</strong> : Contenu principal</li>
+            <li><strong>&lt;section&gt;</strong> : Section thématique</li>
+            <li><strong>&lt;article&gt;</strong> : Contenu autonome</li>
+            <li><strong>&lt;footer&gt;</strong> : Pied de page</li>
+          </ul>
+        </li>
+      </ul>
+      <br />
+      <strong>✨ Ce que vous allez apprendre dans cette page :</strong><br />
+      <ul>
+        <li>Les balises de titre <strong>&lt;h1&gt; à &lt;h6&gt;</strong> (hiérarchie des titres)</li>
+        <li>Comment intégrer une <strong>image</strong> avec &lt;img src="..." alt="..."&gt;</li>
+        <li>Créer des <strong>paragraphes</strong> avec &lt;p&gt;</li>
+        <li>Mettre du texte en <strong>gras</strong> (&lt;strong&gt;) et en <em>italique</em> (&lt;em&gt;)</li>
+        <li>Créer des <strong>liens hypertextes</strong> avec &lt;a href="..."&gt;</li>
+        <li>Construire une <strong>liste à puces</strong> (&lt;ul&gt; et &lt;li&gt;) :</li>
+      </ul>
+      <img src="img/exo1-2.png" alt="" class="img-responsive" /><br />
+      <ul>
+        <li>Créer un <strong>tableau</strong> (&lt;table&gt;, &lt;tr&gt;, &lt;th&gt;, &lt;td&gt;) :</li>
+      </ul>
+      <img src="img/exo1-1.png" alt="" class="img-responsive" /><br /><br />
+
+      <strong>💡 Conseil :</strong> Ouvrez cette page dans Visual Studio Code et examinez le code source pour voir comment chaque élément est construit !
+      </p>
+
+        <img id="Froggie" class="overfrog" src="img/froggie-300.png" alt="Froggie explain" />
+
+    </div>
+    <!-- Lien d'ancrage (#Froggie) qui renvoie vers l'élément ayant l'id="Froggie" -->
+    <a href="#Froggie"><div id="goToFroggie"><img src="img/froggie-300.png" width="50px"/><br><i class="bi bi-arrow-bar-down"></i></div></a>
+
+
+ <!-- Pied de page avec lien vers GitHub, target="_blank" ouvre le lien dans un nouvel onglet -->
+ <div id="footerGit"><a href="https://github.com/eCreafr/DWWM" target="_blank"><i class="bi bi-github">GitHub - eCrea</i></a></div>
+
+  </body> <!-- Fin du corps du document -->
+</html> <!-- Fin du document HTML -->
