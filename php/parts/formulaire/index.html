@@ -1,23 +1,36 @@
 <!doctype html>
 <html lang="fr">
     <head>
+        <!-- ==================== META TAGS ==================== -->
+        <!-- Définit l'encodage des caractères pour supporter les accents français -->
         <meta charset="UTF-8" />
+        <!-- Responsive design : adaptation aux écrans mobiles -->
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>mon formulaire de contact</title>
+
+        <!-- ==================== FRAMEWORKS CSS ==================== -->
+        <!-- Bootstrap 5.3.3 : Framework CSS pour le design responsive et les composants -->
         <link
             href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
             rel="stylesheet"
             integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
             crossorigin="anonymous"
         />
+
+        <!-- ==================== POLICES ==================== -->
+        <!-- Google Fonts : polices personnalisées pour le design -->
         <link
             href="https://fonts.googleapis.com/css2?family=Arima:wght@100..700&family=Fira+Sans+Condensed:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Oswald:wght@200..700&display=swap"
             rel="stylesheet"
         />
+
+        <!-- ==================== ICÔNES ==================== -->
+        <!-- Bootstrap Icons : bibliothèque d'icônes -->
         <link
             rel="stylesheet"
             href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
         />
+        <!-- Font Awesome : bibliothèque d'icônes complémentaires -->
         <link
             rel="stylesheet"
             href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
@@ -25,18 +38,26 @@
             crossorigin="anonymous"
             referrerpolicy="no-referrer"
         />
+
+        <!-- ==================== SÉCURITÉ ==================== -->
+        <!-- Google reCAPTCHA v3 : Protection anti-spam et anti-robots -->
+        <!-- IMPORTANT : Remplacer 'votre-clef' par votre clé de site reCAPTCHA -->
         <script src="https://www.google.com/recaptcha/api.js?render=votre-clef"></script>
     </head>
     <body>
+        <!-- ==================== EN-TÊTE / NAVIGATION ==================== -->
+        <!-- Header avec position sticky (reste visible en haut lors du scroll) -->
         <header class="sticky-top">
             <div class="container-fluid">
                 <div class="container">
+                    <!-- Barre de navigation Bootstrap responsive -->
                     <nav class="navbar navbar-expand-lg">
-                        <!--Logo-->
+                        <!-- Logo du site -->
                         <a class="navbar-brand" href="#">
-                           <h2>mon logo</h2> 
+                           <h2>mon logo</h2>
                         </a>
-                        <!--Bouton de menu responsive-->
+
+                        <!-- Bouton hamburger pour menu mobile (visible uniquement sur petits écrans) -->
                         <button
                             class="navbar-toggler"
                             type="button"
@@ -48,9 +69,11 @@
                         >
                             <span class="navbar-toggler-icon"></span>
                         </button>
-                        <!--Liens de Navigation-->
+
+                        <!-- Menu de navigation (collapse sur mobile) -->
                         <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
                             <ul class="navbar-nav">
+                                <!-- Liens de navigation vers les sections de la page -->
                                 <li class="nav-item">
                                     <a class="nav-link" href="#propos">A propos</a>
                                 </li>
@@ -63,7 +86,10 @@
                                 <li class="nav-item">
                                     <a class="nav-link" href="#services">Mes services</a>
                                 </li>
-                                <!-- Bouton cliquable -->
+
+                                <!-- Bouton Contact qui ouvre le panneau latéral (Offcanvas) -->
+                                <!-- data-bs-toggle="offcanvas" : active le composant Offcanvas de Bootstrap -->
+                                <!-- data-bs-target="#offcanvasContact" : cible l'élément à ouvrir -->
                                 <a
                                     class="btn btn-primary ml-3"
                                     data-bs-toggle="offcanvas"
@@ -79,92 +105,153 @@
                 </div>
             </div>
         </header>
-        
+
+        <!-- Espace de contenu principal (100% de la hauteur de l'écran) -->
         <div class="spacer vh-100"></div>
-       
+
+        <!-- ==================== PIED DE PAGE ==================== -->
         <footer>
                <div class="text-center col-12">
-                    <small>votre site © 2024. Tous droits réservés.</small>
+                    <small>votre site © 2025. Tous droits réservés.</small>
                 </div>
             </div>
         </footer>
 
-        <!-- Offcanvas Contact Form -->
+        <!-- ==================== PANNEAU LATÉRAL DE CONTACT (OFFCANVAS) ==================== -->
+        <!--
+            Offcanvas : composant Bootstrap qui crée un panneau coulissant depuis le côté
+            - offcanvas-end : s'ouvre depuis la droite
+            - tabindex="-1" : pour la navigation au clavier
+            - id="offcanvasContact" : identifiant unique pour cibler ce panneau
+        -->
         <div
             class="offcanvas offcanvas-end"
             tabindex="-1"
             id="offcanvasContact"
             aria-labelledby="offcanvasContactLabel"
         >
+            <!-- En-tête du panneau avec titre et bouton de fermeture -->
             <div class="offcanvas-header">
                 <h5 id="offcanvasContactLabel">Contact</h5>
+                <!-- Bouton X pour fermer le panneau -->
                 <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
             </div>
+
+            <!-- Corps du panneau contenant le formulaire -->
             <div class="offcanvas-body">
                 <p>
                     Bonjour, ravi de prendre contact avec vous !
                     <br />
                     Merci de renseigner tous les champs.
                 </p>
+
+                <!-- ==================== FORMULAIRE DE CONTACT ==================== -->
+                <!-- id="contactForm" : permet de cibler le formulaire en JavaScript -->
                 <form id="contactForm">
+                    <!-- Champ Nom/Prénom -->
                     <div class="mb-3">
                         <label for="name" class="form-label">Vos Prénom Nom :</label>
+                        <!-- type="text" : champ texte simple -->
+                        <!-- required : champ obligatoire (validation HTML5) -->
                         <input type="text" class="form-control" id="name" name="name" required />
                     </div>
+
+                    <!-- Champ Email -->
                     <div class="mb-3">
                         <label for="email" class="form-label">Votre email :</label>
+                        <!-- type="email" : validation automatique du format email par le navigateur -->
                         <input type="email" class="form-control" id="email" name="email" required />
                     </div>
+
+                    <!-- Champ Téléphone -->
                     <div class="mb-3">
                         <label for="phone" class="form-label">Votre téléphone :</label>
+                        <!-- type="tel" : optimise le clavier mobile pour la saisie de numéro -->
                         <input type="tel" class="form-control" id="phone" name="phone" required />
                     </div>
+
+                    <!-- Champ Message -->
                     <div class="mb-3">
                         <label for="message" class="form-label">Votre message :</label>
+                        <!-- textarea : champ de texte multiligne -->
+                        <!-- rows="3" : hauteur initiale de 3 lignes -->
                         <textarea class="form-control" id="message" name="message" rows="3" required></textarea>
                     </div>
+
+                    <!-- Champ caché pour le token reCAPTCHA -->
+                    <!-- Ce token sera généré par JavaScript et envoyé avec le formulaire -->
                     <input type="hidden" id="recaptcha_token" name="recaptcha_token" />
+
+                    <!-- Bouton d'envoi du formulaire -->
                     <button type="submit" class="btn btn-primary">Envoyer</button>
                 </form>
                 <br />
+                <!-- Zone d'affichage des messages de succès ou d'erreur -->
+                <!-- Sera rempli dynamiquement par JavaScript -->
                 <p id="formMessage"></p>
             </div>
         </div>
 
+        <!-- ==================== SCRIPTS JAVASCRIPT ==================== -->
+        <!-- Bootstrap JS : Nécessaire pour les composants interactifs (offcanvas, collapse, etc.) -->
         <script
             src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
             crossorigin="anonymous"
         ></script>
+
+        <!-- Script personnalisé pour gérer l'envoi du formulaire avec reCAPTCHA -->
         <script src="script.js"></script>
+
+        <!-- ==================== SCRIPT : FERMETURE AUTO DU MENU MOBILE ==================== -->
+        <!--
+            Ce script ferme automatiquement le menu hamburger sur mobile
+            quand l'utilisateur clique sur un lien de navigation
+        -->
         <script>
+            // Attend que le DOM soit complètement chargé avant d'exécuter le code
             document.addEventListener('DOMContentLoaded', function () {
+                // Sélectionne tous les liens de navigation
                 const links = document.querySelectorAll('.nav-link');
+                // Sélectionne le menu collapse
                 const navbarCollapse = document.getElementById('navbarNav');
+                // Sélectionne le bouton hamburger
                 const toggleButton = document.querySelector('.navbar-toggler');
 
+                // Ajoute un écouteur d'événement sur chaque lien
                 links.forEach((link) => {
                     link.addEventListener('click', function () {
+                        // Si le menu est ouvert (classe 'show' présente)
                         if (navbarCollapse && navbarCollapse.classList.contains('show')) {
+                            // Simule un clic sur le bouton hamburger pour fermer le menu
                             toggleButton.click();
                         }
                     });
                 });
             });
         </script>
+
+        <!-- ==================== SCRIPT : GESTION SIMPLIFIÉE DU FORMULAIRE (DEMO) ==================== -->
+        <!--
+            ATTENTION : Ce script est désactivé en production car il n'envoie pas vraiment les données
+            Il sert uniquement à des fins de démonstration/test
+            Le vrai traitement est géré par script.js
+        -->
         <script>
             document.addEventListener('DOMContentLoaded', function () {
                 const contactForm = document.getElementById('contactForm');
                 const formMessage = document.getElementById('formMessage');
 
                 contactForm.addEventListener('submit', function (event) {
-                    event.preventDefault(); // Empêche l'envoi réel du formulaire
+                    // event.preventDefault() : empêche l'envoi traditionnel du formulaire
+                    // (qui rechargerait la page)
+                    event.preventDefault();
 
-                    // Affiche un message de confirmation
+                    // Affiche un message de confirmation factice
                     formMessage.textContent = 'Votre message a été envoyé avec succes !';
                     formMessage.style.color = 'black';
 
-                    // Réinitialise le formulaire
+                    // Réinitialise tous les champs du formulaire
                     contactForm.reset();
                 });
             });

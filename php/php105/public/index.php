@@ -3,10 +3,10 @@
 //index = notre point d'entrée unique
 
 session_start(); // Démarrage de la session
-include('../common/db.php');
-include('../common/config.php');
-include('../common/functions.php');
-include('../common/variables.php');
+require_once('../common/db.php');
+require_once('../common/config.php');
+require_once('../common/functions.php');
+require_once('../common/variables.php');
 
 
 $title = "L'Actu avec Sport 2000"; // Titre par défaut
