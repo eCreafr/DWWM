@@ -37,7 +37,7 @@ document.getElementById('contactForm').addEventListener('submit', function (even
      * - Génère un score de 0 (bot) à 1 (humain)
      * - Pas de challenge visuel (contrairement à v2)
      */
-    grecaptcha.execute('votre-clef', { action: 'submit' }).then(function (token) {
+    grecaptcha.execute('votre-clef-pub', { action: 'submit' }).then(function (token) {
         // Le token est généré et sera vérifié côté serveur par formulaire.php
 
         // ==================== ENVOI ASYNCHRONE DES DONNÉES (AJAX/FETCH) ==================== //

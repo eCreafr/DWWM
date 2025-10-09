@@ -71,12 +71,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Corps du message (contenu de l'email)
     // Opérateur de concaténation : . (point)
     // \n : retour à la ligne
-    $body = "Vous avez reçu un nouveau message de contact :\n\n".
-            "Nom : $name\n".
-            "Email : $email\n".
-            "Téléphone : $phone\n".
-            "methode : $radio\n".
-            "Message : $message";
+    $body = "Vous avez reçu un nouveau message de contact :\n\n" .
+        "Nom : $name\n" .
+        "Email : $email\n" .
+        "Téléphone : $phone\n" .
+        "Message : $message";
 
     // En-têtes HTTP de l'email
     // From : adresse d'expéditeur
@@ -84,8 +83,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // X-Mailer : identifie le logiciel utilisé pour envoyer l'email
     // \r\n : retour chariot + nouvelle ligne (standard email)
     $headers = 'From: votre@email.fr' . "\r\n" .
-               'Reply-To: votre@email.fr' . "\r\n" .
-               'X-Mailer: PHP/' . phpversion();
+        'Reply-To: votre@email.fr' . "\r\n" .
+        'X-Mailer: PHP/' . phpversion();
 
     // Tentative d'envoi de l'email
     // La fonction mail() retourne true en cas de succès, false en cas d'échec
@@ -94,8 +93,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } else {
         echo 'Erreur lors de l\'envoi de l\'email.';
     }
-    */
 
+*/ // Fin de la section mail()
 
     // ==================== MÉTHODE 2 : ENVOI EMAIL VIA API MANDRILL (ACTIVE) ==================== //
     /*
