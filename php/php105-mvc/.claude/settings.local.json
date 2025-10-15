@@ -1,7 +1,7 @@
 {
   "permissions": {
     "allow": [
-      "Bash(git mv:*)"
+      "Bash(mkdir:*)"
     ],
     "deny": [],
     "ask": []

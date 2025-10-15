@@ -16,7 +16,7 @@ $metadesc = "L'Actu avec Sport 2000 : c'est les meilleurs journalistes sportifs 
 // Gestion de l'affichage de la page demandée mixe rewrite htaccess + méthode get
 
 // on gère d'abord les articles
-if (isset($_GET['page']) && $_GET['page'] === 'article' && isset($_GET['id'])) {
+if (isset($_GET['page']) && $_GET['page'] === 'articles' && isset($_GET['id'])) {
     include('../common/dbArticle.php');
     $title = $article['titre'];
     $metadesc = $article['titre'] . ", " . truncateString($article['contenu'], 80);

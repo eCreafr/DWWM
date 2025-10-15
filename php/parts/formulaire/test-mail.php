@@ -1,7 +1,8 @@
 <?php
 // ------------------------------------------------------
 // Test simple d'envoi d'e-mail sur un hébergement OVH
-// sans bibliothèque externe (pas de PHPMailer)
+// sans bibliothèque externe (pas de PHPMailer) pour verifier si X-mailer est activé
+// et si la fonction mail() est opérationnelle.
 // ------------------------------------------------------
 
 // Adresse du destinataire (remplacer par la vôtre)

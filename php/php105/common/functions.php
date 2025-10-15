@@ -23,11 +23,11 @@ function createArticleUrl($id, $titre, $score = null)
 
     // Ajouter le score dans l'URL s'il est dispo
     if (!is_null($score)) {
-        return 'article/' . $id . '-' . $slug . '-' . $score . '.html';
+        return 'articles/' . $id . '-' . $slug . '-' . $score . '.html';
     }
 
     // Sinon, retourner l'URL sans score tant pis
-    return 'article/' . $id . '-' . $slug . '.html';
+    return 'articles/' . $id . '-' . $slug . '.html';
 }
 
 

@@ -61,7 +61,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
      * Fonctionne uniquement si le serveur PHP est configuré pour envoyer des emails
      */
 
-    /*
     // Destinataire de l'email
     $to = 'votre@email.fr';
 
@@ -89,12 +88,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Tentative d'envoi de l'email
     // La fonction mail() retourne true en cas de succès, false en cas d'échec
     if (mail($to, $subject, $body, $headers)) {
-        echo 'Email envoyé avec succès !';
+        echo 'Email envoyé avec succes !';
     } else {
         echo 'Erreur lors de l\'envoi de l\'email.';
     }
 
-*/ // Fin de la section mail()
+    // Fin de la section mail()
 
     // ==================== MÉTHODE 2 : ENVOI EMAIL VIA API MANDRILL (ACTIVE) ==================== //
     /*

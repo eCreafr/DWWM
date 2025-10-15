@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+  <!-- Les trois cercles -->
+  <circle cx="18" cy="5" r="3" stroke="#FFF" stroke-width="2" fill="none"/>
+  <circle cx="6" cy="12" r="3" stroke="#FFF" stroke-width="2" fill="none"/>
+  <circle cx="18" cy="19" r="3" stroke="#FFF" stroke-width="2" fill="none"/>
+  
+  <!-- Les lignes de connexion -->
+  <line x1="15.2" y1="6.8" x2="8.8" y2="10.2" stroke="#FFF" stroke-width="2"/>
+  <line x1="15.2" y1="17.2" x2="8.8" y2="13.8" stroke="#FFF" stroke-width="2"/>
+</svg>

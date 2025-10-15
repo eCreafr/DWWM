@@ -4,11 +4,11 @@
 
 $whitelist = array(
     'home' => "L'EQUIPE",
-    'add' => "Ajouter",
+    'add' => "Ajouter un nouvel article",
     'addpost' => "Ajouter",
     'edit' => "Modifier",
     'editpost' => "Modifier",
     'delete' => "Supprimer",
     'deletepost' => "Supprimer",
-    'article' => "Article"
+    'articles' => "Article"
 );
