@@ -51,6 +51,11 @@ et la on a comme un petit gout de bootstrap, en mettant col-xl-3 au lieu de 4 pa
  {$product.price_amount}	Prix TTC (float)
 
 
+{if $product.price_amount <20} <strong> {$product.price} </strong> {elseif  $product.price > 40 } <em> {$product.price} </em> {else}  {$product.price}  {/if}
+
+<p class="{if $product.price_amount <20}rouge{elseif  $product.price > 40 }vert{else}{/if}"> {$product.price} </p>
+
+<p style="{if $product.price <20}color:FF0000;{elseif  $product.price > 40 }vert{else}{/if}"> {$product.price} </p>
 
  /////////////////////////////////////////////////////////////////////
 
