@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Effet Parallaxe GSAP - 3 Niveaux</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            overflow-x: hidden;
+            background: #0a0a0a;
+        }
+
+        /* Section Hero avec Parallaxe */
+        .parallax-container {
+            position: relative;
+            height: 100vh;
+            overflow: hidden;
+            background: linear-gradient(180deg, #0a0a0a 0%, #1a1a2e 100%);
+        }
+
+        /* Couches de parallaxe */
+        .parallax-layer {
+            position: absolute;
+            width: 110%;
+            height: 120%;
+            top: -10%;
+            left: -5%;
+            will-change: transform;
+        }
+
+        /* Niveau 1 - Arrière-plan (plus lent) */
+        .parallax-bg {
+            z-index: 1;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800"><defs><linearGradient id="g1" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:%234a00e0;stop-opacity:0.3"/><stop offset="100%" style="stop-color:%238e2de2;stop-opacity:0.3"/></linearGradient></defs><circle cx="100" cy="100" r="80" fill="url(%23g1)"/><circle cx="800" cy="300" r="120" fill="url(%23g1)"/><circle cx="500" cy="600" r="100" fill="url(%23g1)"/></svg>') no-repeat center;
+            background-size: cover;
+            opacity: 0.6;
+        }
+
+        /* Niveau 2 - Milieu */
+        .parallax-mid {
+            z-index: 2;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800"><defs><linearGradient id="g2" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:%236a00ff;stop-opacity:0.5"/><stop offset="100%" style="stop-color:%23ff0099;stop-opacity:0.5"/></linearGradient></defs><rect x="200" y="400" width="300" height="300" fill="url(%23g2)" transform="rotate(45 350 550)"/><rect x="700" y="200" width="200" height="200" fill="url(%23g2)" transform="rotate(30 800 300)"/></svg>') no-repeat center;
+            background-size: cover;
+            opacity: 0.4;
+        }
+
+        /* Niveau 3 - Premier plan (plus rapide) */
+        .parallax-front {
+            z-index: 3;
+            pointer-events: none;
+        }
+
+        .parallax-front::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800"><defs><filter id="glow"><feGaussianBlur stdDeviation="4" result="coloredBlur"/><feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs><circle cx="300" cy="500" r="5" fill="%23fff" filter="url(%23glow)" opacity="0.8"/><circle cx="600" cy="200" r="3" fill="%23fff" filter="url(%23glow)" opacity="0.6"/><circle cx="900" cy="400" r="4" fill="%23fff" filter="url(%23glow)" opacity="0.7"/><circle cx="150" cy="300" r="3" fill="%23fff" filter="url(%23glow)" opacity="0.5"/><circle cx="1000" cy="600" r="6" fill="%23fff" filter="url(%23glow)" opacity="0.9"/></svg>') repeat;
+            background-size: 100% 100%;
+            animation: float 20s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        /* Contenu principal */
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+        }
+
+        .hero-title {
+            font-size: clamp(2rem, 8vw, 5rem);
+            font-weight: bold;
+            margin-bottom: 1rem;
+            opacity: 0;
+            transform: translateY(50px);
+            background: linear-gradient(45deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1rem, 3vw, 1.5rem);
+            opacity: 0;
+            transform: translateY(30px);
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        /* Sections de contenu */
+        .content-section {
+            min-height: 100vh;
+            padding: 100px 0;
+            position: relative;
+            background: linear-gradient(180deg, #1a1a2e 0%, #0a0a0a 100%);
+        }
+
+        .content-box {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 3rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transform: translateY(50px);
+            opacity: 0;
+        }
+
+        .section-title {
+            color: #667eea;
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .section-text {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        /* Indicateur de scroll */
+        .scroll-indicator {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 20;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
+            40% { transform: translateX(-50%) translateY(-10px); }
+            60% { transform: translateX(-50%) translateY(-5px); }
+        }
+
+        .scroll-indicator svg {
+            width: 30px;
+            height: 30px;
+            fill: rgba(255, 255, 255, 0.5);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Container Parallaxe -->
+    <div class="parallax-container">
+        <!-- Niveau 1 : Arrière-plan -->
+        <div class="parallax-layer parallax-bg" data-speed="0.3"></div>
+        
+        <!-- Niveau 2 : Milieu -->
+        <div class="parallax-layer parallax-mid" data-speed="0.5"></div>
+        
+        <!-- Niveau 3 : Premier plan -->
+        <div class="parallax-layer parallax-front" data-speed="0.8"></div>
+        
+        <!-- Contenu Hero -->
+        <div class="hero-content">
+            <div class="container">
+                <h1 class="hero-title">Effet Parallaxe GSAP</h1>
+                <p class="hero-subtitle">Trois niveaux de profondeur pour une expérience immersive</p>
+            </div>
+        </div>
+
+        <!-- Indicateur de scroll -->
+        <div class="scroll-indicator">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 13l-4-4h8l-4 4z"/>
+            </svg>
+        </div>
+    </div>
+
+    <!-- Section de contenu 1 -->
+    <section class="content-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+                    <div class="content-box">
+                        <h2 class="section-title">Animation Fluide</h2>
+                        <p class="section-text">
+                            L'effet de parallaxe multi-couches crée une sensation de profondeur et d'immersion. 
+                            Chaque élément se déplace à une vitesse différente lors du scroll, créant un effet 3D subtil mais efficace.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section de contenu 2 -->
+    <section class="content-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+                    <div class="content-box">
+                        <h2 class="section-title">Performance Optimisée</h2>
+                        <p class="section-text">
+                            Utilisant GSAP ScrollTrigger, l'animation est optimisée pour offrir une expérience fluide 
+                            même sur les appareils moins puissants. Les transformations CSS3D garantissent l'accélération matérielle.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section de contenu 3 -->
+    <section class="content-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+                    <div class="content-box">
+                        <h2 class="section-title">Responsive Design</h2>
+                        <p class="section-text">
+                            Entièrement responsive grâce à Bootstrap, l'effet s'adapte parfaitement à tous les écrans. 
+                            Les animations sont ajustées automatiquement selon la taille de l'viewport.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- GSAP et ScrollTrigger -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+    <script>
+        // Enregistrer ScrollTrigger
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Configuration de l'effet parallaxe pour les 3 niveaux
+        document.addEventListener('DOMContentLoaded', function() {
+            
+            // Animation d'entrée du hero
+            gsap.timeline()
+                .to('.hero-title', {
+                    opacity: 1,
+                    y: 0,
+                    duration: 1.2,
+                    ease: 'power3.out'
+                })
+                .to('.hero-subtitle', {
+                    opacity: 1,
+                    y: 0,
+                    duration: 1,
+                    ease: 'power3.out'
+                }, '-=0.5');
+
+            // Effet parallaxe sur les couches
+            gsap.utils.toArray('.parallax-layer').forEach(layer => {
+                const speed = layer.dataset.speed || 0.5;
+                const yPercent = -100 * (1 - speed);
+                
+                gsap.to(layer, {
+                    yPercent: yPercent,
+                    ease: 'none',
+                    scrollTrigger: {
+                        trigger: '.parallax-container',
+                        start: 'top top',
+                        end: 'bottom top',
+                        scrub: true,
+                        invalidateOnRefresh: true
+                    }
+                });
+            });
+
+            // Animation au scroll pour les sections de contenu
+            gsap.utils.toArray('.content-box').forEach(box => {
+                gsap.to(box, {
+                    opacity: 1,
+                    y: 0,
+                    duration: 1.2,
+                    ease: 'power3.out',
+                    scrollTrigger: {
+                        trigger: box,
+                        start: 'top 80%',
+                        end: 'bottom 20%',
+                        toggleActions: 'play none none reverse'
+                    }
+                });
+            });
+
+            // Effet de mouvement subtil sur le mouvement de la souris
+            let mouseX = 0;
+            let mouseY = 0;
+            let currentX = 0;
+            let currentY = 0;
+            
+            document.addEventListener('mousemove', (e) => {
+                mouseX = (e.clientX / window.innerWidth - 0.5) * 2;
+                mouseY = (e.clientY / window.innerHeight - 0.5) * 2;
+            });
+
+            function animateParallaxMouse() {
+                currentX += (mouseX - currentX) * 0.05;
+                currentY += (mouseY - currentY) * 0.05;
+
+                // Appliquer différentes intensités selon le niveau
+                gsap.set('.parallax-bg', {
+                    x: currentX * 20,
+                    y: currentY * 20,
+                    rotationY: currentX * 2,
+                    rotationX: -currentY * 2
+                });
+
+                gsap.set('.parallax-mid', {
+                    x: currentX * 35,
+                    y: currentY * 35,
+                    rotationY: currentX * 3,
+                    rotationX: -currentY * 3
+                });
+
+                gsap.set('.parallax-front', {
+                    x: currentX * 50,
+                    y: currentY * 50,
+                    rotationY: currentX * 5,
+                    rotationX: -currentY * 5
+                });
+
+                requestAnimationFrame(animateParallaxMouse);
+            }
+
+            animateParallaxMouse();
+
+            // Optimisation : pause des animations hors viewport
+            ScrollTrigger.config({
+                limitCallbacks: true,
+                syncInterval: 40
+            });
+
+            // Refresh ScrollTrigger sur resize
+            let resizeTimer;
+            window.addEventListener('resize', () => {
+                clearTimeout(resizeTimer);
+                resizeTimer = setTimeout(() => {
+                    ScrollTrigger.refresh();
+                }, 250);
+            });
+        });
+    </script>
+
+</body>
+</html>

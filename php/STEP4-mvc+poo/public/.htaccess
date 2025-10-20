@@ -1,5 +1,8 @@
 RewriteEngine On
 
+# Empêche l'accès direct aux fichiers sensibles
+RewriteRule ^(config|src)/.*$ - [F,L]
+
 # on s'occupe des articles en premier sinon la seconde regle va l'ignorer
 RewriteRule ^articles/([0-9]+)-([a-zA-Z0-9-]+)\.html$ index.php?page=articles&id=$1 [L,QSA]
 
