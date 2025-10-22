@@ -18,8 +18,37 @@
 
 <body>
     <!-- En-tête du site avec le logo/titre -->
-    <header>
+    <header class="d-flex justify-content-between align-items-center px-4 py-3">
         <a href="<?= BASE_URL ?>/home.html">L'EQUIPE</a>
+
+        <!-- Menu d'authentification -->
+        <div class="auth-menu d-flex align-items-center gap-2">
+            <?php if (\App\Helpers\AuthHelper::isLoggedIn()): ?>
+                <!-- Si l'utilisateur est connecté, afficher son nom et le bouton de déconnexion -->
+                <span class="me-2">
+                    Bonjour,
+                    <strong><?= htmlspecialchars(\App\Helpers\AuthHelper::getCurrentUserName()); ?></strong>
+                    <?php if (\App\Helpers\AuthHelper::isAdmin()): ?>
+                        <span class="badge bg-danger">ADMIN</span>
+                    <?php else: ?>
+                        <span class="badge bg-primary">USER</span>
+                    <?php endif; ?>
+                </span>
+                <!-- Bouton de déconnexion avec style Bootstrap -->
+                <a href="<?= BASE_URL ?>/logout.html"
+                    class="btn btn-sm rounded-pill"
+                    title="Se déconnecter">
+                    🚪 Deconnexion
+                </a>
+            <?php else: ?>
+                <!-- Si l'utilisateur n'est pas connecté, afficher le bouton de connexion -->
+                <a href="<?= BASE_URL ?>/login.html"
+                    class="btn btn-sm rounded-pill"
+                    title="Se connecter">
+                    🔐 Connexion
+                </a>
+            <?php endif; ?>
+        </div>
     </header>
 
     <!-- Contenu principal de la page -->

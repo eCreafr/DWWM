@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Controllers\ArticleController;
+use App\Controllers\AuthController;
 
 /**
  * Classe Router - Gestionnaire de routes de l'application
@@ -26,11 +27,18 @@ class Router
     private ArticleController $articleController;
 
     /**
-     * Constructeur - Initialise le contrôleur
+     * Instance du contrôleur d'authentification
+     * @var AuthController
+     */
+    private AuthController $authController;
+
+    /**
+     * Constructeur - Initialise les contrôleurs
      */
     public function __construct()
     {
         $this->articleController = new ArticleController();
+        $this->authController = new AuthController();
     }
 
     /**
@@ -47,6 +55,9 @@ class Router
      * - edit.html?id=123 => formulaire de modification
      * - editpost.html => traitement du formulaire de modification
      * - deletepost.html => traitement de la suppression
+     * - login.html => formulaire de connexion
+     * - loginpost.html => traitement de la connexion
+     * - logout.html => déconnexion
      */
     public function dispatch(): void
     {
@@ -64,6 +75,9 @@ class Router
             'delete',
             'deletepost',
             'articles',
+            'login',
+            'loginpost',
+            'logout',
         ];
 
         // Route pour les articles individuels (ex: articles/123-titre.html)
@@ -108,6 +122,21 @@ class Router
             case 'deletepost':
                 // Traitement de la suppression (action POST)
                 $this->articleController->delete();
+                break;
+
+            case 'login':
+                // Formulaire de connexion
+                $this->authController->showLoginForm();
+                break;
+
+            case 'loginpost':
+                // Traitement du formulaire de connexion (action POST)
+                $this->authController->login();
+                break;
+
+            case 'logout':
+                // Déconnexion de l'utilisateur
+                $this->authController->logout();
                 break;
 
             default:

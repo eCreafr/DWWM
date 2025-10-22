@@ -4,12 +4,15 @@
 <div class="container d-flex flex-wrap justify-content-center">
 
     <!-- Bouton d'ajout d'article en haut de page -->
-    <div class="p-3 m-3 col-12 text-center">
-        <a class="btn btn-outline-primary rounded-pill" role="button" href="<?= BASE_URL ?>/add.html">
-            <img src="<?= BASE_URL ?>/assets/img/file-earmark-plus.svg" alt="">
-            AJOUTER UN NOUVEL ARTICLE
-        </a>
-    </div>
+    <!-- Ce bouton n'est visible que pour les administrateurs -->
+    <?php if (\App\Helpers\AuthHelper::isAdmin()): ?>
+        <div class="p-3 m-3 col-12 text-center">
+            <a class="btn btn-outline-primary rounded-pill" role="button" href="<?= BASE_URL ?>/add.html">
+                <img src="<?= BASE_URL ?>/assets/img/file-earmark-plus.svg" alt="">
+                AJOUTER UN NOUVEL ARTICLE
+            </a>
+        </div>
+    <?php endif; ?>
 
     <?php
     // Affichage du message de succès (suppression, ajout, modification)
@@ -81,22 +84,25 @@
             </div>
 
             <!-- Boutons d'action : Modifier et Supprimer -->
-            <div class="col-12 text-center">
-                <!-- Bouton Modifier -->
-                <a class="btn btn-outline-success rounded-pill"
-                    role="button"
-                    href="<?= BASE_URL ?>/edit.html?id=<?= $article['id']; ?>">
-                    <img src="<?= BASE_URL ?>/assets/img/pencil-square.svg" alt="Modifier">
-                </a>
+            <!-- Ces boutons ne sont visibles que pour les administrateurs -->
+            <?php if (\App\Helpers\AuthHelper::isAdmin()): ?>
+                <div class="col-12 text-center">
+                    <!-- Bouton Modifier -->
+                    <a class="btn btn-outline-success rounded-pill"
+                        role="button"
+                        href="<?= BASE_URL ?>/edit.html?id=<?= $article['id']; ?>">
+                        <img src="<?= BASE_URL ?>/assets/img/pencil-square.svg" alt="Modifier">
+                    </a>
 
-                <!-- Bouton Supprimer (ouvre une modal de confirmation) -->
-                <button type="button"
-                    class="btn btn-outline-danger rounded-pill"
-                    data-bs-toggle="modal"
-                    data-bs-target="#Modal<?= $article['id']; ?>">
-                    <img src="<?= BASE_URL ?>/assets/img/trash.svg" alt="Supprimer">
-                </button>
-            </div>
+                    <!-- Bouton Supprimer (ouvre une modal de confirmation) -->
+                    <button type="button"
+                        class="btn btn-outline-danger rounded-pill"
+                        data-bs-toggle="modal"
+                        data-bs-target="#Modal<?= $article['id']; ?>">
+                        <img src="<?= BASE_URL ?>/assets/img/trash.svg" alt="Supprimer">
+                    </button>
+                </div>
+            <?php endif; ?>
         </div>
 
         <!-- Modal de confirmation de suppression pour cet article -->
@@ -144,11 +150,14 @@
     <?php endforeach; ?>
 
     <!-- Bouton d'ajout d'article en bas de page -->
-    <div class="p-3 m-3 col-12 text-center">
-        <a class="btn btn-outline-primary rounded-pill" role="button" href="<?= BASE_URL ?>/add.html">
-            <img src="<?= BASE_URL ?>/assets/img/file-earmark-plus.svg" alt="">
-            AJOUTER UN NOUVEL ARTICLE
-        </a>
-    </div>
+    <!-- Ce bouton n'est visible que pour les administrateurs -->
+    <?php if (\App\Helpers\AuthHelper::isAdmin()): ?>
+        <div class="p-3 m-3 col-12 text-center">
+            <a class="btn btn-outline-primary rounded-pill" role="button" href="<?= BASE_URL ?>/add.html">
+                <img src="<?= BASE_URL ?>/assets/img/file-earmark-plus.svg" alt="">
+                AJOUTER UN NOUVEL ARTICLE
+            </a>
+        </div>
+    <?php endif; ?>
 
 </div>
