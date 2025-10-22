@@ -38,7 +38,7 @@
     // Boucle sur tous les articles récupérés par le contrôleur
     foreach ($articles as $article):
     ?>
-        <div class="p-3 m-3 col-lg-3">
+        <div class="col-lg-3 col-md-4 col-sm-6 p-3">
             <div class="card">
                 <!-- Image aléatoire via Lorem Picsum, unique par article grâce à l'ID -->
                 <img src="https://picsum.photos/300/150?random=<?= $article['id']; ?>"
@@ -69,17 +69,24 @@
                         <?= htmlspecialchars(StringHelper::truncate($article['contenu'], 200)); ?>
                     </p>
 
-                    <!-- Lien vers l'article complet avec URL SEO-friendly -->
-                    <?php
-                    $url = UrlHelper::createArticleUrl(
-                        $article['id'],
-                        $article['titre'],
-                        $article['score'] ?? null
-                    );
-                    ?>
-                    <a class="btn btn-primary rounded-pill" href="<?= BASE_URL ?>/<?= $url; ?>">
-                        Voir l'article complet
-                    </a>
+                    <?php if (\App\Helpers\AuthHelper::isUser()): ?>
+
+                        <!-- Lien vers l'article complet avec URL SEO-friendly -->
+                        <?php
+                        $url = UrlHelper::createArticleUrl(
+                            $article['id'],
+                            $article['titre'],
+                            $article['score'] ?? null
+                        );
+                        ?>
+                        <a class="btn btn-primary rounded-pill" href="<?= BASE_URL ?>/<?= $url; ?>">
+                            Voir l'article complet
+                        </a>
+                    <?php else: ?>
+
+                        <a class="btn btn-primary rounded-pill" href="<?= BASE_URL ?>/login.html">
+                            Voir l'article complet </a>(connexion requise)
+                    <?php endif; ?>
                 </div>
             </div>
 
