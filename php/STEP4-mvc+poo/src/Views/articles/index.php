@@ -69,7 +69,7 @@
                         <?= htmlspecialchars(StringHelper::truncate($article['contenu'], 200)); ?>
                     </p>
 
-                    <?php if (\App\Helpers\AuthHelper::isUser()): ?>
+                    <?php if (\App\Helpers\AuthHelper::isUser() or \App\Helpers\AuthHelper::isAdmin()):  ?>
 
                         <!-- Lien vers l'article complet avec URL SEO-friendly -->
                         <?php

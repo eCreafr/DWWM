@@ -1,3 +1,3 @@
 <?php
-header("Location: STEP4-mvc+poo/index.php");
+header("Location: STEP4-mvc+poo/public/index.php");
 exit;

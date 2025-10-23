@@ -16,6 +16,7 @@ $config = [
     'files_to_delete' => [
         __FILE__,
         'site.zip',
+        'index.html',
         'database.sql'
     ]
 ];
