@@ -1,0 +1,381 @@
+<!doctype html>
+<!-- Déclaration du type de document HTML5 -->
+<html lang="fr">
+    <!-- Balise racine avec langue française -->
+    <head>
+        <!-- En-tête du document -->
+        <meta charset="UTF-8" />
+        <!-- Encodage des caractères en UTF-8 -->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <!-- Configuration responsive pour mobile -->
+        <title>Exercice 16 | Démonstration object-fit CSS</title>
+        <!-- Titre affiché dans l'onglet du navigateur -->
+
+        <link rel="stylesheet" href="css/froggie.css" />
+        <!-- Lien vers la feuille de style Froggie -->
+
+        <style>
+            /* Styles pour la démonstration object-fit */
+            .demo-container {
+                max-width: 1200px;
+                margin: 40px auto;
+                padding: 20px;
+                font-family: Arial, sans-serif;
+            }
+
+            .demo-title {
+                text-align: center;
+                font-size: 2.5em;
+                margin-bottom: 20px;
+                color: #2c3e50;
+            }
+
+            .demo-intro {
+                background: #ecf0f1;
+                padding: 20px;
+                border-radius: 10px;
+                margin-bottom: 40px;
+                line-height: 1.6;
+            }
+
+            .demo-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                gap: 30px;
+                margin-bottom: 40px;
+            }
+
+            .demo-item {
+                border: 2px solid #3498db;
+                border-radius: 10px;
+                padding: 20px;
+                background: white;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+                transition: transform 0.3s ease;
+            }
+
+            .demo-item:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+            }
+
+            .demo-item h2 {
+                margin-top: 0;
+                color: #3498db;
+                font-size: 1.5em;
+                text-align: center;
+            }
+
+            .demo-item p {
+                color: #7f8c8d;
+                margin: 10px 0;
+                font-size: 0.95em;
+            }
+
+            .image-box {
+                width: 100%;
+                height: 200px;
+                border: 3px dashed #95a5a6;
+                margin: 15px 0;
+                position: relative;
+                overflow: hidden;
+                background: #f8f9fa;
+            }
+
+            .image-box::before {
+                content: 'Conteneur: 100% × 200px';
+                position: absolute;
+                top: 5px;
+                left: 5px;
+                background: rgba(255, 255, 255, 0.9);
+                padding: 5px 10px;
+                border-radius: 5px;
+                font-size: 0.8em;
+                color: #555;
+                z-index: 1;
+            }
+
+            .demo-item img {
+                width: 100%;
+                height: 100%;
+                display: block;
+            }
+
+            .fill {
+                object-fit: fill;
+            }
+
+            .contain {
+                object-fit: contain;
+            }
+
+            .cover {
+                object-fit: cover;
+            }
+
+            .none {
+                object-fit: none;
+            }
+
+            .scale-down {
+                object-fit: scale-down;
+            }
+
+            .code-example {
+                background: #2c3e50;
+                color: #ecf0f1;
+                padding: 10px;
+                border-radius: 5px;
+                font-family: 'Courier New', monospace;
+                font-size: 0.9em;
+                margin-top: 10px;
+                overflow-x: auto;
+            }
+
+            .highlight {
+                color: #f39c12;
+                font-weight: bold;
+            }
+
+            .aspect-ratio-demo {
+                margin-top: 40px;
+                padding: 20px;
+                background: #e8f4f8;
+                border-radius: 10px;
+            }
+
+            .aspect-ratio-demo h3 {
+                color: #2c3e50;
+                margin-bottom: 20px;
+            }
+
+            .ratio-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                gap: 20px;
+            }
+
+            .ratio-item {
+                text-align: center;
+            }
+
+            .ratio-item img {
+                width: 100%;
+                height: 100%;
+                display: block;
+            }
+
+            .ratio-box {
+                width: 100%;
+                height: 150px;
+                border: 2px solid #3498db;
+                margin-bottom: 10px;
+            }
+
+            .landscape {
+                width: 100%;
+                height: 100px;
+            }
+
+            .portrait {
+                width: 60%;
+                height: 180px;
+                margin: 0 auto;
+            }
+
+            .square {
+                width: 150px;
+                height: 150px;
+                margin: 0 auto;
+            }
+        </style>
+    </head>
+    <body>
+        <!-- Corps du document -->
+
+        <!-- Conteneur principal pour les exemples -->
+        <div class="demo-container">
+            <h1 class="demo-title">🖼️ Démonstration : object-fit en CSS</h1>
+
+            <div class="demo-intro">
+                <h3>📚 Qu'est-ce que object-fit ?</h3>
+                <p>
+                    La propriété CSS <strong>object-fit</strong> spécifie comment le contenu d'un élément remplacé
+                    (comme une image ou une vidéo) doit s'adapter à son conteneur en termes de taille.
+                </p>
+                <p>
+                    Elle est particulièrement utile pour contrôler le comportement des images qui ont des dimensions
+                    différentes de leur conteneur, évitant ainsi les déformations ou les débordements.
+                </p>
+            </div>
+
+            <!-- Grille des exemples object-fit -->
+            <div class="demo-grid">
+                <!-- FILL -->
+                <div class="demo-item">
+                    <h2>fill (défaut)</h2>
+                    <p>
+                        L'image remplit tout le conteneur. Elle sera étirée ou compressée pour occuper 100% de l'espace.
+                    </p>
+                    <div class="image-box">
+                        <img src="img/fondglass.jpg" alt="Image fill" class="fill" />
+                    </div>
+                    <div class="code-example">
+                        img {<br />
+                        &nbsp;&nbsp;<span class="highlight">object-fit: fill;</span><br />
+                        }
+                    </div>
+                    <p><strong>⚠️ Attention :</strong> Peut déformer l'image (aspect ratio non respecté).</p>
+                </div>
+
+                <!-- CONTAIN -->
+                <div class="demo-item">
+                    <h2>contain</h2>
+                    <p>
+                        L'image est redimensionnée pour tenir entièrement dans le conteneur tout en conservant ses
+                        proportions.
+                    </p>
+                    <div class="image-box">
+                        <img src="img/fondglass.jpg" alt="Image contain" class="contain" />
+                    </div>
+                    <div class="code-example">
+                        img {<br />
+                        &nbsp;&nbsp;<span class="highlight">object-fit: contain;</span><br />
+                        }
+                    </div>
+                    <p><strong>✅ Idéal pour :</strong> Afficher l'image complète sans déformation.</p>
+                </div>
+
+                <!-- COVER -->
+                <div class="demo-item">
+                    <h2>cover</h2>
+                    <p>L'image couvre tout le conteneur en conservant ses proportions. Elle peut être rognée.</p>
+                    <div class="image-box">
+                        <img src="img/fondglass.jpg" alt="Image cover" class="cover" />
+                    </div>
+                    <div class="code-example">
+                        img {<br />
+                        &nbsp;&nbsp;<span class="highlight">object-fit: cover;</span><br />
+                        }
+                    </div>
+                    <p><strong>✅ Idéal pour :</strong> Créer des backgrounds ou vignettes sans espaces vides.</p>
+                </div>
+
+                <!-- NONE -->
+                <div class="demo-item">
+                    <h2>none</h2>
+                    <p>L'image garde sa taille d'origine. Elle peut déborder ou laisser des espaces vides.</p>
+                    <div class="image-box">
+                        <img src="img/fondglass.jpg" alt="Image none" class="none" />
+                    </div>
+                    <div class="code-example">
+                        img {<br />
+                        &nbsp;&nbsp;<span class="highlight">object-fit: none;</span><br />
+                        }
+                    </div>
+                    <p><strong>📝 Note :</strong> L'image n'est pas redimensionnée du tout.</p>
+                </div>
+
+                <!-- SCALE-DOWN -->
+                <div class="demo-item">
+                    <h2>scale-down</h2>
+                    <p>Choisit entre 'none' et 'contain' selon ce qui produit la plus petite taille finale.</p>
+                    <div class="image-box">
+                        <img src="img/fondglass.jpg" alt="Image scale-down" class="scale-down" />
+                    </div>
+                    <div class="code-example">
+                        img {<br />
+                        &nbsp;&nbsp;<span class="highlight">object-fit: scale-down;</span><br />
+                        }
+                    </div>
+                    <p><strong>✅ Idéal pour :</strong> Éviter l'agrandissement d'images petites.</p>
+                </div>
+            </div>
+
+            <!-- Section bonus : object-position -->
+            <div class="aspect-ratio-demo">
+                <h3>🎯 Bonus : Combiner avec object-position</h3>
+                <p>
+                    La propriété <strong>object-position</strong> permet de contrôler la position de l'image dans son
+                    conteneur (fonctionne bien avec 'cover' et 'none').
+                </p>
+
+                <div class="ratio-grid">
+                    <div class="ratio-item">
+                        <div class="image-box">
+                            <img src="img/fondglass.jpg" alt="Position top" class="cover" style="object-position: top" />
+                        </div>
+                        <div class="code-example">
+                            object-fit: cover;<br />
+                            <span class="highlight">object-position: top;</span>
+                        </div>
+                    </div>
+
+                    <div class="ratio-item">
+                        <div class="image-box">
+                            <img
+                                src="img/fondglass.jpg"
+                                alt="Position center"
+                                class="cover"
+                                style="object-position: center"
+                            />
+                        </div>
+                        <div class="code-example">
+                            object-fit: cover;<br />
+                            <span class="highlight">object-position: center;</span>
+                        </div>
+                    </div>
+
+                    <div class="ratio-item">
+                        <div class="image-box">
+                            <img
+                                src="img/fondglass.jpg"
+                                alt="Position bottom right"
+                                class="cover"
+                                style="object-position: bottom right"
+                            />
+                        </div>
+                        <div class="code-example">
+                            object-fit: cover;<br />
+                            <span class="highlight">object-position: bottom right;</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Zone d'explication pédagogique "Froggiesplaining" -->
+        <div class="froggiesplaining">
+            <span> Froggiesplaining :</span>
+            <p>
+                <br />
+                <strong>🎯 Objectifs de cet exercice :</strong><br />
+                ✅ Comprendre les 5 valeurs de object-fit : fill, contain, cover, none, scale-down<br />
+                ✅ Visualiser l'impact de chaque valeur sur les images<br />
+                ✅ Apprendre à combiner object-fit avec object-position<br />
+                ✅ Savoir choisir la bonne valeur selon le contexte<br /><br />
+
+                <strong>📖 Résumé rapide :</strong><br />
+                • <strong>fill</strong> : Remplit le conteneur (peut déformer)<br />
+                • <strong>contain</strong> : Image complète visible (peut laisser des espaces)<br />
+                • <strong>cover</strong> : Remplit sans déformer (peut rogner)<br />
+                • <strong>none</strong> : Taille d'origine (peut déborder)<br />
+                • <strong>scale-down</strong> : Le plus petit entre none et contain<br />
+            </p>
+            <img src="img/froggie-300.png" alt="Froggie explain" class="overfrog" id="Froggie" />
+        </div>
+
+        <!-- Lien d'ancrage vers Froggie -->
+        <a href="#Froggie"
+            ><div id="goToFroggie">
+                <img src="img/froggie-300.png" width="50px" /><br /><i class="bi bi-arrow-bar-down"></i></div
+        ></a>
+
+        <!-- Pied de page avec lien GitHub -->
+        <div id="footerGit">
+            <a href="https://github.com/eCreafr/DWWM" target="_blank"><i class="bi bi-github">GitHub - eCrea</i></a>
+        </div>
+    </body>
+    <!-- Fin du corps du document -->
+</html>
+<!-- Fin du document HTML -->

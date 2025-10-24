@@ -1,0 +1,371 @@
+<!doctype html>
+<!-- Déclaration du type de document HTML5 -->
+<html lang="fr">
+    <!-- Balise racine avec langue française -->
+    <head>
+        <!-- En-tête du document -->
+        <meta charset="UTF-8" />
+        <!-- Encodage des caractères en UTF-8 -->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <!-- Configuration responsive pour mobile -->
+        <title>Exercice 17 | Démonstration CSS Columns</title>
+        <!-- Titre affiché dans l'onglet du navigateur -->
+
+        <link rel="stylesheet" href="css/froggie.css" />
+        <!-- Lien vers la feuille de style Froggie -->
+
+        <style>
+            /* Styles pour la démonstration columns */
+            .demo-container {
+                max-width: 1200px;
+                margin: 40px auto;
+                padding: 20px;
+                font-family: Arial, sans-serif;
+            }
+
+            .demo-title {
+                text-align: center;
+                font-size: 2.5em;
+                margin-bottom: 20px;
+                color: #2c3e50;
+            }
+
+            .demo-intro {
+                background: #ecf0f1;
+                padding: 20px;
+                border-radius: 10px;
+                margin-bottom: 40px;
+                line-height: 1.6;
+            }
+
+            .demo-grid {
+                display: flex;
+                flex-direction: column;
+                gap: 30px;
+                margin-bottom: 40px;
+            }
+
+            .demo-item {
+                border: 2px solid #3498db;
+                border-radius: 10px;
+                padding: 20px;
+                background: white;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+                transition: transform 0.3s ease;
+            }
+
+            .demo-item:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+            }
+
+            .demo-item h2 {
+                margin-top: 0;
+                color: #3498db;
+                font-size: 1.5em;
+                text-align: center;
+            }
+
+            .demo-item p {
+                color: #7f8c8d;
+                margin: 10px 0;
+                font-size: 0.95em;
+            }
+
+            .column-box {
+                width: 100%;
+                padding: 15px;
+                border: 3px dashed #95a5a6;
+                margin: 15px 0;
+                background: #f8f9fa;
+                text-align: justify;
+                line-height: 1.6;
+                box-sizing: border-box;
+            }
+
+            /* Exemple principal avec columns */
+            .columns-main {
+                columns: 150px 3;
+                column-rule: 1px solid #ccc;
+                gap: 3em;
+            }
+
+            /* Variation 1 : Nombre de colonnes fixe */
+            .columns-count {
+                column-count: 3;
+                column-rule: 2px solid #3498db;
+                column-gap: 2em;
+            }
+
+            /* Variation 2 : Largeur de colonne */
+            .columns-width {
+                column-width: 200px;
+                column-rule: 3px dotted #e74c3c;
+                column-gap: 1.5em;
+            }
+
+            /* Variation 3 : Colonnes avec gap large */
+            .columns-gap {
+                columns: 2;
+                column-rule: 4px double #2ecc71;
+                column-gap: 4em;
+            }
+
+            /* Variation 4 : Sans séparateur */
+            .columns-no-rule {
+                columns: 150px 4;
+                column-gap: 2em;
+            }
+
+            /* Style pour les éléments span-column */
+            .column-span {
+                column-span: all;
+                background: #3498db;
+                color: white;
+                padding: 10px;
+                margin: 15px 0;
+                text-align: center;
+                font-weight: bold;
+                border-radius: 5px;
+            }
+
+            .code-example {
+                background: #2c3e50;
+                color: #ecf0f1;
+                padding: 10px;
+                border-radius: 5px;
+                font-family: 'Courier New', monospace;
+                font-size: 0.9em;
+                margin-top: 10px;
+                overflow-x: auto;
+            }
+
+            .highlight {
+                color: #f39c12;
+                font-weight: bold;
+            }
+
+            .advanced-demo {
+                margin-top: 40px;
+                padding: 20px;
+                background: #e8f4f8;
+                border-radius: 10px;
+            }
+
+            .advanced-demo h3 {
+                color: #2c3e50;
+                margin-bottom: 20px;
+            }
+
+            /* Style pour éviter les ruptures */
+            .no-break {
+                break-inside: avoid;
+                background: #fff3cd;
+                padding: 10px;
+                margin: 10px 0;
+                border-left: 4px solid #ffc107;
+            }
+        </style>
+    </head>
+    <body>
+        <!-- Corps du document -->
+
+        <!-- Conteneur principal pour les exemples -->
+        <div class="demo-container">
+            <h1 class="demo-title">📰 Démonstration : CSS Columns</h1>
+
+            <div class="demo-intro">
+                <h3>📚 Qu'est-ce que CSS Columns ?</h3>
+                <p>
+                    La propriété CSS <strong>columns</strong> permet de créer des mises en page multi-colonnes,
+                    similaires à celles des journaux ou magazines. Elle est un raccourci pour
+                    <strong>column-width</strong> et <strong>column-count</strong>.
+                </p>
+                <p>
+                    Les propriétés associées comme <strong>column-rule</strong> (pour les séparateurs) et
+                    <strong>gap</strong> (pour l'espacement) permettent de contrôler finement l'apparence des colonnes.
+                </p>
+            </div>
+
+            <!-- Grille des exemples columns -->
+            <div class="demo-grid">
+                <!-- EXEMPLE PRINCIPAL -->
+                <div class="demo-item">
+                    <h2>Exemple Principal</h2>
+                    <p>Configuration avec largeur minimale et nombre maximum de colonnes</p>
+                    <div class="column-box columns-main">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut
+                        labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                        laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in
+                        voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+                    </div>
+                    <div class="code-example">
+                        .columns {<br />
+                        &nbsp;&nbsp;<span class="highlight">columns: 150px 3;</span><br />
+                        &nbsp;&nbsp;<span class="highlight">column-rule: 1px solid #ccc;</span><br />
+                        &nbsp;&nbsp;<span class="highlight">gap: 3em;</span><br />
+                        }
+                    </div>
+                    <p>
+                        <strong>📝 Note :</strong> Crée jusqu'à 3 colonnes de 150px minimum avec séparateur gris et
+                        espacement de 3em.
+                    </p>
+                </div>
+
+                <!-- COLUMN-COUNT -->
+                <div class="demo-item">
+                    <h2>column-count</h2>
+                    <p>Nombre de colonnes fixe, quelle que soit la largeur disponible</p>
+                    <div class="column-box columns-count">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut
+                        labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                        laboris. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore.
+                    </div>
+                    <div class="code-example">
+                        .columns {<br />
+                        &nbsp;&nbsp;<span class="highlight">column-count: 3;</span><br />
+                        &nbsp;&nbsp;column-rule: 2px solid #3498db;<br />
+                        &nbsp;&nbsp;column-gap: 2em;<br />
+                        }
+                    </div>
+                    <p><strong>✅ Idéal pour :</strong> Un nombre de colonnes constant et prévisible.</p>
+                </div>
+
+                <!-- COLUMN-WIDTH -->
+                <div class="demo-item">
+                    <h2>column-width</h2>
+                    <p>Largeur de colonne optimale, le nombre s'adapte automatiquement</p>
+                    <div class="column-box columns-width">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut
+                        labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                        laboris. Duis aute irure dolor in reprehenderit.
+                    </div>
+                    <div class="code-example">
+                        .columns {<br />
+                        &nbsp;&nbsp;<span class="highlight">column-width: 200px;</span><br />
+                        &nbsp;&nbsp;column-rule: 3px dotted #e74c3c;<br />
+                        &nbsp;&nbsp;column-gap: 1.5em;<br />
+                        }
+                    </div>
+                    <p><strong>✅ Idéal pour :</strong> Un design responsive avec colonnes de taille optimale.</p>
+                </div>
+
+                <!-- COLUMN-GAP LARGE -->
+                <div class="demo-item">
+                    <h2>Gap Large</h2>
+                    <p>Espacement important entre les colonnes</p>
+                    <div class="column-box columns-gap">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut
+                        labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                        laboris nisi ut aliquip ex ea commodo.
+                    </div>
+                    <div class="code-example">
+                        .columns {<br />
+                        &nbsp;&nbsp;columns: 2;<br />
+                        &nbsp;&nbsp;column-rule: 4px double #2ecc71;<br />
+                        &nbsp;&nbsp;<span class="highlight">column-gap: 4em;</span><br />
+                        }
+                    </div>
+                    <p><strong>📝 Note :</strong> Un gap important améliore la lisibilité entre colonnes.</p>
+                </div>
+
+                <!-- SANS SÉPARATEUR -->
+                <div class="demo-item">
+                    <h2>Sans Séparateur</h2>
+                    <p>Colonnes sans ligne de séparation (column-rule)</p>
+                    <div class="column-box columns-no-rule">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut
+                        labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                        laboris nisi ut aliquip ex ea commodo consequat.
+                    </div>
+                    <div class="code-example">
+                        .columns {<br />
+                        &nbsp;&nbsp;<span class="highlight">columns: 150px 4;</span><br />
+                        &nbsp;&nbsp;column-gap: 2em;<br />
+                        &nbsp;&nbsp;/* Pas de column-rule */<br />
+                        }
+                    </div>
+                    <p><strong>✅ Idéal pour :</strong> Un design minimaliste et épuré.</p>
+                </div>
+            </div>
+
+            <!-- Section avancée -->
+            <div class="advanced-demo">
+                <h3>🎯 Fonctionnalités Avancées</h3>
+
+                <h4>1. Column-Span : Titres sur toute la largeur</h4>
+                <div class="column-box columns-main">
+                    <h3 class="column-span">Titre sur toutes les colonnes</h3>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore
+                    et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+                    aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+                    cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+                    culpa qui officia deserunt mollit anim id est laborum.
+                </div>
+                <div class="code-example">
+                    h3 {<br />
+                    &nbsp;&nbsp;<span class="highlight">column-span: all;</span><br />
+                    &nbsp;&nbsp;background: #3498db;<br />
+                    &nbsp;&nbsp;padding: 10px;<br />
+                    }
+                </div>
+
+                <h4 style="margin-top: 30px">2. Break-Inside : Éviter les ruptures</h4>
+                <div class="column-box columns-count">
+                    <div class="no-break">
+                        <strong>Bloc Important :</strong> Ce contenu ne sera pas coupé entre deux colonnes grâce à
+                        break-inside: avoid. C'est utile pour garder ensemble les éléments importants comme les
+                        citations ou les blocs de code.
+                    </div>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore
+                    et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+                    aliquip ex ea commodo consequat.
+                </div>
+                <div class="code-example">
+                    .no-break {<br />
+                    &nbsp;&nbsp;<span class="highlight">break-inside: avoid;</span><br />
+                    &nbsp;&nbsp;background: #fff3cd;<br />
+                    &nbsp;&nbsp;padding: 10px;<br />
+                    }
+                </div>
+            </div>
+        </div>
+
+        <!-- Zone d'explication pédagogique "Froggiesplaining" -->
+        <div class="froggiesplaining">
+            <span> Froggiesplaining :</span>
+            <p>
+                <br />
+                <strong>🎯 Objectifs de cet exercice :</strong><br />
+                ✅ Comprendre la propriété columns et ses variations<br />
+                ✅ Maîtriser column-count vs column-width<br />
+                ✅ Utiliser column-rule pour les séparateurs visuels<br />
+                ✅ Contrôler l'espacement avec gap<br />
+                ✅ Découvrir column-span et break-inside<br /><br />
+
+                <strong>📖 Résumé rapide :</strong><br />
+                • <strong>columns: 150px 3</strong> : Largeur min 150px, max 3 colonnes<br />
+                • <strong>column-count</strong> : Nombre fixe de colonnes<br />
+                • <strong>column-width</strong> : Largeur optimale (nombre variable)<br />
+                • <strong>column-rule</strong> : Ligne de séparation entre colonnes<br />
+                • <strong>gap (column-gap)</strong> : Espacement entre colonnes<br />
+                • <strong>column-span: all</strong> : Élément sur toute la largeur<br />
+                • <strong>break-inside: avoid</strong> : Évite les coupures<br />
+            </p>
+            <img src="img/froggie-300.png" alt="Froggie explain" class="overfrog" id="Froggie" />
+        </div>
+
+        <!-- Lien d'ancrage vers Froggie -->
+        <a href="#Froggie"
+            ><div id="goToFroggie">
+                <img src="img/froggie-300.png" width="50px" /><br /><i class="bi bi-arrow-bar-down"></i></div
+        ></a>
+
+        <!-- Pied de page avec lien GitHub -->
+        <div id="footerGit">
+            <a href="https://github.com/eCreafr/DWWM" target="_blank"><i class="bi bi-github">GitHub - eCrea</i></a>
+        </div>
+    </body>
+    <!-- Fin du corps du document -->
+</html>
+<!-- Fin du document HTML -->
