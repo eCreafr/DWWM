@@ -1,93 +1,93 @@
 /* CSS exo 07 A */
 body {
-  text-align: center;
+    text-align: center;
 }
 @media screen and (min-width: 800px) {
-  .testqueries1 {
-    display: block;
-  }
+    .testqueries1 {
+        display: block;
+    }
 
-  .testqueries2 {
-    display: none;
-  }
+    .testqueries2 {
+        display: none;
+    }
 }
 
 @media screen and (max-width: 799px) {
-  .testqueries1 {
-    display: none;
-  }
+    .testqueries1 {
+        display: none;
+    }
 
-  .testqueries2 {
-    display: block;
-  }
-  .testqueries3 {
-    background-color: rgba(35, 15, 39, 0.221) !important;
-    color: aliceblue !important;
-  }
+    .testqueries2 {
+        display: block;
+    }
+    .testqueries3 {
+        background-color: rgba(35, 15, 39, 0.221) !important;
+        color: aliceblue !important;
+    }
 }
 
 .testqueries1,
 .testqueries2,
 .testqueries3 {
-  background-color: rgba(89, 56, 151, 0.096);
-  margin: 8px;
-  padding: 8px;
-  text-align: center;
+    background-color: rgba(89, 56, 151, 0.096);
+    margin: 8px;
+    padding: 8px;
+    text-align: center;
 }
 
 header,
 footer {
-  text-align: center;
+    text-align: center;
 }
 
 strong {
-  color: #ba8ce4;
+    color: #ba8ce4;
 }
 
 /* rendre responsive une image */
 
 .img-responsive {
-  display: block;
-  max-width: 100%;
-  height: auto;
-  margin: auto;
+    display: block;
+    max-width: 100%;
+    height: auto;
+    margin: auto;
 }
 
 /* CSS exo 07 B */
 
 /* Style de base pour le conteneur */
 .container7b {
-  width: 100%;
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 0px;
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0px;
 }
 
 /* Conteneur adaptable en fonction de la taille */
 .box7b {
-  background-color: rgba(173, 216, 230, 0.274);
-  padding: 80px 0px;
-  text-align: center;
-  margin: 0 auto;
+    background-color: rgba(173, 216, 230, 0.274);
+    padding: 80px 0px;
+    text-align: center;
+    margin: 0 auto;
 }
 
 /* Container query pour modifier le style de .box si le conteneur parent fait au moins 500px de largeur */
 @container (min-width: 500px) {
-  .box7b {
-    background-color: rgba(255, 127, 80, 0.352);
-    font-size: 1.5rem;
-  }
+    .box7b {
+        background-color: rgba(255, 127, 80, 0.352);
+        font-size: 1.5rem;
+    }
 }
 
 /* Container query pour modifier le style de .box si le conteneur parent fait au moins 700px de largeur */
 @container (min-width: 700px) {
-  .box7b {
-    background-color: rgba(144, 238, 144, 0.272);
-    font-size: 2rem;
-  }
+    .box7b {
+        background-color: rgba(144, 238, 144, 0.272);
+        font-size: 2rem;
+    }
 }
 
 /* Activer les container queries */
 .container7b {
-  container-type: inline-size;
+    container-type: inline-size;
 }

@@ -31,37 +31,6 @@ body {
     padding: 0;
 }
 
-@media screen and (max-width: 650px) {
-    body {
-        width: 100%;
-        background-color: #2a185d;
-        background-image: radial-gradient(at 0% 0%, #15acff 0px, transparent 50%),
-            radial-gradient(at 30% 0%, #584cb4 0px, transparent 50%),
-            radial-gradient(at 97% 50%, #15acff 0px, transparent 50%),
-            radial-gradient(at 50% 50%, #ba8ce4 0px, transparent 50%),
-            radial-gradient(at 0% 100%, #2a185d 0px, transparent 50%),
-            radial-gradient(at 0% 0%, #2a185d 0px, transparent 50%);
-        background-repeat: no-repeat;
-        background-position: 50% 0;
-        margin: 0;
-        padding: 0;
-        color: #e9f3fc;
-    }
-    #goToFroggie {
-        display: none;
-    }
-    h3,
-    main {
-        color: #e9f3fc !important;
-    }
-    .exercice {
-        padding: 8px;
-        margin: 24px;
-        border: thin solid #e9f3fc !important;
-        text-align: left;
-    }
-}
-
 .img-responsive {
     display: block;
     max-width: 100%;
