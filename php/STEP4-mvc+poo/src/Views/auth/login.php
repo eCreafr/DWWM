@@ -65,8 +65,8 @@
                     <!-- Informations pour les tests (à retirer en production !) -->
                     <div class="alert alert-info mt-4 small">
                         <strong>Comptes de test :</strong><br>
-                        Admin : raphael.lang@gmail.com / 123<br>
-                        User : jane@example.com / 123
+                        Admin : raphael.lang@gmail.com / 123 (haché en bdd)<br>
+                        User : jane@example.com / 123 (haché en bdd)
                     </div>
 
                     <!-- Lien vers la page d'accueil -->

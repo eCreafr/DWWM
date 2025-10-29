@@ -1,4 +1,4 @@
 <?php
-$password = "ici mettre pass a hacher";
+$password = "123";
 $hash = password_hash($password, PASSWORD_DEFAULT);
 echo "Votre hash : " . $hash;

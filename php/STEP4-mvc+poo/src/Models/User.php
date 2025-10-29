@@ -120,11 +120,10 @@ class User
             return false;
         }
 
-        // Vérifie le mot de passe
-        // IMPORTANT : Dans un vrai projet, il faudrait utiliser password_verify()
-        // Exemple : if (password_verify($password, $user['pswd'])) { ... }
-        if ($user['pswd'] === $password) {
-            // Supprime le mot de passe des données retournées (sécurité)
+        // Vérifie le mot de passe avec "password_verify" 
+
+        if (password_verify($password, $user['pswd'])) {
+            // puis supprime le mot de passe des données retournées (sécurité)
             unset($user['pswd']);
 
             // Retourne les informations de l'utilisateur (sans le mot de passe)
