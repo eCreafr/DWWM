@@ -43,13 +43,13 @@
         $imageUrl = $imagePath ? BASE_URL . $imagePath : "https://picsum.photos/300/150?random={$article['id']}";
     ?>
         <div class="col-lg-3 col-md-4 col-sm-6 p-3">
-            <div class="card">
+            <div class="card card-custom">
                 <!-- Image uploadée ou image aléatoire via Lorem Picsum -->
-                <img src="<?= $imageUrl ?>"
-                    class="card-img-top"
+                <img src="<?= $imageUrl ?>" style="height: 100px;"
+                    class="card-img-top object-fit-cover"
                     alt="<?= htmlspecialchars($article['titre']); ?>">
 
-                <div class="card-body">
+                <div class="card-body d-flex flex-column">
                     <!-- Date de publication -->
                     <p>
                         <mark><?= htmlspecialchars($article['date_publication']); ?></mark>
@@ -68,7 +68,7 @@
                         <p>à <?= htmlspecialchars($article['lieu']); ?></p>
                     <?php endif; ?>
 
-                    <!-- Contenu tronqué de l'article (200 caractères max) -->
+                    <!-- Contenu tronqué de l'article (200 caractères max par php, 3 lignes max par css card-text ) -->
                     <p class="card-text">
                         <?= htmlspecialchars(StringHelper::truncate($article['contenu'], 200)); ?>
                     </p>
@@ -83,37 +83,39 @@
                             $article['score'] ?? null
                         );
                         ?>
-                        <a class="btn btn-primary rounded-pill" href="<?= BASE_URL ?>/<?= $url; ?>">
-                            Voir l'article complet
-                        </a>
+                        <div class="btn btn-primary rounded-pill mt-auto d-flex justify-content-between align-items-center">
+                            <a class="text-white text-decoration-none flex-grow-1" href="<?= BASE_URL ?>/<?= $url; ?>">
+                                Voir l'article complet
+                            </a>
+
+                            <!-- Boutons d'action : Modifier et Supprimer (visible pour les admins uniquement) -->
+                            <?php if (\App\Helpers\AuthHelper::isAdmin()): ?>
+                                <div class="d-flex gap-2">
+                                    <!-- Bouton Modifier -->
+                                    <a role="button"
+                                        href="<?= BASE_URL ?>/edit.html?id=<?= $article['id']; ?>"
+                                        class="btn btn-link text-white bg-success  rounded-pill ">
+                                        <img src="<?= BASE_URL ?>/assets/img/pencil-square.svg" alt="Modifier" style="filter: brightness(0) invert(1);">
+                                    </a>
+
+                                    <!-- Bouton Supprimer (ouvre une modal de confirmation) -->
+                                    <button type="button"
+                                        class="btn btn-link rounded-pill text-white bg-danger"
+                                        data-bs-toggle="modal"
+                                        data-bs-target="#Modal<?= $article['id']; ?>">
+                                        <img src="<?= BASE_URL ?>/assets/img/trash.svg" alt="Supprimer" style="filter: brightness(0) invert(1);">
+                                    </button>
+                                </div>
+                            <?php endif; ?>
+                        </div>
                     <?php else: ?>
 
-                        <a class="btn btn-primary rounded-pill" href="<?= BASE_URL ?>/login.html">
+                        <a class="btn btn-primary rounded-pill mt-auto" href="<?= BASE_URL ?>/login.html">
                             Voir l'article complet </a>(connexion requise)
                     <?php endif; ?>
                 </div>
             </div>
 
-            <!-- Boutons d'action : Modifier et Supprimer -->
-            <!-- Ces boutons ne sont visibles que pour les administrateurs -->
-            <?php if (\App\Helpers\AuthHelper::isAdmin()): ?>
-                <div class="col-12 text-center">
-                    <!-- Bouton Modifier -->
-                    <a class="btn btn-outline-success rounded-pill"
-                        role="button"
-                        href="<?= BASE_URL ?>/edit.html?id=<?= $article['id']; ?>">
-                        <img src="<?= BASE_URL ?>/assets/img/pencil-square.svg" alt="Modifier">
-                    </a>
-
-                    <!-- Bouton Supprimer (ouvre une modal de confirmation) -->
-                    <button type="button"
-                        class="btn btn-outline-danger rounded-pill"
-                        data-bs-toggle="modal"
-                        data-bs-target="#Modal<?= $article['id']; ?>">
-                        <img src="<?= BASE_URL ?>/assets/img/trash.svg" alt="Supprimer">
-                    </button>
-                </div>
-            <?php endif; ?>
         </div>
 
         <!-- Modal de confirmation de suppression pour cet article -->

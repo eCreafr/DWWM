@@ -38,20 +38,27 @@ header > a {
 .simpsons {
     font-family: 'simpsonfont' !important;
 }
-.card {
-    margin: 50px auto;
-    padding: 20px;
-    max-width: 500px;
+
+.card-custom {
+    min-height: 500px !important;
     background: white;
-    border-radius: 8px;
+    border-radius: 16px !important;
     transition-property: box-shadow, opacity;
     box-shadow:
-        0 3px 1px -2px rgba(0, 0, 0, 0.2),
-        0 2px 2px 0 rgba(0, 0, 0, 0.14),
-        0 1px 5px 0 rgba(0, 0, 0, 0.12);
+        0 5px 1px -2px rgba(0, 0, 0, 0.1),
+        0 2px 2px 0 rgba(0, 0, 0, 0.1),
+        0 1px 5px 0 rgba(0, 0, 0, 0.1);
 }
 .card img {
-    border-radius: 8px !important;
+    border-radius: 16px 16px 0 0 !important;
+}
+
+.card-text {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
 }
 
 .btn {
