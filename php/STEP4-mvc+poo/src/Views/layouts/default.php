@@ -19,7 +19,7 @@
 <body>
     <!-- En-tête du site avec le logo/titre -->
     <header class="d-flex justify-content-between align-items-center px-4 py-3">
-        <a href="<?= BASE_URL ?>/home.html">L'EQUIPE</a>
+        <a href="<?= BASE_URL ?>/home.html">L'ACTU DWWM</a>
 
         <!-- Menu d'authentification -->
         <div class="auth-menu d-flex align-items-center gap-2">
@@ -36,14 +36,14 @@
                 </span>
                 <!-- Bouton de déconnexion avec style Bootstrap -->
                 <a href="<?= BASE_URL ?>/logout.html"
-                    class="btn btn-sm rounded-pill"
+                    class="btn btn-sm rounded-pill text-light"
                     title="Se déconnecter">
                     🚪 Deconnexion
                 </a>
             <?php else: ?>
                 <!-- Si l'utilisateur n'est pas connecté, afficher le bouton de connexion -->
                 <a href="<?= BASE_URL ?>/login.html"
-                    class="btn btn-sm rounded-pill"
+                    class="btn btn-sm rounded-pill text-light"
                     title="Se connecter">
                     🔐 Connexion
                 </a>

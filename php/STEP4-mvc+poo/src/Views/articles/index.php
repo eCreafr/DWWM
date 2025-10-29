@@ -45,15 +45,18 @@
         <div class="col-lg-3 col-md-4 col-sm-6 p-3">
             <div class="card card-custom">
                 <!-- Image uploadée ou image aléatoire via Lorem Picsum -->
-                <img src="<?= $imageUrl ?>" style="height: 100px;"
-                    class="card-img-top object-fit-cover"
-                    alt="<?= htmlspecialchars($article['titre']); ?>">
+                <div class="position-relative">
+                    <img src="<?= $imageUrl ?>" style="height: 100px;"
+                        class="card-img-top object-fit-cover"
+                        alt="<?= htmlspecialchars($article['titre']); ?>">
 
-                <div class="card-body d-flex flex-column">
-                    <!-- Date de publication -->
-                    <p>
+                    <!-- Date de publication en overlay -->
+                    <p class="position-absolute bottom-0 start-0 m-2" style="z-index: 10;">
                         <mark><?= htmlspecialchars($article['date_publication']); ?></mark>
                     </p>
+                </div>
+
+                <div class="card-body d-flex flex-column">
 
                     <!-- Titre de l'article -->
                     <h5 class="card-title"><?= htmlspecialchars($article['titre']); ?></h5>
@@ -94,16 +97,16 @@
                                     <!-- Bouton Modifier -->
                                     <a role="button"
                                         href="<?= BASE_URL ?>/edit.html?id=<?= $article['id']; ?>"
-                                        class="btn btn-link text-white bg-success  rounded-pill ">
-                                        <img src="<?= BASE_URL ?>/assets/img/pencil-square.svg" alt="Modifier" style="filter: brightness(0) invert(1);">
+                                        class="btn btn-link bg-light  rounded-pill ">
+                                        <img src="<?= BASE_URL ?>/assets/img/pencil-square.svg" alt="Modifier">
                                     </a>
 
                                     <!-- Bouton Supprimer (ouvre une modal de confirmation) -->
                                     <button type="button"
-                                        class="btn btn-link rounded-pill text-white bg-danger"
+                                        class="btn btn-link rounded-pill bg-light"
                                         data-bs-toggle="modal"
                                         data-bs-target="#Modal<?= $article['id']; ?>">
-                                        <img src="<?= BASE_URL ?>/assets/img/trash.svg" alt="Supprimer" style="filter: brightness(0) invert(1);">
+                                        <img src="<?= BASE_URL ?>/assets/img/trash.svg" alt="Supprimer" style="filter: invert(27%) sepia(98%) saturate(7466%) hue-rotate(357deg) brightness(91%) contrast(115);">
                                     </button>
                                 </div>
                             <?php endif; ?>
