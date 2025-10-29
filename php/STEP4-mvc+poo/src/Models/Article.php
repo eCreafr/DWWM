@@ -57,6 +57,7 @@ class Article
                 a.auteur,
                 a.date_publication,
                 a.match_id,
+                a.image,
                 r.score,
                 r.lieu,
                 r.equipe1,
@@ -89,6 +90,7 @@ class Article
                 a.auteur,
                 a.date_publication,
                 a.match_id,
+                a.image,
                 r.score,
                 r.lieu,
                 r.equipe1,
@@ -121,9 +123,9 @@ class Article
     {
         $query = "
             INSERT INTO s2_articles_presse
-            (titre, contenu, auteur, date_publication, match_id)
+            (titre, contenu, auteur, date_publication, match_id, image)
             VALUES
-            (:titre, :contenu, :auteur, :date_publication, :match_id)
+            (:titre, :contenu, :auteur, :date_publication, :match_id, :image)
         ";
 
         $statement = $this->db->prepare($query);
@@ -135,6 +137,7 @@ class Article
             'auteur' => $data['auteur'],
             'date_publication' => date('Y-m-d'), // Date actuelle au format SQL
             'match_id' => $data['match_id'] ?? 0, // 0 si pas de match associé
+            'image' => $data['image'] ?? null, // null si pas d'image
         ]);
 
         // lastInsertId() retourne l'ID auto-incrémenté du dernier INSERT
@@ -150,22 +153,44 @@ class Article
      */
     public function update(int $id, array $data): bool
     {
-        $query = "
-            UPDATE s2_articles_presse
-            SET
-                titre = :titre,
-                contenu = :contenu
-            WHERE id = :id
-        ";
+        // Si une image est fournie, on l'inclut dans la mise à jour
+        if (isset($data['image'])) {
+            $query = "
+                UPDATE s2_articles_presse
+                SET
+                    titre = :titre,
+                    contenu = :contenu,
+                    image = :image
+                WHERE id = :id
+            ";
 
-        $statement = $this->db->prepare($query);
+            $statement = $this->db->prepare($query);
 
-        // execute() retourne true en cas de succès, false en cas d'échec
-        return $statement->execute([
-            'titre' => $data['titre'],
-            'contenu' => $data['contenu'],
-            'id' => $id,
-        ]);
+            return $statement->execute([
+                'titre' => $data['titre'],
+                'contenu' => $data['contenu'],
+                'image' => $data['image'],
+                'id' => $id,
+            ]);
+        } else {
+            // Sinon, on met à jour uniquement titre et contenu
+            $query = "
+                UPDATE s2_articles_presse
+                SET
+                    titre = :titre,
+                    contenu = :contenu
+                WHERE id = :id
+            ";
+
+            $statement = $this->db->prepare($query);
+
+            // execute() retourne true en cas de succès, false en cas d'échec
+            return $statement->execute([
+                'titre' => $data['titre'],
+                'contenu' => $data['contenu'],
+                'id' => $id,
+            ]);
+        }
     }
 
     /**

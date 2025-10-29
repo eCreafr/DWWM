@@ -23,7 +23,7 @@
         <h1>Mettre à jour "<?= htmlspecialchars($article['titre']); ?>"</h1>
 
         <!-- Formulaire de modification (POST vers editpost.html) -->
-        <form action="<?= BASE_URL ?>/editpost.html" method="POST">
+        <form action="<?= BASE_URL ?>/editpost.html" method="POST" enctype="multipart/form-data">
 
             <!-- Champ caché contenant l'ID de l'article -->
             <input type="hidden" name="id" value="<?= $article['id']; ?>">
@@ -51,6 +51,29 @@
                     name="contenu"
                     rows="10"
                     required><?= htmlspecialchars($article['contenu']); ?></textarea>
+            </div>
+
+            <!-- Champ Image -->
+            <div class="mb-3">
+                <label for="image" class="form-label">Modifier l'image de l'article (JPG ou WEBP uniquement)</label>
+                <?php
+                use App\Helpers\ImageHelper;
+                $imagePath = ImageHelper::getArticleImagePath($article['id'], $article['image'] ?? null);
+                if ($imagePath):
+                ?>
+                    <div class="mb-2">
+                        <img src="<?= BASE_URL . $imagePath ?>" alt="Image actuelle" class="img-thumbnail" style="max-width: 200px;">
+                        <p class="text-muted small">Image actuelle</p>
+                    </div>
+                <?php endif; ?>
+                <input type="file"
+                    class="form-control"
+                    id="image"
+                    name="image"
+                    accept=".jpg,.jpeg,.webp">
+                <div class="form-text">
+                    Taille maximale : 5 Mo. Formats acceptés : JPG, WEBP. Laissez vide pour conserver l'image actuelle.
+                </div>
             </div>
 
             <!-- Si l'article a un match associé, proposer de le modifier -->

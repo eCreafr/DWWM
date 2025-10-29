@@ -4,6 +4,11 @@
 <?php
 
 use App\Helpers\StringHelper;
+use App\Helpers\ImageHelper;
+
+// Récupère le chemin de l'image uploadée ou utilise picsum par défaut
+$imagePath = ImageHelper::getArticleImagePath($article['id'], $article['image'] ?? null);
+$imageUrl = $imagePath ? BASE_URL . $imagePath : "https://picsum.photos/1300/400?random={$article['id']}";
 ?>
 
 <div class="container my-5">
@@ -17,8 +22,8 @@ use App\Helpers\StringHelper;
 
     <!-- Article complet -->
     <article>
-        <!-- Image illustrative de l'article -->
-        <img src="https://picsum.photos/800/400?random=<?= $article['id']; ?>"
+        <!-- Image uploadée ou image illustrative de l'article -->
+        <img src="<?= $imageUrl ?>"
             class="img-fluid mb-4"
             alt="<?= htmlspecialchars($article['titre']); ?>">
 

@@ -15,7 +15,7 @@
         <?php endif; ?>
 
         <!-- Formulaire d'ajout (POST vers addpost.html) -->
-        <form action="<?= BASE_URL ?>/addpost.html" method="POST">
+        <form action="<?= BASE_URL ?>/addpost.html" method="POST" enctype="multipart/form-data">
 
             <!-- Champ Auteur -->
             <div class="mb-3">
@@ -50,6 +50,19 @@
                     name="contenu"
                     rows="10"
                     required></textarea>
+            </div>
+
+            <!-- Champ Image -->
+            <div class="mb-3">
+                <label for="image" class="form-label">Image de l'article (JPG ou WEBP uniquement)</label>
+                <input type="file"
+                    class="form-control"
+                    id="image"
+                    name="image"
+                    accept=".jpg,.jpeg,.webp">
+                <div class="form-text">
+                    Taille maximale : 5 Mo. Formats acceptés : JPG, WEBP
+                </div>
             </div>
 
             <!-- Case à cocher pour ajouter un match -->

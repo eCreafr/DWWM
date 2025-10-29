@@ -34,14 +34,18 @@
     // Importation des classes helpers pour les utiliser dans la vue
     use App\Helpers\StringHelper;
     use App\Helpers\UrlHelper;
+    use App\Helpers\ImageHelper;
 
     // Boucle sur tous les articles récupérés par le contrôleur
     foreach ($articles as $article):
+        // Récupère le chemin de l'image uploadée ou utilise picsum par défaut
+        $imagePath = ImageHelper::getArticleImagePath($article['id'], $article['image'] ?? null);
+        $imageUrl = $imagePath ? BASE_URL . $imagePath : "https://picsum.photos/300/150?random={$article['id']}";
     ?>
         <div class="col-lg-3 col-md-4 col-sm-6 p-3">
             <div class="card">
-                <!-- Image aléatoire via Lorem Picsum, unique par article grâce à l'ID -->
-                <img src="https://picsum.photos/300/150?random=<?= $article['id']; ?>"
+                <!-- Image uploadée ou image aléatoire via Lorem Picsum -->
+                <img src="<?= $imageUrl ?>"
                     class="card-img-top"
                     alt="<?= htmlspecialchars($article['titre']); ?>">
 

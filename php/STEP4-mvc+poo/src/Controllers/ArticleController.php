@@ -6,6 +6,7 @@ use App\Models\Article;
 use App\Models\MatchModel;
 use App\Helpers\StringHelper;
 use App\Helpers\UrlHelper;
+use App\Helpers\ImageHelper;
 
 /**
  * Classe ArticleController - Contrôleur gérant les articles
@@ -180,6 +181,25 @@ class ArticleController
         // Crée l'article en base de données
         $articleId = $this->articleModel->create($articleData);
 
+        // Gestion de l'upload d'image
+        if (isset($_FILES['image']) && ImageHelper::hasUploadedFile($_FILES['image'])) {
+            $uploadResult = ImageHelper::uploadArticleImage($_FILES['image'], $articleId);
+
+            if ($uploadResult['success']) {
+                // Met à jour l'article avec le nom de l'image
+                $this->articleModel->update($articleId, [
+                    'titre' => $titre,
+                    'contenu' => $contenu,
+                    'image' => $uploadResult['filename'],
+                ]);
+            } else {
+                // En cas d'erreur d'upload, on affiche un message d'avertissement
+                $_SESSION['error_message'] = "L'article a été créé mais l'image n'a pas pu être uploadée : " . $uploadResult['error'];
+                UrlHelper::redirect("edit.html?id={$articleId}");
+                return;
+            }
+        }
+
         // Message de succès
         $_SESSION['success_message'] = "L'article a été ajouté avec succès ! Vous pouvez le corriger si nécessaire :";
 
@@ -239,11 +259,29 @@ class ArticleController
         $titre = StringHelper::sanitize($postData['titre']);
         $contenu = StringHelper::sanitize($postData['contenu']);
 
-        // Met à jour l'article
-        $this->articleModel->update($id, [
+        // Prépare les données de mise à jour
+        $updateData = [
             'titre' => $titre,
             'contenu' => $contenu,
-        ]);
+        ];
+
+        // Gestion de l'upload d'image
+        if (isset($_FILES['image']) && ImageHelper::hasUploadedFile($_FILES['image'])) {
+            $uploadResult = ImageHelper::uploadArticleImage($_FILES['image'], $id);
+
+            if ($uploadResult['success']) {
+                // Ajoute le nom de l'image aux données de mise à jour
+                $updateData['image'] = $uploadResult['filename'];
+            } else {
+                // En cas d'erreur d'upload, on affiche un message d'erreur
+                $_SESSION['error_message'] = "L'image n'a pas pu être uploadée : " . $uploadResult['error'];
+                UrlHelper::redirect("edit.html?id={$id}");
+                return;
+            }
+        }
+
+        // Met à jour l'article
+        $this->articleModel->update($id, $updateData);
 
         // Si l'utilisateur a coché "modifier le match"
         if (isset($postData['modifierMatch']) && $postData['modifierMatch'] === 'on') {
