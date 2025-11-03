@@ -1,0 +1,377 @@
+<!doctype html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Semaine 4 - Jour 4 | Personnalisation Bootstrap</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+        <link rel="stylesheet" href="../css/froggie.css" />
+        <style>
+            /* Variables CSS custom */
+            :root {
+                --custom-primary: #6366f1;
+                --custom-secondary: #ec4899;
+                --custom-success: #10b981;
+            }
+
+            /* Surcharger les styles Bootstrap */
+            .btn-custom {
+                background: linear-gradient(135deg, var(--custom-primary), var(--custom-secondary));
+                border: none;
+                color: white;
+                padding: 12px 30px;
+                border-radius: 25px;
+                transition: all 0.3s;
+            }
+
+            .btn-custom:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 10px 25px rgba(99, 102, 241, 0.4);
+                color: white;
+            }
+
+            .card-custom {
+                border: none;
+                border-radius: 15px;
+                box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+                transition: all 0.3s;
+            }
+
+            .card-custom:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            }
+
+            .navbar-custom {
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            }
+
+            .badge-custom {
+                background: linear-gradient(135deg, var(--custom-primary), var(--custom-secondary));
+                padding: 8px 15px;
+                border-radius: 20px;
+            }
+
+            .demo-container {max-width: 1200px; margin: 40px auto; padding: 20px;}
+            .section-title {background: linear-gradient(135deg, #667eea, #764ba2); color: white; padding: 20px; border-radius: 10px; text-align: center; margin: 30px 0 20px; font-size: 1.8em;}
+            .code-example {background: #2c3e50; color: #ecf0f1; padding: 15px; border-radius: 5px; font-family: 'Courier New', monospace; font-size: 0.85em; margin: 15px 0; overflow-x: auto;}
+            .highlight {color: #f39c12; font-weight: bold;}
+
+            /* Dark mode custom */
+            .dark-mode-demo {
+                background: #1a1a2e;
+                color: #eee;
+                padding: 30px;
+                border-radius: 10px;
+                margin: 20px 0;
+            }
+
+            .dark-mode-demo .card {
+                background: #16213e;
+                color: #eee;
+                border: 1px solid #0f3460;
+            }
+
+            /* Custom spacing */
+            .spacing-custom-sm {padding: 1rem;}
+            .spacing-custom-md {padding: 2rem;}
+            .spacing-custom-lg {padding: 3rem;}
+
+            /* Animation custom */
+            @keyframes slideIn {
+                from {opacity: 0; transform: translateY(20px);}
+                to {opacity: 1; transform: translateY(0);}
+            }
+
+            .animate-slide-in {
+                animation: slideIn 0.5s ease-out;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="demo-container">
+            <h1 class="text-center mb-5 animate-slide-in" style="font-size: 2.5em; color: #2c3e50;">🎨 Semaine 4 - Jour 4 : Personnalisation Bootstrap</h1>
+
+            <div class="alert alert-info animate-slide-in">
+                <h4 class="alert-heading">📚 Objectifs du jour</h4>
+                <p>Apprendre à personnaliser Bootstrap : surcharger les styles, créer des composants custom, utiliser les variables CSS, et combiner Bootstrap avec votre propre CSS.</p>
+            </div>
+
+            <h2 class="section-title">🎨 Méthode 1 : Surcharger avec CSS custom</h2>
+            <div class="row g-4 mb-5">
+                <div class="col-md-6">
+                    <h4>Bootstrap standard</h4>
+                    <button class="btn btn-primary mb-3">Bouton standard</button>
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Card standard</h5>
+                            <p class="card-text">Style Bootstrap par défaut.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <h4>Bootstrap personnalisé</h4>
+                    <button class="btn-custom mb-3">Bouton custom</button>
+                    <div class="card card-custom">
+                        <div class="card-body">
+                            <h5 class="card-title">Card custom</h5>
+                            <p class="card-text">Style personnalisé avec CSS.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="code-example">
+                /* Créer ses propres classes */<br/>
+                <span class="highlight">.btn-custom</span> {<br/>
+                &nbsp;&nbsp;background: linear-gradient(135deg, #6366f1, #ec4899);<br/>
+                &nbsp;&nbsp;border: none;<br/>
+                &nbsp;&nbsp;color: white;<br/>
+                &nbsp;&nbsp;border-radius: 25px;<br/>
+                }<br/><br/>
+                <span class="highlight">.card-custom</span> {<br/>
+                &nbsp;&nbsp;border: none;<br/>
+                &nbsp;&nbsp;border-radius: 15px;<br/>
+                &nbsp;&nbsp;box-shadow: 0 5px 20px rgba(0,0,0,0.1);<br/>
+                }
+            </div>
+
+            <h2 class="section-title">🎨 Méthode 2 : Variables CSS</h2>
+            <div class="mb-5">
+                <p>Utiliser les variables CSS (custom properties) pour personnaliser facilement.</p>
+                <div class="code-example">
+                    :root {<br/>
+                    &nbsp;&nbsp;<span class="highlight">--custom-primary: #6366f1;</span><br/>
+                    &nbsp;&nbsp;<span class="highlight">--custom-secondary: #ec4899;</span><br/>
+                    &nbsp;&nbsp;<span class="highlight">--custom-success: #10b981;</span><br/>
+                    }<br/><br/>
+                    .btn-custom {<br/>
+                    &nbsp;&nbsp;background: <span class="highlight">var(--custom-primary)</span>;<br/>
+                    }
+                </div>
+                <div class="d-flex gap-3 flex-wrap">
+                    <span class="badge badge-custom">Badge Custom</span>
+                    <span class="badge" style="background: var(--custom-success);">Success Custom</span>
+                    <span class="badge" style="background: var(--custom-secondary);">Secondary Custom</span>
+                </div>
+            </div>
+
+            <h2 class="section-title">🌙 Méthode 3 : Dark Mode</h2>
+            <div class="dark-mode-demo mb-5">
+                <h3>Exemple Dark Mode</h3>
+                <p>Créez votre propre thème sombre en surchargeant les couleurs Bootstrap.</p>
+                <div class="row g-3">
+                    <div class="col-md-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">Card Dark</h5>
+                                <p class="card-text">Stylisée pour le mode sombre.</p>
+                                <a href="#" class="btn btn-custom">Action</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">Card Dark 2</h5>
+                                <p class="card-text">Couleurs adaptées.</p>
+                                <a href="#" class="btn btn-custom">Action</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">Card Dark 3</h5>
+                                <p class="card-text">Thème cohérent.</p>
+                                <a href="#" class="btn btn-custom">Action</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="code-example">
+                <span class="highlight">.dark-mode</span> {<br/>
+                &nbsp;&nbsp;background: #1a1a2e;<br/>
+                &nbsp;&nbsp;color: #eee;<br/>
+                }<br/><br/>
+                .dark-mode <span class="highlight">.card</span> {<br/>
+                &nbsp;&nbsp;background: #16213e;<br/>
+                &nbsp;&nbsp;color: #eee;<br/>
+                &nbsp;&nbsp;border: 1px solid #0f3460;<br/>
+                }
+            </div>
+
+            <h2 class="section-title">🎯 Navbar personnalisée</h2>
+            <nav class="navbar navbar-expand-lg navbar-dark navbar-custom mb-4">
+                <div class="container-fluid">
+                    <a class="navbar-brand fw-bold" href="#">✨ Brand Custom</a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCustom">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarCustom">
+                        <ul class="navbar-nav ms-auto">
+                            <li class="nav-item"><a class="nav-link" href="#">Accueil</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#">Services</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+            <div class="code-example">
+                <span class="highlight">.navbar-custom</span> {<br/>
+                &nbsp;&nbsp;background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);<br/>
+                &nbsp;&nbsp;box-shadow: 0 4px 15px rgba(0,0,0,0.1);<br/>
+                }
+            </div>
+
+            <h2 class="section-title">💡 Classes utilitaires custom</h2>
+            <div class="row g-4 mb-5">
+                <div class="col-md-4">
+                    <div class="card spacing-custom-sm">
+                        <h5>Spacing SM</h5>
+                        <p>Padding custom 1rem</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card spacing-custom-md">
+                        <h5>Spacing MD</h5>
+                        <p>Padding custom 2rem</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card spacing-custom-lg">
+                        <h5>Spacing LG</h5>
+                        <p>Padding custom 3rem</p>
+                    </div>
+                </div>
+            </div>
+            <div class="code-example">
+                /* Créer ses propres utilitaires */<br/>
+                <span class="highlight">.spacing-custom-sm</span> { padding: 1rem; }<br/>
+                <span class="highlight">.spacing-custom-md</span> { padding: 2rem; }<br/>
+                <span class="highlight">.spacing-custom-lg</span> { padding: 3rem; }
+            </div>
+
+            <h2 class="section-title">🎬 Animations custom</h2>
+            <div class="row g-4 mb-5">
+                <div class="col-md-4">
+                    <div class="card animate-slide-in" style="animation-delay: 0.1s;">
+                        <div class="card-body">
+                            <h5 class="card-title">Animation 1</h5>
+                            <p class="card-text">Slide in avec délai.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card animate-slide-in" style="animation-delay: 0.2s;">
+                        <div class="card-body">
+                            <h5 class="card-title">Animation 2</h5>
+                            <p class="card-text">Slide in avec délai.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card animate-slide-in" style="animation-delay: 0.3s;">
+                        <div class="card-body">
+                            <h5 class="card-title">Animation 3</h5>
+                            <p class="card-text">Slide in avec délai.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="code-example">
+                <span class="highlight">@keyframes slideIn</span> {<br/>
+                &nbsp;&nbsp;from { opacity: 0; transform: translateY(20px); }<br/>
+                &nbsp;&nbsp;to { opacity: 1; transform: translateY(0); }<br/>
+                }<br/><br/>
+                <span class="highlight">.animate-slide-in</span> {<br/>
+                &nbsp;&nbsp;animation: slideIn 0.5s ease-out;<br/>
+                }
+            </div>
+
+            <h2 class="section-title">📝 Best Practices</h2>
+            <div class="row g-4">
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">✅ À faire</h5>
+                            <ul>
+                                <li>Créer des classes custom (pas de !important)</li>
+                                <li>Utiliser des variables CSS pour les couleurs</li>
+                                <li>Garder Bootstrap.css en premier</li>
+                                <li>Ajouter votre CSS après Bootstrap</li>
+                                <li>Nommer clairement vos classes custom</li>
+                                <li>Documenter vos surcharges</li>
+                                <li>Tester le responsive</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">❌ À éviter</h5>
+                            <ul>
+                                <li>Modifier directement Bootstrap.css</li>
+                                <li>Abuser de !important</li>
+                                <li>Surcharger trop de classes Bootstrap</li>
+                                <li>Créer des conflits de noms</li>
+                                <li>Oublier le mobile</li>
+                                <li>CSS inline partout</li>
+                                <li>Pas de cohérence visuelle</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="alert alert-success mt-5">
+                <h4 class="alert-heading">🎓 Structure HTML recommandée</h4>
+                <div class="code-example">
+                    &lt;head&gt;<br/>
+                    &nbsp;&nbsp;<span class="highlight">&lt;!-- 1. Bootstrap CSS en premier --&gt;</span><br/>
+                    &nbsp;&nbsp;&lt;link href="bootstrap.min.css" rel="stylesheet"&gt;<br/><br/>
+                    &nbsp;&nbsp;<span class="highlight">&lt;!-- 2. Vos CSS custom après --&gt;</span><br/>
+                    &nbsp;&nbsp;&lt;link href="custom.css" rel="stylesheet"&gt;<br/>
+                    &lt;/head&gt;
+                </div>
+            </div>
+        </div>
+
+        <div class="froggiesplaining">
+            <span> Froggiesplaining :</span>
+            <p>
+                <br/>
+                <strong>🎯 Objectifs :</strong><br/>
+                ✅ Surcharger les styles Bootstrap<br/>
+                ✅ Créer des composants custom<br/>
+                ✅ Utiliser les variables CSS<br/>
+                ✅ Implémenter un dark mode<br/>
+                ✅ Ajouter des animations personnalisées<br/><br/>
+
+                <strong>📖 Points clés :</strong><br/>
+                • <strong>Bootstrap d'abord</strong>, custom CSS après<br/>
+                • <strong>Variables CSS</strong> pour faciliter la personnalisation<br/>
+                • <strong>Classes custom</strong> avec noms clairs<br/>
+                • <strong>Éviter !important</strong> autant que possible<br/>
+                • <strong>Tester le responsive</strong> après personnalisation<br/><br/>
+
+                <strong>🏋️ Exercice :</strong><br/>
+                Personnalisez Bootstrap pour votre marque :<br/>
+                • Définir vos couleurs en variables CSS<br/>
+                • Créer btn-custom et card-custom<br/>
+                • Styliser la navbar avec votre thème<br/>
+                • Ajouter des animations sur les cards<br/>
+                • Implémenter un toggle dark mode
+            </p>
+            <img src="../img/froggie-300.png" alt="Froggie" class="overfrog" id="Froggie" />
+        </div>
+
+        <a href="#Froggie"><div id="goToFroggie"><img src="../img/froggie-300.png" width="50px" /><br/><i class="bi bi-arrow-bar-down"></i></div></a>
+        <div id="footerGit"><a href="https://github.com/eCreafr/DWWM" target="_blank"><i class="bi bi-github">GitHub - eCrea</i></a></div>
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    </body>
+</html>

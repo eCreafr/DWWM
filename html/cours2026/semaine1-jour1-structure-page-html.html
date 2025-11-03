@@ -1,0 +1,283 @@
+<!doctype html>
+<!-- Déclaration du type de document HTML5 -->
+<html lang="fr">
+    <!-- Balise racine avec langue française -->
+    <head>
+        <!-- En-tête du document -->
+        <meta charset="UTF-8" />
+        <!-- Encodage des caractères en UTF-8 -->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <!-- Configuration responsive pour mobile -->
+        <title>Semaine 1 - Jour 1 | Structure d'une page HTML</title>
+        <!-- Titre affiché dans l'onglet du navigateur -->
+
+        <link rel="stylesheet" href="../css/froggie.css" />
+        <!-- Lien vers la feuille de style Froggie -->
+
+        <style>
+            /* Styles pour la démonstration */
+            .demo-container {
+                max-width: 1200px;
+                margin: 40px auto;
+                padding: 20px;
+                font-family: Arial, sans-serif;
+            }
+
+            .demo-title {
+                text-align: center;
+                font-size: 2.5em;
+                margin-bottom: 20px;
+                color: #2c3e50;
+            }
+
+            .demo-intro {
+                background: #ecf0f1;
+                padding: 20px;
+                border-radius: 10px;
+                margin-bottom: 40px;
+                line-height: 1.6;
+            }
+
+            .demo-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                gap: 30px;
+                margin-bottom: 40px;
+            }
+
+            .demo-item {
+                border: 2px solid #3498db;
+                border-radius: 10px;
+                padding: 20px;
+                background: white;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            }
+
+            .demo-item h2 {
+                margin-top: 0;
+                color: #3498db;
+                font-size: 1.5em;
+            }
+
+            .code-example {
+                background: #2c3e50;
+                color: #ecf0f1;
+                padding: 15px;
+                border-radius: 5px;
+                font-family: 'Courier New', monospace;
+                font-size: 0.9em;
+                margin: 15px 0;
+                overflow-x: auto;
+            }
+
+            .highlight {
+                color: #f39c12;
+                font-weight: bold;
+            }
+
+            .structure-visual {
+                border: 3px solid #e74c3c;
+                padding: 10px;
+                margin: 10px 0;
+                border-radius: 5px;
+            }
+
+            .html-tag {
+                background: #e8f4f8;
+                border-left: 4px solid #3498db;
+                padding: 10px;
+                margin: 10px 0;
+            }
+
+            .head-tag {
+                background: #fef5e7;
+                border-left: 4px solid #f39c12;
+                padding: 10px;
+                margin: 10px 0;
+            }
+
+            .body-tag {
+                background: #e8f8f5;
+                border-left: 4px solid #1abc9c;
+                padding: 10px;
+                margin: 10px 0;
+            }
+        </style>
+    </head>
+    <body>
+        <!-- Corps du document -->
+
+        <!-- Conteneur principal pour les exemples -->
+        <div class="demo-container">
+            <h1 class="demo-title">📄 Semaine 1 - Jour 1 : Structure d'une page HTML</h1>
+
+            <div class="demo-intro">
+                <h3>📚 Qu'est-ce que le HTML ?</h3>
+                <p>
+                    <strong>HTML</strong> (HyperText Markup Language) est le langage de balisage utilisé pour créer la
+                    structure d'une page web. Il utilise des <strong>balises</strong> pour organiser et décrire le
+                    contenu.
+                </p>
+                <p>
+                    Chaque page HTML suit une structure de base composée de plusieurs éléments essentiels que nous
+                    allons découvrir ensemble.
+                </p>
+            </div>
+
+            <!-- Structure de base -->
+            <div class="demo-grid">
+                <!-- DOCTYPE -->
+                <div class="demo-item">
+                    <h2>1. &lt;!DOCTYPE html&gt;</h2>
+                    <p>
+                        Déclaration qui indique au navigateur qu'il s'agit d'un document HTML5. Elle doit toujours être
+                        la première ligne du fichier.
+                    </p>
+                    <div class="code-example">
+                        <span class="highlight">&lt;!DOCTYPE html&gt;</span>
+                    </div>
+                    <p><strong>📝 Note :</strong> Obligatoire pour que le navigateur interprète correctement la page.</p>
+                </div>
+
+                <!-- HTML -->
+                <div class="demo-item">
+                    <h2>2. &lt;html&gt;</h2>
+                    <p>
+                        Balise racine qui englobe tout le contenu de la page. L'attribut <code>lang="fr"</code> indique
+                        la langue du contenu.
+                    </p>
+                    <div class="code-example">
+                        &lt;html <span class="highlight">lang="fr"</span>&gt;<br />
+                        &nbsp;&nbsp;...<br />
+                        &lt;/html&gt;
+                    </div>
+                    <p><strong>✅ Bonne pratique :</strong> Toujours spécifier la langue pour l'accessibilité.</p>
+                </div>
+
+                <!-- HEAD -->
+                <div class="demo-item">
+                    <h2>3. &lt;head&gt;</h2>
+                    <p>
+                        Section contenant les métadonnées (informations sur la page) qui ne sont pas affichées
+                        directement à l'écran.
+                    </p>
+                    <div class="code-example">
+                        &lt;head&gt;<br />
+                        &nbsp;&nbsp;&lt;meta charset="UTF-8"&gt;<br />
+                        &nbsp;&nbsp;&lt;title&gt;Mon site&lt;/title&gt;<br />
+                        &lt;/head&gt;
+                    </div>
+                    <p><strong>📦 Contient :</strong> titre, liens CSS, scripts, métadonnées...</p>
+                </div>
+
+                <!-- BODY -->
+                <div class="demo-item">
+                    <h2>4. &lt;body&gt;</h2>
+                    <p>
+                        Section contenant tout le contenu visible de la page : textes, images, vidéos, formulaires,
+                        etc.
+                    </p>
+                    <div class="code-example">
+                        &lt;body&gt;<br />
+                        &nbsp;&nbsp;&lt;h1&gt;Bienvenue&lt;/h1&gt;<br />
+                        &nbsp;&nbsp;&lt;p&gt;Mon premier site&lt;/p&gt;<br />
+                        &lt;/body&gt;
+                    </div>
+                    <p><strong>👁️ Important :</strong> Tout ce qui est dans le body est affiché dans le navigateur.</p>
+                </div>
+            </div>
+
+            <!-- Structure complète -->
+            <div class="structure-visual">
+                <h2 style="text-align: center; color: #e74c3c">📋 Structure HTML complète</h2>
+                <div class="code-example">
+                    &lt;!DOCTYPE html&gt;<br />
+                    &lt;html lang="fr"&gt;<br />
+                    <br />
+                    &nbsp;&nbsp;&lt;head&gt;<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;&lt;meta charset="UTF-8"&gt;<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;&lt;title&gt;Ma première page&lt;/title&gt;<br />
+                    &nbsp;&nbsp;&lt;/head&gt;<br />
+                    <br />
+                    &nbsp;&nbsp;&lt;body&gt;<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;&lt;h1&gt;Bonjour le monde !&lt;/h1&gt;<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;&lt;p&gt;Ceci est ma première page HTML.&lt;/p&gt;<br />
+                    &nbsp;&nbsp;&lt;/body&gt;<br />
+                    <br />
+                    &lt;/html&gt;
+                </div>
+            </div>
+
+            <!-- Balises importantes du head -->
+            <div style="margin-top: 40px">
+                <h2 style="color: #2c3e50; text-align: center">🔍 Balises importantes du &lt;head&gt;</h2>
+
+                <div class="head-tag">
+                    <h3>&lt;meta charset="UTF-8"&gt;</h3>
+                    <p>
+                        Définit l'encodage des caractères. UTF-8 permet d'afficher tous les caractères (accents,
+                        symboles...).
+                    </p>
+                </div>
+
+                <div class="head-tag">
+                    <h3>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</h3>
+                    <p>
+                        Configure l'affichage pour les appareils mobiles. Essentiel pour un site responsive (qui
+                        s'adapte aux différentes tailles d'écran).
+                    </p>
+                </div>
+
+                <div class="head-tag">
+                    <h3>&lt;title&gt;Titre de la page&lt;/title&gt;</h3>
+                    <p>
+                        Définit le titre affiché dans l'onglet du navigateur et dans les résultats de recherche Google.
+                    </p>
+                </div>
+
+                <div class="head-tag">
+                    <h3>&lt;link rel="stylesheet" href="style.css"&gt;</h3>
+                    <p>Permet de lier une feuille de style CSS externe pour styliser la page.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Zone d'explication pédagogique "Froggiesplaining" -->
+        <div class="froggiesplaining">
+            <span> Froggiesplaining :</span>
+            <p>
+                <br />
+                <strong>🎯 Objectifs de ce cours :</strong><br />
+                ✅ Comprendre la structure de base d'une page HTML5<br />
+                ✅ Connaître le rôle de chaque balise principale (DOCTYPE, html, head, body)<br />
+                ✅ Savoir créer une page HTML valide et bien structurée<br />
+                ✅ Comprendre l'importance des métadonnées dans le &lt;head&gt;<br /><br />
+
+                <strong>📖 Points clés à retenir :</strong><br />
+                • Toute page HTML commence par <strong>&lt;!DOCTYPE html&gt;</strong><br />
+                • La balise <strong>&lt;html&gt;</strong> englobe tout le contenu<br />
+                • Le <strong>&lt;head&gt;</strong> contient les informations invisibles (métadonnées)<br />
+                • Le <strong>&lt;body&gt;</strong> contient le contenu visible de la page<br />
+                • L'indentation rend le code plus lisible et organisé<br /><br />
+
+                <strong>🏋️ Exercice pratique :</strong><br />
+                Créez votre première page HTML avec un titre "Ma présentation" et un paragraphe qui vous décrit !
+            </p>
+            <img src="../img/froggie-300.png" alt="Froggie explain" class="overfrog" id="Froggie" />
+        </div>
+
+        <!-- Lien d'ancrage vers Froggie -->
+        <a href="#Froggie"
+            ><div id="goToFroggie">
+                <img src="../img/froggie-300.png" width="50px" /><br /><i class="bi bi-arrow-bar-down"></i></div
+        ></a>
+
+        <!-- Pied de page avec lien GitHub -->
+        <div id="footerGit">
+            <a href="https://github.com/eCreafr/DWWM" target="_blank"><i class="bi bi-github">GitHub - eCrea</i></a>
+        </div>
+    </body>
+    <!-- Fin du corps du document -->
+</html>
+<!-- Fin du document HTML -->

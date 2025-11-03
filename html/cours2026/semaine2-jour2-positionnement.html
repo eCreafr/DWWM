@@ -1,0 +1,550 @@
+<!doctype html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Semaine 2 - Jour 2 | Positionnement CSS</title>
+
+        <link rel="stylesheet" href="../css/froggie.css" />
+
+        <style>
+            .demo-container {
+                max-width: 1200px;
+                margin: 40px auto;
+                padding: 20px;
+                font-family: Arial, sans-serif;
+            }
+
+            .demo-title {
+                text-align: center;
+                font-size: 2.5em;
+                margin-bottom: 20px;
+                color: #2c3e50;
+            }
+
+            .demo-intro {
+                background: #ecf0f1;
+                padding: 20px;
+                border-radius: 10px;
+                margin-bottom: 40px;
+                line-height: 1.6;
+            }
+
+            .demo-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                gap: 30px;
+                margin-bottom: 40px;
+            }
+
+            .demo-item {
+                border: 2px solid #3498db;
+                border-radius: 10px;
+                padding: 20px;
+                background: white;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+                transition: transform 0.3s ease;
+            }
+
+            .demo-item:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+            }
+
+            .demo-item h2 {
+                margin-top: 0;
+                color: #3498db;
+                font-size: 1.5em;
+            }
+
+            .code-example {
+                background: #2c3e50;
+                color: #ecf0f1;
+                padding: 15px;
+                border-radius: 5px;
+                font-family: 'Courier New', monospace;
+                font-size: 0.9em;
+                margin: 15px 0;
+                overflow-x: auto;
+                line-height: 1.6;
+            }
+
+            .highlight {
+                color: #f39c12;
+                font-weight: bold;
+            }
+
+            /* Exemples de position */
+            .position-demo {
+                background: #ecf0f1;
+                border: 2px dashed #95a5a6;
+                padding: 20px;
+                margin: 20px 0;
+                min-height: 300px;
+                position: relative;
+            }
+
+            .box-static {
+                background: #3498db;
+                color: white;
+                padding: 15px;
+                margin: 10px 0;
+            }
+
+            .box-relative {
+                background: #e74c3c;
+                color: white;
+                padding: 15px;
+                margin: 10px 0;
+                position: relative;
+                top: 20px;
+                left: 30px;
+            }
+
+            .box-absolute {
+                background: #1abc9c;
+                color: white;
+                padding: 15px;
+                position: absolute;
+                top: 50px;
+                right: 20px;
+            }
+
+            .box-fixed {
+                background: #9b59b6;
+                color: white;
+                padding: 15px;
+                position: fixed;
+                bottom: 20px;
+                right: 20px;
+                z-index: 100;
+                border-radius: 5px;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            }
+
+            .box-sticky {
+                background: #f39c12;
+                color: white;
+                padding: 15px;
+                position: sticky;
+                top: 0;
+                z-index: 10;
+            }
+
+            /* Background examples */
+            .bg-color {
+                background-color: #3498db;
+                color: white;
+                padding: 30px;
+                margin: 15px 0;
+                border-radius: 8px;
+            }
+
+            .bg-gradient {
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                color: white;
+                padding: 30px;
+                margin: 15px 0;
+                border-radius: 8px;
+            }
+
+            .bg-image {
+                background-image: url('https://via.placeholder.com/600x200/3498db/ffffff?text=Background+Image');
+                background-size: cover;
+                background-position: center;
+                color: white;
+                padding: 60px 30px;
+                margin: 15px 0;
+                border-radius: 8px;
+                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+            }
+
+            /* Pseudo-classes */
+            .pseudo-demo a {
+                display: block;
+                padding: 15px;
+                margin: 10px 0;
+                background: #ecf0f1;
+                color: #2c3e50;
+                text-decoration: none;
+                border-radius: 5px;
+                transition: all 0.3s;
+            }
+
+            .pseudo-demo a:hover {
+                background: #3498db;
+                color: white;
+                transform: translateX(10px);
+            }
+
+            .pseudo-demo a:active {
+                background: #2980b9;
+            }
+
+            .pseudo-demo a:visited {
+                color: #7f8c8d;
+            }
+
+            .list-demo li:nth-child(odd) {
+                background: #e8f4f8;
+                padding: 10px;
+                margin: 5px 0;
+            }
+
+            .list-demo li:nth-child(even) {
+                background: #fef5e7;
+                padding: 10px;
+                margin: 5px 0;
+            }
+
+            .list-demo li:first-child {
+                border-left: 4px solid #e74c3c;
+                font-weight: bold;
+            }
+
+            .list-demo li:last-child {
+                border-left: 4px solid #1abc9c;
+                font-weight: bold;
+            }
+
+            /* Pseudo-elements */
+            .pseudo-element-demo {
+                position: relative;
+                padding: 20px;
+                background: #ecf0f1;
+                margin: 20px 0;
+            }
+
+            .pseudo-element-demo::before {
+                content: '📌 ';
+                font-size: 1.5em;
+            }
+
+            .pseudo-element-demo::after {
+                content: ' ✨';
+                font-size: 1.5em;
+            }
+
+            .quote-demo {
+                background: #fff;
+                padding: 30px 30px 30px 60px;
+                margin: 20px 0;
+                border-left: 4px solid #3498db;
+                position: relative;
+                font-style: italic;
+            }
+
+            .quote-demo::before {
+                content: '"';
+                position: absolute;
+                left: 10px;
+                top: 10px;
+                font-size: 4em;
+                color: #3498db;
+                opacity: 0.3;
+            }
+
+            /* Z-index demo */
+            .z-index-demo {
+                position: relative;
+                height: 300px;
+                background: #ecf0f1;
+                margin: 20px 0;
+            }
+
+            .layer-1 {
+                position: absolute;
+                top: 20px;
+                left: 20px;
+                width: 150px;
+                height: 150px;
+                background: #e74c3c;
+                color: white;
+                padding: 20px;
+                z-index: 1;
+            }
+
+            .layer-2 {
+                position: absolute;
+                top: 60px;
+                left: 60px;
+                width: 150px;
+                height: 150px;
+                background: #3498db;
+                color: white;
+                padding: 20px;
+                z-index: 2;
+            }
+
+            .layer-3 {
+                position: absolute;
+                top: 100px;
+                left: 100px;
+                width: 150px;
+                height: 150px;
+                background: #1abc9c;
+                color: white;
+                padding: 20px;
+                z-index: 3;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="demo-container">
+            <h1 class="demo-title">🎯 Semaine 2 - Jour 2 : Positionnement CSS</h1>
+
+            <div class="demo-intro">
+                <h3>📚 Le positionnement en CSS</h3>
+                <p>
+                    Le positionnement CSS permet de contrôler précisément où les éléments apparaissent sur la page. Nous
+                    allons découvrir les 5 types de positionnement (static, relative, absolute, fixed, sticky) ainsi que
+                    les backgrounds et les pseudo-classes/pseudo-éléments.
+                </p>
+            </div>
+
+            <h2 style="text-align: center; color: #2c3e50; margin: 40px 0 20px">📍 Les types de position</h2>
+
+            <div class="demo-grid">
+                <div class="demo-item">
+                    <h2>position: static (défaut)</h2>
+                    <p>Position par défaut, suit le flux normal du document.</p>
+                    <div class="code-example">
+                        .element {<br />
+                        &nbsp;&nbsp;<span class="highlight">position: static;</span><br />
+                        }
+                    </div>
+                    <div class="box-static">Je suis en position static (flux normal)</div>
+                    <p><strong>📌 Note :</strong> top, right, bottom, left n'ont aucun effet</p>
+                </div>
+
+                <div class="demo-item">
+                    <h2>position: relative</h2>
+                    <p>Déplacé par rapport à sa position normale, mais garde sa place dans le flux.</p>
+                    <div class="code-example">
+                        .element {<br />
+                        &nbsp;&nbsp;<span class="highlight">position: relative;</span><br />
+                        &nbsp;&nbsp;top: 20px;<br />
+                        &nbsp;&nbsp;left: 30px;<br />
+                        }
+                    </div>
+                    <div class="position-demo">
+                        <div class="box-static">Élément normal</div>
+                        <div class="box-relative">Je suis déplacé de 20px vers le bas et 30px vers la droite</div>
+                        <div class="box-static">Élément suivant</div>
+                    </div>
+                    <p><strong>✅ Usage :</strong> Point de référence pour position: absolute</p>
+                </div>
+
+                <div class="demo-item">
+                    <h2>position: absolute</h2>
+                    <p>
+                        Retiré du flux, positionné par rapport au premier parent en position relative (ou au
+                        &lt;body&gt;).
+                    </p>
+                    <div class="code-example">
+                        .element {<br />
+                        &nbsp;&nbsp;<span class="highlight">position: absolute;</span><br />
+                        &nbsp;&nbsp;top: 50px;<br />
+                        &nbsp;&nbsp;right: 20px;<br />
+                        }
+                    </div>
+                    <div class="position-demo">
+                        <div class="box-static">Conteneur parent (position: relative)</div>
+                        <div class="box-absolute">Position absolute<br />(top: 50px, right: 20px)</div>
+                    </div>
+                    <p><strong>✅ Usage :</strong> Badges, tooltips, overlays, popups</p>
+                </div>
+
+                <div class="demo-item">
+                    <h2>position: fixed</h2>
+                    <p>Fixé par rapport à la fenêtre du navigateur, reste visible au scroll.</p>
+                    <div class="code-example">
+                        .element {<br />
+                        &nbsp;&nbsp;<span class="highlight">position: fixed;</span><br />
+                        &nbsp;&nbsp;bottom: 20px;<br />
+                        &nbsp;&nbsp;right: 20px;<br />
+                        }
+                    </div>
+                    <p>
+                        <strong>👁️ Regardez en bas à droite :</strong> la box violette reste fixe quand vous scrollez !
+                    </p>
+                    <p><strong>✅ Usage :</strong> Header fixe, bouton "retour en haut", chat widget</p>
+                </div>
+
+                <div class="demo-item">
+                    <h2>position: sticky</h2>
+                    <p>Mélange entre relative et fixed. Devient fixe après avoir scrollé jusqu'à lui.</p>
+                    <div class="code-example">
+                        .element {<br />
+                        &nbsp;&nbsp;<span class="highlight">position: sticky;</span><br />
+                        &nbsp;&nbsp;top: 0;<br />
+                        }
+                    </div>
+                    <div class="box-sticky">Je deviens sticky au scroll ! (top: 0)</div>
+                    <p><strong>✅ Usage :</strong> En-têtes de tableaux, menus de navigation</p>
+                </div>
+
+                <div class="demo-item">
+                    <h2>z-index (Profondeur)</h2>
+                    <p>Contrôle l'ordre d'empilement des éléments positionnés.</p>
+                    <div class="code-example">
+                        .layer-1 { z-index: 1; }<br />
+                        .layer-2 { z-index: 2; }<br />
+                        .layer-3 { z-index: 3; }
+                    </div>
+                    <div class="z-index-demo">
+                        <div class="layer-1">z-index: 1</div>
+                        <div class="layer-2">z-index: 2</div>
+                        <div class="layer-3">z-index: 3</div>
+                    </div>
+                    <p><strong>📌 Note :</strong> Fonctionne uniquement avec position (sauf static)</p>
+                </div>
+            </div>
+
+            <h2 style="text-align: center; color: #2c3e50; margin: 40px 0 20px">🎨 Backgrounds CSS</h2>
+
+            <div class="demo-grid">
+                <div class="demo-item" style="grid-column: 1 / -1">
+                    <h2>Arrière-plans (Background)</h2>
+
+                    <div class="bg-color">
+                        <strong>background-color</strong>: Couleur unie<br />
+                        <code>background-color: #3498db;</code>
+                    </div>
+
+                    <div class="bg-gradient">
+                        <strong>background (gradient)</strong>: Dégradé de couleurs<br />
+                        <code>background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);</code>
+                    </div>
+
+                    <div class="bg-image">
+                        <strong>background-image</strong>: Image d'arrière-plan<br />
+                        <code>background-image: url('image.jpg');</code>
+                    </div>
+
+                    <div class="code-example">
+                        /* Propriétés background */<br />
+                        background-color: #3498db;<br />
+                        background-image: url('image.jpg');<br />
+                        background-size: <span class="highlight">cover</span>; /* contain, 100%, auto */<br />
+                        background-position: <span class="highlight">center</span>; /* top, bottom, left, right */<br />
+                        background-repeat: <span class="highlight">no-repeat</span>; /* repeat, repeat-x, repeat-y */<br
+                        />
+                        background-attachment: <span class="highlight">fixed</span>; /* scroll, local */<br /><br />
+                        /* Syntaxe raccourcie */<br />
+                        background: url('image.jpg') center/cover no-repeat;
+                    </div>
+                </div>
+            </div>
+
+            <h2 style="text-align: center; color: #2c3e50; margin: 40px 0 20px">🎭 Pseudo-classes</h2>
+
+            <div class="demo-grid">
+                <div class="demo-item">
+                    <h2>Pseudo-classes de lien</h2>
+                    <p>États interactifs des liens.</p>
+                    <div class="pseudo-demo">
+                        <a href="#">Survolez-moi pour voir :hover</a>
+                        <a href="#">Cliquez-moi pour voir :active</a>
+                    </div>
+                    <div class="code-example">
+                        a:link { color: blue; }<br />
+                        a:visited { color: purple; }<br />
+                        a:hover { color: red; }<br />
+                        a:active { color: orange; }<br />
+                        a:focus { outline: 2px solid blue; }
+                    </div>
+                </div>
+
+                <div class="demo-item">
+                    <h2>Pseudo-classes structurelles</h2>
+                    <p>Cibler des éléments selon leur position.</p>
+                    <ul class="list-demo">
+                        <li>Premier élément (:first-child)</li>
+                        <li>Élément impair (:nth-child(odd))</li>
+                        <li>Élément pair (:nth-child(even))</li>
+                        <li>Élément impair</li>
+                        <li>Dernier élément (:last-child)</li>
+                    </ul>
+                    <div class="code-example">
+                        li:first-child { ... }<br />
+                        li:last-child { ... }<br />
+                        li:nth-child(odd) { ... }<br />
+                        li:nth-child(even) { ... }<br />
+                        li:nth-child(3) { ... }
+                    </div>
+                </div>
+            </div>
+
+            <h2 style="text-align: center; color: #2c3e50; margin: 40px 0 20px">✨ Pseudo-éléments</h2>
+
+            <div class="demo-grid">
+                <div class="demo-item">
+                    <h2>::before et ::after</h2>
+                    <p>Insère du contenu avant ou après un élément.</p>
+                    <div class="pseudo-element-demo">Cet élément a du contenu ajouté via ::before et ::after</div>
+                    <div class="code-example">
+                        .element::before {<br />
+                        &nbsp;&nbsp;content: '📌 ';<br />
+                        }<br /><br />
+                        .element::after {<br />
+                        &nbsp;&nbsp;content: ' ✨';<br />
+                        }
+                    </div>
+                </div>
+
+                <div class="demo-item">
+                    <h2>Exemple : Citation stylisée</h2>
+                    <div class="quote-demo">
+                        Le CSS est un langage puissant qui permet de créer des designs magnifiques et interactifs.
+                    </div>
+                    <div class="code-example">
+                        .quote::before {<br />
+                        &nbsp;&nbsp;content: '"';<br />
+                        &nbsp;&nbsp;position: absolute;<br />
+                        &nbsp;&nbsp;font-size: 4em;<br />
+                        &nbsp;&nbsp;color: #3498db;<br />
+                        &nbsp;&nbsp;opacity: 0.3;<br />
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Box fixed example -->
+        <div class="box-fixed">Position: fixed<br />Je reste visible !</div>
+
+        <div class="froggiesplaining">
+            <span> Froggiesplaining :</span>
+            <p>
+                <br />
+                <strong>🎯 Objectifs de ce cours :</strong><br />
+                ✅ Comprendre les 5 types de positionnement CSS<br />
+                ✅ Utiliser z-index pour gérer les superpositions<br />
+                ✅ Maîtriser les propriétés background<br />
+                ✅ Appliquer les pseudo-classes (:hover, :nth-child, etc.)<br />
+                ✅ Créer du contenu avec ::before et ::after<br /><br />
+
+                <strong>📖 Résumé :</strong><br />
+                • <strong>static</strong> : flux normal (défaut)<br />
+                • <strong>relative</strong> : décalage depuis position normale<br />
+                • <strong>absolute</strong> : par rapport au parent positionné<br />
+                • <strong>fixed</strong> : par rapport à la fenêtre<br />
+                • <strong>sticky</strong> : relative puis fixed au scroll<br /><br />
+
+                <strong>🏋️ Exercice :</strong><br />
+                Créez un header sticky avec navigation + un bouton "retour en haut" en position fixed !
+            </p>
+            <img src="../img/froggie-300.png" alt="Froggie explain" class="overfrog" id="Froggie" />
+        </div>
+
+        <a href="#Froggie"
+            ><div id="goToFroggie">
+                <img src="../img/froggie-300.png" width="50px" /><br /><i class="bi bi-arrow-bar-down"></i></div
+        ></a>
+
+        <div id="footerGit">
+            <a href="https://github.com/eCreafr/DWWM" target="_blank"><i class="bi bi-github">GitHub - eCrea</i></a>
+        </div>
+    </body>
+</html>

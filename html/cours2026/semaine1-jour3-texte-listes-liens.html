@@ -1,0 +1,455 @@
+<!doctype html>
+<!-- Déclaration du type de document HTML5 -->
+<html lang="fr">
+    <!-- Balise racine avec langue française -->
+    <head>
+        <!-- En-tête du document -->
+        <meta charset="UTF-8" />
+        <!-- Encodage des caractères en UTF-8 -->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <!-- Configuration responsive pour mobile -->
+        <title>Semaine 1 - Jour 3 | Texte, Listes et Liens</title>
+        <!-- Titre affiché dans l'onglet du navigateur -->
+
+        <link rel="stylesheet" href="../css/froggie.css" />
+        <!-- Lien vers la feuille de style Froggie -->
+
+        <style>
+            /* Styles pour la démonstration */
+            .demo-container {
+                max-width: 1200px;
+                margin: 40px auto;
+                padding: 20px;
+                font-family: Arial, sans-serif;
+            }
+
+            .demo-title {
+                text-align: center;
+                font-size: 2.5em;
+                margin-bottom: 20px;
+                color: #2c3e50;
+            }
+
+            .demo-intro {
+                background: #ecf0f1;
+                padding: 20px;
+                border-radius: 10px;
+                margin-bottom: 40px;
+                line-height: 1.6;
+            }
+
+            .demo-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                gap: 30px;
+                margin-bottom: 40px;
+            }
+
+            .demo-item {
+                border: 2px solid #3498db;
+                border-radius: 10px;
+                padding: 20px;
+                background: white;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+                transition: transform 0.3s ease;
+            }
+
+            .demo-item:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+            }
+
+            .demo-item h2 {
+                margin-top: 0;
+                color: #3498db;
+                font-size: 1.5em;
+            }
+
+            .code-example {
+                background: #2c3e50;
+                color: #ecf0f1;
+                padding: 15px;
+                border-radius: 5px;
+                font-family: 'Courier New', monospace;
+                font-size: 0.9em;
+                margin: 15px 0;
+                overflow-x: auto;
+            }
+
+            .highlight {
+                color: #f39c12;
+                font-weight: bold;
+            }
+
+            .render-box {
+                background: #f8f9fa;
+                border: 2px dashed #95a5a6;
+                padding: 15px;
+                margin: 10px 0;
+                border-radius: 5px;
+            }
+
+            .heading-example h1 {
+                font-size: 2em;
+                margin: 10px 0;
+            }
+
+            .heading-example h2 {
+                font-size: 1.5em;
+                margin: 10px 0;
+            }
+
+            .heading-example h3 {
+                font-size: 1.17em;
+                margin: 10px 0;
+            }
+
+            .heading-example h4 {
+                font-size: 1em;
+                margin: 10px 0;
+            }
+
+            .heading-example h5 {
+                font-size: 0.83em;
+                margin: 10px 0;
+            }
+
+            .heading-example h6 {
+                font-size: 0.67em;
+                margin: 10px 0;
+            }
+
+            .list-examples {
+                margin: 20px 0;
+            }
+
+            .link-demo a {
+                display: block;
+                margin: 10px 0;
+                padding: 10px;
+                background: #e8f4f8;
+                border-radius: 5px;
+                text-decoration: none;
+                color: #3498db;
+                transition: background 0.3s;
+            }
+
+            .link-demo a:hover {
+                background: #3498db;
+                color: white;
+            }
+        </style>
+    </head>
+    <body>
+        <!-- Corps du document -->
+
+        <!-- Conteneur principal pour les exemples -->
+        <div class="demo-container">
+            <h1 class="demo-title">✍️ Semaine 1 - Jour 3 : Texte, Listes et Liens</h1>
+
+            <div class="demo-intro">
+                <h3>📚 Le contenu textuel en HTML</h3>
+                <p>
+                    Le HTML propose de nombreuses balises pour structurer et mettre en forme du texte. Nous allons
+                    découvrir les titres, paragraphes, emphases, listes et liens - les bases essentielles de tout site
+                    web.
+                </p>
+            </div>
+
+            <!-- Section Titres -->
+            <div class="demo-grid">
+                <div class="demo-item">
+                    <h2>📐 Les titres (h1 à h6)</h2>
+                    <p>
+                        HTML propose 6 niveaux de titres, de <code>&lt;h1&gt;</code> (le plus important) à
+                        <code>&lt;h6&gt;</code> (le moins important).
+                    </p>
+                    <div class="code-example">
+                        <span class="highlight">&lt;h1&gt;</span>Titre principal<span class="highlight"
+                            >&lt;/h1&gt;</span
+                        ><br />
+                        <span class="highlight">&lt;h2&gt;</span>Sous-titre<span class="highlight">&lt;/h2&gt;</span
+                        ><br />
+                        <span class="highlight">&lt;h3&gt;</span>Section<span class="highlight">&lt;/h3&gt;</span><br />
+                        <span class="highlight">&lt;h4&gt;</span>Sous-section<span class="highlight"
+                            >&lt;/h4&gt;</span
+                        ><br />
+                        <span class="highlight">&lt;h5&gt;</span>Paragraphe<span class="highlight">&lt;/h5&gt;</span
+                        ><br />
+                        <span class="highlight">&lt;h6&gt;</span>Détail<span class="highlight">&lt;/h6&gt;</span>
+                    </div>
+                    <div class="render-box heading-example">
+                        <h1>Titre h1</h1>
+                        <h2>Titre h2</h2>
+                        <h3>Titre h3</h3>
+                        <h4>Titre h4</h4>
+                        <h5>Titre h5</h5>
+                        <h6>Titre h6</h6>
+                    </div>
+                    <p>
+                        <strong>⚠️ Important :</strong> Un seul &lt;h1&gt; par page, respecter la hiérarchie (pas de h3
+                        après un h1)
+                    </p>
+                </div>
+
+                <div class="demo-item">
+                    <h2>📝 Paragraphes et texte</h2>
+                    <p>Les balises de base pour structurer du texte.</p>
+                    <div class="code-example">
+                        <span class="highlight">&lt;p&gt;</span>Paragraphe de texte<span class="highlight"
+                            >&lt;/p&gt;</span
+                        ><br /><br />
+                        <span class="highlight">&lt;strong&gt;</span>Texte important<span class="highlight"
+                            >&lt;/strong&gt;</span
+                        ><br />
+                        <span class="highlight">&lt;em&gt;</span>Texte emphase<span class="highlight">&lt;/em&gt;</span
+                        ><br />
+                        <span class="highlight">&lt;mark&gt;</span>Texte surligné<span class="highlight"
+                            >&lt;/mark&gt;</span
+                        ><br />
+                        <span class="highlight">&lt;small&gt;</span>Petit texte<span class="highlight"
+                            >&lt;/small&gt;</span
+                        ><br />
+                        <span class="highlight">&lt;del&gt;</span>Texte supprimé<span class="highlight"
+                            >&lt;/del&gt;</span
+                        ><br />
+                        <span class="highlight">&lt;ins&gt;</span>Texte inséré<span class="highlight">&lt;/ins&gt;</span
+                        ><br />
+                        <span class="highlight">&lt;code&gt;</span>Code inline<span class="highlight"
+                            >&lt;/code&gt;</span
+                        >
+                    </div>
+                    <div class="render-box">
+                        <p>Ceci est un paragraphe normal.</p>
+                        <p><strong>Texte en gras (important)</strong></p>
+                        <p><em>Texte en italique (emphase)</em></p>
+                        <p><mark>Texte surligné</mark></p>
+                        <p><small>Texte de petite taille</small></p>
+                        <p><del>Texte supprimé</del></p>
+                        <p><ins>Texte inséré</ins></p>
+                        <p><code>console.log('Hello')</code></p>
+                    </div>
+                    <p><strong>💡 Astuce :</strong> &lt;strong&gt; et &lt;em&gt; ont un sens sémantique, pas juste visuel</p>
+                </div>
+            </div>
+
+            <!-- Section Listes -->
+            <h2 style="text-align: center; color: #2c3e50; margin: 40px 0 20px">📋 Les listes</h2>
+
+            <div class="demo-grid">
+                <div class="demo-item">
+                    <h2>&lt;ul&gt; - Liste non ordonnée</h2>
+                    <p>Liste à puces, sans ordre particulier.</p>
+                    <div class="code-example">
+                        <span class="highlight">&lt;ul&gt;</span><br />
+                        &nbsp;&nbsp;&lt;li&gt;Élément 1&lt;/li&gt;<br />
+                        &nbsp;&nbsp;&lt;li&gt;Élément 2&lt;/li&gt;<br />
+                        &nbsp;&nbsp;&lt;li&gt;Élément 3&lt;/li&gt;<br />
+                        <span class="highlight">&lt;/ul&gt;</span>
+                    </div>
+                    <div class="render-box">
+                        <ul>
+                            <li>HTML</li>
+                            <li>CSS</li>
+                            <li>JavaScript</li>
+                        </ul>
+                    </div>
+                    <p><strong>📍 Usage :</strong> Menus, listes de features, tags...</p>
+                </div>
+
+                <div class="demo-item">
+                    <h2>&lt;ol&gt; - Liste ordonnée</h2>
+                    <p>Liste numérotée, avec un ordre précis.</p>
+                    <div class="code-example">
+                        <span class="highlight">&lt;ol&gt;</span><br />
+                        &nbsp;&nbsp;&lt;li&gt;Étape 1&lt;/li&gt;<br />
+                        &nbsp;&nbsp;&lt;li&gt;Étape 2&lt;/li&gt;<br />
+                        &nbsp;&nbsp;&lt;li&gt;Étape 3&lt;/li&gt;<br />
+                        <span class="highlight">&lt;/ol&gt;</span>
+                    </div>
+                    <div class="render-box">
+                        <ol>
+                            <li>Ouvrir VS Code</li>
+                            <li>Créer un fichier HTML</li>
+                            <li>Coder !</li>
+                        </ol>
+                    </div>
+                    <p><strong>📍 Usage :</strong> Instructions, classements, étapes...</p>
+                </div>
+
+                <div class="demo-item">
+                    <h2>🔁 Listes imbriquées</h2>
+                    <p>On peut mettre des listes dans des listes !</p>
+                    <div class="code-example">
+                        &lt;ul&gt;<br />
+                        &nbsp;&nbsp;&lt;li&gt;Frontend<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;&lt;ul&gt;<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;li&gt;HTML&lt;/li&gt;<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;li&gt;CSS&lt;/li&gt;<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;&lt;/ul&gt;<br />
+                        &nbsp;&nbsp;&lt;/li&gt;<br />
+                        &nbsp;&nbsp;&lt;li&gt;Backend&lt;/li&gt;<br />
+                        &lt;/ul&gt;
+                    </div>
+                    <div class="render-box">
+                        <ul>
+                            <li>
+                                Frontend
+                                <ul>
+                                    <li>HTML</li>
+                                    <li>CSS</li>
+                                    <li>JavaScript</li>
+                                </ul>
+                            </li>
+                            <li>Backend</li>
+                        </ul>
+                    </div>
+                    <p><strong>💡 Astuce :</strong> Très utilisé pour les menus de navigation</p>
+                </div>
+            </div>
+
+            <!-- Section Liens -->
+            <h2 style="text-align: center; color: #2c3e50; margin: 40px 0 20px">🔗 Les liens</h2>
+
+            <div class="demo-grid">
+                <div class="demo-item">
+                    <h2>&lt;a&gt; - Lien simple</h2>
+                    <p>Balise d'ancrage pour créer des liens hypertexte.</p>
+                    <div class="code-example">
+                        <span class="highlight">&lt;a href="https://google.com"&gt;</span><br />
+                        &nbsp;&nbsp;Visiter Google<br />
+                        <span class="highlight">&lt;/a&gt;</span>
+                    </div>
+                    <div class="render-box link-demo">
+                        <a href="https://google.com">Visiter Google</a>
+                    </div>
+                    <p><strong>📌 Attribut :</strong> <code>href</code> définit la destination</p>
+                </div>
+
+                <div class="demo-item">
+                    <h2>🆕 Nouvel onglet</h2>
+                    <p>Ouvrir un lien dans un nouvel onglet.</p>
+                    <div class="code-example">
+                        &lt;a href="https://google.com"<br />
+                        &nbsp;&nbsp;<span class="highlight">target="_blank"</span>&gt;<br />
+                        &nbsp;&nbsp;Nouvel onglet<br />
+                        &lt;/a&gt;
+                    </div>
+                    <div class="render-box link-demo">
+                        <a href="https://google.com" target="_blank">Ouvrir dans un nouvel onglet</a>
+                    </div>
+                    <p><strong>⚠️ Sécurité :</strong> Ajouter <code>rel="noopener"</code> avec target="_blank"</p>
+                </div>
+
+                <div class="demo-item">
+                    <h2>📧 Lien email</h2>
+                    <p>Créer un lien qui ouvre le client email.</p>
+                    <div class="code-example">
+                        <span class="highlight">&lt;a href="mailto:contact@site.com"&gt;</span><br />
+                        &nbsp;&nbsp;Nous contacter<br />
+                        &lt;/a&gt;
+                    </div>
+                    <div class="render-box link-demo">
+                        <a href="mailto:contact@exemple.com">Envoyer un email</a>
+                    </div>
+                    <p><strong>💡 Bonus :</strong> <code>href="tel:0123456789"</code> pour numéro de téléphone</p>
+                </div>
+
+                <div class="demo-item">
+                    <h2>🔖 Lien d'ancrage</h2>
+                    <p>Lien vers une section de la même page.</p>
+                    <div class="code-example">
+                        &lt;a <span class="highlight">href="#section2"</span>&gt;<br />
+                        &nbsp;&nbsp;Aller à la section 2<br />
+                        &lt;/a&gt;<br /><br />
+                        &lt;section <span class="highlight">id="section2"</span>&gt;<br />
+                        &nbsp;&nbsp;Contenu...<br />
+                        &lt;/section&gt;
+                    </div>
+                    <div class="render-box link-demo">
+                        <a href="#Froggie">Aller vers Froggie (en bas)</a>
+                    </div>
+                    <p><strong>📍 Usage :</strong> Table des matières, "retour en haut", navigation interne</p>
+                </div>
+
+                <div class="demo-item">
+                    <h2>📂 Lien relatif</h2>
+                    <p>Lien vers une autre page du même site.</p>
+                    <div class="code-example">
+                        &lt;!-- Même dossier --&gt;<br />
+                        &lt;a href="<span class="highlight">contact.html</span>"&gt;Contact&lt;/a&gt;<br /><br />
+                        &lt;!-- Dossier parent --&gt;<br />
+                        &lt;a href="<span class="highlight">../index.html</span>"&gt;Accueil&lt;/a&gt;<br /><br />
+                        &lt;!-- Sous-dossier --&gt;<br />
+                        &lt;a href="<span class="highlight">pages/about.html</span>"&gt;À propos&lt;/a&gt;
+                    </div>
+                    <p>
+                        <strong>💡 Chemin :</strong><br />
+                        • <code>./</code> = dossier actuel<br />
+                        • <code>../</code> = dossier parent<br />
+                        • <code>/</code> = racine du site
+                    </p>
+                </div>
+
+                <div class="demo-item">
+                    <h2>🎨 Styles de liens</h2>
+                    <p>Les liens ont 4 états CSS différents.</p>
+                    <div class="code-example">
+                        a:link { color: blue; }<br />
+                        a:visited { color: purple; }<br />
+                        a:hover { color: red; }<br />
+                        a:active { color: orange; }
+                    </div>
+                    <p>
+                        <strong>📚 États :</strong><br />
+                        • <code>:link</code> = lien non visité<br />
+                        • <code>:visited</code> = lien visité<br />
+                        • <code>:hover</code> = survol souris<br />
+                        • <code>:active</code> = au clic
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Zone d'explication pédagogique "Froggiesplaining" -->
+        <div class="froggiesplaining">
+            <span> Froggiesplaining :</span>
+            <p>
+                <br />
+                <strong>🎯 Objectifs de ce cours :</strong><br />
+                ✅ Maîtriser la hiérarchie des titres (h1 à h6)<br />
+                ✅ Utiliser les balises de mise en forme du texte<br />
+                ✅ Créer des listes ordonnées et non ordonnées<br />
+                ✅ Créer différents types de liens (internes, externes, email, ancrage)<br /><br />
+
+                <strong>📖 Points clés :</strong><br />
+                • Les <strong>titres</strong> structurent le contenu (1 seul h1 par page)<br />
+                • <strong>&lt;strong&gt;</strong> et <strong>&lt;em&gt;</strong> ont un sens sémantique<br />
+                • Les <strong>listes</strong> peuvent être imbriquées<br />
+                • L'attribut <strong>href</strong> définit la destination d'un lien<br />
+                • <strong>target="_blank"</strong> ouvre dans un nouvel onglet<br /><br />
+
+                <strong>🏋️ Exercice pratique :</strong><br />
+                Créez une page "Portfolio" avec :<br />
+                • Des titres de différents niveaux<br />
+                • Une liste de compétences<br />
+                • Des liens vers vos réseaux sociaux<br />
+                • Un lien email de contact
+            </p>
+            <img src="../img/froggie-300.png" alt="Froggie explain" class="overfrog" id="Froggie" />
+        </div>
+
+        <!-- Lien d'ancrage vers Froggie -->
+        <a href="#Froggie"
+            ><div id="goToFroggie">
+                <img src="../img/froggie-300.png" width="50px" /><br /><i class="bi bi-arrow-bar-down"></i></div
+        ></a>
+
+        <!-- Pied de page avec lien GitHub -->
+        <div id="footerGit">
+            <a href="https://github.com/eCreafr/DWWM" target="_blank"><i class="bi bi-github">GitHub - eCrea</i></a>
+        </div>
+    </body>
+    <!-- Fin du corps du document -->
+</html>
+<!-- Fin du document HTML -->

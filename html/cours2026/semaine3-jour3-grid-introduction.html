@@ -1,0 +1,337 @@
+<!doctype html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Semaine 3 - Jour 3 | Introduction CSS Grid</title>
+        <link rel="stylesheet" href="../css/froggie.css" />
+        <style>
+            .demo-container {max-width: 1200px; margin: 40px auto; padding: 20px; font-family: Arial, sans-serif;}
+            .demo-title {text-align: center; font-size: 2.5em; margin-bottom: 20px; color: #2c3e50;}
+            .demo-intro {background: #ecf0f1; padding: 20px; border-radius: 10px; margin-bottom: 40px; line-height: 1.6;}
+            .demo-grid-layout {display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-bottom: 40px;}
+            .demo-item {border: 2px solid #3498db; border-radius: 10px; padding: 20px; background: white; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);}
+            .demo-item h2 {margin-top: 0; color: #3498db;}
+            .code-example {background: #2c3e50; color: #ecf0f1; padding: 15px; border-radius: 5px; font-family: 'Courier New', monospace; font-size: 0.9em; margin: 15px 0; overflow-x: auto;}
+            .highlight {color: #f39c12; font-weight: bold;}
+
+            .grid-container {
+                display: grid;
+                background: #ecf0f1;
+                border: 3px solid #3498db;
+                padding: 15px;
+                margin: 15px 0;
+                gap: 10px;
+            }
+            .grid-item {
+                background: #3498db;
+                color: white;
+                padding: 20px;
+                border-radius: 5px;
+                font-weight: bold;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            .grid-3cols {grid-template-columns: repeat(3, 1fr);}
+            .grid-2cols {grid-template-columns: repeat(2, 1fr);}
+            .grid-auto {grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));}
+            .grid-fr {grid-template-columns: 1fr 2fr 1fr;}
+            .grid-mixed {grid-template-columns: 200px 1fr 150px;}
+            .grid-rows {grid-template-rows: 100px 150px 100px;}
+            .grid-areas {
+                grid-template-areas:
+                    "header header header"
+                    "sidebar main main"
+                    "footer footer footer";
+                grid-template-columns: 200px 1fr 1fr;
+                grid-template-rows: auto 1fr auto;
+                min-height: 400px;
+            }
+            .header {grid-area: header; background: #e74c3c;}
+            .sidebar {grid-area: sidebar; background: #f39c12;}
+            .main {grid-area: main; background: #1abc9c;}
+            .footer {grid-area: footer; background: #9b59b6;}
+            .span-2 {grid-column: span 2;}
+            .span-3 {grid-column: span 3;}
+            .grid-gap-demo {gap: 20px;}
+        </style>
+    </head>
+    <body>
+        <div class="demo-container">
+            <h1 class="demo-title">🎯 Semaine 3 - Jour 3 : Introduction CSS Grid</h1>
+
+            <div class="demo-intro">
+                <h3>📚 Qu'est-ce que CSS Grid ?</h3>
+                <p><strong>CSS Grid</strong> est un système de mise en page bidimensionnel (lignes ET colonnes) qui permet de créer des layouts complexes facilement. C'est l'outil le plus puissant pour la mise en page web moderne.</p>
+                <p><strong>Différence avec Flexbox :</strong> Flexbox = 1 dimension (ligne OU colonne), Grid = 2 dimensions (lignes ET colonnes)</p>
+            </div>
+
+            <h2 style="text-align: center; color: #2c3e50">🎨 Concept de base</h2>
+
+            <div class="demo-grid-layout">
+                <div class="demo-item">
+                    <h2>Activation de Grid</h2>
+                    <div class="code-example">
+                        .container {<br/>
+                        &nbsp;&nbsp;<span class="highlight">display: grid;</span><br/>
+                        }
+                    </div>
+                    <div class="grid-container">
+                        <div class="grid-item">1</div>
+                        <div class="grid-item">2</div>
+                        <div class="grid-item">3</div>
+                    </div>
+                    <p><strong>📌 Note :</strong> Par défaut, les items sont en 1 colonne</p>
+                </div>
+
+                <div class="demo-item">
+                    <h2>Terminologie Grid</h2>
+                    <ul style="line-height: 1.8">
+                        <li><strong>Grid Container :</strong> élément parent avec display: grid</li>
+                        <li><strong>Grid Items :</strong> enfants directs du container</li>
+                        <li><strong>Grid Line :</strong> ligne séparatrice</li>
+                        <li><strong>Grid Track :</strong> ligne ou colonne</li>
+                        <li><strong>Grid Cell :</strong> intersection ligne/colonne</li>
+                        <li><strong>Grid Area :</strong> zone rectangulaire de cellules</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h2 style="text-align: center; color: #2c3e50; margin: 40px 0 20px">📐 grid-template-columns</h2>
+
+            <div class="demo-grid-layout">
+                <div class="demo-item">
+                    <h2>3 colonnes égales</h2>
+                    <div class="code-example">
+                        .grid {<br/>
+                        &nbsp;&nbsp;display: grid;<br/>
+                        &nbsp;&nbsp;<span class="highlight">grid-template-columns: 1fr 1fr 1fr;</span><br/>
+                        &nbsp;&nbsp;/* ou repeat(3, 1fr) */<br/>
+                        }
+                    </div>
+                    <div class="grid-container grid-3cols">
+                        <div class="grid-item">1</div>
+                        <div class="grid-item">2</div>
+                        <div class="grid-item">3</div>
+                        <div class="grid-item">4</div>
+                        <div class="grid-item">5</div>
+                        <div class="grid-item">6</div>
+                    </div>
+                    <p><strong>fr :</strong> "fraction" - part égale de l'espace disponible</p>
+                </div>
+
+                <div class="demo-item">
+                    <h2>Colonnes avec proportions</h2>
+                    <div class="code-example">
+                        grid-template-columns: <span class="highlight">1fr 2fr 1fr;</span>
+                    </div>
+                    <div class="grid-container grid-fr">
+                        <div class="grid-item">1fr</div>
+                        <div class="grid-item">2fr (double)</div>
+                        <div class="grid-item">1fr</div>
+                    </div>
+                    <p>La colonne du milieu fait le double des autres</p>
+                </div>
+
+                <div class="demo-item">
+                    <h2>Colonnes mixtes (px + fr)</h2>
+                    <div class="code-example">
+                        grid-template-columns: <span class="highlight">200px 1fr 150px;</span>
+                    </div>
+                    <div class="grid-container grid-mixed">
+                        <div class="grid-item">200px</div>
+                        <div class="grid-item">1fr (flexible)</div>
+                        <div class="grid-item">150px</div>
+                    </div>
+                    <p><strong>✅ Usage :</strong> Sidebar fixe + contenu flexible</p>
+                </div>
+
+                <div class="demo-item">
+                    <h2>auto-fit (responsive)</h2>
+                    <div class="code-example">
+                        grid-template-columns:<br/>
+                        &nbsp;&nbsp;<span class="highlight">repeat(auto-fit,<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;minmax(150px, 1fr));</span>
+                    </div>
+                    <div class="grid-container grid-auto">
+                        <div class="grid-item">1</div>
+                        <div class="grid-item">2</div>
+                        <div class="grid-item">3</div>
+                        <div class="grid-item">4</div>
+                        <div class="grid-item">5</div>
+                        <div class="grid-item">6</div>
+                    </div>
+                    <p><strong>🌟 Magique :</strong> S'adapte automatiquement à la largeur !</p>
+                </div>
+            </div>
+
+            <h2 style="text-align: center; color: #2c3e50; margin: 40px 0 20px">📏 grid-template-rows</h2>
+
+            <div class="demo-grid-layout">
+                <div class="demo-item" style="grid-column: 1 / -1">
+                    <h2>Définir la hauteur des lignes</h2>
+                    <div class="code-example">
+                        .grid {<br/>
+                        &nbsp;&nbsp;grid-template-columns: repeat(3, 1fr);<br/>
+                        &nbsp;&nbsp;<span class="highlight">grid-template-rows: 100px 150px 100px;</span><br/>
+                        }
+                    </div>
+                    <div class="grid-container grid-3cols grid-rows">
+                        <div class="grid-item">100px</div>
+                        <div class="grid-item">100px</div>
+                        <div class="grid-item">100px</div>
+                        <div class="grid-item">150px</div>
+                        <div class="grid-item">150px</div>
+                        <div class="grid-item">150px</div>
+                        <div class="grid-item">100px</div>
+                        <div class="grid-item">100px</div>
+                        <div class="grid-item">100px</div>
+                    </div>
+                </div>
+            </div>
+
+            <h2 style="text-align: center; color: #2c3e50; margin: 40px 0 20px">📦 gap (espacement)</h2>
+
+            <div class="demo-grid-layout">
+                <div class="demo-item">
+                    <h2>Sans gap</h2>
+                    <div class="grid-container grid-3cols" style="gap: 0">
+                        <div class="grid-item">1</div>
+                        <div class="grid-item">2</div>
+                        <div class="grid-item">3</div>
+                    </div>
+                </div>
+
+                <div class="demo-item">
+                    <h2>Avec gap: 20px</h2>
+                    <div class="grid-container grid-3cols grid-gap-demo">
+                        <div class="grid-item">1</div>
+                        <div class="grid-item">2</div>
+                        <div class="grid-item">3</div>
+                    </div>
+                    <div class="code-example">
+                        .grid {<br/>
+                        &nbsp;&nbsp;<span class="highlight">gap: 20px;</span><br/>
+                        &nbsp;&nbsp;/* ou */<br/>
+                        &nbsp;&nbsp;row-gap: 20px;<br/>
+                        &nbsp;&nbsp;column-gap: 20px;<br/>
+                        }
+                    </div>
+                </div>
+            </div>
+
+            <h2 style="text-align: center; color: #2c3e50; margin: 40px 0 20px">🎯 grid-column & grid-row</h2>
+
+            <div class="demo-grid-layout">
+                <div class="demo-item" style="grid-column: 1 / -1">
+                    <h2>Faire des items qui occupent plusieurs cellules</h2>
+                    <div class="code-example">
+                        .item1 { <span class="highlight">grid-column: span 2;</span> }<br/>
+                        .item3 { <span class="highlight">grid-column: span 3;</span> }
+                    </div>
+                    <div class="grid-container grid-3cols">
+                        <div class="grid-item span-2">span 2 colonnes</div>
+                        <div class="grid-item">Normal</div>
+                        <div class="grid-item span-3">span 3 colonnes (toute la largeur)</div>
+                        <div class="grid-item">4</div>
+                        <div class="grid-item">5</div>
+                    </div>
+                </div>
+            </div>
+
+            <h2 style="text-align: center; color: #2c3e50; margin: 40px 0 20px">🗺️ grid-template-areas</h2>
+
+            <div class="demo-item" style="max-width: 100%; margin: 0 auto 40px">
+                <h2>Layout complexe avec noms de zones</h2>
+                <div class="code-example">
+                    .grid {<br/>
+                    &nbsp;&nbsp;display: grid;<br/>
+                    &nbsp;&nbsp;<span class="highlight">grid-template-areas:</span><br/>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="highlight">"header header header"</span><br/>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="highlight">"sidebar main main"</span><br/>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="highlight">"footer footer footer";</span><br/>
+                    &nbsp;&nbsp;grid-template-columns: 200px 1fr 1fr;<br/>
+                    }<br/><br/>
+                    .header { <span class="highlight">grid-area: header;</span> }<br/>
+                    .sidebar { <span class="highlight">grid-area: sidebar;</span> }<br/>
+                    .main { <span class="highlight">grid-area: main;</span> }<br/>
+                    .footer { <span class="highlight">grid-area: footer;</span> }
+                </div>
+                <div class="grid-container grid-areas">
+                    <div class="grid-item header">HEADER</div>
+                    <div class="grid-item sidebar">SIDEBAR</div>
+                    <div class="grid-item main">MAIN CONTENT</div>
+                    <div class="grid-item footer">FOOTER</div>
+                </div>
+                <p style="background: #e8f8f5; padding: 15px; border-radius: 5px; margin-top: 20px">
+                    <strong>🌟 Incroyable :</strong> Cette technique permet de visualiser la structure directement dans le CSS ! C'est très lisible et maintenable.
+                </p>
+            </div>
+
+            <h2 style="text-align: center; color: #2c3e50; margin: 40px 0 20px">⚔️ Flexbox vs Grid</h2>
+
+            <div class="demo-grid-layout">
+                <div class="demo-item">
+                    <h2>Quand utiliser Flexbox ?</h2>
+                    <ul style="line-height: 1.8">
+                        <li>✅ Navigation (navbar)</li>
+                        <li>✅ Alignement d'éléments en ligne</li>
+                        <li>✅ Centrage simple</li>
+                        <li>✅ Petits composants (cards, buttons)</li>
+                        <li>✅ Ordre flexible des éléments</li>
+                    </ul>
+                    <p><strong>Résumé :</strong> 1 dimension, composants</p>
+                </div>
+
+                <div class="demo-item">
+                    <h2>Quand utiliser Grid ?</h2>
+                    <ul style="line-height: 1.8">
+                        <li>✅ Layout de page complet</li>
+                        <li>✅ Galeries d'images</li>
+                        <li>✅ Tableaux de bord (dashboards)</li>
+                        <li>✅ Grilles de produits</li>
+                        <li>✅ Layouts complexes 2D</li>
+                    </ul>
+                    <p><strong>Résumé :</strong> 2 dimensions, layouts</p>
+                </div>
+
+                <div class="demo-item" style="grid-column: 1 / -1; background: #e8f4f8">
+                    <h2 style="text-align: center">💡 La meilleure approche</h2>
+                    <p style="text-align: center; font-size: 1.1em; margin: 20px 0">
+                        <strong>Utilisez Grid pour la structure globale, et Flexbox pour les composants !</strong><br/>
+                        Ils sont complémentaires, pas concurrents. On peut (et doit) les combiner.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="froggiesplaining">
+            <span> Froggiesplaining :</span>
+            <p>
+                <br/>
+                <strong>🎯 Objectifs :</strong><br/>
+                ✅ Comprendre le concept de CSS Grid (2 dimensions)<br/>
+                ✅ Créer des colonnes avec grid-template-columns<br/>
+                ✅ Utiliser les unités fr, px, auto-fit<br/>
+                ✅ Espacer avec gap<br/>
+                ✅ Utiliser grid-template-areas pour des layouts complexes<br/><br/>
+
+                <strong>📖 Résumé :</strong><br/>
+                • <strong>display: grid</strong> active Grid<br/>
+                • <strong>fr</strong> = fraction flexible<br/>
+                • <strong>repeat(3, 1fr)</strong> = 3 colonnes égales<br/>
+                • <strong>auto-fit</strong> = responsive automatique<br/>
+                • <strong>gap</strong> = espacement entre cellules<br/>
+                • <strong>grid-template-areas</strong> = nommer les zones<br/><br/>
+
+                <strong>🏋️ Exercice :</strong><br/>
+                Créez un layout avec header, sidebar, main et footer en utilisant grid-template-areas !
+            </p>
+            <img src="../img/froggie-300.png" alt="Froggie" class="overfrog" id="Froggie" />
+        </div>
+
+        <a href="#Froggie"><div id="goToFroggie"><img src="../img/froggie-300.png" width="50px" /><br/><i class="bi bi-arrow-bar-down"></i></div></a>
+        <div id="footerGit"><a href="https://github.com/eCreafr/DWWM" target="_blank"><i class="bi bi-github">GitHub - eCrea</i></a></div>
+    </body>
+</html>

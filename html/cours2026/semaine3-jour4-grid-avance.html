@@ -1,0 +1,296 @@
+<!doctype html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Semaine 3 - Jour 4 | CSS Grid Avancé</title>
+        <link rel="stylesheet" href="../css/froggie.css" />
+        <style>
+            .demo-container {max-width: 1200px; margin: 40px auto; padding: 20px; font-family: Arial, sans-serif;}
+            .demo-title {text-align: center; font-size: 2.5em; margin-bottom: 20px; color: #2c3e50;}
+            .demo-intro {background: #ecf0f1; padding: 20px; border-radius: 10px; margin-bottom: 40px; line-height: 1.6;}
+            .demo-grid-layout {display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-bottom: 40px;}
+            .demo-item {border: 2px solid #3498db; border-radius: 10px; padding: 20px; background: white; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);}
+            .demo-item h2 {margin-top: 0; color: #3498db;}
+            .code-example {background: #2c3e50; color: #ecf0f1; padding: 15px; border-radius: 5px; font-family: 'Courier New', monospace; font-size: 0.85em; margin: 15px 0; overflow-x: auto;}
+            .highlight {color: #f39c12; font-weight: bold;}
+
+            .grid-container {display: grid; background: #ecf0f1; border: 3px solid #3498db; padding: 15px; margin: 15px 0; gap: 10px;}
+            .grid-item {background: #3498db; color: white; padding: 20px; border-radius: 5px; font-weight: bold; display: flex; align-items: center; justify-content: center; min-height: 80px;}
+
+            /* Grid avancé */
+            .grid-auto-flow-row {grid-auto-flow: row; grid-template-columns: repeat(3, 1fr);}
+            .grid-auto-flow-column {grid-auto-flow: column; grid-template-rows: repeat(2, 100px); grid-auto-columns: 150px;}
+
+            .grid-span {grid-template-columns: repeat(4, 1fr);}
+            .span-2-3 {grid-column: 2 / 4; grid-row: 1 / 3; background: #e74c3c; font-size: 1.2em;}
+
+            .grid-line-names {
+                grid-template-columns: [sidebar-start] 200px [sidebar-end main-start] 1fr [main-end];
+                grid-template-rows: [header-start] auto [header-end content-start] 1fr [content-end footer-start] auto [footer-end];
+                min-height: 400px;
+            }
+            .header-line {grid-column: sidebar-start / main-end; grid-row: header-start / header-end; background: #e74c3c;}
+            .sidebar-line {grid-column: sidebar-start / sidebar-end; grid-row: content-start / content-end; background: #f39c12;}
+            .main-line {grid-column: main-start / main-end; grid-row: content-start / content-end; background: #1abc9c;}
+            .footer-line {grid-column: sidebar-start / main-end; grid-row: footer-start / footer-end; background: #9b59b6;}
+
+            .grid-minmax {grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));}
+            .grid-auto-fill {grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));}
+            .grid-auto-fit {grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));}
+
+            .grid-dense {grid-template-columns: repeat(4, 1fr); grid-auto-flow: dense;}
+            .dense-big {grid-column: span 2; grid-row: span 2; background: #e74c3c;}
+            .dense-wide {grid-column: span 2; background: #f39c12;}
+
+            .masonry-demo {display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 15px; grid-auto-rows: 80px;}
+            .masonry-item {background: #3498db; color: white; padding: 15px; border-radius: 8px; display: flex; align-items: center; justify-content: center;}
+            .masonry-tall {grid-row: span 2;}
+            .masonry-very-tall {grid-row: span 3;}
+
+            .subgrid-demo {display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px;}
+            .subgrid-item {display: grid; grid-template-columns: subgrid; gap: 10px; border: 2px solid #3498db; padding: 10px; background: #e8f4f8;}
+        </style>
+    </head>
+    <body>
+        <div class="demo-container">
+            <h1 class="demo-title">🎯 Semaine 3 - Jour 4 : CSS Grid Avancé</h1>
+
+            <div class="demo-intro">
+                <h3>📚 Objectifs du jour</h3>
+                <p>Techniques avancées Grid : grid-auto-flow, line names, minmax(), auto-fit vs auto-fill, dense packing, et création de layouts complexes.</p>
+            </div>
+
+            <h2 style="text-align: center; color: #2c3e50; margin: 40px 0 20px">🔄 grid-auto-flow</h2>
+
+            <div class="demo-grid-layout">
+                <div class="demo-item">
+                    <h2>row (défaut)</h2>
+                    <div class="code-example">
+                        .grid {<br/>
+                        &nbsp;&nbsp;<span class="highlight">grid-auto-flow: row;</span><br/>
+                        &nbsp;&nbsp;grid-template-columns: repeat(3, 1fr);<br/>
+                        }
+                    </div>
+                    <div class="grid-container grid-auto-flow-row">
+                        <div class="grid-item">1</div>
+                        <div class="grid-item">2</div>
+                        <div class="grid-item">3</div>
+                        <div class="grid-item">4</div>
+                        <div class="grid-item">5</div>
+                    </div>
+                    <p>Les items se placent ligne par ligne</p>
+                </div>
+
+                <div class="demo-item">
+                    <h2>column</h2>
+                    <div class="code-example">
+                        .grid {<br/>
+                        &nbsp;&nbsp;<span class="highlight">grid-auto-flow: column;</span><br/>
+                        &nbsp;&nbsp;grid-template-rows: repeat(2, 100px);<br/>
+                        }
+                    </div>
+                    <div class="grid-container grid-auto-flow-column">
+                        <div class="grid-item">1</div>
+                        <div class="grid-item">2</div>
+                        <div class="grid-item">3</div>
+                        <div class="grid-item">4</div>
+                    </div>
+                    <p>Les items se placent colonne par colonne</p>
+                </div>
+            </div>
+
+            <h2 style="text-align: center; color: #2c3e50; margin: 40px 0 20px">📍 Positionnement avec lignes</h2>
+
+            <div class="demo-item" style="margin-bottom: 40px;">
+                <h2>grid-column / grid-row - Placer précisément</h2>
+                <div class="code-example">
+                    .item {<br/>
+                    &nbsp;&nbsp;<span class="highlight">grid-column: 2 / 4;</span> /* De la ligne 2 à 4 (colonnes) */<br/>
+                    &nbsp;&nbsp;<span class="highlight">grid-row: 1 / 3;</span> /* De la ligne 1 à 3 (rangées) */<br/>
+                    }
+                </div>
+                <div class="grid-container grid-span">
+                    <div class="grid-item">1</div>
+                    <div class="grid-item span-2-3">Item large<br/>(col: 2/4, row: 1/3)</div>
+                    <div class="grid-item">3</div>
+                    <div class="grid-item">4</div>
+                    <div class="grid-item">5</div>
+                    <div class="grid-item">6</div>
+                </div>
+            </div>
+
+            <h2 style="text-align: center; color: #2c3e50; margin: 40px 0 20px">🏷️ Nommer les lignes</h2>
+
+            <div class="demo-item" style="margin-bottom: 40px;">
+                <h2>Line Names - Noms personnalisés pour les lignes</h2>
+                <div class="code-example">
+                    .grid {<br/>
+                    &nbsp;&nbsp;grid-template-columns:<br/>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="highlight">[sidebar-start]</span> 200px<br/>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="highlight">[sidebar-end main-start]</span> 1fr<br/>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="highlight">[main-end]</span>;<br/>
+                    }<br/><br/>
+                    .header {<br/>
+                    &nbsp;&nbsp;<span class="highlight">grid-column: sidebar-start / main-end;</span><br/>
+                    }
+                </div>
+                <div class="grid-container grid-line-names">
+                    <div class="grid-item header-line">HEADER</div>
+                    <div class="grid-item sidebar-line">SIDEBAR</div>
+                    <div class="grid-item main-line">MAIN</div>
+                    <div class="grid-item footer-line">FOOTER</div>
+                </div>
+            </div>
+
+            <h2 style="text-align: center; color: #2c3e50; margin: 40px 0 20px">📐 minmax(), auto-fill, auto-fit</h2>
+
+            <div class="demo-grid-layout">
+                <div class="demo-item" style="grid-column: 1 / -1;">
+                    <h2>minmax() - Taille min et max</h2>
+                    <div class="code-example">
+                        grid-template-columns: repeat(auto-fit, <span class="highlight">minmax(200px, 1fr)</span>);
+                    </div>
+                    <div class="grid-container grid-minmax">
+                        <div class="grid-item">Min 200px</div>
+                        <div class="grid-item">Flexible</div>
+                        <div class="grid-item">Responsive</div>
+                    </div>
+                    <p><strong>💡 Magic :</strong> Créez des grilles responsive sans media queries !</p>
+                </div>
+
+                <div class="demo-item">
+                    <h2>auto-fill</h2>
+                    <div class="code-example">
+                        repeat(<span class="highlight">auto-fill</span>, minmax(150px, 1fr));
+                    </div>
+                    <div class="grid-container grid-auto-fill">
+                        <div class="grid-item">1</div>
+                        <div class="grid-item">2</div>
+                        <div class="grid-item">3</div>
+                    </div>
+                    <p>Remplit avec autant de colonnes que possible</p>
+                </div>
+
+                <div class="demo-item">
+                    <h2>auto-fit</h2>
+                    <div class="code-example">
+                        repeat(<span class="highlight">auto-fit</span>, minmax(150px, 1fr));
+                    </div>
+                    <div class="grid-container grid-auto-fit">
+                        <div class="grid-item">1</div>
+                        <div class="grid-item">2</div>
+                        <div class="grid-item">3</div>
+                    </div>
+                    <p>Étire les items pour remplir l'espace</p>
+                </div>
+            </div>
+
+            <h2 style="text-align: center; color: #2c3e50; margin: 40px 0 20px">🧩 grid-auto-flow: dense</h2>
+
+            <div class="demo-item" style="margin-bottom: 40px;">
+                <h2>Dense Packing - Combler les trous</h2>
+                <div class="code-example">
+                    .grid {<br/>
+                    &nbsp;&nbsp;<span class="highlight">grid-auto-flow: dense;</span><br/>
+                    }
+                </div>
+                <div class="grid-container grid-dense">
+                    <div class="grid-item">1</div>
+                    <div class="grid-item dense-big">BIG<br/>(2×2)</div>
+                    <div class="grid-item">3</div>
+                    <div class="grid-item">4</div>
+                    <div class="grid-item dense-wide">WIDE (2×1)</div>
+                    <div class="grid-item">6</div>
+                    <div class="grid-item">7</div>
+                    <div class="grid-item">8</div>
+                </div>
+                <p><strong>✅ Usage :</strong> Galeries d'images, Pinterest-style layouts</p>
+            </div>
+
+            <h2 style="text-align: center; color: #2c3e50; margin: 40px 0 20px">🎨 Masonry-like Layout</h2>
+
+            <div class="demo-item" style="margin-bottom: 40px;">
+                <h2>Style Pinterest avec grid-row: span</h2>
+                <div class="code-example">
+                    .grid {<br/>
+                    &nbsp;&nbsp;grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));<br/>
+                    &nbsp;&nbsp;<span class="highlight">grid-auto-rows: 80px;</span><br/>
+                    }<br/><br/>
+                    .item-tall { <span class="highlight">grid-row: span 2;</span> }<br/>
+                    .item-very-tall { <span class="highlight">grid-row: span 3;</span> }
+                </div>
+                <div class="masonry-demo">
+                    <div class="masonry-item">Item 1</div>
+                    <div class="masonry-item masonry-tall">Tall (span 2)</div>
+                    <div class="masonry-item">Item 3</div>
+                    <div class="masonry-item masonry-very-tall">Very Tall<br/>(span 3)</div>
+                    <div class="masonry-item">Item 5</div>
+                    <div class="masonry-item masonry-tall">Tall (span 2)</div>
+                    <div class="masonry-item">Item 7</div>
+                    <div class="masonry-item">Item 8</div>
+                </div>
+            </div>
+
+            <h2 style="text-align: center; color: #2c3e50; margin: 40px 0 20px">🎓 Récapitulatif</h2>
+
+            <div class="demo-grid-layout">
+                <div class="demo-item">
+                    <h2>Techniques avancées</h2>
+                    <ul style="line-height: 1.8">
+                        <li><strong>grid-auto-flow:</strong> row | column | dense</li>
+                        <li><strong>grid-column: 2 / 4</strong> : placement précis</li>
+                        <li><strong>Line names:</strong> [sidebar-start] etc.</li>
+                        <li><strong>minmax(200px, 1fr)</strong> : taille flexible</li>
+                        <li><strong>auto-fit vs auto-fill</strong> : responsive</li>
+                        <li><strong>grid-row: span 2</strong> : masonry</li>
+                    </ul>
+                </div>
+
+                <div class="demo-item">
+                    <h2>Formules magiques</h2>
+                    <div class="code-example">
+                        /* Responsive sans media query */<br/>
+                        grid-template-columns:<br/>
+                        &nbsp;&nbsp;repeat(auto-fit,<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;minmax(300px, 1fr));<br/><br/>
+                        /* Layout dense */<br/>
+                        grid-auto-flow: dense;<br/><br/>
+                        /* Masonry */<br/>
+                        grid-auto-rows: 100px;<br/>
+                        .item { grid-row: span 2; }
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="froggiesplaining">
+            <span> Froggiesplaining :</span>
+            <p>
+                <br/>
+                <strong>🎯 Objectifs :</strong><br/>
+                ✅ Maîtriser grid-auto-flow (row, column, dense)<br/>
+                ✅ Positionner avec grid-column/row et lignes nommées<br/>
+                ✅ Utiliser minmax() pour des grilles flexibles<br/>
+                ✅ Comprendre auto-fit vs auto-fill<br/>
+                ✅ Créer des layouts type masonry<br/><br/>
+
+                <strong>📖 Points clés :</strong><br/>
+                • <strong>repeat(auto-fit, minmax(300px, 1fr))</strong> = responsive magic<br/>
+                • <strong>grid-auto-flow: dense</strong> = comble les trous<br/>
+                • <strong>grid-row: span 2</strong> = hauteur variable<br/>
+                • <strong>Line names</strong> = code plus lisible<br/><br/>
+
+                <strong>🏋️ Exercice :</strong><br/>
+                Créez une galerie d'images type Pinterest avec :<br/>
+                • Grille responsive (auto-fit + minmax)<br/>
+                • Hauteurs variables (span 1, 2 ou 3)<br/>
+                • Dense packing pour combler les espaces
+            </p>
+            <img src="../img/froggie-300.png" alt="Froggie" class="overfrog" id="Froggie" />
+        </div>
+
+        <a href="#Froggie"><div id="goToFroggie"><img src="../img/froggie-300.png" width="50px" /><br/><i class="bi bi-arrow-bar-down"></i></div></a>
+        <div id="footerGit"><a href="https://github.com/eCreafr/DWWM" target="_blank"><i class="bi bi-github">GitHub - eCrea</i></a></div>
+    </body>
+</html>

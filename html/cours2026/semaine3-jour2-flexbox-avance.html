@@ -1,0 +1,360 @@
+<!doctype html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Semaine 3 - Jour 2 | Flexbox Avancé</title>
+        <link rel="stylesheet" href="../css/froggie.css" />
+        <style>
+            .demo-container {max-width: 1200px; margin: 40px auto; padding: 20px; font-family: Arial, sans-serif;}
+            .demo-title {text-align: center; font-size: 2.5em; margin-bottom: 20px; color: #2c3e50;}
+            .demo-intro {background: #ecf0f1; padding: 20px; border-radius: 10px; margin-bottom: 40px; line-height: 1.6;}
+            .demo-grid {display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-bottom: 40px;}
+            .demo-item {border: 2px solid #3498db; border-radius: 10px; padding: 20px; background: white; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);}
+            .demo-item h2 {margin-top: 0; color: #3498db;}
+            .code-example {background: #2c3e50; color: #ecf0f1; padding: 15px; border-radius: 5px; font-family: 'Courier New', monospace; font-size: 0.9em; margin: 15px 0; overflow-x: auto;}
+            .highlight {color: #f39c12; font-weight: bold;}
+
+            .flex-container {display: flex; background: #ecf0f1; border: 3px solid #3498db; padding: 15px; margin: 15px 0; min-height: 100px;}
+            .flex-item {background: #3498db; color: white; padding: 20px; margin: 5px; border-radius: 5px; font-weight: bold; text-align: center;}
+
+            /* flex-wrap */
+            .wrap-demo {flex-wrap: wrap; gap: 10px;}
+            .wrap-item {min-width: 150px;}
+
+            /* flex-grow */
+            .grow-container {display: flex; gap: 10px;}
+            .grow-0 {flex-grow: 0; background: #e74c3c;}
+            .grow-1 {flex-grow: 1; background: #3498db;}
+            .grow-2 {flex-grow: 2; background: #1abc9c;}
+
+            /* flex-shrink */
+            .shrink-container {display: flex; gap: 10px; width: 400px;}
+            .shrink-0 {flex-shrink: 0; width: 200px; background: #e74c3c;}
+            .shrink-1 {flex-shrink: 1; width: 200px; background: #3498db;}
+
+            /* flex-basis */
+            .basis-container {display: flex; gap: 10px;}
+            .basis-item {flex-basis: 200px; background: #9b59b6;}
+
+            /* flex shorthand */
+            .flex-demo {display: flex; gap: 10px;}
+            .flex-0-0-auto {flex: 0 0 auto; background: #e74c3c;}
+            .flex-1 {flex: 1; background: #3498db;}
+            .flex-2 {flex: 2; background: #1abc9c;}
+
+            /* align-self */
+            .align-self-demo {display: flex; align-items: flex-start; height: 200px; gap: 10px;}
+            .self-start {align-self: flex-start; background: #e74c3c;}
+            .self-center {align-self: center; background: #3498db;}
+            .self-end {align-self: flex-end; background: #1abc9c;}
+            .self-stretch {align-self: stretch; background: #f39c12;}
+
+            /* order */
+            .order-demo {display: flex; gap: 10px;}
+            .order-3 {order: 3; background: #e74c3c;}
+            .order-1 {order: 1; background: #3498db;}
+            .order-2 {order: 2; background: #1abc9c;}
+
+            /* Exemples pratiques */
+            .navbar {display: flex; justify-content: space-between; align-items: center; background: #2c3e50; padding: 15px 30px; border-radius: 8px; margin: 20px 0;}
+            .navbar-logo {color: white; font-weight: bold; font-size: 1.3em;}
+            .navbar-menu {display: flex; gap: 20px; list-style: none; margin: 0; padding: 0;}
+            .navbar-menu a {color: white; text-decoration: none; transition: color 0.3s;}
+            .navbar-menu a:hover {color: #3498db;}
+
+            .card-layout {display: flex; flex-wrap: wrap; gap: 20px; margin: 20px 0;}
+            .card {flex: 1 1 300px; border: 2px solid #e0e0e0; border-radius: 10px; padding: 20px; background: white; transition: all 0.3s;}
+            .card:hover {box-shadow: 0 10px 30px rgba(0,0,0,0.2); transform: translateY(-5px);}
+
+            .sidebar-layout {display: flex; gap: 20px; margin: 20px 0;}
+            .sidebar {flex: 0 0 250px; background: #34495e; color: white; padding: 20px; border-radius: 8px;}
+            .main-content {flex: 1; background: #ecf0f1; padding: 20px; border-radius: 8px;}
+
+            .footer-flex {display: flex; flex-wrap: wrap; justify-content: space-between; gap: 30px; background: #2c3e50; color: white; padding: 30px; border-radius: 8px; margin: 20px 0;}
+            .footer-section {flex: 1 1 200px;}
+            .footer-section h4 {margin-top: 0; color: #3498db;}
+        </style>
+    </head>
+    <body>
+        <div class="demo-container">
+            <h1 class="demo-title">🚀 Semaine 3 - Jour 2 : Flexbox Avancé</h1>
+
+            <div class="demo-intro">
+                <h3>📚 Objectifs du jour</h3>
+                <p>Maîtriser les propriétés avancées de Flexbox : flex-wrap, flex-grow, flex-shrink, flex-basis, align-self, order. Créer des layouts professionnels et responsives.</p>
+            </div>
+
+            <h2 style="text-align: center; color: #2c3e50; margin: 40px 0 20px">🔄 flex-wrap</h2>
+
+            <div class="demo-grid">
+                <div class="demo-item" style="grid-column: 1 / -1;">
+                    <h2>Retour à la ligne automatique</h2>
+                    <div class="code-example">
+                        .container {<br/>
+                        &nbsp;&nbsp;display: flex;<br/>
+                        &nbsp;&nbsp;<span class="highlight">flex-wrap: wrap;</span><br/>
+                        }
+                    </div>
+                    <div class="flex-container wrap-demo">
+                        <div class="flex-item wrap-item">1</div>
+                        <div class="flex-item wrap-item">2</div>
+                        <div class="flex-item wrap-item">3</div>
+                        <div class="flex-item wrap-item">4</div>
+                        <div class="flex-item wrap-item">5</div>
+                        <div class="flex-item wrap-item">6</div>
+                        <div class="flex-item wrap-item">7</div>
+                        <div class="flex-item wrap-item">8</div>
+                    </div>
+                    <p><strong>✅ Usage :</strong> Galeries, grilles de cartes, layouts responsives</p>
+                </div>
+            </div>
+
+            <h2 style="text-align: center; color: #2c3e50; margin: 40px 0 20px">📈 flex-grow</h2>
+
+            <div class="demo-grid">
+                <div class="demo-item" style="grid-column: 1 / -1;">
+                    <h2>Capacité à grandir (occuper l'espace disponible)</h2>
+                    <div class="code-example">
+                        .item1 { <span class="highlight">flex-grow: 0;</span> } /* Ne grandit pas */<br/>
+                        .item2 { <span class="highlight">flex-grow: 1;</span> } /* Grandit 1x */<br/>
+                        .item3 { <span class="highlight">flex-grow: 2;</span> } /* Grandit 2x (double) */
+                    </div>
+                    <div class="flex-container grow-container">
+                        <div class="flex-item grow-0">grow: 0</div>
+                        <div class="flex-item grow-1">grow: 1</div>
+                        <div class="flex-item grow-2">grow: 2 (double)</div>
+                    </div>
+                    <p><strong>💡 Astuce :</strong> flex-grow: 1 est très utilisé pour que les éléments remplissent l'espace</p>
+                </div>
+            </div>
+
+            <h2 style="text-align: center; color: #2c3e50; margin: 40px 0 20px">📉 flex-shrink</h2>
+
+            <div class="demo-grid">
+                <div class="demo-item" style="grid-column: 1 / -1;">
+                    <h2>Capacité à rétrécir</h2>
+                    <div class="code-example">
+                        .item1 { <span class="highlight">flex-shrink: 0;</span> } /* Ne rétrécit JAMAIS */<br/>
+                        .item2 { <span class="highlight">flex-shrink: 1;</span> } /* Peut rétrécir (défaut) */
+                    </div>
+                    <div class="flex-container shrink-container">
+                        <div class="flex-item shrink-0">shrink: 0 (garde sa taille)</div>
+                        <div class="flex-item shrink-1">shrink: 1 (peut rétrécir)</div>
+                    </div>
+                    <p><strong>⚠️ Note :</strong> Le conteneur a width: 400px, mais les items font 200px chacun. L'item avec shrink: 1 rétrécit.</p>
+                </div>
+            </div>
+
+            <h2 style="text-align: center; color: #2c3e50; margin: 40px 0 20px">📏 flex-basis</h2>
+
+            <div class="demo-grid">
+                <div class="demo-item" style="grid-column: 1 / -1;">
+                    <h2>Taille de base (avant distribution de l'espace)</h2>
+                    <div class="code-example">
+                        .item {<br/>
+                        &nbsp;&nbsp;<span class="highlight">flex-basis: 200px;</span> /* Taille de départ */<br/>
+                        }
+                    </div>
+                    <div class="flex-container basis-container">
+                        <div class="flex-item basis-item">basis: 200px</div>
+                        <div class="flex-item basis-item">basis: 200px</div>
+                        <div class="flex-item basis-item">basis: 200px</div>
+                    </div>
+                    <p><strong>💡 Différence avec width :</strong> flex-basis est la taille AVANT la redistribution, width est fixe</p>
+                </div>
+            </div>
+
+            <h2 style="text-align: center; color: #2c3e50; margin: 40px 0 20px">⚡ Propriété flex (shorthand)</h2>
+
+            <div class="demo-grid">
+                <div class="demo-item" style="grid-column: 1 / -1;">
+                    <h2>Syntaxe raccourcie : flex = grow shrink basis</h2>
+                    <div class="code-example">
+                        .item { <span class="highlight">flex: [grow] [shrink] [basis];</span> }<br/><br/>
+                        /* Valeurs courantes */<br/>
+                        <span class="highlight">flex: 0 0 auto;</span> /* Taille fixe, ne grandit/rétrécit pas */<br/>
+                        <span class="highlight">flex: 1;</span> /* Équivaut à flex: 1 1 0% (grandit pour remplir) */<br/>
+                        <span class="highlight">flex: 2;</span> /* 2× plus grand que flex: 1 */
+                    </div>
+                    <div class="flex-container flex-demo">
+                        <div class="flex-item flex-0-0-auto">flex: 0 0 auto</div>
+                        <div class="flex-item flex-1">flex: 1</div>
+                        <div class="flex-item flex-2">flex: 2</div>
+                    </div>
+                    <p><strong>🌟 Recommandation :</strong> Utiliser flex: 1 pour des colonnes égales qui remplissent l'espace</p>
+                </div>
+            </div>
+
+            <h2 style="text-align: center; color: #2c3e50; margin: 40px 0 20px">🎯 align-self</h2>
+
+            <div class="demo-grid">
+                <div class="demo-item" style="grid-column: 1 / -1;">
+                    <h2>Alignement individuel (overrides align-items)</h2>
+                    <div class="code-example">
+                        .item1 { <span class="highlight">align-self: flex-start;</span> }<br/>
+                        .item2 { <span class="highlight">align-self: center;</span> }<br/>
+                        .item3 { <span class="highlight">align-self: flex-end;</span> }<br/>
+                        .item4 { <span class="highlight">align-self: stretch;</span> }
+                    </div>
+                    <div class="flex-container align-self-demo">
+                        <div class="flex-item self-start">flex-start</div>
+                        <div class="flex-item self-center">center</div>
+                        <div class="flex-item self-end">flex-end</div>
+                        <div class="flex-item self-stretch">stretch</div>
+                    </div>
+                </div>
+            </div>
+
+            <h2 style="text-align: center; color: #2c3e50; margin: 40px 0 20px">🔢 order</h2>
+
+            <div class="demo-grid">
+                <div class="demo-item" style="grid-column: 1 / -1;">
+                    <h2>Réorganiser l'ordre visuel (sans changer le HTML)</h2>
+                    <div class="code-example">
+                        .item1 { <span class="highlight">order: 3;</span> }<br/>
+                        .item2 { <span class="highlight">order: 1;</span> }<br/>
+                        .item3 { <span class="highlight">order: 2;</span> }
+                    </div>
+                    <div class="flex-container order-demo">
+                        <div class="flex-item order-3">HTML : 1er (order: 3)</div>
+                        <div class="flex-item order-1">HTML : 2ème (order: 1)</div>
+                        <div class="flex-item order-2">HTML : 3ème (order: 2)</div>
+                    </div>
+                    <p><strong>📌 Ordre d'affichage :</strong> 2ème élément (order: 1), puis 3ème (order: 2), puis 1er (order: 3)</p>
+                    <p><strong>✅ Usage :</strong> Réorganiser sur mobile, mettre un élément en premier/dernier</p>
+                </div>
+            </div>
+
+            <h2 style="text-align: center; color: #2c3e50; margin: 40px 0 20px">🎨 Exemples pratiques</h2>
+
+            <div class="demo-item" style="margin-bottom: 30px;">
+                <h2>Navbar avec Flexbox</h2>
+                <div class="code-example">
+                    .navbar {<br/>
+                    &nbsp;&nbsp;display: flex;<br/>
+                    &nbsp;&nbsp;<span class="highlight">justify-content: space-between;</span><br/>
+                    &nbsp;&nbsp;<span class="highlight">align-items: center;</span><br/>
+                    }
+                </div>
+                <nav class="navbar">
+                    <div class="navbar-logo">🐸 MonSite</div>
+                    <ul class="navbar-menu">
+                        <li><a href="#">Accueil</a></li>
+                        <li><a href="#">Services</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </nav>
+            </div>
+
+            <div class="demo-item" style="margin-bottom: 30px;">
+                <h2>Grille de cartes responsive</h2>
+                <div class="code-example">
+                    .card-layout {<br/>
+                    &nbsp;&nbsp;display: flex;<br/>
+                    &nbsp;&nbsp;<span class="highlight">flex-wrap: wrap;</span><br/>
+                    &nbsp;&nbsp;gap: 20px;<br/>
+                    }<br/><br/>
+                    .card {<br/>
+                    &nbsp;&nbsp;<span class="highlight">flex: 1 1 300px;</span><br/>
+                    }
+                </div>
+                <div class="card-layout">
+                    <div class="card">
+                        <h3>Card 1</h3>
+                        <p>Contenu de la carte flexible</p>
+                    </div>
+                    <div class="card">
+                        <h3>Card 2</h3>
+                        <p>S'adapte automatiquement</p>
+                    </div>
+                    <div class="card">
+                        <h3>Card 3</h3>
+                        <p>Responsive sans media query !</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="demo-item" style="margin-bottom: 30px;">
+                <h2>Layout Sidebar + Contenu</h2>
+                <div class="code-example">
+                    .sidebar {<br/>
+                    &nbsp;&nbsp;<span class="highlight">flex: 0 0 250px;</span> /* Largeur fixe */<br/>
+                    }<br/><br/>
+                    .main-content {<br/>
+                    &nbsp;&nbsp;<span class="highlight">flex: 1;</span> /* Prend l'espace restant */<br/>
+                    }
+                </div>
+                <div class="sidebar-layout">
+                    <aside class="sidebar">
+                        <h4>Sidebar</h4>
+                        <p>Largeur fixe 250px</p>
+                    </aside>
+                    <main class="main-content">
+                        <h4>Contenu Principal</h4>
+                        <p>Prend tout l'espace restant grâce à flex: 1</p>
+                    </main>
+                </div>
+            </div>
+
+            <div class="demo-item">
+                <h2>Footer multi-colonnes</h2>
+                <div class="code-example">
+                    .footer {<br/>
+                    &nbsp;&nbsp;display: flex;<br/>
+                    &nbsp;&nbsp;<span class="highlight">flex-wrap: wrap;</span><br/>
+                    &nbsp;&nbsp;justify-content: space-between;<br/>
+                    }<br/><br/>
+                    .footer-section {<br/>
+                    &nbsp;&nbsp;<span class="highlight">flex: 1 1 200px;</span><br/>
+                    }
+                </div>
+                <footer class="footer-flex">
+                    <div class="footer-section">
+                        <h4>À propos</h4>
+                        <p>Notre entreprise...</p>
+                    </div>
+                    <div class="footer-section">
+                        <h4>Services</h4>
+                        <p>Web Design, Développement...</p>
+                    </div>
+                    <div class="footer-section">
+                        <h4>Contact</h4>
+                        <p>contact@site.com</p>
+                    </div>
+                </footer>
+            </div>
+        </div>
+
+        <div class="froggiesplaining">
+            <span> Froggiesplaining :</span>
+            <p>
+                <br/>
+                <strong>🎯 Objectifs :</strong><br/>
+                ✅ Maîtriser flex-wrap pour les retours à la ligne<br/>
+                ✅ Comprendre flex-grow, flex-shrink, flex-basis<br/>
+                ✅ Utiliser la shorthand flex: grow shrink basis<br/>
+                ✅ Aligner individuellement avec align-self<br/>
+                ✅ Réorganiser visuellement avec order<br/>
+                ✅ Créer des layouts professionnels<br/><br/>
+
+                <strong>📖 Formules magiques :</strong><br/>
+                • <strong>flex: 1</strong> = prend l'espace disponible (égal)<br/>
+                • <strong>flex: 0 0 250px</strong> = taille fixe, ne change jamais<br/>
+                • <strong>flex: 1 1 300px</strong> = min 300px, puis flexible<br/>
+                • <strong>flex-wrap: wrap</strong> = responsive automatique<br/><br/>
+
+                <strong>🏋️ Exercice :</strong><br/>
+                Créez une page complète avec :<br/>
+                • Navbar (logo gauche, menu droite)<br/>
+                • Layout sidebar fixe + contenu flexible<br/>
+                • Grille de 6 cartes (flex-wrap)<br/>
+                • Footer 3 colonnes responsive
+            </p>
+            <img src="../img/froggie-300.png" alt="Froggie" class="overfrog" id="Froggie" />
+        </div>
+
+        <a href="#Froggie"><div id="goToFroggie"><img src="../img/froggie-300.png" width="50px" /><br/><i class="bi bi-arrow-bar-down"></i></div></a>
+        <div id="footerGit"><a href="https://github.com/eCreafr/DWWM" target="_blank"><i class="bi bi-github">GitHub - eCrea</i></a></div>
+    </body>
+</html>

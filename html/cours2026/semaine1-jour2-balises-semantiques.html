@@ -1,0 +1,413 @@
+<!doctype html>
+<!-- Déclaration du type de document HTML5 -->
+<html lang="fr">
+    <!-- Balise racine avec langue française -->
+    <head>
+        <!-- En-tête du document -->
+        <meta charset="UTF-8" />
+        <!-- Encodage des caractères en UTF-8 -->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <!-- Configuration responsive pour mobile -->
+        <title>Semaine 1 - Jour 2 | Balises sémantiques HTML5</title>
+        <!-- Titre affiché dans l'onglet du navigateur -->
+
+        <link rel="stylesheet" href="../css/froggie.css" />
+        <!-- Lien vers la feuille de style Froggie -->
+
+        <style>
+            /* Styles pour la démonstration */
+            .demo-container {
+                max-width: 1200px;
+                margin: 40px auto;
+                padding: 20px;
+                font-family: Arial, sans-serif;
+            }
+
+            .demo-title {
+                text-align: center;
+                font-size: 2.5em;
+                margin-bottom: 20px;
+                color: #2c3e50;
+            }
+
+            .demo-intro {
+                background: #ecf0f1;
+                padding: 20px;
+                border-radius: 10px;
+                margin-bottom: 40px;
+                line-height: 1.6;
+            }
+
+            .demo-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                gap: 30px;
+                margin-bottom: 40px;
+            }
+
+            .demo-item {
+                border: 2px solid #3498db;
+                border-radius: 10px;
+                padding: 20px;
+                background: white;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+                transition: transform 0.3s ease;
+            }
+
+            .demo-item:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+            }
+
+            .demo-item h2 {
+                margin-top: 0;
+                color: #3498db;
+                font-size: 1.5em;
+            }
+
+            .code-example {
+                background: #2c3e50;
+                color: #ecf0f1;
+                padding: 15px;
+                border-radius: 5px;
+                font-family: 'Courier New', monospace;
+                font-size: 0.9em;
+                margin: 15px 0;
+                overflow-x: auto;
+            }
+
+            .highlight {
+                color: #f39c12;
+                font-weight: bold;
+            }
+
+            .semantic-visual {
+                background: #fff;
+                border: 2px solid #3498db;
+                padding: 20px;
+                margin: 20px 0;
+                border-radius: 10px;
+            }
+
+            .semantic-visual header {
+                background: #e74c3c;
+                color: white;
+                padding: 15px;
+                margin-bottom: 10px;
+                border-radius: 5px;
+            }
+
+            .semantic-visual nav {
+                background: #f39c12;
+                color: white;
+                padding: 15px;
+                margin-bottom: 10px;
+                border-radius: 5px;
+            }
+
+            .semantic-visual main {
+                background: #3498db;
+                color: white;
+                padding: 15px;
+                margin-bottom: 10px;
+                border-radius: 5px;
+            }
+
+            .semantic-visual section {
+                background: #1abc9c;
+                color: white;
+                padding: 15px;
+                margin: 10px;
+                border-radius: 5px;
+            }
+
+            .semantic-visual article {
+                background: #9b59b6;
+                color: white;
+                padding: 15px;
+                margin: 10px;
+                border-radius: 5px;
+            }
+
+            .semantic-visual aside {
+                background: #95a5a6;
+                color: white;
+                padding: 15px;
+                margin-bottom: 10px;
+                border-radius: 5px;
+            }
+
+            .semantic-visual footer {
+                background: #34495e;
+                color: white;
+                padding: 15px;
+                border-radius: 5px;
+            }
+
+            .comparison-box {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 20px;
+                margin: 20px 0;
+            }
+
+            .bad-practice {
+                background: #ffebee;
+                border-left: 4px solid #e74c3c;
+                padding: 15px;
+                border-radius: 5px;
+            }
+
+            .good-practice {
+                background: #e8f8f5;
+                border-left: 4px solid #1abc9c;
+                padding: 15px;
+                border-radius: 5px;
+            }
+        </style>
+    </head>
+    <body>
+        <!-- Corps du document -->
+
+        <!-- Conteneur principal pour les exemples -->
+        <div class="demo-container">
+            <h1 class="demo-title">🏗️ Semaine 1 - Jour 2 : Balises sémantiques HTML5</h1>
+
+            <div class="demo-intro">
+                <h3>📚 Qu'est-ce que les balises sémantiques ?</h3>
+                <p>
+                    Les <strong>balises sémantiques</strong> sont des balises HTML qui donnent du sens au contenu
+                    qu'elles contiennent. Contrairement à <code>&lt;div&gt;</code>, elles indiquent clairement le rôle
+                    de chaque section de la page.
+                </p>
+                <p>
+                    <strong>Avantages :</strong> meilleure accessibilité, meilleur référencement (SEO), code plus
+                    lisible et maintenable.
+                </p>
+            </div>
+
+            <!-- Balises sémantiques principales -->
+            <div class="demo-grid">
+                <!-- HEADER -->
+                <div class="demo-item">
+                    <h2>&lt;header&gt;</h2>
+                    <p>
+                        En-tête d'une page ou d'une section. Contient généralement le logo, le titre principal et la
+                        navigation.
+                    </p>
+                    <div class="code-example">
+                        <span class="highlight">&lt;header&gt;</span><br />
+                        &nbsp;&nbsp;&lt;h1&gt;Mon Site&lt;/h1&gt;<br />
+                        &nbsp;&nbsp;&lt;nav&gt;...&lt;/nav&gt;<br />
+                        <span class="highlight">&lt;/header&gt;</span>
+                    </div>
+                    <p><strong>📍 Position :</strong> Généralement au début du &lt;body&gt; ou d'un &lt;article&gt;</p>
+                </div>
+
+                <!-- NAV -->
+                <div class="demo-item">
+                    <h2>&lt;nav&gt;</h2>
+                    <p>Section contenant les liens de navigation principaux du site.</p>
+                    <div class="code-example">
+                        <span class="highlight">&lt;nav&gt;</span><br />
+                        &nbsp;&nbsp;&lt;ul&gt;<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;&lt;li&gt;&lt;a href="/"&gt;Accueil&lt;/a&gt;&lt;/li&gt;<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;&lt;li&gt;&lt;a href="/about"&gt;À propos&lt;/a&gt;&lt;/li&gt;<br />
+                        &nbsp;&nbsp;&lt;/ul&gt;<br />
+                        <span class="highlight">&lt;/nav&gt;</span>
+                    </div>
+                    <p><strong>✅ Utilisation :</strong> Menu principal, navigation secondaire, fil d'Ariane</p>
+                </div>
+
+                <!-- MAIN -->
+                <div class="demo-item">
+                    <h2>&lt;main&gt;</h2>
+                    <p>Contenu principal de la page. Il ne peut y avoir qu'un seul &lt;main&gt; par page.</p>
+                    <div class="code-example">
+                        <span class="highlight">&lt;main&gt;</span><br />
+                        &nbsp;&nbsp;&lt;h1&gt;Titre de la page&lt;/h1&gt;<br />
+                        &nbsp;&nbsp;&lt;p&gt;Contenu principal...&lt;/p&gt;<br />
+                        <span class="highlight">&lt;/main&gt;</span>
+                    </div>
+                    <p><strong>⚠️ Important :</strong> Ne pas mettre dans un &lt;article&gt; ou &lt;section&gt;</p>
+                </div>
+
+                <!-- SECTION -->
+                <div class="demo-item">
+                    <h2>&lt;section&gt;</h2>
+                    <p>
+                        Section thématique d'un document. Chaque section devrait avoir un titre (&lt;h2&gt;,
+                        &lt;h3&gt;...).
+                    </p>
+                    <div class="code-example">
+                        <span class="highlight">&lt;section&gt;</span><br />
+                        &nbsp;&nbsp;&lt;h2&gt;Nos Services&lt;/h2&gt;<br />
+                        &nbsp;&nbsp;&lt;p&gt;Description...&lt;/p&gt;<br />
+                        <span class="highlight">&lt;/section&gt;</span>
+                    </div>
+                    <p><strong>🎯 Usage :</strong> Chapitres, onglets, regroupements thématiques</p>
+                </div>
+
+                <!-- ARTICLE -->
+                <div class="demo-item">
+                    <h2>&lt;article&gt;</h2>
+                    <p>Contenu autonome et réutilisable : article de blog, commentaire, widget, carte produit...</p>
+                    <div class="code-example">
+                        <span class="highlight">&lt;article&gt;</span><br />
+                        &nbsp;&nbsp;&lt;h2&gt;Titre de l'article&lt;/h2&gt;<br />
+                        &nbsp;&nbsp;&lt;p&gt;Contenu de l'article...&lt;/p&gt;<br />
+                        <span class="highlight">&lt;/article&gt;</span>
+                    </div>
+                    <p><strong>💡 Astuce :</strong> Peut être extrait et réutilisé indépendamment du reste</p>
+                </div>
+
+                <!-- ASIDE -->
+                <div class="demo-item">
+                    <h2>&lt;aside&gt;</h2>
+                    <p>
+                        Contenu complémentaire ou secondaire : barre latérale, encadré d'informations, publicités...
+                    </p>
+                    <div class="code-example">
+                        <span class="highlight">&lt;aside&gt;</span><br />
+                        &nbsp;&nbsp;&lt;h3&gt;À lire aussi&lt;/h3&gt;<br />
+                        &nbsp;&nbsp;&lt;ul&gt;...&lt;/ul&gt;<br />
+                        <span class="highlight">&lt;/aside&gt;</span>
+                    </div>
+                    <p><strong>📌 Position :</strong> Souvent sur le côté, mais pas obligatoire</p>
+                </div>
+
+                <!-- FOOTER -->
+                <div class="demo-item">
+                    <h2>&lt;footer&gt;</h2>
+                    <p>Pied de page d'une page ou d'une section. Contient souvent copyright, liens légaux, contacts.</p>
+                    <div class="code-example">
+                        <span class="highlight">&lt;footer&gt;</span><br />
+                        &nbsp;&nbsp;&lt;p&gt;&copy; 2026 Mon Site&lt;/p&gt;<br />
+                        &nbsp;&nbsp;&lt;nav&gt;...&lt;/nav&gt;<br />
+                        <span class="highlight">&lt;/footer&gt;</span>
+                    </div>
+                    <p><strong>📍 Position :</strong> Généralement en bas de page ou d'un &lt;article&gt;</p>
+                </div>
+            </div>
+
+            <!-- Visualisation de structure -->
+            <div class="semantic-visual">
+                <h2 style="text-align: center; color: #2c3e50; margin-bottom: 20px">
+                    📐 Structure sémantique d'une page
+                </h2>
+
+                <header>
+                    <strong>&lt;header&gt;</strong><br />
+                    Logo + Navigation principale
+                </header>
+
+                <nav>
+                    <strong>&lt;nav&gt;</strong><br />
+                    Menu : Accueil | Services | Contact
+                </nav>
+
+                <main>
+                    <strong>&lt;main&gt;</strong><br />
+                    Contenu principal de la page
+
+                    <section>
+                        <strong>&lt;section&gt;</strong><br />
+                        Section 1 : Introduction
+                    </section>
+
+                    <section>
+                        <strong>&lt;section&gt;</strong><br />
+                        Section 2 : Détails
+
+                        <article>
+                            <strong>&lt;article&gt;</strong><br />
+                            Article autonome
+                        </article>
+                    </section>
+                </main>
+
+                <aside>
+                    <strong>&lt;aside&gt;</strong><br />
+                    Barre latérale : Articles connexes
+                </aside>
+
+                <footer>
+                    <strong>&lt;footer&gt;</strong><br />
+                    Copyright © 2026 | Mentions légales
+                </footer>
+            </div>
+
+            <!-- Comparaison mauvaise vs bonne pratique -->
+            <h2 style="text-align: center; color: #2c3e50; margin: 40px 0 20px 0">❌ vs ✅ Comparaison</h2>
+
+            <div class="comparison-box">
+                <div class="bad-practice">
+                    <h3 style="color: #e74c3c">❌ Sans sémantique</h3>
+                    <div class="code-example">
+                        &lt;div id="header"&gt;<br />
+                        &nbsp;&nbsp;&lt;div id="nav"&gt;...&lt;/div&gt;<br />
+                        &lt;/div&gt;<br />
+                        &lt;div id="main"&gt;<br />
+                        &nbsp;&nbsp;&lt;div class="post"&gt;...&lt;/div&gt;<br />
+                        &lt;/div&gt;<br />
+                        &lt;div id="footer"&gt;...&lt;/div&gt;
+                    </div>
+                    <p><strong>Problèmes :</strong> Pas de sens, mauvais pour SEO et accessibilité</p>
+                </div>
+
+                <div class="good-practice">
+                    <h3 style="color: #1abc9c">✅ Avec sémantique</h3>
+                    <div class="code-example">
+                        &lt;header&gt;<br />
+                        &nbsp;&nbsp;&lt;nav&gt;...&lt;/nav&gt;<br />
+                        &lt;/header&gt;<br />
+                        &lt;main&gt;<br />
+                        &nbsp;&nbsp;&lt;article&gt;...&lt;/article&gt;<br />
+                        &lt;/main&gt;<br />
+                        &lt;footer&gt;...&lt;/footer&gt;
+                    </div>
+                    <p><strong>Avantages :</strong> Clair, accessible, bon SEO, meilleur référencement</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Zone d'explication pédagogique "Froggiesplaining" -->
+        <div class="froggiesplaining">
+            <span> Froggiesplaining :</span>
+            <p>
+                <br />
+                <strong>🎯 Objectifs de ce cours :</strong><br />
+                ✅ Comprendre l'importance de la sémantique HTML<br />
+                ✅ Connaître les 7 balises sémantiques principales<br />
+                ✅ Savoir structurer une page de manière logique et accessible<br />
+                ✅ Différencier &lt;section&gt; et &lt;article&gt;<br /><br />
+
+                <strong>📖 Résumé rapide :</strong><br />
+                • <strong>&lt;header&gt;</strong> : En-tête de page ou de section<br />
+                • <strong>&lt;nav&gt;</strong> : Navigation principale<br />
+                • <strong>&lt;main&gt;</strong> : Contenu principal (unique par page)<br />
+                • <strong>&lt;section&gt;</strong> : Section thématique<br />
+                • <strong>&lt;article&gt;</strong> : Contenu autonome et réutilisable<br />
+                • <strong>&lt;aside&gt;</strong> : Contenu complémentaire<br />
+                • <strong>&lt;footer&gt;</strong> : Pied de page<br /><br />
+
+                <strong>🏋️ Exercice pratique :</strong><br />
+                Créez une page "Blog" avec header, nav, main contenant 3 articles, aside et footer !
+            </p>
+            <img src="../img/froggie-300.png" alt="Froggie explain" class="overfrog" id="Froggie" />
+        </div>
+
+        <!-- Lien d'ancrage vers Froggie -->
+        <a href="#Froggie"
+            ><div id="goToFroggie">
+                <img src="../img/froggie-300.png" width="50px" /><br /><i class="bi bi-arrow-bar-down"></i></div
+        ></a>
+
+        <!-- Pied de page avec lien GitHub -->
+        <div id="footerGit">
+            <a href="https://github.com/eCreafr/DWWM" target="_blank"><i class="bi bi-github">GitHub - eCrea</i></a>
+        </div>
+    </body>
+    <!-- Fin du corps du document -->
+</html>
+<!-- Fin du document HTML -->

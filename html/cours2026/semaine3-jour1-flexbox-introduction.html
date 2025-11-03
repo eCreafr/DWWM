@@ -1,0 +1,316 @@
+<!doctype html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Semaine 3 - Jour 1 | Introduction Flexbox</title>
+        <link rel="stylesheet" href="../css/froggie.css" />
+        <style>
+            .demo-container {max-width: 1200px; margin: 40px auto; padding: 20px; font-family: Arial, sans-serif;}
+            .demo-title {text-align: center; font-size: 2.5em; margin-bottom: 20px; color: #2c3e50;}
+            .demo-intro {background: #ecf0f1; padding: 20px; border-radius: 10px; margin-bottom: 40px; line-height: 1.6;}
+            .demo-grid {display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-bottom: 40px;}
+            .demo-item {border: 2px solid #3498db; border-radius: 10px; padding: 20px; background: white; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);}
+            .demo-item h2 {margin-top: 0; color: #3498db;}
+            .code-example {background: #2c3e50; color: #ecf0f1; padding: 15px; border-radius: 5px; font-family: 'Courier New', monospace; font-size: 0.9em; margin: 15px 0; overflow-x: auto;}
+            .highlight {color: #f39c12; font-weight: bold;}
+            .flex-container {display: flex; background: #ecf0f1; border: 3px solid #3498db; padding: 15px; margin: 15px 0; min-height: 100px;}
+            .flex-item {background: #3498db; color: white; padding: 20px; margin: 5px; border-radius: 5px; font-weight: bold;}
+            .flex-row {flex-direction: row;}
+            .flex-column {flex-direction: column;}
+            .justify-start {justify-content: flex-start;}
+            .justify-center {justify-content: center;}
+            .justify-end {justify-content: flex-end;}
+            .justify-between {justify-content: space-between;}
+            .justify-around {justify-content: space-around;}
+            .justify-evenly {justify-content: space-evenly;}
+            .align-start {align-items: flex-start;}
+            .align-center {align-items: center;}
+            .align-end {align-items: flex-end;}
+            .align-stretch {align-items: stretch;}
+            .flex-wrap {flex-wrap: wrap;}
+        </style>
+    </head>
+    <body>
+        <div class="demo-container">
+            <h1 class="demo-title">🎯 Semaine 3 - Jour 1 : Introduction à Flexbox</h1>
+
+            <div class="demo-intro">
+                <h3>📚 Qu'est-ce que Flexbox ?</h3>
+                <p><strong>Flexbox</strong> (Flexible Box Layout) est un module CSS qui facilite la création de mises en page flexibles et responsives. Il permet d'aligner et de distribuer l'espace entre les éléments de manière intuitive.</p>
+                <p><strong>Avantages :</strong> Alignement simple, distribution automatique, responsive naturel, moins de code que les anciennes méthodes (float).</p>
+            </div>
+
+            <h2 style="text-align: center; color: #2c3e50">🎨 Concepts de base</h2>
+
+            <div class="demo-grid">
+                <div class="demo-item">
+                    <h2>Conteneur Flex</h2>
+                    <p>L'élément parent qui contient les flex items.</p>
+                    <div class="code-example">
+                        .container {<br/>
+                        &nbsp;&nbsp;<span class="highlight">display: flex;</span><br/>
+                        }
+                    </div>
+                    <div class="flex-container">
+                        <div class="flex-item">1</div>
+                        <div class="flex-item">2</div>
+                        <div class="flex-item">3</div>
+                    </div>
+                    <p><strong>✅ Effet :</strong> Les enfants deviennent des flex items et s'alignent en ligne</p>
+                </div>
+
+                <div class="demo-item">
+                    <h2>Axes Flexbox</h2>
+                    <p>Flexbox fonctionne selon 2 axes :</p>
+                    <ul style="line-height: 1.8">
+                        <li><strong>Axe principal (main axis) :</strong> Direction des flex items (row = horizontal, column = vertical)</li>
+                        <li><strong>Axe transversal (cross axis) :</strong> Perpendiculaire à l'axe principal</li>
+                    </ul>
+                    <p style="background: #e8f4f8; padding: 15px; border-radius: 5px; margin-top: 15px">
+                        <strong>💡 Important :</strong><br/>
+                        • <code>justify-content</code> = axe principal<br/>
+                        • <code>align-items</code> = axe transversal
+                    </p>
+                </div>
+            </div>
+
+            <h2 style="text-align: center; color: #2c3e50; margin: 40px 0 20px">↔️ flex-direction</h2>
+
+            <div class="demo-grid">
+                <div class="demo-item">
+                    <h2>flex-direction: row (défaut)</h2>
+                    <div class="code-example">
+                        .container {<br/>
+                        &nbsp;&nbsp;display: flex;<br/>
+                        &nbsp;&nbsp;<span class="highlight">flex-direction: row;</span><br/>
+                        }
+                    </div>
+                    <div class="flex-container flex-row">
+                        <div class="flex-item">1</div>
+                        <div class="flex-item">2</div>
+                        <div class="flex-item">3</div>
+                    </div>
+                    <p>Les items sont disposés horizontalement (de gauche à droite)</p>
+                </div>
+
+                <div class="demo-item">
+                    <h2>flex-direction: column</h2>
+                    <div class="code-example">
+                        .container {<br/>
+                        &nbsp;&nbsp;display: flex;<br/>
+                        &nbsp;&nbsp;<span class="highlight">flex-direction: column;</span><br/>
+                        }
+                    </div>
+                    <div class="flex-container flex-column">
+                        <div class="flex-item">1</div>
+                        <div class="flex-item">2</div>
+                        <div class="flex-item">3</div>
+                    </div>
+                    <p>Les items sont disposés verticalement (de haut en bas)</p>
+                </div>
+            </div>
+
+            <h2 style="text-align: center; color: #2c3e50; margin: 40px 0 20px">🎯 justify-content (Axe principal)</h2>
+
+            <div class="demo-grid">
+                <div class="demo-item">
+                    <h2>flex-start (défaut)</h2>
+                    <div class="code-example">justify-content: <span class="highlight">flex-start;</span></div>
+                    <div class="flex-container justify-start">
+                        <div class="flex-item">1</div>
+                        <div class="flex-item">2</div>
+                        <div class="flex-item">3</div>
+                    </div>
+                </div>
+
+                <div class="demo-item">
+                    <h2>center</h2>
+                    <div class="code-example">justify-content: <span class="highlight">center;</span></div>
+                    <div class="flex-container justify-center">
+                        <div class="flex-item">1</div>
+                        <div class="flex-item">2</div>
+                        <div class="flex-item">3</div>
+                    </div>
+                </div>
+
+                <div class="demo-item">
+                    <h2>flex-end</h2>
+                    <div class="code-example">justify-content: <span class="highlight">flex-end;</span></div>
+                    <div class="flex-container justify-end">
+                        <div class="flex-item">1</div>
+                        <div class="flex-item">2</div>
+                        <div class="flex-item">3</div>
+                    </div>
+                </div>
+
+                <div class="demo-item">
+                    <h2>space-between</h2>
+                    <div class="code-example">justify-content: <span class="highlight">space-between;</span></div>
+                    <div class="flex-container justify-between">
+                        <div class="flex-item">1</div>
+                        <div class="flex-item">2</div>
+                        <div class="flex-item">3</div>
+                    </div>
+                    <p>Espace égal <strong>entre</strong> les items</p>
+                </div>
+
+                <div class="demo-item">
+                    <h2>space-around</h2>
+                    <div class="code-example">justify-content: <span class="highlight">space-around;</span></div>
+                    <div class="flex-container justify-around">
+                        <div class="flex-item">1</div>
+                        <div class="flex-item">2</div>
+                        <div class="flex-item">3</div>
+                    </div>
+                    <p>Espace égal <strong>autour</strong> de chaque item</p>
+                </div>
+
+                <div class="demo-item">
+                    <h2>space-evenly</h2>
+                    <div class="code-example">justify-content: <span class="highlight">space-evenly;</span></div>
+                    <div class="flex-container justify-evenly">
+                        <div class="flex-item">1</div>
+                        <div class="flex-item">2</div>
+                        <div class="flex-item">3</div>
+                    </div>
+                    <p>Espace <strong>parfaitement égal</strong> partout</p>
+                </div>
+            </div>
+
+            <h2 style="text-align: center; color: #2c3e50; margin: 40px 0 20px">⬆️ align-items (Axe transversal)</h2>
+
+            <div class="demo-grid">
+                <div class="demo-item">
+                    <h2>stretch (défaut)</h2>
+                    <div class="code-example">align-items: <span class="highlight">stretch;</span></div>
+                    <div class="flex-container align-stretch" style="height: 150px">
+                        <div class="flex-item">1</div>
+                        <div class="flex-item">2</div>
+                        <div class="flex-item">3</div>
+                    </div>
+                    <p>Les items s'étirent pour remplir le conteneur</p>
+                </div>
+
+                <div class="demo-item">
+                    <h2>flex-start</h2>
+                    <div class="code-example">align-items: <span class="highlight">flex-start;</span></div>
+                    <div class="flex-container align-start" style="height: 150px">
+                        <div class="flex-item">1</div>
+                        <div class="flex-item">2</div>
+                        <div class="flex-item">3</div>
+                    </div>
+                    <p>Alignés en haut</p>
+                </div>
+
+                <div class="demo-item">
+                    <h2>center</h2>
+                    <div class="code-example">align-items: <span class="highlight">center;</span></div>
+                    <div class="flex-container align-center" style="height: 150px">
+                        <div class="flex-item">1</div>
+                        <div class="flex-item">2</div>
+                        <div class="flex-item">3</div>
+                    </div>
+                    <p>Centrés verticalement ✅ Très utilisé !</p>
+                </div>
+
+                <div class="demo-item">
+                    <h2>flex-end</h2>
+                    <div class="code-example">align-items: <span class="highlight">flex-end;</span></div>
+                    <div class="flex-container align-end" style="height: 150px">
+                        <div class="flex-item">1</div>
+                        <div class="flex-item">2</div>
+                        <div class="flex-item">3</div>
+                    </div>
+                    <p>Alignés en bas</p>
+                </div>
+            </div>
+
+            <h2 style="text-align: center; color: #2c3e50; margin: 40px 0 20px">🔄 gap & flex-wrap</h2>
+
+            <div class="demo-grid">
+                <div class="demo-item">
+                    <h2>gap (espacement)</h2>
+                    <div class="code-example">
+                        .container {<br/>
+                        &nbsp;&nbsp;display: flex;<br/>
+                        &nbsp;&nbsp;<span class="highlight">gap: 20px;</span><br/>
+                        }
+                    </div>
+                    <div class="flex-container" style="gap: 20px">
+                        <div class="flex-item">1</div>
+                        <div class="flex-item">2</div>
+                        <div class="flex-item">3</div>
+                    </div>
+                    <p><strong>💡 Moderne :</strong> Remplace les margin entre items</p>
+                </div>
+
+                <div class="demo-item">
+                    <h2>flex-wrap: wrap</h2>
+                    <div class="code-example">
+                        .container {<br/>
+                        &nbsp;&nbsp;display: flex;<br/>
+                        &nbsp;&nbsp;<span class="highlight">flex-wrap: wrap;</span><br/>
+                        }
+                    </div>
+                    <div class="flex-container flex-wrap" style="gap: 10px">
+                        <div class="flex-item">1</div>
+                        <div class="flex-item">2</div>
+                        <div class="flex-item">3</div>
+                        <div class="flex-item">4</div>
+                        <div class="flex-item">5</div>
+                        <div class="flex-item">6</div>
+                    </div>
+                    <p>Les items passent à la ligne si nécessaire</p>
+                </div>
+            </div>
+
+            <h2 style="text-align: center; color: #2c3e50; margin: 40px 0 20px">🎨 Centrage parfait</h2>
+
+            <div class="demo-item" style="max-width: 800px; margin: 0 auto">
+                <h2>La technique miracle : Centrer horizontalement ET verticalement</h2>
+                <div class="code-example">
+                    .container {<br/>
+                    &nbsp;&nbsp;display: flex;<br/>
+                    &nbsp;&nbsp;<span class="highlight">justify-content: center;</span><br/>
+                    &nbsp;&nbsp;<span class="highlight">align-items: center;</span><br/>
+                    &nbsp;&nbsp;height: 300px;<br/>
+                    }
+                </div>
+                <div class="flex-container justify-center align-center" style="height: 200px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%)">
+                    <div class="flex-item" style="font-size: 1.5em">Parfaitement centré ! 🎯</div>
+                </div>
+                <p style="margin-top: 20px; background: #e8f8f5; padding: 15px; border-radius: 5px">
+                    <strong>✅ Cette technique Flexbox remplace</strong> des années de galères avec position absolute, transform, table-cell, etc. C'est LA raison pour laquelle Flexbox est révolutionnaire !
+                </p>
+            </div>
+        </div>
+
+        <div class="froggiesplaining">
+            <span> Froggiesplaining :</span>
+            <p>
+                <br/>
+                <strong>🎯 Objectifs :</strong><br/>
+                ✅ Comprendre le concept de Flexbox (conteneur + items)<br/>
+                ✅ Maîtriser flex-direction (row/column)<br/>
+                ✅ Utiliser justify-content pour l'axe principal<br/>
+                ✅ Utiliser align-items pour l'axe transversal<br/>
+                ✅ Combiner les propriétés pour un centrage parfait<br/><br/>
+
+                <strong>📖 Résumé :</strong><br/>
+                • <strong>display: flex</strong> active Flexbox<br/>
+                • <strong>justify-content</strong> = horizontal (en row)<br/>
+                • <strong>align-items</strong> = vertical (en row)<br/>
+                • <strong>gap</strong> = espacement entre items<br/>
+                • <strong>flex-wrap</strong> = retour à la ligne<br/><br/>
+
+                <strong>🏋️ Exercice :</strong><br/>
+                Créez une navbar avec logo à gauche et menu à droite en Flexbox !
+            </p>
+            <img src="../img/froggie-300.png" alt="Froggie" class="overfrog" id="Froggie" />
+        </div>
+
+        <a href="#Froggie"><div id="goToFroggie"><img src="../img/froggie-300.png" width="50px" /><br/><i class="bi bi-arrow-bar-down"></i></div></a>
+        <div id="footerGit"><a href="https://github.com/eCreafr/DWWM" target="_blank"><i class="bi bi-github">GitHub - eCrea</i></a></div>
+    </body>
+</html>

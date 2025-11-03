@@ -1,0 +1,345 @@
+<!doctype html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Semaine 2 - Jour 5 | Pseudo-éléments & Transitions</title>
+        <link rel="stylesheet" href="../css/froggie.css" />
+        <style>
+            .demo-container {max-width: 1200px; margin: 40px auto; padding: 20px; font-family: Arial, sans-serif;}
+            .demo-title {text-align: center; font-size: 2.5em; margin-bottom: 20px; color: #2c3e50;}
+            .demo-intro {background: #ecf0f1; padding: 20px; border-radius: 10px; margin-bottom: 40px; line-height: 1.6;}
+            .demo-grid {display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-bottom: 40px;}
+            .demo-item {border: 2px solid #3498db; border-radius: 10px; padding: 20px; background: white; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);}
+            .demo-item h2 {margin-top: 0; color: #3498db;}
+            .code-example {background: #2c3e50; color: #ecf0f1; padding: 15px; border-radius: 5px; font-family: 'Courier New', monospace; font-size: 0.85em; margin: 15px 0; overflow-x: auto; line-height: 1.6;}
+            .highlight {color: #f39c12; font-weight: bold;}
+
+            /* Pseudo-éléments */
+            .before-after {background: #e8f4f8; padding: 20px; border-radius: 8px; margin: 15px 0; position: relative;}
+            .before-after::before {content: '📌 '; font-size: 1.5em; margin-right: 10px;}
+            .before-after::after {content: ' ✨'; font-size: 1.5em; margin-left: 10px;}
+
+            .quote-style {background: white; padding: 30px 30px 30px 70px; margin: 20px 0; border-left: 5px solid #3498db; position: relative; font-style: italic; font-size: 1.2em; color: #555;}
+            .quote-style::before {content: '"'; position: absolute; left: 15px; top: -10px; font-size: 5em; color: #3498db; opacity: 0.3; line-height: 1;}
+
+            .badge-demo {display: inline-block; padding: 10px 20px; background: #3498db; color: white; border-radius: 25px; position: relative; margin: 20px;}
+            .badge-demo::after {content: '5'; position: absolute; top: -10px; right: -10px; background: #e74c3c; color: white; width: 25px; height: 25px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.8em; font-weight: bold;}
+
+            .tooltip-demo {display: inline-block; padding: 10px 20px; background: #3498db; color: white; border-radius: 5px; position: relative; cursor: pointer; margin: 20px;}
+            .tooltip-demo::after {content: attr(data-tooltip); position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%); background: #2c3e50; color: white; padding: 8px 12px; border-radius: 5px; white-space: nowrap; opacity: 0; pointer-events: none; transition: opacity 0.3s; margin-bottom: 5px; font-size: 0.9em;}
+            .tooltip-demo:hover::after {opacity: 1;}
+
+            .clearfix::after {content: ''; display: table; clear: both;}
+
+            /* Transitions */
+            .transition-demo {background: #3498db; color: white; padding: 20px; border-radius: 5px; margin: 15px 0; transition: all 0.3s ease; cursor: pointer; text-align: center;}
+            .transition-demo:hover {background: #e74c3c; transform: scale(1.1); box-shadow: 0 10px 30px rgba(0,0,0,0.3);}
+
+            .transition-prop {background: #1abc9c; color: white; padding: 20px; border-radius: 5px; margin: 15px 0; transition: background-color 0.5s, transform 0.3s, box-shadow 0.4s; cursor: pointer;}
+            .transition-prop:hover {background: #9b59b6; transform: translateY(-10px); box-shadow: 0 15px 40px rgba(155, 89, 182, 0.5);}
+
+            .timing-demo {display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px; margin: 20px 0;}
+            .timing-box {background: #3498db; color: white; padding: 30px 20px; border-radius: 5px; text-align: center; cursor: pointer; transition: transform 1s;}
+            .timing-ease {transition-timing-function: ease;}
+            .timing-linear {transition-timing-function: linear;}
+            .timing-ease-in {transition-timing-function: ease-in;}
+            .timing-ease-out {transition-timing-function: ease-out;}
+            .timing-ease-in-out {transition-timing-function: ease-in-out;}
+            .timing-box:hover {transform: translateX(50px);}
+
+            .button-fancy {display: inline-block; padding: 15px 40px; background: linear-gradient(135deg, #667eea, #764ba2); color: white; border: none; border-radius: 50px; cursor: pointer; font-size: 1.1em; font-weight: bold; transition: all 0.3s ease; position: relative; overflow: hidden; text-decoration: none; margin: 10px;}
+            .button-fancy::before {content: ''; position: absolute; top: 50%; left: 50%; width: 0; height: 0; background: rgba(255,255,255,0.3); border-radius: 50%; transform: translate(-50%, -50%); transition: width 0.6s, height 0.6s;}
+            .button-fancy:hover {transform: translateY(-3px); box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);}
+            .button-fancy:hover::before {width: 300px; height: 300px;}
+            .button-fancy:active {transform: translateY(0);}
+
+            .card-flip {width: 100%; height: 200px; perspective: 1000px; margin: 20px 0;}
+            .card-flip-inner {position: relative; width: 100%; height: 100%; transition: transform 0.6s; transform-style: preserve-3d;}
+            .card-flip:hover .card-flip-inner {transform: rotateY(180deg);}
+            .card-flip-front, .card-flip-back {position: absolute; width: 100%; height: 100%; backface-visibility: hidden; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.5em; font-weight: bold;}
+            .card-flip-front {background: linear-gradient(135deg, #667eea, #764ba2); color: white;}
+            .card-flip-back {background: linear-gradient(135deg, #f093fb, #f5576c); color: white; transform: rotateY(180deg);}
+
+            .progress-bar {width: 100%; height: 30px; background: #ecf0f1; border-radius: 15px; overflow: hidden; margin: 20px 0;}
+            .progress-fill {height: 100%; background: linear-gradient(to right, #667eea, #764ba2); width: 0%; transition: width 2s ease-out; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold;}
+            .progress-bar:hover .progress-fill {width: 75%;}
+        </style>
+    </head>
+    <body>
+        <div class="demo-container">
+            <h1 class="demo-title">✨ Semaine 2 - Jour 5 : Pseudo-éléments & Transitions</h1>
+
+            <div class="demo-intro">
+                <h3>📚 Objectifs du jour</h3>
+                <p>Découverte des <strong>pseudo-éléments</strong> (::before, ::after) pour ajouter du contenu décoratif, et des <strong>transitions CSS</strong> pour créer des animations fluides et professionnelles.</p>
+            </div>
+
+            <h2 style="text-align: center; color: #2c3e50; margin: 40px 0 20px">🎭 Pseudo-éléments</h2>
+
+            <div class="demo-grid">
+                <div class="demo-item">
+                    <h2>::before et ::after</h2>
+                    <p>Injectent du contenu avant ou après un élément</p>
+                    <div class="code-example">
+                        .element::before {<br/>
+                        &nbsp;&nbsp;<span class="highlight">content: '📌 ';</span><br/>
+                        }<br/><br/>
+                        .element::after {<br/>
+                        &nbsp;&nbsp;<span class="highlight">content: ' ✨';</span><br/>
+                        }
+                    </div>
+                    <div class="before-after">Contenu avec décorations</div>
+                </div>
+
+                <div class="demo-item">
+                    <h2>Citation stylisée</h2>
+                    <div class="code-example">
+                        .quote::before {<br/>
+                        &nbsp;&nbsp;content: '"';<br/>
+                        &nbsp;&nbsp;position: absolute;<br/>
+                        &nbsp;&nbsp;font-size: 5em;<br/>
+                        &nbsp;&nbsp;color: #3498db;<br/>
+                        &nbsp;&nbsp;opacity: 0.3;<br/>
+                        }
+                    </div>
+                    <div class="quote-style">
+                        Les pseudo-éléments sont des outils puissants pour enrichir le design sans toucher au HTML.
+                    </div>
+                </div>
+
+                <div class="demo-item">
+                    <h2>Badge de notification</h2>
+                    <div class="code-example">
+                        .button::after {<br/>
+                        &nbsp;&nbsp;content: '5';<br/>
+                        &nbsp;&nbsp;position: absolute;<br/>
+                        &nbsp;&nbsp;top: -10px;<br/>
+                        &nbsp;&nbsp;right: -10px;<br/>
+                        &nbsp;&nbsp;background: #e74c3c;<br/>
+                        &nbsp;&nbsp;border-radius: 50%;<br/>
+                        }
+                    </div>
+                    <div style="text-align: center;">
+                        <div class="badge-demo">Messages</div>
+                    </div>
+                </div>
+
+                <div class="demo-item">
+                    <h2>Tooltip (info-bulle)</h2>
+                    <div class="code-example">
+                        .tooltip::after {<br/>
+                        &nbsp;&nbsp;content: <span class="highlight">attr(data-tooltip)</span>;<br/>
+                        &nbsp;&nbsp;position: absolute;<br/>
+                        &nbsp;&nbsp;opacity: 0;<br/>
+                        }<br/><br/>
+                        .tooltip:hover::after {<br/>
+                        &nbsp;&nbsp;opacity: 1;<br/>
+                        }
+                    </div>
+                    <div style="text-align: center;">
+                        <span class="tooltip-demo" data-tooltip="Ceci est une info-bulle !">Survolez-moi</span>
+                    </div>
+                </div>
+            </div>
+
+            <h2 style="text-align: center; color: #2c3e50; margin: 40px 0 20px">🎬 Transitions CSS</h2>
+
+            <div class="demo-grid">
+                <div class="demo-item">
+                    <h2>Transition simple</h2>
+                    <div class="code-example">
+                        .button {<br/>
+                        &nbsp;&nbsp;<span class="highlight">transition: all 0.3s ease;</span><br/>
+                        }<br/><br/>
+                        .button:hover {<br/>
+                        &nbsp;&nbsp;background: #e74c3c;<br/>
+                        &nbsp;&nbsp;transform: scale(1.1);<br/>
+                        }
+                    </div>
+                    <div class="transition-demo">Survolez-moi pour voir la transition</div>
+                </div>
+
+                <div class="demo-item">
+                    <h2>Propriétés multiples</h2>
+                    <div class="code-example">
+                        transition:<br/>
+                        &nbsp;&nbsp;<span class="highlight">background-color 0.5s,</span><br/>
+                        &nbsp;&nbsp;<span class="highlight">transform 0.3s,</span><br/>
+                        &nbsp;&nbsp;<span class="highlight">box-shadow 0.4s;</span>
+                    </div>
+                    <div class="transition-prop">Chaque propriété a sa propre durée</div>
+                </div>
+            </div>
+
+            <h2 style="text-align: center; color: #2c3e50; margin: 40px 0 20px">⏱️ Timing Functions</h2>
+
+            <div class="demo-item" style="margin-bottom: 40px;">
+                <h2>Courbes d'accélération (Survolez chaque box)</h2>
+                <div class="code-example">
+                    ease (défaut) | linear | ease-in | ease-out | ease-in-out
+                </div>
+                <div class="timing-demo">
+                    <div class="timing-box timing-ease">ease</div>
+                    <div class="timing-box timing-linear">linear</div>
+                    <div class="timing-box timing-ease-in">ease-in</div>
+                    <div class="timing-box timing-ease-out">ease-out</div>
+                    <div class="timing-box timing-ease-in-out">ease-in-out</div>
+                </div>
+                <p><strong>💡 Recommandation :</strong> ease-out pour la plupart des interactions</p>
+            </div>
+
+            <h2 style="text-align: center; color: #2c3e50; margin: 40px 0 20px">🎨 Exemples avancés</h2>
+
+            <div class="demo-grid">
+                <div class="demo-item">
+                    <h2>Bouton avec effet ripple</h2>
+                    <div class="code-example">
+                        .button::before {<br/>
+                        &nbsp;&nbsp;content: '';<br/>
+                        &nbsp;&nbsp;position: absolute;<br/>
+                        &nbsp;&nbsp;background: rgba(255,255,255,0.3);<br/>
+                        &nbsp;&nbsp;border-radius: 50%;<br/>
+                        &nbsp;&nbsp;transition: width 0.6s, height 0.6s;<br/>
+                        }<br/><br/>
+                        .button:hover::before {<br/>
+                        &nbsp;&nbsp;width: 300px;<br/>
+                        &nbsp;&nbsp;height: 300px;<br/>
+                        }
+                    </div>
+                    <div style="text-align: center;">
+                        <a href="#" class="button-fancy">Survolez-moi ! 🎯</a>
+                    </div>
+                </div>
+
+                <div class="demo-item">
+                    <h2>Card Flip (retournement)</h2>
+                    <div class="code-example">
+                        .card {<br/>
+                        &nbsp;&nbsp;transform-style: preserve-3d;<br/>
+                        &nbsp;&nbsp;transition: transform 0.6s;<br/>
+                        }<br/><br/>
+                        .card:hover {<br/>
+                        &nbsp;&nbsp;<span class="highlight">transform: rotateY(180deg);</span><br/>
+                        }
+                    </div>
+                    <div class="card-flip">
+                        <div class="card-flip-inner">
+                            <div class="card-flip-front">FACE AVANT</div>
+                            <div class="card-flip-back">FACE ARRIÈRE 🎉</div>
+                        </div>
+                    </div>
+                    <p style="text-align: center;"><em>Survolez la carte pour la retourner</em></p>
+                </div>
+
+                <div class="demo-item" style="grid-column: 1 / -1;">
+                    <h2>Barre de progression animée</h2>
+                    <div class="code-example">
+                        .progress-fill {<br/>
+                        &nbsp;&nbsp;width: 0%;<br/>
+                        &nbsp;&nbsp;<span class="highlight">transition: width 2s ease-out;</span><br/>
+                        }<br/><br/>
+                        .progress-bar:hover .progress-fill {<br/>
+                        &nbsp;&nbsp;width: 75%;<br/>
+                        }
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill">75%</div>
+                    </div>
+                    <p style="text-align: center;"><em>Survolez la barre pour l'animer</em></p>
+                </div>
+            </div>
+
+            <h2 style="text-align: center; color: #2c3e50; margin: 40px 0 20px">📊 Propriétés transition</h2>
+
+            <div class="demo-grid">
+                <div class="demo-item">
+                    <h2>Syntaxe complète</h2>
+                    <div class="code-example">
+                        transition:<br/>
+                        &nbsp;&nbsp;<span class="highlight">[property]</span> /* Propriété à animer */<br/>
+                        &nbsp;&nbsp;<span class="highlight">[duration]</span> /* Durée (ex: 0.3s) */<br/>
+                        &nbsp;&nbsp;<span class="highlight">[timing-function]</span> /* Courbe (ease, linear...) */<br/>
+                        &nbsp;&nbsp;<span class="highlight">[delay]</span>; /* Délai (ex: 0.1s) */
+                    </div>
+                    <div class="code-example">
+                        /* Exemple */<br/>
+                        transition: transform 0.3s ease-in-out 0.1s;
+                    </div>
+                </div>
+
+                <div class="demo-item">
+                    <h2>Propriétés animables</h2>
+                    <ul style="line-height: 1.8">
+                        <li>✅ <strong>color, background-color</strong></li>
+                        <li>✅ <strong>width, height</strong></li>
+                        <li>✅ <strong>margin, padding</strong></li>
+                        <li>✅ <strong>transform</strong> (scale, rotate, translate)</li>
+                        <li>✅ <strong>opacity</strong></li>
+                        <li>✅ <strong>box-shadow, border</strong></li>
+                        <li>❌ <strong>display</strong> (non animable)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h2 style="text-align: center; color: #2c3e50; margin: 40px 0 20px">🎯 Best Practices</h2>
+
+            <div class="demo-grid">
+                <div class="demo-item">
+                    <h2>✅ Bonnes pratiques</h2>
+                    <ul style="line-height: 1.8">
+                        <li>Utiliser <strong>transform</strong> plutôt que left/top (meilleures perfs)</li>
+                        <li>Durées : <strong>0.2s-0.4s</strong> pour les interactions</li>
+                        <li>Préférer <strong>ease-out</strong> pour les hovers</li>
+                        <li>Tester sur appareils mobiles</li>
+                        <li>Ne pas animer trop de propriétés à la fois</li>
+                        <li>::before/::after pour décorations seulement</li>
+                    </ul>
+                </div>
+
+                <div class="demo-item">
+                    <h2>❌ À éviter</h2>
+                    <ul style="line-height: 1.8">
+                        <li>Transitions trop longues (> 0.6s)</li>
+                        <li>Animer width/height (utiliser scale)</li>
+                        <li>Trop d'animations simultanées</li>
+                        <li>Pseudo-éléments avec contenu important</li>
+                        <li>Oublier les préfixes navigateurs si besoin</li>
+                        <li>content: '' sans display ou position</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="froggiesplaining">
+            <span> Froggiesplaining :</span>
+            <p>
+                <br/>
+                <strong>🎯 Objectifs :</strong><br/>
+                ✅ Utiliser ::before et ::after pour du contenu décoratif<br/>
+                ✅ Créer des transitions fluides avec transition<br/>
+                ✅ Comprendre les timing functions (ease, linear, etc.)<br/>
+                ✅ Combiner pseudo-éléments et transitions<br/>
+                ✅ Créer des effets avancés (ripple, flip, tooltip)<br/><br/>
+
+                <strong>📖 Points clés :</strong><br/>
+                • <strong>::before/::after</strong> nécessitent <code>content</code><br/>
+                • <strong>transition: all 0.3s ease</strong> = syntaxe rapide<br/>
+                • <strong>transform</strong> est plus performant que left/top<br/>
+                • <strong>ease-out</strong> : démarrage rapide, fin lente<br/>
+                • Durée idéale : <strong>0.2s-0.4s</strong> pour interactions<br/><br/>
+
+                <strong>🏋️ Exercice :</strong><br/>
+                Créez des boutons call-to-action avec :<br/>
+                • Transition au hover (couleur + élévation)<br/>
+                • Badge de notification avec ::after<br/>
+                • Effet ripple avec ::before<br/>
+                • Tooltip informatif
+            </p>
+            <img src="../img/froggie-300.png" alt="Froggie" class="overfrog" id="Froggie" />
+        </div>
+
+        <a href="#Froggie"><div id="goToFroggie"><img src="../img/froggie-300.png" width="50px" /><br/><i class="bi bi-arrow-bar-down"></i></div></a>
+        <div id="footerGit"><a href="https://github.com/eCreafr/DWWM" target="_blank"><i class="bi bi-github">GitHub - eCrea</i></a></div>
+    </body>
+</html>

@@ -1,0 +1,377 @@
+<!doctype html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Semaine 2 - Jour 4 | Backgrounds & Pseudo-classes avancées</title>
+        <link rel="stylesheet" href="../css/froggie.css" />
+        <style>
+            .demo-container {max-width: 1200px; margin: 40px auto; padding: 20px; font-family: Arial, sans-serif;}
+            .demo-title {text-align: center; font-size: 2.5em; margin-bottom: 20px; color: #2c3e50;}
+            .demo-intro {background: #ecf0f1; padding: 20px; border-radius: 10px; margin-bottom: 40px; line-height: 1.6;}
+            .demo-grid {display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-bottom: 40px;}
+            .demo-item {border: 2px solid #3498db; border-radius: 10px; padding: 20px; background: white; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);}
+            .demo-item h2 {margin-top: 0; color: #3498db;}
+            .code-example {background: #2c3e50; color: #ecf0f1; padding: 15px; border-radius: 5px; font-family: 'Courier New', monospace; font-size: 0.9em; margin: 15px 0; overflow-x: auto;}
+            .highlight {color: #f39c12; font-weight: bold;}
+
+            /* Backgrounds */
+            .bg-solid {background-color: #3498db; color: white; padding: 40px; border-radius: 8px; margin: 15px 0;}
+            .bg-gradient-linear {background: linear-gradient(to right, #667eea, #764ba2); color: white; padding: 40px; border-radius: 8px; margin: 15px 0;}
+            .bg-gradient-radial {background: radial-gradient(circle, #f093fb 0%, #f5576c 100%); color: white; padding: 40px; border-radius: 8px; margin: 15px 0;}
+            .bg-gradient-multi {background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%); color: white; padding: 40px; border-radius: 8px; margin: 15px 0;}
+            .bg-image-demo {background-image: url('https://images.unsplash.com/photo-1557683316-973673baf926?w=800'); background-size: cover; background-position: center; color: white; padding: 60px; border-radius: 8px; margin: 15px 0; text-shadow: 2px 2px 4px rgba(0,0,0,0.7);}
+            .bg-pattern {background-color: #3498db; background-image: repeating-linear-gradient(45deg, transparent, transparent 35px, rgba(255,255,255,.1) 35px, rgba(255,255,255,.1) 70px); color: white; padding: 40px; border-radius: 8px; margin: 15px 0;}
+            .bg-multiple {
+                background-image:
+                    linear-gradient(rgba(52, 152, 219, 0.8), rgba(52, 152, 219, 0.8)),
+                    url('https://images.unsplash.com/photo-1557683316-973673baf926?w=800');
+                background-size: cover;
+                background-position: center;
+                color: white;
+                padding: 40px;
+                border-radius: 8px;
+                margin: 15px 0;
+            }
+
+            /* Pseudo-classes */
+            .hover-demo {background: #3498db; color: white; padding: 20px; border-radius: 5px; margin: 10px 0; transition: all 0.3s; cursor: pointer;}
+            .hover-demo:hover {background: #e74c3c; transform: scale(1.05);}
+
+            .focus-demo {display: block; padding: 15px; margin: 10px 0; border: 2px solid #bdc3c7; border-radius: 5px; font-size: 16px;}
+            .focus-demo:focus {outline: none; border-color: #3498db; box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.3);}
+
+            .list-pseudo {list-style: none; padding: 0;}
+            .list-pseudo li {padding: 15px; margin: 5px 0; background: #ecf0f1; border-radius: 5px;}
+            .list-pseudo li:first-child {background: #e74c3c; color: white; font-weight: bold;}
+            .list-pseudo li:last-child {background: #1abc9c; color: white; font-weight: bold;}
+            .list-pseudo li:nth-child(odd) {border-left: 4px solid #3498db;}
+            .list-pseudo li:nth-child(even) {border-left: 4px solid #f39c12;}
+            .list-pseudo li:hover {background: #3498db; color: white; transform: translateX(10px); transition: all 0.3s;}
+
+            .link-demo a {display: block; padding: 15px; margin: 10px 0; background: #ecf0f1; color: #2c3e50; text-decoration: none; border-radius: 5px; transition: all 0.3s;}
+            .link-demo a:link {border-left: 4px solid #3498db;}
+            .link-demo a:visited {border-left: 4px solid #9b59b6;}
+            .link-demo a:hover {background: #3498db; color: white; transform: translateX(10px);}
+            .link-demo a:active {background: #2980b9;}
+
+            .input-states input, .input-states textarea {width: 100%; padding: 12px; margin: 10px 0; border: 2px solid #bdc3c7; border-radius: 5px;}
+            .input-states input:focus, .input-states textarea:focus {border-color: #3498db; outline: none; box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);}
+            .input-states input:invalid {border-color: #e74c3c;}
+            .input-states input:valid {border-color: #1abc9c;}
+            .input-states input:disabled {background: #ecf0f1; cursor: not-allowed; opacity: 0.6;}
+
+            .checkbox-demo {padding: 20px; background: #f8f9fa; border-radius: 8px; margin: 15px 0;}
+            .checkbox-demo input[type="checkbox"]:checked + label {color: #1abc9c; font-weight: bold;}
+
+            .card-hover {border: 2px solid #e0e0e0; border-radius: 10px; padding: 20px; margin: 15px 0; transition: all 0.3s;}
+            .card-hover:hover {box-shadow: 0 10px 30px rgba(0,0,0,0.2); transform: translateY(-5px); border-color: #3498db;}
+            .card-hover:hover h3 {color: #3498db;}
+        </style>
+    </head>
+    <body>
+        <div class="demo-container">
+            <h1 class="demo-title">🎨 Semaine 2 - Jour 4 : Backgrounds & Pseudo-classes</h1>
+
+            <div class="demo-intro">
+                <h3>📚 Objectifs du jour</h3>
+                <p>Aujourd'hui, nous allons explorer les arrière-plans CSS en profondeur (couleurs, gradients, images, motifs) et maîtriser les pseudo-classes pour créer des interactions riches.</p>
+            </div>
+
+            <h2 style="text-align: center; color: #2c3e50; margin: 40px 0 20px">🌈 Backgrounds avancés</h2>
+
+            <div class="demo-grid">
+                <div class="demo-item">
+                    <h2>Couleur solide</h2>
+                    <div class="code-example">
+                        .element {<br/>
+                        &nbsp;&nbsp;<span class="highlight">background-color: #3498db;</span><br/>
+                        }
+                    </div>
+                    <div class="bg-solid">Background couleur unie</div>
+                </div>
+
+                <div class="demo-item">
+                    <h2>Gradient linéaire</h2>
+                    <div class="code-example">
+                        background: <span class="highlight">linear-gradient</span>(<br/>
+                        &nbsp;&nbsp;to right,<br/>
+                        &nbsp;&nbsp;#667eea,<br/>
+                        &nbsp;&nbsp;#764ba2<br/>
+                        );
+                    </div>
+                    <div class="bg-gradient-linear">Gradient horizontal</div>
+                </div>
+
+                <div class="demo-item">
+                    <h2>Gradient radial</h2>
+                    <div class="code-example">
+                        background: <span class="highlight">radial-gradient</span>(<br/>
+                        &nbsp;&nbsp;circle,<br/>
+                        &nbsp;&nbsp;#f093fb 0%,<br/>
+                        &nbsp;&nbsp;#f5576c 100%<br/>
+                        );
+                    </div>
+                    <div class="bg-gradient-radial">Gradient circulaire</div>
+                </div>
+
+                <div class="demo-item">
+                    <h2>Gradient multi-couleurs</h2>
+                    <div class="code-example">
+                        background: linear-gradient(<br/>
+                        &nbsp;&nbsp;135deg,<br/>
+                        &nbsp;&nbsp;#667eea 0%,<br/>
+                        &nbsp;&nbsp;#764ba2 50%,<br/>
+                        &nbsp;&nbsp;#f093fb 100%<br/>
+                        );
+                    </div>
+                    <div class="bg-gradient-multi">3 couleurs en dégradé</div>
+                </div>
+
+                <div class="demo-item">
+                    <h2>Image de fond</h2>
+                    <div class="code-example">
+                        .hero {<br/>
+                        &nbsp;&nbsp;<span class="highlight">background-image:</span> url('image.jpg');<br/>
+                        &nbsp;&nbsp;<span class="highlight">background-size: cover;</span><br/>
+                        &nbsp;&nbsp;<span class="highlight">background-position: center;</span><br/>
+                        }
+                    </div>
+                    <div class="bg-image-demo">
+                        <h3>Hero Section</h3>
+                        <p>Image en arrière-plan</p>
+                    </div>
+                </div>
+
+                <div class="demo-item">
+                    <h2>Motif répétitif</h2>
+                    <div class="code-example">
+                        background-image: <span class="highlight">repeating-linear-gradient</span>(<br/>
+                        &nbsp;&nbsp;45deg,<br/>
+                        &nbsp;&nbsp;transparent,<br/>
+                        &nbsp;&nbsp;transparent 35px,<br/>
+                        &nbsp;&nbsp;rgba(255,255,255,.1) 35px,<br/>
+                        &nbsp;&nbsp;rgba(255,255,255,.1) 70px<br/>
+                        );
+                    </div>
+                    <div class="bg-pattern">Motif rayé</div>
+                </div>
+
+                <div class="demo-item" style="grid-column: 1 / -1">
+                    <h2>Backgrounds multiples (overlay)</h2>
+                    <div class="code-example">
+                        .element {<br/>
+                        &nbsp;&nbsp;<span class="highlight">background-image:</span><br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;linear-gradient(rgba(52, 152, 219, 0.8), rgba(52, 152, 219, 0.8)),<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;url('image.jpg');<br/>
+                        &nbsp;&nbsp;<span class="highlight">background-size: cover;</span><br/>
+                        }
+                    </div>
+                    <div class="bg-multiple">
+                        <h3>Overlay coloré sur image</h3>
+                        <p>Technique très utilisée pour améliorer la lisibilité du texte</p>
+                    </div>
+                </div>
+            </div>
+
+            <h2 style="text-align: center; color: #2c3e50; margin: 40px 0 20px">🎯 Pseudo-classes d'interaction</h2>
+
+            <div class="demo-grid">
+                <div class="demo-item">
+                    <h2>:hover (survol)</h2>
+                    <div class="code-example">
+                        .element:hover {<br/>
+                        &nbsp;&nbsp;background: #e74c3c;<br/>
+                        &nbsp;&nbsp;transform: scale(1.05);<br/>
+                        }
+                    </div>
+                    <div class="hover-demo">Survolez-moi ! 🎯</div>
+                    <p><strong>✅ Usage :</strong> Feedback visuel au survol</p>
+                </div>
+
+                <div class="demo-item">
+                    <h2>:focus (focus input)</h2>
+                    <div class="code-example">
+                        input:focus {<br/>
+                        &nbsp;&nbsp;border-color: #3498db;<br/>
+                        &nbsp;&nbsp;box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.3);<br/>
+                        }
+                    </div>
+                    <input type="text" class="focus-demo" placeholder="Cliquez ici pour voir :focus">
+                    <p><strong>♿ Accessibilité :</strong> Essentiel pour la navigation clavier</p>
+                </div>
+
+                <div class="demo-item">
+                    <h2>États des liens</h2>
+                    <div class="code-example">
+                        a:link { color: blue; }<br/>
+                        a:visited { color: purple; }<br/>
+                        a:hover { color: red; }<br/>
+                        a:active { color: orange; }
+                    </div>
+                    <div class="link-demo">
+                        <a href="#demo">Lien non visité</a>
+                        <a href="#">Survolez pour voir :hover</a>
+                    </div>
+                </div>
+
+                <div class="demo-item">
+                    <h2>:active (au clic)</h2>
+                    <p>État actif pendant le clic</p>
+                    <div class="code-example">
+                        button:active {<br/>
+                        &nbsp;&nbsp;transform: scale(0.95);<br/>
+                        }
+                    </div>
+                    <button style="padding: 15px 30px; background: #3498db; color: white; border: none; border-radius: 5px; cursor: pointer; transition: transform 0.1s;" onmousedown="this.style.transform='scale(0.95)'" onmouseup="this.style.transform='scale(1)'">Cliquez-moi !</button>
+                </div>
+            </div>
+
+            <h2 style="text-align: center; color: #2c3e50; margin: 40px 0 20px">🔢 Pseudo-classes structurelles</h2>
+
+            <div class="demo-grid">
+                <div class="demo-item" style="grid-column: 1 / -1">
+                    <h2>:nth-child() - Cibler des enfants spécifiques</h2>
+                    <div class="code-example">
+                        li:first-child { background: #e74c3c; }<br/>
+                        li:last-child { background: #1abc9c; }<br/>
+                        li:nth-child(odd) { border-left: 4px solid #3498db; }<br/>
+                        li:nth-child(even) { border-left: 4px solid #f39c12; }<br/>
+                        li:hover { background: #3498db; color: white; }
+                    </div>
+                    <ul class="list-pseudo">
+                        <li>Premier élément (first-child)</li>
+                        <li>Élément pair (even)</li>
+                        <li>Élément impair (odd)</li>
+                        <li>Élément pair (even)</li>
+                        <li>Élément impair (odd)</li>
+                        <li>Dernier élément (last-child)</li>
+                    </ul>
+                    <p><strong>💡 Astuce :</strong> Survolez les items pour voir l'effet hover !</p>
+                </div>
+            </div>
+
+            <h2 style="text-align: center; color: #2c3e50; margin: 40px 0 20px">📝 Pseudo-classes de formulaire</h2>
+
+            <div class="demo-grid">
+                <div class="demo-item" style="grid-column: 1 / -1">
+                    <h2>États des inputs</h2>
+                    <div class="input-states">
+                        <label><strong>:focus</strong> - Input actif (cliquez dedans)</label>
+                        <input type="text" placeholder="Focus = bordure bleue">
+
+                        <label><strong>:valid</strong> - Email valide</label>
+                        <input type="email" placeholder="email@exemple.com" value="test@test.com">
+
+                        <label><strong>:invalid</strong> - Email invalide</label>
+                        <input type="email" placeholder="email@exemple.com" value="pas-un-email">
+
+                        <label><strong>:disabled</strong> - Input désactivé</label>
+                        <input type="text" value="Je suis désactivé" disabled>
+
+                        <label><strong>:required</strong> - Champ obligatoire</label>
+                        <input type="text" placeholder="Champ requis" required>
+                    </div>
+                    <div class="code-example">
+                        input:focus { border-color: #3498db; }<br/>
+                        input:valid { border-color: #1abc9c; }<br/>
+                        input:invalid { border-color: #e74c3c; }<br/>
+                        input:disabled { opacity: 0.6; cursor: not-allowed; }
+                    </div>
+                </div>
+            </div>
+
+            <h2 style="text-align: center; color: #2c3e50; margin: 40px 0 20px">✅ :checked (checkbox/radio)</h2>
+
+            <div class="demo-grid">
+                <div class="demo-item">
+                    <h2>Checkbox personnalisée</h2>
+                    <div class="code-example">
+                        input[type="checkbox"]:checked + label {<br/>
+                        &nbsp;&nbsp;color: #1abc9c;<br/>
+                        &nbsp;&nbsp;font-weight: bold;<br/>
+                        }
+                    </div>
+                    <div class="checkbox-demo">
+                        <input type="checkbox" id="check1"> <label for="check1">HTML</label><br>
+                        <input type="checkbox" id="check2" checked> <label for="check2">CSS (coché)</label><br>
+                        <input type="checkbox" id="check3"> <label for="check3">JavaScript</label>
+                    </div>
+                </div>
+
+                <div class="demo-item">
+                    <h2>Exemple pratique : Card interactive</h2>
+                    <div class="card-hover">
+                        <h3>Survole-moi !</h3>
+                        <p>Cette carte utilise :hover pour créer un effet d'élévation.</p>
+                    </div>
+                    <div class="code-example">
+                        .card:hover {<br/>
+                        &nbsp;&nbsp;box-shadow: 0 10px 30px rgba(0,0,0,0.2);<br/>
+                        &nbsp;&nbsp;transform: translateY(-5px);<br/>
+                        }
+                    </div>
+                </div>
+            </div>
+
+            <h2 style="text-align: center; color: #2c3e50; margin: 40px 0 20px">🎓 Récapitulatif</h2>
+
+            <div class="demo-grid">
+                <div class="demo-item">
+                    <h2>Backgrounds</h2>
+                    <ul style="line-height: 1.8">
+                        <li><strong>background-color</strong> : couleur unie</li>
+                        <li><strong>linear-gradient</strong> : dégradé linéaire</li>
+                        <li><strong>radial-gradient</strong> : dégradé circulaire</li>
+                        <li><strong>background-image</strong> : image</li>
+                        <li><strong>background-size: cover</strong> : remplit l'élément</li>
+                        <li><strong>Multiples backgrounds</strong> : superposition</li>
+                    </ul>
+                </div>
+
+                <div class="demo-item">
+                    <h2>Pseudo-classes essentielles</h2>
+                    <ul style="line-height: 1.8">
+                        <li><strong>:hover</strong> : survol souris</li>
+                        <li><strong>:focus</strong> : élément actif (accessibilité)</li>
+                        <li><strong>:active</strong> : au moment du clic</li>
+                        <li><strong>:nth-child()</strong> : enfants spécifiques</li>
+                        <li><strong>:first-child / :last-child</strong></li>
+                        <li><strong>:valid / :invalid</strong> : validation formulaires</li>
+                        <li><strong>:checked</strong> : checkbox/radio cochés</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="froggiesplaining">
+            <span> Froggiesplaining :</span>
+            <p>
+                <br/>
+                <strong>🎯 Objectifs :</strong><br/>
+                ✅ Créer des gradients linéaires et radiaux<br/>
+                ✅ Gérer les images de fond (cover, position)<br/>
+                ✅ Utiliser :hover, :focus, :active pour l'interactivité<br/>
+                ✅ Styliser avec :nth-child() et pseudo-classes structurelles<br/>
+                ✅ Gérer les états de formulaire (:valid, :invalid, :checked)<br/><br/>
+
+                <strong>📖 Points clés :</strong><br/>
+                • <strong>linear-gradient</strong> : to right, 135deg, etc.<br/>
+                • <strong>background-size: cover</strong> : remplit tout l'espace<br/>
+                • <strong>:hover</strong> : feedback visuel essentiel<br/>
+                • <strong>:focus</strong> : crucial pour l'accessibilité<br/>
+                • <strong>:nth-child(odd/even)</strong> : zébrage automatique<br/><br/>
+
+                <strong>🏋️ Exercice :</strong><br/>
+                Créez une galerie de cards avec :<br/>
+                • Gradient en background<br/>
+                • Effet hover (élévation + ombre)<br/>
+                • Liste avec :nth-child pour alterner les couleurs
+            </p>
+            <img src="../img/froggie-300.png" alt="Froggie" class="overfrog" id="Froggie" />
+        </div>
+
+        <a href="#Froggie"><div id="goToFroggie"><img src="../img/froggie-300.png" width="50px" /><br/><i class="bi bi-arrow-bar-down"></i></div></a>
+        <div id="footerGit"><a href="https://github.com/eCreafr/DWWM" target="_blank"><i class="bi bi-github">GitHub - eCrea</i></a></div>
+    </body>
+</html>

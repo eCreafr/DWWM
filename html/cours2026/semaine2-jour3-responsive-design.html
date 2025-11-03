@@ -1,0 +1,432 @@
+<!doctype html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Semaine 2 - Jour 3 | Responsive Design</title>
+        <link rel="stylesheet" href="../css/froggie.css" />
+        <style>
+            .demo-container {
+                max-width: 1200px;
+                margin: 40px auto;
+                padding: 20px;
+                font-family: Arial, sans-serif;
+            }
+            .demo-title {
+                text-align: center;
+                font-size: 2.5em;
+                margin-bottom: 20px;
+                color: #2c3e50;
+            }
+            .demo-intro {
+                background: #ecf0f1;
+                padding: 20px;
+                border-radius: 10px;
+                margin-bottom: 40px;
+                line-height: 1.6;
+            }
+            .demo-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                gap: 30px;
+                margin-bottom: 40px;
+            }
+            .demo-item {
+                border: 2px solid #3498db;
+                border-radius: 10px;
+                padding: 20px;
+                background: white;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            }
+            .demo-item h2 {
+                margin-top: 0;
+                color: #3498db;
+            }
+            .code-example {
+                background: #2c3e50;
+                color: #ecf0f1;
+                padding: 15px;
+                border-radius: 5px;
+                font-family: 'Courier New', monospace;
+                font-size: 0.9em;
+                margin: 15px 0;
+                overflow-x: auto;
+            }
+            .highlight {
+                color: #f39c12;
+                font-weight: bold;
+            }
+            .unit-demo {
+                background: #e8f4f8;
+                padding: 20px;
+                margin: 15px 0;
+                border-radius: 5px;
+            }
+            .pixel-box {
+                width: 200px;
+                background: #3498db;
+                color: white;
+                padding: 15px;
+                margin: 10px 0;
+            }
+            .percent-box {
+                width: 50%;
+                background: #e74c3c;
+                color: white;
+                padding: 15px;
+                margin: 10px 0;
+            }
+            .viewport-box {
+                width: 80vw;
+                max-width: 100%;
+                background: #1abc9c;
+                color: white;
+                padding: 15px;
+                margin: 10px 0;
+            }
+            .responsive-demo {
+                background: #3498db;
+                color: white;
+                padding: 20px;
+                text-align: center;
+                border-radius: 5px;
+            }
+            @media (max-width: 768px) {
+                .responsive-demo {
+                    background: #e74c3c;
+                }
+            }
+            @media (max-width: 480px) {
+                .responsive-demo {
+                    background: #1abc9c;
+                }
+            }
+            .mobile-first-demo {
+                background: #1abc9c;
+                color: white;
+                padding: 20px;
+                text-align: center;
+                border-radius: 5px;
+                font-size: 14px;
+            }
+            @media (min-width: 768px) {
+                .mobile-first-demo {
+                    background: #e74c3c;
+                    font-size: 16px;
+                }
+            }
+            @media (min-width: 1024px) {
+                .mobile-first-demo {
+                    background: #3498db;
+                    font-size: 18px;
+                }
+            }
+            .breakpoint-table {
+                width: 100%;
+                border-collapse: collapse;
+                margin: 20px 0;
+            }
+            .breakpoint-table th,
+            .breakpoint-table td {
+                border: 1px solid #bdc3c7;
+                padding: 12px;
+                text-align: left;
+            }
+            .breakpoint-table th {
+                background: #3498db;
+                color: white;
+            }
+            .img-responsive {
+                max-width: 100%;
+                height: auto;
+                display: block;
+                border-radius: 8px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="demo-container">
+            <h1 class="demo-title">📱 Semaine 2 - Jour 3 : Responsive Design</h1>
+
+            <div class="demo-intro">
+                <h3>📚 Qu'est-ce que le Responsive Design ?</h3>
+                <p>
+                    Le <strong>Responsive Web Design</strong> est une approche qui permet aux sites web de s'adapter
+                    automatiquement à toutes les tailles d'écran (mobile, tablette, desktop). C'est essentiel car plus de
+                    60% du trafic web vient des mobiles !
+                </p>
+            </div>
+
+            <h2 style="text-align: center; color: #2c3e50">📏 Les unités relatives</h2>
+
+            <div class="demo-grid">
+                <div class="demo-item">
+                    <h2>Pixels (px) - Absolu</h2>
+                    <p>Unité fixe, ne s'adapte pas.</p>
+                    <div class="pixel-box">width: 200px</div>
+                    <div class="code-example">
+                        .box {<br />
+                        &nbsp;&nbsp;<span class="highlight">width: 200px;</span><br />
+                        }
+                    </div>
+                    <p><strong>⚠️ Problème :</strong> Pas responsive, taille fixe</p>
+                </div>
+
+                <div class="demo-item">
+                    <h2>Pourcentage (%) - Relatif</h2>
+                    <p>Relatif à la taille du parent.</p>
+                    <div class="percent-box">width: 50%</div>
+                    <div class="code-example">
+                        .box {<br />
+                        &nbsp;&nbsp;<span class="highlight">width: 50%;</span><br />
+                        }
+                    </div>
+                    <p><strong>✅ Avantage :</strong> S'adapte au conteneur parent</p>
+                </div>
+
+                <div class="demo-item">
+                    <h2>em et rem</h2>
+                    <p>
+                        <strong>em :</strong> Relatif à la taille de police du parent<br />
+                        <strong>rem :</strong> Relatif à la taille de police racine (html)
+                    </p>
+                    <div class="code-example">
+                        html { font-size: 16px; }<br /><br />
+                        .element {<br />
+                        &nbsp;&nbsp;font-size: <span class="highlight">1.5rem</span>; /* 24px */<br />
+                        &nbsp;&nbsp;padding: <span class="highlight">2em</span>; /* Relatif au font-size */<br />
+                        }
+                    </div>
+                    <p><strong>💡 Préférer :</strong> rem pour plus de prévisibilité</p>
+                </div>
+
+                <div class="demo-item">
+                    <h2>Viewport (vw, vh)</h2>
+                    <p>
+                        <strong>vw :</strong> 1% de la largeur de la fenêtre<br />
+                        <strong>vh :</strong> 1% de la hauteur de la fenêtre
+                    </p>
+                    <div class="viewport-box">width: 80vw</div>
+                    <div class="code-example">
+                        .hero {<br />
+                        &nbsp;&nbsp;<span class="highlight">width: 100vw;</span><br />
+                        &nbsp;&nbsp;<span class="highlight">height: 100vh;</span><br />
+                        }
+                    </div>
+                    <p><strong>✅ Usage :</strong> Sections plein écran, hero sections</p>
+                </div>
+            </div>
+
+            <h2 style="text-align: center; color: #2c3e50; margin: 40px 0 20px">📐 Media Queries</h2>
+
+            <div class="demo-grid">
+                <div class="demo-item" style="grid-column: 1 / -1">
+                    <h2>Syntaxe des Media Queries</h2>
+                    <p>
+                        Les <strong>media queries</strong> permettent d'appliquer des styles CSS en fonction de la taille
+                        de l'écran.
+                    </p>
+                    <div class="code-example">
+                        /* Desktop First (du plus grand au plus petit) */<br />
+                        .element {<br />
+                        &nbsp;&nbsp;font-size: 18px; /* Desktop */<br />
+                        }<br /><br />
+                        <span class="highlight">@media (max-width: 768px)</span> {<br />
+                        &nbsp;&nbsp;.element {<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;font-size: 16px; /* Tablette */<br />
+                        &nbsp;&nbsp;}<br />
+                        }<br /><br />
+                        <span class="highlight">@media (max-width: 480px)</span> {<br />
+                        &nbsp;&nbsp;.element {<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;font-size: 14px; /* Mobile */<br />
+                        &nbsp;&nbsp;}<br />
+                        }
+                    </div>
+
+                    <div class="responsive-demo">
+                        Redimensionnez votre fenêtre !<br />
+                        Desktop (bleu) → Tablette (rouge) → Mobile (vert)
+                    </div>
+                </div>
+            </div>
+
+            <h2 style="text-align: center; color: #2c3e50">📱 Mobile First (Recommandé)</h2>
+
+            <div class="demo-grid">
+                <div class="demo-item" style="grid-column: 1 / -1">
+                    <h2>Approche Mobile First</h2>
+                    <p>
+                        <strong>Mobile First :</strong> On commence par le design mobile, puis on ajoute des styles pour
+                        les écrans plus grands avec <code>min-width</code>.
+                    </p>
+                    <div class="code-example">
+                        /* Mobile First (du plus petit au plus grand) */<br />
+                        .element {<br />
+                        &nbsp;&nbsp;font-size: 14px; /* Mobile par défaut */<br />
+                        }<br /><br />
+                        <span class="highlight">@media (min-width: 768px)</span> {<br />
+                        &nbsp;&nbsp;.element {<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;font-size: 16px; /* Tablette et + */<br />
+                        &nbsp;&nbsp;}<br />
+                        }<br /><br />
+                        <span class="highlight">@media (min-width: 1024px)</span> {<br />
+                        &nbsp;&nbsp;.element {<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;font-size: 18px; /* Desktop */<br />
+                        &nbsp;&nbsp;}<br />
+                        }
+                    </div>
+
+                    <div class="mobile-first-demo">
+                        Mobile First en action !<br />
+                        Mobile (vert, 14px) → Tablette (rouge, 16px) → Desktop (bleu, 18px)
+                    </div>
+
+                    <p style="margin-top: 20px">
+                        <strong>✅ Avantages Mobile First :</strong><br />
+                        • Meilleure performance sur mobile<br />
+                        • Progressive enhancement (amélioration progressive)<br />
+                        • Correspond à l'usage réel (60%+ de trafic mobile)
+                    </p>
+                </div>
+            </div>
+
+            <h2 style="text-align: center; color: #2c3e50">🎯 Breakpoints courants</h2>
+
+            <table class="breakpoint-table">
+                <thead>
+                    <tr>
+                        <th>Appareil</th>
+                        <th>Breakpoint</th>
+                        <th>Media Query</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>📱 Mobile (Portrait)</td>
+                        <td>< 480px</td>
+                        <td>@media (max-width: 480px)</td>
+                    </tr>
+                    <tr>
+                        <td>📱 Mobile (Paysage)</td>
+                        <td>481px - 767px</td>
+                        <td>@media (min-width: 481px) and (max-width: 767px)</td>
+                    </tr>
+                    <tr>
+                        <td>📲 Tablette</td>
+                        <td>768px - 1023px</td>
+                        <td>@media (min-width: 768px) and (max-width: 1023px)</td>
+                    </tr>
+                    <tr>
+                        <td>💻 Desktop</td>
+                        <td>1024px - 1279px</td>
+                        <td>@media (min-width: 1024px)</td>
+                    </tr>
+                    <tr>
+                        <td>🖥️ Large Desktop</td>
+                        <td>> 1280px</td>
+                        <td>@media (min-width: 1280px)</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2 style="text-align: center; color: #2c3e50; margin: 40px 0 20px">🖼️ Images Responsives</h2>
+
+            <div class="demo-grid">
+                <div class="demo-item">
+                    <h2>Image responsive simple</h2>
+                    <div class="code-example">
+                        img {<br />
+                        &nbsp;&nbsp;<span class="highlight">max-width: 100%;</span><br />
+                        &nbsp;&nbsp;<span class="highlight">height: auto;</span><br />
+                        &nbsp;&nbsp;display: block;<br />
+                        }
+                    </div>
+                    <p>
+                        <strong>✅ Effet :</strong> L'image ne dépasse jamais son conteneur et garde ses proportions
+                    </p>
+                </div>
+
+                <div class="demo-item">
+                    <h2>Meta viewport (essentiel !)</h2>
+                    <div class="code-example">
+                        &lt;head&gt;<br />
+                        &nbsp;&nbsp;&lt;meta<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;name="viewport"<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;content="<span class="highlight"
+                            >width=device-width, initial-scale=1.0</span
+                        >"<br />
+                        &nbsp;&nbsp;/&gt;<br />
+                        &lt;/head&gt;
+                    </div>
+                    <p>
+                        <strong>⚠️ OBLIGATOIRE :</strong> Sans cette balise, le responsive ne fonctionne pas sur mobile
+                        !
+                    </p>
+                </div>
+            </div>
+
+            <h2 style="text-align: center; color: #2c3e50">🏆 Best Practices</h2>
+
+            <div class="demo-grid">
+                <div class="demo-item">
+                    <h2>✅ À faire</h2>
+                    <ul>
+                        <li>Utiliser Mobile First</li>
+                        <li>Utiliser des unités relatives (%, rem, vw)</li>
+                        <li>Tester sur vrais appareils</li>
+                        <li>Images responsive (max-width: 100%)</li>
+                        <li>Meta viewport obligatoire</li>
+                        <li>Breakpoints cohérents</li>
+                    </ul>
+                </div>
+
+                <div class="demo-item">
+                    <h2>❌ À éviter</h2>
+                    <ul>
+                        <li>Largeurs fixes en pixels</li>
+                        <li>Trop de breakpoints</li>
+                        <li>Oublier la meta viewport</li>
+                        <li>Tester uniquement sur desktop</li>
+                        <li>Images trop lourdes</li>
+                        <li>Scroll horizontal sur mobile</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="froggiesplaining">
+            <span> Froggiesplaining :</span>
+            <p>
+                <br />
+                <strong>🎯 Objectifs :</strong><br />
+                ✅ Comprendre le concept de Responsive Design<br />
+                ✅ Utiliser les unités relatives (%, rem, vw, vh)<br />
+                ✅ Maîtriser les media queries<br />
+                ✅ Appliquer l'approche Mobile First<br /><br />
+
+                <strong>📖 Points clés :</strong><br />
+                • <strong>Mobile First</strong> = min-width (recommandé)<br />
+                • <strong>Desktop First</strong> = max-width<br />
+                • <strong>Unités :</strong> %, rem, vw/vh pour le responsive<br />
+                • <strong>Images :</strong> max-width: 100%, height: auto<br />
+                • <strong>Meta viewport :</strong> OBLIGATOIRE !<br /><br />
+
+                <strong>🏋️ Exercice :</strong><br />
+                Rendez votre page portfolio responsive avec :<br />
+                • 1 colonne sur mobile<br />
+                • 2 colonnes sur tablette<br />
+                • 3 colonnes sur desktop
+            </p>
+            <img src="../img/froggie-300.png" alt="Froggie" class="overfrog" id="Froggie" />
+        </div>
+
+        <a href="#Froggie"
+            ><div id="goToFroggie">
+                <img src="../img/froggie-300.png" width="50px" /><br /><i class="bi bi-arrow-bar-down"></i></div
+        ></a>
+
+        <div id="footerGit">
+            <a href="https://github.com/eCreafr/DWWM" target="_blank"><i class="bi bi-github">GitHub - eCrea</i></a>
+        </div>
+    </body>
+</html>

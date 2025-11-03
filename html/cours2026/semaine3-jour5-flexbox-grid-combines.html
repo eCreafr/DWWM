@@ -1,0 +1,424 @@
+<!doctype html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Semaine 3 - Jour 5 | Flexbox + Grid combinés</title>
+        <link rel="stylesheet" href="../css/froggie.css" />
+        <style>
+            .demo-container {max-width: 1200px; margin: 40px auto; padding: 20px; font-family: Arial, sans-serif;}
+            .demo-title {text-align: center; font-size: 2.5em; margin-bottom: 20px; color: #2c3e50;}
+            .demo-intro {background: #ecf0f1; padding: 20px; border-radius: 10px; margin-bottom: 40px; line-height: 1.6;}
+            .demo-grid {display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-bottom: 40px;}
+            .demo-item {border: 2px solid #3498db; border-radius: 10px; padding: 20px; background: white; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);}
+            .demo-item h2 {margin-top: 0; color: #3498db;}
+            .code-example {background: #2c3e50; color: #ecf0f1; padding: 15px; border-radius: 5px; font-family: 'Courier New', monospace; font-size: 0.85em; margin: 15px 0; overflow-x: auto;}
+            .highlight {color: #f39c12; font-weight: bold;}
+
+            /* Layout principal Grid + Flex */
+            .main-layout {display: grid; grid-template-areas: "header header" "sidebar main" "footer footer"; grid-template-columns: 250px 1fr; grid-template-rows: auto 1fr auto; min-height: 500px; gap: 15px; background: #ecf0f1; padding: 15px; border-radius: 10px; margin: 20px 0;}
+            .main-header {grid-area: header; background: #2c3e50; color: white; padding: 20px; border-radius: 8px; display: flex; justify-content: space-between; align-items: center;}
+            .main-nav {display: flex; gap: 20px; list-style: none; margin: 0; padding: 0;}
+            .main-nav a {color: white; text-decoration: none;}
+            .main-sidebar {grid-area: sidebar; background: #34495e; color: white; padding: 20px; border-radius: 8px;}
+            .main-content {grid-area: main; background: white; padding: 20px; border-radius: 8px;}
+            .main-footer {grid-area: footer; background: #2c3e50; color: white; padding: 20px; border-radius: 8px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px;}
+
+            /* Cards Grid + Flex */
+            .card-grid {display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin: 20px 0;}
+            .card {background: white; border: 2px solid #e0e0e0; border-radius: 10px; overflow: hidden; transition: all 0.3s;}
+            .card:hover {box-shadow: 0 10px 30px rgba(0,0,0,0.15); transform: translateY(-5px);}
+            .card-body {padding: 20px; display: flex; flex-direction: column; gap: 15px;}
+            .card-actions {display: flex; gap: 10px; margin-top: auto;}
+            .card-button {flex: 1; padding: 10px; border: none; border-radius: 5px; cursor: pointer; transition: all 0.3s;}
+            .btn-primary {background: #3498db; color: white;}
+            .btn-secondary {background: #95a5a6; color: white;}
+
+            /* Dashboard Grid + Flex */
+            .dashboard {display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin: 20px 0;}
+            .widget {background: white; border-radius: 10px; padding: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); display: flex; flex-direction: column; gap: 15px;}
+            .widget-header {display: flex; justify-content: space-between; align-items: center; padding-bottom: 15px; border-bottom: 2px solid #ecf0f1;}
+            .widget-content {flex: 1; display: flex; align-items: center; justify-content: center; font-size: 2em; font-weight: bold; color: #3498db;}
+
+            /* Product Grid */
+            .product-grid {display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 20px; margin: 20px 0;}
+            .product {background: white; border-radius: 10px; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,0.1); transition: all 0.3s;}
+            .product:hover {box-shadow: 0 10px 30px rgba(0,0,0,0.2); transform: translateY(-5px);}
+            .product-image {background: linear-gradient(135deg, #667eea, #764ba2); height: 150px; display: flex; align-items: center; justify-content: center; color: white; font-size: 3em;}
+            .product-info {padding: 15px; display: flex; flex-direction: column; gap: 10px;}
+            .product-footer {display: flex; justify-content: space-between; align-items: center; padding-top: 10px; border-top: 1px solid #ecf0f1;}
+
+            /* Gallery Masonry */
+            .gallery {display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); grid-auto-rows: 100px; gap: 15px; margin: 20px 0;}
+            .gallery-item {background: linear-gradient(135deg, #667eea, #764ba2); border-radius: 10px; overflow: hidden; display: flex; flex-direction: column; justify-content: space-between; padding: 15px; color: white;}
+            .gallery-tall {grid-row: span 2;}
+            .gallery-wide {grid-column: span 2;}
+            .gallery-big {grid-row: span 2; grid-column: span 2;}
+            .gallery-footer {display: flex; justify-content: space-between; align-items: center; margin-top: auto;}
+
+            .comparison-table {width: 100%; border-collapse: collapse; margin: 20px 0;}
+            .comparison-table th, .comparison-table td {border: 1px solid #bdc3c7; padding: 15px; text-align: left;}
+            .comparison-table th {background: #3498db; color: white;}
+            .comparison-table tr:nth-child(even) {background: #f8f9fa;}
+        </style>
+    </head>
+    <body>
+        <div class="demo-container">
+            <h1 class="demo-title">🎯 Semaine 3 - Jour 5 : Flexbox + Grid Combinés</h1>
+
+            <div class="demo-intro">
+                <h3>📚 La puissance du combo</h3>
+                <p>Flexbox et Grid ne sont pas concurrents, ils sont <strong>complémentaires</strong> ! Grid pour la structure globale, Flexbox pour les composants. Découvrons comment les combiner efficacement.</p>
+            </div>
+
+            <h2 style="text-align: center; color: #2c3e50; margin: 40px 0 20px">⚔️ Flexbox vs Grid : Quand utiliser quoi ?</h2>
+
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Critère</th>
+                        <th>🔵 Flexbox</th>
+                        <th>🟢 Grid</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Dimensions</strong></td>
+                        <td>1D (ligne OU colonne)</td>
+                        <td>2D (lignes ET colonnes)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Usage idéal</strong></td>
+                        <td>Composants, navigation, alignement</td>
+                        <td>Layouts de page, grilles</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Exemples</strong></td>
+                        <td>Navbar, cards internes, boutons, centrage</td>
+                        <td>Page layout, galeries, dashboards</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Contrôle</strong></td>
+                        <td>Content-out (du contenu vers le layout)</td>
+                        <td>Layout-in (du layout vers le contenu)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Flexibilité</strong></td>
+                        <td>Items s'adaptent dynamiquement</td>
+                        <td>Structure définie à l'avance</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2 style="text-align: center; color: #2c3e50; margin: 40px 0 20px">🏗️ Exemple 1 : Layout complet (Grid + Flex)</h2>
+
+            <div class="demo-item" style="margin-bottom: 40px;">
+                <h2>Structure de page : Grid pour le layout, Flex pour les composants</h2>
+                <div class="code-example">
+                    /* Grid pour la structure globale */<br/>
+                    .layout {<br/>
+                    &nbsp;&nbsp;<span class="highlight">display: grid;</span><br/>
+                    &nbsp;&nbsp;grid-template-areas:<br/>
+                    &nbsp;&nbsp;&nbsp;&nbsp;"header header"<br/>
+                    &nbsp;&nbsp;&nbsp;&nbsp;"sidebar main"<br/>
+                    &nbsp;&nbsp;&nbsp;&nbsp;"footer footer";<br/>
+                    }<br/><br/>
+                    /* Flex pour le header */<br/>
+                    .header {<br/>
+                    &nbsp;&nbsp;<span class="highlight">display: flex;</span><br/>
+                    &nbsp;&nbsp;justify-content: space-between;<br/>
+                    &nbsp;&nbsp;align-items: center;<br/>
+                    }
+                </div>
+                <div class="main-layout">
+                    <header class="main-header">
+                        <div class="main-logo">🐸 MonSite</div>
+                        <nav class="main-nav">
+                            <a href="#">Accueil</a>
+                            <a href="#">Services</a>
+                            <a href="#">Contact</a>
+                        </nav>
+                    </header>
+                    <aside class="main-sidebar">
+                        <h3>Sidebar</h3>
+                        <p>Menu latéral</p>
+                    </aside>
+                    <main class="main-content">
+                        <h3>Contenu Principal</h3>
+                        <p>Grid définit les zones, Flex aligne les éléments dans chaque zone.</p>
+                    </main>
+                    <footer class="main-footer">
+                        <div>© 2026 MonSite</div>
+                        <div>Mentions légales</div>
+                        <div>Contact</div>
+                    </footer>
+                </div>
+            </div>
+
+            <h2 style="text-align: center; color: #2c3e50; margin: 40px 0 20px">🎴 Exemple 2 : Grille de Cards</h2>
+
+            <div class="demo-item" style="margin-bottom: 40px;">
+                <h2>Grid pour la grille, Flex à l'intérieur des cards</h2>
+                <div class="code-example">
+                    /* Grid pour disposer les cards */<br/>
+                    .card-grid {<br/>
+                    &nbsp;&nbsp;<span class="highlight">display: grid;</span><br/>
+                    &nbsp;&nbsp;grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));<br/>
+                    }<br/><br/>
+                    /* Flex à l'intérieur des cards */<br/>
+                    .card-body {<br/>
+                    &nbsp;&nbsp;<span class="highlight">display: flex;</span><br/>
+                    &nbsp;&nbsp;flex-direction: column;<br/>
+                    }<br/><br/>
+                    .card-actions {<br/>
+                    &nbsp;&nbsp;<span class="highlight">display: flex;</span><br/>
+                    &nbsp;&nbsp;gap: 10px;<br/>
+                    }
+                </div>
+                <div class="card-grid">
+                    <div class="card">
+                        <div class="card-body">
+                            <h3>Card Titre 1</h3>
+                            <p>Grid organise les cards en grille responsive.</p>
+                            <div class="card-actions">
+                                <button class="card-button btn-primary">Action</button>
+                                <button class="card-button btn-secondary">Plus</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-body">
+                            <h3>Card Titre 2</h3>
+                            <p>Flex organise le contenu interne et les boutons.</p>
+                            <div class="card-actions">
+                                <button class="card-button btn-primary">Action</button>
+                                <button class="card-button btn-secondary">Plus</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-body">
+                            <h3>Card Titre 3</h3>
+                            <p>Parfaite combinaison pour des layouts modernes !</p>
+                            <div class="card-actions">
+                                <button class="card-button btn-primary">Action</button>
+                                <button class="card-button btn-secondary">Plus</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <h2 style="text-align: center; color: #2c3e50; margin: 40px 0 20px">📊 Exemple 3 : Dashboard</h2>
+
+            <div class="demo-item" style="margin-bottom: 40px;">
+                <h2>Grid pour les widgets, Flex pour leur contenu</h2>
+                <div class="code-example">
+                    .dashboard { <span class="highlight">display: grid;</span> }<br/>
+                    .widget { <span class="highlight">display: flex;</span> flex-direction: column; }<br/>
+                    .widget-header { <span class="highlight">display: flex;</span> justify-content: space-between; }
+                </div>
+                <div class="dashboard">
+                    <div class="widget">
+                        <div class="widget-header">
+                            <h4>Ventes</h4>
+                            <span>📈</span>
+                        </div>
+                        <div class="widget-content">1,234</div>
+                    </div>
+                    <div class="widget">
+                        <div class="widget-header">
+                            <h4>Utilisateurs</h4>
+                            <span>👥</span>
+                        </div>
+                        <div class="widget-content">567</div>
+                    </div>
+                    <div class="widget">
+                        <div class="widget-header">
+                            <h4>Revenue</h4>
+                            <span>💰</span>
+                        </div>
+                        <div class="widget-content">€45K</div>
+                    </div>
+                </div>
+            </div>
+
+            <h2 style="text-align: center; color: #2c3e50; margin: 40px 0 20px">🛍️ Exemple 4 : E-commerce Grid</h2>
+
+            <div class="demo-item" style="margin-bottom: 40px;">
+                <h2>Grille de produits</h2>
+                <div class="product-grid">
+                    <div class="product">
+                        <div class="product-image">📱</div>
+                        <div class="product-info">
+                            <h4>Produit 1</h4>
+                            <p>Description courte</p>
+                            <div class="product-footer">
+                                <span><strong>49€</strong></span>
+                                <button style="padding: 8px 15px; background: #3498db; color: white; border: none; border-radius: 5px; cursor: pointer;">Acheter</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="product">
+                        <div class="product-image">💻</div>
+                        <div class="product-info">
+                            <h4>Produit 2</h4>
+                            <p>Description courte</p>
+                            <div class="product-footer">
+                                <span><strong>99€</strong></span>
+                                <button style="padding: 8px 15px; background: #3498db; color: white; border: none; border-radius: 5px; cursor: pointer;">Acheter</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="product">
+                        <div class="product-image">⌚</div>
+                        <div class="product-info">
+                            <h4>Produit 3</h4>
+                            <p>Description courte</p>
+                            <div class="product-footer">
+                                <span><strong>199€</strong></span>
+                                <button style="padding: 8px 15px; background: #3498db; color: white; border: none; border-radius: 5px; cursor: pointer;">Acheter</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="product">
+                        <div class="product-image">🎧</div>
+                        <div class="product-info">
+                            <h4>Produit 4</h4>
+                            <p>Description courte</p>
+                            <div class="product-footer">
+                                <span><strong>79€</strong></span>
+                                <button style="padding: 8px 15px; background: #3498db; color: white; border: none; border-radius: 5px; cursor: pointer;">Acheter</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <h2 style="text-align: center; color: #2c3e50; margin: 40px 0 20px">🖼️ Exemple 5 : Galerie Masonry</h2>
+
+            <div class="demo-item" style="margin-bottom: 40px;">
+                <h2>Grid pour le masonry, Flex pour les overlays</h2>
+                <div class="code-example">
+                    .gallery {<br/>
+                    &nbsp;&nbsp;<span class="highlight">display: grid;</span><br/>
+                    &nbsp;&nbsp;grid-auto-rows: 100px;<br/>
+                    }<br/><br/>
+                    .gallery-item {<br/>
+                    &nbsp;&nbsp;<span class="highlight">display: flex;</span><br/>
+                    &nbsp;&nbsp;flex-direction: column;<br/>
+                    &nbsp;&nbsp;justify-content: space-between;<br/>
+                    }
+                </div>
+                <div class="gallery">
+                    <div class="gallery-item gallery-tall">
+                        <div>📷</div>
+                        <div class="gallery-footer">
+                            <span>Photo 1</span>
+                            <span>❤️ 24</span>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <div>📷</div>
+                        <div class="gallery-footer">
+                            <span>Photo 2</span>
+                            <span>❤️ 12</span>
+                        </div>
+                    </div>
+                    <div class="gallery-item gallery-wide">
+                        <div>📷</div>
+                        <div class="gallery-footer">
+                            <span>Photo 3 (wide)</span>
+                            <span>❤️ 45</span>
+                        </div>
+                    </div>
+                    <div class="gallery-item gallery-big">
+                        <div style="font-size: 2em;">📷</div>
+                        <div class="gallery-footer">
+                            <span>Photo 4 (big)</span>
+                            <span>❤️ 98</span>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <div>📷</div>
+                        <div class="gallery-footer">
+                            <span>Photo 5</span>
+                            <span>❤️ 7</span>
+                        </div>
+                    </div>
+                    <div class="gallery-item gallery-tall">
+                        <div>📷</div>
+                        <div class="gallery-footer">
+                            <span>Photo 6</span>
+                            <span>❤️ 31</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <h2 style="text-align: center; color: #2c3e50; margin: 40px 0 20px">💡 Best Practices</h2>
+
+            <div class="demo-grid">
+                <div class="demo-item">
+                    <h2>✅ Utiliser Grid pour</h2>
+                    <ul style="line-height: 1.8">
+                        <li>Layout de page (header, sidebar, main, footer)</li>
+                        <li>Grilles de produits / articles</li>
+                        <li>Dashboards avec widgets</li>
+                        <li>Galeries d'images</li>
+                        <li>Structures 2D complexes</li>
+                    </ul>
+                </div>
+
+                <div class="demo-item">
+                    <h2>✅ Utiliser Flexbox pour</h2>
+                    <ul style="line-height: 1.8">
+                        <li>Navigation (navbar)</li>
+                        <li>Contenu interne des cards</li>
+                        <li>Alignement vertical/horizontal</li>
+                        <li>Groupes de boutons</li>
+                        <li>Composants 1D</li>
+                    </ul>
+                </div>
+
+                <div class="demo-item" style="grid-column: 1 / -1;">
+                    <h2>🎯 La règle d'or</h2>
+                    <p style="font-size: 1.2em; text-align: center; background: #e8f4f8; padding: 20px; border-radius: 10px; margin: 20px 0;">
+                        <strong>Grid = Structure globale (le squelette)</strong><br/>
+                        <strong>Flexbox = Composants et alignement (les muscles)</strong><br/><br/>
+                        💪 Ensemble, ils créent des layouts puissants et maintenables !
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="froggiesplaining">
+            <span> Froggiesplaining :</span>
+            <p>
+                <br/>
+                <strong>🎯 Objectifs :</strong><br/>
+                ✅ Comprendre quand utiliser Grid vs Flexbox<br/>
+                ✅ Combiner Grid (structure) et Flex (composants)<br/>
+                ✅ Créer des layouts professionnels modernes<br/>
+                ✅ Maîtriser le nesting (Grid dans Flex, Flex dans Grid)<br/><br/>
+
+                <strong>📖 Points clés :</strong><br/>
+                • <strong>Grid</strong> : layouts 2D, structure de page<br/>
+                • <strong>Flexbox</strong> : composants 1D, alignement<br/>
+                • <strong>Combinaison</strong> : Grid en parent, Flex en enfant<br/>
+                • Pas de règle absolue, tester les deux !<br/><br/>
+
+                <strong>🏋️ Projet final Semaine 3 :</strong><br/>
+                Créez une page complète e-commerce avec :<br/>
+                • Layout Grid (header, sidebar, main, footer)<br/>
+                • Navbar Flexbox dans le header<br/>
+                • Grille de produits Grid + cards Flex<br/>
+                • Dashboard widgets Grid + contenu Flex
+            </p>
+            <img src="../img/froggie-300.png" alt="Froggie" class="overfrog" id="Froggie" />
+        </div>
+
+        <a href="#Froggie"><div id="goToFroggie"><img src="../img/froggie-300.png" width="50px" /><br/><i class="bi bi-arrow-bar-down"></i></div></a>
+        <div id="footerGit"><a href="https://github.com/eCreafr/DWWM" target="_blank"><i class="bi bi-github">GitHub - eCrea</i></a></div>
+    </body>
+</html>

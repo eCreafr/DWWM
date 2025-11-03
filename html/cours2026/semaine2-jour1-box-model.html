@@ -1,0 +1,590 @@
+<!doctype html>
+<!-- Déclaration du type de document HTML5 -->
+<html lang="fr">
+    <!-- Balise racine avec langue française -->
+    <head>
+        <!-- En-tête du document -->
+        <meta charset="UTF-8" />
+        <!-- Encodage des caractères en UTF-8 -->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <!-- Configuration responsive pour mobile -->
+        <title>Semaine 2 - Jour 1 | Box Model CSS</title>
+        <!-- Titre affiché dans l'onglet du navigateur -->
+
+        <link rel="stylesheet" href="../css/froggie.css" />
+        <!-- Lien vers la feuille de style Froggie -->
+
+        <style>
+            /* Styles pour la démonstration */
+            .demo-container {
+                max-width: 1200px;
+                margin: 40px auto;
+                padding: 20px;
+                font-family: Arial, sans-serif;
+            }
+
+            .demo-title {
+                text-align: center;
+                font-size: 2.5em;
+                margin-bottom: 20px;
+                color: #2c3e50;
+            }
+
+            .demo-intro {
+                background: #ecf0f1;
+                padding: 20px;
+                border-radius: 10px;
+                margin-bottom: 40px;
+                line-height: 1.6;
+            }
+
+            .demo-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                gap: 30px;
+                margin-bottom: 40px;
+            }
+
+            .demo-item {
+                border: 2px solid #3498db;
+                border-radius: 10px;
+                padding: 20px;
+                background: white;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+                transition: transform 0.3s ease;
+            }
+
+            .demo-item:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+            }
+
+            .demo-item h2 {
+                margin-top: 0;
+                color: #3498db;
+                font-size: 1.5em;
+            }
+
+            .code-example {
+                background: #2c3e50;
+                color: #ecf0f1;
+                padding: 15px;
+                border-radius: 5px;
+                font-family: 'Courier New', monospace;
+                font-size: 0.9em;
+                margin: 15px 0;
+                overflow-x: auto;
+                line-height: 1.6;
+            }
+
+            .highlight {
+                color: #f39c12;
+                font-weight: bold;
+            }
+
+            /* Visualisation du Box Model */
+            .box-model-visual {
+                background: #fff;
+                padding: 40px;
+                margin: 30px auto;
+                max-width: 600px;
+                text-align: center;
+            }
+
+            .box-margin {
+                background: #f39c12;
+                padding: 30px;
+                border: 5px solid #e67e22;
+                margin-bottom: 20px;
+            }
+
+            .box-border {
+                background: #1abc9c;
+                padding: 30px;
+                border: 5px solid #16a085;
+            }
+
+            .box-padding {
+                background: #3498db;
+                padding: 30px;
+                color: white;
+            }
+
+            .box-content {
+                background: #e74c3c;
+                padding: 20px;
+                color: white;
+                font-weight: bold;
+            }
+
+            /* Exemples pratiques */
+            .example-padding {
+                background: #e8f4f8;
+                border: 2px solid #3498db;
+                padding: 20px;
+                margin: 15px 0;
+            }
+
+            .example-margin {
+                background: #fef5e7;
+                border: 2px solid #f39c12;
+                padding: 10px;
+                margin: 30px 0;
+            }
+
+            .example-border {
+                background: #e8f8f5;
+                padding: 15px;
+                margin: 15px 0;
+                border: 5px solid #1abc9c;
+            }
+
+            .border-styles {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+                gap: 15px;
+                margin: 20px 0;
+            }
+
+            .border-solid {
+                border: 4px solid #3498db;
+                padding: 15px;
+                text-align: center;
+            }
+
+            .border-dashed {
+                border: 4px dashed #e74c3c;
+                padding: 15px;
+                text-align: center;
+            }
+
+            .border-dotted {
+                border: 4px dotted #1abc9c;
+                padding: 15px;
+                text-align: center;
+            }
+
+            .border-double {
+                border: 6px double #9b59b6;
+                padding: 15px;
+                text-align: center;
+            }
+
+            .box-sizing-demo {
+                margin: 30px 0;
+            }
+
+            .without-box-sizing {
+                width: 200px;
+                padding: 20px;
+                border: 5px solid #e74c3c;
+                background: #ffebee;
+                margin: 15px 0;
+            }
+
+            .with-box-sizing {
+                width: 200px;
+                padding: 20px;
+                border: 5px solid #1abc9c;
+                background: #e8f8f5;
+                box-sizing: border-box;
+                margin: 15px 0;
+            }
+
+            .display-examples {
+                margin: 20px 0;
+            }
+
+            .display-block {
+                display: block;
+                background: #3498db;
+                color: white;
+                padding: 10px;
+                margin: 10px 0;
+            }
+
+            .display-inline {
+                display: inline;
+                background: #e74c3c;
+                color: white;
+                padding: 10px;
+                margin: 10px;
+            }
+
+            .display-inline-block {
+                display: inline-block;
+                background: #1abc9c;
+                color: white;
+                padding: 10px;
+                margin: 10px;
+                width: 150px;
+            }
+
+            .comparison-table {
+                width: 100%;
+                border-collapse: collapse;
+                margin: 20px 0;
+            }
+
+            .comparison-table th,
+            .comparison-table td {
+                border: 1px solid #bdc3c7;
+                padding: 12px;
+                text-align: left;
+            }
+
+            .comparison-table th {
+                background: #3498db;
+                color: white;
+            }
+
+            .comparison-table tr:nth-child(even) {
+                background: #ecf0f1;
+            }
+        </style>
+    </head>
+    <body>
+        <!-- Corps du document -->
+
+        <!-- Conteneur principal pour les exemples -->
+        <div class="demo-container">
+            <h1 class="demo-title">📦 Semaine 2 - Jour 1 : Le Box Model CSS</h1>
+
+            <div class="demo-intro">
+                <h3>📚 Qu'est-ce que le Box Model ?</h3>
+                <p>
+                    Le <strong>Box Model</strong> (modèle de boîte) est un concept fondamental en CSS. Chaque élément HTML
+                    est considéré comme une boîte rectangulaire composée de 4 zones : le contenu, le padding (remplissage
+                    intérieur), la bordure et la marge.
+                </p>
+                <p>
+                    <strong>Comprendre le Box Model est essentiel</strong> pour maîtriser la mise en page et l'espacement
+                    des éléments.
+                </p>
+            </div>
+
+            <!-- Visualisation du Box Model -->
+            <div class="box-model-visual">
+                <h2 style="color: #2c3e50">🎯 Anatomie du Box Model</h2>
+                <div class="box-margin">
+                    <strong>MARGIN (Marge externe)</strong>
+                    <div class="box-border">
+                        <strong>BORDER (Bordure)</strong>
+                        <div class="box-padding">
+                            <strong>PADDING (Remplissage interne)</strong>
+                            <div class="box-content"><strong>CONTENT (Contenu)</strong></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Les 4 composantes -->
+            <div class="demo-grid">
+                <div class="demo-item">
+                    <h2>1. Content (Contenu)</h2>
+                    <p>La zone où le contenu réel est affiché (texte, images, etc.).</p>
+                    <div class="code-example">
+                        .box {<br />
+                        &nbsp;&nbsp;<span class="highlight">width: 200px;</span><br />
+                        &nbsp;&nbsp;<span class="highlight">height: 100px;</span><br />
+                        }
+                    </div>
+                    <p>
+                        <strong>📐 Propriétés :</strong><br />
+                        • <code>width</code> : largeur<br />
+                        • <code>height</code> : hauteur<br />
+                        • <code>min-width / max-width</code><br />
+                        • <code>min-height / max-height</code>
+                    </p>
+                </div>
+
+                <div class="demo-item">
+                    <h2>2. Padding (Remplissage)</h2>
+                    <p>Espace entre le contenu et la bordure (transparent).</p>
+                    <div class="code-example">
+                        .box {<br />
+                        &nbsp;&nbsp;<span class="highlight">padding: 20px;</span><br />
+                        }<br /><br />
+                        /* Ou individuellement */<br />
+                        padding-top: 10px;<br />
+                        padding-right: 15px;<br />
+                        padding-bottom: 10px;<br />
+                        padding-left: 15px;
+                    </div>
+                    <div class="example-padding">Ce contenu a 20px de padding de tous les côtés</div>
+                    <p><strong>💡 Astuce :</strong> Le padding hérite de la couleur de fond de l'élément</p>
+                </div>
+
+                <div class="demo-item">
+                    <h2>3. Border (Bordure)</h2>
+                    <p>Contour visible autour du padding et du contenu.</p>
+                    <div class="code-example">
+                        .box {<br />
+                        &nbsp;&nbsp;<span class="highlight">border: 2px solid blue;</span><br />
+                        }<br /><br />
+                        /* Ou séparément */<br />
+                        border-width: 2px;<br />
+                        border-style: solid;<br />
+                        border-color: blue;
+                    </div>
+                    <div class="example-border">Ce contenu a une bordure de 5px solid</div>
+                </div>
+
+                <div class="demo-item">
+                    <h2>4. Margin (Marge)</h2>
+                    <p>Espace extérieur, entre l'élément et les autres éléments (transparent).</p>
+                    <div class="code-example">
+                        .box {<br />
+                        &nbsp;&nbsp;<span class="highlight">margin: 30px;</span><br />
+                        }<br /><br />
+                        /* Ou individuellement */<br />
+                        margin-top: 20px;<br />
+                        margin-right: 15px;<br />
+                        margin-bottom: 20px;<br />
+                        margin-left: 15px;
+                    </div>
+                    <div class="example-margin">Ce contenu a 30px de marge de tous les côtés</div>
+                    <p><strong>⚠️ Note :</strong> Les marges peuvent "fusionner" (margin collapse)</p>
+                </div>
+            </div>
+
+            <!-- Syntaxes courtes -->
+            <h2 style="text-align: center; color: #2c3e50; margin: 40px 0 20px">⚡ Syntaxes raccourcies</h2>
+
+            <div class="demo-grid">
+                <div class="demo-item">
+                    <h2>Padding & Margin - 4 valeurs</h2>
+                    <div class="code-example">
+                        /* Top Right Bottom Left (sens horaire) */<br />
+                        <span class="highlight">padding: 10px 20px 10px 20px;</span><br /><br />
+                        /* Top/Bottom Left/Right */<br />
+                        <span class="highlight">padding: 10px 20px;</span><br /><br />
+                        /* Toutes les côtés */<br />
+                        <span class="highlight">padding: 20px;</span><br /><br />
+                        /* Top, Left/Right, Bottom */<br />
+                        <span class="highlight">padding: 10px 20px 15px;</span>
+                    </div>
+                </div>
+
+                <div class="demo-item">
+                    <h2>Border - Styles disponibles</h2>
+                    <div class="border-styles">
+                        <div class="border-solid">solid</div>
+                        <div class="border-dashed">dashed</div>
+                        <div class="border-dotted">dotted</div>
+                        <div class="border-double">double</div>
+                    </div>
+                    <div class="code-example">
+                        border: 2px solid #3498db;<br />
+                        border: 4px dashed #e74c3c;<br />
+                        border: 4px dotted #1abc9c;<br />
+                        border: 6px double #9b59b6;
+                    </div>
+                </div>
+            </div>
+
+            <!-- box-sizing -->
+            <h2 style="text-align: center; color: #2c3e50; margin: 40px 0 20px">🎛️ box-sizing: border-box</h2>
+
+            <div class="demo-item" style="max-width: 900px; margin: 0 auto 40px">
+                <h2>Le problème du calcul de taille</h2>
+                <p>
+                    Par défaut, <code>width</code> et <code>height</code> ne s'appliquent qu'au
+                    <strong>contenu</strong>. Le padding et la bordure s'ajoutent à cette taille.
+                </p>
+
+                <div class="box-sizing-demo">
+                    <h3>❌ Sans box-sizing (défaut)</h3>
+                    <div class="without-box-sizing">
+                        width: 200px<br />
+                        + padding: 20px × 2<br />
+                        + border: 5px × 2<br />
+                        = <strong>250px au total</strong>
+                    </div>
+
+                    <h3>✅ Avec box-sizing: border-box</h3>
+                    <div class="with-box-sizing">
+                        width: 200px<br />
+                        (padding et border inclus)<br />
+                        = <strong>200px au total</strong>
+                    </div>
+                </div>
+
+                <div class="code-example">
+                    <span class="highlight">/* Recommandation : appliquer à tous les éléments */</span><br />
+                    * {<br />
+                    &nbsp;&nbsp;<span class="highlight">box-sizing: border-box;</span><br />
+                    }
+                </div>
+
+                <p>
+                    <strong>✅ Avantage :</strong> Calculs plus prévisibles, mise en page plus simple<br />
+                    <strong>🌟 Recommandation :</strong> Toujours utiliser box-sizing: border-box dans vos projets !
+                </p>
+            </div>
+
+            <!-- Display property -->
+            <h2 style="text-align: center; color: #2c3e50; margin: 40px 0 20px">📺 La propriété display</h2>
+
+            <div class="demo-grid">
+                <div class="demo-item">
+                    <h2>display: block</h2>
+                    <p>Prend toute la largeur disponible, commence sur une nouvelle ligne.</p>
+                    <div class="code-example">
+                        .element {<br />
+                        &nbsp;&nbsp;<span class="highlight">display: block;</span><br />
+                        }
+                    </div>
+                    <div class="display-examples">
+                        <div class="display-block">Block 1</div>
+                        <div class="display-block">Block 2</div>
+                        <div class="display-block">Block 3</div>
+                    </div>
+                    <p>
+                        <strong>📋 Éléments block par défaut :</strong><br />
+                        div, p, h1-h6, section, article, header, footer, ul, li
+                    </p>
+                </div>
+
+                <div class="demo-item">
+                    <h2>display: inline</h2>
+                    <p>Prend uniquement la largeur nécessaire, reste sur la même ligne.</p>
+                    <div class="code-example">
+                        .element {<br />
+                        &nbsp;&nbsp;<span class="highlight">display: inline;</span><br />
+                        }
+                    </div>
+                    <div class="display-examples">
+                        <span class="display-inline">Inline 1</span>
+                        <span class="display-inline">Inline 2</span>
+                        <span class="display-inline">Inline 3</span>
+                    </div>
+                    <p>
+                        <strong>📋 Éléments inline par défaut :</strong><br />
+                        span, a, strong, em, img
+                    </p>
+                    <p><strong>⚠️ Limitation :</strong> width et height n'ont pas d'effet</p>
+                </div>
+
+                <div class="demo-item">
+                    <h2>display: inline-block</h2>
+                    <p>Comme inline, mais accepte width, height, padding et margin.</p>
+                    <div class="code-example">
+                        .element {<br />
+                        &nbsp;&nbsp;<span class="highlight">display: inline-block;</span><br />
+                        &nbsp;&nbsp;width: 150px;<br />
+                        }
+                    </div>
+                    <div class="display-examples">
+                        <div class="display-inline-block">Box 1</div>
+                        <div class="display-inline-block">Box 2</div>
+                        <div class="display-inline-block">Box 3</div>
+                    </div>
+                    <p><strong>✅ Usage :</strong> Boutons, cartes côte à côte, menus horizontaux</p>
+                </div>
+
+                <div class="demo-item">
+                    <h2>display: none</h2>
+                    <p>Cache complètement l'élément (n'occupe pas d'espace).</p>
+                    <div class="code-example">
+                        .element {<br />
+                        &nbsp;&nbsp;<span class="highlight">display: none;</span><br />
+                        }
+                    </div>
+                    <p>
+                        <strong>💡 Alternative :</strong><br />
+                        <code>visibility: hidden;</code> cache l'élément mais garde l'espace
+                    </p>
+                </div>
+            </div>
+
+            <!-- Tableau comparatif -->
+            <div style="margin: 40px 0">
+                <h2 style="text-align: center; color: #2c3e50">📊 Comparaison display</h2>
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Propriété</th>
+                            <th>Nouvelle ligne</th>
+                            <th>Width/Height</th>
+                            <th>Padding/Margin</th>
+                            <th>Usage</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>block</strong></td>
+                            <td>Oui</td>
+                            <td>✅ Oui</td>
+                            <td>✅ Tous</td>
+                            <td>Sections, conteneurs</td>
+                        </tr>
+                        <tr>
+                            <td><strong>inline</strong></td>
+                            <td>Non</td>
+                            <td>❌ Non</td>
+                            <td>⚠️ Horizontal seul</td>
+                            <td>Texte, liens</td>
+                        </tr>
+                        <tr>
+                            <td><strong>inline-block</strong></td>
+                            <td>Non</td>
+                            <td>✅ Oui</td>
+                            <td>✅ Tous</td>
+                            <td>Boutons, cartes</td>
+                        </tr>
+                        <tr>
+                            <td><strong>none</strong></td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>Masquer complètement</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Zone d'explication pédagogique "Froggiesplaining" -->
+        <div class="froggiesplaining">
+            <span> Froggiesplaining :</span>
+            <p>
+                <br />
+                <strong>🎯 Objectifs de ce cours :</strong><br />
+                ✅ Comprendre les 4 composantes du Box Model (content, padding, border, margin)<br />
+                ✅ Maîtriser les syntaxes raccourcies pour padding et margin<br />
+                ✅ Utiliser box-sizing: border-box pour des calculs prévisibles<br />
+                ✅ Connaître les différences entre block, inline et inline-block<br /><br />
+
+                <strong>📖 Points clés à retenir :</strong><br />
+                • Le <strong>Box Model</strong> détermine la taille et l'espacement des éléments<br />
+                • <strong>Padding</strong> = espace intérieur, <strong>Margin</strong> = espace extérieur<br />
+                • Toujours utiliser <strong>box-sizing: border-box</strong> pour faciliter les calculs<br />
+                • <strong>display: block</strong> = nouvelle ligne, prend toute la largeur<br />
+                • <strong>display: inline</strong> = même ligne, ne respecte pas width/height<br />
+                • <strong>display: inline-block</strong> = même ligne + width/height<br /><br />
+
+                <strong>🏋️ Exercice pratique :</strong><br />
+                Créez 3 cartes (cards) côte à côte avec :<br />
+                • Une bordure colorée différente pour chaque carte<br />
+                • Du padding pour espacer le contenu<br />
+                • Des marges pour séparer les cartes<br />
+                • Une largeur fixe avec box-sizing: border-box
+            </p>
+            <img src="../img/froggie-300.png" alt="Froggie explain" class="overfrog" id="Froggie" />
+        </div>
+
+        <!-- Lien d'ancrage vers Froggie -->
+        <a href="#Froggie"
+            ><div id="goToFroggie">
+                <img src="../img/froggie-300.png" width="50px" /><br /><i class="bi bi-arrow-bar-down"></i></div
+        ></a>
+
+        <!-- Pied de page avec lien GitHub -->
+        <div id="footerGit">
+            <a href="https://github.com/eCreafr/DWWM" target="_blank"><i class="bi bi-github">GitHub - eCrea</i></a>
+        </div>
+    </body>
+    <!-- Fin du corps du document -->
+</html>
+<!-- Fin du document HTML -->

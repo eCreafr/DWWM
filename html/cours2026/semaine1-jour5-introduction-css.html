@@ -1,0 +1,540 @@
+<!doctype html>
+<!-- Déclaration du type de document HTML5 -->
+<html lang="fr">
+    <!-- Balise racine avec langue française -->
+    <head>
+        <!-- En-tête du document -->
+        <meta charset="UTF-8" />
+        <!-- Encodage des caractères en UTF-8 -->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <!-- Configuration responsive pour mobile -->
+        <title>Semaine 1 - Jour 5 | Introduction au CSS</title>
+        <!-- Titre affiché dans l'onglet du navigateur -->
+
+        <link rel="stylesheet" href="../css/froggie.css" />
+        <!-- Lien vers la feuille de style Froggie -->
+
+        <!-- Exemple de CSS interne -->
+        <style>
+            /* Styles pour la démonstration */
+            .demo-container {
+                max-width: 1200px;
+                margin: 40px auto;
+                padding: 20px;
+                font-family: Arial, sans-serif;
+            }
+
+            .demo-title {
+                text-align: center;
+                font-size: 2.5em;
+                margin-bottom: 20px;
+                color: #2c3e50;
+            }
+
+            .demo-intro {
+                background: #ecf0f1;
+                padding: 20px;
+                border-radius: 10px;
+                margin-bottom: 40px;
+                line-height: 1.6;
+            }
+
+            .demo-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                gap: 30px;
+                margin-bottom: 40px;
+            }
+
+            .demo-item {
+                border: 2px solid #3498db;
+                border-radius: 10px;
+                padding: 20px;
+                background: white;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+                transition: transform 0.3s ease;
+            }
+
+            .demo-item:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+            }
+
+            .demo-item h2 {
+                margin-top: 0;
+                color: #3498db;
+                font-size: 1.5em;
+            }
+
+            .code-example {
+                background: #2c3e50;
+                color: #ecf0f1;
+                padding: 15px;
+                border-radius: 5px;
+                font-family: 'Courier New', monospace;
+                font-size: 0.9em;
+                margin: 15px 0;
+                overflow-x: auto;
+                line-height: 1.6;
+            }
+
+            .highlight {
+                color: #f39c12;
+                font-weight: bold;
+            }
+
+            .green {
+                color: #1abc9c;
+            }
+
+            .pink {
+                color: #e74c3c;
+            }
+
+            .render-box {
+                background: #f8f9fa;
+                border: 2px dashed #95a5a6;
+                padding: 15px;
+                margin: 10px 0;
+                border-radius: 5px;
+            }
+
+            /* Exemples de sélecteurs */
+            .selecteur-element {
+                background: #e8f4f8;
+                padding: 10px;
+                margin: 5px 0;
+            }
+
+            .selecteur-classe {
+                background: #fef5e7;
+                padding: 10px;
+                margin: 5px 0;
+            }
+
+            #selecteur-id {
+                background: #e8f8f5;
+                padding: 10px;
+                margin: 5px 0;
+            }
+
+            /* Exemples de couleurs */
+            .color-name {
+                background: tomato;
+                color: white;
+                padding: 15px;
+                margin: 10px 0;
+                border-radius: 5px;
+            }
+
+            .color-hex {
+                background: #3498db;
+                color: white;
+                padding: 15px;
+                margin: 10px 0;
+                border-radius: 5px;
+            }
+
+            .color-rgb {
+                background: rgb(52, 152, 219);
+                color: white;
+                padding: 15px;
+                margin: 10px 0;
+                border-radius: 5px;
+            }
+
+            .color-rgba {
+                background: rgba(52, 152, 219, 0.5);
+                color: #2c3e50;
+                padding: 15px;
+                margin: 10px 0;
+                border-radius: 5px;
+            }
+
+            /* Exemples de typographie */
+            .typo-demo-1 {
+                font-family: 'Courier New', monospace;
+                font-size: 18px;
+                font-weight: bold;
+            }
+
+            .typo-demo-2 {
+                font-family: Georgia, serif;
+                font-size: 20px;
+                font-style: italic;
+            }
+
+            .typo-demo-3 {
+                font-family: Arial, sans-serif;
+                font-size: 16px;
+                text-align: center;
+                text-decoration: underline;
+            }
+
+            .typo-demo-4 {
+                font-family: 'Times New Roman', serif;
+                font-size: 14px;
+                text-transform: uppercase;
+                letter-spacing: 2px;
+            }
+
+            .css-methods {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                gap: 20px;
+                margin: 30px 0;
+            }
+
+            .method-card {
+                border: 2px solid #95a5a6;
+                border-radius: 8px;
+                padding: 15px;
+                background: white;
+            }
+
+            .method-card h3 {
+                color: #2c3e50;
+                margin-top: 0;
+            }
+
+            .priority-badge {
+                display: inline-block;
+                padding: 5px 10px;
+                border-radius: 5px;
+                font-size: 0.8em;
+                font-weight: bold;
+            }
+
+            .priority-low {
+                background: #1abc9c;
+                color: white;
+            }
+
+            .priority-medium {
+                background: #f39c12;
+                color: white;
+            }
+
+            .priority-high {
+                background: #e74c3c;
+                color: white;
+            }
+        </style>
+    </head>
+    <body>
+        <!-- Corps du document -->
+
+        <!-- Conteneur principal pour les exemples -->
+        <div class="demo-container">
+            <h1 class="demo-title">🎨 Semaine 1 - Jour 5 : Introduction au CSS</h1>
+
+            <div class="demo-intro">
+                <h3>📚 Qu'est-ce que le CSS ?</h3>
+                <p>
+                    <strong>CSS</strong> (Cascading Style Sheets) est le langage utilisé pour styliser et mettre en page
+                    les documents HTML. Si le HTML est le squelette, le CSS est la peau et les vêtements de votre site
+                    web.
+                </p>
+                <p>
+                    <strong>Rôle du CSS :</strong> couleurs, polices, espacements, positionnement, animations, et bien
+                    plus encore !
+                </p>
+            </div>
+
+            <!-- Les 3 façons d'intégrer le CSS -->
+            <h2 style="text-align: center; color: #2c3e50; margin: 40px 0 20px">
+                🔧 Les 3 méthodes d'intégration CSS
+            </h2>
+
+            <div class="css-methods">
+                <div class="method-card">
+                    <h3>1. CSS Inline</h3>
+                    <span class="priority-badge priority-high">Priorité: Haute</span>
+                    <p>Directement dans l'attribut <code>style</code> de la balise HTML.</p>
+                    <div class="code-example">
+                        &lt;p <span class="highlight">style="color: red;"</span>&gt;<br />
+                        &nbsp;&nbsp;Texte en rouge<br />
+                        &lt;/p&gt;
+                    </div>
+                    <p>
+                        <strong>❌ Inconvénient :</strong> Difficile à maintenir, code répétitif<br />
+                        <strong>✅ Usage :</strong> Styles ponctuels, tests rapides
+                    </p>
+                </div>
+
+                <div class="method-card">
+                    <h3>2. CSS Interne</h3>
+                    <span class="priority-badge priority-medium">Priorité: Moyenne</span>
+                    <p>Dans une balise <code>&lt;style&gt;</code> dans le &lt;head&gt;.</p>
+                    <div class="code-example">
+                        &lt;head&gt;<br />
+                        &nbsp;&nbsp;<span class="highlight">&lt;style&gt;</span><br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;p {<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;color: blue;<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;}<br />
+                        &nbsp;&nbsp;<span class="highlight">&lt;/style&gt;</span><br />
+                        &lt;/head&gt;
+                    </div>
+                    <p>
+                        <strong>✅ Avantage :</strong> Styles spécifiques à une page<br />
+                        <strong>❌ Inconvénient :</strong> Non réutilisable sur d'autres pages
+                    </p>
+                </div>
+
+                <div class="method-card">
+                    <h3>3. CSS Externe</h3>
+                    <span class="priority-badge priority-low">Priorité: Basse (mais recommandé !)</span>
+                    <p>Fichier .css séparé, lié avec <code>&lt;link&gt;</code>.</p>
+                    <div class="code-example">
+                        &lt;head&gt;<br />
+                        &nbsp;&nbsp;<span class="highlight">&lt;link</span><br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;rel="stylesheet"<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;href="style.css"<br />
+                        &nbsp;&nbsp;<span class="highlight">/&gt;</span><br />
+                        &lt;/head&gt;
+                    </div>
+                    <p>
+                        <strong>✅ Avantages :</strong> Réutilisable, organisé, meilleure performance<br />
+                        <strong>⭐ Recommandation :</strong> Méthode à privilégier !
+                    </p>
+                </div>
+            </div>
+
+            <!-- Syntaxe CSS -->
+            <h2 style="text-align: center; color: #2c3e50; margin: 40px 0 20px">📝 Syntaxe CSS</h2>
+
+            <div class="demo-item" style="max-width: 800px; margin: 0 auto 40px">
+                <h2>Structure d'une règle CSS</h2>
+                <div class="code-example">
+                    <span class="highlight">sélecteur</span> {<br />
+                    &nbsp;&nbsp;<span class="green">propriété</span>: <span class="pink">valeur</span>;<br />
+                    &nbsp;&nbsp;<span class="green">propriété</span>: <span class="pink">valeur</span>;<br />
+                    }
+                </div>
+                <div class="render-box">
+                    <p style="margin: 10px 0">
+                        <strong>Sélecteur :</strong> élément HTML ciblé<br />
+                        <strong>Propriété :</strong> aspect à modifier (color, font-size, etc.)<br />
+                        <strong>Valeur :</strong> la valeur de la propriété<br />
+                        <strong>Point-virgule :</strong> sépare chaque déclaration
+                    </p>
+                </div>
+                <div class="code-example">
+                    <span class="highlight">p</span> {<br />
+                    &nbsp;&nbsp;<span class="green">color</span>: <span class="pink">blue</span>;<br />
+                    &nbsp;&nbsp;<span class="green">font-size</span>: <span class="pink">16px</span>;<br />
+                    &nbsp;&nbsp;<span class="green">text-align</span>: <span class="pink">center</span>;<br />
+                    }
+                </div>
+            </div>
+
+            <!-- Les sélecteurs CSS -->
+            <h2 style="text-align: center; color: #2c3e50; margin: 40px 0 20px">🎯 Les sélecteurs de base</h2>
+
+            <div class="demo-grid">
+                <div class="demo-item">
+                    <h2>Sélecteur d'élément</h2>
+                    <p>Cible tous les éléments d'un type donné.</p>
+                    <div class="code-example">
+                        <span class="highlight">p</span> {<br />
+                        &nbsp;&nbsp;color: purple;<br />
+                        }<br /><br />
+                        <span class="highlight">h1</span> {<br />
+                        &nbsp;&nbsp;font-size: 32px;<br />
+                        }
+                    </div>
+                    <div class="render-box">
+                        <div class="selecteur-element">Tous les &lt;p&gt; seront affectés</div>
+                        <div class="selecteur-element">Chaque paragraphe aura ce style</div>
+                    </div>
+                </div>
+
+                <div class="demo-item">
+                    <h2>Sélecteur de classe</h2>
+                    <p>
+                        Cible les éléments avec une classe spécifique. Préfixe : <strong>point (.)</strong>
+                    </p>
+                    <div class="code-example">
+                        <span class="highlight">.ma-classe</span> {<br />
+                        &nbsp;&nbsp;background: yellow;<br />
+                        }<br /><br />
+                        &lt;p <span class="highlight">class="ma-classe"</span>&gt;...&lt;/p&gt;
+                    </div>
+                    <div class="render-box">
+                        <div class="selecteur-classe">Élément avec classe="selecteur-classe"</div>
+                        <div class="selecteur-classe">Réutilisable sur plusieurs éléments</div>
+                    </div>
+                    <p><strong>💡 Conseil :</strong> Le plus utilisé ! Réutilisable et flexible</p>
+                </div>
+
+                <div class="demo-item">
+                    <h2>Sélecteur d'ID</h2>
+                    <p>
+                        Cible un élément unique avec un ID. Préfixe : <strong>dièse (#)</strong>
+                    </p>
+                    <div class="code-example">
+                        <span class="highlight">#mon-id</span> {<br />
+                        &nbsp;&nbsp;border: 2px solid red;<br />
+                        }<br /><br />
+                        &lt;div <span class="highlight">id="mon-id"</span>&gt;...&lt;/div&gt;
+                    </div>
+                    <div class="render-box">
+                        <div id="selecteur-id">Élément avec id="selecteur-id"</div>
+                    </div>
+                    <p><strong>⚠️ Important :</strong> Un ID doit être unique dans la page !</p>
+                </div>
+            </div>
+
+            <!-- Les couleurs en CSS -->
+            <h2 style="text-align: center; color: #2c3e50; margin: 40px 0 20px">🌈 Les couleurs en CSS</h2>
+
+            <div class="demo-grid">
+                <div class="demo-item">
+                    <h2>Nom de couleur</h2>
+                    <p>140 couleurs prédéfinies en CSS.</p>
+                    <div class="code-example">color: <span class="highlight">tomato</span>;</div>
+                    <div class="color-name">background: tomato;</div>
+                    <p><strong>Exemples :</strong> red, blue, green, tomato, coral, crimson...</p>
+                </div>
+
+                <div class="demo-item">
+                    <h2>Hexadécimal (HEX)</h2>
+                    <p>Format #RRGGBB (Rouge Vert Bleu).</p>
+                    <div class="code-example">color: <span class="highlight">#3498db</span>;</div>
+                    <div class="color-hex">background: #3498db;</div>
+                    <p><strong>💡 Astuce :</strong> Utiliser un color picker pour trouver le code</p>
+                </div>
+
+                <div class="demo-item">
+                    <h2>RGB</h2>
+                    <p>Rouge, Vert, Bleu (valeurs 0-255).</p>
+                    <div class="code-example">color: <span class="highlight">rgb(52, 152, 219)</span>;</div>
+                    <div class="color-rgb">background: rgb(52, 152, 219);</div>
+                    <p><strong>Équivalent :</strong> rgb(52, 152, 219) = #3498db</p>
+                </div>
+
+                <div class="demo-item">
+                    <h2>RGBA</h2>
+                    <p>RGB + Alpha (transparence 0-1).</p>
+                    <div class="code-example">color: <span class="highlight">rgba(52, 152, 219, 0.5)</span>;</div>
+                    <div class="color-rgba">background: rgba(52, 152, 219, 0.5);</div>
+                    <p><strong>Alpha :</strong> 0 = transparent, 1 = opaque, 0.5 = 50% transparent</p>
+                </div>
+            </div>
+
+            <!-- Typographie -->
+            <h2 style="text-align: center; color: #2c3e50; margin: 40px 0 20px">✍️ Typographie CSS</h2>
+
+            <div class="demo-grid">
+                <div class="demo-item">
+                    <h2>font-family</h2>
+                    <p>Définit la police de caractères.</p>
+                    <div class="code-example">
+                        font-family: <span class="highlight">Arial, sans-serif</span>;<br />
+                        font-family: <span class="highlight">'Times New Roman', serif</span>;<br />
+                        font-family: <span class="highlight">'Courier New', monospace</span>;
+                    </div>
+                    <div class="render-box">
+                        <p style="font-family: Arial, sans-serif">Arial (sans-serif)</p>
+                        <p style="font-family: 'Times New Roman', serif">Times New Roman (serif)</p>
+                        <p style="font-family: 'Courier New', monospace">Courier New (monospace)</p>
+                    </div>
+                    <p><strong>💡 Conseil :</strong> Toujours prévoir une police de secours</p>
+                </div>
+
+                <div class="demo-item">
+                    <h2>font-size</h2>
+                    <p>Taille de la police.</p>
+                    <div class="code-example">
+                        font-size: <span class="highlight">16px</span>; /* Pixels */<br />
+                        font-size: <span class="highlight">1.5em</span>; /* Relatif au parent */<br />
+                        font-size: <span class="highlight">1.2rem</span>; /* Relatif à la racine */
+                    </div>
+                    <div class="render-box">
+                        <p style="font-size: 14px">14px - Petit</p>
+                        <p style="font-size: 18px">18px - Moyen</p>
+                        <p style="font-size: 24px">24px - Grand</p>
+                    </div>
+                </div>
+
+                <div class="demo-item">
+                    <h2>font-weight</h2>
+                    <p>Épaisseur de la police.</p>
+                    <div class="code-example">
+                        font-weight: <span class="highlight">normal</span>; /* 400 */<br />
+                        font-weight: <span class="highlight">bold</span>; /* 700 */<br />
+                        font-weight: <span class="highlight">600</span>; /* Semi-bold */
+                    </div>
+                    <div class="render-box">
+                        <p style="font-weight: 300">300 - Light</p>
+                        <p style="font-weight: 400">400 - Normal</p>
+                        <p style="font-weight: 700">700 - Bold</p>
+                        <p style="font-weight: 900">900 - Black</p>
+                    </div>
+                </div>
+
+                <div class="demo-item">
+                    <h2>text-align</h2>
+                    <p>Alignement du texte.</p>
+                    <div class="code-example">
+                        text-align: <span class="highlight">left</span>;<br />
+                        text-align: <span class="highlight">center</span>;<br />
+                        text-align: <span class="highlight">right</span>;<br />
+                        text-align: <span class="highlight">justify</span>;
+                    </div>
+                    <div class="render-box">
+                        <p style="text-align: left">Aligné à gauche</p>
+                        <p style="text-align: center">Centré</p>
+                        <p style="text-align: right">Aligné à droite</p>
+                        <p style="text-align: justify">
+                            Justifié - Le texte est aligné à la fois à gauche et à droite.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Zone d'explication pédagogique "Froggiesplaining" -->
+        <div class="froggiesplaining">
+            <span> Froggiesplaining :</span>
+            <p>
+                <br />
+                <strong>🎯 Objectifs de ce cours :</strong><br />
+                ✅ Comprendre le rôle du CSS dans le développement web<br />
+                ✅ Connaître les 3 méthodes d'intégration CSS (inline, interne, externe)<br />
+                ✅ Maîtriser la syntaxe CSS (sélecteur, propriété, valeur)<br />
+                ✅ Utiliser les sélecteurs de base (élément, classe, ID)<br />
+                ✅ Appliquer des couleurs (noms, hex, rgb, rgba)<br />
+                ✅ Styliser du texte (police, taille, poids, alignement)<br /><br />
+
+                <strong>📖 Points clés :</strong><br />
+                • Privilégier le <strong>CSS externe</strong> pour un code organisé<br />
+                • Les <strong>classes</strong> sont réutilisables, les <strong>ID</strong> sont uniques<br />
+                • <strong>RGBA</strong> permet d'ajouter de la transparence<br />
+                • Toujours prévoir une <strong>police de secours</strong> (fallback)<br />
+                • <strong>1rem</strong> = taille de police de l'élément racine (généralement 16px)<br /><br />
+
+                <strong>🏋️ Exercice pratique :</strong><br />
+                Créez un fichier style.css et stylisez votre page "À propos" :<br />
+                • Changez les couleurs (titres, texte, fond)<br />
+                • Modifiez les polices et tailles<br />
+                • Centrez le titre principal<br />
+                • Ajoutez des classes pour styliser différentes sections
+            </p>
+            <img src="../img/froggie-300.png" alt="Froggie explain" class="overfrog" id="Froggie" />
+        </div>
+
+        <!-- Lien d'ancrage vers Froggie -->
+        <a href="#Froggie"
+            ><div id="goToFroggie">
+                <img src="../img/froggie-300.png" width="50px" /><br /><i class="bi bi-arrow-bar-down"></i></div
+        ></a>
+
+        <!-- Pied de page avec lien GitHub -->
+        <div id="footerGit">
+            <a href="https://github.com/eCreafr/DWWM" target="_blank"><i class="bi bi-github">GitHub - eCrea</i></a>
+        </div>
+    </body>
+    <!-- Fin du corps du document -->
+</html>
+<!-- Fin du document HTML -->

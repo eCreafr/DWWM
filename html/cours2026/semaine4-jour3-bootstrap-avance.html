@@ -1,0 +1,285 @@
+<!doctype html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Semaine 4 - Jour 3 | Bootstrap Avancé</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+        <link rel="stylesheet" href="../css/froggie.css" />
+        <style>
+            .demo-container {max-width: 1200px; margin: 40px auto; padding: 20px;}
+            .section-title {background: linear-gradient(135deg, #667eea, #764ba2); color: white; padding: 20px; border-radius: 10px; text-align: center; margin: 30px 0 20px; font-size: 1.8em;}
+            .code-example {background: #2c3e50; color: #ecf0f1; padding: 15px; border-radius: 5px; font-family: 'Courier New', monospace; font-size: 0.85em; margin: 15px 0; overflow-x: auto;}
+            .highlight {color: #f39c12; font-weight: bold;}
+        </style>
+    </head>
+    <body>
+        <div class="demo-container">
+            <h1 class="text-center mb-5" style="font-size: 2.5em; color: #2c3e50;">🚀 Semaine 4 - Jour 3 : Bootstrap Avancé</h1>
+
+            <div class="alert alert-info">
+                <h4 class="alert-heading">📚 Objectifs du jour</h4>
+                <p>Découvrir les composants interactifs de Bootstrap : carousel, modal, accordion, tabs, collapse, offcanvas et dropdowns.</p>
+            </div>
+
+            <h2 class="section-title">🎠 Carousel (Carrousel)</h2>
+            <div id="carouselExample" class="carousel slide mb-4" data-bs-ride="carousel">
+                <div class="carousel-indicators">
+                    <button type="button" data-bs-target="#carouselExample" data-bs-slide-to="0" class="active"></button>
+                    <button type="button" data-bs-target="#carouselExample" data-bs-slide-to="1"></button>
+                    <button type="button" data-bs-target="#carouselExample" data-bs-slide-to="2"></button>
+                </div>
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <div style="background: linear-gradient(135deg, #667eea, #764ba2); height: 400px; display: flex; align-items: center; justify-content: center; color: white; font-size: 2em; border-radius: 10px;">
+                            Slide 1
+                        </div>
+                        <div class="carousel-caption">
+                            <h5>Premier Slide</h5>
+                            <p>Description du premier slide.</p>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <div style="background: linear-gradient(135deg, #f093fb, #f5576c); height: 400px; display: flex; align-items: center; justify-content: center; color: white; font-size: 2em; border-radius: 10px;">
+                            Slide 2
+                        </div>
+                        <div class="carousel-caption">
+                            <h5>Deuxième Slide</h5>
+                            <p>Description du deuxième slide.</p>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <div style="background: linear-gradient(135deg, #4facfe, #00f2fe); height: 400px; display: flex; align-items: center; justify-content: center; color: white; font-size: 2em; border-radius: 10px;">
+                            Slide 3
+                        </div>
+                        <div class="carousel-caption">
+                            <h5>Troisième Slide</h5>
+                            <p>Description du troisième slide.</p>
+                        </div>
+                    </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon"></span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+                    <span class="carousel-control-next-icon"></span>
+                </button>
+            </div>
+            <div class="code-example">
+                &lt;div class="<span class="highlight">carousel slide</span>" data-bs-ride="carousel"&gt;<br/>
+                &nbsp;&nbsp;&lt;div class="<span class="highlight">carousel-inner</span>"&gt;<br/>
+                &nbsp;&nbsp;&nbsp;&nbsp;&lt;div class="<span class="highlight">carousel-item active</span>"&gt;...&lt;/div&gt;<br/>
+                &nbsp;&nbsp;&nbsp;&nbsp;&lt;div class="<span class="highlight">carousel-item</span>"&gt;...&lt;/div&gt;<br/>
+                &nbsp;&nbsp;&lt;/div&gt;<br/>
+                &nbsp;&nbsp;&lt;button class="<span class="highlight">carousel-control-prev</span>" data-bs-slide="prev"&gt;...&lt;/button&gt;<br/>
+                &nbsp;&nbsp;&lt;button class="<span class="highlight">carousel-control-next</span>" data-bs-slide="next"&gt;...&lt;/button&gt;<br/>
+                &lt;/div&gt;
+            </div>
+
+            <h2 class="section-title">🪟 Modal (Fenêtre modale)</h2>
+            <button type="button" class="btn btn-primary mb-4" data-bs-toggle="modal" data-bs-target="#exampleModal">Ouvrir Modal</button>
+            <div class="modal fade" id="exampleModal" tabindex="-1">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Titre du Modal</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                        </div>
+                        <div class="modal-body">
+                            <p>Ceci est le contenu du modal. Vous pouvez y mettre n'importe quoi : texte, formulaires, images, etc.</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                            <button type="button" class="btn btn-primary">Enregistrer</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="code-example">
+                &lt;button data-bs-toggle="<span class="highlight">modal</span>" data-bs-target="<span class="highlight">#myModal</span>"&gt;Ouvrir&lt;/button&gt;<br/><br/>
+                &lt;div class="<span class="highlight">modal fade</span>" id="myModal"&gt;<br/>
+                &nbsp;&nbsp;&lt;div class="<span class="highlight">modal-dialog</span>"&gt;<br/>
+                &nbsp;&nbsp;&nbsp;&nbsp;&lt;div class="<span class="highlight">modal-content</span>"&gt;<br/>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;div class="<span class="highlight">modal-header</span>"&gt;Titre&lt;/div&gt;<br/>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;div class="<span class="highlight">modal-body</span>"&gt;Contenu&lt;/div&gt;<br/>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;div class="<span class="highlight">modal-footer</span>"&gt;Boutons&lt;/div&gt;<br/>
+                &nbsp;&nbsp;&nbsp;&nbsp;&lt;/div&gt;<br/>
+                &nbsp;&nbsp;&lt;/div&gt;<br/>
+                &lt;/div&gt;
+            </div>
+
+            <h2 class="section-title">🎵 Accordion (Accordéon)</h2>
+            <div class="accordion mb-4" id="accordionExample">
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne">
+                            Section 1
+                        </button>
+                    </h2>
+                    <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            <strong>Contenu de la section 1.</strong> Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo">
+                            Section 2
+                        </button>
+                    </h2>
+                    <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            <strong>Contenu de la section 2.</strong> Sed do eiusmod tempor incididunt ut labore.
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree">
+                            Section 3
+                        </button>
+                    </h2>
+                    <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            <strong>Contenu de la section 3.</strong> Ut enim ad minim veniam, quis nostrud exercitation.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="code-example">
+                &lt;div class="<span class="highlight">accordion</span>" id="accordionExample"&gt;<br/>
+                &nbsp;&nbsp;&lt;div class="<span class="highlight">accordion-item</span>"&gt;<br/>
+                &nbsp;&nbsp;&nbsp;&nbsp;&lt;h2 class="<span class="highlight">accordion-header</span>"&gt;<br/>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;button class="<span class="highlight">accordion-button</span>" data-bs-toggle="collapse"&gt;...&lt;/button&gt;<br/>
+                &nbsp;&nbsp;&nbsp;&nbsp;&lt;/h2&gt;<br/>
+                &nbsp;&nbsp;&nbsp;&nbsp;&lt;div class="<span class="highlight">accordion-collapse collapse</span>"&gt;<br/>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;div class="<span class="highlight">accordion-body</span>"&gt;Contenu&lt;/div&gt;<br/>
+                &nbsp;&nbsp;&nbsp;&nbsp;&lt;/div&gt;<br/>
+                &nbsp;&nbsp;&lt;/div&gt;<br/>
+                &lt;/div&gt;
+            </div>
+
+            <h2 class="section-title">📑 Tabs (Onglets)</h2>
+            <ul class="nav nav-tabs mb-3" id="myTab" role="tablist">
+                <li class="nav-item">
+                    <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button">Accueil</button>
+                </li>
+                <li class="nav-item">
+                    <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button">Profil</button>
+                </li>
+                <li class="nav-item">
+                    <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button">Contact</button>
+                </li>
+            </ul>
+            <div class="tab-content mb-4" id="myTabContent">
+                <div class="tab-pane fade show active" id="home">
+                    <h4>Onglet Accueil</h4>
+                    <p>Contenu de l'onglet Accueil.</p>
+                </div>
+                <div class="tab-pane fade" id="profile">
+                    <h4>Onglet Profil</h4>
+                    <p>Contenu de l'onglet Profil.</p>
+                </div>
+                <div class="tab-pane fade" id="contact">
+                    <h4>Onglet Contact</h4>
+                    <p>Contenu de l'onglet Contact.</p>
+                </div>
+            </div>
+
+            <h2 class="section-title">🍔 Offcanvas (Menu latéral)</h2>
+            <button class="btn btn-primary mb-4" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample">Ouvrir Offcanvas</button>
+            <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample">
+                <div class="offcanvas-header">
+                    <h5 class="offcanvas-title">Menu Offcanvas</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+                </div>
+                <div class="offcanvas-body">
+                    <p>Contenu du menu latéral qui glisse depuis le côté.</p>
+                    <ul class="list-group">
+                        <li class="list-group-item">Item 1</li>
+                        <li class="list-group-item">Item 2</li>
+                        <li class="list-group-item">Item 3</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h2 class="section-title">📊 Dropdowns (Menus déroulants)</h2>
+            <div class="dropdown mb-4">
+                <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown">Menu Dropdown</button>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="#">Action</a></li>
+                    <li><a class="dropdown-item" href="#">Autre action</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item" href="#">Élément séparé</a></li>
+                </ul>
+            </div>
+
+            <h2 class="section-title">🔔 Toast (Notifications)</h2>
+            <button type="button" class="btn btn-primary mb-4" id="liveToastBtn">Afficher Toast</button>
+            <div class="toast-container position-fixed bottom-0 end-0 p-3">
+                <div id="liveToast" class="toast" role="alert">
+                    <div class="toast-header">
+                        <strong class="me-auto">Notification</strong>
+                        <small>À l'instant</small>
+                        <button type="button" class="btn-close" data-bs-dismiss="toast"></button>
+                    </div>
+                    <div class="toast-body">
+                        Voici une notification toast !
+                    </div>
+                </div>
+            </div>
+
+            <div class="alert alert-success mb-5">
+                <h4 class="alert-heading">✅ Composants maîtrisés !</h4>
+                <p>Vous connaissez maintenant tous les composants Bootstrap interactifs essentiels. Combinez-les pour créer des interfaces riches et professionnelles !</p>
+            </div>
+        </div>
+
+        <div class="froggiesplaining">
+            <span> Froggiesplaining :</span>
+            <p>
+                <br/>
+                <strong>🎯 Objectifs :</strong><br/>
+                ✅ Créer un carousel d'images<br/>
+                ✅ Utiliser des modals pour afficher du contenu<br/>
+                ✅ Structurer avec accordion et tabs<br/>
+                ✅ Ajouter offcanvas pour menu mobile<br/>
+                ✅ Créer des dropdowns et toasts<br/><br/>
+
+                <strong>📖 Points clés :</strong><br/>
+                • <strong>data-bs-toggle</strong> : active le composant<br/>
+                • <strong>data-bs-target</strong> : cible l'élément<br/>
+                • <strong>Carousel</strong> : data-bs-ride="carousel"<br/>
+                • <strong>Modal</strong> : modal fade + modal-dialog<br/>
+                • <strong>Accordion</strong> : data-bs-parent pour fermer les autres<br/><br/>
+
+                <strong>🏋️ Exercice :</strong><br/>
+                Créez une page produit avec :<br/>
+                • Carousel d'images produit<br/>
+                • Modal "Ajouter au panier"<br/>
+                • Accordion FAQ<br/>
+                • Tabs pour description/avis/livraison<br/>
+                • Toast confirmation d'ajout
+            </p>
+            <img src="../img/froggie-300.png" alt="Froggie" class="overfrog" id="Froggie" />
+        </div>
+
+        <a href="#Froggie"><div id="goToFroggie"><img src="../img/froggie-300.png" width="50px" /><br/><i class="bi bi-arrow-bar-down"></i></div></a>
+        <div id="footerGit"><a href="https://github.com/eCreafr/DWWM" target="_blank"><i class="bi bi-github">GitHub - eCrea</i></a></div>
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+        <script>
+            // Toast button
+            const toastTrigger = document.getElementById('liveToastBtn')
+            const toastLiveExample = document.getElementById('liveToast')
+            if (toastTrigger) {
+                toastTrigger.addEventListener('click', () => {
+                    const toast = new bootstrap.Toast(toastLiveExample)
+                    toast.show()
+                })
+            }
+        </script>
+    </body>
+</html>

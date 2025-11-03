@@ -1,0 +1,370 @@
+<!doctype html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Semaine 4 - Jour 1 | Introduction à Bootstrap</title>
+
+        <!-- Bootstrap CSS CDN -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+
+        <link rel="stylesheet" href="../css/froggie.css" />
+
+        <style>
+            .demo-container {max-width: 1200px; margin: 40px auto; padding: 20px; font-family: Arial, sans-serif;}
+            .demo-title {text-align: center; font-size: 2.5em; margin-bottom: 20px; color: #2c3e50;}
+            .demo-intro {background: #ecf0f1; padding: 20px; border-radius: 10px; margin-bottom: 40px; line-height: 1.6;}
+            .code-example {background: #2c3e50; color: #ecf0f1; padding: 15px; border-radius: 5px; font-family: 'Courier New', monospace; font-size: 0.85em; margin: 15px 0; overflow-x: auto; line-height: 1.6;}
+            .highlight {color: #f39c12; font-weight: bold;}
+            .demo-box {border: 2px dashed #6c757d; padding: 15px; margin: 15px 0; border-radius: 5px; background: #f8f9fa;}
+            .section-title {background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 15px; border-radius: 10px; text-align: center; margin: 30px 0 20px; font-size: 1.8em;}
+        </style>
+    </head>
+    <body>
+        <div class="demo-container">
+            <h1 class="demo-title">🚀 Semaine 4 - Jour 1 : Introduction à Bootstrap</h1>
+
+            <div class="demo-intro">
+                <h3>📚 Qu'est-ce que Bootstrap ?</h3>
+                <p><strong>Bootstrap</strong> est le framework CSS le plus populaire au monde. Il fournit des composants prêts à l'emploi (navbar, cards, buttons, etc.) et un système de grille responsive puissant.</p>
+                <p><strong>Avantages :</strong> Développement rapide, responsive par défaut, compatible tous navigateurs, documentation excellente, grande communauté.</p>
+            </div>
+
+            <h2 class="section-title">📦 Installation</h2>
+
+            <div class="row g-4">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <h3 class="card-title">Méthode CDN (Recommandée pour débuter)</h3>
+                            <p>Ajoutez ces lignes dans le <code>&lt;head&gt;</code> de votre HTML :</p>
+                            <div class="code-example">
+                                &lt;!-- Bootstrap CSS --&gt;<br/>
+                                &lt;link href="<span class="highlight">https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css</span>"<br/>
+                                &nbsp;&nbsp;rel="stylesheet"&gt;<br/><br/>
+                                &lt;!-- Bootstrap Icons --&gt;<br/>
+                                &lt;link href="<span class="highlight">https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css</span>"<br/>
+                                &nbsp;&nbsp;rel="stylesheet"&gt;<br/><br/>
+                                &lt;!-- Bootstrap JS (avant la fermeture du &lt;/body&gt;) --&gt;<br/>
+                                &lt;script src="<span class="highlight">https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js</span>"&gt;&lt;/script&gt;
+                            </div>
+                            <div class="alert alert-success mt-3">
+                                <i class="bi bi-check-circle-fill"></i> <strong>Pas d'installation :</strong> Fonctionne immédiatement, sans npm ou téléchargement !
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <h2 class="section-title">🎯 Système de Grille Bootstrap</h2>
+
+            <div class="row g-4 mb-4">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <h3>Concept : 12 colonnes</h3>
+                            <p>Bootstrap divise l'écran en <strong>12 colonnes</strong>. Vous choisissez combien de colonnes chaque élément occupe.</p>
+                            <div class="code-example">
+                                &lt;div class="<span class="highlight">container</span>"&gt;<br/>
+                                &nbsp;&nbsp;&lt;div class="<span class="highlight">row</span>"&gt;<br/>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&lt;div class="<span class="highlight">col-md-4</span>"&gt;4 colonnes&lt;/div&gt;<br/>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&lt;div class="<span class="highlight">col-md-4</span>"&gt;4 colonnes&lt;/div&gt;<br/>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&lt;div class="<span class="highlight">col-md-4</span>"&gt;4 colonnes&lt;/div&gt;<br/>
+                                &nbsp;&nbsp;&lt;/div&gt;<br/>
+                                &lt;/div&gt;
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <h3>Exemples de grilles</h3>
+
+            <div class="mb-4">
+                <p><strong>3 colonnes égales (4 + 4 + 4 = 12)</strong></p>
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="demo-box bg-primary text-white">col-md-4</div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="demo-box bg-success text-white">col-md-4</div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="demo-box bg-danger text-white">col-md-4</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mb-4">
+                <p><strong>2 colonnes (8 + 4 = 12)</strong></p>
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div class="demo-box bg-info text-white">col-md-8 (contenu principal)</div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="demo-box bg-warning">col-md-4 (sidebar)</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mb-4">
+                <p><strong>4 colonnes égales (3 + 3 + 3 + 3 = 12)</strong></p>
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-3"><div class="demo-box bg-primary text-white">col-md-3</div></div>
+                        <div class="col-md-3"><div class="demo-box bg-success text-white">col-md-3</div></div>
+                        <div class="col-md-3"><div class="demo-box bg-danger text-white">col-md-3</div></div>
+                        <div class="col-md-3"><div class="demo-box bg-info text-white">col-md-3</div></div>
+                    </div>
+                </div>
+            </div>
+
+            <h2 class="section-title">📱 Breakpoints Responsive</h2>
+
+            <div class="row g-4 mb-4">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <h3>Préfixes de taille</h3>
+                            <table class="table table-striped">
+                                <thead class="table-dark">
+                                    <tr>
+                                        <th>Préfixe</th>
+                                        <th>Taille écran</th>
+                                        <th>Exemple</th>
+                                        <th>Usage</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><code>.col-</code></td>
+                                        <td>< 576px</td>
+                                        <td><code>col-6</code></td>
+                                        <td>Tous les écrans</td>
+                                    </tr>
+                                    <tr>
+                                        <td><code>.col-sm-</code></td>
+                                        <td>≥ 576px</td>
+                                        <td><code>col-sm-6</code></td>
+                                        <td>Mobile large</td>
+                                    </tr>
+                                    <tr>
+                                        <td><code>.col-md-</code></td>
+                                        <td>≥ 768px</td>
+                                        <td><code>col-md-4</code></td>
+                                        <td>Tablette</td>
+                                    </tr>
+                                    <tr>
+                                        <td><code>.col-lg-</code></td>
+                                        <td>≥ 992px</td>
+                                        <td><code>col-lg-3</code></td>
+                                        <td>Desktop</td>
+                                    </tr>
+                                    <tr>
+                                        <td><code>.col-xl-</code></td>
+                                        <td>≥ 1200px</td>
+                                        <td><code>col-xl-2</code></td>
+                                        <td>Large desktop</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mb-4">
+                <h3>Exemple responsive : Mobile (12), Tablette (6), Desktop (4)</h3>
+                <div class="code-example">
+                    &lt;div class="<span class="highlight">col-12 col-md-6 col-lg-4</span>"&gt;...&lt;/div&gt;
+                </div>
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-12 col-md-6 col-lg-4">
+                            <div class="demo-box bg-primary text-white">Responsive Box 1</div>
+                        </div>
+                        <div class="col-12 col-md-6 col-lg-4">
+                            <div class="demo-box bg-success text-white">Responsive Box 2</div>
+                        </div>
+                        <div class="col-12 col-md-6 col-lg-4">
+                            <div class="demo-box bg-danger text-white">Responsive Box 3</div>
+                        </div>
+                    </div>
+                </div>
+                <p class="mt-3"><em>Redimensionnez la fenêtre pour voir l'adaptation !</em></p>
+            </div>
+
+            <h2 class="section-title">🎨 Classes Utilitaires</h2>
+
+            <div class="row g-4">
+                <div class="col-md-6">
+                    <div class="card h-100">
+                        <div class="card-header bg-primary text-white"><h4 class="mb-0">Spacing (Marges & Padding)</h4></div>
+                        <div class="card-body">
+                            <div class="code-example">
+                                m-3 = margin: 1rem<br/>
+                                p-4 = padding: 1.5rem<br/>
+                                mt-2 = margin-top<br/>
+                                mb-3 = margin-bottom<br/>
+                                ms-2 = margin-start (left)<br/>
+                                me-2 = margin-end (right)<br/>
+                                mx-auto = margin horizontal auto<br/>
+                                py-5 = padding vertical
+                            </div>
+                            <div class="demo-box bg-light mt-3">
+                                <div class="bg-primary text-white p-3">Padding de 3</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="card h-100">
+                        <div class="card-header bg-success text-white"><h4 class="mb-0">Couleurs</h4></div>
+                        <div class="card-body">
+                            <div class="demo-box bg-primary text-white mb-2">bg-primary text-white</div>
+                            <div class="demo-box bg-success text-white mb-2">bg-success text-white</div>
+                            <div class="demo-box bg-danger text-white mb-2">bg-danger text-white</div>
+                            <div class="demo-box bg-warning mb-2">bg-warning</div>
+                            <div class="demo-box bg-info text-white mb-2">bg-info text-white</div>
+                            <div class="demo-box bg-dark text-white mb-2">bg-dark text-white</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="card h-100">
+                        <div class="card-header bg-warning"><h4 class="mb-0">Texte</h4></div>
+                        <div class="card-body">
+                            <p class="text-start">text-start (gauche)</p>
+                            <p class="text-center">text-center (centré)</p>
+                            <p class="text-end">text-end (droite)</p>
+                            <p class="fw-bold">fw-bold (gras)</p>
+                            <p class="fst-italic">fst-italic (italique)</p>
+                            <p class="text-uppercase">text-uppercase (MAJUSCULES)</p>
+                            <p class="text-primary">text-primary (couleur)</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="card h-100">
+                        <div class="card-header bg-info text-white"><h4 class="mb-0">Display & Flex</h4></div>
+                        <div class="card-body">
+                            <div class="code-example">
+                                d-none = display: none<br/>
+                                d-block = display: block<br/>
+                                d-flex = display: flex<br/>
+                                justify-content-center<br/>
+                                align-items-center<br/>
+                                flex-column<br/>
+                                gap-3
+                            </div>
+                            <div class="d-flex justify-content-center align-items-center gap-3 bg-light p-3 mt-2">
+                                <div class="bg-primary text-white p-2">Box 1</div>
+                                <div class="bg-success text-white p-2">Box 2</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <h2 class="section-title mt-5">🎯 Composants Bootstrap</h2>
+
+            <div class="row g-4 mt-3">
+                <div class="col-md-6">
+                    <h3>Boutons</h3>
+                    <button class="btn btn-primary">Primary</button>
+                    <button class="btn btn-success">Success</button>
+                    <button class="btn btn-danger">Danger</button>
+                    <button class="btn btn-warning">Warning</button>
+                    <button class="btn btn-outline-primary mt-2">Outline</button>
+                    <button class="btn btn-lg btn-info mt-2">Large</button>
+                    <button class="btn btn-sm btn-dark mt-2">Small</button>
+                </div>
+
+                <div class="col-md-6">
+                    <h3>Alerts</h3>
+                    <div class="alert alert-success" role="alert">
+                        <i class="bi bi-check-circle-fill"></i> Succès ! Opération réussie.
+                    </div>
+                    <div class="alert alert-warning" role="alert">
+                        <i class="bi bi-exclamation-triangle-fill"></i> Attention ! Vérifiez les données.
+                    </div>
+                    <div class="alert alert-danger" role="alert">
+                        <i class="bi bi-x-circle-fill"></i> Erreur ! Quelque chose s'est mal passé.
+                    </div>
+                </div>
+
+                <div class="col-md-12">
+                    <h3>Cards (Cartes)</h3>
+                    <div class="row g-3">
+                        <div class="col-md-4">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title">Titre de la carte</h5>
+                                    <p class="card-text">Ceci est un exemple de carte Bootstrap. Simple et élégant !</p>
+                                    <a href="#" class="btn btn-primary">En savoir plus</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card text-white bg-primary">
+                                <div class="card-body">
+                                    <h5 class="card-title">Carte colorée</h5>
+                                    <p class="card-text">Avec fond coloré et texte blanc.</p>
+                                    <a href="#" class="btn btn-light">Action</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card">
+                                <div class="card-header">En-tête</div>
+                                <div class="card-body">
+                                    <h5 class="card-title">Avec header</h5>
+                                    <p class="card-text">Et un footer en bas.</p>
+                                </div>
+                                <div class="card-footer text-muted">Footer</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="froggiesplaining">
+            <span> Froggiesplaining :</span>
+            <p>
+                <br/>
+                <strong>🎯 Objectifs :</strong><br/>
+                ✅ Installer Bootstrap via CDN<br/>
+                ✅ Comprendre le système de grille (12 colonnes)<br/>
+                ✅ Utiliser les breakpoints responsive (sm, md, lg, xl)<br/>
+                ✅ Appliquer les classes utilitaires (spacing, couleurs, texte)<br/>
+                ✅ Utiliser les composants (buttons, alerts, cards)<br/><br/>
+
+                <strong>📖 Points clés :</strong><br/>
+                • <strong>container</strong> = conteneur principal<br/>
+                • <strong>row</strong> = ligne de grille<br/>
+                • <strong>col-md-4</strong> = 4 colonnes sur 12 (tablette+)<br/>
+                • <strong>Classes utilitaires</strong> = rapide et efficace<br/>
+                • <strong>Responsive par défaut</strong> = mobile first<br/><br/>
+
+                <strong>🏋️ Exercice :</strong><br/>
+                Créez une landing page avec navbar Bootstrap, 3 cards de features et un footer !
+            </p>
+            <img src="../img/froggie-300.png" alt="Froggie" class="overfrog" id="Froggie" />
+        </div>
+
+        <a href="#Froggie"><div id="goToFroggie"><img src="../img/froggie-300.png" width="50px" /><br/><i class="bi bi-arrow-bar-down"></i></div></a>
+        <div id="footerGit"><a href="https://github.com/eCreafr/DWWM" target="_blank"><i class="bi bi-github">GitHub - eCrea</i></a></div>
+
+        <!-- Bootstrap JS -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    </body>
+</html>

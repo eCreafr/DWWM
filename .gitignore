@@ -6,6 +6,7 @@ php/php005.php
 php/old/
 .prettierrc
 .vscode
+.claude
 settings.json
 php/composer/vendor
 php/symfony/vendor
@@ -20,3 +21,6 @@ FEPAE_v2/
 javascript/test-vue
 php/parts/auto-install/sauvegarde/
 php/parts/auto-install-v2/sauvegarde/
+STEP5-mvc+poo+composer/
+STEP5-mvc+poo+composer/vendor/
+

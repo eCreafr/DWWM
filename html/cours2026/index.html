@@ -1,0 +1,360 @@
+<!doctype html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Plan de cours HTML/CSS - 4 semaines</title>
+        <link rel="stylesheet" href="../css/froggie.css" />
+        <style>
+            * {
+                box-sizing: border-box;
+            }
+            body {
+                font-family: Arial, sans-serif;
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                min-height: 100vh;
+                padding: 20px;
+            }
+            .container {
+                max-width: 1200px;
+                margin: 0 auto;
+            }
+            h1 {
+                text-align: center;
+                color: white;
+                font-size: 3em;
+                margin-bottom: 10px;
+                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            }
+            .subtitle {
+                text-align: center;
+                color: white;
+                font-size: 1.3em;
+                margin-bottom: 40px;
+                opacity: 0.9;
+            }
+            .week {
+                background: white;
+                border-radius: 15px;
+                padding: 30px;
+                margin-bottom: 30px;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            }
+            .week-title {
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                color: white;
+                padding: 15px 25px;
+                border-radius: 10px;
+                font-size: 1.8em;
+                margin: -30px -30px 25px -30px;
+                text-align: center;
+            }
+            .lessons {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+                gap: 20px;
+            }
+            .lesson-card {
+                border: 2px solid #e0e0e0;
+                border-radius: 10px;
+                padding: 20px;
+                background: #f8f9fa;
+                transition: all 0.3s;
+                text-decoration: none;
+                color: #2c3e50;
+                display: block;
+            }
+            .lesson-card:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
+                border-color: #667eea;
+            }
+            .lesson-number {
+                background: #667eea;
+                color: white;
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-weight: bold;
+                margin-bottom: 15px;
+                font-size: 1.2em;
+            }
+            .lesson-title {
+                font-size: 1.2em;
+                font-weight: bold;
+                margin-bottom: 10px;
+                color: #2c3e50;
+            }
+            .lesson-desc {
+                font-size: 0.95em;
+                color: #7f8c8d;
+                line-height: 1.5;
+            }
+            .status {
+                display: inline-block;
+                padding: 5px 15px;
+                border-radius: 20px;
+                font-size: 0.85em;
+                font-weight: bold;
+                margin-top: 10px;
+            }
+            .status-disponible {
+                background: #1abc9c;
+                color: white;
+            }
+            .status-bientot {
+                background: #f39c12;
+                color: white;
+            }
+            .footer-info {
+                background: white;
+                border-radius: 15px;
+                padding: 25px;
+                margin-top: 30px;
+                text-align: center;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            }
+            .footer-info h3 {
+                color: #667eea;
+                margin-top: 0;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <h1>📚 Formation HTML & CSS</h1>
+            <p class="subtitle">Plan de cours sur 4 semaines - Du débutant à Flexbox, Grid et Bootstrap</p>
+
+            <!-- SEMAINE 1 -->
+            <div class="week">
+                <h2 class="week-title">Semaine 1 : Fondamentaux HTML & CSS de base</h2>
+                <div class="lessons">
+                    <a href="semaine1-jour1-structure-page-html.html" class="lesson-card">
+                        <div class="lesson-number">1</div>
+                        <div class="lesson-title">Structure HTML</div>
+                        <div class="lesson-desc">
+                            DOCTYPE, html, head, body, métadonnées essentielles
+                        </div>
+                        <span class="status status-disponible">✅ Disponible</span>
+                    </a>
+
+                    <a href="semaine1-jour2-balises-semantiques.html" class="lesson-card">
+                        <div class="lesson-number">2</div>
+                        <div class="lesson-title">Balises sémantiques</div>
+                        <div class="lesson-desc">
+                            header, nav, main, section, article, aside, footer
+                        </div>
+                        <span class="status status-disponible">✅ Disponible</span>
+                    </a>
+
+                    <a href="semaine1-jour3-texte-listes-liens.html" class="lesson-card">
+                        <div class="lesson-number">3</div>
+                        <div class="lesson-title">Texte, Listes & Liens</div>
+                        <div class="lesson-desc">
+                            Titres (h1-h6), paragraphes, listes (ul/ol), liens (a), emphases
+                        </div>
+                        <span class="status status-disponible">✅ Disponible</span>
+                    </a>
+
+                    <a href="semaine1-jour4-images-tableaux-formulaires.html" class="lesson-card">
+                        <div class="lesson-number">4</div>
+                        <div class="lesson-title">Images, Tableaux & Formulaires</div>
+                        <div class="lesson-desc">
+                            img, figure, table, form, input, select, textarea, button
+                        </div>
+                        <span class="status status-disponible">✅ Disponible</span>
+                    </a>
+
+                    <a href="semaine1-jour5-introduction-css.html" class="lesson-card">
+                        <div class="lesson-number">5</div>
+                        <div class="lesson-title">Introduction CSS</div>
+                        <div class="lesson-desc">
+                            Sélecteurs, propriétés, couleurs, typographie, 3 méthodes d'intégration
+                        </div>
+                        <span class="status status-disponible">✅ Disponible</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- SEMAINE 2 -->
+            <div class="week">
+                <h2 class="week-title">Semaine 2 : CSS approfondi & Box Model</h2>
+                <div class="lessons">
+                    <a href="semaine2-jour1-box-model.html" class="lesson-card">
+                        <div class="lesson-number">6</div>
+                        <div class="lesson-title">Box Model</div>
+                        <div class="lesson-desc">
+                            padding, border, margin, box-sizing, width/height, display
+                        </div>
+                        <span class="status status-disponible">✅ Disponible</span>
+                    </a>
+
+                    <a href="semaine2-jour2-positionnement.html" class="lesson-card">
+                        <div class="lesson-number">7</div>
+                        <div class="lesson-title">Positionnement CSS</div>
+                        <div class="lesson-desc">
+                            static, relative, absolute, fixed, sticky, z-index, float
+                        </div>
+                        <span class="status status-disponible">✅ Disponible</span>
+                    </a>
+
+                    <a href="semaine2-jour3-responsive-design.html" class="lesson-card">
+                        <div class="lesson-number">8</div>
+                        <div class="lesson-title">Responsive Design</div>
+                        <div class="lesson-desc">
+                            Unités relatives (%, rem, vw/vh), Media queries, Mobile First
+                        </div>
+                        <span class="status status-disponible">✅ Disponible</span>
+                    </a>
+
+                    <a href="semaine2-jour4-backgrounds-pseudo-classes.html" class="lesson-card">
+                        <div class="lesson-number">9</div>
+                        <div class="lesson-title">Backgrounds & Pseudo-classes</div>
+                        <div class="lesson-desc">
+                            background-image, gradients, :hover, :focus, :nth-child
+                        </div>
+                        <span class="status status-disponible">✅ Disponible</span>
+                    </a>
+
+                    <a href="semaine2-jour5-pseudo-elements-transitions.html" class="lesson-card">
+                        <div class="lesson-number">10</div>
+                        <div class="lesson-title">Pseudo-éléments & Transitions</div>
+                        <div class="lesson-desc">
+                            ::before, ::after, transition, transform basics
+                        </div>
+                        <span class="status status-disponible">✅ Disponible</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- SEMAINE 3 -->
+            <div class="week">
+                <h2 class="week-title">Semaine 3 : Flexbox & Grid</h2>
+                <div class="lessons">
+                    <a href="semaine3-jour1-flexbox-introduction.html" class="lesson-card">
+                        <div class="lesson-number">11</div>
+                        <div class="lesson-title">Introduction Flexbox</div>
+                        <div class="lesson-desc">
+                            display: flex, flex-direction, justify-content, align-items
+                        </div>
+                        <span class="status status-disponible">✅ Disponible</span>
+                    </a>
+
+                    <a href="semaine3-jour2-flexbox-avance.html" class="lesson-card">
+                        <div class="lesson-number">12</div>
+                        <div class="lesson-title">Flexbox Avancé</div>
+                        <div class="lesson-desc">
+                            flex-wrap, flex-grow, flex-shrink, flex-basis, gap, order
+                        </div>
+                        <span class="status status-disponible">✅ Disponible</span>
+                    </a>
+
+                    <a href="semaine3-jour3-grid-introduction.html" class="lesson-card">
+                        <div class="lesson-number">13</div>
+                        <div class="lesson-title">Introduction Grid</div>
+                        <div class="lesson-desc">
+                            display: grid, grid-template-columns/rows, gap
+                        </div>
+                        <span class="status status-disponible">✅ Disponible</span>
+                    </a>
+
+                    <a href="semaine3-jour4-grid-avance.html" class="lesson-card">
+                        <div class="lesson-number">14</div>
+                        <div class="lesson-title">Grid Avancé</div>
+                        <div class="lesson-desc">
+                            grid-area, grid-template-areas, auto-fill, auto-fit
+                        </div>
+                        <span class="status status-disponible">✅ Disponible</span>
+                    </a>
+
+                    <a href="semaine3-jour5-flexbox-grid-combines.html" class="lesson-card">
+                        <div class="lesson-number">15</div>
+                        <div class="lesson-title">Flexbox + Grid combinés</div>
+                        <div class="lesson-desc">
+                            Quand utiliser l'un ou l'autre, nesting, layouts complexes
+                        </div>
+                        <span class="status status-disponible">✅ Disponible</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- SEMAINE 4 -->
+            <div class="week">
+                <h2 class="week-title">Semaine 4 : Bootstrap & Projet final</h2>
+                <div class="lessons">
+                    <a href="semaine4-jour1-bootstrap-introduction.html" class="lesson-card">
+                        <div class="lesson-number">16</div>
+                        <div class="lesson-title">Introduction Bootstrap</div>
+                        <div class="lesson-desc">
+                            Installation (CDN), système de grille, container, row, col
+                        </div>
+                        <span class="status status-disponible">✅ Disponible</span>
+                    </a>
+
+                    <a href="semaine4-jour2-composants-bootstrap.html" class="lesson-card">
+                        <div class="lesson-number">17</div>
+                        <div class="lesson-title">Composants Bootstrap</div>
+                        <div class="lesson-desc">
+                            navbar, cards, buttons, forms, classes utilitaires
+                        </div>
+                        <span class="status status-disponible">✅ Disponible</span>
+                    </a>
+
+                    <a href="semaine4-jour3-bootstrap-avance.html" class="lesson-card">
+                        <div class="lesson-number">18</div>
+                        <div class="lesson-title">Bootstrap Avancé</div>
+                        <div class="lesson-desc">
+                            carousel, modal, accordion, responsive utilities, icônes
+                        </div>
+                        <span class="status status-disponible">✅ Disponible</span>
+                    </a>
+
+                    <a href="semaine4-jour4-personnalisation-bootstrap.html" class="lesson-card">
+                        <div class="lesson-number">19</div>
+                        <div class="lesson-title">Personnalisation Bootstrap</div>
+                        <div class="lesson-desc">
+                            Surcharger les styles, custom colors, combiner avec CSS perso
+                        </div>
+                        <span class="status status-disponible">✅ Disponible</span>
+                    </a>
+
+                    <a href="semaine4-jour5-projet-final.html" class="lesson-card">
+                        <div class="lesson-number">20</div>
+                        <div class="lesson-title">🎓 Projet Final</div>
+                        <div class="lesson-desc">
+                            Site web complet multi-pages responsive avec Bootstrap + CSS custom
+                        </div>
+                        <span class="status status-disponible">✅ Disponible</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- FOOTER INFO -->
+            <div class="footer-info">
+                <h3>📖 Progression recommandée</h3>
+                <p style="color: #7f8c8d; line-height: 1.8">
+                    <strong>Semaine 1 :</strong> Bases HTML et premier contact avec CSS<br />
+                    <strong>Semaine 2 :</strong> Maîtrise du Box Model et positionnement<br />
+                    <strong>Semaine 3 :</strong> Layouts modernes avec Flexbox et Grid<br />
+                    <strong>Semaine 4 :</strong> Framework Bootstrap et projet complet<br /><br />
+
+                    <strong style="color: #667eea">💡 Conseil :</strong> Pratiquez chaque jour avec les exercices
+                    proposés !<br />
+                    <strong style="color: #667eea">🎯 Objectif :</strong> À la fin, vous serez capable de créer des
+                    sites web responsive modernes.
+                </p>
+            </div>
+
+            <div style="text-align: center; margin-top: 30px">
+                <a href="https://github.com/eCreafr/DWWM" target="_blank" style="color: white; text-decoration: none">
+                    <div style="background: rgba(255,255,255,0.2); display: inline-block; padding: 15px 30px; border-radius: 50px; backdrop-filter: blur(10px)">
+                        <i class="bi bi-github"></i> GitHub - eCrea
+                    </div>
+                </a>
+            </div>
+        </div>
+    </body>
+</html>

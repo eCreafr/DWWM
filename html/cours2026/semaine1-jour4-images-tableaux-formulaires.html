@@ -1,0 +1,477 @@
+<!doctype html>
+<!-- Déclaration du type de document HTML5 -->
+<html lang="fr">
+    <!-- Balise racine avec langue française -->
+    <head>
+        <!-- En-tête du document -->
+        <meta charset="UTF-8" />
+        <!-- Encodage des caractères en UTF-8 -->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <!-- Configuration responsive pour mobile -->
+        <title>Semaine 1 - Jour 4 | Images, Tableaux et Formulaires</title>
+        <!-- Titre affiché dans l'onglet du navigateur -->
+
+        <link rel="stylesheet" href="../css/froggie.css" />
+        <!-- Lien vers la feuille de style Froggie -->
+
+        <style>
+            /* Styles pour la démonstration */
+            .demo-container {
+                max-width: 1200px;
+                margin: 40px auto;
+                padding: 20px;
+                font-family: Arial, sans-serif;
+            }
+
+            .demo-title {
+                text-align: center;
+                font-size: 2.5em;
+                margin-bottom: 20px;
+                color: #2c3e50;
+            }
+
+            .demo-intro {
+                background: #ecf0f1;
+                padding: 20px;
+                border-radius: 10px;
+                margin-bottom: 40px;
+                line-height: 1.6;
+            }
+
+            .demo-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+                gap: 30px;
+                margin-bottom: 40px;
+            }
+
+            .demo-item {
+                border: 2px solid #3498db;
+                border-radius: 10px;
+                padding: 20px;
+                background: white;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+                transition: transform 0.3s ease;
+            }
+
+            .demo-item:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+            }
+
+            .demo-item h2 {
+                margin-top: 0;
+                color: #3498db;
+                font-size: 1.5em;
+            }
+
+            .code-example {
+                background: #2c3e50;
+                color: #ecf0f1;
+                padding: 15px;
+                border-radius: 5px;
+                font-family: 'Courier New', monospace;
+                font-size: 0.85em;
+                margin: 15px 0;
+                overflow-x: auto;
+                line-height: 1.6;
+            }
+
+            .highlight {
+                color: #f39c12;
+                font-weight: bold;
+            }
+
+            .render-box {
+                background: #f8f9fa;
+                border: 2px dashed #95a5a6;
+                padding: 15px;
+                margin: 10px 0;
+                border-radius: 5px;
+            }
+
+            .image-demo img {
+                max-width: 100%;
+                height: auto;
+                border-radius: 8px;
+            }
+
+            table {
+                width: 100%;
+                border-collapse: collapse;
+                margin: 15px 0;
+            }
+
+            th,
+            td {
+                border: 1px solid #bdc3c7;
+                padding: 12px;
+                text-align: left;
+            }
+
+            th {
+                background-color: #3498db;
+                color: white;
+                font-weight: bold;
+            }
+
+            tr:nth-child(even) {
+                background-color: #ecf0f1;
+            }
+
+            .form-example {
+                background: white;
+                padding: 20px;
+                border-radius: 8px;
+            }
+
+            .form-example label {
+                display: block;
+                margin-top: 15px;
+                font-weight: bold;
+                color: #2c3e50;
+            }
+
+            .form-example input,
+            .form-example textarea,
+            .form-example select {
+                width: 100%;
+                padding: 10px;
+                margin-top: 5px;
+                border: 2px solid #bdc3c7;
+                border-radius: 5px;
+                font-size: 1em;
+                font-family: Arial, sans-serif;
+            }
+
+            .form-example input:focus,
+            .form-example textarea:focus,
+            .form-example select:focus {
+                outline: none;
+                border-color: #3498db;
+            }
+
+            .form-example button {
+                background: #3498db;
+                color: white;
+                padding: 12px 30px;
+                border: none;
+                border-radius: 5px;
+                font-size: 1em;
+                cursor: pointer;
+                margin-top: 20px;
+                transition: background 0.3s;
+            }
+
+            .form-example button:hover {
+                background: #2980b9;
+            }
+
+            .checkbox-group,
+            .radio-group {
+                margin-top: 10px;
+            }
+
+            .checkbox-group label,
+            .radio-group label {
+                display: inline-block;
+                margin-right: 20px;
+                font-weight: normal;
+            }
+
+            .checkbox-group input,
+            .radio-group input {
+                width: auto;
+                margin-right: 5px;
+            }
+        </style>
+    </head>
+    <body>
+        <!-- Corps du document -->
+
+        <!-- Conteneur principal pour les exemples -->
+        <div class="demo-container">
+            <h1 class="demo-title">🖼️ Semaine 1 - Jour 4 : Images, Tableaux et Formulaires</h1>
+
+            <div class="demo-intro">
+                <h3>📚 Enrichir le contenu</h3>
+                <p>
+                    Aujourd'hui, nous allons apprendre à intégrer des <strong>images</strong>, créer des
+                    <strong>tableaux</strong> pour présenter des données et concevoir des
+                    <strong>formulaires</strong> pour interagir avec les utilisateurs.
+                </p>
+            </div>
+
+            <!-- Section Images -->
+            <h2 style="text-align: center; color: #2c3e50; margin: 40px 0 20px">🖼️ Les Images</h2>
+
+            <div class="demo-grid">
+                <div class="demo-item">
+                    <h2>&lt;img&gt; - Image simple</h2>
+                    <p>Balise auto-fermante pour afficher une image.</p>
+                    <div class="code-example">
+                        <span class="highlight">&lt;img</span><br />
+                        &nbsp;&nbsp;src="chemin/image.jpg"<br />
+                        &nbsp;&nbsp;alt="Description"<br />
+                        &nbsp;&nbsp;width="300"<br />
+                        <span class="highlight">/&gt;</span>
+                    </div>
+                    <p>
+                        <strong>📌 Attributs obligatoires :</strong><br />
+                        • <code>src</code> : chemin vers l'image<br />
+                        • <code>alt</code> : texte alternatif (accessibilité)
+                    </p>
+                </div>
+
+                <div class="demo-item">
+                    <h2>&lt;figure&gt; et &lt;figcaption&gt;</h2>
+                    <p>Balises sémantiques pour image avec légende.</p>
+                    <div class="code-example">
+                        <span class="highlight">&lt;figure&gt;</span><br />
+                        &nbsp;&nbsp;&lt;img src="photo.jpg" alt="Photo"&gt;<br />
+                        &nbsp;&nbsp;&lt;figcaption&gt;<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;Légende de l'image<br />
+                        &nbsp;&nbsp;&lt;/figcaption&gt;<br />
+                        <span class="highlight">&lt;/figure&gt;</span>
+                    </div>
+                    <p><strong>✅ Avantage :</strong> Associe visuellement l'image et sa description</p>
+                </div>
+
+                <div class="demo-item">
+                    <h2>🌐 Formats d'image</h2>
+                    <p>Différents formats selon l'usage.</p>
+                    <div class="render-box">
+                        <p>
+                            <strong>JPG/JPEG :</strong> Photos, images complexes<br />
+                            <strong>PNG :</strong> Transparence, logos, icônes<br />
+                            <strong>SVG :</strong> Graphiques vectoriels, icônes<br />
+                            <strong>WebP :</strong> Format moderne, léger<br />
+                            <strong>GIF :</strong> Animations simples
+                        </p>
+                    </div>
+                    <p><strong>💡 Conseil :</strong> Optimiser les images pour le web (compression)</p>
+                </div>
+            </div>
+
+            <!-- Section Tableaux -->
+            <h2 style="text-align: center; color: #2c3e50; margin: 40px 0 20px">📊 Les Tableaux</h2>
+
+            <div class="demo-grid">
+                <div class="demo-item" style="grid-column: 1 / -1">
+                    <h2>&lt;table&gt; - Structure complète</h2>
+                    <p>Les tableaux permettent d'organiser des données en lignes et colonnes.</p>
+                    <div class="code-example">
+                        <span class="highlight">&lt;table&gt;</span><br />
+                        &nbsp;&nbsp;&lt;thead&gt;<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;&lt;tr&gt;<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;th&gt;Nom&lt;/th&gt;<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;th&gt;Âge&lt;/th&gt;<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;th&gt;Ville&lt;/th&gt;<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;&lt;/tr&gt;<br />
+                        &nbsp;&nbsp;&lt;/thead&gt;<br />
+                        &nbsp;&nbsp;&lt;tbody&gt;<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;&lt;tr&gt;<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;td&gt;Alice&lt;/td&gt;<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;td&gt;25&lt;/td&gt;<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;td&gt;Paris&lt;/td&gt;<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;&lt;/tr&gt;<br />
+                        &nbsp;&nbsp;&lt;/tbody&gt;<br />
+                        <span class="highlight">&lt;/table&gt;</span>
+                    </div>
+                    <div class="render-box">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Nom</th>
+                                    <th>Âge</th>
+                                    <th>Ville</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Alice</td>
+                                    <td>25</td>
+                                    <td>Paris</td>
+                                </tr>
+                                <tr>
+                                    <td>Bob</td>
+                                    <td>30</td>
+                                    <td>Lyon</td>
+                                </tr>
+                                <tr>
+                                    <td>Charlie</td>
+                                    <td>28</td>
+                                    <td>Marseille</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <p>
+                        <strong>🔑 Balises :</strong><br />
+                        • <code>&lt;table&gt;</code> : conteneur du tableau<br />
+                        • <code>&lt;thead&gt;</code> : en-tête du tableau<br />
+                        • <code>&lt;tbody&gt;</code> : corps du tableau<br />
+                        • <code>&lt;tr&gt;</code> : ligne (table row)<br />
+                        • <code>&lt;th&gt;</code> : cellule d'en-tête (table header)<br />
+                        • <code>&lt;td&gt;</code> : cellule de données (table data)
+                    </p>
+                </div>
+            </div>
+
+            <!-- Section Formulaires -->
+            <h2 style="text-align: center; color: #2c3e50; margin: 40px 0 20px">📝 Les Formulaires</h2>
+
+            <div class="demo-grid">
+                <div class="demo-item" style="grid-column: 1 / -1">
+                    <h2>&lt;form&gt; - Formulaire complet</h2>
+                    <p>Les formulaires permettent de collecter des informations des utilisateurs.</p>
+
+                    <div class="form-example">
+                        <form>
+                            <label for="nom">Nom complet :</label>
+                            <input type="text" id="nom" name="nom" placeholder="Jean Dupont" required />
+
+                            <label for="email">Email :</label>
+                            <input type="email" id="email" name="email" placeholder="jean@exemple.com" required />
+
+                            <label for="tel">Téléphone :</label>
+                            <input type="tel" id="tel" name="tel" placeholder="06 12 34 56 78" />
+
+                            <label for="age">Âge :</label>
+                            <input type="number" id="age" name="age" min="18" max="99" />
+
+                            <label for="date">Date de naissance :</label>
+                            <input type="date" id="date" name="date" />
+
+                            <label>Genre :</label>
+                            <div class="radio-group">
+                                <label><input type="radio" name="genre" value="homme" /> Homme</label>
+                                <label><input type="radio" name="genre" value="femme" /> Femme</label>
+                                <label><input type="radio" name="genre" value="autre" /> Autre</label>
+                            </div>
+
+                            <label>Intérêts :</label>
+                            <div class="checkbox-group">
+                                <label><input type="checkbox" name="interets" value="html" /> HTML</label>
+                                <label><input type="checkbox" name="interets" value="css" /> CSS</label>
+                                <label><input type="checkbox" name="interets" value="js" /> JavaScript</label>
+                            </div>
+
+                            <label for="pays">Pays :</label>
+                            <select id="pays" name="pays">
+                                <option value="">-- Choisir --</option>
+                                <option value="fr">France</option>
+                                <option value="be">Belgique</option>
+                                <option value="ch">Suisse</option>
+                                <option value="ca">Canada</option>
+                            </select>
+
+                            <label for="message">Message :</label>
+                            <textarea id="message" name="message" rows="4" placeholder="Votre message..."></textarea>
+
+                            <button type="submit">Envoyer</button>
+                        </form>
+                    </div>
+
+                    <div class="code-example" style="margin-top: 20px">
+                        <span class="highlight">&lt;form action="/submit" method="POST"&gt;</span><br />
+                        <br />
+                        &nbsp;&nbsp;&lt;label for="nom"&gt;Nom :&lt;/label&gt;<br />
+                        &nbsp;&nbsp;&lt;input type="text" id="nom" name="nom" required&gt;<br />
+                        <br />
+                        &nbsp;&nbsp;&lt;label for="email"&gt;Email :&lt;/label&gt;<br />
+                        &nbsp;&nbsp;&lt;input type="email" id="email" name="email"&gt;<br />
+                        <br />
+                        &nbsp;&nbsp;&lt;textarea name="message" rows="4"&gt;&lt;/textarea&gt;<br />
+                        <br />
+                        &nbsp;&nbsp;&lt;button type="submit"&gt;Envoyer&lt;/button&gt;<br />
+                        <br />
+                        <span class="highlight">&lt;/form&gt;</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Types d'inputs -->
+            <div class="demo-grid">
+                <div class="demo-item">
+                    <h2>📋 Types d'input</h2>
+                    <div class="render-box">
+                        <p>
+                            <strong>text :</strong> texte simple<br />
+                            <strong>email :</strong> adresse email<br />
+                            <strong>password :</strong> mot de passe<br />
+                            <strong>number :</strong> nombre<br />
+                            <strong>tel :</strong> téléphone<br />
+                            <strong>date :</strong> date<br />
+                            <strong>time :</strong> heure<br />
+                            <strong>url :</strong> URL<br />
+                            <strong>search :</strong> recherche<br />
+                            <strong>color :</strong> couleur<br />
+                            <strong>file :</strong> fichier<br />
+                            <strong>checkbox :</strong> case à cocher<br />
+                            <strong>radio :</strong> bouton radio
+                        </p>
+                    </div>
+                </div>
+
+                <div class="demo-item">
+                    <h2>🔑 Attributs importants</h2>
+                    <div class="render-box">
+                        <p>
+                            <strong>required :</strong> champ obligatoire<br />
+                            <strong>placeholder :</strong> texte d'exemple<br />
+                            <strong>value :</strong> valeur par défaut<br />
+                            <strong>disabled :</strong> champ désactivé<br />
+                            <strong>readonly :</strong> lecture seule<br />
+                            <strong>min / max :</strong> valeurs limites<br />
+                            <strong>minlength / maxlength :</strong> longueur texte<br />
+                            <strong>pattern :</strong> regex validation<br />
+                            <strong>autocomplete :</strong> autocomplétion
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Zone d'explication pédagogique "Froggiesplaining" -->
+        <div class="froggiesplaining">
+            <span> Froggiesplaining :</span>
+            <p>
+                <br />
+                <strong>🎯 Objectifs de ce cours :</strong><br />
+                ✅ Intégrer des images avec les balises &lt;img&gt;, &lt;figure&gt; et &lt;figcaption&gt;<br />
+                ✅ Créer des tableaux structurés avec thead, tbody, tr, th, td<br />
+                ✅ Construire des formulaires interactifs complets<br />
+                ✅ Connaître les différents types d'input et leurs attributs<br /><br />
+
+                <strong>📖 Points clés :</strong><br />
+                • L'attribut <strong>alt</strong> est obligatoire pour l'accessibilité<br />
+                • Les tableaux sont pour les <strong>données</strong>, pas pour la mise en page<br />
+                • Toujours associer un <strong>&lt;label&gt;</strong> à chaque input (attribut for/id)<br />
+                • L'attribut <strong>name</strong> permet d'identifier les données envoyées<br />
+                • L'attribut <strong>required</strong> rend un champ obligatoire<br /><br />
+
+                <strong>🏋️ Projet pratique :</strong><br />
+                Créez un formulaire de contact complet avec :<br />
+                • Nom, email, téléphone<br />
+                • Liste déroulante pour le sujet<br />
+                • Zone de texte pour le message<br />
+                • Bouton d'envoi stylisé
+            </p>
+            <img src="../img/froggie-300.png" alt="Froggie explain" class="overfrog" id="Froggie" />
+        </div>
+
+        <!-- Lien d'ancrage vers Froggie -->
+        <a href="#Froggie"
+            ><div id="goToFroggie">
+                <img src="../img/froggie-300.png" width="50px" /><br /><i class="bi bi-arrow-bar-down"></i></div
+        ></a>
+
+        <!-- Pied de page avec lien GitHub -->
+        <div id="footerGit">
+            <a href="https://github.com/eCreafr/DWWM" target="_blank"><i class="bi bi-github">GitHub - eCrea</i></a>
+        </div>
+    </body>
+    <!-- Fin du corps du document -->
+</html>
+<!-- Fin du document HTML -->
