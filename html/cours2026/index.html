@@ -95,19 +95,31 @@
             }
             .status {
                 display: inline-block;
-                padding: 5px 15px;
+                padding: 8px 18px;
                 border-radius: 20px;
                 font-size: 0.85em;
                 font-weight: bold;
                 margin-top: 10px;
+                cursor: pointer;
+                border: none;
+                transition: all 0.3s ease;
+                user-select: none;
             }
-            .status-disponible {
+            .status-todo {
+                background: #f39c12;
+                color: white;
+            }
+            .status-todo:hover {
+                background: #e67e22;
+                transform: scale(1.05);
+            }
+            .status-done {
                 background: #1abc9c;
                 color: white;
             }
-            .status-bientot {
-                background: #f39c12;
-                color: white;
+            .status-done:hover {
+                background: #16a085;
+                transform: scale(1.05);
             }
             .footer-info {
                 background: white;
@@ -138,7 +150,7 @@
                         <div class="lesson-desc">
                             DOCTYPE, html, head, body, métadonnées essentielles
                         </div>
-                        <span class="status status-disponible">✅ Disponible</span>
+                        <button class="status status-todo" data-lesson="1" onclick="toggleLesson(1)">📝 À faire</button>
                     </a>
 
                     <a href="semaine1-jour2-balises-semantiques.html" class="lesson-card">
@@ -147,7 +159,7 @@
                         <div class="lesson-desc">
                             header, nav, main, section, article, aside, footer
                         </div>
-                        <span class="status status-disponible">✅ Disponible</span>
+                        <button class="status status-todo" data-lesson="2" onclick="toggleLesson(2)">📝 À faire</button>
                     </a>
 
                     <a href="semaine1-jour3-texte-listes-liens.html" class="lesson-card">
@@ -156,7 +168,7 @@
                         <div class="lesson-desc">
                             Titres (h1-h6), paragraphes, listes (ul/ol), liens (a), emphases
                         </div>
-                        <span class="status status-disponible">✅ Disponible</span>
+                        <button class="status status-todo" data-lesson="3" onclick="toggleLesson(3)">📝 À faire</button>
                     </a>
 
                     <a href="semaine1-jour4-images-tableaux-formulaires.html" class="lesson-card">
@@ -165,7 +177,7 @@
                         <div class="lesson-desc">
                             img, figure, table, form, input, select, textarea, button
                         </div>
-                        <span class="status status-disponible">✅ Disponible</span>
+                        <button class="status status-todo" data-lesson="4" onclick="toggleLesson(4)">📝 À faire</button>
                     </a>
 
                     <a href="semaine1-jour5-introduction-css.html" class="lesson-card">
@@ -174,7 +186,7 @@
                         <div class="lesson-desc">
                             Sélecteurs, propriétés, couleurs, typographie, 3 méthodes d'intégration
                         </div>
-                        <span class="status status-disponible">✅ Disponible</span>
+                        <button class="status status-todo" data-lesson="5" onclick="toggleLesson(5)">📝 À faire</button>
                     </a>
                 </div>
             </div>
@@ -189,7 +201,7 @@
                         <div class="lesson-desc">
                             padding, border, margin, box-sizing, width/height, display
                         </div>
-                        <span class="status status-disponible">✅ Disponible</span>
+                        <button class="status status-todo" data-lesson="6" onclick="toggleLesson(6)">📝 À faire</button>
                     </a>
 
                     <a href="semaine2-jour2-positionnement.html" class="lesson-card">
@@ -198,7 +210,7 @@
                         <div class="lesson-desc">
                             static, relative, absolute, fixed, sticky, z-index, float
                         </div>
-                        <span class="status status-disponible">✅ Disponible</span>
+                        <button class="status status-todo" data-lesson="7" onclick="toggleLesson(7)">📝 À faire</button>
                     </a>
 
                     <a href="semaine2-jour3-responsive-design.html" class="lesson-card">
@@ -207,7 +219,7 @@
                         <div class="lesson-desc">
                             Unités relatives (%, rem, vw/vh), Media queries, Mobile First
                         </div>
-                        <span class="status status-disponible">✅ Disponible</span>
+                        <button class="status status-todo" data-lesson="8" onclick="toggleLesson(8)">📝 À faire</button>
                     </a>
 
                     <a href="semaine2-jour4-backgrounds-pseudo-classes.html" class="lesson-card">
@@ -216,7 +228,7 @@
                         <div class="lesson-desc">
                             background-image, gradients, :hover, :focus, :nth-child
                         </div>
-                        <span class="status status-disponible">✅ Disponible</span>
+                        <button class="status status-todo" data-lesson="9" onclick="toggleLesson(9)">📝 À faire</button>
                     </a>
 
                     <a href="semaine2-jour5-pseudo-elements-transitions.html" class="lesson-card">
@@ -225,7 +237,7 @@
                         <div class="lesson-desc">
                             ::before, ::after, transition, transform basics
                         </div>
-                        <span class="status status-disponible">✅ Disponible</span>
+                        <button class="status status-todo" data-lesson="10" onclick="toggleLesson(10)">📝 À faire</button>
                     </a>
                 </div>
             </div>
@@ -240,7 +252,7 @@
                         <div class="lesson-desc">
                             display: flex, flex-direction, justify-content, align-items
                         </div>
-                        <span class="status status-disponible">✅ Disponible</span>
+                        <button class="status status-todo" data-lesson="11" onclick="toggleLesson(11)">📝 À faire</button>
                     </a>
 
                     <a href="semaine3-jour2-flexbox-avance.html" class="lesson-card">
@@ -249,7 +261,7 @@
                         <div class="lesson-desc">
                             flex-wrap, flex-grow, flex-shrink, flex-basis, gap, order
                         </div>
-                        <span class="status status-disponible">✅ Disponible</span>
+                        <button class="status status-todo" data-lesson="12" onclick="toggleLesson(12)">📝 À faire</button>
                     </a>
 
                     <a href="semaine3-jour3-grid-introduction.html" class="lesson-card">
@@ -258,7 +270,7 @@
                         <div class="lesson-desc">
                             display: grid, grid-template-columns/rows, gap
                         </div>
-                        <span class="status status-disponible">✅ Disponible</span>
+                        <button class="status status-todo" data-lesson="13" onclick="toggleLesson(13)">📝 À faire</button>
                     </a>
 
                     <a href="semaine3-jour4-grid-avance.html" class="lesson-card">
@@ -267,7 +279,7 @@
                         <div class="lesson-desc">
                             grid-area, grid-template-areas, auto-fill, auto-fit
                         </div>
-                        <span class="status status-disponible">✅ Disponible</span>
+                        <button class="status status-todo" data-lesson="14" onclick="toggleLesson(14)">📝 À faire</button>
                     </a>
 
                     <a href="semaine3-jour5-flexbox-grid-combines.html" class="lesson-card">
@@ -276,7 +288,7 @@
                         <div class="lesson-desc">
                             Quand utiliser l'un ou l'autre, nesting, layouts complexes
                         </div>
-                        <span class="status status-disponible">✅ Disponible</span>
+                        <button class="status status-todo" data-lesson="15" onclick="toggleLesson(15)">📝 À faire</button>
                     </a>
                 </div>
             </div>
@@ -291,7 +303,7 @@
                         <div class="lesson-desc">
                             Installation (CDN), système de grille, container, row, col
                         </div>
-                        <span class="status status-disponible">✅ Disponible</span>
+                        <button class="status status-todo" data-lesson="16" onclick="toggleLesson(16)">📝 À faire</button>
                     </a>
 
                     <a href="semaine4-jour2-composants-bootstrap.html" class="lesson-card">
@@ -300,7 +312,7 @@
                         <div class="lesson-desc">
                             navbar, cards, buttons, forms, classes utilitaires
                         </div>
-                        <span class="status status-disponible">✅ Disponible</span>
+                        <button class="status status-todo" data-lesson="17" onclick="toggleLesson(17)">📝 À faire</button>
                     </a>
 
                     <a href="semaine4-jour3-bootstrap-avance.html" class="lesson-card">
@@ -309,7 +321,7 @@
                         <div class="lesson-desc">
                             carousel, modal, accordion, responsive utilities, icônes
                         </div>
-                        <span class="status status-disponible">✅ Disponible</span>
+                        <button class="status status-todo" data-lesson="18" onclick="toggleLesson(18)">📝 À faire</button>
                     </a>
 
                     <a href="semaine4-jour4-personnalisation-bootstrap.html" class="lesson-card">
@@ -318,7 +330,7 @@
                         <div class="lesson-desc">
                             Surcharger les styles, custom colors, combiner avec CSS perso
                         </div>
-                        <span class="status status-disponible">✅ Disponible</span>
+                        <button class="status status-todo" data-lesson="19" onclick="toggleLesson(19)">📝 À faire</button>
                     </a>
 
                     <a href="semaine4-jour5-projet-final.html" class="lesson-card">
@@ -327,7 +339,7 @@
                         <div class="lesson-desc">
                             Site web complet multi-pages responsive avec Bootstrap + CSS custom
                         </div>
-                        <span class="status status-disponible">✅ Disponible</span>
+                        <button class="status status-todo" data-lesson="20" onclick="toggleLesson(20)">📝 À faire</button>
                     </a>
                 </div>
             </div>
@@ -356,5 +368,61 @@
                 </a>
             </div>
         </div>
+
+        <script>
+            // Fonction pour gérer les cookies
+            function setCookie(name, value, days) {
+                const date = new Date();
+                date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+                const expires = "expires=" + date.toUTCString();
+                document.cookie = name + "=" + value + ";" + expires + ";path=/";
+            }
+
+            function getCookie(name) {
+                const nameEQ = name + "=";
+                const ca = document.cookie.split(';');
+                for (let i = 0; i < ca.length; i++) {
+                    let c = ca[i];
+                    while (c.charAt(0) === ' ') c = c.substring(1, c.length);
+                    if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length);
+                }
+                return null;
+            }
+
+            // Fonction pour basculer le statut d'une leçon
+            function toggleLesson(lessonNumber) {
+                const button = document.querySelector(`button[data-lesson="${lessonNumber}"]`);
+                const currentStatus = getCookie(`lesson_${lessonNumber}`);
+
+                if (currentStatus === 'done') {
+                    // Passer de "Fait" à "À faire"
+                    button.className = 'status status-todo';
+                    button.innerHTML = '📝 À faire';
+                    setCookie(`lesson_${lessonNumber}`, 'todo', 365);
+                } else {
+                    // Passer de "À faire" à "Fait"
+                    button.className = 'status status-done';
+                    button.innerHTML = '✅ Fait';
+                    setCookie(`lesson_${lessonNumber}`, 'done', 365);
+                }
+            }
+
+            // Charger les statuts sauvegardés au chargement de la page
+            window.addEventListener('DOMContentLoaded', function() {
+                const buttons = document.querySelectorAll('button[data-lesson]');
+                buttons.forEach(button => {
+                    const lessonNumber = button.getAttribute('data-lesson');
+                    const savedStatus = getCookie(`lesson_${lessonNumber}`);
+
+                    if (savedStatus === 'done') {
+                        button.className = 'status status-done';
+                        button.innerHTML = '✅ Fait';
+                    } else {
+                        button.className = 'status status-todo';
+                        button.innerHTML = '📝 À faire';
+                    }
+                });
+            });
+        </script>
     </body>
 </html>
