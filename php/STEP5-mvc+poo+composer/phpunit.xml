@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="vendor/phpunit/phpunit/phpunit.xsd"
+         bootstrap="vendor/autoload.php"
+         colors="true"
+         executionOrder="default"
+         cacheDirectory=".phpunit.cache"
+         testdox="true">
+
+    <!-- Suites de tests -->
+    <testsuites>
+        <testsuite name="All Tests">
+            <directory>tests</directory>
+        </testsuite>
+    </testsuites>
+
+    <!-- Code Coverage - Fichiers à analyser -->
+    <source>
+        <include>
+            <directory suffix=".php">src</directory>
+        </include>
+        <exclude>
+            <directory>src/Views</directory>
+        </exclude>
+    </source>
+
+    <!-- Configuration PHP pour les tests -->
+    <php>
+        <env name="APP_ENV" value="testing"/>
+    </php>
+</phpunit>
