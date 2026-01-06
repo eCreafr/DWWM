@@ -5,6 +5,12 @@
  *
  * Ce fichier contient tous les paramètres globaux de l'application
  * comme l'URL de base, les paramètres de session, etc.
+ *
+ * INSTALLATION :
+ * --------------
+ * 1. Copiez ce fichier et renommez-le en "config.php"
+ * 2. Modifiez les paramètres selon votre environnement
+ * 3. Ajoutez votre clé API TinyMCE (gratuite sur https://www.tiny.cloud/)
  */
 
 // Démarrage de la session pour pouvoir gérer les messages flash et l'authentification
@@ -25,9 +31,9 @@ define('BASE_URL', $protocol . $host . $baseFolder);
 date_default_timezone_set('UTC');
 
 // Clé API TinyMCE (éditeur de texte riche)
-// Obtenez une clé gratuite sur https://www.tiny.cloud/
+// Obtenez une clé gratuite sur https://www.tiny.cloud/auth/signup/
 // Remplacez 'no-api-key' par votre clé API pour débloquer toutes les fonctionnalités
-define('TINYMCE_API_KEY', '5cwidnspevwfhqgmp8mq8icyqo30bytukm5bv8wyuiabxmpm');
+define('TINYMCE_API_KEY', 'no-api-key');
 
 // Active l'affichage des erreurs en mode développement
 // En production, mettre ces valeurs à 0 et 'off'

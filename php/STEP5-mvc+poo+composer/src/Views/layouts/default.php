@@ -14,6 +14,11 @@
     <!-- Fichiers CSS Bootstrap et personnalisés -->
     <link rel="stylesheet" href="<?= BASE_URL ?>/assets/css/main.css">
     <link rel="stylesheet" href="<?= BASE_URL ?>/assets/css/bootstrap.min.css">
+
+    <!-- TinyMCE Editor (chargé conditionnellement si nécessaire) -->
+    <?php if (isset($useTinyMCE) && $useTinyMCE === true): ?>
+        <script src="https://cdn.tiny.cloud/1/<?= TINYMCE_API_KEY ?>/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
+    <?php endif; ?>
 </head>
 
 <body>

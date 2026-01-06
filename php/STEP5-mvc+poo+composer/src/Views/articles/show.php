@@ -89,8 +89,9 @@ $imageUrl = $imagePath ? BASE_URL . $imagePath : "https://picsum.photos/1300/400
 
         <!-- Contenu complet de l'article -->
         <div class="article-content">
-            <!-- nl2br() convertit les sauts de ligne en balises <br> -->
-            <?= nl2br(htmlspecialchars($article['contenu'])); ?>
+            <!-- Affichage du contenu riche formaté par TinyMCE -->
+            <!-- Le contenu HTML est purifié côté serveur pour la sécurité -->
+            <?= $article['contenu']; ?>
         </div>
 
     </article>

@@ -165,3 +165,7 @@ textarea {
 ::before {
     box-sizing: border-box;
 }
+
+.tox-statusbar__branding {
+    display: none !important;
+}

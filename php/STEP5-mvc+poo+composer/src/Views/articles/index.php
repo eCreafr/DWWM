@@ -73,7 +73,7 @@
 
                     <!-- Contenu tronqué de l'article (200 caractères max par php, 3 lignes max par css card-text ) -->
                     <p class="card-text">
-                        <?= htmlspecialchars(StringHelper::truncate($article['contenu'], 200)); ?>
+                        <?= htmlspecialchars(StringHelper::truncate(StringHelper::stripHtml($article['contenu']), 200)); ?>
                     </p>
 
                     <?php if (\App\Helpers\AuthHelper::isUser() or \App\Helpers\AuthHelper::isAdmin()):  ?>

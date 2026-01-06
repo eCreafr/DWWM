@@ -99,4 +99,28 @@ class StringHelper
     {
         return htmlspecialchars($string, ENT_QUOTES, 'UTF-8');
     }
+
+    /**
+     * Extrait le texte brut d'une chaîne HTML (pour les extraits d'articles)
+     *
+     * Cette méthode retire toutes les balises HTML pour obtenir uniquement le texte,
+     * utile pour afficher un extrait d'un contenu riche formaté par TinyMCE
+     *
+     * @param string $html La chaîne HTML à convertir
+     * @return string Le texte brut sans balises HTML
+     */
+    public static function stripHtml(string $html): string
+    {
+        // Supprime toutes les balises HTML et PHP
+        $text = strip_tags($html);
+
+        // Décode les entités HTML (par ex: &nbsp; devient un espace)
+        $text = html_entity_decode($text, ENT_QUOTES, 'UTF-8');
+
+        // Supprime les espaces multiples et les sauts de ligne
+        $text = preg_replace('/\s+/', ' ', $text);
+
+        // Supprime les espaces en début et fin
+        return trim($text);
+    }
 }

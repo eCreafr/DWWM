@@ -1,6 +1,11 @@
 <!-- Vue du formulaire d'ajout d'article -->
 <!-- Cette vue affiche le formulaire pour créer un nouvel article -->
 
+<?php
+// Active TinyMCE pour cette page
+$useTinyMCE = true;
+?>
+
 <div class="d-flex flex-column min-vh-100">
     <div class="container">
 
@@ -156,5 +161,22 @@
         matchInputs.forEach(input => {
             input.required = this.checked;
         });
+    });
+
+    // Initialisation de TinyMCE sur le champ "contenu"
+    tinymce.init({
+        selector: '#contenu',
+        language: 'fr_FR',
+        height: 400,
+        menubar: false,
+        plugins: [
+            'advlist', 'autolink', 'lists', 'link', 'image', 'charmap', 'preview',
+            'anchor', 'searchreplace', 'visualblocks', 'code', 'fullscreen',
+            'insertdatetime', 'media', 'table', 'help', 'wordcount'
+        ],
+        toolbar: 'undo redo | blocks | bold italic forecolor backcolor | ' +
+            'alignleft aligncenter alignright alignjustify | ' +
+            'bullist numlist outdent indent | removeformat | help',
+        content_style: 'body { font-family: Arial, sans-serif; font-size: 14px }'
     });
 </script>

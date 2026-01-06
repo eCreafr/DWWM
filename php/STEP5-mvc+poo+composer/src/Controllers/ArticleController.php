@@ -125,7 +125,7 @@ class ArticleController
             empty($postData['contenu']) ||
             empty($postData['auteur']) ||
             StringHelper::sanitize($postData['titre']) === '' ||
-            StringHelper::sanitize($postData['contenu']) === '' ||
+            trim(strip_tags($postData['contenu'])) === '' || // Validation sans retirer le HTML définitivement
             StringHelper::sanitize($postData['auteur']) === ''
         ) {
             // En cas d'erreur, on stocke le message en session et on redirige
@@ -136,7 +136,9 @@ class ArticleController
 
         // Nettoie les données de l'article (sécurité contre XSS)
         $titre = StringHelper::sanitize($postData['titre']);
-        $contenu = StringHelper::sanitize($postData['contenu']);
+        // Le contenu n'est PAS sanitizé car il contient du HTML riche de TinyMCE
+        // IMPORTANT : Pour la production, utilisez HTML Purifier (voir INTEGRATION_TINYMCE.md)
+        $contenu = trim($postData['contenu']);
         $auteur = StringHelper::sanitize($postData['auteur']);
 
         // Initialise l'ID du match à 0 (pas de match par défaut)
@@ -248,7 +250,7 @@ class ArticleController
             empty($postData['titre']) ||
             empty($postData['contenu']) ||
             StringHelper::sanitize($postData['titre']) === '' ||
-            StringHelper::sanitize($postData['contenu']) === ''
+            trim(strip_tags($postData['contenu'])) === '' // Validation sans retirer le HTML définitivement
         ) {
             $_SESSION['error_message'] = 'Il manque des informations pour permettre l\'édition du formulaire.';
             UrlHelper::redirect('home.html');
@@ -257,7 +259,9 @@ class ArticleController
 
         $id = (int) $postData['id'];
         $titre = StringHelper::sanitize($postData['titre']);
-        $contenu = StringHelper::sanitize($postData['contenu']);
+        // Le contenu n'est PAS sanitizé car il contient du HTML riche de TinyMCE
+        // IMPORTANT : Pour la production, utilisez HTML Purifier (voir INTEGRATION_TINYMCE.md)
+        $contenu = trim($postData['contenu']);
 
         // Prépare les données de mise à jour
         $updateData = [
