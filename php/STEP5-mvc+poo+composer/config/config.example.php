@@ -8,10 +8,14 @@
  *
  * INSTALLATION :
  * --------------
- * 1. Copiez ce fichier et renommez-le en "config.php"
- * 2. Modifiez les paramètres selon votre environnement
- * 3. Ajoutez votre clé API TinyMCE (gratuite sur https://www.tiny.cloud/)
+ * 1. Copiez .env.example vers .env et configurez vos variables d'environnement
+ * 2. Ce fichier config.php sera créé automatiquement lors de l'installation
+ * 3. Si vous le créez manuellement, copiez ce fichier vers config.php
  */
+
+// Charge les variables d'environnement depuis le fichier .env
+require_once __DIR__ . '/env.php';
+loadEnv(__DIR__ . '/../.env');
 
 // Démarrage de la session pour pouvoir gérer les messages flash et l'authentification
 session_start();
@@ -26,17 +30,23 @@ $baseFolder = dirname($_SERVER['SCRIPT_NAME']);
 define('BASE_URL', $protocol . $host . $baseFolder);
 
 // Définit le fuseau horaire par défaut pour les dates
-// TEMPORAIRE : UTC pour correspondre au téléphone en développement
-// En production : utiliser 'Europe/Paris'
-date_default_timezone_set('UTC');
+// Chargé depuis la variable d'environnement TIMEZONE dans le fichier .env
+date_default_timezone_set(env('TIMEZONE', 'UTC'));
 
 // Clé API TinyMCE (éditeur de texte riche)
-// Obtenez une clé gratuite sur https://www.tiny.cloud/auth/signup/
-// Remplacez 'no-api-key' par votre clé API pour débloquer toutes les fonctionnalités
-define('TINYMCE_API_KEY', 'no-api-key');
+// Chargée depuis la variable d'environnement TINYMCE_API_KEY dans le fichier .env
+// Obtenez une clé gratuite sur https://www.tiny.cloud/
+define('TINYMCE_API_KEY', env('TINYMCE_API_KEY', 'no-api-key'));
 
 // Active l'affichage des erreurs en mode développement
-// En production, mettre ces valeurs à 0 et 'off'
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
+// Contrôlé par la variable d'environnement DEV_MODE dans le fichier .env
+$devMode = filter_var(env('DEV_MODE', 'true'), FILTER_VALIDATE_BOOLEAN);
+if ($devMode) {
+    ini_set('display_errors', 1);
+    ini_set('display_startup_errors', 1);
+    error_reporting(E_ALL);
+} else {
+    ini_set('display_errors', 0);
+    ini_set('display_startup_errors', 0);
+    error_reporting(0);
+}
