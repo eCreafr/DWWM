@@ -1,0 +1,615 @@
+<!doctype html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Semaine 3 - Jour 3 | Événements JavaScript</title>
+        <link rel="stylesheet" href="../css/froggie.css" />
+        <style>
+            .demo-container {
+                max-width: 1200px;
+                margin: 40px auto;
+                padding: 20px;
+                font-family: Arial, sans-serif;
+            }
+            .demo-title {
+                text-align: center;
+                font-size: 2.5em;
+                margin-bottom: 20px;
+                color: #2c3e50;
+            }
+            .demo-intro {
+                background: #ecf0f1;
+                padding: 20px;
+                border-radius: 10px;
+                margin-bottom: 40px;
+                line-height: 1.6;
+            }
+            .demo-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                gap: 30px;
+                margin-bottom: 40px;
+            }
+            .demo-item {
+                border: 2px solid #f093fb;
+                border-radius: 10px;
+                padding: 20px;
+                background: white;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            }
+            .demo-item h2 {
+                margin-top: 0;
+                color: #f093fb;
+                font-size: 1.5em;
+            }
+            .code-example {
+                background: #2c3e50;
+                color: #ecf0f1;
+                padding: 15px;
+                border-radius: 5px;
+                font-family: 'Courier New', monospace;
+                font-size: 0.9em;
+                margin: 15px 0;
+                overflow-x: auto;
+            }
+            .highlight {
+                color: #f39c12;
+                font-weight: bold;
+            }
+            .keyword {
+                color: #e74c3c;
+            }
+            .string {
+                color: #2ecc71;
+            }
+            .comment {
+                color: #95a5a6;
+                font-style: italic;
+            }
+
+            /* Zone de démonstration interactive */
+            .interactive-demo {
+                background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+                padding: 20px;
+                border-radius: 10px;
+                margin: 20px 0;
+                color: white;
+            }
+            .demo-box {
+                background: white;
+                color: #2c3e50;
+                padding: 15px;
+                border-radius: 8px;
+                margin: 10px 0;
+                transition: all 0.3s;
+            }
+            .demo-button {
+                background: #2ecc71;
+                color: white;
+                border: none;
+                padding: 10px 20px;
+                border-radius: 5px;
+                cursor: pointer;
+                font-weight: bold;
+                margin: 5px;
+                transition: all 0.3s;
+            }
+            .demo-button:hover {
+                background: #27ae60;
+                transform: scale(1.05);
+            }
+            .demo-input {
+                width: 100%;
+                padding: 10px;
+                border: 2px solid #3498db;
+                border-radius: 5px;
+                font-size: 14px;
+                margin: 5px 0;
+            }
+            .demo-output {
+                background: #ecf0f1;
+                padding: 10px;
+                border-radius: 5px;
+                margin: 10px 0;
+                min-height: 40px;
+                color: #2c3e50;
+            }
+            .hover-zone {
+                background: #3498db;
+                color: white;
+                padding: 30px;
+                text-align: center;
+                border-radius: 8px;
+                cursor: pointer;
+                transition: all 0.3s;
+            }
+            .hover-zone:hover {
+                background: #2ecc71;
+                transform: scale(1.05);
+            }
+
+            /* Console JavaScript interactive */
+            .js-console {
+                background: #1e1e1e;
+                border-radius: 10px;
+                padding: 20px;
+                margin: 30px 0;
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            }
+            .js-console-header {
+                color: #f39c12;
+                font-weight: bold;
+                margin-bottom: 15px;
+                font-size: 1.1em;
+                display: flex;
+                align-items: center;
+                gap: 10px;
+            }
+            .js-console-editor {
+                background: #2d2d2d;
+                border: 1px solid #444;
+                border-radius: 5px;
+                padding: 15px;
+                margin-bottom: 15px;
+            }
+            .js-console-editor textarea {
+                width: 100%;
+                background: transparent;
+                border: none;
+                color: #f8f8f2;
+                font-family: 'Courier New', monospace;
+                font-size: 0.95em;
+                resize: vertical;
+                min-height: 80px;
+                outline: none;
+            }
+            .js-console-output {
+                background: #000;
+                border: 1px solid #444;
+                border-radius: 5px;
+                padding: 15px;
+                color: #0f0;
+                font-family: 'Courier New', monospace;
+                font-size: 0.9em;
+                min-height: 60px;
+                max-height: 300px;
+                overflow-y: auto;
+                white-space: pre-wrap;
+            }
+            .js-console-output .error {
+                color: #e74c3c;
+            }
+            .js-console-output .warning {
+                color: #f39c12;
+            }
+            .js-console-buttons {
+                display: flex;
+                gap: 10px;
+                margin-bottom: 15px;
+            }
+            .btn-execute {
+                background: #2ecc71;
+                color: white;
+                border: none;
+                padding: 10px 20px;
+                border-radius: 5px;
+                cursor: pointer;
+                font-weight: bold;
+                transition: background 0.3s;
+            }
+            .btn-execute:hover {
+                background: #27ae60;
+            }
+            .btn-clear {
+                background: #e74c3c;
+                color: white;
+                border: none;
+                padding: 10px 20px;
+                border-radius: 5px;
+                cursor: pointer;
+                font-weight: bold;
+                transition: background 0.3s;
+            }
+            .btn-clear:hover {
+                background: #c0392b;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="demo-container">
+            <h1 class="demo-title">Semaine 3 - Jour 3 : Événements JavaScript</h1>
+
+            <div class="demo-intro">
+                <h3>Rendre vos pages interactives avec les événements</h3>
+                <p>
+                    Les <strong>événements</strong> sont des actions qui se produisent dans le navigateur : un clic, une frappe clavier,
+                    un survol de souris, la soumission d'un formulaire... JavaScript peut "écouter" ces événements et réagir.
+                </p>
+                <p>
+                    <strong>Applications concrètes :</strong> Boutons cliquables, validation de formulaires en temps réel,
+                    menus interactifs, animations au survol, raccourcis clavier...
+                </p>
+                <p>
+                    <strong>Aujourd'hui :</strong> addEventListener(), types d'événements courants, l'objet event, et preventDefault().
+                </p>
+            </div>
+
+            <!-- Concepts de base -->
+            <div class="demo-grid">
+                <div class="demo-item">
+                    <h2>1. addEventListener()</h2>
+                    <p>
+                        La méthode moderne pour écouter les événements. Peut gérer plusieurs listeners sur le même élément.
+                    </p>
+                    <div class="code-example">
+                        <span class="comment">// Syntaxe de base</span><br />
+                        element.<span class="highlight">addEventListener</span>(<span class="string">'type'</span>, <span class="keyword">function</span>(event) {<br />
+                        &nbsp;&nbsp;<span class="comment">// Code à exécuter</span><br />
+                        });<br /><br />
+
+                        <span class="comment">// Exemple : Clic sur un bouton</span><br />
+                        <span class="keyword">let</span> btn = <span class="highlight">document.querySelector</span>(<span class="string">'button'</span>);<br />
+                        btn.<span class="highlight">addEventListener</span>(<span class="string">'click'</span>, <span class="keyword">function</span>() {<br />
+                        &nbsp;&nbsp;console.<span class="highlight">log</span>(<span class="string">'Bouton cliqué !'</span>);<br />
+                        });<br /><br />
+
+                        <span class="comment">// Avec une fonction fléchée</span><br />
+                        btn.<span class="highlight">addEventListener</span>(<span class="string">'click'</span>, () => {<br />
+                        &nbsp;&nbsp;alert(<span class="string">'Clic détecté'</span>);<br />
+                        });
+                    </div>
+
+                    <div class="interactive-demo">
+                        <h3>Démo interactive</h3>
+                        <button class="demo-button" id="click-demo">Cliquez-moi !</button>
+                        <div class="demo-output" id="click-output">En attente de clic...</div>
+                    </div>
+                </div>
+
+                <div class="demo-item">
+                    <h2>2. Types d'événements courants</h2>
+                    <p>
+                        <strong>click</strong> : Clic de souris<br />
+                        <strong>input</strong> : Modification de champ<br />
+                        <strong>change</strong> : Changement validé<br />
+                        <strong>mouseover</strong> : Survol
+                    </p>
+                    <div class="code-example">
+                        <span class="comment">// Click : Clic de souris</span><br />
+                        btn.<span class="highlight">addEventListener</span>(<span class="string">'click'</span>, () => {});<br /><br />
+
+                        <span class="comment">// Input : Frappe clavier (temps réel)</span><br />
+                        input.<span class="highlight">addEventListener</span>(<span class="string">'input'</span>, () => {<br />
+                        &nbsp;&nbsp;console.<span class="highlight">log</span>(input.<span class="highlight">value</span>);<br />
+                        });<br /><br />
+
+                        <span class="comment">// Change : Changement validé (perd le focus)</span><br />
+                        select.<span class="highlight">addEventListener</span>(<span class="string">'change'</span>, () => {});<br /><br />
+
+                        <span class="comment">// Mouseover : Survol de souris</span><br />
+                        div.<span class="highlight">addEventListener</span>(<span class="string">'mouseover'</span>, () => {<br />
+                        &nbsp;&nbsp;div.<span class="highlight">style.backgroundColor</span> = <span class="string">'red'</span>;<br />
+                        });
+                    </div>
+
+                    <div class="interactive-demo">
+                        <h3>Démo interactive</h3>
+                        <input type="text" class="demo-input" id="input-demo" placeholder="Tapez du texte..." />
+                        <div class="demo-output" id="input-output">Texte saisi : <strong>aucun</strong></div>
+                        <div class="hover-zone" id="hover-demo">Survolez-moi avec la souris !</div>
+                    </div>
+                </div>
+
+                <div class="demo-item">
+                    <h2>3. L'objet event</h2>
+                    <p>
+                        Chaque événement passe un objet <strong>event</strong> en paramètre contenant des informations utiles.
+                    </p>
+                    <div class="code-example">
+                        element.<span class="highlight">addEventListener</span>(<span class="string">'click'</span>, (<span class="highlight">event</span>) => {<br />
+                        &nbsp;&nbsp;<span class="comment">// Type d'événement</span><br />
+                        &nbsp;&nbsp;console.<span class="highlight">log</span>(event.<span class="highlight">type</span>); <span class="comment">// 'click'</span><br /><br />
+
+                        &nbsp;&nbsp;<span class="comment">// Élément qui a déclenché l'événement</span><br />
+                        &nbsp;&nbsp;console.<span class="highlight">log</span>(event.<span class="highlight">target</span>);<br /><br />
+
+                        &nbsp;&nbsp;<span class="comment">// Position de la souris</span><br />
+                        &nbsp;&nbsp;console.<span class="highlight">log</span>(event.<span class="highlight">clientX</span>, event.<span class="highlight">clientY</span>);<br /><br />
+
+                        &nbsp;&nbsp;<span class="comment">// Touche enfoncée (pour clavier)</span><br />
+                        &nbsp;&nbsp;console.<span class="highlight">log</span>(event.<span class="highlight">key</span>);<br />
+                        });
+                    </div>
+
+                    <div class="interactive-demo">
+                        <h3>Démo interactive</h3>
+                        <div class="demo-box" id="event-demo" style="cursor: pointer; text-align: center; padding: 30px;">
+                            Cliquez n'importe où dans cette zone
+                        </div>
+                        <div class="demo-output" id="event-output">Informations sur l'événement apparaîtront ici</div>
+                    </div>
+                </div>
+
+                <div class="demo-item">
+                    <h2>4. event.preventDefault()</h2>
+                    <p>
+                        Empêche le comportement par défaut d'un événement (ex: soumission de formulaire, clic sur lien).
+                    </p>
+                    <div class="code-example">
+                        <span class="comment">// Empêcher la soumission d'un formulaire</span><br />
+                        form.<span class="highlight">addEventListener</span>(<span class="string">'submit'</span>, (<span class="highlight">event</span>) => {<br />
+                        &nbsp;&nbsp;event.<span class="highlight">preventDefault</span>(); <span class="comment">// Bloque l'envoi</span><br />
+                        &nbsp;&nbsp;console.<span class="highlight">log</span>(<span class="string">'Formulaire validé côté client'</span>);<br />
+                        });<br /><br />
+
+                        <span class="comment">// Empêcher le clic sur un lien</span><br />
+                        lien.<span class="highlight">addEventListener</span>(<span class="string">'click'</span>, (<span class="highlight">event</span>) => {<br />
+                        &nbsp;&nbsp;event.<span class="highlight">preventDefault</span>();<br />
+                        &nbsp;&nbsp;alert(<span class="string">'Navigation bloquée'</span>);<br />
+                        });<br /><br />
+
+                        <span class="comment">// Utile pour la validation avant soumission</span>
+                    </div>
+
+                    <div class="interactive-demo">
+                        <h3>Démo interactive</h3>
+                        <form id="form-demo">
+                            <input type="text" class="demo-input" id="form-input" placeholder="Votre nom" required />
+                            <button type="submit" class="demo-button">Soumettre</button>
+                        </form>
+                        <div class="demo-output" id="form-output">Le formulaire ne rechargera pas la page !</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Console interactive -->
+            <div class="js-console">
+                <div class="js-console-header">
+                    Console JavaScript Interactive - Testez les événements !
+                </div>
+                <div class="js-console-editor">
+                    <textarea id="js-input" placeholder="Écrivez votre code JavaScript ici..."></textarea>
+                </div>
+                <div class="js-console-buttons">
+                    <button class="btn-execute" onclick="executeCode()">Exécuter (Ctrl + Enter)</button>
+                    <button class="btn-clear" onclick="clearConsole()">Effacer</button>
+                </div>
+                <div class="js-console-output" id="js-output">Prêt à exécuter votre code...</div>
+            </div>
+
+            <!-- Exemples pratiques -->
+            <div style="background: #e8f4f8; padding: 25px; border-radius: 10px; margin: 30px 0">
+                <h2 style="color: #2c3e50; text-align: center; margin-top: 0">Exemples pratiques - Compteur interactif</h2>
+                <div class="code-example">
+                    <span class="comment">// Créer un compteur avec boutons +/-</span><br /><br />
+
+                    <span class="keyword">let</span> compteur = <span class="highlight">0</span>;<br />
+                    <span class="keyword">let</span> affichage = <span class="highlight">document.querySelector</span>(<span class="string">'.compteur'</span>);<br />
+                    <span class="keyword">let</span> btnPlus = <span class="highlight">document.querySelector</span>(<span class="string">'.btn-plus'</span>);<br />
+                    <span class="keyword">let</span> btnMoins = <span class="highlight">document.querySelector</span>(<span class="string">'.btn-moins'</span>);<br />
+                    <span class="keyword">let</span> btnReset = <span class="highlight">document.querySelector</span>(<span class="string">'.btn-reset'</span>);<br /><br />
+
+                    <span class="comment">// Fonction pour mettre à jour l'affichage</span><br />
+                    <span class="keyword">function</span> <span class="highlight">mettreAJour</span>() {<br />
+                    &nbsp;&nbsp;affichage.<span class="highlight">textContent</span> = compteur;<br />
+                    &nbsp;&nbsp;<span class="comment">// Changer la couleur selon la valeur</span><br />
+                    &nbsp;&nbsp;<span class="keyword">if</span> (compteur > <span class="highlight">0</span>) {<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;affichage.<span class="highlight">style.color</span> = <span class="string">'green'</span>;<br />
+                    &nbsp;&nbsp;} <span class="keyword">else if</span> (compteur &lt; <span class="highlight">0</span>) {<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;affichage.<span class="highlight">style.color</span> = <span class="string">'red'</span>;<br />
+                    &nbsp;&nbsp;} <span class="keyword">else</span> {<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;affichage.<span class="highlight">style.color</span> = <span class="string">'black'</span>;<br />
+                    &nbsp;&nbsp;}<br />
+                    }<br /><br />
+
+                    <span class="comment">// Événements</span><br />
+                    btnPlus.<span class="highlight">addEventListener</span>(<span class="string">'click'</span>, () => {<br />
+                    &nbsp;&nbsp;compteur++;<br />
+                    &nbsp;&nbsp;<span class="highlight">mettreAJour</span>();<br />
+                    });<br /><br />
+
+                    btnMoins.<span class="highlight">addEventListener</span>(<span class="string">'click'</span>, () => {<br />
+                    &nbsp;&nbsp;compteur--;<br />
+                    &nbsp;&nbsp;<span class="highlight">mettreAJour</span>();<br />
+                    });<br /><br />
+
+                    btnReset.<span class="highlight">addEventListener</span>(<span class="string">'click'</span>, () => {<br />
+                    &nbsp;&nbsp;compteur = <span class="highlight">0</span>;<br />
+                    &nbsp;&nbsp;<span class="highlight">mettreAJour</span>();<br />
+                    });
+                </div>
+                <p style="text-align: center; margin-top: 20px">
+                    <strong>Testez ces exemples dans la console interactive ci-dessus !</strong>
+                </p>
+            </div>
+        </div>
+
+        <!-- Zone Froggiesplaining -->
+        <div class="froggiesplaining">
+            <span> Froggiesplaining :</span>
+            <p>
+                <br />
+                <strong>Objectifs de ce cours :</strong><br />
+                ✅ Comprendre le système d'événements JavaScript<br />
+                ✅ Utiliser addEventListener() pour écouter les événements<br />
+                ✅ Connaître les types d'événements courants (click, input, change, mouseover)<br />
+                ✅ Exploiter l'objet event pour obtenir des informations<br />
+                ✅ Utiliser preventDefault() pour contrôler le comportement<br /><br />
+
+                <strong>Points clés à retenir :</strong><br />
+                • <strong>addEventListener('type', callback)</strong> : Écouter un événement<br />
+                • <strong>click</strong> : Clic de souris (le plus courant)<br />
+                • <strong>input</strong> : Saisie temps réel dans un champ (à chaque frappe)<br />
+                • <strong>change</strong> : Changement validé (quand le champ perd le focus)<br />
+                • <strong>submit</strong> : Soumission de formulaire<br />
+                • <strong>event.target</strong> : Élément qui a déclenché l'événement<br />
+                • <strong>event.preventDefault()</strong> : Bloquer le comportement par défaut<br />
+                • Toujours utiliser addEventListener (pas onclick dans le HTML)<br /><br />
+
+                <strong>Exercice pratique :</strong><br />
+                1. Créez un bouton qui affiche une alerte au clic<br />
+                2. Créez un champ input qui affiche sa valeur en temps réel<br />
+                3. Créez une div qui change de couleur au survol (mouseover/mouseout)<br />
+                4. Créez un formulaire qui affiche les données au lieu de les envoyer<br />
+                5. Créez un bouton qui compte le nombre de clics<br />
+                6. Bonus : Créez un compteur avec boutons + et -<br />
+                7. Bonus 2 : Détectez la touche Enter dans un champ input (event.key)
+            </p>
+            <img src="../img/froggie-300.png" alt="Froggie explain" class="overfrog" id="Froggie" />
+        </div>
+
+        <!-- Bouton retour -->
+        <a href="index.html" id="goToIndex" title="Retour à l'index">
+            <i class="bi bi-arrow-left"></i>
+        </a>
+
+        <!-- Lien vers Froggie -->
+        <a href="#Froggie">
+            <div id="goToFroggie">
+                <img src="../img/froggie-300.png" width="50px" /><br /><i class="bi bi-arrow-bar-down"></i>
+            </div>
+        </a>
+
+        <!-- Footer -->
+        <div id="footerGit">
+            <a href="https://github.com/eCreafr/DWWM" target="_blank"><i class="bi bi-github">GitHub - eCrea</i></a>
+        </div>
+
+        <script>
+            // Démo 1 : Click event
+            let clickCount = 0;
+            document.getElementById('click-demo').addEventListener('click', function() {
+                clickCount++;
+                document.getElementById('click-output').innerHTML =
+                    `<strong>Nombre de clics : ${clickCount}</strong>`;
+            });
+
+            // Démo 2 : Input event
+            document.getElementById('input-demo').addEventListener('input', function(event) {
+                const value = event.target.value;
+                document.getElementById('input-output').innerHTML =
+                    `Texte saisi : <strong>${value || 'aucun'}</strong> (${value.length} caractères)`;
+            });
+
+            // Démo 2 : Hover event
+            document.getElementById('hover-demo').addEventListener('mouseover', function() {
+                this.textContent = 'Bravo ! Vous me survolez !';
+                this.style.background = '#2ecc71';
+            });
+            document.getElementById('hover-demo').addEventListener('mouseout', function() {
+                this.textContent = 'Survolez-moi avec la souris !';
+                this.style.background = '#3498db';
+            });
+
+            // Démo 3 : Event object
+            document.getElementById('event-demo').addEventListener('click', function(event) {
+                const output = document.getElementById('event-output');
+                output.innerHTML = `
+                    <strong>Informations sur l'événement :</strong><br>
+                    • Type : ${event.type}<br>
+                    • Position X : ${event.clientX}px<br>
+                    • Position Y : ${event.clientY}px<br>
+                    • Cible : ${event.target.tagName}<br>
+                    • Heure : ${new Date().toLocaleTimeString()}
+                `;
+            });
+
+            // Démo 4 : preventDefault
+            document.getElementById('form-demo').addEventListener('submit', function(event) {
+                event.preventDefault();
+                const name = document.getElementById('form-input').value;
+                const output = document.getElementById('form-output');
+                if (name) {
+                    output.innerHTML = `<strong>✅ Formulaire soumis !</strong><br>Bonjour ${name} ! (Page non rechargée grâce à preventDefault)`;
+                    output.style.background = '#2ecc71';
+                    output.style.color = 'white';
+                } else {
+                    output.innerHTML = '<strong>❌ Veuillez entrer votre nom</strong>';
+                    output.style.background = '#e74c3c';
+                    output.style.color = 'white';
+                }
+            });
+
+            // Console JavaScript interactive
+            const jsInput = document.getElementById('js-input');
+            const jsOutput = document.getElementById('js-output');
+
+            // Exécuter le code
+            function executeCode() {
+                const code = jsInput.value;
+                jsOutput.innerHTML = '';
+
+                // Capturer console.log
+                const logs = [];
+                const originalLog = console.log;
+                console.log = function (...args) {
+                    logs.push(args.map(arg =>
+                        typeof arg === 'object' ? JSON.stringify(arg, null, 2) : String(arg)
+                    ).join(' '));
+                    originalLog.apply(console, args);
+                };
+
+                try {
+                    // Exécuter le code
+                    eval(code);
+
+                    // Afficher les logs
+                    if (logs.length > 0) {
+                        jsOutput.innerHTML = logs.join('\n');
+                    } else {
+                        jsOutput.innerHTML = '✅ Code exécuté sans erreur (aucune sortie console)';
+                    }
+                } catch (error) {
+                    jsOutput.innerHTML = `<span class="error">❌ Erreur : ${error.message}</span>`;
+                } finally {
+                    // Restaurer console.log
+                    console.log = originalLog;
+                }
+            }
+
+            // Effacer la console
+            function clearConsole() {
+                jsInput.value = '';
+                jsOutput.innerHTML = 'Console effacée. Prêt à exécuter votre code...';
+            }
+
+            // Raccourci clavier Ctrl + Enter
+            jsInput.addEventListener('keydown', function (e) {
+                if (e.ctrlKey && e.key === 'Enter') {
+                    e.preventDefault();
+                    executeCode();
+                }
+            });
+
+            // Exemple au chargement
+            window.addEventListener('DOMContentLoaded', function() {
+                jsInput.value = `// Événements JavaScript
+// Essayez ces exemples !
+
+// 1. Ajouter un listener sur le titre
+let titre = document.querySelector('.demo-title');
+titre.addEventListener('click', function() {
+  alert('Titre cliqué !');
+  this.style.color = '#f093fb';
+});
+console.log('✅ Listener ajouté sur le titre');
+
+// 2. Compter les clics sur un bouton
+let count = 0;
+let btn = document.querySelector('.btn-execute');
+btn.addEventListener('click', function() {
+  count++;
+  console.log('Clics sur Exécuter:', count);
+});
+
+// 3. Détecter les touches du clavier
+document.addEventListener('keydown', function(event) {
+  console.log('Touche pressée:', event.key);
+});
+
+console.log('Événements configurés ! Testez-les.');`;
+            });
+        </script>
+    </body>
+</html>

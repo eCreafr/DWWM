@@ -1,0 +1,402 @@
+<!doctype html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Semaine 1 - Jour 1 | Introduction à JavaScript</title>
+        <link rel="stylesheet" href="../../html/css/froggie.css" />
+        <style>
+            .demo-container {
+                max-width: 1200px;
+                margin: 40px auto;
+                padding: 20px;
+                font-family: Arial, sans-serif;
+            }
+            .demo-title {
+                text-align: center;
+                font-size: 2.5em;
+                margin-bottom: 20px;
+                color: #2c3e50;
+            }
+            .demo-intro {
+                background: #ecf0f1;
+                padding: 20px;
+                border-radius: 10px;
+                margin-bottom: 40px;
+                line-height: 1.6;
+            }
+            .demo-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                gap: 30px;
+                margin-bottom: 40px;
+            }
+            .demo-item {
+                border: 2px solid #f093fb;
+                border-radius: 10px;
+                padding: 20px;
+                background: white;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            }
+            .demo-item h2 {
+                margin-top: 0;
+                color: #f093fb;
+                font-size: 1.5em;
+            }
+            .code-example {
+                background: #2c3e50;
+                color: #ecf0f1;
+                padding: 15px;
+                border-radius: 5px;
+                font-family: 'Courier New', monospace;
+                font-size: 0.9em;
+                margin: 15px 0;
+                overflow-x: auto;
+            }
+            .highlight {
+                color: #f39c12;
+                font-weight: bold;
+            }
+            .keyword {
+                color: #e74c3c;
+            }
+            .string {
+                color: #2ecc71;
+            }
+            .comment {
+                color: #95a5a6;
+                font-style: italic;
+            }
+
+            /* Console JavaScript interactive */
+            .js-console {
+                background: #1e1e1e;
+                border-radius: 10px;
+                padding: 20px;
+                margin: 30px 0;
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            }
+            .js-console-header {
+                color: #f39c12;
+                font-weight: bold;
+                margin-bottom: 15px;
+                font-size: 1.1em;
+                display: flex;
+                align-items: center;
+                gap: 10px;
+            }
+            .js-console-editor {
+                background: #2d2d2d;
+                border: 1px solid #444;
+                border-radius: 5px;
+                padding: 15px;
+                margin-bottom: 15px;
+            }
+            .js-console-editor textarea {
+                width: 100%;
+                background: transparent;
+                border: none;
+                color: #f8f8f2;
+                font-family: 'Courier New', monospace;
+                font-size: 0.95em;
+                resize: vertical;
+                min-height: 80px;
+                outline: none;
+            }
+            .js-console-output {
+                background: #000;
+                border: 1px solid #444;
+                border-radius: 5px;
+                padding: 15px;
+                color: #0f0;
+                font-family: 'Courier New', monospace;
+                font-size: 0.9em;
+                min-height: 60px;
+                max-height: 300px;
+                overflow-y: auto;
+                white-space: pre-wrap;
+            }
+            .js-console-output .error {
+                color: #e74c3c;
+            }
+            .js-console-output .warning {
+                color: #f39c12;
+            }
+            .js-console-buttons {
+                display: flex;
+                gap: 10px;
+                margin-bottom: 15px;
+            }
+            .btn-execute {
+                background: #2ecc71;
+                color: white;
+                border: none;
+                padding: 10px 20px;
+                border-radius: 5px;
+                cursor: pointer;
+                font-weight: bold;
+                transition: background 0.3s;
+            }
+            .btn-execute:hover {
+                background: #27ae60;
+            }
+            .btn-clear {
+                background: #e74c3c;
+                color: white;
+                border: none;
+                padding: 10px 20px;
+                border-radius: 5px;
+                cursor: pointer;
+                font-weight: bold;
+                transition: background 0.3s;
+            }
+            .btn-clear:hover {
+                background: #c0392b;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="demo-container">
+            <h1 class="demo-title">🚀 Semaine 1 - Jour 1 : Introduction à JavaScript</h1>
+
+            <div class="demo-intro">
+                <h3>📚 Qu'est-ce que JavaScript ?</h3>
+                <p>
+                    <strong>JavaScript</strong> est le langage de programmation du web. Il permet de rendre les pages
+                    web <strong>interactives</strong> et <strong>dynamiques</strong>.
+                </p>
+                <p>
+                    <strong>Exemples d'utilisation :</strong> valider des formulaires, créer des animations, charger du
+                    contenu sans recharger la page, créer des jeux, des applications web complètes...
+                </p>
+                <p><strong>Important :</strong> JavaScript est différent de Java ! Ce sont deux langages distincts.</p>
+            </div>
+
+            <!-- Concepts de base -->
+            <div class="demo-grid">
+                <div class="demo-item">
+                    <h2>1. Où écrire du JavaScript ?</h2>
+                    <p><strong>3 méthodes principales :</strong></p>
+                    <ul style="line-height: 1.8">
+                        <li><strong>Dans la balise &lt;script&gt;</strong> (dans le HTML)</li>
+                        <li><strong>Dans un fichier externe</strong> (script.js)</li>
+                        <li><strong>Dans la console du navigateur</strong> (F12)</li>
+                    </ul>
+                    <div class="code-example">
+                        <span class="comment">&lt;!-- Dans le HTML --&gt;</span><br />
+                        &lt;<span class="keyword">script</span>&gt;<br />
+                        &nbsp;&nbsp;console.<span class="highlight">log</span>(<span class="string">'Bonjour !'</span
+                        >);<br />
+                        &lt;/<span class="keyword">script</span>&gt;
+                    </div>
+                </div>
+
+                <div class="demo-item">
+                    <h2>2. console.log()</h2>
+                    <p>
+                        La commande <code>console.log()</code> permet d'afficher des messages dans la console du
+                        navigateur.
+                    </p>
+                    <p><strong>Très utile pour :</strong></p>
+                    <ul style="line-height: 1.8">
+                        <li>Vérifier si le code fonctionne</li>
+                        <li>Afficher des valeurs</li>
+                        <li>Déboguer (trouver les erreurs)</li>
+                    </ul>
+                    <div class="code-example">
+                        console.<span class="highlight">log</span>(<span class="string">'Bonjour le monde !'</span
+                        >);<br />
+                        console.<span class="highlight">log</span>(<span class="highlight">42</span>);<br />
+                        console.<span class="highlight">log</span>(<span class="highlight">2 + 2</span>);
+                    </div>
+                </div>
+
+                <div class="demo-item">
+                    <h2>3. Commentaires</h2>
+                    <p>Les commentaires permettent d'expliquer le code. Ils ne sont pas exécutés.</p>
+                    <div class="code-example">
+                        <span class="comment">// Commentaire sur une seule ligne</span><br /><br />
+                        <span class="comment">/*</span><br />
+                        <span class="comment">&nbsp;&nbsp;Commentaire</span><br />
+                        <span class="comment">&nbsp;&nbsp;sur plusieurs</span><br />
+                        <span class="comment">&nbsp;&nbsp;lignes</span><br />
+                        <span class="comment">*/</span>
+                    </div>
+                    <p><strong>✅ Bonne pratique :</strong> Commenter son code pour le rendre plus lisible !</p>
+                </div>
+
+                <div class="demo-item">
+                    <h2>4. Instructions et point-virgule</h2>
+                    <p>
+                        Chaque instruction JavaScript se termine par un <strong>point-virgule (;)</strong> (optionnel
+                        mais recommandé).
+                    </p>
+                    <div class="code-example">
+                        console.<span class="highlight">log</span>(<span class="string">'Première ligne'</span>)<span
+                            class="highlight"
+                            >;</span
+                        ><br />
+                        console.<span class="highlight">log</span>(<span class="string">'Deuxième ligne'</span>)<span
+                            class="highlight"
+                            >;</span
+                        ><br />
+                    </div>
+                    <p>
+                        <strong>💡 Astuce :</strong> Même si JavaScript ajoute automatiquement les points-virgules, il
+                        est préférable de les écrire explicitement.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Console interactive -->
+            <div class="js-console">
+                <div class="js-console-header">⚡ Console JavaScript Interactive - Testez votre code !</div>
+                <div class="js-console-editor">
+                    <textarea
+                        id="js-input"
+                        placeholder="Écrivez votre code JavaScript ici...
+Exemple : console.log('Bonjour !');"
+                    ></textarea>
+                </div>
+                <div class="js-console-buttons">
+                    <button class="btn-execute" onclick="executeCode()">▶️ Exécuter (Ctrl + Enter)</button>
+                    <button class="btn-clear" onclick="clearConsole()">🗑️ Effacer</button>
+                </div>
+                <div class="js-console-output" id="js-output">Prêt à exécuter votre code...</div>
+            </div>
+
+            <!-- Exemples pratiques -->
+            <div style="background: #e8f4f8; padding: 25px; border-radius: 10px; margin: 30px 0">
+                <h2 style="color: #2c3e50; text-align: center; margin-top: 0">💻 Exemples à tester</h2>
+                <div class="code-example">
+                    <span class="comment">// Afficher un message</span><br />
+                    console.<span class="highlight">log</span>(<span class="string">'Bonjour le monde !'</span
+                    >);<br /><br />
+
+                    <span class="comment">// Afficher un calcul</span><br />
+                    console.<span class="highlight">log</span>(<span class="highlight">10 + 5</span>);<br /><br />
+
+                    <span class="comment">// Afficher plusieurs valeurs</span><br />
+                    console.<span class="highlight">log</span>(<span class="string">'Résultat :'</span>,
+                    <span class="highlight">2 + 2</span>);<br /><br />
+
+                    <span class="comment">// Utiliser des emoji</span><br />
+                    console.<span class="highlight">log</span>(<span class="string"
+                        >'🚀 Bienvenue dans JavaScript !'</span
+                    >);
+                </div>
+                <p style="text-align: center; margin-top: 20px">
+                    <strong>👆 Copiez ces exemples dans la console interactive ci-dessus !</strong>
+                </p>
+            </div>
+        </div>
+
+        <!-- Zone Froggiesplaining -->
+        <div class="froggiesplaining">
+            <span> Froggiesplaining :</span>
+            <p>
+                <br />
+                <strong>🎯 Objectifs de ce cours :</strong><br />
+                ✅ Comprendre ce qu'est JavaScript et à quoi il sert<br />
+                ✅ Savoir où écrire du code JavaScript<br />
+                ✅ Utiliser console.log() pour afficher des messages<br />
+                ✅ Écrire des commentaires pour expliquer son code<br /><br />
+
+                <strong>📖 Points clés à retenir :</strong><br />
+                • JavaScript rend les pages web interactives<br />
+                • <strong>console.log()</strong> affiche des messages dans la console (F12)<br />
+                • <strong>//</strong> pour commenter une ligne, <strong>/* */</strong> pour plusieurs lignes<br />
+                • Chaque instruction se termine par un <strong>;</strong><br />
+                • La console du navigateur est votre meilleure amie pour tester du code !<br /><br />
+
+                <strong>🏋️ Exercice pratique :</strong><br />
+                1. Ouvrez la console de votre navigateur (F12 → Console)<br />
+                2. Tapez : <code>console.log('Mon prénom est [votre prénom]');</code><br />
+                3. Appuyez sur Entrée<br />
+                4. Testez d'autres messages avec la console interactive ci-dessus !<br />
+                5. Essayez d'afficher un calcul : <code>console.log(25 * 4);</code>
+            </p>
+            <img src="../img/froggie-300.png" alt="Froggie explain" class="overfrog" id="Froggie" />
+        </div>
+
+        <!-- Bouton retour -->
+        <a href="index.html" id="goToIndex" title="Retour à l'index">
+            <i class="bi bi-arrow-left"></i>
+        </a>
+
+        <!-- Lien vers Froggie -->
+        <a href="#Froggie">
+            <div id="goToFroggie">
+                <img src="../img/froggie-300.png" width="50px" /><br /><i class="bi bi-arrow-bar-down"></i>
+            </div>
+        </a>
+
+        <!-- Footer -->
+        <div id="footerGit">
+            <a href="https://github.com/eCreafr/DWWM" target="_blank"><i class="bi bi-github">GitHub - eCrea</i></a>
+        </div>
+
+        <script>
+            // Console JavaScript interactive
+            const jsInput = document.getElementById('js-input');
+            const jsOutput = document.getElementById('js-output');
+
+            // Exécuter le code
+            function executeCode() {
+                const code = jsInput.value;
+                jsOutput.innerHTML = '';
+
+                // Capturer console.log
+                const logs = [];
+                const originalLog = console.log;
+                console.log = function (...args) {
+                    logs.push(
+                        args
+                            .map((arg) => (typeof arg === 'object' ? JSON.stringify(arg, null, 2) : String(arg)))
+                            .join(' ')
+                    );
+                    originalLog.apply(console, args);
+                };
+
+                try {
+                    // Exécuter le code
+                    eval(code);
+
+                    // Afficher les logs
+                    if (logs.length > 0) {
+                        jsOutput.innerHTML = logs.join('\n');
+                    } else {
+                        jsOutput.innerHTML = '✅ Code exécuté sans erreur (aucune sortie console)';
+                    }
+                } catch (error) {
+                    jsOutput.innerHTML = `<span class="error">❌ Erreur : ${error.message}</span>`;
+                } finally {
+                    // Restaurer console.log
+                    console.log = originalLog;
+                }
+            }
+
+            // Effacer la console
+            function clearConsole() {
+                jsInput.value = '';
+                jsOutput.innerHTML = 'Console effacée. Prêt à exécuter votre code...';
+            }
+
+            // Raccourci clavier Ctrl + Enter
+            jsInput.addEventListener('keydown', function (e) {
+                if (e.ctrlKey && e.key === 'Enter') {
+                    e.preventDefault();
+                    executeCode();
+                }
+            });
+
+            // Exemple au chargement
+            window.addEventListener('DOMContentLoaded', function () {
+                jsInput.value = `// Bienvenue ! Testez votre premier code JavaScript
+console.log('🚀 Bonjour le monde !');
+console.log('Je découvre JavaScript');
+console.log('2 + 2 =', 2 + 2);`;
+            });
+        </script>
+    </body>
+</html>

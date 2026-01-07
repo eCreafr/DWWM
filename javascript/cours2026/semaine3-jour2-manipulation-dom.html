@@ -1,0 +1,619 @@
+<!doctype html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Semaine 3 - Jour 2 | Manipulation du DOM</title>
+        <link rel="stylesheet" href="../css/froggie.css" />
+        <style>
+            .demo-container {
+                max-width: 1200px;
+                margin: 40px auto;
+                padding: 20px;
+                font-family: Arial, sans-serif;
+            }
+            .demo-title {
+                text-align: center;
+                font-size: 2.5em;
+                margin-bottom: 20px;
+                color: #2c3e50;
+            }
+            .demo-intro {
+                background: #ecf0f1;
+                padding: 20px;
+                border-radius: 10px;
+                margin-bottom: 40px;
+                line-height: 1.6;
+            }
+            .demo-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                gap: 30px;
+                margin-bottom: 40px;
+            }
+            .demo-item {
+                border: 2px solid #f093fb;
+                border-radius: 10px;
+                padding: 20px;
+                background: white;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            }
+            .demo-item h2 {
+                margin-top: 0;
+                color: #f093fb;
+                font-size: 1.5em;
+            }
+            .code-example {
+                background: #2c3e50;
+                color: #ecf0f1;
+                padding: 15px;
+                border-radius: 5px;
+                font-family: 'Courier New', monospace;
+                font-size: 0.9em;
+                margin: 15px 0;
+                overflow-x: auto;
+            }
+            .highlight {
+                color: #f39c12;
+                font-weight: bold;
+            }
+            .keyword {
+                color: #e74c3c;
+            }
+            .string {
+                color: #2ecc71;
+            }
+            .comment {
+                color: #95a5a6;
+                font-style: italic;
+            }
+
+            /* Zone de démonstration interactive */
+            .interactive-demo {
+                background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+                padding: 20px;
+                border-radius: 10px;
+                margin: 20px 0;
+                color: white;
+            }
+            .demo-box {
+                background: white;
+                color: #2c3e50;
+                padding: 15px;
+                border-radius: 8px;
+                margin: 10px 0;
+                transition: all 0.3s;
+            }
+            .demo-button {
+                background: #2ecc71;
+                color: white;
+                border: none;
+                padding: 10px 20px;
+                border-radius: 5px;
+                cursor: pointer;
+                font-weight: bold;
+                margin: 5px;
+                transition: all 0.3s;
+            }
+            .demo-button:hover {
+                background: #27ae60;
+                transform: scale(1.05);
+            }
+            .demo-image {
+                max-width: 150px;
+                border-radius: 8px;
+                margin: 10px;
+            }
+            .active-class {
+                background: #f39c12 !important;
+                color: white !important;
+                font-weight: bold !important;
+                transform: scale(1.05);
+            }
+
+            /* Console JavaScript interactive */
+            .js-console {
+                background: #1e1e1e;
+                border-radius: 10px;
+                padding: 20px;
+                margin: 30px 0;
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            }
+            .js-console-header {
+                color: #f39c12;
+                font-weight: bold;
+                margin-bottom: 15px;
+                font-size: 1.1em;
+                display: flex;
+                align-items: center;
+                gap: 10px;
+            }
+            .js-console-editor {
+                background: #2d2d2d;
+                border: 1px solid #444;
+                border-radius: 5px;
+                padding: 15px;
+                margin-bottom: 15px;
+            }
+            .js-console-editor textarea {
+                width: 100%;
+                background: transparent;
+                border: none;
+                color: #f8f8f2;
+                font-family: 'Courier New', monospace;
+                font-size: 0.95em;
+                resize: vertical;
+                min-height: 80px;
+                outline: none;
+            }
+            .js-console-output {
+                background: #000;
+                border: 1px solid #444;
+                border-radius: 5px;
+                padding: 15px;
+                color: #0f0;
+                font-family: 'Courier New', monospace;
+                font-size: 0.9em;
+                min-height: 60px;
+                max-height: 300px;
+                overflow-y: auto;
+                white-space: pre-wrap;
+            }
+            .js-console-output .error {
+                color: #e74c3c;
+            }
+            .js-console-output .warning {
+                color: #f39c12;
+            }
+            .js-console-buttons {
+                display: flex;
+                gap: 10px;
+                margin-bottom: 15px;
+            }
+            .btn-execute {
+                background: #2ecc71;
+                color: white;
+                border: none;
+                padding: 10px 20px;
+                border-radius: 5px;
+                cursor: pointer;
+                font-weight: bold;
+                transition: background 0.3s;
+            }
+            .btn-execute:hover {
+                background: #27ae60;
+            }
+            .btn-clear {
+                background: #e74c3c;
+                color: white;
+                border: none;
+                padding: 10px 20px;
+                border-radius: 5px;
+                cursor: pointer;
+                font-weight: bold;
+                transition: background 0.3s;
+            }
+            .btn-clear:hover {
+                background: #c0392b;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="demo-container">
+            <h1 class="demo-title">Semaine 3 - Jour 2 : Manipulation du DOM</h1>
+
+            <div class="demo-intro">
+                <h3>Modifier le DOM en temps réel</h3>
+                <p>
+                    Maintenant que vous savez sélectionner des éléments, apprenons à les <strong>modifier</strong> :
+                    changer leurs attributs, leurs styles CSS, ajouter/supprimer des classes, et créer de nouveaux éléments.
+                </p>
+                <p>
+                    <strong>Applications concrètes :</strong> Changer la couleur d'un bouton au survol, afficher/masquer
+                    du contenu, modifier une image, ajouter dynamiquement des éléments à une liste...
+                </p>
+                <p>
+                    <strong>Aujourd'hui :</strong> setAttribute/getAttribute, .style, classList, createElement et appendChild.
+                </p>
+            </div>
+
+            <!-- Concepts de base -->
+            <div class="demo-grid">
+                <div class="demo-item">
+                    <h2>1. Modifier les attributs</h2>
+                    <p>
+                        <strong>setAttribute()</strong> : Modifier un attribut HTML.<br />
+                        <strong>getAttribute()</strong> : Lire un attribut HTML.
+                    </p>
+                    <div class="code-example">
+                        <span class="comment">// Modifier l'attribut src d'une image</span><br />
+                        <span class="keyword">let</span> img = <span class="highlight">document.querySelector</span>(<span class="string">'img'</span>);<br />
+                        img.<span class="highlight">setAttribute</span>(<span class="string">'src'</span>, <span class="string">'nouvelle-image.jpg'</span>);<br /><br />
+
+                        <span class="comment">// Modifier l'attribut href d'un lien</span><br />
+                        <span class="keyword">let</span> lien = <span class="highlight">document.querySelector</span>(<span class="string">'a'</span>);<br />
+                        lien.<span class="highlight">setAttribute</span>(<span class="string">'href'</span>, <span class="string">'https://google.com'</span>);<br /><br />
+
+                        <span class="comment">// Lire un attribut</span><br />
+                        <span class="keyword">let</span> url = lien.<span class="highlight">getAttribute</span>(<span class="string">'href'</span>);<br />
+                        console.<span class="highlight">log</span>(url);<br /><br />
+
+                        <span class="comment">// Raccourci : accès direct à certains attributs</span><br />
+                        img.<span class="highlight">src</span> = <span class="string">'image.jpg'</span>; <span class="comment">// Équivalent</span>
+                    </div>
+
+                    <div class="interactive-demo">
+                        <h3>Démo interactive</h3>
+                        <img src="https://via.placeholder.com/150/f093fb/ffffff?text=Image+1"
+                             id="demo-img" class="demo-image" alt="Demo" />
+                        <div>
+                            <button class="demo-button" onclick="changeImage(1)">Image 1</button>
+                            <button class="demo-button" onclick="changeImage(2)">Image 2</button>
+                            <button class="demo-button" onclick="changeImage(3)">Image 3</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="demo-item">
+                    <h2>2. Modifier les styles CSS</h2>
+                    <p>
+                        Utiliser <strong>.style</strong> pour modifier directement les styles CSS d'un élément.
+                    </p>
+                    <div class="code-example">
+                        <span class="comment">// Modifier la couleur de fond</span><br />
+                        <span class="keyword">let</span> div = <span class="highlight">document.querySelector</span>(<span class="string">'.ma-div'</span>);<br />
+                        div.<span class="highlight">style.backgroundColor</span> = <span class="string">'#f39c12'</span>;<br /><br />
+
+                        <span class="comment">// Modifier plusieurs styles</span><br />
+                        div.<span class="highlight">style.color</span> = <span class="string">'white'</span>;<br />
+                        div.<span class="highlight">style.padding</span> = <span class="string">'20px'</span>;<br />
+                        div.<span class="highlight">style.fontSize</span> = <span class="string">'18px'</span>;<br /><br />
+
+                        <span class="comment">// Attention : CSS camelCase (background-color → backgroundColor)</span><br />
+                        div.<span class="highlight">style.borderRadius</span> = <span class="string">'10px'</span>;<br /><br />
+
+                        <span class="comment">// Lire un style</span><br />
+                        console.<span class="highlight">log</span>(div.<span class="highlight">style.backgroundColor</span>);
+                    </div>
+
+                    <div class="interactive-demo">
+                        <h3>Démo interactive</h3>
+                        <div class="demo-box" id="style-demo">
+                            Changez mon style avec les boutons !
+                        </div>
+                        <div>
+                            <button class="demo-button" onclick="changeStyle('color')">Couleur</button>
+                            <button class="demo-button" onclick="changeStyle('size')">Taille</button>
+                            <button class="demo-button" onclick="changeStyle('border')">Bordure</button>
+                            <button class="demo-button" onclick="changeStyle('reset')">Réinitialiser</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="demo-item">
+                    <h2>3. Gérer les classes CSS</h2>
+                    <p>
+                        <strong>classList</strong> permet d'ajouter, supprimer, basculer des classes CSS facilement.
+                    </p>
+                    <div class="code-example">
+                        <span class="keyword">let</span> element = <span class="highlight">document.querySelector</span>(<span class="string">'.ma-div'</span>);<br /><br />
+
+                        <span class="comment">// Ajouter une classe</span><br />
+                        element.<span class="highlight">classList.add</span>(<span class="string">'active'</span>);<br /><br />
+
+                        <span class="comment">// Supprimer une classe</span><br />
+                        element.<span class="highlight">classList.remove</span>(<span class="string">'hidden'</span>);<br /><br />
+
+                        <span class="comment">// Basculer (toggle) une classe</span><br />
+                        element.<span class="highlight">classList.toggle</span>(<span class="string">'active'</span>);<br /><br />
+
+                        <span class="comment">// Vérifier si une classe existe</span><br />
+                        <span class="keyword">if</span> (element.<span class="highlight">classList.contains</span>(<span class="string">'active'</span>)) {<br />
+                        &nbsp;&nbsp;console.<span class="highlight">log</span>(<span class="string">'Element is active'</span>);<br />
+                        }
+                    </div>
+
+                    <div class="interactive-demo">
+                        <h3>Démo interactive</h3>
+                        <div class="demo-box" id="class-demo">
+                            Cliquez pour activer/désactiver
+                        </div>
+                        <div>
+                            <button class="demo-button" onclick="toggleClass()">Toggle Active</button>
+                            <button class="demo-button" onclick="addClass()">Ajouter Active</button>
+                            <button class="demo-button" onclick="removeClass()">Supprimer Active</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="demo-item">
+                    <h2>4. Créer et ajouter des éléments</h2>
+                    <p>
+                        <strong>createElement()</strong> : Créer un nouvel élément.<br />
+                        <strong>appendChild()</strong> : Ajouter un élément enfant.
+                    </p>
+                    <div class="code-example">
+                        <span class="comment">// Créer un nouveau paragraphe</span><br />
+                        <span class="keyword">let</span> p = <span class="highlight">document.createElement</span>(<span class="string">'p'</span>);<br />
+                        p.<span class="highlight">textContent</span> = <span class="string">'Nouveau paragraphe'</span>;<br /><br />
+
+                        <span class="comment">// L'ajouter au body</span><br />
+                        <span class="highlight">document.body.appendChild</span>(p);<br /><br />
+
+                        <span class="comment">// Créer un élément avec styles</span><br />
+                        <span class="keyword">let</span> div = <span class="highlight">document.createElement</span>(<span class="string">'div'</span>);<br />
+                        div.<span class="highlight">textContent</span> = <span class="string">'Hello'</span>;<br />
+                        div.<span class="highlight">style.color</span> = <span class="string">'red'</span>;<br />
+                        div.<span class="highlight">classList.add</span>(<span class="string">'ma-classe'</span>);<br /><br />
+
+                        <span class="comment">// L'ajouter à un conteneur</span><br />
+                        <span class="keyword">let</span> container = <span class="highlight">document.querySelector</span>(<span class="string">'.container'</span>);<br />
+                        container.<span class="highlight">appendChild</span>(div);
+                    </div>
+
+                    <div class="interactive-demo">
+                        <h3>Démo interactive</h3>
+                        <div id="element-container" class="demo-box">
+                            <strong>Conteneur :</strong> Les éléments apparaîtront ici
+                        </div>
+                        <div>
+                            <button class="demo-button" onclick="addElement()">Ajouter élément</button>
+                            <button class="demo-button" onclick="clearElements()">Tout effacer</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Console interactive -->
+            <div class="js-console">
+                <div class="js-console-header">
+                    Console JavaScript Interactive - Testez la manipulation DOM !
+                </div>
+                <div class="js-console-editor">
+                    <textarea id="js-input" placeholder="Écrivez votre code JavaScript ici..."></textarea>
+                </div>
+                <div class="js-console-buttons">
+                    <button class="btn-execute" onclick="executeCode()">Exécuter (Ctrl + Enter)</button>
+                    <button class="btn-clear" onclick="clearConsole()">Effacer</button>
+                </div>
+                <div class="js-console-output" id="js-output">Prêt à exécuter votre code...</div>
+            </div>
+
+            <!-- Exemples pratiques -->
+            <div style="background: #e8f4f8; padding: 25px; border-radius: 10px; margin: 30px 0">
+                <h2 style="color: #2c3e50; text-align: center; margin-top: 0">Exemples pratiques - Galerie d'images dynamique</h2>
+                <div class="code-example">
+                    <span class="comment">// Créer une galerie d'images dynamique</span><br /><br />
+
+                    <span class="keyword">let</span> images = [<br />
+                    &nbsp;&nbsp;<span class="string">'image1.jpg'</span>,<br />
+                    &nbsp;&nbsp;<span class="string">'image2.jpg'</span>,<br />
+                    &nbsp;&nbsp;<span class="string">'image3.jpg'</span><br />
+                    ];<br /><br />
+
+                    <span class="keyword">let</span> galerie = <span class="highlight">document.querySelector</span>(<span class="string">'.galerie'</span>);<br /><br />
+
+                    <span class="comment">// Pour chaque image</span><br />
+                    images.<span class="highlight">forEach</span>((src, index) => {<br />
+                    &nbsp;&nbsp;<span class="comment">// Créer un conteneur</span><br />
+                    &nbsp;&nbsp;<span class="keyword">let</span> container = <span class="highlight">document.createElement</span>(<span class="string">'div'</span>);<br />
+                    &nbsp;&nbsp;container.<span class="highlight">classList.add</span>(<span class="string">'image-container'</span>);<br /><br />
+
+                    &nbsp;&nbsp;<span class="comment">// Créer l'image</span><br />
+                    &nbsp;&nbsp;<span class="keyword">let</span> img = <span class="highlight">document.createElement</span>(<span class="string">'img'</span>);<br />
+                    &nbsp;&nbsp;img.<span class="highlight">src</span> = src;<br />
+                    &nbsp;&nbsp;img.<span class="highlight">alt</span> = <span class="string">`Image ${index + 1}`</span>;<br />
+                    &nbsp;&nbsp;img.<span class="highlight">style.width</span> = <span class="string">'200px'</span>;<br />
+                    &nbsp;&nbsp;img.<span class="highlight">style.borderRadius</span> = <span class="string">'10px'</span>;<br /><br />
+
+                    &nbsp;&nbsp;<span class="comment">// Créer une légende</span><br />
+                    &nbsp;&nbsp;<span class="keyword">let</span> caption = <span class="highlight">document.createElement</span>(<span class="string">'p'</span>);<br />
+                    &nbsp;&nbsp;caption.<span class="highlight">textContent</span> = <span class="string">`Image ${index + 1}`</span>;<br />
+                    &nbsp;&nbsp;caption.<span class="highlight">style.textAlign</span> = <span class="string">'center'</span>;<br /><br />
+
+                    &nbsp;&nbsp;<span class="comment">// Assembler</span><br />
+                    &nbsp;&nbsp;container.<span class="highlight">appendChild</span>(img);<br />
+                    &nbsp;&nbsp;container.<span class="highlight">appendChild</span>(caption);<br />
+                    &nbsp;&nbsp;galerie.<span class="highlight">appendChild</span>(container);<br />
+                    });
+                </div>
+                <p style="text-align: center; margin-top: 20px">
+                    <strong>Testez ces exemples dans la console interactive ci-dessus !</strong>
+                </p>
+            </div>
+        </div>
+
+        <!-- Zone Froggiesplaining -->
+        <div class="froggiesplaining">
+            <span> Froggiesplaining :</span>
+            <p>
+                <br />
+                <strong>Objectifs de ce cours :</strong><br />
+                ✅ Modifier les attributs HTML avec setAttribute/getAttribute<br />
+                ✅ Changer les styles CSS avec .style<br />
+                ✅ Gérer les classes CSS avec classList<br />
+                ✅ Créer de nouveaux éléments avec createElement<br />
+                ✅ Ajouter des éléments au DOM avec appendChild<br /><br />
+
+                <strong>Points clés à retenir :</strong><br />
+                • <strong>setAttribute('attr', 'value')</strong> : Modifier un attribut HTML<br />
+                • <strong>element.style.property</strong> : Modifier un style CSS (camelCase)<br />
+                • <strong>classList.add()</strong> / remove() / toggle() : Gérer les classes<br />
+                • <strong>createElement('tag')</strong> : Créer un nouvel élément<br />
+                • <strong>appendChild(element)</strong> : Ajouter un élément au DOM<br />
+                • classList est préférable à .style pour les modifications complexes<br />
+                • Toujours créer l'élément avant de l'ajouter au DOM<br /><br />
+
+                <strong>Exercice pratique :</strong><br />
+                1. Sélectionnez une image et changez son src<br />
+                2. Modifiez la couleur de fond d'une div avec .style<br />
+                3. Ajoutez et supprimez une classe CSS avec classList<br />
+                4. Créez un nouveau paragraphe avec createElement<br />
+                5. Ajoutez-le au body avec appendChild<br />
+                6. Bonus : Créez une liste de 5 éléments dynamiquement<br />
+                7. Bonus 2 : Créez un bouton qui change de couleur au clic avec classList.toggle
+            </p>
+            <img src="../img/froggie-300.png" alt="Froggie explain" class="overfrog" id="Froggie" />
+        </div>
+
+        <!-- Bouton retour -->
+        <a href="index.html" id="goToIndex" title="Retour à l'index">
+            <i class="bi bi-arrow-left"></i>
+        </a>
+
+        <!-- Lien vers Froggie -->
+        <a href="#Froggie">
+            <div id="goToFroggie">
+                <img src="../img/froggie-300.png" width="50px" /><br /><i class="bi bi-arrow-bar-down"></i>
+            </div>
+        </a>
+
+        <!-- Footer -->
+        <div id="footerGit">
+            <a href="https://github.com/eCreafr/DWWM" target="_blank"><i class="bi bi-github">GitHub - eCrea</i></a>
+        </div>
+
+        <script>
+            // Démos interactives
+            function changeImage(num) {
+                const img = document.getElementById('demo-img');
+                const colors = ['f093fb', 'f5576c', '2ecc71'];
+                img.src = `https://via.placeholder.com/150/${colors[num-1]}/ffffff?text=Image+${num}`;
+            }
+
+            function changeStyle(type) {
+                const box = document.getElementById('style-demo');
+                switch(type) {
+                    case 'color':
+                        box.style.backgroundColor = `hsl(${Math.random() * 360}, 70%, 60%)`;
+                        box.style.color = 'white';
+                        break;
+                    case 'size':
+                        const size = Math.floor(Math.random() * 10) + 14;
+                        box.style.fontSize = size + 'px';
+                        box.style.padding = (size + 5) + 'px';
+                        break;
+                    case 'border':
+                        const radius = Math.floor(Math.random() * 30);
+                        box.style.borderRadius = radius + 'px';
+                        box.style.border = `${Math.floor(Math.random() * 5) + 2}px solid #f093fb`;
+                        break;
+                    case 'reset':
+                        box.style = '';
+                        box.className = 'demo-box';
+                        break;
+                }
+            }
+
+            function toggleClass() {
+                const box = document.getElementById('class-demo');
+                box.classList.toggle('active-class');
+            }
+
+            function addClass() {
+                const box = document.getElementById('class-demo');
+                box.classList.add('active-class');
+            }
+
+            function removeClass() {
+                const box = document.getElementById('class-demo');
+                box.classList.remove('active-class');
+            }
+
+            let elementCount = 0;
+            function addElement() {
+                elementCount++;
+                const container = document.getElementById('element-container');
+                const newElement = document.createElement('div');
+                newElement.textContent = `Élément ${elementCount}`;
+                newElement.style.padding = '8px';
+                newElement.style.margin = '5px 0';
+                newElement.style.background = `hsl(${elementCount * 30}, 70%, 80%)`;
+                newElement.style.borderRadius = '5px';
+                container.appendChild(newElement);
+            }
+
+            function clearElements() {
+                const container = document.getElementById('element-container');
+                container.innerHTML = '<strong>Conteneur :</strong> Les éléments apparaîtront ici';
+                elementCount = 0;
+            }
+
+            // Console JavaScript interactive
+            const jsInput = document.getElementById('js-input');
+            const jsOutput = document.getElementById('js-output');
+
+            // Exécuter le code
+            function executeCode() {
+                const code = jsInput.value;
+                jsOutput.innerHTML = '';
+
+                // Capturer console.log
+                const logs = [];
+                const originalLog = console.log;
+                console.log = function (...args) {
+                    logs.push(args.map(arg =>
+                        typeof arg === 'object' ? JSON.stringify(arg, null, 2) : String(arg)
+                    ).join(' '));
+                    originalLog.apply(console, args);
+                };
+
+                try {
+                    // Exécuter le code
+                    eval(code);
+
+                    // Afficher les logs
+                    if (logs.length > 0) {
+                        jsOutput.innerHTML = logs.join('\n');
+                    } else {
+                        jsOutput.innerHTML = '✅ Code exécuté sans erreur (aucune sortie console)';
+                    }
+                } catch (error) {
+                    jsOutput.innerHTML = `<span class="error">❌ Erreur : ${error.message}</span>`;
+                } finally {
+                    // Restaurer console.log
+                    console.log = originalLog;
+                }
+            }
+
+            // Effacer la console
+            function clearConsole() {
+                jsInput.value = '';
+                jsOutput.innerHTML = 'Console effacée. Prêt à exécuter votre code...';
+            }
+
+            // Raccourci clavier Ctrl + Enter
+            jsInput.addEventListener('keydown', function (e) {
+                if (e.ctrlKey && e.key === 'Enter') {
+                    e.preventDefault();
+                    executeCode();
+                }
+            });
+
+            // Exemple au chargement
+            window.addEventListener('DOMContentLoaded', function() {
+                jsInput.value = `// Manipulation du DOM
+// Essayez ces exemples !
+
+// 1. Modifier les styles
+let titre = document.querySelector('.demo-title');
+titre.style.color = '#f093fb';
+titre.style.textShadow = '2px 2px 4px rgba(0,0,0,0.2)';
+console.log('Titre stylé !');
+
+// 2. Créer et ajouter un élément
+let box = document.createElement('div');
+box.textContent = 'Nouvelle boîte créée !';
+box.style.background = '#2ecc71';
+box.style.color = 'white';
+box.style.padding = '15px';
+box.style.borderRadius = '8px';
+box.style.margin = '10px 0';
+
+let container = document.querySelector('.demo-container');
+container.appendChild(box);
+console.log('Élément ajouté au DOM !');`;
+            });
+        </script>
+    </body>
+</html>

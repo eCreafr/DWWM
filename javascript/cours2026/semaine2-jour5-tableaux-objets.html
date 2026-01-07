@@ -1,0 +1,465 @@
+<!doctype html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Semaine 2 - Jour 5 | Tableaux d'objets</title>
+        <link rel="stylesheet" href="../css/froggie.css" />
+        <style>
+            .demo-container {
+                max-width: 1200px;
+                margin: 40px auto;
+                padding: 20px;
+                font-family: Arial, sans-serif;
+            }
+            .demo-title {
+                text-align: center;
+                font-size: 2.5em;
+                margin-bottom: 20px;
+                color: #2c3e50;
+            }
+            .demo-intro {
+                background: #ecf0f1;
+                padding: 20px;
+                border-radius: 10px;
+                margin-bottom: 40px;
+                line-height: 1.6;
+            }
+            .demo-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                gap: 30px;
+                margin-bottom: 40px;
+            }
+            .demo-item {
+                border: 2px solid #f093fb;
+                border-radius: 10px;
+                padding: 20px;
+                background: white;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            }
+            .demo-item h2 {
+                margin-top: 0;
+                color: #f093fb;
+                font-size: 1.5em;
+            }
+            .code-example {
+                background: #2c3e50;
+                color: #ecf0f1;
+                padding: 15px;
+                border-radius: 5px;
+                font-family: 'Courier New', monospace;
+                font-size: 0.9em;
+                margin: 15px 0;
+                overflow-x: auto;
+            }
+            .highlight {
+                color: #f39c12;
+                font-weight: bold;
+            }
+            .keyword {
+                color: #e74c3c;
+            }
+            .string {
+                color: #2ecc71;
+            }
+            .comment {
+                color: #95a5a6;
+                font-style: italic;
+            }
+
+            /* Console JavaScript interactive */
+            .js-console {
+                background: #1e1e1e;
+                border-radius: 10px;
+                padding: 20px;
+                margin: 30px 0;
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            }
+            .js-console-header {
+                color: #f39c12;
+                font-weight: bold;
+                margin-bottom: 15px;
+                font-size: 1.1em;
+                display: flex;
+                align-items: center;
+                gap: 10px;
+            }
+            .js-console-editor {
+                background: #2d2d2d;
+                border: 1px solid #444;
+                border-radius: 5px;
+                padding: 15px;
+                margin-bottom: 15px;
+            }
+            .js-console-editor textarea {
+                width: 100%;
+                background: transparent;
+                border: none;
+                color: #f8f8f2;
+                font-family: 'Courier New', monospace;
+                font-size: 0.95em;
+                resize: vertical;
+                min-height: 80px;
+                outline: none;
+            }
+            .js-console-output {
+                background: #000;
+                border: 1px solid #444;
+                border-radius: 5px;
+                padding: 15px;
+                color: #0f0;
+                font-family: 'Courier New', monospace;
+                font-size: 0.9em;
+                min-height: 60px;
+                max-height: 300px;
+                overflow-y: auto;
+                white-space: pre-wrap;
+            }
+            .js-console-output .error {
+                color: #e74c3c;
+            }
+            .js-console-output .warning {
+                color: #f39c12;
+            }
+            .js-console-buttons {
+                display: flex;
+                gap: 10px;
+                margin-bottom: 15px;
+            }
+            .btn-execute {
+                background: #2ecc71;
+                color: white;
+                border: none;
+                padding: 10px 20px;
+                border-radius: 5px;
+                cursor: pointer;
+                font-weight: bold;
+                transition: background 0.3s;
+            }
+            .btn-execute:hover {
+                background: #27ae60;
+            }
+            .btn-clear {
+                background: #e74c3c;
+                color: white;
+                border: none;
+                padding: 10px 20px;
+                border-radius: 5px;
+                cursor: pointer;
+                font-weight: bold;
+                transition: background 0.3s;
+            }
+            .btn-clear:hover {
+                background: #c0392b;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="demo-container">
+            <h1 class="demo-title">Semaine 2 - Jour 5 : Tableaux d'objets</h1>
+
+            <div class="demo-intro">
+                <h3>Combiner tableaux et objets</h3>
+                <p>
+                    Les <strong>tableaux d'objets</strong> sont extrêmement courants en programmation JavaScript.
+                    Ils permettent de stocker et manipuler des collections de données structurées (utilisateurs, produits, commandes...).
+                </p>
+                <p>
+                    <strong>Cas d'usage réels :</strong> liste d'étudiants avec leurs notes, catalogue de produits e-commerce,
+                    données JSON d'une API, liste de tâches avec détails...
+                </p>
+                <p>
+                    <strong>Puissance :</strong> On peut combiner les méthodes de tableaux (map, filter, reduce) avec les objets
+                    pour effectuer des traitements de données complexes de manière élégante.
+                </p>
+            </div>
+
+            <!-- Concepts de base -->
+            <div class="demo-grid">
+                <div class="demo-item">
+                    <h2>1. Créer et parcourir</h2>
+                    <p>
+                        Un tableau d'objets est simplement un tableau où chaque élément est un objet.
+                    </p>
+                    <div class="code-example">
+                        <span class="comment">// Tableau d'étudiants</span><br />
+                        <span class="keyword">let</span> etudiants = [<br />
+                        &nbsp;&nbsp;{ nom: <span class="string">'Dupont'</span>, prenom: <span class="string">'Alice'</span>, age: <span class="highlight">22</span> },<br />
+                        &nbsp;&nbsp;{ nom: <span class="string">'Martin'</span>, prenom: <span class="string">'Bob'</span>, age: <span class="highlight">20</span> },<br />
+                        &nbsp;&nbsp;{ nom: <span class="string">'Bernard'</span>, prenom: <span class="string">'Clara'</span>, age: <span class="highlight">23</span> }<br />
+                        ];<br /><br />
+
+                        <span class="comment">// Accéder à un élément</span><br />
+                        console.<span class="highlight">log</span>(etudiants[<span class="highlight">0</span>].<span class="highlight">nom</span>); <span class="comment">// 'Dupont'</span><br /><br />
+
+                        <span class="comment">// Parcourir avec for...of</span><br />
+                        <span class="keyword">for</span> (<span class="keyword">let</span> etudiant <span class="keyword">of</span> etudiants) {<br />
+                        &nbsp;&nbsp;console.<span class="highlight">log</span>(<span class="string">`${etudiant.prenom} ${etudiant.nom}`</span>);<br />
+                        }
+                    </div>
+                </div>
+
+                <div class="demo-item">
+                    <h2>2. Filtrer des objets</h2>
+                    <p>
+                        Utiliser <strong>filter()</strong> pour sélectionner des objets selon des critères.
+                    </p>
+                    <div class="code-example">
+                        <span class="keyword">let</span> produits = [<br />
+                        &nbsp;&nbsp;{ nom: <span class="string">'Laptop'</span>, prix: <span class="highlight">999</span>, enStock: <span class="keyword">true</span> },<br />
+                        &nbsp;&nbsp;{ nom: <span class="string">'Souris'</span>, prix: <span class="highlight">29</span>, enStock: <span class="keyword">false</span> },<br />
+                        &nbsp;&nbsp;{ nom: <span class="string">'Clavier'</span>, prix: <span class="highlight">79</span>, enStock: <span class="keyword">true</span> }<br />
+                        ];<br /><br />
+
+                        <span class="comment">// Filtrer les produits en stock</span><br />
+                        <span class="keyword">let</span> disponibles = produits.<span class="highlight">filter</span>(p => p.<span class="highlight">enStock</span>);<br /><br />
+
+                        <span class="comment">// Filtrer les produits < 100€</span><br />
+                        <span class="keyword">let</span> abordables = produits.<span class="highlight">filter</span>(p => p.<span class="highlight">prix</span> &lt; <span class="highlight">100</span>);<br /><br />
+
+                        console.<span class="highlight">log</span>(disponibles.<span class="highlight">length</span>); <span class="comment">// 2 produits</span>
+                    </div>
+                </div>
+
+                <div class="demo-item">
+                    <h2>3. Transformer avec map()</h2>
+                    <p>
+                        Utiliser <strong>map()</strong> pour extraire ou transformer des propriétés d'objets.
+                    </p>
+                    <div class="code-example">
+                        <span class="keyword">let</span> etudiants = [<br />
+                        &nbsp;&nbsp;{ nom: <span class="string">'Alice'</span>, note: <span class="highlight">15</span> },<br />
+                        &nbsp;&nbsp;{ nom: <span class="string">'Bob'</span>, note: <span class="highlight">12</span> },<br />
+                        &nbsp;&nbsp;{ nom: <span class="string">'Clara'</span>, note: <span class="highlight">18</span> }<br />
+                        ];<br /><br />
+
+                        <span class="comment">// Extraire juste les noms</span><br />
+                        <span class="keyword">let</span> noms = etudiants.<span class="highlight">map</span>(e => e.<span class="highlight">nom</span>);<br />
+                        console.<span class="highlight">log</span>(noms); <span class="comment">// ['Alice', 'Bob', 'Clara']</span><br /><br />
+
+                        <span class="comment">// Ajouter 2 points bonus à chaque note</span><br />
+                        <span class="keyword">let</span> avecBonus = etudiants.<span class="highlight">map</span>(e => ({<br />
+                        &nbsp;&nbsp;...e,<br />
+                        &nbsp;&nbsp;note: <span class="highlight">Math.min</span>(e.<span class="highlight">note</span> + <span class="highlight">2</span>, <span class="highlight">20</span>)<br />
+                        }));
+                    </div>
+                </div>
+
+                <div class="demo-item">
+                    <h2>4. Trier et destructuration</h2>
+                    <p>
+                        <strong>sort()</strong> pour trier par propriété • <strong>Destructuration</strong> pour extraire les valeurs.
+                    </p>
+                    <div class="code-example">
+                        <span class="keyword">let</span> produits = [<br />
+                        &nbsp;&nbsp;{ nom: <span class="string">'C'</span>, prix: <span class="highlight">50</span> },<br />
+                        &nbsp;&nbsp;{ nom: <span class="string">'A'</span>, prix: <span class="highlight">30</span> },<br />
+                        &nbsp;&nbsp;{ nom: <span class="string">'B'</span>, prix: <span class="highlight">40</span> }<br />
+                        ];<br /><br />
+
+                        <span class="comment">// Trier par prix croissant</span><br />
+                        produits.<span class="highlight">sort</span>((a, b) => a.<span class="highlight">prix</span> - b.<span class="highlight">prix</span>);<br /><br />
+
+                        <span class="comment">// Destructuration</span><br />
+                        <span class="keyword">let</span> { nom, prix } = produits[<span class="highlight">0</span>];<br />
+                        console.<span class="highlight">log</span>(nom, prix); <span class="comment">// 'A' 30</span><br /><br />
+
+                        <span class="comment">// Destructuration dans une boucle</span><br />
+                        <span class="keyword">for</span> (<span class="keyword">let</span> { nom, prix } <span class="keyword">of</span> produits) {<br />
+                        &nbsp;&nbsp;console.<span class="highlight">log</span>(<span class="string">`${nom}: ${prix}€`</span>);<br />
+                        }
+                    </div>
+                </div>
+            </div>
+
+            <!-- Console interactive -->
+            <div class="js-console">
+                <div class="js-console-header">
+                    Console JavaScript Interactive - Testez les tableaux d'objets !
+                </div>
+                <div class="js-console-editor">
+                    <textarea id="js-input" placeholder="Écrivez votre code JavaScript ici..."></textarea>
+                </div>
+                <div class="js-console-buttons">
+                    <button class="btn-execute" onclick="executeCode()">Exécuter (Ctrl + Enter)</button>
+                    <button class="btn-clear" onclick="clearConsole()">Effacer</button>
+                </div>
+                <div class="js-console-output" id="js-output">Prêt à exécuter votre code...</div>
+            </div>
+
+            <!-- Exemples pratiques -->
+            <div style="background: #e8f4f8; padding: 25px; border-radius: 10px; margin: 30px 0">
+                <h2 style="color: #2c3e50; text-align: center; margin-top: 0">Exemples pratiques - E-commerce</h2>
+                <div class="code-example">
+                    <span class="comment">// Catalogue de produits</span><br />
+                    <span class="keyword">let</span> catalogue = [<br />
+                    &nbsp;&nbsp;{ id: <span class="highlight">1</span>, nom: <span class="string">'Ordinateur'</span>, prix: <span class="highlight">999</span>, categorie: <span class="string">'Informatique'</span>, stock: <span class="highlight">15</span> },<br />
+                    &nbsp;&nbsp;{ id: <span class="highlight">2</span>, nom: <span class="string">'Souris'</span>, prix: <span class="highlight">29</span>, categorie: <span class="string">'Accessoires'</span>, stock: <span class="highlight">0</span> },<br />
+                    &nbsp;&nbsp;{ id: <span class="highlight">3</span>, nom: <span class="string">'Écran'</span>, prix: <span class="highlight">299</span>, categorie: <span class="string">'Informatique'</span>, stock: <span class="highlight">8</span> },<br />
+                    &nbsp;&nbsp;{ id: <span class="highlight">4</span>, nom: <span class="string">'Clavier'</span>, prix: <span class="highlight">79</span>, categorie: <span class="string">'Accessoires'</span>, stock: <span class="highlight">20</span> }<br />
+                    ];<br /><br />
+
+                    <span class="comment">// 1. Produits en stock</span><br />
+                    <span class="keyword">let</span> enStock = catalogue.<span class="highlight">filter</span>(p => p.<span class="highlight">stock</span> > <span class="highlight">0</span>);<br />
+                    console.<span class="highlight">log</span>(<span class="string">'Produits disponibles:'</span>, enStock.<span class="highlight">length</span>);<br /><br />
+
+                    <span class="comment">// 2. Produits de la catégorie Informatique</span><br />
+                    <span class="keyword">let</span> informatique = catalogue.<span class="highlight">filter</span>(p => {<br />
+                    &nbsp;&nbsp;<span class="keyword">return</span> p.<span class="highlight">categorie</span> === <span class="string">'Informatique'</span>;<br />
+                    });<br />
+                    console.<span class="highlight">log</span>(<span class="string">'Informatique:'</span>, informatique.<span class="highlight">map</span>(p => p.<span class="highlight">nom</span>));<br /><br />
+
+                    <span class="comment">// 3. Calculer la valeur totale du stock</span><br />
+                    <span class="keyword">let</span> valeurTotale = catalogue.<span class="highlight">reduce</span>((total, p) => {<br />
+                    &nbsp;&nbsp;<span class="keyword">return</span> total + (p.<span class="highlight">prix</span> * p.<span class="highlight">stock</span>);<br />
+                    }, <span class="highlight">0</span>);<br />
+                    console.<span class="highlight">log</span>(<span class="string">'Valeur totale:'</span>, valeurTotale, <span class="string">'€'</span>);<br /><br />
+
+                    <span class="comment">// 4. Trier par prix décroissant</span><br />
+                    <span class="keyword">let</span> parPrix = [...catalogue].<span class="highlight">sort</span>((a, b) => b.<span class="highlight">prix</span> - a.<span class="highlight">prix</span>);<br />
+                    console.<span class="highlight">log</span>(<span class="string">'Le plus cher:'</span>, parPrix[<span class="highlight">0</span>].<span class="highlight">nom</span>);<br /><br />
+
+                    <span class="comment">// 5. Créer un résumé pour affichage</span><br />
+                    <span class="keyword">let</span> resume = catalogue.<span class="highlight">map</span>(p => ({<br />
+                    &nbsp;&nbsp;nom: p.<span class="highlight">nom</span>,<br />
+                    &nbsp;&nbsp;info: <span class="string">`${p.prix}€ - ${p.stock > 0 ? 'En stock' : 'Rupture'}`</span><br />
+                    }));<br />
+                    console.<span class="highlight">log</span>(<span class="string">'Résumé:'</span>, resume);
+                </div>
+                <p style="text-align: center; margin-top: 20px">
+                    <strong>Copiez ces exemples dans la console interactive ci-dessus !</strong>
+                </p>
+            </div>
+        </div>
+
+        <!-- Zone Froggiesplaining -->
+        <div class="froggiesplaining">
+            <span> Froggiesplaining :</span>
+            <p>
+                <br />
+                <strong>Objectifs de ce cours :</strong><br />
+                ✅ Créer et manipuler des tableaux d'objets<br />
+                ✅ Filtrer des objets selon des critères multiples<br />
+                ✅ Transformer et extraire des données avec map()<br />
+                ✅ Trier des objets par leurs propriétés<br />
+                ✅ Utiliser la destructuration pour simplifier le code<br /><br />
+
+                <strong>Points clés à retenir :</strong><br />
+                • Les tableaux d'objets sont très courants en JavaScript<br />
+                • <strong>filter()</strong> pour sélectionner des objets selon des critères<br />
+                • <strong>map()</strong> pour transformer ou extraire des propriétés<br />
+                • <strong>sort()</strong> pour trier : <code>(a, b) => a.prix - b.prix</code><br />
+                • <strong>reduce()</strong> pour calculer des totaux, moyennes, etc.<br />
+                • On peut chaîner les méthodes pour des opérations complexes<br />
+                • La destructuration rend le code plus lisible<br /><br />
+
+                <strong>Exercice pratique :</strong><br />
+                1. Créez un tableau de 5 étudiants avec nom, prénom, age, note<br />
+                2. Filtrez les étudiants admis (note >= 10)<br />
+                3. Calculez la moyenne générale avec reduce()<br />
+                4. Triez les étudiants par note décroissante<br />
+                5. Créez un nouveau tableau contenant uniquement les noms complets<br />
+                6. Bonus : Trouvez l'étudiant avec la meilleure note<br />
+                7. Bonus 2 : Groupez les étudiants par tranche d'âge (< 20, 20-25, > 25)
+            </p>
+            <img src="../img/froggie-300.png" alt="Froggie explain" class="overfrog" id="Froggie" />
+        </div>
+
+        <!-- Bouton retour -->
+        <a href="index.html" id="goToIndex" title="Retour à l'index">
+            <i class="bi bi-arrow-left"></i>
+        </a>
+
+        <!-- Lien vers Froggie -->
+        <a href="#Froggie">
+            <div id="goToFroggie">
+                <img src="../img/froggie-300.png" width="50px" /><br /><i class="bi bi-arrow-bar-down"></i>
+            </div>
+        </a>
+
+        <!-- Footer -->
+        <div id="footerGit">
+            <a href="https://github.com/eCreafr/DWWM" target="_blank"><i class="bi bi-github">GitHub - eCrea</i></a>
+        </div>
+
+        <script>
+            // Console JavaScript interactive
+            const jsInput = document.getElementById('js-input');
+            const jsOutput = document.getElementById('js-output');
+
+            // Exécuter le code
+            function executeCode() {
+                const code = jsInput.value;
+                jsOutput.innerHTML = '';
+
+                // Capturer console.log
+                const logs = [];
+                const originalLog = console.log;
+                console.log = function (...args) {
+                    logs.push(args.map(arg =>
+                        typeof arg === 'object' ? JSON.stringify(arg, null, 2) : String(arg)
+                    ).join(' '));
+                    originalLog.apply(console, args);
+                };
+
+                try {
+                    // Exécuter le code
+                    eval(code);
+
+                    // Afficher les logs
+                    if (logs.length > 0) {
+                        jsOutput.innerHTML = logs.join('\n');
+                    } else {
+                        jsOutput.innerHTML = '✅ Code exécuté sans erreur (aucune sortie console)';
+                    }
+                } catch (error) {
+                    jsOutput.innerHTML = `<span class="error">❌ Erreur : ${error.message}</span>`;
+                } finally {
+                    // Restaurer console.log
+                    console.log = originalLog;
+                }
+            }
+
+            // Effacer la console
+            function clearConsole() {
+                jsInput.value = '';
+                jsOutput.innerHTML = 'Console effacée. Prêt à exécuter votre code...';
+            }
+
+            // Raccourci clavier Ctrl + Enter
+            jsInput.addEventListener('keydown', function (e) {
+                if (e.ctrlKey && e.key === 'Enter') {
+                    e.preventDefault();
+                    executeCode();
+                }
+            });
+
+            // Exemple au chargement
+            window.addEventListener('DOMContentLoaded', function() {
+                jsInput.value = `// Gestion de produits e-commerce
+let produits = [
+  { nom: 'Laptop', prix: 999, stock: 5 },
+  { nom: 'Souris', prix: 29, stock: 0 },
+  { nom: 'Écran', prix: 299, stock: 8 },
+  { nom: 'Clavier', prix: 79, stock: 12 }
+];
+
+// Produits disponibles
+let disponibles = produits.filter(p => p.stock > 0);
+console.log('Disponibles:', disponibles.length);
+
+// Valeur totale du stock
+let total = produits.reduce((sum, p) => {
+  return sum + (p.prix * p.stock);
+}, 0);
+console.log('Valeur stock:', total, '€');
+
+// Trier par prix
+let tries = [...produits].sort((a, b) => a.prix - b.prix);
+console.log('\\nPar prix:');
+tries.forEach(p => console.log(\`- \${p.nom}: \${p.prix}€\`));`;
+            });
+        </script>
+    </body>
+</html>

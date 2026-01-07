@@ -1,0 +1,401 @@
+<!doctype html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Semaine 1 - Jour 2 | Variables et types de données</title>
+        <link rel="stylesheet" href="../css/froggie.css" />
+        <style>
+            .demo-container {
+                max-width: 1200px;
+                margin: 40px auto;
+                padding: 20px;
+                font-family: Arial, sans-serif;
+            }
+            .demo-title {
+                text-align: center;
+                font-size: 2.5em;
+                margin-bottom: 20px;
+                color: #2c3e50;
+            }
+            .demo-intro {
+                background: #ecf0f1;
+                padding: 20px;
+                border-radius: 10px;
+                margin-bottom: 40px;
+                line-height: 1.6;
+            }
+            .demo-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                gap: 30px;
+                margin-bottom: 40px;
+            }
+            .demo-item {
+                border: 2px solid #f093fb;
+                border-radius: 10px;
+                padding: 20px;
+                background: white;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            }
+            .demo-item h2 {
+                margin-top: 0;
+                color: #f093fb;
+                font-size: 1.5em;
+            }
+            .code-example {
+                background: #2c3e50;
+                color: #ecf0f1;
+                padding: 15px;
+                border-radius: 5px;
+                font-family: 'Courier New', monospace;
+                font-size: 0.9em;
+                margin: 15px 0;
+                overflow-x: auto;
+            }
+            .highlight {
+                color: #f39c12;
+                font-weight: bold;
+            }
+            .keyword {
+                color: #e74c3c;
+            }
+            .string {
+                color: #2ecc71;
+            }
+            .comment {
+                color: #95a5a6;
+                font-style: italic;
+            }
+
+            /* Console JavaScript interactive */
+            .js-console {
+                background: #1e1e1e;
+                border-radius: 10px;
+                padding: 20px;
+                margin: 30px 0;
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            }
+            .js-console-header {
+                color: #f39c12;
+                font-weight: bold;
+                margin-bottom: 15px;
+                font-size: 1.1em;
+                display: flex;
+                align-items: center;
+                gap: 10px;
+            }
+            .js-console-editor {
+                background: #2d2d2d;
+                border: 1px solid #444;
+                border-radius: 5px;
+                padding: 15px;
+                margin-bottom: 15px;
+            }
+            .js-console-editor textarea {
+                width: 100%;
+                background: transparent;
+                border: none;
+                color: #f8f8f2;
+                font-family: 'Courier New', monospace;
+                font-size: 0.95em;
+                resize: vertical;
+                min-height: 80px;
+                outline: none;
+            }
+            .js-console-output {
+                background: #000;
+                border: 1px solid #444;
+                border-radius: 5px;
+                padding: 15px;
+                color: #0f0;
+                font-family: 'Courier New', monospace;
+                font-size: 0.9em;
+                min-height: 60px;
+                max-height: 300px;
+                overflow-y: auto;
+                white-space: pre-wrap;
+            }
+            .js-console-output .error {
+                color: #e74c3c;
+            }
+            .js-console-output .warning {
+                color: #f39c12;
+            }
+            .js-console-buttons {
+                display: flex;
+                gap: 10px;
+                margin-bottom: 15px;
+            }
+            .btn-execute {
+                background: #2ecc71;
+                color: white;
+                border: none;
+                padding: 10px 20px;
+                border-radius: 5px;
+                cursor: pointer;
+                font-weight: bold;
+                transition: background 0.3s;
+            }
+            .btn-execute:hover {
+                background: #27ae60;
+            }
+            .btn-clear {
+                background: #e74c3c;
+                color: white;
+                border: none;
+                padding: 10px 20px;
+                border-radius: 5px;
+                cursor: pointer;
+                font-weight: bold;
+                transition: background 0.3s;
+            }
+            .btn-clear:hover {
+                background: #c0392b;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="demo-container">
+            <h1 class="demo-title">🔤 Semaine 1 - Jour 2 : Variables et types de données</h1>
+
+            <div class="demo-intro">
+                <h3>📦 Les variables : stocker des informations</h3>
+                <p>
+                    Une <strong>variable</strong> est comme une boîte dans laquelle on stocke une valeur. On peut ensuite
+                    utiliser cette valeur, la modifier, ou la remplacer.
+                </p>
+                <p>
+                    En JavaScript, on déclare des variables avec <strong>let</strong> (modifiable) ou <strong>const</strong> (constante).
+                </p>
+                <p>
+                    <strong>Important :</strong> Évitez d'utiliser <strong>var</strong> (ancienne méthode, problèmes de portée).
+                </p>
+            </div>
+
+            <!-- Concepts de base -->
+            <div class="demo-grid">
+                <div class="demo-item">
+                    <h2>1. Déclarer des variables</h2>
+                    <p><strong>let</strong> : pour une variable qui peut changer</p>
+                    <p><strong>const</strong> : pour une constante (valeur fixe)</p>
+                    <div class="code-example">
+                        <span class="comment">// Variable modifiable</span><br />
+                        <span class="keyword">let</span> <span class="highlight">prenom</span> = <span class="string">'Alice'</span>;<br />
+                        prenom = <span class="string">'Bob'</span>; <span class="comment">// ✅ OK</span><br /><br />
+
+                        <span class="comment">// Constante (non modifiable)</span><br />
+                        <span class="keyword">const</span> <span class="highlight">age</span> = <span class="highlight">25</span>;<br />
+                        <span class="comment">// age = 30; ❌ ERREUR !</span>
+                    </div>
+                    <p><strong>💡 Règle :</strong> Utilisez <strong>const</strong> par défaut, <strong>let</strong> uniquement si la valeur change.</p>
+                </div>
+
+                <div class="demo-item">
+                    <h2>2. Types de données primitifs</h2>
+                    <p>JavaScript a plusieurs types de données de base :</p>
+                    <div class="code-example">
+                        <span class="comment">// String (chaîne de caractères)</span><br />
+                        <span class="keyword">let</span> nom = <span class="string">'Dupont'</span>;<br /><br />
+
+                        <span class="comment">// Number (nombre)</span><br />
+                        <span class="keyword">let</span> age = <span class="highlight">30</span>;<br />
+                        <span class="keyword">let</span> prix = <span class="highlight">19.99</span>;<br /><br />
+
+                        <span class="comment">// Boolean (vrai/faux)</span><br />
+                        <span class="keyword">let</span> estMajeur = <span class="keyword">true</span>;<br />
+                        <span class="keyword">let</span> estMineur = <span class="keyword">false</span>;
+                    </div>
+                </div>
+
+                <div class="demo-item">
+                    <h2>3. Valeurs spéciales</h2>
+                    <p><strong>null</strong> : absence volontaire de valeur</p>
+                    <p><strong>undefined</strong> : variable non initialisée</p>
+                    <div class="code-example">
+                        <span class="comment">// Variable déclarée mais non initialisée</span><br />
+                        <span class="keyword">let</span> resultat;<br />
+                        console.<span class="highlight">log</span>(resultat); <span class="comment">// undefined</span><br /><br />
+
+                        <span class="comment">// Absence volontaire de valeur</span><br />
+                        <span class="keyword">let</span> utilisateur = <span class="keyword">null</span>;<br />
+                        console.<span class="highlight">log</span>(utilisateur); <span class="comment">// null</span>
+                    </div>
+                    <p><strong>✅ Astuce :</strong> Utilisez <strong>null</strong> pour indiquer "pas de valeur" intentionnellement.</p>
+                </div>
+
+                <div class="demo-item">
+                    <h2>4. typeof : connaître le type</h2>
+                    <p>
+                        L'opérateur <code>typeof</code> permet de vérifier le type d'une variable.
+                    </p>
+                    <div class="code-example">
+                        <span class="keyword">typeof</span> <span class="string">'Bonjour'</span>; <span class="comment">// "string"</span><br />
+                        <span class="keyword">typeof</span> <span class="highlight">42</span>; <span class="comment">// "number"</span><br />
+                        <span class="keyword">typeof</span> <span class="keyword">true</span>; <span class="comment">// "boolean"</span><br />
+                        <span class="keyword">typeof</span> <span class="keyword">undefined</span>; <span class="comment">// "undefined"</span><br />
+                        <span class="keyword">typeof</span> <span class="keyword">null</span>; <span class="comment">// "object" ⚠️ bug historique !</span>
+                    </div>
+                    <p><strong>⚠️ Piège :</strong> <code>typeof null</code> renvoie "object" (erreur historique de JavaScript).</p>
+                </div>
+            </div>
+
+            <!-- Console interactive -->
+            <div class="js-console">
+                <div class="js-console-header">
+                    ⚡ Console JavaScript Interactive - Testez les variables !
+                </div>
+                <div class="js-console-editor">
+                    <textarea id="js-input" placeholder="Écrivez votre code JavaScript ici...
+Exemple : let prenom = 'Alice'; console.log(prenom);"></textarea>
+                </div>
+                <div class="js-console-buttons">
+                    <button class="btn-execute" onclick="executeCode()">▶️ Exécuter (Ctrl + Enter)</button>
+                    <button class="btn-clear" onclick="clearConsole()">🗑️ Effacer</button>
+                </div>
+                <div class="js-console-output" id="js-output">Prêt à exécuter votre code...</div>
+            </div>
+
+            <!-- Exemples pratiques -->
+            <div style="background: #e8f4f8; padding: 25px; border-radius: 10px; margin: 30px 0">
+                <h2 style="color: #2c3e50; text-align: center; margin-top: 0">💻 Exemples à tester</h2>
+                <div class="code-example">
+                    <span class="comment">// Déclaration de variables</span><br />
+                    <span class="keyword">let</span> prenom = <span class="string">'Marie'</span>;<br />
+                    <span class="keyword">let</span> age = <span class="highlight">28</span>;<br />
+                    <span class="keyword">const</span> pays = <span class="string">'France'</span>;<br /><br />
+
+                    <span class="comment">// Afficher les variables</span><br />
+                    console.<span class="highlight">log</span>(<span class="string">'Prénom :'</span>, prenom);<br />
+                    console.<span class="highlight">log</span>(<span class="string">'Age :'</span>, age);<br />
+                    console.<span class="highlight">log</span>(<span class="string">'Pays :'</span>, pays);<br /><br />
+
+                    <span class="comment">// Modifier une variable</span><br />
+                    prenom = <span class="string">'Sophie'</span>;<br />
+                    console.<span class="highlight">log</span>(<span class="string">'Nouveau prénom :'</span>, prenom);<br /><br />
+
+                    <span class="comment">// Vérifier les types</span><br />
+                    console.<span class="highlight">log</span>(<span class="keyword">typeof</span> prenom); <span class="comment">// "string"</span><br />
+                    console.<span class="highlight">log</span>(<span class="keyword">typeof</span> age); <span class="comment">// "number"</span><br />
+                    console.<span class="highlight">log</span>(<span class="keyword">typeof</span> <span class="keyword">true</span>); <span class="comment">// "boolean"</span>
+                </div>
+                <p style="text-align: center; margin-top: 20px">
+                    <strong>👆 Copiez ces exemples dans la console interactive ci-dessus !</strong>
+                </p>
+            </div>
+        </div>
+
+        <!-- Zone Froggiesplaining -->
+        <div class="froggiesplaining">
+            <span> Froggiesplaining :</span>
+            <p>
+                <br />
+                <strong>🎯 Objectifs de ce cours :</strong><br />
+                ✅ Comprendre ce qu'est une variable et comment la déclarer<br />
+                ✅ Connaître la différence entre let et const<br />
+                ✅ Maîtriser les types de données primitifs (string, number, boolean)<br />
+                ✅ Utiliser typeof pour vérifier le type d'une variable<br />
+                ✅ Comprendre null et undefined<br /><br />
+
+                <strong>📖 Points clés à retenir :</strong><br />
+                • <strong>let</strong> = variable modifiable, <strong>const</strong> = constante<br />
+                • <strong>String</strong> (texte), <strong>Number</strong> (nombre), <strong>Boolean</strong> (true/false)<br />
+                • <strong>undefined</strong> = non initialisé, <strong>null</strong> = absence volontaire<br />
+                • <strong>typeof</strong> permet de connaître le type d'une valeur<br />
+                • Privilégiez <strong>const</strong> par défaut pour éviter les erreurs<br /><br />
+
+                <strong>🏋️ Exercice pratique :</strong><br />
+                1. Déclarez une variable <code>nom</code> avec votre nom (string)<br />
+                2. Déclarez une variable <code>age</code> avec votre âge (number)<br />
+                3. Déclarez une constante <code>estEtudiant</code> = true (boolean)<br />
+                4. Affichez ces 3 variables avec console.log()<br />
+                5. Utilisez <code>typeof</code> pour vérifier le type de chaque variable<br />
+                6. Essayez de modifier <code>estEtudiant</code> et observez l'erreur !
+            </p>
+            <img src="../img/froggie-300.png" alt="Froggie explain" class="overfrog" id="Froggie" />
+        </div>
+
+        <!-- Bouton retour -->
+        <a href="index.html" id="goToIndex" title="Retour à l'index">
+            <i class="bi bi-arrow-left"></i>
+        </a>
+
+        <!-- Lien vers Froggie -->
+        <a href="#Froggie">
+            <div id="goToFroggie">
+                <img src="../img/froggie-300.png" width="50px" /><br /><i class="bi bi-arrow-bar-down"></i>
+            </div>
+        </a>
+
+        <!-- Footer -->
+        <div id="footerGit">
+            <a href="https://github.com/eCreafr/DWWM" target="_blank"><i class="bi bi-github">GitHub - eCrea</i></a>
+        </div>
+
+        <script>
+            // Console JavaScript interactive
+            const jsInput = document.getElementById('js-input');
+            const jsOutput = document.getElementById('js-output');
+
+            // Exécuter le code
+            function executeCode() {
+                const code = jsInput.value;
+                jsOutput.innerHTML = '';
+
+                // Capturer console.log
+                const logs = [];
+                const originalLog = console.log;
+                console.log = function (...args) {
+                    logs.push(args.map(arg =>
+                        typeof arg === 'object' ? JSON.stringify(arg, null, 2) : String(arg)
+                    ).join(' '));
+                    originalLog.apply(console, args);
+                };
+
+                try {
+                    // Exécuter le code
+                    eval(code);
+
+                    // Afficher les logs
+                    if (logs.length > 0) {
+                        jsOutput.innerHTML = logs.join('\n');
+                    } else {
+                        jsOutput.innerHTML = '✅ Code exécuté sans erreur (aucune sortie console)';
+                    }
+                } catch (error) {
+                    jsOutput.innerHTML = `<span class="error">❌ Erreur : ${error.message}</span>`;
+                } finally {
+                    // Restaurer console.log
+                    console.log = originalLog;
+                }
+            }
+
+            // Effacer la console
+            function clearConsole() {
+                jsInput.value = '';
+                jsOutput.innerHTML = 'Console effacée. Prêt à exécuter votre code...';
+            }
+
+            // Raccourci clavier Ctrl + Enter
+            jsInput.addEventListener('keydown', function (e) {
+                if (e.ctrlKey && e.key === 'Enter') {
+                    e.preventDefault();
+                    executeCode();
+                }
+            });
+
+            // Exemple au chargement
+            window.addEventListener('DOMContentLoaded', function() {
+                jsInput.value = `// Testez les variables et les types !
+let prenom = 'Alice';
+let age = 25;
+const pays = 'France';
+
+console.log('Prénom :', prenom);
+console.log('Age :', age);
+console.log('Type de prenom :', typeof prenom);
+console.log('Type de age :', typeof age);`;
+            });
+        </script>
+    </body>
+</html>

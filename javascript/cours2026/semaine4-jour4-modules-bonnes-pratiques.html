@@ -1,0 +1,790 @@
+<!doctype html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Semaine 4 - Jour 4 | Modules & Bonnes Pratiques</title>
+        <link rel="stylesheet" href="../css/froggie.css" />
+        <style>
+            .demo-container {
+                max-width: 1200px;
+                margin: 40px auto;
+                padding: 20px;
+                font-family: Arial, sans-serif;
+            }
+            .demo-title {
+                text-align: center;
+                font-size: 2.5em;
+                margin-bottom: 20px;
+                color: #2c3e50;
+            }
+            .demo-intro {
+                background: #ecf0f1;
+                padding: 20px;
+                border-radius: 10px;
+                margin-bottom: 40px;
+                line-height: 1.6;
+            }
+            .demo-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                gap: 30px;
+                margin-bottom: 40px;
+            }
+            .demo-item {
+                border: 2px solid #f093fb;
+                border-radius: 10px;
+                padding: 20px;
+                background: white;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            }
+            .demo-item h2 {
+                margin-top: 0;
+                color: #f093fb;
+                font-size: 1.5em;
+            }
+            .code-example {
+                background: #2c3e50;
+                color: #ecf0f1;
+                padding: 15px;
+                border-radius: 5px;
+                font-family: 'Courier New', monospace;
+                font-size: 0.9em;
+                margin: 15px 0;
+                overflow-x: auto;
+            }
+            .highlight {
+                color: #f39c12;
+                font-weight: bold;
+            }
+            .keyword {
+                color: #e74c3c;
+            }
+            .string {
+                color: #2ecc71;
+            }
+            .comment {
+                color: #95a5a6;
+                font-style: italic;
+            }
+
+            /* Good vs Bad practices */
+            .practice-comparison {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 20px;
+                margin: 20px 0;
+            }
+            .practice-box {
+                border-radius: 8px;
+                padding: 15px;
+            }
+            .practice-good {
+                background: #d4edda;
+                border: 2px solid #28a745;
+            }
+            .practice-bad {
+                background: #f8d7da;
+                border: 2px solid #dc3545;
+            }
+            .practice-box h3 {
+                margin-top: 0;
+            }
+
+            /* File structure visualization */
+            .file-tree {
+                background: #f8f9fa;
+                border: 2px solid #6c757d;
+                border-radius: 8px;
+                padding: 15px;
+                font-family: 'Courier New', monospace;
+                line-height: 1.8;
+            }
+            .file-tree .folder {
+                color: #f39c12;
+                font-weight: bold;
+            }
+            .file-tree .file {
+                color: #2c3e50;
+            }
+
+            /* Zone de démonstration interactive */
+            .interactive-demo {
+                background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+                padding: 20px;
+                border-radius: 10px;
+                margin: 20px 0;
+                color: white;
+            }
+            .demo-box {
+                background: white;
+                color: #2c3e50;
+                padding: 15px;
+                border-radius: 8px;
+                margin: 10px 0;
+                transition: all 0.3s;
+            }
+            .demo-button {
+                background: #2ecc71;
+                color: white;
+                border: none;
+                padding: 10px 20px;
+                border-radius: 5px;
+                cursor: pointer;
+                font-weight: bold;
+                margin: 5px;
+                transition: all 0.3s;
+            }
+            .demo-button:hover {
+                background: #27ae60;
+                transform: scale(1.05);
+            }
+            .demo-output {
+                background: #ecf0f1;
+                padding: 15px;
+                border-radius: 5px;
+                margin: 10px 0;
+                min-height: 60px;
+                color: #2c3e50;
+                font-family: 'Courier New', monospace;
+                font-size: 0.9em;
+                max-height: 400px;
+                overflow-y: auto;
+            }
+
+            /* Console JavaScript interactive */
+            .js-console {
+                background: #1e1e1e;
+                border-radius: 10px;
+                padding: 20px;
+                margin: 30px 0;
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            }
+            .js-console-header {
+                color: #f39c12;
+                font-weight: bold;
+                margin-bottom: 15px;
+                font-size: 1.1em;
+                display: flex;
+                align-items: center;
+                gap: 10px;
+            }
+            .js-console-editor {
+                background: #2d2d2d;
+                border: 1px solid #444;
+                border-radius: 5px;
+                padding: 15px;
+                margin-bottom: 15px;
+            }
+            .js-console-editor textarea {
+                width: 100%;
+                background: transparent;
+                border: none;
+                color: #f8f8f2;
+                font-family: 'Courier New', monospace;
+                font-size: 0.95em;
+                resize: vertical;
+                min-height: 80px;
+                outline: none;
+            }
+            .js-console-output {
+                background: #000;
+                border: 1px solid #444;
+                border-radius: 5px;
+                padding: 15px;
+                color: #0f0;
+                font-family: 'Courier New', monospace;
+                font-size: 0.9em;
+                min-height: 60px;
+                max-height: 300px;
+                overflow-y: auto;
+                white-space: pre-wrap;
+            }
+            .js-console-output .error {
+                color: #e74c3c;
+            }
+            .js-console-output .warning {
+                color: #f39c12;
+            }
+            .js-console-buttons {
+                display: flex;
+                gap: 10px;
+                margin-bottom: 15px;
+            }
+            .btn-execute {
+                background: #2ecc71;
+                color: white;
+                border: none;
+                padding: 10px 20px;
+                border-radius: 5px;
+                cursor: pointer;
+                font-weight: bold;
+                transition: background 0.3s;
+            }
+            .btn-execute:hover {
+                background: #27ae60;
+            }
+            .btn-clear {
+                background: #e74c3c;
+                color: white;
+                border: none;
+                padding: 10px 20px;
+                border-radius: 5px;
+                cursor: pointer;
+                font-weight: bold;
+                transition: background 0.3s;
+            }
+            .btn-clear:hover {
+                background: #c0392b;
+            }
+
+            @media (max-width: 768px) {
+                .practice-comparison {
+                    grid-template-columns: 1fr;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <div class="demo-container">
+            <h1 class="demo-title">📦 Semaine 4 - Jour 4 : Modules & Bonnes Pratiques</h1>
+
+            <div class="demo-intro">
+                <h3>🚀 Organisez votre code comme un professionnel</h3>
+                <p>
+                    Les <strong>modules ES6</strong> permettent de diviser votre code en fichiers réutilisables et maintenables. C'est LA façon moderne d'organiser du code JavaScript dans des projets réels.
+                </p>
+                <p>
+                    <strong>Pourquoi c'est crucial ?</strong> Dans un projet professionnel, vous ne mettez pas tout votre code dans un seul fichier de 10 000 lignes ! Les modules permettent de créer du code modulaire, testable et facile à maintenir.
+                </p>
+                <p>
+                    <strong>Dans ce cours :</strong> import/export, export default, destructuration avancée, spread operator, rest parameters, organisation du code, et conventions professionnelles.
+                </p>
+            </div>
+
+            <!-- Concepts de base -->
+            <div class="demo-grid">
+                <div class="demo-item">
+                    <h2>1. Export et Import</h2>
+                    <p>
+                        <strong>export</strong> permet d'exposer des fonctions, variables ou classes depuis un fichier.<br>
+                        <strong>import</strong> permet de les utiliser dans un autre fichier.
+                    </p>
+                    <div class="code-example">
+                        <span class="comment">// 📄 utils.js</span><br />
+                        <span class="keyword">export</span> <span class="keyword">function</span> <span class="highlight">add</span>(a, b) {<br />
+                        &nbsp;&nbsp;<span class="keyword">return</span> a + b;<br />
+                        }<br />
+                        <br />
+                        <span class="keyword">export</span> <span class="keyword">const</span> <span class="highlight">PI</span> = <span class="highlight">3.14159</span>;<br />
+                        <br />
+                        <span class="keyword">export</span> <span class="keyword">class</span> <span class="highlight">User</span> {<br />
+                        &nbsp;&nbsp;<span class="keyword">constructor</span>(name) {<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">this</span>.name = name;<br />
+                        &nbsp;&nbsp;}<br />
+                        }
+                    </div>
+                    <div class="code-example">
+                        <span class="comment">// 📄 main.js</span><br />
+                        <span class="keyword">import</span> { add, PI, User } <span class="keyword">from</span> <span class="string">'./utils.js'</span>;<br />
+                        <br />
+                        console.<span class="highlight">log</span>(<span class="highlight">add</span>(<span class="highlight">5</span>, <span class="highlight">3</span>)); <span class="comment">// 8</span><br />
+                        console.<span class="highlight">log</span>(PI); <span class="comment">// 3.14159</span><br />
+                        <span class="keyword">const</span> user = <span class="keyword">new</span> <span class="highlight">User</span>(<span class="string">'Alice'</span>);
+                    </div>
+                </div>
+
+                <div class="demo-item">
+                    <h2>2. Export Default</h2>
+                    <p>
+                        <strong>export default</strong> permet d'exporter UNE valeur principale par fichier. Utile pour les classes ou fonctions principales.
+                    </p>
+                    <div class="code-example">
+                        <span class="comment">// 📄 Calculator.js</span><br />
+                        <span class="keyword">export default class</span> <span class="highlight">Calculator</span> {<br />
+                        &nbsp;&nbsp;<span class="highlight">add</span>(a, b) { <span class="keyword">return</span> a + b; }<br />
+                        &nbsp;&nbsp;<span class="highlight">subtract</span>(a, b) { <span class="keyword">return</span> a - b; }<br />
+                        }
+                    </div>
+                    <div class="code-example">
+                        <span class="comment">// 📄 main.js (pas de { } pour default)</span><br />
+                        <span class="keyword">import</span> Calculator <span class="keyword">from</span> <span class="string">'./Calculator.js'</span>;<br />
+                        <br />
+                        <span class="keyword">const</span> calc = <span class="keyword">new</span> Calculator();<br />
+                        console.<span class="highlight">log</span>(calc.<span class="highlight">add</span>(<span class="highlight">10</span>, <span class="highlight">5</span>));
+                    </div>
+                    <p><strong>💡 Astuce :</strong> On peut combiner export default avec des exports nommés !</p>
+                </div>
+
+                <div class="demo-item">
+                    <h2>3. Spread Operator (...)</h2>
+                    <p>
+                        Le <strong>spread operator</strong> (...) permet de "déplier" un tableau ou un objet.
+                    </p>
+                    <div class="code-example">
+                        <span class="comment">// Copier un tableau</span><br />
+                        <span class="keyword">const</span> arr1 = [<span class="highlight">1</span>, <span class="highlight">2</span>, <span class="highlight">3</span>];<br />
+                        <span class="keyword">const</span> arr2 = [...arr1]; <span class="comment">// [1, 2, 3]</span><br />
+                        <br />
+                        <span class="comment">// Fusionner des tableaux</span><br />
+                        <span class="keyword">const</span> merged = [...arr1, <span class="highlight">4</span>, <span class="highlight">5</span>]; <span class="comment">// [1, 2, 3, 4, 5]</span><br />
+                        <br />
+                        <span class="comment">// Copier un objet</span><br />
+                        <span class="keyword">const</span> user = { name: <span class="string">'Alice'</span>, age: <span class="highlight">25</span> };<br />
+                        <span class="keyword">const</span> newUser = { ...user, city: <span class="string">'Paris'</span> };<br />
+                        <span class="comment">// { name: 'Alice', age: 25, city: 'Paris' }</span>
+                    </div>
+                    <p><strong>✅ Utilisation :</strong> Copier sans modifier l'original (immutabilité)</p>
+                </div>
+
+                <div class="demo-item">
+                    <h2>4. Rest Parameters (...)</h2>
+                    <p>
+                        Les <strong>rest parameters</strong> permettent de capturer un nombre variable d'arguments dans une fonction.
+                    </p>
+                    <div class="code-example">
+                        <span class="comment">// Fonction avec nombre variable d'arguments</span><br />
+                        <span class="keyword">function</span> <span class="highlight">sum</span>(...numbers) {<br />
+                        &nbsp;&nbsp;<span class="keyword">return</span> numbers.<span class="highlight">reduce</span>((a, b) => a + b, <span class="highlight">0</span>);<br />
+                        }<br />
+                        <br />
+                        console.<span class="highlight">log</span>(<span class="highlight">sum</span>(<span class="highlight">1</span>, <span class="highlight">2</span>)); <span class="comment">// 3</span><br />
+                        console.<span class="highlight">log</span>(<span class="highlight">sum</span>(<span class="highlight">1</span>, <span class="highlight">2</span>, <span class="highlight">3</span>, <span class="highlight">4</span>)); <span class="comment">// 10</span>
+                    </div>
+                    <div class="code-example">
+                        <span class="comment">// Destructuration avec rest</span><br />
+                        <span class="keyword">const</span> [first, second, ...rest] = [<span class="highlight">1</span>, <span class="highlight">2</span>, <span class="highlight">3</span>, <span class="highlight">4</span>, <span class="highlight">5</span>];<br />
+                        console.<span class="highlight">log</span>(first); <span class="comment">// 1</span><br />
+                        console.<span class="highlight">log</span>(rest); <span class="comment">// [3, 4, 5]</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Structure de projet professionnelle -->
+            <div style="background: #e8f4f8; padding: 25px; border-radius: 10px; margin: 30px 0">
+                <h2 style="color: #2c3e50; text-align: center; margin-top: 0">📁 Structure de Projet Professionnelle</h2>
+                <div class="file-tree">
+                    <span class="folder">📁 mon-projet/</span><br>
+                    &nbsp;&nbsp;<span class="folder">📁 src/</span><br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="folder">📁 components/</span><br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="file">📄 Header.js</span><br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="file">📄 Footer.js</span><br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="file">📄 Card.js</span><br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="folder">📁 utils/</span><br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="file">📄 helpers.js</span><br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="file">📄 validators.js</span><br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="file">📄 api.js</span><br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="folder">📁 services/</span><br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="file">📄 userService.js</span><br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="file">📄 authService.js</span><br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="file">📄 main.js</span><br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="file">📄 config.js</span><br>
+                    &nbsp;&nbsp;<span class="file">📄 index.html</span><br>
+                    &nbsp;&nbsp;<span class="file">📄 package.json</span><br>
+                    &nbsp;&nbsp;<span class="file">📄 README.md</span>
+                </div>
+                <p style="text-align: center; margin-top: 15px">
+                    <strong>🎯 Organisation :</strong> Séparez votre code en dossiers logiques (components, utils, services)
+                </p>
+            </div>
+
+            <!-- Bonnes vs Mauvaises pratiques -->
+            <div style="background: #fff3cd; padding: 25px; border-radius: 10px; margin: 30px 0">
+                <h2 style="color: #2c3e50; text-align: center; margin-top: 0">✅ Bonnes Pratiques vs ❌ Mauvaises Pratiques</h2>
+
+                <h3 style="color: #2c3e50; margin-top: 20px">1. Nommage des variables</h3>
+                <div class="practice-comparison">
+                    <div class="practice-bad">
+                        <h3 style="color: #dc3545">❌ Mauvais</h3>
+                        <div class="code-example">
+                            <span class="keyword">const</span> x = <span class="highlight">5</span>;<br />
+                            <span class="keyword">const</span> fn = () => {};<br />
+                            <span class="keyword">const</span> data = [];<br />
+                            <span class="keyword">const</span> temp = {};
+                        </div>
+                        <p><small>Noms trop courts, pas explicites</small></p>
+                    </div>
+                    <div class="practice-good">
+                        <h3 style="color: #28a745">✅ Bon</h3>
+                        <div class="code-example">
+                            <span class="keyword">const</span> maxRetries = <span class="highlight">5</span>;<br />
+                            <span class="keyword">const</span> fetchUserData = () => {};<br />
+                            <span class="keyword">const</span> userList = [];<br />
+                            <span class="keyword">const</span> userSettings = {};
+                        </div>
+                        <p><small>Noms descriptifs et explicites</small></p>
+                    </div>
+                </div>
+
+                <h3 style="color: #2c3e50; margin-top: 20px">2. Fonctions</h3>
+                <div class="practice-comparison">
+                    <div class="practice-bad">
+                        <h3 style="color: #dc3545">❌ Mauvais</h3>
+                        <div class="code-example">
+                            <span class="keyword">function</span> <span class="highlight">doStuff</span>(a, b, c, d, e) {<br />
+                            &nbsp;&nbsp;<span class="comment">// Fonction trop longue</span><br />
+                            &nbsp;&nbsp;<span class="comment">// 50 lignes de code...</span><br />
+                            &nbsp;&nbsp;<span class="keyword">return</span> a + b - c * d / e;<br />
+                            }
+                        </div>
+                        <p><small>Nom vague, trop de paramètres</small></p>
+                    </div>
+                    <div class="practice-good">
+                        <h3 style="color: #28a745">✅ Bon</h3>
+                        <div class="code-example">
+                            <span class="keyword">function</span> <span class="highlight">calculateTotalPrice</span>(price, tax) {<br />
+                            &nbsp;&nbsp;<span class="keyword">const</span> taxAmount = price * tax;<br />
+                            &nbsp;&nbsp;<span class="keyword">return</span> price + taxAmount;<br />
+                            }
+                        </div>
+                        <p><small>Nom clair, peu de paramètres, une responsabilité</small></p>
+                    </div>
+                </div>
+
+                <h3 style="color: #2c3e50; margin-top: 20px">3. Commentaires</h3>
+                <div class="practice-comparison">
+                    <div class="practice-bad">
+                        <h3 style="color: #dc3545">❌ Mauvais</h3>
+                        <div class="code-example">
+                            <span class="comment">// Additionne deux nombres</span><br />
+                            <span class="keyword">function</span> <span class="highlight">add</span>(a, b) {<br />
+                            &nbsp;&nbsp;<span class="keyword">return</span> a + b; <span class="comment">// Retourne la somme</span><br />
+                            }
+                        </div>
+                        <p><small>Commentaires évidents et inutiles</small></p>
+                    </div>
+                    <div class="practice-good">
+                        <h3 style="color: #28a745">✅ Bon</h3>
+                        <div class="code-example">
+                            <span class="comment">// Applique une réduction de 20% pour les commandes > 100€</span><br />
+                            <span class="comment">// car c'est la politique commerciale 2024</span><br />
+                            <span class="keyword">function</span> <span class="highlight">applyDiscount</span>(total) {<br />
+                            &nbsp;&nbsp;<span class="keyword">return</span> total > <span class="highlight">100</span> ? total * <span class="highlight">0.8</span> : total;<br />
+                            }
+                        </div>
+                        <p><small>Explique le POURQUOI, pas le COMMENT</small></p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Démonstrations interactives -->
+            <div class="interactive-demo">
+                <h2 style="text-align: center; margin-top: 0">🔀 Démonstration 1 : Spread Operator</h2>
+                <div class="demo-box">
+                    <button class="demo-button" onclick="demoSpread()">Tester le Spread</button>
+                    <div class="demo-output" id="output-spread">Cliquez pour voir le spread operator en action...</div>
+                </div>
+            </div>
+
+            <div class="interactive-demo">
+                <h2 style="text-align: center; margin-top: 0">📦 Démonstration 2 : Rest Parameters</h2>
+                <div class="demo-box">
+                    <button class="demo-button" onclick="demoRest()">Tester Rest Parameters</button>
+                    <div class="demo-output" id="output-rest">Cliquez pour voir les rest parameters...</div>
+                </div>
+            </div>
+
+            <div class="interactive-demo">
+                <h2 style="text-align: center; margin-top: 0">🎯 Démonstration 3 : Destructuration Avancée</h2>
+                <div class="demo-box">
+                    <button class="demo-button" onclick="demoDestructuring()">Tester la Destructuration</button>
+                    <div class="demo-output" id="output-destructuring">Cliquez pour voir la destructuration...</div>
+                </div>
+            </div>
+
+            <!-- Console interactive -->
+            <div class="js-console">
+                <div class="js-console-header">
+                    ⚡ Console JavaScript Interactive - Testez les bonnes pratiques !
+                </div>
+                <div class="js-console-editor">
+                    <textarea id="js-input" placeholder="Écrivez votre code JavaScript ici..."></textarea>
+                </div>
+                <div class="js-console-buttons">
+                    <button class="btn-execute" onclick="executeCode()">▶️ Exécuter (Ctrl + Enter)</button>
+                    <button class="btn-clear" onclick="clearConsole()">🗑️ Effacer</button>
+                </div>
+                <div class="js-console-output" id="js-output">Prêt à exécuter votre code...</div>
+            </div>
+
+            <!-- Exemples pratiques -->
+            <div style="background: #e8f4f8; padding: 25px; border-radius: 10px; margin: 30px 0">
+                <h2 style="color: #2c3e50; text-align: center; margin-top: 0">💻 Exemples à tester</h2>
+                <div class="code-example">
+                    <span class="comment">// 1. Spread pour fusionner des objets</span><br />
+                    <span class="keyword">const</span> defaults = { theme: <span class="string">'light'</span>, lang: <span class="string">'fr'</span> };<br />
+                    <span class="keyword">const</span> userPrefs = { lang: <span class="string">'en'</span>, fontSize: <span class="highlight">16</span> };<br />
+                    <span class="keyword">const</span> settings = { ...defaults, ...userPrefs };<br />
+                    console.<span class="highlight">log</span>(settings);<br />
+                    <span class="comment">// { theme: 'light', lang: 'en', fontSize: 16 }</span><br /><br />
+
+                    <span class="comment">// 2. Destructuration avec renommage</span><br />
+                    <span class="keyword">const</span> user = { name: <span class="string">'Alice'</span>, age: <span class="highlight">25</span>, email: <span class="string">'alice@example.com'</span> };<br />
+                    <span class="keyword">const</span> { name: userName, age: userAge } = user;<br />
+                    console.<span class="highlight">log</span>(userName, userAge); <span class="comment">// Alice 25</span><br /><br />
+
+                    <span class="comment">// 3. Rest parameters pour créer un logger flexible</span><br />
+                    <span class="keyword">function</span> <span class="highlight">log</span>(level, ...messages) {<br />
+                    &nbsp;&nbsp;console.<span class="highlight">log</span>(<span class="string">`[${level}]`</span>, ...messages);<br />
+                    }<br />
+                    <span class="highlight">log</span>(<span class="string">'INFO'</span>, <span class="string">'Utilisateur'</span>, <span class="string">'connecté'</span>, <span class="string">'avec succès'</span>);<br /><br />
+
+                    <span class="comment">// 4. Spread pour copier et modifier un tableau</span><br />
+                    <span class="keyword">const</span> numbers = [<span class="highlight">1</span>, <span class="highlight">2</span>, <span class="highlight">3</span>];<br />
+                    <span class="keyword">const</span> moreNumbers = [...numbers, <span class="highlight">4</span>, <span class="highlight">5</span>];<br />
+                    console.<span class="highlight">log</span>(moreNumbers); <span class="comment">// [1, 2, 3, 4, 5]</span>
+                </div>
+                <p style="text-align: center; margin-top: 20px">
+                    <strong>👆 Testez ces exemples dans la console interactive !</strong>
+                </p>
+            </div>
+        </div>
+
+        <!-- Zone Froggiesplaining -->
+        <div class="froggiesplaining">
+            <span> Froggiesplaining :</span>
+            <p>
+                <br />
+                <strong>🎯 Objectifs de ce cours :</strong><br />
+                ✅ Comprendre et utiliser les modules ES6 (import/export)<br />
+                ✅ Maîtriser le spread operator et les rest parameters<br />
+                ✅ Organiser son code de manière professionnelle<br />
+                ✅ Appliquer les bonnes pratiques de nommage et de structure<br />
+                ✅ Écrire des commentaires utiles<br /><br />
+
+                <strong>📖 Points clés à retenir :</strong><br />
+                • <strong>export</strong> pour exposer, <strong>import</strong> pour utiliser<br />
+                • <strong>export default</strong> pour l'export principal d'un fichier<br />
+                • <strong>Spread (...)</strong> pour copier/fusionner tableaux et objets<br />
+                • <strong>Rest parameters (...)</strong> pour capturer plusieurs arguments<br />
+                • Nommez vos variables de façon <strong>descriptive</strong> (pas x, y, z !)<br />
+                • Une fonction = <strong>une responsabilité</strong><br />
+                • Commentez le POURQUOI, pas le COMMENT<br />
+                • Organisez votre code en <strong>dossiers logiques</strong><br /><br />
+
+                <strong>🏋️ Exercices pratiques :</strong><br />
+                1. <strong>Créer un module :</strong> Créez un fichier utils.js avec 3 fonctions utilitaires (formatDate, capitalize, truncate) et exportez-les<br />
+                2. <strong>Spread practice :</strong> Fusionnez 3 objets de configuration en un seul objet final<br />
+                3. <strong>Rest practice :</strong> Créez une fonction average(...numbers) qui calcule la moyenne de N nombres<br />
+                4. <strong>Refactoring :</strong> Prenez un ancien code et améliorez le nommage des variables/fonctions<br />
+                5. <strong>Destructuration :</strong> Utilisez la destructuration pour extraire proprement les données d'une API (name, email, address.city)<br /><br />
+
+                <strong>💡 Conventions professionnelles :</strong><br />
+                • <strong>Variables/fonctions :</strong> camelCase (getUserData, totalPrice)<br />
+                • <strong>Classes :</strong> PascalCase (User, ShoppingCart)<br />
+                • <strong>Constantes :</strong> UPPER_SNAKE_CASE (MAX_RETRIES, API_URL)<br />
+                • <strong>Fichiers :</strong> kebab-case (user-service.js, api-client.js)<br />
+                • <strong>Booléens :</strong> préfixes is/has/can (isActive, hasPermission, canEdit)<br />
+                • Toujours utiliser <strong>const</strong> par défaut, <strong>let</strong> si besoin, jamais <strong>var</strong>
+            </p>
+            <img src="../img/froggie-300.png" alt="Froggie explain" class="overfrog" id="Froggie" />
+        </div>
+
+        <!-- Bouton retour -->
+        <a href="index.html" id="goToIndex" title="Retour à l'index">
+            <i class="bi bi-arrow-left"></i>
+        </a>
+
+        <!-- Lien vers Froggie -->
+        <a href="#Froggie">
+            <div id="goToFroggie">
+                <img src="../img/froggie-300.png" width="50px" /><br /><i class="bi bi-arrow-bar-down"></i>
+            </div>
+        </a>
+
+        <!-- Footer -->
+        <div id="footerGit">
+            <a href="https://github.com/eCreafr/DWWM" target="_blank"><i class="bi bi-github">GitHub - eCrea</i></a>
+        </div>
+
+        <script>
+            // ===== DÉMONSTRATION 1 : Spread Operator =====
+            function demoSpread() {
+                const output = document.getElementById('output-spread');
+
+                const fruits1 = ['🍎', '🍌', '🍊'];
+                const fruits2 = ['🍇', '🍓'];
+                const allFruits = [...fruits1, ...fruits2, '🥝'];
+
+                const user = { name: 'Alice', age: 25 };
+                const userWithEmail = { ...user, email: 'alice@example.com' };
+
+                const numbers = [5, 2, 8, 1, 9];
+                const maxNumber = Math.max(...numbers);
+
+                output.innerHTML = `
+                    <strong>1. Fusion de tableaux :</strong><br>
+                    fruits1: ${JSON.stringify(fruits1)}<br>
+                    fruits2: ${JSON.stringify(fruits2)}<br>
+                    Résultat: ${JSON.stringify(allFruits)}<br><br>
+
+                    <strong>2. Copie et extension d'objet :</strong><br>
+                    Original: ${JSON.stringify(user)}<br>
+                    Avec email: ${JSON.stringify(userWithEmail)}<br><br>
+
+                    <strong>3. Spread dans Math.max() :</strong><br>
+                    Nombres: ${JSON.stringify(numbers)}<br>
+                    Maximum: ${maxNumber}<br><br>
+
+                    <small>✅ Le spread (...) permet de "déplier" des structures de données</small>
+                `;
+            }
+
+            // ===== DÉMONSTRATION 2 : Rest Parameters =====
+            function demoRest() {
+                const output = document.getElementById('output-rest');
+
+                function sum(...numbers) {
+                    return numbers.reduce((total, num) => total + num, 0);
+                }
+
+                function greet(greeting, ...names) {
+                    return `${greeting} ${names.join(', ')} !`;
+                }
+
+                const [first, second, ...others] = [1, 2, 3, 4, 5, 6];
+
+                output.innerHTML = `
+                    <strong>1. Fonction avec nombre variable d'arguments :</strong><br>
+                    sum(1, 2, 3) = ${sum(1, 2, 3)}<br>
+                    sum(5, 10, 15, 20) = ${sum(5, 10, 15, 20)}<br><br>
+
+                    <strong>2. Combiner paramètres fixes et rest :</strong><br>
+                    greet('Bonjour', 'Alice', 'Bob', 'Charlie'):<br>
+                    "${greet('Bonjour', 'Alice', 'Bob', 'Charlie')}"<br><br>
+
+                    <strong>3. Destructuration avec rest :</strong><br>
+                    [1, 2, 3, 4, 5, 6]<br>
+                    first: ${first}<br>
+                    second: ${second}<br>
+                    others: ${JSON.stringify(others)}<br><br>
+
+                    <small>✅ Les rest parameters (...) capturent tous les arguments restants</small>
+                `;
+            }
+
+            // ===== DÉMONSTRATION 3 : Destructuration Avancée =====
+            function demoDestructuring() {
+                const output = document.getElementById('output-destructuring');
+
+                const user = {
+                    name: 'Alice Dupont',
+                    age: 28,
+                    email: 'alice@example.com',
+                    address: {
+                        street: '123 Rue de la Paix',
+                        city: 'Paris',
+                        country: 'France'
+                    },
+                    hobbies: ['lecture', 'sport', 'musique']
+                };
+
+                // Destructuration simple
+                const { name, email } = user;
+
+                // Destructuration avec renommage
+                const { age: userAge } = user;
+
+                // Destructuration imbriquée
+                const { address: { city, country } } = user;
+
+                // Destructuration de tableau
+                const [hobby1, hobby2] = user.hobbies;
+
+                // Avec valeurs par défaut
+                const { phone = 'Non renseigné' } = user;
+
+                output.innerHTML = `
+                    <strong>Objet d'origine :</strong><br>
+                    ${JSON.stringify(user, null, 2)}<br><br>
+
+                    <strong>Destructuration simple :</strong><br>
+                    name: "${name}"<br>
+                    email: "${email}"<br><br>
+
+                    <strong>Avec renommage :</strong><br>
+                    userAge: ${userAge}<br><br>
+
+                    <strong>Destructuration imbriquée :</strong><br>
+                    city: "${city}"<br>
+                    country: "${country}"<br><br>
+
+                    <strong>Tableaux :</strong><br>
+                    hobby1: "${hobby1}"<br>
+                    hobby2: "${hobby2}"<br><br>
+
+                    <strong>Valeur par défaut :</strong><br>
+                    phone: "${phone}"<br><br>
+
+                    <small>✅ La destructuration permet d'extraire proprement des données</small>
+                `;
+            }
+
+            // ===== CONSOLE INTERACTIVE =====
+            const jsInput = document.getElementById('js-input');
+            const jsOutput = document.getElementById('js-output');
+
+            function executeCode() {
+                const code = jsInput.value;
+                jsOutput.innerHTML = '';
+
+                const logs = [];
+                const originalLog = console.log;
+                const originalError = console.error;
+
+                console.log = function (...args) {
+                    logs.push(args.map(arg =>
+                        typeof arg === 'object' ? JSON.stringify(arg, null, 2) : String(arg)
+                    ).join(' '));
+                    originalLog.apply(console, args);
+                };
+
+                console.error = function (...args) {
+                    logs.push('<span class="error">' + args.join(' ') + '</span>');
+                    originalError.apply(console, args);
+                };
+
+                try {
+                    eval(code);
+
+                    if (logs.length > 0) {
+                        jsOutput.innerHTML = logs.join('\n');
+                    } else {
+                        jsOutput.innerHTML = '✅ Code exécuté sans erreur (aucune sortie console)';
+                    }
+                } catch (error) {
+                    jsOutput.innerHTML = `<span class="error">❌ Erreur : ${error.message}</span>`;
+                } finally {
+                    console.log = originalLog;
+                    console.error = originalError;
+                }
+            }
+
+            function clearConsole() {
+                jsInput.value = '';
+                jsOutput.innerHTML = 'Console effacée. Prêt à exécuter votre code...';
+            }
+
+            jsInput.addEventListener('keydown', function (e) {
+                if (e.ctrlKey && e.key === 'Enter') {
+                    e.preventDefault();
+                    executeCode();
+                }
+            });
+
+            window.addEventListener('DOMContentLoaded', function() {
+                jsInput.value = `// Testez le spread et rest !
+const arr1 = [1, 2, 3];
+const arr2 = [4, 5, 6];
+const merged = [...arr1, ...arr2];
+console.log('Fusion:', merged);
+
+function sum(...numbers) {
+  return numbers.reduce((a, b) => a + b, 0);
+}
+
+console.log('Somme:', sum(1, 2, 3, 4, 5));`;
+            });
+        </script>
+    </body>
+</html>

@@ -1,0 +1,555 @@
+<!doctype html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Semaine 3 - Jour 1 | Introduction au DOM</title>
+        <link rel="stylesheet" href="../css/froggie.css" />
+        <style>
+            .demo-container {
+                max-width: 1200px;
+                margin: 40px auto;
+                padding: 20px;
+                font-family: Arial, sans-serif;
+            }
+            .demo-title {
+                text-align: center;
+                font-size: 2.5em;
+                margin-bottom: 20px;
+                color: #2c3e50;
+            }
+            .demo-intro {
+                background: #ecf0f1;
+                padding: 20px;
+                border-radius: 10px;
+                margin-bottom: 40px;
+                line-height: 1.6;
+            }
+            .demo-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                gap: 30px;
+                margin-bottom: 40px;
+            }
+            .demo-item {
+                border: 2px solid #f093fb;
+                border-radius: 10px;
+                padding: 20px;
+                background: white;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            }
+            .demo-item h2 {
+                margin-top: 0;
+                color: #f093fb;
+                font-size: 1.5em;
+            }
+            .code-example {
+                background: #2c3e50;
+                color: #ecf0f1;
+                padding: 15px;
+                border-radius: 5px;
+                font-family: 'Courier New', monospace;
+                font-size: 0.9em;
+                margin: 15px 0;
+                overflow-x: auto;
+            }
+            .highlight {
+                color: #f39c12;
+                font-weight: bold;
+            }
+            .keyword {
+                color: #e74c3c;
+            }
+            .string {
+                color: #2ecc71;
+            }
+            .comment {
+                color: #95a5a6;
+                font-style: italic;
+            }
+
+            /* Zone de démonstration interactive */
+            .interactive-demo {
+                background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+                padding: 20px;
+                border-radius: 10px;
+                margin: 20px 0;
+                color: white;
+            }
+            .demo-box {
+                background: white;
+                color: #2c3e50;
+                padding: 15px;
+                border-radius: 8px;
+                margin: 10px 0;
+            }
+            .demo-button {
+                background: #2ecc71;
+                color: white;
+                border: none;
+                padding: 10px 20px;
+                border-radius: 5px;
+                cursor: pointer;
+                font-weight: bold;
+                margin: 5px;
+                transition: all 0.3s;
+            }
+            .demo-button:hover {
+                background: #27ae60;
+                transform: scale(1.05);
+            }
+
+            /* Console JavaScript interactive */
+            .js-console {
+                background: #1e1e1e;
+                border-radius: 10px;
+                padding: 20px;
+                margin: 30px 0;
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            }
+            .js-console-header {
+                color: #f39c12;
+                font-weight: bold;
+                margin-bottom: 15px;
+                font-size: 1.1em;
+                display: flex;
+                align-items: center;
+                gap: 10px;
+            }
+            .js-console-editor {
+                background: #2d2d2d;
+                border: 1px solid #444;
+                border-radius: 5px;
+                padding: 15px;
+                margin-bottom: 15px;
+            }
+            .js-console-editor textarea {
+                width: 100%;
+                background: transparent;
+                border: none;
+                color: #f8f8f2;
+                font-family: 'Courier New', monospace;
+                font-size: 0.95em;
+                resize: vertical;
+                min-height: 80px;
+                outline: none;
+            }
+            .js-console-output {
+                background: #000;
+                border: 1px solid #444;
+                border-radius: 5px;
+                padding: 15px;
+                color: #0f0;
+                font-family: 'Courier New', monospace;
+                font-size: 0.9em;
+                min-height: 60px;
+                max-height: 300px;
+                overflow-y: auto;
+                white-space: pre-wrap;
+            }
+            .js-console-output .error {
+                color: #e74c3c;
+            }
+            .js-console-output .warning {
+                color: #f39c12;
+            }
+            .js-console-buttons {
+                display: flex;
+                gap: 10px;
+                margin-bottom: 15px;
+            }
+            .btn-execute {
+                background: #2ecc71;
+                color: white;
+                border: none;
+                padding: 10px 20px;
+                border-radius: 5px;
+                cursor: pointer;
+                font-weight: bold;
+                transition: background 0.3s;
+            }
+            .btn-execute:hover {
+                background: #27ae60;
+            }
+            .btn-clear {
+                background: #e74c3c;
+                color: white;
+                border: none;
+                padding: 10px 20px;
+                border-radius: 5px;
+                cursor: pointer;
+                font-weight: bold;
+                transition: background 0.3s;
+            }
+            .btn-clear:hover {
+                background: #c0392b;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="demo-container">
+            <h1 class="demo-title">Semaine 3 - Jour 1 : Introduction au DOM</h1>
+
+            <div class="demo-intro">
+                <h3>Le Document Object Model (DOM)</h3>
+                <p>
+                    Le <strong>DOM</strong> (Document Object Model) est une représentation structurée de votre page HTML
+                    que JavaScript peut lire et modifier. Chaque élément HTML devient un "objet" que vous pouvez manipuler.
+                </p>
+                <p>
+                    <strong>Pourquoi c'est important :</strong> Le DOM permet de créer des pages web interactives en temps réel,
+                    sans recharger la page. Vous pouvez changer du texte, modifier des styles, ajouter/supprimer des éléments...
+                </p>
+                <p>
+                    <strong>Aujourd'hui :</strong> Apprendre à sélectionner des éléments HTML avec JavaScript
+                    et à lire leur contenu avec <code>textContent</code> et <code>innerHTML</code>.
+                </p>
+            </div>
+
+            <!-- Concepts de base -->
+            <div class="demo-grid">
+                <div class="demo-item">
+                    <h2>1. getElementById()</h2>
+                    <p>
+                        Sélectionne un élément par son <strong>attribut id</strong> (le plus rapide et précis).
+                    </p>
+                    <div class="code-example">
+                        <span class="comment">// HTML : &lt;div id="titre"&gt;Bonjour&lt;/div&gt;</span><br /><br />
+
+                        <span class="keyword">let</span> element = <span class="highlight">document.getElementById</span>(<span class="string">'titre'</span>);<br />
+                        console.<span class="highlight">log</span>(element); <span class="comment">// &lt;div id="titre"&gt;...&lt;/div&gt;</span><br /><br />
+
+                        <span class="comment">// Lire le texte</span><br />
+                        console.<span class="highlight">log</span>(element.<span class="highlight">textContent</span>); <span class="comment">// 'Bonjour'</span><br /><br />
+
+                        <span class="comment">// ⚠️ Retourne null si l'id n'existe pas</span><br />
+                        <span class="keyword">let</span> inexistant = <span class="highlight">document.getElementById</span>(<span class="string">'xyz'</span>);<br />
+                        console.<span class="highlight">log</span>(inexistant); <span class="comment">// null</span>
+                    </div>
+
+                    <div class="interactive-demo">
+                        <h3>Démo interactive</h3>
+                        <div class="demo-box" id="demo-box-1">
+                            Cliquez sur le bouton pour me sélectionner !
+                        </div>
+                        <button class="demo-button" onclick="demoGetElementById()">
+                            Sélectionner avec getElementById
+                        </button>
+                    </div>
+                </div>
+
+                <div class="demo-item">
+                    <h2>2. querySelector()</h2>
+                    <p>
+                        Sélectionne le <strong>premier élément</strong> qui correspond à un sélecteur CSS.
+                    </p>
+                    <div class="code-example">
+                        <span class="comment">// Par id (comme CSS : #)</span><br />
+                        <span class="keyword">let</span> titre = <span class="highlight">document.querySelector</span>(<span class="string">'#titre'</span>);<br /><br />
+
+                        <span class="comment">// Par classe (comme CSS : .)</span><br />
+                        <span class="keyword">let</span> boite = <span class="highlight">document.querySelector</span>(<span class="string">'.ma-classe'</span>);<br /><br />
+
+                        <span class="comment">// Par balise</span><br />
+                        <span class="keyword">let</span> premier = <span class="highlight">document.querySelector</span>(<span class="string">'p'</span>);<br /><br />
+
+                        <span class="comment">// Sélecteur complexe</span><br />
+                        <span class="keyword">let</span> lien = <span class="highlight">document.querySelector</span>(<span class="string">'div.menu a'</span>);<br /><br />
+
+                        <span class="comment">// ⚠️ Retourne null si aucun match</span>
+                    </div>
+
+                    <div class="interactive-demo">
+                        <h3>Démo interactive</h3>
+                        <div class="demo-box highlight-me">
+                            Je suis la première boîte avec la classe "highlight-me"
+                        </div>
+                        <div class="demo-box highlight-me">
+                            Je suis la deuxième boîte (non sélectionnée)
+                        </div>
+                        <button class="demo-button" onclick="demoQuerySelector()">
+                            Sélectionner avec querySelector
+                        </button>
+                    </div>
+                </div>
+
+                <div class="demo-item">
+                    <h2>3. querySelectorAll()</h2>
+                    <p>
+                        Sélectionne <strong>tous les éléments</strong> qui correspondent à un sélecteur CSS.
+                        Retourne une NodeList (comme un tableau).
+                    </p>
+                    <div class="code-example">
+                        <span class="comment">// Sélectionner tous les paragraphes</span><br />
+                        <span class="keyword">let</span> paragraphes = <span class="highlight">document.querySelectorAll</span>(<span class="string">'p'</span>);<br />
+                        console.<span class="highlight">log</span>(paragraphes.<span class="highlight">length</span>); <span class="comment">// Nombre de &lt;p&gt;</span><br /><br />
+
+                        <span class="comment">// Parcourir avec forEach</span><br />
+                        paragraphes.<span class="highlight">forEach</span>(p => {<br />
+                        &nbsp;&nbsp;console.<span class="highlight">log</span>(p.<span class="highlight">textContent</span>);<br />
+                        });<br /><br />
+
+                        <span class="comment">// Accéder à un élément spécifique</span><br />
+                        <span class="keyword">let</span> premier = paragraphes[<span class="highlight">0</span>];<br /><br />
+
+                        <span class="comment">// ⚠️ Retourne une NodeList vide [] si aucun match</span>
+                    </div>
+
+                    <div class="interactive-demo">
+                        <h3>Démo interactive</h3>
+                        <div class="demo-box count-me">Boîte 1</div>
+                        <div class="demo-box count-me">Boîte 2</div>
+                        <div class="demo-box count-me">Boîte 3</div>
+                        <button class="demo-button" onclick="demoQuerySelectorAll()">
+                            Sélectionner avec querySelectorAll
+                        </button>
+                    </div>
+                </div>
+
+                <div class="demo-item">
+                    <h2>4. textContent vs innerHTML</h2>
+                    <p>
+                        <strong>textContent :</strong> Lit/modifie uniquement le texte brut.<br />
+                        <strong>innerHTML :</strong> Lit/modifie le HTML complet (balises incluses).
+                    </p>
+                    <div class="code-example">
+                        <span class="comment">// HTML : &lt;div id="test"&gt;&lt;b&gt;Bonjour&lt;/b&gt; monde&lt;/div&gt;</span><br /><br />
+
+                        <span class="keyword">let</span> div = <span class="highlight">document.getElementById</span>(<span class="string">'test'</span>);<br /><br />
+
+                        <span class="comment">// textContent : texte brut uniquement</span><br />
+                        console.<span class="highlight">log</span>(div.<span class="highlight">textContent</span>);<br />
+                        <span class="comment">// "Bonjour monde" (sans balises)</span><br /><br />
+
+                        <span class="comment">// innerHTML : HTML complet</span><br />
+                        console.<span class="highlight">log</span>(div.<span class="highlight">innerHTML</span>);<br />
+                        <span class="comment">// "&lt;b&gt;Bonjour&lt;/b&gt; monde"</span><br /><br />
+
+                        <span class="comment">// ⚠️ innerHTML peut être dangereux avec des données utilisateur</span>
+                    </div>
+
+                    <div class="interactive-demo">
+                        <h3>Démo interactive</h3>
+                        <div class="demo-box" id="content-demo">
+                            <strong>Texte en gras</strong> et texte normal
+                        </div>
+                        <button class="demo-button" onclick="demoTextContent()">
+                            Lire textContent
+                        </button>
+                        <button class="demo-button" onclick="demoInnerHTML()">
+                            Lire innerHTML
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Console interactive -->
+            <div class="js-console">
+                <div class="js-console-header">
+                    Console JavaScript Interactive - Testez les sélecteurs DOM !
+                </div>
+                <div class="js-console-editor">
+                    <textarea id="js-input" placeholder="Écrivez votre code JavaScript ici..."></textarea>
+                </div>
+                <div class="js-console-buttons">
+                    <button class="btn-execute" onclick="executeCode()">Exécuter (Ctrl + Enter)</button>
+                    <button class="btn-clear" onclick="clearConsole()">Effacer</button>
+                </div>
+                <div class="js-console-output" id="js-output">Prêt à exécuter votre code...</div>
+            </div>
+
+            <!-- Exemples pratiques -->
+            <div style="background: #e8f4f8; padding: 25px; border-radius: 10px; margin: 30px 0">
+                <h2 style="color: #2c3e50; text-align: center; margin-top: 0">Exemples pratiques - Sélection DOM</h2>
+                <div class="code-example">
+                    <span class="comment">// Exemple complet : Analyser une page</span><br /><br />
+
+                    <span class="comment">// 1. Compter tous les liens de la page</span><br />
+                    <span class="keyword">let</span> liens = <span class="highlight">document.querySelectorAll</span>(<span class="string">'a'</span>);<br />
+                    console.<span class="highlight">log</span>(<span class="string">'Nombre de liens:'</span>, liens.<span class="highlight">length</span>);<br /><br />
+
+                    <span class="comment">// 2. Lire le titre de la page</span><br />
+                    <span class="keyword">let</span> titre = <span class="highlight">document.querySelector</span>(<span class="string">'h1'</span>);<br />
+                    console.<span class="highlight">log</span>(<span class="string">'Titre:'</span>, titre.<span class="highlight">textContent</span>);<br /><br />
+
+                    <span class="comment">// 3. Récupérer toutes les images</span><br />
+                    <span class="keyword">let</span> images = <span class="highlight">document.querySelectorAll</span>(<span class="string">'img'</span>);<br />
+                    images.<span class="highlight">forEach</span>(img => {<br />
+                    &nbsp;&nbsp;console.<span class="highlight">log</span>(<span class="string">'Image:'</span>, img.<span class="highlight">src</span>);<br />
+                    });<br /><br />
+
+                    <span class="comment">// 4. Trouver tous les éléments avec une classe spécifique</span><br />
+                    <span class="keyword">let</span> boites = <span class="highlight">document.querySelectorAll</span>(<span class="string">'.demo-box'</span>);<br />
+                    console.<span class="highlight">log</span>(<span class="string">'Nombre de boîtes demo:'</span>, boites.<span class="highlight">length</span>);<br /><br />
+
+                    <span class="comment">// 5. Lire le contenu d'un élément spécifique</span><br />
+                    <span class="keyword">let</span> intro = <span class="highlight">document.querySelector</span>(<span class="string">'.demo-intro'</span>);<br />
+                    <span class="keyword">if</span> (intro) {<br />
+                    &nbsp;&nbsp;console.<span class="highlight">log</span>(<span class="string">'Texte intro:'</span>, intro.<span class="highlight">textContent</span>.<span class="highlight">substring</span>(<span class="highlight">0</span>, <span class="highlight">50</span>) + <span class="string">'...'</span>);<br />
+                    }
+                </div>
+                <p style="text-align: center; margin-top: 20px">
+                    <strong>Testez ces exemples dans la console interactive ci-dessus !</strong>
+                </p>
+            </div>
+        </div>
+
+        <!-- Zone Froggiesplaining -->
+        <div class="froggiesplaining">
+            <span> Froggiesplaining :</span>
+            <p>
+                <br />
+                <strong>Objectifs de ce cours :</strong><br />
+                ✅ Comprendre ce qu'est le DOM<br />
+                ✅ Sélectionner des éléments avec getElementById()<br />
+                ✅ Utiliser querySelector() et querySelectorAll()<br />
+                ✅ Différencier textContent et innerHTML<br />
+                ✅ Lire le contenu des éléments HTML<br /><br />
+
+                <strong>Points clés à retenir :</strong><br />
+                • <strong>getElementById('id')</strong> : Sélection par ID (le plus rapide)<br />
+                • <strong>querySelector('.classe')</strong> : Premier élément qui match (sélecteur CSS)<br />
+                • <strong>querySelectorAll('p')</strong> : Tous les éléments qui match (retourne NodeList)<br />
+                • <strong>textContent</strong> : Texte brut uniquement (sécurisé)<br />
+                • <strong>innerHTML</strong> : HTML complet avec balises (attention XSS)<br />
+                • Toujours vérifier si l'élément existe avant de l'utiliser (if)<br />
+                • querySelectorAll retourne une NodeList, utilisez forEach() pour parcourir<br /><br />
+
+                <strong>Exercice pratique :</strong><br />
+                1. Sélectionnez l'élément avec l'id "demo-title" et affichez son textContent<br />
+                2. Comptez tous les paragraphes de la page avec querySelectorAll<br />
+                3. Sélectionnez toutes les div avec la classe "demo-box"<br />
+                4. Parcourez-les avec forEach et affichez leur contenu<br />
+                5. Comparez textContent et innerHTML sur l'élément #content-demo<br />
+                6. Bonus : Trouvez tous les boutons et affichez leur texte<br />
+                7. Bonus 2 : Sélectionnez le premier élément avec querySelector('.demo-item') et lisez son HTML
+            </p>
+            <img src="../img/froggie-300.png" alt="Froggie explain" class="overfrog" id="Froggie" />
+        </div>
+
+        <!-- Bouton retour -->
+        <a href="index.html" id="goToIndex" title="Retour à l'index">
+            <i class="bi bi-arrow-left"></i>
+        </a>
+
+        <!-- Lien vers Froggie -->
+        <a href="#Froggie">
+            <div id="goToFroggie">
+                <img src="../img/froggie-300.png" width="50px" /><br /><i class="bi bi-arrow-bar-down"></i>
+            </div>
+        </a>
+
+        <!-- Footer -->
+        <div id="footerGit">
+            <a href="https://github.com/eCreafr/DWWM" target="_blank"><i class="bi bi-github">GitHub - eCrea</i></a>
+        </div>
+
+        <script>
+            // Démos interactives
+            function demoGetElementById() {
+                const element = document.getElementById('demo-box-1');
+                alert('Element sélectionné !\n\nID: ' + element.id + '\nTexte: ' + element.textContent);
+            }
+
+            function demoQuerySelector() {
+                const element = document.querySelector('.highlight-me');
+                element.style.background = '#f39c12';
+                element.style.color = 'white';
+                element.style.fontWeight = 'bold';
+                alert('Premier élément avec la classe "highlight-me" sélectionné et surligné en orange !');
+            }
+
+            function demoQuerySelectorAll() {
+                const elements = document.querySelectorAll('.count-me');
+                alert('Nombre d\'éléments sélectionnés : ' + elements.length);
+                elements.forEach((el, index) => {
+                    el.style.background = `hsl(${index * 120}, 70%, 80%)`;
+                });
+            }
+
+            function demoTextContent() {
+                const element = document.getElementById('content-demo');
+                alert('textContent :\n\n' + element.textContent);
+            }
+
+            function demoInnerHTML() {
+                const element = document.getElementById('content-demo');
+                alert('innerHTML :\n\n' + element.innerHTML);
+            }
+
+            // Console JavaScript interactive
+            const jsInput = document.getElementById('js-input');
+            const jsOutput = document.getElementById('js-output');
+
+            // Exécuter le code
+            function executeCode() {
+                const code = jsInput.value;
+                jsOutput.innerHTML = '';
+
+                // Capturer console.log
+                const logs = [];
+                const originalLog = console.log;
+                console.log = function (...args) {
+                    logs.push(args.map(arg =>
+                        typeof arg === 'object' ? JSON.stringify(arg, null, 2) : String(arg)
+                    ).join(' '));
+                    originalLog.apply(console, args);
+                };
+
+                try {
+                    // Exécuter le code
+                    eval(code);
+
+                    // Afficher les logs
+                    if (logs.length > 0) {
+                        jsOutput.innerHTML = logs.join('\n');
+                    } else {
+                        jsOutput.innerHTML = '✅ Code exécuté sans erreur (aucune sortie console)';
+                    }
+                } catch (error) {
+                    jsOutput.innerHTML = `<span class="error">❌ Erreur : ${error.message}</span>`;
+                } finally {
+                    // Restaurer console.log
+                    console.log = originalLog;
+                }
+            }
+
+            // Effacer la console
+            function clearConsole() {
+                jsInput.value = '';
+                jsOutput.innerHTML = 'Console effacée. Prêt à exécuter votre code...';
+            }
+
+            // Raccourci clavier Ctrl + Enter
+            jsInput.addEventListener('keydown', function (e) {
+                if (e.ctrlKey && e.key === 'Enter') {
+                    e.preventDefault();
+                    executeCode();
+                }
+            });
+
+            // Exemple au chargement
+            window.addEventListener('DOMContentLoaded', function() {
+                jsInput.value = `// Sélectionner des éléments DOM
+// Essayez ces exemples !
+
+// 1. Par ID
+let titre = document.getElementById('demo-title');
+console.log('Titre trouvé:', titre ? 'Oui' : 'Non');
+
+// 2. Compter tous les boutons
+let boutons = document.querySelectorAll('button');
+console.log('Nombre de boutons:', boutons.length);
+
+// 3. Toutes les boîtes de démo
+let boxes = document.querySelectorAll('.demo-box');
+console.log('Nombre de demo-box:', boxes.length);
+
+// 4. Parcourir et afficher
+boxes.forEach((box, index) => {
+  console.log(\`Boîte \${index + 1}: \${box.textContent.substring(0, 30)}...\`);
+});`;
+            });
+        </script>
+    </body>
+</html>

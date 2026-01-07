@@ -1,0 +1,415 @@
+<!doctype html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Semaine 2 - Jour 1 | Fonctions</title>
+        <link rel="stylesheet" href="../css/froggie.css" />
+        <style>
+            .demo-container {
+                max-width: 1200px;
+                margin: 40px auto;
+                padding: 20px;
+                font-family: Arial, sans-serif;
+            }
+            .demo-title {
+                text-align: center;
+                font-size: 2.5em;
+                margin-bottom: 20px;
+                color: #2c3e50;
+            }
+            .demo-intro {
+                background: #ecf0f1;
+                padding: 20px;
+                border-radius: 10px;
+                margin-bottom: 40px;
+                line-height: 1.6;
+            }
+            .demo-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                gap: 30px;
+                margin-bottom: 40px;
+            }
+            .demo-item {
+                border: 2px solid #f093fb;
+                border-radius: 10px;
+                padding: 20px;
+                background: white;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            }
+            .demo-item h2 {
+                margin-top: 0;
+                color: #f093fb;
+                font-size: 1.5em;
+            }
+            .code-example {
+                background: #2c3e50;
+                color: #ecf0f1;
+                padding: 15px;
+                border-radius: 5px;
+                font-family: 'Courier New', monospace;
+                font-size: 0.9em;
+                margin: 15px 0;
+                overflow-x: auto;
+            }
+            .highlight {
+                color: #f39c12;
+                font-weight: bold;
+            }
+            .keyword {
+                color: #e74c3c;
+            }
+            .string {
+                color: #2ecc71;
+            }
+            .comment {
+                color: #95a5a6;
+                font-style: italic;
+            }
+
+            /* Console JavaScript interactive */
+            .js-console {
+                background: #1e1e1e;
+                border-radius: 10px;
+                padding: 20px;
+                margin: 30px 0;
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            }
+            .js-console-header {
+                color: #f39c12;
+                font-weight: bold;
+                margin-bottom: 15px;
+                font-size: 1.1em;
+                display: flex;
+                align-items: center;
+                gap: 10px;
+            }
+            .js-console-editor {
+                background: #2d2d2d;
+                border: 1px solid #444;
+                border-radius: 5px;
+                padding: 15px;
+                margin-bottom: 15px;
+            }
+            .js-console-editor textarea {
+                width: 100%;
+                background: transparent;
+                border: none;
+                color: #f8f8f2;
+                font-family: 'Courier New', monospace;
+                font-size: 0.95em;
+                resize: vertical;
+                min-height: 80px;
+                outline: none;
+            }
+            .js-console-output {
+                background: #000;
+                border: 1px solid #444;
+                border-radius: 5px;
+                padding: 15px;
+                color: #0f0;
+                font-family: 'Courier New', monospace;
+                font-size: 0.9em;
+                min-height: 60px;
+                max-height: 300px;
+                overflow-y: auto;
+                white-space: pre-wrap;
+            }
+            .js-console-output .error {
+                color: #e74c3c;
+            }
+            .js-console-output .warning {
+                color: #f39c12;
+            }
+            .js-console-buttons {
+                display: flex;
+                gap: 10px;
+                margin-bottom: 15px;
+            }
+            .btn-execute {
+                background: #2ecc71;
+                color: white;
+                border: none;
+                padding: 10px 20px;
+                border-radius: 5px;
+                cursor: pointer;
+                font-weight: bold;
+                transition: background 0.3s;
+            }
+            .btn-execute:hover {
+                background: #27ae60;
+            }
+            .btn-clear {
+                background: #e74c3c;
+                color: white;
+                border: none;
+                padding: 10px 20px;
+                border-radius: 5px;
+                cursor: pointer;
+                font-weight: bold;
+                transition: background 0.3s;
+            }
+            .btn-clear:hover {
+                background: #c0392b;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="demo-container">
+            <h1 class="demo-title">Semaine 2 - Jour 1 : Fonctions</h1>
+
+            <div class="demo-intro">
+                <h3>Qu'est-ce qu'une fonction ?</h3>
+                <p>
+                    Une <strong>fonction</strong> est un bloc de code réutilisable qui accomplit une tâche spécifique.
+                    Au lieu d'écrire le même code plusieurs fois, on crée une fonction qu'on peut appeler quand on en a besoin.
+                </p>
+                <p>
+                    <strong>Analogie :</strong> Une fonction est comme une recette de cuisine. Vous définissez les ingrédients (paramètres),
+                    les étapes (code), et obtenez un résultat (valeur de retour).
+                </p>
+                <p>
+                    <strong>Avantages :</strong> Code réutilisable, plus lisible, plus facile à maintenir et déboguer.
+                </p>
+            </div>
+
+            <!-- Concepts de base -->
+            <div class="demo-grid">
+                <div class="demo-item">
+                    <h2>1. Déclaration de fonction</h2>
+                    <p>Une fonction se déclare avec le mot-clé <strong>function</strong> suivi d'un nom et de parenthèses.</p>
+                    <div class="code-example">
+                        <span class="comment">// Fonction simple sans paramètre</span><br />
+                        <span class="keyword">function</span> <span class="highlight">direBonjour</span>() {<br />
+                        &nbsp;&nbsp;console.<span class="highlight">log</span>(<span class="string">'Bonjour !'</span>);<br />
+                        }<br /><br />
+
+                        <span class="comment">// Appel de la fonction</span><br />
+                        <span class="highlight">direBonjour</span>(); <span class="comment">// Affiche: Bonjour !</span>
+                    </div>
+                    <p><strong>💡 Astuce :</strong> On peut appeler la fonction autant de fois qu'on veut !</p>
+                </div>
+
+                <div class="demo-item">
+                    <h2>2. Paramètres et arguments</h2>
+                    <p>
+                        Les <strong>paramètres</strong> permettent de passer des valeurs à la fonction pour la rendre plus flexible.
+                    </p>
+                    <div class="code-example">
+                        <span class="comment">// Fonction avec paramètres</span><br />
+                        <span class="keyword">function</span> <span class="highlight">saluer</span>(nom, age) {<br />
+                        &nbsp;&nbsp;console.<span class="highlight">log</span>(<span class="string">'Bonjour '</span> + nom);<br />
+                        &nbsp;&nbsp;console.<span class="highlight">log</span>(<span class="string">'Tu as '</span> + age + <span class="string">' ans'</span>);<br />
+                        }<br /><br />
+
+                        <span class="comment">// Appel avec arguments</span><br />
+                        <span class="highlight">saluer</span>(<span class="string">'Marie'</span>, <span class="highlight">25</span>);<br />
+                        <span class="highlight">saluer</span>(<span class="string">'Tom'</span>, <span class="highlight">30</span>);
+                    </div>
+                </div>
+
+                <div class="demo-item">
+                    <h2>3. Valeur de retour (return)</h2>
+                    <p>
+                        Le mot-clé <strong>return</strong> permet de renvoyer une valeur depuis la fonction.
+                        La fonction s'arrête après le return.
+                    </p>
+                    <div class="code-example">
+                        <span class="comment">// Fonction qui calcule et retourne</span><br />
+                        <span class="keyword">function</span> <span class="highlight">additionner</span>(a, b) {<br />
+                        &nbsp;&nbsp;<span class="keyword">return</span> a + b;<br />
+                        }<br /><br />
+
+                        <span class="keyword">let</span> resultat = <span class="highlight">additionner</span>(<span class="highlight">5</span>, <span class="highlight">3</span>);<br />
+                        console.<span class="highlight">log</span>(resultat); <span class="comment">// 8</span><br /><br />
+
+                        <span class="comment">// Utilisation directe</span><br />
+                        console.<span class="highlight">log</span>(<span class="highlight">additionner</span>(<span class="highlight">10</span>, <span class="highlight">20</span>)); <span class="comment">// 30</span>
+                    </div>
+                </div>
+
+                <div class="demo-item">
+                    <h2>4. Fonctions fléchées (Arrow Functions)</h2>
+                    <p>
+                        Syntaxe moderne et concise pour créer des fonctions (ES6+).
+                    </p>
+                    <div class="code-example">
+                        <span class="comment">// Syntaxe classique</span><br />
+                        <span class="keyword">function</span> <span class="highlight">carre</span>(x) {<br />
+                        &nbsp;&nbsp;<span class="keyword">return</span> x * x;<br />
+                        }<br /><br />
+
+                        <span class="comment">// Fonction fléchée équivalente</span><br />
+                        <span class="keyword">const</span> <span class="highlight">carre</span> = (x) => {<br />
+                        &nbsp;&nbsp;<span class="keyword">return</span> x * x;<br />
+                        };<br /><br />
+
+                        <span class="comment">// Version ultra-courte (return implicite)</span><br />
+                        <span class="keyword">const</span> <span class="highlight">carre</span> = x => x * x;
+                    </div>
+                </div>
+            </div>
+
+            <!-- Console interactive -->
+            <div class="js-console">
+                <div class="js-console-header">
+                    Console JavaScript Interactive - Testez les fonctions !
+                </div>
+                <div class="js-console-editor">
+                    <textarea id="js-input" placeholder="Écrivez votre code JavaScript ici..."></textarea>
+                </div>
+                <div class="js-console-buttons">
+                    <button class="btn-execute" onclick="executeCode()">Exécuter (Ctrl + Enter)</button>
+                    <button class="btn-clear" onclick="clearConsole()">Effacer</button>
+                </div>
+                <div class="js-console-output" id="js-output">Prêt à exécuter votre code...</div>
+            </div>
+
+            <!-- Exemples pratiques -->
+            <div style="background: #e8f4f8; padding: 25px; border-radius: 10px; margin: 30px 0">
+                <h2 style="color: #2c3e50; text-align: center; margin-top: 0">Exemples pratiques</h2>
+                <div class="code-example">
+                    <span class="comment">// Calculer le prix TTC</span><br />
+                    <span class="keyword">function</span> <span class="highlight">calculerPrixTTC</span>(prixHT, tauxTVA) {<br />
+                    &nbsp;&nbsp;<span class="keyword">return</span> prixHT * (<span class="highlight">1</span> + tauxTVA / <span class="highlight">100</span>);<br />
+                    }<br /><br />
+
+                    console.<span class="highlight">log</span>(<span class="highlight">calculerPrixTTC</span>(<span class="highlight">100</span>, <span class="highlight">20</span>)); <span class="comment">// 120</span><br /><br />
+
+                    <span class="comment">// Vérifier si un nombre est pair</span><br />
+                    <span class="keyword">const</span> <span class="highlight">estPair</span> = nombre => nombre % <span class="highlight">2</span> === <span class="highlight">0</span>;<br /><br />
+
+                    console.<span class="highlight">log</span>(<span class="highlight">estPair</span>(<span class="highlight">4</span>)); <span class="comment">// true</span><br />
+                    console.<span class="highlight">log</span>(<span class="highlight">estPair</span>(<span class="highlight">7</span>)); <span class="comment">// false</span><br /><br />
+
+                    <span class="comment">// Générer un message personnalisé</span><br />
+                    <span class="keyword">function</span> <span class="highlight">creerMessage</span>(prenom, ville) {<br />
+                    &nbsp;&nbsp;<span class="keyword">return</span> <span class="string">`Bonjour ${prenom}, bienvenue à ${ville} !`</span>;<br />
+                    }<br /><br />
+
+                    console.<span class="highlight">log</span>(<span class="highlight">creerMessage</span>(<span class="string">'Alice'</span>, <span class="string">'Paris'</span>));
+                </div>
+                <p style="text-align: center; margin-top: 20px">
+                    <strong>Copiez ces exemples dans la console interactive ci-dessus !</strong>
+                </p>
+            </div>
+        </div>
+
+        <!-- Zone Froggiesplaining -->
+        <div class="froggiesplaining">
+            <span> Froggiesplaining :</span>
+            <p>
+                <br />
+                <strong>Objectifs de ce cours :</strong><br />
+                ✅ Comprendre ce qu'est une fonction et pourquoi l'utiliser<br />
+                ✅ Savoir déclarer et appeler une fonction<br />
+                ✅ Utiliser des paramètres pour rendre les fonctions flexibles<br />
+                ✅ Retourner des valeurs avec return<br />
+                ✅ Découvrir les fonctions fléchées (syntaxe moderne)<br /><br />
+
+                <strong>Points clés à retenir :</strong><br />
+                • Une fonction = bloc de code réutilisable<br />
+                • <strong>function nomFonction(paramètres) { ... }</strong> pour déclarer<br />
+                • <strong>return</strong> pour renvoyer une valeur<br />
+                • <strong>const maFonction = (params) => { ... }</strong> pour les fonctions fléchées<br />
+                • Les fonctions évitent la répétition de code<br />
+                • Scope : les variables déclarées dans une fonction sont locales<br /><br />
+
+                <strong>Exercice pratique :</strong><br />
+                1. Créez une fonction <code>calculerAge(anneeNaissance)</code> qui retourne l'âge<br />
+                2. Créez une fonction <code>estMajeur(age)</code> qui retourne true si age >= 18<br />
+                3. Créez une fonction fléchée <code>doubler</code> qui multiplie un nombre par 2<br />
+                4. Testez vos fonctions dans la console interactive !<br />
+                5. Bonus : Créez une fonction qui convertit des degrés Celsius en Fahrenheit
+            </p>
+            <img src="../img/froggie-300.png" alt="Froggie explain" class="overfrog" id="Froggie" />
+        </div>
+
+        <!-- Bouton retour -->
+        <a href="index.html" id="goToIndex" title="Retour à l'index">
+            <i class="bi bi-arrow-left"></i>
+        </a>
+
+        <!-- Lien vers Froggie -->
+        <a href="#Froggie">
+            <div id="goToFroggie">
+                <img src="../img/froggie-300.png" width="50px" /><br /><i class="bi bi-arrow-bar-down"></i>
+            </div>
+        </a>
+
+        <!-- Footer -->
+        <div id="footerGit">
+            <a href="https://github.com/eCreafr/DWWM" target="_blank"><i class="bi bi-github">GitHub - eCrea</i></a>
+        </div>
+
+        <script>
+            // Console JavaScript interactive
+            const jsInput = document.getElementById('js-input');
+            const jsOutput = document.getElementById('js-output');
+
+            // Exécuter le code
+            function executeCode() {
+                const code = jsInput.value;
+                jsOutput.innerHTML = '';
+
+                // Capturer console.log
+                const logs = [];
+                const originalLog = console.log;
+                console.log = function (...args) {
+                    logs.push(args.map(arg =>
+                        typeof arg === 'object' ? JSON.stringify(arg, null, 2) : String(arg)
+                    ).join(' '));
+                    originalLog.apply(console, args);
+                };
+
+                try {
+                    // Exécuter le code
+                    eval(code);
+
+                    // Afficher les logs
+                    if (logs.length > 0) {
+                        jsOutput.innerHTML = logs.join('\n');
+                    } else {
+                        jsOutput.innerHTML = '✅ Code exécuté sans erreur (aucune sortie console)';
+                    }
+                } catch (error) {
+                    jsOutput.innerHTML = `<span class="error">❌ Erreur : ${error.message}</span>`;
+                } finally {
+                    // Restaurer console.log
+                    console.log = originalLog;
+                }
+            }
+
+            // Effacer la console
+            function clearConsole() {
+                jsInput.value = '';
+                jsOutput.innerHTML = 'Console effacée. Prêt à exécuter votre code...';
+            }
+
+            // Raccourci clavier Ctrl + Enter
+            jsInput.addEventListener('keydown', function (e) {
+                if (e.ctrlKey && e.key === 'Enter') {
+                    e.preventDefault();
+                    executeCode();
+                }
+            });
+
+            // Exemple au chargement
+            window.addEventListener('DOMContentLoaded', function() {
+                jsInput.value = `// Testez les fonctions !
+function calculerPrixTTC(prixHT, tauxTVA) {
+  return prixHT * (1 + tauxTVA / 100);
+}
+
+console.log('Prix HT: 100€, TVA 20%');
+console.log('Prix TTC:', calculerPrixTTC(100, 20), '€');
+
+// Fonction fléchée
+const estPair = n => n % 2 === 0;
+console.log('4 est pair ?', estPair(4));
+console.log('7 est pair ?', estPair(7));`;
+            });
+        </script>
+    </body>
+</html>

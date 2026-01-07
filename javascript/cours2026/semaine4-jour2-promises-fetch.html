@@ -1,0 +1,684 @@
+<!doctype html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Semaine 4 - Jour 2 | Promises & Fetch API</title>
+        <link rel="stylesheet" href="../css/froggie.css" />
+        <style>
+            .demo-container {
+                max-width: 1200px;
+                margin: 40px auto;
+                padding: 20px;
+                font-family: Arial, sans-serif;
+            }
+            .demo-title {
+                text-align: center;
+                font-size: 2.5em;
+                margin-bottom: 20px;
+                color: #2c3e50;
+            }
+            .demo-intro {
+                background: #ecf0f1;
+                padding: 20px;
+                border-radius: 10px;
+                margin-bottom: 40px;
+                line-height: 1.6;
+            }
+            .demo-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                gap: 30px;
+                margin-bottom: 40px;
+            }
+            .demo-item {
+                border: 2px solid #f093fb;
+                border-radius: 10px;
+                padding: 20px;
+                background: white;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            }
+            .demo-item h2 {
+                margin-top: 0;
+                color: #f093fb;
+                font-size: 1.5em;
+            }
+            .code-example {
+                background: #2c3e50;
+                color: #ecf0f1;
+                padding: 15px;
+                border-radius: 5px;
+                font-family: 'Courier New', monospace;
+                font-size: 0.9em;
+                margin: 15px 0;
+                overflow-x: auto;
+            }
+            .highlight {
+                color: #f39c12;
+                font-weight: bold;
+            }
+            .keyword {
+                color: #e74c3c;
+            }
+            .string {
+                color: #2ecc71;
+            }
+            .comment {
+                color: #95a5a6;
+                font-style: italic;
+            }
+
+            /* Zone de démonstration interactive */
+            .interactive-demo {
+                background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+                padding: 20px;
+                border-radius: 10px;
+                margin: 20px 0;
+                color: white;
+            }
+            .demo-box {
+                background: white;
+                color: #2c3e50;
+                padding: 15px;
+                border-radius: 8px;
+                margin: 10px 0;
+                transition: all 0.3s;
+            }
+            .demo-button {
+                background: #2ecc71;
+                color: white;
+                border: none;
+                padding: 10px 20px;
+                border-radius: 5px;
+                cursor: pointer;
+                font-weight: bold;
+                margin: 5px;
+                transition: all 0.3s;
+            }
+            .demo-button:hover {
+                background: #27ae60;
+                transform: scale(1.05);
+            }
+            .demo-output {
+                background: #ecf0f1;
+                padding: 15px;
+                border-radius: 5px;
+                margin: 10px 0;
+                min-height: 60px;
+                color: #2c3e50;
+                font-family: 'Courier New', monospace;
+                font-size: 0.9em;
+                max-height: 400px;
+                overflow-y: auto;
+            }
+
+            /* Loading animation */
+            .loading {
+                display: inline-block;
+                width: 20px;
+                height: 20px;
+                border: 3px solid #f3f3f3;
+                border-top: 3px solid #3498db;
+                border-radius: 50%;
+                animation: spin 1s linear infinite;
+                margin-right: 10px;
+            }
+
+            @keyframes spin {
+                0% { transform: rotate(0deg); }
+                100% { transform: rotate(360deg); }
+            }
+
+            /* Card pour afficher les données */
+            .data-card {
+                background: white;
+                border: 2px solid #3498db;
+                border-radius: 8px;
+                padding: 15px;
+                margin: 10px 0;
+                box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            }
+            .data-card h3 {
+                margin-top: 0;
+                color: #2c3e50;
+            }
+
+            /* Console JavaScript interactive */
+            .js-console {
+                background: #1e1e1e;
+                border-radius: 10px;
+                padding: 20px;
+                margin: 30px 0;
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            }
+            .js-console-header {
+                color: #f39c12;
+                font-weight: bold;
+                margin-bottom: 15px;
+                font-size: 1.1em;
+                display: flex;
+                align-items: center;
+                gap: 10px;
+            }
+            .js-console-editor {
+                background: #2d2d2d;
+                border: 1px solid #444;
+                border-radius: 5px;
+                padding: 15px;
+                margin-bottom: 15px;
+            }
+            .js-console-editor textarea {
+                width: 100%;
+                background: transparent;
+                border: none;
+                color: #f8f8f2;
+                font-family: 'Courier New', monospace;
+                font-size: 0.95em;
+                resize: vertical;
+                min-height: 80px;
+                outline: none;
+            }
+            .js-console-output {
+                background: #000;
+                border: 1px solid #444;
+                border-radius: 5px;
+                padding: 15px;
+                color: #0f0;
+                font-family: 'Courier New', monospace;
+                font-size: 0.9em;
+                min-height: 60px;
+                max-height: 300px;
+                overflow-y: auto;
+                white-space: pre-wrap;
+            }
+            .js-console-output .error {
+                color: #e74c3c;
+            }
+            .js-console-output .warning {
+                color: #f39c12;
+            }
+            .js-console-buttons {
+                display: flex;
+                gap: 10px;
+                margin-bottom: 15px;
+            }
+            .btn-execute {
+                background: #2ecc71;
+                color: white;
+                border: none;
+                padding: 10px 20px;
+                border-radius: 5px;
+                cursor: pointer;
+                font-weight: bold;
+                transition: background 0.3s;
+            }
+            .btn-execute:hover {
+                background: #27ae60;
+            }
+            .btn-clear {
+                background: #e74c3c;
+                color: white;
+                border: none;
+                padding: 10px 20px;
+                border-radius: 5px;
+                cursor: pointer;
+                font-weight: bold;
+                transition: background 0.3s;
+            }
+            .btn-clear:hover {
+                background: #c0392b;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="demo-container">
+            <h1 class="demo-title">🎁 Semaine 4 - Jour 2 : Promises & Fetch API</h1>
+
+            <div class="demo-intro">
+                <h3>🚀 Les Promises : gérer l'asynchronisme avec élégance</h3>
+                <p>
+                    Les <strong>Promises</strong> (promesses) sont la solution moderne pour gérer les opérations asynchrones en JavaScript. Elles remplacent les "callback hell" (l'enfer des callbacks imbriqués) par un code plus lisible et maintenable.
+                </p>
+                <p>
+                    <strong>L'API Fetch</strong> utilise les Promises pour récupérer des données depuis des serveurs. C'est LA méthode moderne pour faire des requêtes HTTP en JavaScript.
+                </p>
+                <p>
+                    <strong>Dans ce cours :</strong> Concept de Promise, états (pending/fulfilled/rejected), .then(), .catch(), .finally(), l'API fetch(), et exemples avec JSONPlaceholder (une API de test gratuite).
+                </p>
+            </div>
+
+            <!-- Concepts de base -->
+            <div class="demo-grid">
+                <div class="demo-item">
+                    <h2>1. Qu'est-ce qu'une Promise ?</h2>
+                    <p>
+                        Une <strong>Promise</strong> est un objet qui représente la complétion (ou l'échec) éventuelle d'une opération asynchrone.
+                    </p>
+                    <p><strong>3 états possibles :</strong></p>
+                    <ul style="line-height: 1.8">
+                        <li><strong>pending</strong> : en attente (opération en cours)</li>
+                        <li><strong>fulfilled</strong> : résolue avec succès</li>
+                        <li><strong>rejected</strong> : échouée (erreur)</li>
+                    </ul>
+                    <div class="code-example">
+                        <span class="comment">// Créer une Promise</span><br />
+                        <span class="keyword">const</span> maPromise = <span class="keyword">new Promise</span>((resolve, reject) => {<br />
+                        &nbsp;&nbsp;<span class="keyword">const</span> succes = <span class="highlight">true</span>;<br />
+                        &nbsp;&nbsp;<br />
+                        &nbsp;&nbsp;<span class="keyword">if</span> (succes) {<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="highlight">resolve</span>(<span class="string">'✅ Succès !'</span>);<br />
+                        &nbsp;&nbsp;} <span class="keyword">else</span> {<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="highlight">reject</span>(<span class="string">'❌ Erreur !'</span>);<br />
+                        &nbsp;&nbsp;}<br />
+                        });
+                    </div>
+                </div>
+
+                <div class="demo-item">
+                    <h2>2. .then() et .catch()</h2>
+                    <p>
+                        <strong>.then()</strong> est appelé quand la Promise est résolue (fulfilled).<br />
+                        <strong>.catch()</strong> est appelé quand la Promise est rejetée (rejected).
+                    </p>
+                    <div class="code-example">
+                        maPromise<br />
+                        &nbsp;&nbsp;.<span class="highlight">then</span>(resultat => {<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;console.<span class="highlight">log</span>(resultat);<br />
+                        &nbsp;&nbsp;})<br />
+                        &nbsp;&nbsp;.<span class="highlight">catch</span>(erreur => {<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;console.<span class="highlight">error</span>(erreur);<br />
+                        &nbsp;&nbsp;});
+                    </div>
+                    <p><strong>.finally()</strong> est toujours exécuté, qu'il y ait succès ou échec :</p>
+                    <div class="code-example">
+                        maPromise<br />
+                        &nbsp;&nbsp;.<span class="highlight">then</span>(res => console.<span class="highlight">log</span>(res))<br />
+                        &nbsp;&nbsp;.<span class="highlight">catch</span>(err => console.<span class="highlight">error</span>(err))<br />
+                        &nbsp;&nbsp;.<span class="highlight">finally</span>(() => {<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;console.<span class="highlight">log</span>(<span class="string">'Opération terminée'</span>);<br />
+                        &nbsp;&nbsp;});
+                    </div>
+                </div>
+
+                <div class="demo-item">
+                    <h2>3. L'API Fetch</h2>
+                    <p>
+                        <strong>fetch()</strong> permet de faire des requêtes HTTP. Elle retourne une Promise qui se résout avec la réponse.
+                    </p>
+                    <div class="code-example">
+                        <span class="comment">// Récupérer des données</span><br />
+                        <span class="keyword">fetch</span>(<span class="string">'https://api.example.com/data'</span>)<br />
+                        &nbsp;&nbsp;.<span class="highlight">then</span>(response => response.<span class="highlight">json</span>())<br />
+                        &nbsp;&nbsp;.<span class="highlight">then</span>(data => {<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;console.<span class="highlight">log</span>(data);<br />
+                        &nbsp;&nbsp;})<br />
+                        &nbsp;&nbsp;.<span class="highlight">catch</span>(error => {<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;console.<span class="highlight">error</span>(<span class="string">'Erreur :'</span>, error);<br />
+                        &nbsp;&nbsp;});
+                    </div>
+                    <p><strong>💡 Important :</strong> fetch() retourne d'abord la réponse HTTP, puis on doit appeler .json() pour obtenir les données JSON.</p>
+                </div>
+
+                <div class="demo-item">
+                    <h2>4. JSON : parse() et stringify()</h2>
+                    <p>
+                        <strong>JSON</strong> (JavaScript Object Notation) est le format standard pour échanger des données avec des APIs.
+                    </p>
+                    <div class="code-example">
+                        <span class="comment">// Objet JavaScript → Texte JSON</span><br />
+                        <span class="keyword">const</span> objet = { nom: <span class="string">'Alice'</span>, age: <span class="highlight">25</span> };<br />
+                        <span class="keyword">const</span> json = JSON.<span class="highlight">stringify</span>(objet);<br />
+                        console.<span class="highlight">log</span>(json);<br />
+                        <span class="comment">// {"nom":"Alice","age":25}</span>
+                    </div>
+                    <div class="code-example">
+                        <span class="comment">// Texte JSON → Objet JavaScript</span><br />
+                        <span class="keyword">const</span> texteJSON = <span class="string">'{"nom":"Bob","age":30}'</span>;<br />
+                        <span class="keyword">const</span> objetJS = JSON.<span class="highlight">parse</span>(texteJSON);<br />
+                        console.<span class="highlight">log</span>(objetJS.nom); <span class="comment">// Bob</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Démonstrations interactives -->
+            <div class="interactive-demo">
+                <h2 style="text-align: center; margin-top: 0">🎲 Démonstration 1 : Promise Simple</h2>
+                <div class="demo-box">
+                    <p>Cette Promise a 50% de chances de réussir ou d'échouer :</p>
+                    <button class="demo-button" onclick="demoSimplePromise()">Tester la Promise</button>
+                    <div class="demo-output" id="output-promise">Cliquez pour lancer la Promise...</div>
+                </div>
+            </div>
+
+            <div class="interactive-demo">
+                <h2 style="text-align: center; margin-top: 0">👥 Démonstration 2 : Fetch API - Récupérer des utilisateurs</h2>
+                <div class="demo-box">
+                    <p>Utilise l'API JSONPlaceholder pour récupérer une liste d'utilisateurs fictifs :</p>
+                    <button class="demo-button" onclick="fetchUsers()">Charger les utilisateurs</button>
+                    <div class="demo-output" id="output-users">Cliquez pour charger les données...</div>
+                </div>
+            </div>
+
+            <div class="interactive-demo">
+                <h2 style="text-align: center; margin-top: 0">📝 Démonstration 3 : Fetch API - Récupérer un article</h2>
+                <div class="demo-box">
+                    <label>ID de l'article (1-100) : <input type="number" id="post-id" value="1" min="1" max="100" style="padding: 5px; font-size: 1em; width: 80px;"></label>
+                    <button class="demo-button" onclick="fetchPost()">Charger l'article</button>
+                    <div class="demo-output" id="output-post">Entrez un ID et cliquez pour charger...</div>
+                </div>
+            </div>
+
+            <div class="interactive-demo">
+                <h2 style="text-align: center; margin-top: 0">🔄 Démonstration 4 : Chaînage de Promises</h2>
+                <div class="demo-box">
+                    <p>Cette démo enchaîne plusieurs Promises pour récupérer un article ET ses commentaires :</p>
+                    <button class="demo-button" onclick="fetchPostWithComments()">Charger article + commentaires</button>
+                    <div class="demo-output" id="output-chain">Cliquez pour voir le chaînage de Promises...</div>
+                </div>
+            </div>
+
+            <!-- Console interactive -->
+            <div class="js-console">
+                <div class="js-console-header">
+                    ⚡ Console JavaScript Interactive - Testez les Promises !
+                </div>
+                <div class="js-console-editor">
+                    <textarea id="js-input" placeholder="Écrivez votre code JavaScript ici..."></textarea>
+                </div>
+                <div class="js-console-buttons">
+                    <button class="btn-execute" onclick="executeCode()">▶️ Exécuter (Ctrl + Enter)</button>
+                    <button class="btn-clear" onclick="clearConsole()">🗑️ Effacer</button>
+                </div>
+                <div class="js-console-output" id="js-output">Prêt à exécuter votre code...</div>
+            </div>
+
+            <!-- Exemples pratiques -->
+            <div style="background: #e8f4f8; padding: 25px; border-radius: 10px; margin: 30px 0">
+                <h2 style="color: #2c3e50; text-align: center; margin-top: 0">💻 Exemples à tester</h2>
+                <div class="code-example">
+                    <span class="comment">// 1. Promise qui se résout après 2 secondes</span><br />
+                    <span class="keyword">const</span> delayedPromise = <span class="keyword">new Promise</span>((resolve) => {<br />
+                    &nbsp;&nbsp;<span class="keyword">setTimeout</span>(() => resolve(<span class="string">'✅ Résolu après 2s'</span>), <span class="highlight">2000</span>);<br />
+                    });<br />
+                    <br />
+                    delayedPromise.<span class="highlight">then</span>(msg => console.<span class="highlight">log</span>(msg));<br /><br />
+
+                    <span class="comment">// 2. Fetch simple avec JSONPlaceholder</span><br />
+                    <span class="keyword">fetch</span>(<span class="string">'https://jsonplaceholder.typicode.com/users/1'</span>)<br />
+                    &nbsp;&nbsp;.<span class="highlight">then</span>(response => response.<span class="highlight">json</span>())<br />
+                    &nbsp;&nbsp;.<span class="highlight">then</span>(user => {<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;console.<span class="highlight">log</span>(<span class="string">'Nom:'</span>, user.name);<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;console.<span class="highlight">log</span>(<span class="string">'Email:'</span>, user.email);<br />
+                    &nbsp;&nbsp;})<br />
+                    &nbsp;&nbsp;.<span class="highlight">catch</span>(err => console.<span class="highlight">error</span>(<span class="string">'Erreur:'</span>, err));<br /><br />
+
+                    <span class="comment">// 3. Gestion d'erreur avec .catch()</span><br />
+                    <span class="keyword">fetch</span>(<span class="string">'https://api-qui-nexiste-pas.com/data'</span>)<br />
+                    &nbsp;&nbsp;.<span class="highlight">then</span>(response => response.<span class="highlight">json</span>())<br />
+                    &nbsp;&nbsp;.<span class="highlight">then</span>(data => console.<span class="highlight">log</span>(data))<br />
+                    &nbsp;&nbsp;.<span class="highlight">catch</span>(error => {<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;console.<span class="highlight">error</span>(<span class="string">'❌ Erreur capturée:'</span>, error.message);<br />
+                    &nbsp;&nbsp;});
+                </div>
+                <p style="text-align: center; margin-top: 20px">
+                    <strong>👆 Testez ces exemples dans la console interactive !</strong>
+                </p>
+            </div>
+        </div>
+
+        <!-- Zone Froggiesplaining -->
+        <div class="froggiesplaining">
+            <span> Froggiesplaining :</span>
+            <p>
+                <br />
+                <strong>🎯 Objectifs de ce cours :</strong><br />
+                ✅ Comprendre le concept de Promise et ses 3 états<br />
+                ✅ Utiliser .then(), .catch() et .finally()<br />
+                ✅ Maîtriser fetch() pour récupérer des données d'une API<br />
+                ✅ Manipuler JSON avec parse() et stringify()<br />
+                ✅ Chaîner plusieurs Promises<br /><br />
+
+                <strong>📖 Points clés à retenir :</strong><br />
+                • Une <strong>Promise</strong> a 3 états : pending, fulfilled, rejected<br />
+                • <strong>.then()</strong> gère le succès, <strong>.catch()</strong> gère les erreurs<br />
+                • <strong>fetch()</strong> retourne toujours une Promise<br />
+                • Il faut appeler <strong>.json()</strong> sur la réponse pour obtenir les données<br />
+                • <strong>JSON.parse()</strong> : texte JSON → objet JS<br />
+                • <strong>JSON.stringify()</strong> : objet JS → texte JSON<br />
+                • On peut chaîner les .then() pour des opérations séquentielles<br /><br />
+
+                <strong>🏋️ Exercices pratiques :</strong><br />
+                1. <strong>Liste d'articles :</strong> Utilisez fetch() pour récupérer tous les articles de JSONPlaceholder (/posts) et affichez leurs titres<br />
+                2. <strong>Recherche utilisateur :</strong> Créez un champ de recherche qui récupère un utilisateur par son ID (1-10)<br />
+                3. <strong>Gestion d'erreur :</strong> Ajoutez une vérification pour afficher un message si l'utilisateur n'existe pas<br />
+                4. <strong>Promise personnalisée :</strong> Créez une fonction qui simule une requête API avec une Promise qui se résout après 3 secondes<br />
+                5. <strong>Chaînage avancé :</strong> Récupérez un article, puis son auteur, puis tous les articles de cet auteur (3 fetch enchaînés)<br /><br />
+
+                <strong>💡 Astuce pro :</strong><br />
+                JSONPlaceholder (https://jsonplaceholder.typicode.com) est une API REST gratuite parfaite pour s'entraîner. Routes principales :<br />
+                • /posts : 100 articles<br />
+                • /users : 10 utilisateurs<br />
+                • /comments : commentaires<br />
+                • /posts/1 : article ID 1<br />
+                Testez-les dans votre navigateur ou avec fetch() !
+            </p>
+            <img src="../img/froggie-300.png" alt="Froggie explain" class="overfrog" id="Froggie" />
+        </div>
+
+        <!-- Bouton retour -->
+        <a href="index.html" id="goToIndex" title="Retour à l'index">
+            <i class="bi bi-arrow-left"></i>
+        </a>
+
+        <!-- Lien vers Froggie -->
+        <a href="#Froggie">
+            <div id="goToFroggie">
+                <img src="../img/froggie-300.png" width="50px" /><br /><i class="bi bi-arrow-bar-down"></i>
+            </div>
+        </a>
+
+        <!-- Footer -->
+        <div id="footerGit">
+            <a href="https://github.com/eCreafr/DWWM" target="_blank"><i class="bi bi-github">GitHub - eCrea</i></a>
+        </div>
+
+        <script>
+            // ===== DÉMONSTRATION 1 : Promise Simple =====
+            function demoSimplePromise() {
+                const output = document.getElementById('output-promise');
+                output.innerHTML = '<span class="loading"></span>Promise en cours d\'exécution...';
+
+                const randomPromise = new Promise((resolve, reject) => {
+                    setTimeout(() => {
+                        const random = Math.random();
+                        if (random > 0.5) {
+                            resolve('✅ Succès ! (nombre: ' + random.toFixed(2) + ')');
+                        } else {
+                            reject('❌ Échec ! (nombre: ' + random.toFixed(2) + ')');
+                        }
+                    }, 1500);
+                });
+
+                randomPromise
+                    .then(result => {
+                        output.innerHTML = `<strong style="color: #2ecc71">${result}</strong><br><small>La Promise a été résolue (fulfilled)</small>`;
+                    })
+                    .catch(error => {
+                        output.innerHTML = `<strong style="color: #e74c3c">${error}</strong><br><small>La Promise a été rejetée (rejected)</small>`;
+                    })
+                    .finally(() => {
+                        console.log('Promise terminée');
+                    });
+            }
+
+            // ===== DÉMONSTRATION 2 : Fetch Users =====
+            function fetchUsers() {
+                const output = document.getElementById('output-users');
+                output.innerHTML = '<span class="loading"></span>Chargement des utilisateurs depuis JSONPlaceholder...';
+
+                fetch('https://jsonplaceholder.typicode.com/users')
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Erreur HTTP : ' + response.status);
+                        }
+                        return response.json();
+                    })
+                    .then(users => {
+                        let html = `<strong>✅ ${users.length} utilisateurs chargés :</strong><br><br>`;
+                        users.slice(0, 5).forEach(user => {
+                            html += `<div class="data-card">
+                                <strong>${user.name}</strong><br>
+                                📧 ${user.email}<br>
+                                🏢 ${user.company.name}<br>
+                                🌐 ${user.website}
+                            </div>`;
+                        });
+                        html += '<br><small>Affichage des 5 premiers utilisateurs</small>';
+                        output.innerHTML = html;
+                    })
+                    .catch(error => {
+                        output.innerHTML = `<strong style="color: #e74c3c">❌ Erreur :</strong> ${error.message}`;
+                    });
+            }
+
+            // ===== DÉMONSTRATION 3 : Fetch Post =====
+            function fetchPost() {
+                const output = document.getElementById('output-post');
+                const postId = document.getElementById('post-id').value;
+
+                output.innerHTML = '<span class="loading"></span>Chargement de l\'article...';
+
+                fetch(`https://jsonplaceholder.typicode.com/posts/${postId}`)
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Article non trouvé');
+                        }
+                        return response.json();
+                    })
+                    .then(post => {
+                        output.innerHTML = `
+                            <div class="data-card">
+                                <h3>📝 Article #${post.id}</h3>
+                                <strong>${post.title}</strong><br><br>
+                                ${post.body}<br><br>
+                                <small>👤 Auteur ID: ${post.userId}</small>
+                            </div>
+                        `;
+                    })
+                    .catch(error => {
+                        output.innerHTML = `<strong style="color: #e74c3c">❌ Erreur :</strong> ${error.message}`;
+                    });
+            }
+
+            // ===== DÉMONSTRATION 4 : Chaînage de Promises =====
+            function fetchPostWithComments() {
+                const output = document.getElementById('output-chain');
+                output.innerHTML = '<span class="loading"></span>Étape 1/2 : Chargement de l\'article...';
+
+                let postData;
+
+                // Étape 1 : Récupérer l'article
+                fetch('https://jsonplaceholder.typicode.com/posts/1')
+                    .then(response => response.json())
+                    .then(post => {
+                        postData = post;
+                        output.innerHTML = '<span class="loading"></span>Étape 2/2 : Chargement des commentaires...';
+
+                        // Étape 2 : Récupérer les commentaires de cet article
+                        return fetch(`https://jsonplaceholder.typicode.com/posts/${post.id}/comments`);
+                    })
+                    .then(response => response.json())
+                    .then(comments => {
+                        let html = `
+                            <div class="data-card">
+                                <h3>📝 ${postData.title}</h3>
+                                <p>${postData.body}</p>
+                            </div>
+                            <strong>💬 ${comments.length} commentaires :</strong><br><br>
+                        `;
+
+                        comments.slice(0, 3).forEach(comment => {
+                            html += `<div class="data-card">
+                                <strong>${comment.name}</strong><br>
+                                📧 ${comment.email}<br>
+                                ${comment.body}
+                            </div>`;
+                        });
+
+                        html += '<br><small>Affichage des 3 premiers commentaires</small>';
+                        output.innerHTML = html;
+                    })
+                    .catch(error => {
+                        output.innerHTML = `<strong style="color: #e74c3c">❌ Erreur :</strong> ${error.message}`;
+                    });
+            }
+
+            // ===== CONSOLE INTERACTIVE =====
+            const jsInput = document.getElementById('js-input');
+            const jsOutput = document.getElementById('js-output');
+
+            function executeCode() {
+                const code = jsInput.value;
+                jsOutput.innerHTML = '';
+
+                const logs = [];
+                const originalLog = console.log;
+                const originalError = console.error;
+
+                console.log = function (...args) {
+                    logs.push(args.map(arg =>
+                        typeof arg === 'object' ? JSON.stringify(arg, null, 2) : String(arg)
+                    ).join(' '));
+                    originalLog.apply(console, args);
+                };
+
+                console.error = function (...args) {
+                    logs.push('<span class="error">' + args.join(' ') + '</span>');
+                    originalError.apply(console, args);
+                };
+
+                try {
+                    eval(code);
+
+                    // Attendre un peu pour les Promises
+                    setTimeout(() => {
+                        if (logs.length > 0) {
+                            jsOutput.innerHTML = logs.join('\n');
+                        } else {
+                            jsOutput.innerHTML = '✅ Code exécuté (vérifiez si des Promises sont en cours...)';
+                        }
+                    }, 100);
+                } catch (error) {
+                    jsOutput.innerHTML = `<span class="error">❌ Erreur : ${error.message}</span>`;
+                } finally {
+                    console.log = originalLog;
+                    console.error = originalError;
+                }
+            }
+
+            function clearConsole() {
+                jsInput.value = '';
+                jsOutput.innerHTML = 'Console effacée. Prêt à exécuter votre code...';
+            }
+
+            jsInput.addEventListener('keydown', function (e) {
+                if (e.ctrlKey && e.key === 'Enter') {
+                    e.preventDefault();
+                    executeCode();
+                }
+            });
+
+            window.addEventListener('DOMContentLoaded', function() {
+                jsInput.value = `// Testez fetch() avec JSONPlaceholder !
+fetch('https://jsonplaceholder.typicode.com/users/1')
+  .then(response => response.json())
+  .then(user => {
+    console.log('Nom:', user.name);
+    console.log('Email:', user.email);
+    console.log('Ville:', user.address.city);
+  })
+  .catch(error => console.error('Erreur:', error));`;
+            });
+        </script>
+    </body>
+</html>

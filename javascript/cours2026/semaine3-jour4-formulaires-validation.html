@@ -1,0 +1,724 @@
+<!doctype html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Semaine 3 - Jour 4 | Formulaires et Validation</title>
+        <link rel="stylesheet" href="../css/froggie.css" />
+        <style>
+            .demo-container {
+                max-width: 1200px;
+                margin: 40px auto;
+                padding: 20px;
+                font-family: Arial, sans-serif;
+            }
+            .demo-title {
+                text-align: center;
+                font-size: 2.5em;
+                margin-bottom: 20px;
+                color: #2c3e50;
+            }
+            .demo-intro {
+                background: #ecf0f1;
+                padding: 20px;
+                border-radius: 10px;
+                margin-bottom: 40px;
+                line-height: 1.6;
+            }
+            .demo-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                gap: 30px;
+                margin-bottom: 40px;
+            }
+            .demo-item {
+                border: 2px solid #f093fb;
+                border-radius: 10px;
+                padding: 20px;
+                background: white;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            }
+            .demo-item h2 {
+                margin-top: 0;
+                color: #f093fb;
+                font-size: 1.5em;
+            }
+            .code-example {
+                background: #2c3e50;
+                color: #ecf0f1;
+                padding: 15px;
+                border-radius: 5px;
+                font-family: 'Courier New', monospace;
+                font-size: 0.9em;
+                margin: 15px 0;
+                overflow-x: auto;
+            }
+            .highlight {
+                color: #f39c12;
+                font-weight: bold;
+            }
+            .keyword {
+                color: #e74c3c;
+            }
+            .string {
+                color: #2ecc71;
+            }
+            .comment {
+                color: #95a5a6;
+                font-style: italic;
+            }
+
+            /* Zone de démonstration interactive */
+            .interactive-demo {
+                background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+                padding: 20px;
+                border-radius: 10px;
+                margin: 20px 0;
+                color: white;
+            }
+            .demo-form {
+                background: white;
+                padding: 20px;
+                border-radius: 8px;
+            }
+            .form-group {
+                margin-bottom: 15px;
+            }
+            .form-group label {
+                display: block;
+                margin-bottom: 5px;
+                color: #2c3e50;
+                font-weight: bold;
+            }
+            .form-group input,
+            .form-group select,
+            .form-group textarea {
+                width: 100%;
+                padding: 10px;
+                border: 2px solid #ddd;
+                border-radius: 5px;
+                font-size: 14px;
+                box-sizing: border-box;
+            }
+            .form-group input:focus,
+            .form-group select:focus,
+            .form-group textarea:focus {
+                outline: none;
+                border-color: #f093fb;
+            }
+            .form-group input.invalid {
+                border-color: #e74c3c;
+            }
+            .form-group input.valid {
+                border-color: #2ecc71;
+            }
+            .error-message {
+                color: #e74c3c;
+                font-size: 0.85em;
+                margin-top: 5px;
+                display: none;
+            }
+            .error-message.show {
+                display: block;
+            }
+            .demo-button {
+                background: #2ecc71;
+                color: white;
+                border: none;
+                padding: 12px 25px;
+                border-radius: 5px;
+                cursor: pointer;
+                font-weight: bold;
+                font-size: 14px;
+                transition: all 0.3s;
+            }
+            .demo-button:hover {
+                background: #27ae60;
+                transform: scale(1.05);
+            }
+            .demo-button:disabled {
+                background: #95a5a6;
+                cursor: not-allowed;
+                transform: none;
+            }
+            .success-message {
+                background: #2ecc71;
+                color: white;
+                padding: 15px;
+                border-radius: 5px;
+                margin-top: 15px;
+                display: none;
+            }
+            .success-message.show {
+                display: block;
+            }
+
+            /* Console JavaScript interactive */
+            .js-console {
+                background: #1e1e1e;
+                border-radius: 10px;
+                padding: 20px;
+                margin: 30px 0;
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            }
+            .js-console-header {
+                color: #f39c12;
+                font-weight: bold;
+                margin-bottom: 15px;
+                font-size: 1.1em;
+                display: flex;
+                align-items: center;
+                gap: 10px;
+            }
+            .js-console-editor {
+                background: #2d2d2d;
+                border: 1px solid #444;
+                border-radius: 5px;
+                padding: 15px;
+                margin-bottom: 15px;
+            }
+            .js-console-editor textarea {
+                width: 100%;
+                background: transparent;
+                border: none;
+                color: #f8f8f2;
+                font-family: 'Courier New', monospace;
+                font-size: 0.95em;
+                resize: vertical;
+                min-height: 80px;
+                outline: none;
+            }
+            .js-console-output {
+                background: #000;
+                border: 1px solid #444;
+                border-radius: 5px;
+                padding: 15px;
+                color: #0f0;
+                font-family: 'Courier New', monospace;
+                font-size: 0.9em;
+                min-height: 60px;
+                max-height: 300px;
+                overflow-y: auto;
+                white-space: pre-wrap;
+            }
+            .js-console-output .error {
+                color: #e74c3c;
+            }
+            .js-console-output .warning {
+                color: #f39c12;
+            }
+            .js-console-buttons {
+                display: flex;
+                gap: 10px;
+                margin-bottom: 15px;
+            }
+            .btn-execute {
+                background: #2ecc71;
+                color: white;
+                border: none;
+                padding: 10px 20px;
+                border-radius: 5px;
+                cursor: pointer;
+                font-weight: bold;
+                transition: background 0.3s;
+            }
+            .btn-execute:hover {
+                background: #27ae60;
+            }
+            .btn-clear {
+                background: #e74c3c;
+                color: white;
+                border: none;
+                padding: 10px 20px;
+                border-radius: 5px;
+                cursor: pointer;
+                font-weight: bold;
+                transition: background 0.3s;
+            }
+            .btn-clear:hover {
+                background: #c0392b;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="demo-container">
+            <h1 class="demo-title">Semaine 3 - Jour 4 : Formulaires et Validation</h1>
+
+            <div class="demo-intro">
+                <h3>Valider les formulaires côté client</h3>
+                <p>
+                    Les <strong>formulaires</strong> sont essentiels pour collecter des données utilisateur.
+                    JavaScript permet de <strong>valider</strong> ces données en temps réel avant l'envoi au serveur,
+                    offrant une meilleure expérience utilisateur.
+                </p>
+                <p>
+                    <strong>Applications concrètes :</strong> Inscription/connexion, formulaires de contact,
+                    validation d'email, vérification de mots de passe, messages d'erreur personnalisés...
+                </p>
+                <p>
+                    <strong>Aujourd'hui :</strong> Récupérer les valeurs avec .value, valider les champs,
+                    afficher des messages d'erreur, et empêcher la soumission si le formulaire est invalide.
+                </p>
+            </div>
+
+            <!-- Concepts de base -->
+            <div class="demo-grid">
+                <div class="demo-item">
+                    <h2>1. Récupérer les valeurs</h2>
+                    <p>
+                        Utiliser <strong>.value</strong> pour lire le contenu d'un champ de formulaire.
+                    </p>
+                    <div class="code-example">
+                        <span class="comment">// Récupérer la valeur d'un input</span><br />
+                        <span class="keyword">let</span> input = <span class="highlight">document.querySelector</span>(<span class="string">'#nom'</span>);<br />
+                        <span class="keyword">let</span> valeur = input.<span class="highlight">value</span>;<br />
+                        console.<span class="highlight">log</span>(valeur);<br /><br />
+
+                        <span class="comment">// Récupérer la valeur d'un select</span><br />
+                        <span class="keyword">let</span> select = <span class="highlight">document.querySelector</span>(<span class="string">'#pays'</span>);<br />
+                        console.<span class="highlight">log</span>(select.<span class="highlight">value</span>);<br /><br />
+
+                        <span class="comment">// Vérifier si une checkbox est cochée</span><br />
+                        <span class="keyword">let</span> checkbox = <span class="highlight">document.querySelector</span>(<span class="string">'#accepte'</span>);<br />
+                        console.<span class="highlight">log</span>(checkbox.<span class="highlight">checked</span>); <span class="comment">// true/false</span><br /><br />
+
+                        <span class="comment">// Modifier la valeur</span><br />
+                        input.<span class="highlight">value</span> = <span class="string">'Nouvelle valeur'</span>;
+                    </div>
+
+                    <div class="interactive-demo">
+                        <h3>Démo interactive</h3>
+                        <div class="demo-form">
+                            <div class="form-group">
+                                <label>Tapez votre nom :</label>
+                                <input type="text" id="demo-input-1" placeholder="Votre nom" />
+                            </div>
+                            <button class="demo-button" onclick="getValue()">Afficher la valeur</button>
+                            <div id="value-output" style="margin-top: 10px; color: #2c3e50;"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="demo-item">
+                    <h2>2. Validation de base</h2>
+                    <p>
+                        Vérifier que les champs ne sont pas vides et respectent les formats attendus.
+                    </p>
+                    <div class="code-example">
+                        <span class="comment">// Vérifier si un champ est vide</span><br />
+                        <span class="keyword">if</span> (input.<span class="highlight">value.trim</span>() === <span class="string">''</span>) {<br />
+                        &nbsp;&nbsp;console.<span class="highlight">log</span>(<span class="string">'Champ vide'</span>);<br />
+                        }<br /><br />
+
+                        <span class="comment">// Vérifier la longueur minimale</span><br />
+                        <span class="keyword">if</span> (input.<span class="highlight">value.length</span> &lt; <span class="highlight">3</span>) {<br />
+                        &nbsp;&nbsp;console.<span class="highlight">log</span>(<span class="string">'Minimum 3 caractères'</span>);<br />
+                        }<br /><br />
+
+                        <span class="comment">// Validation email simple</span><br />
+                        <span class="keyword">function</span> <span class="highlight">validerEmail</span>(email) {<br />
+                        &nbsp;&nbsp;<span class="keyword">return</span> email.<span class="highlight">includes</span>(<span class="string">'@'</span>) && email.<span class="highlight">includes</span>(<span class="string">'.'</span>);<br />
+                        }<br /><br />
+
+                        <span class="comment">// Validation avec regex</span><br />
+                        <span class="keyword">let</span> regex = <span class="highlight">/^[^\s@]+@[^\s@]+\.[^\s@]+$/</span>;<br />
+                        <span class="keyword">let</span> valide = regex.<span class="highlight">test</span>(email);
+                    </div>
+
+                    <div class="interactive-demo">
+                        <h3>Démo interactive</h3>
+                        <div class="demo-form">
+                            <div class="form-group">
+                                <label>Nom (min 3 caractères) :</label>
+                                <input type="text" id="validate-name" placeholder="Votre nom" />
+                                <div class="error-message" id="name-error">Minimum 3 caractères</div>
+                            </div>
+                            <button class="demo-button" onclick="validateBasic()">Valider</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="demo-item">
+                    <h2>3. Messages d'erreur</h2>
+                    <p>
+                        Afficher des messages d'erreur personnalisés pour guider l'utilisateur.
+                    </p>
+                    <div class="code-example">
+                        <span class="comment">// Afficher un message d'erreur</span><br />
+                        <span class="keyword">function</span> <span class="highlight">afficherErreur</span>(input, message) {<br />
+                        &nbsp;&nbsp;<span class="keyword">let</span> error = input.<span class="highlight">nextElementSibling</span>;<br />
+                        &nbsp;&nbsp;error.<span class="highlight">textContent</span> = message;<br />
+                        &nbsp;&nbsp;error.<span class="highlight">classList.add</span>(<span class="string">'show'</span>);<br />
+                        &nbsp;&nbsp;input.<span class="highlight">classList.add</span>(<span class="string">'invalid'</span>);<br />
+                        }<br /><br />
+
+                        <span class="comment">// Masquer le message d'erreur</span><br />
+                        <span class="keyword">function</span> <span class="highlight">masquerErreur</span>(input) {<br />
+                        &nbsp;&nbsp;<span class="keyword">let</span> error = input.<span class="highlight">nextElementSibling</span>;<br />
+                        &nbsp;&nbsp;error.<span class="highlight">classList.remove</span>(<span class="string">'show'</span>);<br />
+                        &nbsp;&nbsp;input.<span class="highlight">classList.remove</span>(<span class="string">'invalid'</span>);<br />
+                        &nbsp;&nbsp;input.<span class="highlight">classList.add</span>(<span class="string">'valid'</span>);<br />
+                        }
+                    </div>
+
+                    <div class="interactive-demo">
+                        <h3>Démo interactive</h3>
+                        <div class="demo-form">
+                            <div class="form-group">
+                                <label>Email :</label>
+                                <input type="email" id="email-input" placeholder="exemple@email.com" />
+                                <div class="error-message" id="email-error">Email invalide</div>
+                            </div>
+                            <button class="demo-button" onclick="validateEmail()">Valider Email</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="demo-item">
+                    <h2>4. Empêcher la soumission</h2>
+                    <p>
+                        Utiliser <strong>event.preventDefault()</strong> pour bloquer la soumission si le formulaire est invalide.
+                    </p>
+                    <div class="code-example">
+                        form.<span class="highlight">addEventListener</span>(<span class="string">'submit'</span>, (<span class="highlight">event</span>) => {<br />
+                        &nbsp;&nbsp;<span class="comment">// Empêcher l'envoi par défaut</span><br />
+                        &nbsp;&nbsp;event.<span class="highlight">preventDefault</span>();<br /><br />
+
+                        &nbsp;&nbsp;<span class="comment">// Valider les champs</span><br />
+                        &nbsp;&nbsp;<span class="keyword">let</span> nom = <span class="highlight">document.querySelector</span>(<span class="string">'#nom'</span>).<span class="highlight">value</span>;<br />
+                        &nbsp;&nbsp;<span class="keyword">let</span> email = <span class="highlight">document.querySelector</span>(<span class="string">'#email'</span>).<span class="highlight">value</span>;<br /><br />
+
+                        &nbsp;&nbsp;<span class="keyword">if</span> (nom === <span class="string">''</span> || email === <span class="string">''</span>) {<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;alert(<span class="string">'Remplissez tous les champs'</span>);<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>; <span class="comment">// Arrêter ici</span><br />
+                        &nbsp;&nbsp;}<br /><br />
+
+                        &nbsp;&nbsp;<span class="comment">// Si tout est OK, on peut envoyer</span><br />
+                        &nbsp;&nbsp;console.<span class="highlight">log</span>(<span class="string">'Formulaire valide !'</span>);<br />
+                        });
+                    </div>
+
+                    <div class="interactive-demo">
+                        <h3>Démo interactive</h3>
+                        <form class="demo-form" id="full-form">
+                            <div class="form-group">
+                                <label>Nom complet :</label>
+                                <input type="text" id="full-name" placeholder="Jean Dupont" required />
+                                <div class="error-message" id="full-name-error"></div>
+                            </div>
+                            <div class="form-group">
+                                <label>Email :</label>
+                                <input type="email" id="full-email" placeholder="jean@exemple.com" required />
+                                <div class="error-message" id="full-email-error"></div>
+                            </div>
+                            <button type="submit" class="demo-button">Soumettre</button>
+                            <div class="success-message" id="success-msg">
+                                ✅ Formulaire soumis avec succès !
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Console interactive -->
+            <div class="js-console">
+                <div class="js-console-header">
+                    Console JavaScript Interactive - Testez la validation !
+                </div>
+                <div class="js-console-editor">
+                    <textarea id="js-input" placeholder="Écrivez votre code JavaScript ici..."></textarea>
+                </div>
+                <div class="js-console-buttons">
+                    <button class="btn-execute" onclick="executeCode()">Exécuter (Ctrl + Enter)</button>
+                    <button class="btn-clear" onclick="clearConsole()">Effacer</button>
+                </div>
+                <div class="js-console-output" id="js-output">Prêt à exécuter votre code...</div>
+            </div>
+
+            <!-- Exemples pratiques -->
+            <div style="background: #e8f4f8; padding: 25px; border-radius: 10px; margin: 30px 0">
+                <h2 style="color: #2c3e50; text-align: center; margin-top: 0">Exemples pratiques - Formulaire d'inscription complet</h2>
+                <div class="code-example">
+                    <span class="comment">// Formulaire d'inscription avec validation complète</span><br /><br />
+
+                    <span class="keyword">let</span> form = <span class="highlight">document.querySelector</span>(<span class="string">'#inscription'</span>);<br /><br />
+
+                    form.<span class="highlight">addEventListener</span>(<span class="string">'submit'</span>, (<span class="highlight">event</span>) => {<br />
+                    &nbsp;&nbsp;event.<span class="highlight">preventDefault</span>();<br /><br />
+
+                    &nbsp;&nbsp;<span class="comment">// Récupérer les valeurs</span><br />
+                    &nbsp;&nbsp;<span class="keyword">let</span> nom = <span class="highlight">document.querySelector</span>(<span class="string">'#nom'</span>).<span class="highlight">value.trim</span>();<br />
+                    &nbsp;&nbsp;<span class="keyword">let</span> email = <span class="highlight">document.querySelector</span>(<span class="string">'#email'</span>).<span class="highlight">value.trim</span>();<br />
+                    &nbsp;&nbsp;<span class="keyword">let</span> mdp = <span class="highlight">document.querySelector</span>(<span class="string">'#mdp'</span>).<span class="highlight">value</span>;<br />
+                    &nbsp;&nbsp;<span class="keyword">let</span> mdp2 = <span class="highlight">document.querySelector</span>(<span class="string">'#mdp2'</span>).<span class="highlight">value</span>;<br /><br />
+
+                    &nbsp;&nbsp;<span class="comment">// Validations</span><br />
+                    &nbsp;&nbsp;<span class="keyword">let</span> erreurs = [];<br /><br />
+
+                    &nbsp;&nbsp;<span class="keyword">if</span> (nom.<span class="highlight">length</span> &lt; <span class="highlight">3</span>) {<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;erreurs.<span class="highlight">push</span>(<span class="string">'Nom trop court (min 3 caractères)'</span>);<br />
+                    &nbsp;&nbsp;}<br /><br />
+
+                    &nbsp;&nbsp;<span class="keyword">if</span> (!email.<span class="highlight">includes</span>(<span class="string">'@'</span>) || !email.<span class="highlight">includes</span>(<span class="string">'.'</span>)) {<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;erreurs.<span class="highlight">push</span>(<span class="string">'Email invalide'</span>);<br />
+                    &nbsp;&nbsp;}<br /><br />
+
+                    &nbsp;&nbsp;<span class="keyword">if</span> (mdp.<span class="highlight">length</span> &lt; <span class="highlight">8</span>) {<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;erreurs.<span class="highlight">push</span>(<span class="string">'Mot de passe trop court (min 8 caractères)'</span>);<br />
+                    &nbsp;&nbsp;}<br /><br />
+
+                    &nbsp;&nbsp;<span class="keyword">if</span> (mdp !== mdp2) {<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;erreurs.<span class="highlight">push</span>(<span class="string">'Les mots de passe ne correspondent pas'</span>);<br />
+                    &nbsp;&nbsp;}<br /><br />
+
+                    &nbsp;&nbsp;<span class="comment">// Afficher les erreurs ou soumettre</span><br />
+                    &nbsp;&nbsp;<span class="keyword">if</span> (erreurs.<span class="highlight">length</span> > <span class="highlight">0</span>) {<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;alert(erreurs.<span class="highlight">join</span>(<span class="string">'\\n'</span>));<br />
+                    &nbsp;&nbsp;} <span class="keyword">else</span> {<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;console.<span class="highlight">log</span>(<span class="string">'✅ Inscription réussie !'</span>);<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;console.<span class="highlight">log</span>({ nom, email });<br />
+                    &nbsp;&nbsp;}<br />
+                    });
+                </div>
+                <p style="text-align: center; margin-top: 20px">
+                    <strong>Testez ces exemples dans la console interactive ci-dessus !</strong>
+                </p>
+            </div>
+        </div>
+
+        <!-- Zone Froggiesplaining -->
+        <div class="froggiesplaining">
+            <span> Froggiesplaining :</span>
+            <p>
+                <br />
+                <strong>Objectifs de ce cours :</strong><br />
+                ✅ Récupérer les valeurs des champs avec .value<br />
+                ✅ Valider les données côté client<br />
+                ✅ Afficher des messages d'erreur personnalisés<br />
+                ✅ Empêcher la soumission si le formulaire est invalide<br />
+                ✅ Créer une expérience utilisateur fluide<br /><br />
+
+                <strong>Points clés à retenir :</strong><br />
+                • <strong>input.value</strong> : Récupérer/modifier la valeur d'un champ<br />
+                • <strong>checkbox.checked</strong> : Vérifier si une case est cochée (true/false)<br />
+                • <strong>value.trim()</strong> : Supprimer les espaces avant/après<br />
+                • <strong>event.preventDefault()</strong> : Bloquer la soumission du formulaire<br />
+                • Toujours valider côté client ET côté serveur<br />
+                • Utiliser des classes CSS (invalid/valid) pour le feedback visuel<br />
+                • Collecter toutes les erreurs avant d'afficher (meilleure UX)<br />
+                • Les regex sont utiles pour les validations complexes (email, téléphone...)<br /><br />
+
+                <strong>Exercice pratique :</strong><br />
+                1. Créez un formulaire avec nom, email, âge<br />
+                2. Validez que le nom fait au moins 3 caractères<br />
+                3. Validez que l'email contient @ et un point<br />
+                4. Validez que l'âge est un nombre entre 18 et 120<br />
+                5. Affichez des messages d'erreur personnalisés<br />
+                6. Bloquez la soumission si invalide avec preventDefault<br />
+                7. Bonus : Ajoutez une validation de mot de passe avec confirmation<br />
+                8. Bonus 2 : Validez en temps réel avec l'événement 'input'
+            </p>
+            <img src="../img/froggie-300.png" alt="Froggie explain" class="overfrog" id="Froggie" />
+        </div>
+
+        <!-- Bouton retour -->
+        <a href="index.html" id="goToIndex" title="Retour à l'index">
+            <i class="bi bi-arrow-left"></i>
+        </a>
+
+        <!-- Lien vers Froggie -->
+        <a href="#Froggie">
+            <div id="goToFroggie">
+                <img src="../img/froggie-300.png" width="50px" /><br /><i class="bi bi-arrow-bar-down"></i>
+            </div>
+        </a>
+
+        <!-- Footer -->
+        <div id="footerGit">
+            <a href="https://github.com/eCreafr/DWWM" target="_blank"><i class="bi bi-github">GitHub - eCrea</i></a>
+        </div>
+
+        <script>
+            // Démo 1 : Récupérer valeur
+            function getValue() {
+                const input = document.getElementById('demo-input-1');
+                const output = document.getElementById('value-output');
+                const value = input.value;
+                if (value.trim() === '') {
+                    output.innerHTML = '<strong style="color: #e74c3c;">Le champ est vide !</strong>';
+                } else {
+                    output.innerHTML = `<strong style="color: #2ecc71;">Valeur : "${value}"</strong> (${value.length} caractères)`;
+                }
+            }
+
+            // Démo 2 : Validation de base
+            function validateBasic() {
+                const input = document.getElementById('validate-name');
+                const error = document.getElementById('name-error');
+                const value = input.value.trim();
+
+                if (value.length < 3) {
+                    input.classList.add('invalid');
+                    input.classList.remove('valid');
+                    error.classList.add('show');
+                } else {
+                    input.classList.remove('invalid');
+                    input.classList.add('valid');
+                    error.classList.remove('show');
+                    alert('✅ Validation réussie !');
+                }
+            }
+
+            // Démo 3 : Validation email
+            function validateEmail() {
+                const input = document.getElementById('email-input');
+                const error = document.getElementById('email-error');
+                const value = input.value.trim();
+                const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+                if (!regex.test(value)) {
+                    input.classList.add('invalid');
+                    input.classList.remove('valid');
+                    error.classList.add('show');
+                } else {
+                    input.classList.remove('invalid');
+                    input.classList.add('valid');
+                    error.classList.remove('show');
+                    alert('✅ Email valide !');
+                }
+            }
+
+            // Démo 4 : Formulaire complet
+            document.getElementById('full-form').addEventListener('submit', function(event) {
+                event.preventDefault();
+
+                const nameInput = document.getElementById('full-name');
+                const emailInput = document.getElementById('full-email');
+                const nameError = document.getElementById('full-name-error');
+                const emailError = document.getElementById('full-email-error');
+                const successMsg = document.getElementById('success-msg');
+
+                let isValid = true;
+
+                // Valider le nom
+                if (nameInput.value.trim().length < 3) {
+                    nameInput.classList.add('invalid');
+                    nameError.textContent = 'Le nom doit contenir au moins 3 caractères';
+                    nameError.classList.add('show');
+                    isValid = false;
+                } else {
+                    nameInput.classList.remove('invalid');
+                    nameInput.classList.add('valid');
+                    nameError.classList.remove('show');
+                }
+
+                // Valider l'email
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!emailRegex.test(emailInput.value.trim())) {
+                    emailInput.classList.add('invalid');
+                    emailError.textContent = 'Veuillez entrer un email valide';
+                    emailError.classList.add('show');
+                    isValid = false;
+                } else {
+                    emailInput.classList.remove('invalid');
+                    emailInput.classList.add('valid');
+                    emailError.classList.remove('show');
+                }
+
+                // Afficher le résultat
+                if (isValid) {
+                    successMsg.classList.add('show');
+                    setTimeout(() => {
+                        successMsg.classList.remove('show');
+                        this.reset();
+                        nameInput.classList.remove('valid');
+                        emailInput.classList.remove('valid');
+                    }, 3000);
+                } else {
+                    successMsg.classList.remove('show');
+                }
+            });
+
+            // Console JavaScript interactive
+            const jsInput = document.getElementById('js-input');
+            const jsOutput = document.getElementById('js-output');
+
+            // Exécuter le code
+            function executeCode() {
+                const code = jsInput.value;
+                jsOutput.innerHTML = '';
+
+                // Capturer console.log
+                const logs = [];
+                const originalLog = console.log;
+                console.log = function (...args) {
+                    logs.push(args.map(arg =>
+                        typeof arg === 'object' ? JSON.stringify(arg, null, 2) : String(arg)
+                    ).join(' '));
+                    originalLog.apply(console, args);
+                };
+
+                try {
+                    // Exécuter le code
+                    eval(code);
+
+                    // Afficher les logs
+                    if (logs.length > 0) {
+                        jsOutput.innerHTML = logs.join('\n');
+                    } else {
+                        jsOutput.innerHTML = '✅ Code exécuté sans erreur (aucune sortie console)';
+                    }
+                } catch (error) {
+                    jsOutput.innerHTML = `<span class="error">❌ Erreur : ${error.message}</span>`;
+                } finally {
+                    // Restaurer console.log
+                    console.log = originalLog;
+                }
+            }
+
+            // Effacer la console
+            function clearConsole() {
+                jsInput.value = '';
+                jsOutput.innerHTML = 'Console effacée. Prêt à exécuter votre code...';
+            }
+
+            // Raccourci clavier Ctrl + Enter
+            jsInput.addEventListener('keydown', function (e) {
+                if (e.ctrlKey && e.key === 'Enter') {
+                    e.preventDefault();
+                    executeCode();
+                }
+            });
+
+            // Exemple au chargement
+            window.addEventListener('DOMContentLoaded', function() {
+                jsInput.value = `// Validation de formulaire
+// Essayez ces exemples !
+
+// 1. Récupérer toutes les valeurs d'inputs
+let inputs = document.querySelectorAll('input[type="text"], input[type="email"]');
+console.log('Nombre de champs:', inputs.length);
+
+inputs.forEach(input => {
+  if (input.value) {
+    console.log(\`\${input.placeholder}: "\${input.value}"\`);
+  }
+});
+
+// 2. Fonction de validation d'email
+function validerEmail(email) {
+  let regex = /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/;
+  return regex.test(email);
+}
+
+console.log('\\nTests de validation:');
+console.log('test@exemple.com:', validerEmail('test@exemple.com'));
+console.log('invalide:', validerEmail('invalide'));
+
+// 3. Vérifier tous les champs requis
+let champRequis = document.querySelectorAll('[required]');
+console.log('\\nChamps requis:', champRequis.length);`;
+            });
+        </script>
+    </body>
+</html>

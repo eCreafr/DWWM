@@ -1,0 +1,870 @@
+<!doctype html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Semaine 4 - Jour 5 | Lecture et Adaptation de Code</title>
+        <link rel="stylesheet" href="../css/froggie.css" />
+        <style>
+            .demo-container {
+                max-width: 1200px;
+                margin: 40px auto;
+                padding: 20px;
+                font-family: Arial, sans-serif;
+            }
+            .demo-title {
+                text-align: center;
+                font-size: 2.5em;
+                margin-bottom: 20px;
+                color: #2c3e50;
+            }
+            .demo-intro {
+                background: #ecf0f1;
+                padding: 20px;
+                border-radius: 10px;
+                margin-bottom: 40px;
+                line-height: 1.6;
+            }
+            .demo-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                gap: 30px;
+                margin-bottom: 40px;
+            }
+            .demo-item {
+                border: 2px solid #f093fb;
+                border-radius: 10px;
+                padding: 20px;
+                background: white;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            }
+            .demo-item h2 {
+                margin-top: 0;
+                color: #f093fb;
+                font-size: 1.5em;
+            }
+            .code-example {
+                background: #2c3e50;
+                color: #ecf0f1;
+                padding: 15px;
+                border-radius: 5px;
+                font-family: 'Courier New', monospace;
+                font-size: 0.9em;
+                margin: 15px 0;
+                overflow-x: auto;
+            }
+            .highlight {
+                color: #f39c12;
+                font-weight: bold;
+            }
+            .keyword {
+                color: #e74c3c;
+            }
+            .string {
+                color: #2ecc71;
+            }
+            .comment {
+                color: #95a5a6;
+                font-style: italic;
+            }
+
+            /* Code analysis section */
+            .code-analysis {
+                background: #fff3cd;
+                border: 2px solid #ffc107;
+                border-radius: 8px;
+                padding: 15px;
+                margin: 15px 0;
+            }
+            .code-analysis h4 {
+                margin-top: 0;
+                color: #856404;
+            }
+
+            /* Patterns showcase */
+            .pattern-box {
+                background: #e7f3ff;
+                border: 2px solid #3498db;
+                border-radius: 8px;
+                padding: 15px;
+                margin: 15px 0;
+            }
+            .pattern-box h4 {
+                margin-top: 0;
+                color: #2c3e50;
+            }
+
+            /* Zone de démonstration interactive */
+            .interactive-demo {
+                background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+                padding: 20px;
+                border-radius: 10px;
+                margin: 20px 0;
+                color: white;
+            }
+            .demo-box {
+                background: white;
+                color: #2c3e50;
+                padding: 15px;
+                border-radius: 8px;
+                margin: 10px 0;
+                transition: all 0.3s;
+            }
+            .demo-button {
+                background: #2ecc71;
+                color: white;
+                border: none;
+                padding: 10px 20px;
+                border-radius: 5px;
+                cursor: pointer;
+                font-weight: bold;
+                margin: 5px;
+                transition: all 0.3s;
+            }
+            .demo-button:hover {
+                background: #27ae60;
+                transform: scale(1.05);
+            }
+            .demo-output {
+                background: #ecf0f1;
+                padding: 15px;
+                border-radius: 5px;
+                margin: 10px 0;
+                min-height: 60px;
+                color: #2c3e50;
+                font-size: 0.9em;
+                max-height: 500px;
+                overflow-y: auto;
+            }
+
+            /* Weather widget demo */
+            .weather-widget {
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                color: white;
+                padding: 20px;
+                border-radius: 15px;
+                text-align: center;
+                box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            }
+            .weather-temp {
+                font-size: 3em;
+                font-weight: bold;
+                margin: 10px 0;
+            }
+            .weather-info {
+                margin: 10px 0;
+                font-size: 1.1em;
+            }
+
+            /* Image gallery */
+            .image-gallery {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+                gap: 15px;
+                margin: 15px 0;
+            }
+            .gallery-item {
+                position: relative;
+                border-radius: 8px;
+                overflow: hidden;
+                cursor: pointer;
+                transition: transform 0.3s;
+                background: #e0e0e0;
+                padding-bottom: 100%;
+                box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            }
+            .gallery-item:hover {
+                transform: scale(1.05);
+            }
+            .gallery-item img {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+            .gallery-caption {
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                background: rgba(0,0,0,0.7);
+                color: white;
+                padding: 8px;
+                font-size: 0.85em;
+            }
+
+            /* Loading animation */
+            .loading {
+                display: inline-block;
+                width: 20px;
+                height: 20px;
+                border: 3px solid #f3f3f3;
+                border-top: 3px solid #3498db;
+                border-radius: 50%;
+                animation: spin 1s linear infinite;
+                margin-right: 10px;
+            }
+
+            @keyframes spin {
+                0% { transform: rotate(0deg); }
+                100% { transform: rotate(360deg); }
+            }
+
+            /* Console JavaScript interactive */
+            .js-console {
+                background: #1e1e1e;
+                border-radius: 10px;
+                padding: 20px;
+                margin: 30px 0;
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            }
+            .js-console-header {
+                color: #f39c12;
+                font-weight: bold;
+                margin-bottom: 15px;
+                font-size: 1.1em;
+                display: flex;
+                align-items: center;
+                gap: 10px;
+            }
+            .js-console-editor {
+                background: #2d2d2d;
+                border: 1px solid #444;
+                border-radius: 5px;
+                padding: 15px;
+                margin-bottom: 15px;
+            }
+            .js-console-editor textarea {
+                width: 100%;
+                background: transparent;
+                border: none;
+                color: #f8f8f2;
+                font-family: 'Courier New', monospace;
+                font-size: 0.95em;
+                resize: vertical;
+                min-height: 80px;
+                outline: none;
+            }
+            .js-console-output {
+                background: #000;
+                border: 1px solid #444;
+                border-radius: 5px;
+                padding: 15px;
+                color: #0f0;
+                font-family: 'Courier New', monospace;
+                font-size: 0.9em;
+                min-height: 60px;
+                max-height: 300px;
+                overflow-y: auto;
+                white-space: pre-wrap;
+            }
+            .js-console-output .error {
+                color: #e74c3c;
+            }
+            .js-console-output .warning {
+                color: #f39c12;
+            }
+            .js-console-buttons {
+                display: flex;
+                gap: 10px;
+                margin-bottom: 15px;
+            }
+            .btn-execute {
+                background: #2ecc71;
+                color: white;
+                border: none;
+                padding: 10px 20px;
+                border-radius: 5px;
+                cursor: pointer;
+                font-weight: bold;
+                transition: background 0.3s;
+            }
+            .btn-execute:hover {
+                background: #27ae60;
+            }
+            .btn-clear {
+                background: #e74c3c;
+                color: white;
+                border: none;
+                padding: 10px 20px;
+                border-radius: 5px;
+                cursor: pointer;
+                font-weight: bold;
+                transition: background 0.3s;
+            }
+            .btn-clear:hover {
+                background: #c0392b;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="demo-container">
+            <h1 class="demo-title">🔍 Semaine 4 - Jour 5 : Lecture et Adaptation de Code</h1>
+
+            <div class="demo-intro">
+                <h3>🚀 La compétence la plus importante d'un développeur</h3>
+                <p>
+                    Dans la vraie vie professionnelle, vous passerez <strong>plus de temps à LIRE du code qu'à en ÉCRIRE</strong>. Savoir lire, comprendre et adapter du code existant est une compétence essentielle.
+                </p>
+                <p>
+                    <strong>Pourquoi c'est crucial ?</strong> Vous rejoindrez des projets en cours, utiliserez des librairies, corrigerez des bugs dans du code écrit par d'autres. La capacité à comprendre rapidement du code existant vous rendra efficace et autonome.
+                </p>
+                <p>
+                    <strong>Dans ce cours :</strong> Méthodes de lecture de code, patterns courants, débogage avec console.log et DevTools, adaptation à vos besoins, et des exercices pratiques avec du code réel.
+                </p>
+            </div>
+
+            <!-- Concepts de base -->
+            <div class="demo-grid">
+                <div class="demo-item">
+                    <h2>1. Comment lire du code ?</h2>
+                    <p><strong>Méthode en 5 étapes :</strong></p>
+                    <ol style="line-height: 1.8">
+                        <li><strong>Vue d'ensemble :</strong> Commencez par la fin (que retourne la fonction ?)</li>
+                        <li><strong>Point d'entrée :</strong> Trouvez où commence l'exécution</li>
+                        <li><strong>Flux de données :</strong> Suivez comment les données circulent</li>
+                        <li><strong>Dépendances :</strong> Identifiez les imports et fonctions appelées</li>
+                        <li><strong>Tests mentaux :</strong> Imaginez des valeurs d'entrée et leur résultat</li>
+                    </ol>
+                    <p><strong>💡 Astuce :</strong> Ne lisez pas ligne par ligne, mais par blocs logiques !</p>
+                </div>
+
+                <div class="demo-item">
+                    <h2>2. Patterns courants à reconnaître</h2>
+                    <p><strong>Patterns que vous verrez partout :</strong></p>
+                    <ul style="line-height: 1.8">
+                        <li><strong>IIFE :</strong> (function() {...})() - Fonction exécutée immédiatement</li>
+                        <li><strong>Callback :</strong> Fonction passée en paramètre</li>
+                        <li><strong>Promise chain :</strong> .then().then().catch()</li>
+                        <li><strong>Async/await :</strong> async function avec try/catch</li>
+                        <li><strong>Module pattern :</strong> import/export</li>
+                        <li><strong>Destructuring :</strong> const { a, b } = obj</li>
+                    </ul>
+                </div>
+
+                <div class="demo-item">
+                    <h2>3. Déboguer avec console.log</h2>
+                    <p>
+                        <strong>console.log</strong> est votre meilleur ami pour comprendre du code. Ajoutez des logs stratégiques !
+                    </p>
+                    <div class="code-example">
+                        <span class="keyword">function</span> <span class="highlight">processData</span>(data) {<br />
+                        &nbsp;&nbsp;console.<span class="highlight">log</span>(<span class="string">'1. Données reçues:'</span>, data);<br />
+                        &nbsp;&nbsp;<br />
+                        &nbsp;&nbsp;<span class="keyword">const</span> filtered = data.<span class="highlight">filter</span>(x => x > <span class="highlight">10</span>);<br />
+                        &nbsp;&nbsp;console.<span class="highlight">log</span>(<span class="string">'2. Après filtrage:'</span>, filtered);<br />
+                        &nbsp;&nbsp;<br />
+                        &nbsp;&nbsp;<span class="keyword">const</span> result = filtered.<span class="highlight">map</span>(x => x * <span class="highlight">2</span>);<br />
+                        &nbsp;&nbsp;console.<span class="highlight">log</span>(<span class="string">'3. Résultat final:'</span>, result);<br />
+                        &nbsp;&nbsp;<br />
+                        &nbsp;&nbsp;<span class="keyword">return</span> result;<br />
+                        }
+                    </div>
+                </div>
+
+                <div class="demo-item">
+                    <h2>4. Utiliser les DevTools</h2>
+                    <p><strong>Outils essentiels du navigateur :</strong></p>
+                    <ul style="line-height: 1.8">
+                        <li><strong>Console :</strong> Voir les logs et tester du code</li>
+                        <li><strong>Debugger :</strong> Mettre des breakpoints (mot-clé: debugger;)</li>
+                        <li><strong>Sources :</strong> Naviguer dans les fichiers</li>
+                        <li><strong>Network :</strong> Voir les requêtes HTTP</li>
+                        <li><strong>Elements :</strong> Inspecter le DOM</li>
+                    </ul>
+                    <div class="code-example">
+                        <span class="keyword">function</span> <span class="highlight">debug</span>() {<br />
+                        &nbsp;&nbsp;<span class="keyword">debugger</span>; <span class="comment">// Pause l'exécution ici</span><br />
+                        &nbsp;&nbsp;<span class="keyword">const</span> x = <span class="highlight">42</span>;<br />
+                        &nbsp;&nbsp;<span class="keyword">return</span> x;<br />
+                        }
+                    </div>
+                </div>
+            </div>
+
+            <!-- Patterns courants -->
+            <div style="background: #e8f4f8; padding: 25px; border-radius: 10px; margin: 30px 0">
+                <h2 style="color: #2c3e50; text-align: center; margin-top: 0">🎨 Patterns JavaScript Courants</h2>
+
+                <div class="pattern-box">
+                    <h4>Pattern 1 : Fetch avec gestion d'erreur</h4>
+                    <div class="code-example">
+                        <span class="keyword">async function</span> <span class="highlight">getData</span>() {<br />
+                        &nbsp;&nbsp;<span class="keyword">try</span> {<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">const</span> response = <span class="keyword">await</span> <span class="keyword">fetch</span>(<span class="string">'api/data'</span>);<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span> (!response.ok) <span class="keyword">throw new Error</span>(<span class="string">'Erreur HTTP'</span>);<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return await</span> response.<span class="highlight">json</span>();<br />
+                        &nbsp;&nbsp;} <span class="keyword">catch</span> (error) {<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;console.<span class="highlight">error</span>(<span class="string">'Erreur:'</span>, error);<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span> <span class="keyword">null</span>;<br />
+                        &nbsp;&nbsp;}<br />
+                        }
+                    </div>
+                    <p><small>✅ Vous verrez ce pattern dans 90% des applications modernes</small></p>
+                </div>
+
+                <div class="pattern-box">
+                    <h4>Pattern 2 : Event delegation (délégation d'événements)</h4>
+                    <div class="code-example">
+                        <span class="comment">// Au lieu d'ajouter un listener sur chaque bouton</span><br />
+                        document.<span class="highlight">querySelector</span>(<span class="string">'.container'</span>).<span class="highlight">addEventListener</span>(<span class="string">'click'</span>, (e) => {<br />
+                        &nbsp;&nbsp;<span class="keyword">if</span> (e.target.<span class="highlight">matches</span>(<span class="string">'button'</span>)) {<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">// Gérer le clic sur n'importe quel bouton</span><br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;console.<span class="highlight">log</span>(<span class="string">'Bouton cliqué:'</span>, e.target.<span class="highlight">textContent</span>);<br />
+                        &nbsp;&nbsp;}<br />
+                        });
+                    </div>
+                    <p><small>✅ Plus performant quand vous avez beaucoup d'éléments</small></p>
+                </div>
+
+                <div class="pattern-box">
+                    <h4>Pattern 3 : Debounce (limiter la fréquence d'exécution)</h4>
+                    <div class="code-example">
+                        <span class="keyword">function</span> <span class="highlight">debounce</span>(func, delay) {<br />
+                        &nbsp;&nbsp;<span class="keyword">let</span> timeoutId;<br />
+                        &nbsp;&nbsp;<span class="keyword">return function</span>(...args) {<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">clearTimeout</span>(timeoutId);<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;timeoutId = <span class="keyword">setTimeout</span>(() => func.<span class="highlight">apply</span>(<span class="keyword">this</span>, args), delay);<br />
+                        &nbsp;&nbsp;};<br />
+                        }<br />
+                        <br />
+                        <span class="comment">// Utilisation : recherche qui attend 300ms après la dernière frappe</span><br />
+                        <span class="keyword">const</span> search = <span class="highlight">debounce</span>((query) => console.<span class="highlight">log</span>(query), <span class="highlight">300</span>);
+                    </div>
+                    <p><small>✅ Essentiel pour optimiser les recherches en temps réel</small></p>
+                </div>
+            </div>
+
+            <!-- Démonstrations interactives -->
+            <div class="interactive-demo">
+                <h2 style="text-align: center; margin-top: 0">☁️ Exercice 1 : Analyser et adapter un Widget Météo</h2>
+                <div class="demo-box">
+                    <p><strong>Mission :</strong> Analysez le code du widget météo ci-dessous et identifiez :</p>
+                    <ul>
+                        <li>Comment les données sont récupérées (quelle API ?)</li>
+                        <li>Comment l'affichage est mis à jour</li>
+                        <li>Comment les erreurs sont gérées</li>
+                    </ul>
+                    <button class="demo-button" onclick="loadWeather()">Charger la météo</button>
+                    <button class="demo-button" onclick="showWeatherCode()">Voir le code source</button>
+                    <div id="weather-container"></div>
+                    <div class="demo-output" id="weather-code" style="display: none;"></div>
+                </div>
+            </div>
+
+            <div class="interactive-demo">
+                <h2 style="text-align: center; margin-top: 0">🖼️ Exercice 2 : Analyser une Galerie d'Images</h2>
+                <div class="demo-box">
+                    <p><strong>Mission :</strong> Analysez le code de cette galerie et identifiez :</p>
+                    <ul>
+                        <li>Comment les images sont chargées depuis l'API</li>
+                        <li>Comment la grille responsive est créée</li>
+                        <li>Comment le loading state est géré</li>
+                    </ul>
+                    <button class="demo-button" onclick="loadGallery()">Charger la galerie</button>
+                    <button class="demo-button" onclick="showGalleryCode()">Voir le code source</button>
+                    <div id="gallery-container"></div>
+                    <div class="demo-output" id="gallery-code" style="display: none;"></div>
+                </div>
+            </div>
+
+            <div class="interactive-demo">
+                <h2 style="text-align: center; margin-top: 0">🔧 Exercice 3 : Déboguer du code cassé</h2>
+                <div class="demo-box">
+                    <p><strong>Mission :</strong> Ce code contient 3 bugs. Utilisez console.log et les DevTools pour les trouver !</p>
+                    <button class="demo-button" onclick="runBuggyCode()">Exécuter le code bugué</button>
+                    <button class="demo-button" onclick="showBuggyCode()">Voir le code</button>
+                    <button class="demo-button" onclick="showBugFixes()">Voir les solutions</button>
+                    <div class="demo-output" id="buggy-output">Cliquez pour exécuter...</div>
+                    <div class="demo-output" id="buggy-code" style="display: none;"></div>
+                    <div class="demo-output" id="bug-fixes" style="display: none;"></div>
+                </div>
+            </div>
+
+            <!-- Console interactive -->
+            <div class="js-console">
+                <div class="js-console-header">
+                    ⚡ Console JavaScript Interactive - Expérimentez !
+                </div>
+                <div class="js-console-editor">
+                    <textarea id="js-input" placeholder="Écrivez votre code JavaScript ici..."></textarea>
+                </div>
+                <div class="js-console-buttons">
+                    <button class="btn-execute" onclick="executeCode()">▶️ Exécuter (Ctrl + Enter)</button>
+                    <button class="btn-clear" onclick="clearConsole()">🗑️ Effacer</button>
+                </div>
+                <div class="js-console-output" id="js-output">Prêt à exécuter votre code...</div>
+            </div>
+
+            <!-- Checklist de lecture de code -->
+            <div style="background: #d1ecf1; padding: 25px; border-radius: 10px; margin: 30px 0">
+                <h2 style="color: #2c3e50; text-align: center; margin-top: 0">📋 Checklist : Comment lire du code efficacement</h2>
+                <div style="background: white; padding: 20px; border-radius: 8px; line-height: 2">
+                    ✅ <strong>1. Commencez par le haut :</strong> Lisez les imports pour comprendre les dépendances<br>
+                    ✅ <strong>2. Identifiez le point d'entrée :</strong> Où commence l'exécution ? (init(), main(), DOMContentLoaded...)<br>
+                    ✅ <strong>3. Repérez les structures :</strong> Fonctions, classes, objets principaux<br>
+                    ✅ <strong>4. Suivez le flux de données :</strong> Comment les données entrent, sont transformées, et sortent<br>
+                    ✅ <strong>5. Cherchez les patterns :</strong> Reconnaissez les structures courantes (fetch, event listeners, etc.)<br>
+                    ✅ <strong>6. Ajoutez des logs :</strong> console.log() aux endroits stratégiques<br>
+                    ✅ <strong>7. Testez mentalement :</strong> "Si je passe X en entrée, j'obtiens Y en sortie ?"<br>
+                    ✅ <strong>8. Lisez la documentation :</strong> Si le code utilise une librairie, consultez sa doc<br>
+                    ✅ <strong>9. Simplifiez :</strong> Essayez de réécrire une version simplifiée<br>
+                    ✅ <strong>10. Posez des questions :</strong> Si vous ne comprenez pas, demandez ou cherchez en ligne !
+                </div>
+            </div>
+        </div>
+
+        <!-- Zone Froggiesplaining -->
+        <div class="froggiesplaining">
+            <span> Froggiesplaining :</span>
+            <p>
+                <br />
+                <strong>🎯 Objectifs de ce cours :</strong><br />
+                ✅ Développer une méthode pour lire du code efficacement<br />
+                ✅ Reconnaître les patterns JavaScript courants<br />
+                ✅ Maîtriser le débogage avec console.log et DevTools<br />
+                ✅ Savoir adapter du code existant à vos besoins<br />
+                ✅ Comprendre comment lire la documentation de librairies<br /><br />
+
+                <strong>📖 Points clés à retenir :</strong><br />
+                • Lire du code est une <strong>compétence à part entière</strong> qui se développe avec la pratique<br />
+                • Ne lisez pas ligne par ligne, mais par <strong>blocs logiques</strong><br />
+                • <strong>console.log()</strong> est votre meilleur ami pour comprendre le flux d'exécution<br />
+                • Les <strong>DevTools</strong> du navigateur sont essentiels (Console, Debugger, Network)<br />
+                • Reconnaître les <strong>patterns courants</strong> vous fait gagner du temps<br />
+                • Cherchez toujours le <strong>point d'entrée</strong> et le <strong>flux de données</strong><br />
+                • N'ayez pas peur d'<strong>expérimenter</strong> et de modifier le code pour comprendre<br /><br />
+
+                <strong>🏋️ Exercices pratiques :</strong><br />
+                1. <strong>Analyse de widget :</strong> Prenez le code du widget météo, identifiez chaque partie et écrivez un commentaire expliquant son rôle<br />
+                2. <strong>Adaptation :</strong> Modifiez le widget météo pour afficher une autre ville ou utiliser une autre API<br />
+                3. <strong>Débogage :</strong> Trouvez et corrigez les 3 bugs dans l'exercice 3 en utilisant console.log<br />
+                4. <strong>Refactoring :</strong> Améliorez le code de la galerie d'images (ajoutez des commentaires, renommez les variables)<br />
+                5. <strong>Mini-projet :</strong> Créez votre propre widget (horloge, citations aléatoires, blagues...) en vous inspirant des exemples<br /><br />
+
+                <strong>💡 Conseils pour la vraie vie :</strong><br />
+                • Sur un <strong>nouveau projet</strong> : Commencez par lire le README.md et package.json<br />
+                • Pour comprendre une <strong>librairie</strong> : Lisez les exemples de la documentation en premier<br />
+                • Face à un <strong>bug</strong> : Ajoutez des console.log pour isoler le problème (binary search debugging)<br />
+                • <strong>GitHub</strong> : Cherchez des projets similaires pour voir comment d'autres ont résolu le problème<br />
+                • <strong>Stack Overflow</strong> : Cherchez l'erreur exacte, vous n'êtes jamais le premier à la rencontrer<br />
+                • Utilisez <strong>ChatGPT/Claude</strong> pour expliquer du code complexe, mais vérifiez toujours !<br /><br />
+
+                <strong>🎓 Félicitations !</strong><br />
+                Vous avez terminé la semaine 4 sur JavaScript avancé ! Vous maîtrisez maintenant l'asynchronisme, les Promises, async/await, les modules, les bonnes pratiques, et la lecture de code. Vous êtes prêt pour des projets professionnels ! 🚀
+            </p>
+            <img src="../img/froggie-300.png" alt="Froggie explain" class="overfrog" id="Froggie" />
+        </div>
+
+        <!-- Bouton retour -->
+        <a href="index.html" id="goToIndex" title="Retour à l'index">
+            <i class="bi bi-arrow-left"></i>
+        </a>
+
+        <!-- Lien vers Froggie -->
+        <a href="#Froggie">
+            <div id="goToFroggie">
+                <img src="../img/froggie-300.png" width="50px" /><br /><i class="bi bi-arrow-bar-down"></i>
+            </div>
+        </a>
+
+        <!-- Footer -->
+        <div id="footerGit">
+            <a href="https://github.com/eCreafr/DWWM" target="_blank"><i class="bi bi-github">GitHub - eCrea</i></a>
+        </div>
+
+        <script>
+            // ===== EXERCICE 1 : Widget Météo =====
+            async function loadWeather() {
+                const container = document.getElementById('weather-container');
+                container.innerHTML = '<div style="text-align: center; padding: 20px;"><span class="loading"></span>Chargement des données météo...</div>';
+
+                try {
+                    // Utilise l'API JSONPlaceholder pour simuler (pas de vraie API météo gratuite sans clé)
+                    // Dans la vraie vie, vous utiliseriez OpenWeatherMap, WeatherAPI, etc.
+                    const response = await fetch('https://jsonplaceholder.typicode.com/users/1');
+
+                    if (!response.ok) {
+                        throw new Error('Erreur lors de la récupération des données');
+                    }
+
+                    const data = await response.json();
+
+                    // Simulation de données météo
+                    const weatherData = {
+                        city: data.address.city,
+                        temp: Math.floor(Math.random() * 15) + 10,
+                        condition: ['Ensoleillé', 'Nuageux', 'Pluvieux'][Math.floor(Math.random() * 3)],
+                        humidity: Math.floor(Math.random() * 40) + 40,
+                        wind: Math.floor(Math.random() * 20) + 5
+                    };
+
+                    displayWeather(weatherData);
+                } catch (error) {
+                    container.innerHTML = `<div style="color: #e74c3c; padding: 20px;">❌ Erreur : ${error.message}</div>`;
+                }
+            }
+
+            function displayWeather(data) {
+                const container = document.getElementById('weather-container');
+                const icon = data.condition === 'Ensoleillé' ? '☀️' : data.condition === 'Nuageux' ? '☁️' : '🌧️';
+
+                container.innerHTML = `
+                    <div class="weather-widget">
+                        <h3>${data.city}</h3>
+                        <div style="font-size: 4em;">${icon}</div>
+                        <div class="weather-temp">${data.temp}°C</div>
+                        <div class="weather-info">${data.condition}</div>
+                        <div class="weather-info">💧 Humidité : ${data.humidity}%</div>
+                        <div class="weather-info">💨 Vent : ${data.wind} km/h</div>
+                    </div>
+                `;
+            }
+
+            function showWeatherCode() {
+                const codeDiv = document.getElementById('weather-code');
+                codeDiv.style.display = codeDiv.style.display === 'none' ? 'block' : 'none';
+
+                codeDiv.innerHTML = `
+                    <strong>📝 Code source du widget météo :</strong><br><br>
+                    <div class="code-analysis">
+                        <h4>🎯 Analyse du code :</h4>
+                        <strong>1. Structure :</strong> Fonction async pour gérer l'asynchronisme<br>
+                        <strong>2. Loading state :</strong> Affiche un spinner pendant le chargement<br>
+                        <strong>3. Fetch API :</strong> Récupère les données (ici simulées avec JSONPlaceholder)<br>
+                        <strong>4. Gestion d'erreur :</strong> try/catch pour capturer les erreurs réseau<br>
+                        <strong>5. Affichage :</strong> Fonction séparée displayWeather() pour la mise à jour du DOM<br>
+                        <strong>6. Données simulées :</strong> Math.random() pour simuler des valeurs météo<br><br>
+                        <strong>💡 Points clés :</strong><br>
+                        • Séparation logique/affichage (loadWeather vs displayWeather)<br>
+                        • Vérification response.ok avant de parser le JSON<br>
+                        • Feedback visuel pour l'utilisateur (loading, erreur)<br>
+                        • Template literals pour générer le HTML dynamique
+                    </div>
+                `;
+            }
+
+            // ===== EXERCICE 2 : Galerie d'Images =====
+            async function loadGallery() {
+                const container = document.getElementById('gallery-container');
+                container.innerHTML = '<div style="text-align: center; padding: 20px;"><span class="loading"></span>Chargement des images...</div>';
+
+                try {
+                    const response = await fetch('https://jsonplaceholder.typicode.com/photos?_limit=6');
+
+                    if (!response.ok) {
+                        throw new Error('Erreur lors du chargement des images');
+                    }
+
+                    const photos = await response.json();
+                    displayGallery(photos);
+                } catch (error) {
+                    container.innerHTML = `<div style="color: #e74c3c; padding: 20px;">❌ Erreur : ${error.message}</div>`;
+                }
+            }
+
+            function displayGallery(photos) {
+                const container = document.getElementById('gallery-container');
+
+                const galleryHTML = `
+                    <div class="image-gallery">
+                        ${photos.map(photo => `
+                            <div class="gallery-item" onclick="alert('Photo: ${photo.title}')">
+                                <img src="${photo.thumbnailUrl}" alt="${photo.title}" loading="lazy">
+                                <div class="gallery-caption">${photo.title.substring(0, 20)}...</div>
+                            </div>
+                        `).join('')}
+                    </div>
+                `;
+
+                container.innerHTML = galleryHTML;
+            }
+
+            function showGalleryCode() {
+                const codeDiv = document.getElementById('gallery-code');
+                codeDiv.style.display = codeDiv.style.display === 'none' ? 'block' : 'none';
+
+                codeDiv.innerHTML = `
+                    <strong>📝 Code source de la galerie :</strong><br><br>
+                    <div class="code-analysis">
+                        <h4>🎯 Analyse du code :</h4>
+                        <strong>1. API :</strong> JSONPlaceholder/photos avec limite de 6 images<br>
+                        <strong>2. Grid CSS :</strong> display: grid avec auto-fit pour le responsive<br>
+                        <strong>3. Array.map() :</strong> Transforme chaque photo en HTML<br>
+                        <strong>4. Template literals :</strong> Génération dynamique du HTML<br>
+                        <strong>5. Loading lazy :</strong> Optimisation du chargement des images<br>
+                        <strong>6. Event inline :</strong> onclick pour gérer les clics<br><br>
+                        <strong>💡 Points clés :</strong><br>
+                        • map() pour transformer un tableau en HTML<br>
+                        • join('') pour concaténer sans virgules<br>
+                        • CSS Grid pour layout responsive automatique<br>
+                        • substring() pour tronquer les titres longs<br>
+                        • loading="lazy" pour améliorer les performances
+                    </div>
+                `;
+            }
+
+            // ===== EXERCICE 3 : Code Bugué =====
+            function runBuggyCode() {
+                const output = document.getElementById('buggy-output');
+                output.innerHTML = '';
+
+                try {
+                    // Bug 1 : Typo dans le nom de variable
+                    const numbers = [1, 2, 3, 4, 5];
+                    const doubled = numbers.map(num => num * 2);
+                    output.innerHTML += `Nombres doublés : ${doubled.join(', ')}<br>`;
+
+                    // Bug 2 : Mauvaise comparaison (== au lieu de ===)
+                    const value = "5";
+                    if (value === 5) {
+                        output.innerHTML += "Bug 2 : Cette ligne ne devrait pas s'afficher !<br>";
+                    } else {
+                        output.innerHTML += "Bug 2 corrigé : '5' n'est pas égal à 5<br>";
+                    }
+
+                    // Bug 3 : Callback mal écrit
+                    setTimeout(() => {
+                        output.innerHTML += "Bug 3 corrigé : Message après 1 seconde<br>";
+                    }, 1000);
+
+                    output.innerHTML += '<br><strong>✅ Code exécuté (mais il y avait des bugs potentiels !)</strong>';
+                } catch (error) {
+                    output.innerHTML = `<span style="color: #e74c3c">❌ Erreur : ${error.message}</span>`;
+                }
+            }
+
+            function showBuggyCode() {
+                const codeDiv = document.getElementById('buggy-code');
+                codeDiv.style.display = codeDiv.style.display === 'none' ? 'block' : 'none';
+
+                codeDiv.innerHTML = `
+                    <strong>📝 Code avec bugs (version originale) :</strong><br><br>
+                    <pre style="background: #2c3e50; color: #ecf0f1; padding: 15px; border-radius: 5px; overflow-x: auto;">
+// Bug 1 : Typo dans le nom de variable
+const numbers = [1, 2, 3, 4, 5];
+const doubled = numbres.map(num => num * 2); // ❌ "numbres" au lieu de "numbers"
+
+// Bug 2 : Mauvaise comparaison
+const value = "5";
+if (value == 5) { // ❌ Utilise == au lieu de ===
+    console.log("Égal");
+}
+
+// Bug 3 : Callback mal écrit
+setTimeout(function() {
+    console.log("Message");
+} 1000); // ❌ Virgule manquante avant 1000
+                    </pre>
+                `;
+            }
+
+            function showBugFixes() {
+                const fixesDiv = document.getElementById('bug-fixes');
+                fixesDiv.style.display = fixesDiv.style.display === 'none' ? 'block' : 'none';
+
+                fixesDiv.innerHTML = `
+                    <strong>✅ Solutions des bugs :</strong><br><br>
+                    <div class="code-analysis">
+                        <h4>Bug 1 : Erreur de typo</h4>
+                        <strong>Problème :</strong> "numbres" au lieu de "numbers"<br>
+                        <strong>Symptôme :</strong> ReferenceError: numbres is not defined<br>
+                        <strong>Solution :</strong> Corriger le nom de la variable<br>
+                        <strong>Débogage :</strong> console.log(numbers) avant le map()<br><br>
+
+                        <h4>Bug 2 : Comparaison faible (==)</h4>
+                        <strong>Problème :</strong> "5" == 5 retourne true (coercition de type)<br>
+                        <strong>Symptôme :</strong> Code se comporte différemment que prévu<br>
+                        <strong>Solution :</strong> Toujours utiliser === (comparaison stricte)<br>
+                        <strong>Débogage :</strong> console.log(typeof value, typeof 5)<br><br>
+
+                        <h4>Bug 3 : Syntaxe setTimeout</h4>
+                        <strong>Problème :</strong> Virgule manquante entre fonction et délai<br>
+                        <strong>Symptôme :</strong> SyntaxError: Unexpected number<br>
+                        <strong>Solution :</strong> setTimeout(function() {...}, 1000)<br>
+                        <strong>Débogage :</strong> Vérifier la syntaxe dans la console<br><br>
+
+                        <strong>💡 Leçon :</strong> La plupart des bugs sont des erreurs simples (typos, syntaxe).
+                        Utilisez console.log() et lisez attentivement les messages d'erreur !
+                    </div>
+                `;
+            }
+
+            // ===== CONSOLE INTERACTIVE =====
+            const jsInput = document.getElementById('js-input');
+            const jsOutput = document.getElementById('js-output');
+
+            function executeCode() {
+                const code = jsInput.value;
+                jsOutput.innerHTML = '';
+
+                const logs = [];
+                const originalLog = console.log;
+                const originalError = console.error;
+
+                console.log = function (...args) {
+                    logs.push(args.map(arg =>
+                        typeof arg === 'object' ? JSON.stringify(arg, null, 2) : String(arg)
+                    ).join(' '));
+                    originalLog.apply(console, args);
+                };
+
+                console.error = function (...args) {
+                    logs.push('<span class="error">' + args.join(' ') + '</span>');
+                    originalError.apply(console, args);
+                };
+
+                try {
+                    eval(code);
+
+                    setTimeout(() => {
+                        if (logs.length > 0) {
+                            jsOutput.innerHTML = logs.join('\n');
+                        } else {
+                            jsOutput.innerHTML = '✅ Code exécuté sans erreur (aucune sortie console)';
+                        }
+                    }, 100);
+                } catch (error) {
+                    jsOutput.innerHTML = `<span class="error">❌ Erreur : ${error.message}</span>`;
+                } finally {
+                    console.log = originalLog;
+                    console.error = originalError;
+                }
+            }
+
+            function clearConsole() {
+                jsInput.value = '';
+                jsOutput.innerHTML = 'Console effacée. Prêt à exécuter votre code...';
+            }
+
+            jsInput.addEventListener('keydown', function (e) {
+                if (e.ctrlKey && e.key === 'Enter') {
+                    e.preventDefault();
+                    executeCode();
+                }
+            });
+
+            window.addEventListener('DOMContentLoaded', function() {
+                jsInput.value = `// Exercez-vous à déboguer !
+// Trouvez et corrigez les bugs :
+
+const users = [
+  { name: 'Alice', age: 25 },
+  { name: 'Bob', age: 30 },
+  { name: 'Charlie', age: 35 }
+];
+
+// Ajoutez des console.log pour comprendre :
+console.log('Users:', users);
+
+const adults = users.filter(user => user.age >= 18);
+console.log('Adults:', adults);
+
+const names = adults.map(user => user.name);
+console.log('Names:', names);`;
+            });
+        </script>
+    </body>
+</html>

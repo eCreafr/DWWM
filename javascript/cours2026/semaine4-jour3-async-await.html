@@ -1,0 +1,748 @@
+<!doctype html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Semaine 4 - Jour 3 | Async/Await</title>
+        <link rel="stylesheet" href="../css/froggie.css" />
+        <style>
+            .demo-container {
+                max-width: 1200px;
+                margin: 40px auto;
+                padding: 20px;
+                font-family: Arial, sans-serif;
+            }
+            .demo-title {
+                text-align: center;
+                font-size: 2.5em;
+                margin-bottom: 20px;
+                color: #2c3e50;
+            }
+            .demo-intro {
+                background: #ecf0f1;
+                padding: 20px;
+                border-radius: 10px;
+                margin-bottom: 40px;
+                line-height: 1.6;
+            }
+            .demo-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                gap: 30px;
+                margin-bottom: 40px;
+            }
+            .demo-item {
+                border: 2px solid #f093fb;
+                border-radius: 10px;
+                padding: 20px;
+                background: white;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            }
+            .demo-item h2 {
+                margin-top: 0;
+                color: #f093fb;
+                font-size: 1.5em;
+            }
+            .code-example {
+                background: #2c3e50;
+                color: #ecf0f1;
+                padding: 15px;
+                border-radius: 5px;
+                font-family: 'Courier New', monospace;
+                font-size: 0.9em;
+                margin: 15px 0;
+                overflow-x: auto;
+            }
+            .highlight {
+                color: #f39c12;
+                font-weight: bold;
+            }
+            .keyword {
+                color: #e74c3c;
+            }
+            .string {
+                color: #2ecc71;
+            }
+            .comment {
+                color: #95a5a6;
+                font-style: italic;
+            }
+
+            /* Comparison boxes */
+            .comparison {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 20px;
+                margin: 20px 0;
+            }
+            .comparison-box {
+                border: 2px solid #3498db;
+                border-radius: 8px;
+                padding: 15px;
+                background: #ecf0f1;
+            }
+            .comparison-box h3 {
+                margin-top: 0;
+                color: #2c3e50;
+            }
+
+            /* Zone de démonstration interactive */
+            .interactive-demo {
+                background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+                padding: 20px;
+                border-radius: 10px;
+                margin: 20px 0;
+                color: white;
+            }
+            .demo-box {
+                background: white;
+                color: #2c3e50;
+                padding: 15px;
+                border-radius: 8px;
+                margin: 10px 0;
+                transition: all 0.3s;
+            }
+            .demo-button {
+                background: #2ecc71;
+                color: white;
+                border: none;
+                padding: 10px 20px;
+                border-radius: 5px;
+                cursor: pointer;
+                font-weight: bold;
+                margin: 5px;
+                transition: all 0.3s;
+            }
+            .demo-button:hover {
+                background: #27ae60;
+                transform: scale(1.05);
+            }
+            .demo-output {
+                background: #ecf0f1;
+                padding: 15px;
+                border-radius: 5px;
+                margin: 10px 0;
+                min-height: 60px;
+                color: #2c3e50;
+                font-family: 'Courier New', monospace;
+                font-size: 0.9em;
+                max-height: 400px;
+                overflow-y: auto;
+            }
+
+            /* Loading animation */
+            .loading {
+                display: inline-block;
+                width: 20px;
+                height: 20px;
+                border: 3px solid #f3f3f3;
+                border-top: 3px solid #3498db;
+                border-radius: 50%;
+                animation: spin 1s linear infinite;
+                margin-right: 10px;
+            }
+
+            @keyframes spin {
+                0% { transform: rotate(0deg); }
+                100% { transform: rotate(360deg); }
+            }
+
+            /* Data card */
+            .data-card {
+                background: white;
+                border: 2px solid #3498db;
+                border-radius: 8px;
+                padding: 15px;
+                margin: 10px 0;
+                box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            }
+            .data-card h3 {
+                margin-top: 0;
+                color: #2c3e50;
+            }
+
+            /* Console JavaScript interactive */
+            .js-console {
+                background: #1e1e1e;
+                border-radius: 10px;
+                padding: 20px;
+                margin: 30px 0;
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            }
+            .js-console-header {
+                color: #f39c12;
+                font-weight: bold;
+                margin-bottom: 15px;
+                font-size: 1.1em;
+                display: flex;
+                align-items: center;
+                gap: 10px;
+            }
+            .js-console-editor {
+                background: #2d2d2d;
+                border: 1px solid #444;
+                border-radius: 5px;
+                padding: 15px;
+                margin-bottom: 15px;
+            }
+            .js-console-editor textarea {
+                width: 100%;
+                background: transparent;
+                border: none;
+                color: #f8f8f2;
+                font-family: 'Courier New', monospace;
+                font-size: 0.95em;
+                resize: vertical;
+                min-height: 80px;
+                outline: none;
+            }
+            .js-console-output {
+                background: #000;
+                border: 1px solid #444;
+                border-radius: 5px;
+                padding: 15px;
+                color: #0f0;
+                font-family: 'Courier New', monospace;
+                font-size: 0.9em;
+                min-height: 60px;
+                max-height: 300px;
+                overflow-y: auto;
+                white-space: pre-wrap;
+            }
+            .js-console-output .error {
+                color: #e74c3c;
+            }
+            .js-console-output .warning {
+                color: #f39c12;
+            }
+            .js-console-buttons {
+                display: flex;
+                gap: 10px;
+                margin-bottom: 15px;
+            }
+            .btn-execute {
+                background: #2ecc71;
+                color: white;
+                border: none;
+                padding: 10px 20px;
+                border-radius: 5px;
+                cursor: pointer;
+                font-weight: bold;
+                transition: background 0.3s;
+            }
+            .btn-execute:hover {
+                background: #27ae60;
+            }
+            .btn-clear {
+                background: #e74c3c;
+                color: white;
+                border: none;
+                padding: 10px 20px;
+                border-radius: 5px;
+                cursor: pointer;
+                font-weight: bold;
+                transition: background 0.3s;
+            }
+            .btn-clear:hover {
+                background: #c0392b;
+            }
+
+            @media (max-width: 768px) {
+                .comparison {
+                    grid-template-columns: 1fr;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <div class="demo-container">
+            <h1 class="demo-title">✨ Semaine 4 - Jour 3 : Async/Await</h1>
+
+            <div class="demo-intro">
+                <h3>🚀 La syntaxe moderne pour l'asynchronisme</h3>
+                <p>
+                    <strong>async/await</strong> est la syntaxe la plus moderne et la plus lisible pour gérer les opérations asynchrones en JavaScript. Elle a été introduite dans ES2017 et transforme radicalement la façon dont on écrit du code asynchrone.
+                </p>
+                <p>
+                    <strong>Pourquoi c'est génial ?</strong> Au lieu d'enchaîner des .then(), on écrit du code asynchrone qui ressemble à du code synchrone normal. C'est plus facile à lire, à écrire et à déboguer !
+                </p>
+                <p>
+                    <strong>Dans ce cours :</strong> La syntaxe async/await, le mot-clé await, la gestion d'erreurs avec try/catch, comparaison avec .then(), et comment refactoriser du code existant.
+                </p>
+            </div>
+
+            <!-- Concepts de base -->
+            <div class="demo-grid">
+                <div class="demo-item">
+                    <h2>1. La syntaxe async</h2>
+                    <p>
+                        Le mot-clé <strong>async</strong> devant une fonction indique qu'elle retourne toujours une Promise.
+                    </p>
+                    <div class="code-example">
+                        <span class="comment">// Fonction async simple</span><br />
+                        <span class="keyword">async function</span> <span class="highlight">direBonjour</span>() {<br />
+                        &nbsp;&nbsp;<span class="keyword">return</span> <span class="string">'Bonjour !'</span>;<br />
+                        }<br />
+                        <br />
+                        <span class="comment">// Équivalent à :</span><br />
+                        <span class="keyword">function</span> <span class="highlight">direBonjourPromise</span>() {<br />
+                        &nbsp;&nbsp;<span class="keyword">return</span> Promise.<span class="highlight">resolve</span>(<span class="string">'Bonjour !'</span>);<br />
+                        }
+                    </div>
+                    <p><strong>💡 Utilisation :</strong></p>
+                    <div class="code-example">
+                        <span class="highlight">direBonjour</span>().<span class="highlight">then</span>(msg => {<br />
+                        &nbsp;&nbsp;console.<span class="highlight">log</span>(msg); <span class="comment">// Bonjour !</span><br />
+                        });
+                    </div>
+                </div>
+
+                <div class="demo-item">
+                    <h2>2. Le mot-clé await</h2>
+                    <p>
+                        <strong>await</strong> permet d'attendre qu'une Promise se résolve. Il ne peut être utilisé que dans une fonction async.
+                    </p>
+                    <div class="code-example">
+                        <span class="keyword">async function</span> <span class="highlight">getData</span>() {<br />
+                        &nbsp;&nbsp;<span class="comment">// Attend que fetch se termine</span><br />
+                        &nbsp;&nbsp;<span class="keyword">const</span> response = <span class="keyword">await</span> <span class="keyword">fetch</span>(<span class="string">'api.com/data'</span>);<br />
+                        &nbsp;&nbsp;<span class="keyword">const</span> data = <span class="keyword">await</span> response.<span class="highlight">json</span>();<br />
+                        &nbsp;&nbsp;<span class="keyword">return</span> data;<br />
+                        }
+                    </div>
+                    <p><strong>⚠️ Important :</strong> await "pause" l'exécution de la fonction jusqu'à ce que la Promise se résolve.</p>
+                </div>
+
+                <div class="demo-item">
+                    <h2>3. Gestion d'erreurs : try/catch</h2>
+                    <p>
+                        Avec async/await, on utilise <strong>try/catch</strong> au lieu de .catch() pour gérer les erreurs.
+                    </p>
+                    <div class="code-example">
+                        <span class="keyword">async function</span> <span class="highlight">fetchUser</span>(id) {<br />
+                        &nbsp;&nbsp;<span class="keyword">try</span> {<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">const</span> response = <span class="keyword">await</span> <span class="keyword">fetch</span>(<span class="string">`/users/${id}`</span>);<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">const</span> user = <span class="keyword">await</span> response.<span class="highlight">json</span>();<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;console.<span class="highlight">log</span>(user);<br />
+                        &nbsp;&nbsp;} <span class="keyword">catch</span> (error) {<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;console.<span class="highlight">error</span>(<span class="string">'Erreur:'</span>, error);<br />
+                        &nbsp;&nbsp;}<br />
+                        }
+                    </div>
+                    <p><strong>✅ Bonne pratique :</strong> Toujours wrapper vos await dans un try/catch !</p>
+                </div>
+
+                <div class="demo-item">
+                    <h2>4. Pourquoi async/await ?</h2>
+                    <p><strong>Avantages :</strong></p>
+                    <ul style="line-height: 1.8">
+                        <li>Code plus lisible et plus proche du code synchrone</li>
+                        <li>Meilleure gestion des erreurs avec try/catch</li>
+                        <li>Débogage plus facile</li>
+                        <li>Évite le "callback hell"</li>
+                    </ul>
+                    <p><strong>Quand l'utiliser ?</strong></p>
+                    <ul style="line-height: 1.8">
+                        <li>Pour des opérations asynchrones séquentielles</li>
+                        <li>Quand le code doit être facile à lire</li>
+                        <li>Pour du code professionnel moderne</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Comparaison .then() vs async/await -->
+            <div style="background: #e8f4f8; padding: 25px; border-radius: 10px; margin: 30px 0">
+                <h2 style="color: #2c3e50; text-align: center; margin-top: 0">⚖️ Comparaison : .then() vs async/await</h2>
+                <div class="comparison">
+                    <div class="comparison-box">
+                        <h3>❌ Avec .then() (ancien style)</h3>
+                        <div class="code-example">
+                            <span class="keyword">function</span> <span class="highlight">getUser</span>(id) {<br />
+                            &nbsp;&nbsp;<span class="keyword">fetch</span>(<span class="string">`/users/${id}`</span>)<br />
+                            &nbsp;&nbsp;&nbsp;&nbsp;.<span class="highlight">then</span>(response => response.<span class="highlight">json</span>())<br />
+                            &nbsp;&nbsp;&nbsp;&nbsp;.<span class="highlight">then</span>(user => {<br />
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">fetch</span>(<span class="string">`/posts/${user.id}`</span>)<br />
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.<span class="highlight">then</span>(res => res.<span class="highlight">json</span>())<br />
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.<span class="highlight">then</span>(posts => {<br />
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;console.<span class="highlight">log</span>(posts);<br />
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;})<br />
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.<span class="highlight">catch</span>(err => console.<span class="highlight">error</span>(err));<br />
+                            &nbsp;&nbsp;&nbsp;&nbsp;})<br />
+                            &nbsp;&nbsp;&nbsp;&nbsp;.<span class="highlight">catch</span>(err => console.<span class="highlight">error</span>(err));<br />
+                            }
+                        </div>
+                        <p style="color: #e74c3c"><strong>Problèmes :</strong> Imbrications, difficile à lire, erreurs à gérer à plusieurs endroits</p>
+                    </div>
+
+                    <div class="comparison-box">
+                        <h3>✅ Avec async/await (moderne)</h3>
+                        <div class="code-example">
+                            <span class="keyword">async function</span> <span class="highlight">getUser</span>(id) {<br />
+                            &nbsp;&nbsp;<span class="keyword">try</span> {<br />
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">const</span> response = <span class="keyword">await</span> <span class="keyword">fetch</span>(<span class="string">`/users/${id}`</span>);<br />
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">const</span> user = <span class="keyword">await</span> response.<span class="highlight">json</span>();<br />
+                            &nbsp;&nbsp;&nbsp;&nbsp;<br />
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">const</span> postsResponse = <span class="keyword">await</span> <span class="keyword">fetch</span>(<span class="string">`/posts/${user.id}`</span>);<br />
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">const</span> posts = <span class="keyword">await</span> postsResponse.<span class="highlight">json</span>();<br />
+                            &nbsp;&nbsp;&nbsp;&nbsp;<br />
+                            &nbsp;&nbsp;&nbsp;&nbsp;console.<span class="highlight">log</span>(posts);<br />
+                            &nbsp;&nbsp;} <span class="keyword">catch</span> (error) {<br />
+                            &nbsp;&nbsp;&nbsp;&nbsp;console.<span class="highlight">error</span>(error);<br />
+                            &nbsp;&nbsp;}<br />
+                            }
+                        </div>
+                        <p style="color: #2ecc71"><strong>Avantages :</strong> Linéaire, facile à lire, une seule gestion d'erreur</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Démonstrations interactives -->
+            <div class="interactive-demo">
+                <h2 style="text-align: center; margin-top: 0">🎯 Démonstration 1 : Async/Await Simple</h2>
+                <div class="demo-box">
+                    <p>Récupère un utilisateur aléatoire avec async/await :</p>
+                    <button class="demo-button" onclick="demoAsyncAwait()">Charger un utilisateur</button>
+                    <div class="demo-output" id="output-async">Cliquez pour lancer la requête...</div>
+                </div>
+            </div>
+
+            <div class="interactive-demo">
+                <h2 style="text-align: center; margin-top: 0">🔄 Démonstration 2 : Requêtes séquentielles</h2>
+                <div class="demo-box">
+                    <p>Charge un utilisateur, puis tous ses articles (2 requêtes séquentielles) :</p>
+                    <button class="demo-button" onclick="demoSequential()">Charger utilisateur + articles</button>
+                    <div class="demo-output" id="output-sequential">Cliquez pour voir les requêtes en séquence...</div>
+                </div>
+            </div>
+
+            <div class="interactive-demo">
+                <h2 style="text-align: center; margin-top: 0">⚡ Démonstration 3 : Requêtes parallèles avec Promise.all()</h2>
+                <div class="demo-box">
+                    <p>Charge 3 utilisateurs EN PARALLÈLE (plus rapide) :</p>
+                    <button class="demo-button" onclick="demoParallel()">Charger 3 utilisateurs en parallèle</button>
+                    <div class="demo-output" id="output-parallel">Cliquez pour voir les requêtes parallèles...</div>
+                </div>
+            </div>
+
+            <div class="interactive-demo">
+                <h2 style="text-align: center; margin-top: 0">❌ Démonstration 4 : Gestion d'erreurs avec try/catch</h2>
+                <div class="demo-box">
+                    <p>Tente de charger un utilisateur qui n'existe pas :</p>
+                    <button class="demo-button" onclick="demoErrorHandling()">Provoquer une erreur</button>
+                    <div class="demo-output" id="output-error">Cliquez pour voir la gestion d'erreur...</div>
+                </div>
+            </div>
+
+            <!-- Console interactive -->
+            <div class="js-console">
+                <div class="js-console-header">
+                    ⚡ Console JavaScript Interactive - Testez async/await !
+                </div>
+                <div class="js-console-editor">
+                    <textarea id="js-input" placeholder="Écrivez votre code JavaScript ici..."></textarea>
+                </div>
+                <div class="js-console-buttons">
+                    <button class="btn-execute" onclick="executeCode()">▶️ Exécuter (Ctrl + Enter)</button>
+                    <button class="btn-clear" onclick="clearConsole()">🗑️ Effacer</button>
+                </div>
+                <div class="js-console-output" id="js-output">Prêt à exécuter votre code...</div>
+            </div>
+
+            <!-- Exemples pratiques -->
+            <div style="background: #e8f4f8; padding: 25px; border-radius: 10px; margin: 30px 0">
+                <h2 style="color: #2c3e50; text-align: center; margin-top: 0">💻 Exemples à tester</h2>
+                <div class="code-example">
+                    <span class="comment">// 1. Fonction async simple</span><br />
+                    <span class="keyword">async function</span> <span class="highlight">exempleSimple</span>() {<br />
+                    &nbsp;&nbsp;<span class="keyword">const</span> response = <span class="keyword">await</span> <span class="keyword">fetch</span>(<span class="string">'https://jsonplaceholder.typicode.com/users/1'</span>);<br />
+                    &nbsp;&nbsp;<span class="keyword">const</span> user = <span class="keyword">await</span> response.<span class="highlight">json</span>();<br />
+                    &nbsp;&nbsp;console.<span class="highlight">log</span>(user.name);<br />
+                    }<br />
+                    <span class="highlight">exempleSimple</span>();<br /><br />
+
+                    <span class="comment">// 2. Avec gestion d'erreur</span><br />
+                    <span class="keyword">async function</span> <span class="highlight">avecGestionErreur</span>() {<br />
+                    &nbsp;&nbsp;<span class="keyword">try</span> {<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">const</span> res = <span class="keyword">await</span> <span class="keyword">fetch</span>(<span class="string">'https://jsonplaceholder.typicode.com/users/999'</span>);<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">const</span> user = <span class="keyword">await</span> res.<span class="highlight">json</span>();<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;console.<span class="highlight">log</span>(user);<br />
+                    &nbsp;&nbsp;} <span class="keyword">catch</span> (error) {<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;console.<span class="highlight">error</span>(<span class="string">'❌ Erreur capturée:'</span>, error.message);<br />
+                    &nbsp;&nbsp;}<br />
+                    }<br />
+                    <span class="highlight">avecGestionErreur</span>();<br /><br />
+
+                    <span class="comment">// 3. Promise.all() pour requêtes parallèles</span><br />
+                    <span class="keyword">async function</span> <span class="highlight">chargerPlusieursUtilisateurs</span>() {<br />
+                    &nbsp;&nbsp;<span class="keyword">const</span> [user1, user2, user3] = <span class="keyword">await</span> Promise.<span class="highlight">all</span>([<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">fetch</span>(<span class="string">'https://jsonplaceholder.typicode.com/users/1'</span>).<span class="highlight">then</span>(r => r.<span class="highlight">json</span>()),<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">fetch</span>(<span class="string">'https://jsonplaceholder.typicode.com/users/2'</span>).<span class="highlight">then</span>(r => r.<span class="highlight">json</span>()),<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">fetch</span>(<span class="string">'https://jsonplaceholder.typicode.com/users/3'</span>).<span class="highlight">then</span>(r => r.<span class="highlight">json</span>())<br />
+                    &nbsp;&nbsp;]);<br />
+                    &nbsp;&nbsp;console.<span class="highlight">log</span>(user1.name, user2.name, user3.name);<br />
+                    }<br />
+                    <span class="highlight">chargerPlusieursUtilisateurs</span>();
+                </div>
+                <p style="text-align: center; margin-top: 20px">
+                    <strong>👆 Testez ces exemples dans la console interactive !</strong>
+                </p>
+            </div>
+        </div>
+
+        <!-- Zone Froggiesplaining -->
+        <div class="froggiesplaining">
+            <span> Froggiesplaining :</span>
+            <p>
+                <br />
+                <strong>🎯 Objectifs de ce cours :</strong><br />
+                ✅ Maîtriser la syntaxe async function<br />
+                ✅ Utiliser le mot-clé await correctement<br />
+                ✅ Gérer les erreurs avec try/catch<br />
+                ✅ Comprendre la différence entre .then() et async/await<br />
+                ✅ Savoir quand utiliser Promise.all() pour des requêtes parallèles<br /><br />
+
+                <strong>📖 Points clés à retenir :</strong><br />
+                • <strong>async</strong> devant une fonction la transforme en fonction qui retourne une Promise<br />
+                • <strong>await</strong> ne peut être utilisé QUE dans une fonction async<br />
+                • <strong>await</strong> "pause" l'exécution jusqu'à ce que la Promise se résolve<br />
+                • Utilisez <strong>try/catch</strong> pour gérer les erreurs avec async/await<br />
+                • <strong>Promise.all()</strong> permet d'exécuter plusieurs Promises en parallèle<br />
+                • async/await rend le code asynchrone plus lisible et plus facile à déboguer<br /><br />
+
+                <strong>🏋️ Exercices pratiques :</strong><br />
+                1. <strong>Refactoring :</strong> Prenez le code avec .then() du cours précédent et convertissez-le en async/await<br />
+                2. <strong>Chaîne de requêtes :</strong> Récupérez un article, puis son auteur, puis tous les articles de cet auteur (avec async/await)<br />
+                3. <strong>Gestion d'erreur :</strong> Créez une fonction qui teste si une URL répond correctement (try/catch)<br />
+                4. <strong>Promise.all() :</strong> Chargez les 10 utilisateurs de JSONPlaceholder en parallèle et affichez leurs noms<br />
+                5. <strong>Loading state :</strong> Créez une fonction qui affiche "Chargement...", charge des données, puis affiche "Terminé !"<br /><br />
+
+                <strong>💡 Astuces pro :</strong><br />
+                • <strong>Séquentiel vs Parallèle :</strong> Si les requêtes sont indépendantes, utilisez Promise.all() pour les lancer en parallèle (plus rapide !)<br />
+                • <strong>Top-level await :</strong> Dans les modules ES6, vous pouvez utiliser await directement sans async function<br />
+                • <strong>Débogage :</strong> async/await est plus facile à déboguer car la stack trace est plus claire<br />
+                • En production, combinez async/await avec des loading states pour une meilleure UX
+            </p>
+            <img src="../img/froggie-300.png" alt="Froggie explain" class="overfrog" id="Froggie" />
+        </div>
+
+        <!-- Bouton retour -->
+        <a href="index.html" id="goToIndex" title="Retour à l'index">
+            <i class="bi bi-arrow-left"></i>
+        </a>
+
+        <!-- Lien vers Froggie -->
+        <a href="#Froggie">
+            <div id="goToFroggie">
+                <img src="../img/froggie-300.png" width="50px" /><br /><i class="bi bi-arrow-bar-down"></i>
+            </div>
+        </a>
+
+        <!-- Footer -->
+        <div id="footerGit">
+            <a href="https://github.com/eCreafr/DWWM" target="_blank"><i class="bi bi-github">GitHub - eCrea</i></a>
+        </div>
+
+        <script>
+            // ===== DÉMONSTRATION 1 : Async/Await Simple =====
+            async function demoAsyncAwait() {
+                const output = document.getElementById('output-async');
+                output.innerHTML = '<span class="loading"></span>Chargement avec async/await...';
+
+                try {
+                    const randomId = Math.floor(Math.random() * 10) + 1;
+                    const response = await fetch(`https://jsonplaceholder.typicode.com/users/${randomId}`);
+                    const user = await response.json();
+
+                    output.innerHTML = `
+                        <div class="data-card">
+                            <h3>👤 ${user.name}</h3>
+                            <strong>Email :</strong> ${user.email}<br>
+                            <strong>Téléphone :</strong> ${user.phone}<br>
+                            <strong>Site web :</strong> ${user.website}<br>
+                            <strong>Entreprise :</strong> ${user.company.name}<br>
+                            <strong>Ville :</strong> ${user.address.city}
+                        </div>
+                        <small>✅ Chargé avec async/await (utilisateur ID: ${randomId})</small>
+                    `;
+                } catch (error) {
+                    output.innerHTML = `<strong style="color: #e74c3c">❌ Erreur :</strong> ${error.message}`;
+                }
+            }
+
+            // ===== DÉMONSTRATION 2 : Requêtes Séquentielles =====
+            async function demoSequential() {
+                const output = document.getElementById('output-sequential');
+                output.innerHTML = '<span class="loading"></span>Étape 1/2 : Chargement de l\'utilisateur...';
+
+                try {
+                    const randomId = Math.floor(Math.random() * 10) + 1;
+
+                    // Étape 1 : Charger l'utilisateur
+                    const userResponse = await fetch(`https://jsonplaceholder.typicode.com/users/${randomId}`);
+                    const user = await userResponse.json();
+
+                    output.innerHTML = '<span class="loading"></span>Étape 2/2 : Chargement des articles...';
+
+                    // Étape 2 : Charger les articles de cet utilisateur
+                    const postsResponse = await fetch(`https://jsonplaceholder.typicode.com/posts?userId=${user.id}`);
+                    const posts = await postsResponse.json();
+
+                    let html = `
+                        <div class="data-card">
+                            <h3>👤 ${user.name}</h3>
+                            📧 ${user.email}
+                        </div>
+                        <strong>📝 ${posts.length} articles publiés :</strong><br><br>
+                    `;
+
+                    posts.slice(0, 3).forEach(post => {
+                        html += `<div class="data-card">
+                            <strong>${post.title}</strong><br>
+                            ${post.body.substring(0, 100)}...
+                        </div>`;
+                    });
+
+                    html += '<br><small>✅ 2 requêtes exécutées en séquence avec await</small>';
+                    output.innerHTML = html;
+                } catch (error) {
+                    output.innerHTML = `<strong style="color: #e74c3c">❌ Erreur :</strong> ${error.message}`;
+                }
+            }
+
+            // ===== DÉMONSTRATION 3 : Requêtes Parallèles =====
+            async function demoParallel() {
+                const output = document.getElementById('output-parallel');
+                output.innerHTML = '<span class="loading"></span>Chargement de 3 utilisateurs EN PARALLÈLE...';
+
+                try {
+                    const startTime = performance.now();
+
+                    // Lancer les 3 requêtes EN PARALLÈLE avec Promise.all()
+                    const [user1, user2, user3] = await Promise.all([
+                        fetch('https://jsonplaceholder.typicode.com/users/1').then(r => r.json()),
+                        fetch('https://jsonplaceholder.typicode.com/users/2').then(r => r.json()),
+                        fetch('https://jsonplaceholder.typicode.com/users/3').then(r => r.json())
+                    ]);
+
+                    const endTime = performance.now();
+                    const duration = (endTime - startTime).toFixed(0);
+
+                    output.innerHTML = `
+                        <div class="data-card">
+                            <h3>👤 ${user1.name}</h3>
+                            📧 ${user1.email}
+                        </div>
+                        <div class="data-card">
+                            <h3>👤 ${user2.name}</h3>
+                            📧 ${user2.email}
+                        </div>
+                        <div class="data-card">
+                            <h3>👤 ${user3.name}</h3>
+                            📧 ${user3.email}
+                        </div>
+                        <strong>⚡ 3 utilisateurs chargés en parallèle en ${duration}ms</strong><br>
+                        <small>Avec Promise.all(), les requêtes s'exécutent simultanément (plus rapide !)</small>
+                    `;
+                } catch (error) {
+                    output.innerHTML = `<strong style="color: #e74c3c">❌ Erreur :</strong> ${error.message}`;
+                }
+            }
+
+            // ===== DÉMONSTRATION 4 : Gestion d'Erreurs =====
+            async function demoErrorHandling() {
+                const output = document.getElementById('output-error');
+                output.innerHTML = '<span class="loading"></span>Tentative de chargement d\'un utilisateur inexistant...';
+
+                try {
+                    // Tenter de charger un utilisateur qui n'existe pas
+                    const response = await fetch('https://jsonplaceholder.typicode.com/users/999999');
+
+                    if (!response.ok) {
+                        throw new Error(`HTTP ${response.status}: Utilisateur non trouvé`);
+                    }
+
+                    const user = await response.json();
+                    output.innerHTML = `Utilisateur trouvé : ${user.name}`;
+                } catch (error) {
+                    output.innerHTML = `
+                        <div style="background: #fee; border: 2px solid #e74c3c; padding: 15px; border-radius: 8px;">
+                            <strong style="color: #e74c3c">❌ Erreur capturée avec try/catch :</strong><br><br>
+                            ${error.message}<br><br>
+                            <small>L'erreur a été correctement gérée et n'a pas cassé l'application !</small>
+                        </div>
+                    `;
+                }
+            }
+
+            // ===== CONSOLE INTERACTIVE =====
+            const jsInput = document.getElementById('js-input');
+            const jsOutput = document.getElementById('js-output');
+
+            function executeCode() {
+                const code = jsInput.value;
+                jsOutput.innerHTML = '';
+
+                const logs = [];
+                const originalLog = console.log;
+                const originalError = console.error;
+
+                console.log = function (...args) {
+                    logs.push(args.map(arg =>
+                        typeof arg === 'object' ? JSON.stringify(arg, null, 2) : String(arg)
+                    ).join(' '));
+                    originalLog.apply(console, args);
+                };
+
+                console.error = function (...args) {
+                    logs.push('<span class="error">' + args.join(' ') + '</span>');
+                    originalError.apply(console, args);
+                };
+
+                try {
+                    eval(code);
+
+                    setTimeout(() => {
+                        if (logs.length > 0) {
+                            jsOutput.innerHTML = logs.join('\n');
+                        } else {
+                            jsOutput.innerHTML = '✅ Code exécuté (vérifiez si des Promises sont en cours...)';
+                        }
+                    }, 100);
+                } catch (error) {
+                    jsOutput.innerHTML = `<span class="error">❌ Erreur : ${error.message}</span>`;
+                } finally {
+                    console.log = originalLog;
+                    console.error = originalError;
+                }
+            }
+
+            function clearConsole() {
+                jsInput.value = '';
+                jsOutput.innerHTML = 'Console effacée. Prêt à exécuter votre code...';
+            }
+
+            jsInput.addEventListener('keydown', function (e) {
+                if (e.ctrlKey && e.key === 'Enter') {
+                    e.preventDefault();
+                    executeCode();
+                }
+            });
+
+            window.addEventListener('DOMContentLoaded', function() {
+                jsInput.value = `// Testez async/await !
+async function test() {
+  try {
+    const response = await fetch('https://jsonplaceholder.typicode.com/users/1');
+    const user = await response.json();
+    console.log('Nom:', user.name);
+    console.log('Email:', user.email);
+  } catch (error) {
+    console.error('Erreur:', error.message);
+  }
+}
+
+test();`;
+            });
+        </script>
+    </body>
+</html>

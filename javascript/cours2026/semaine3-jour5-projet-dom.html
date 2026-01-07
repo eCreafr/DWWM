@@ -1,0 +1,845 @@
+<!doctype html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Semaine 3 - Jour 5 | Projet DOM Interactif</title>
+        <link rel="stylesheet" href="../css/froggie.css" />
+        <style>
+            .demo-container {
+                max-width: 1200px;
+                margin: 40px auto;
+                padding: 20px;
+                font-family: Arial, sans-serif;
+            }
+            .demo-title {
+                text-align: center;
+                font-size: 2.5em;
+                margin-bottom: 20px;
+                color: #2c3e50;
+            }
+            .demo-intro {
+                background: #ecf0f1;
+                padding: 20px;
+                border-radius: 10px;
+                margin-bottom: 40px;
+                line-height: 1.6;
+            }
+            .code-example {
+                background: #2c3e50;
+                color: #ecf0f1;
+                padding: 15px;
+                border-radius: 5px;
+                font-family: 'Courier New', monospace;
+                font-size: 0.9em;
+                margin: 15px 0;
+                overflow-x: auto;
+            }
+            .highlight {
+                color: #f39c12;
+                font-weight: bold;
+            }
+            .keyword {
+                color: #e74c3c;
+            }
+            .string {
+                color: #2ecc71;
+            }
+            .comment {
+                color: #95a5a6;
+                font-style: italic;
+            }
+
+            /* Quiz interactif */
+            .quiz-container {
+                background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+                padding: 30px;
+                border-radius: 15px;
+                margin: 30px 0;
+                box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            }
+            .quiz-header {
+                text-align: center;
+                color: white;
+                margin-bottom: 20px;
+            }
+            .quiz-header h2 {
+                margin: 0 0 10px 0;
+                font-size: 2em;
+            }
+            .score-display {
+                background: white;
+                color: #2c3e50;
+                padding: 15px;
+                border-radius: 10px;
+                font-size: 1.3em;
+                font-weight: bold;
+                text-align: center;
+                margin-bottom: 20px;
+            }
+            .question-card {
+                background: white;
+                padding: 25px;
+                border-radius: 10px;
+                margin-bottom: 20px;
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+                display: none;
+            }
+            .question-card.active {
+                display: block;
+                animation: slideIn 0.3s ease;
+            }
+            @keyframes slideIn {
+                from {
+                    opacity: 0;
+                    transform: translateX(20px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateX(0);
+                }
+            }
+            .question-text {
+                font-size: 1.3em;
+                color: #2c3e50;
+                margin-bottom: 20px;
+                font-weight: bold;
+            }
+            .question-number {
+                color: #f093fb;
+                font-size: 0.9em;
+                margin-bottom: 10px;
+            }
+            .options-container {
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+            }
+            .option-button {
+                background: #ecf0f1;
+                border: 2px solid #bdc3c7;
+                padding: 15px;
+                border-radius: 8px;
+                cursor: pointer;
+                font-size: 1em;
+                text-align: left;
+                transition: all 0.3s;
+            }
+            .option-button:hover {
+                background: #d5dbdb;
+                border-color: #95a5a6;
+                transform: translateX(5px);
+            }
+            .option-button.selected {
+                background: #3498db;
+                color: white;
+                border-color: #2980b9;
+            }
+            .option-button.correct {
+                background: #2ecc71;
+                color: white;
+                border-color: #27ae60;
+            }
+            .option-button.incorrect {
+                background: #e74c3c;
+                color: white;
+                border-color: #c0392b;
+            }
+            .option-button:disabled {
+                cursor: not-allowed;
+                opacity: 0.7;
+            }
+            .feedback {
+                margin-top: 15px;
+                padding: 15px;
+                border-radius: 8px;
+                font-weight: bold;
+                display: none;
+            }
+            .feedback.show {
+                display: block;
+            }
+            .feedback.correct {
+                background: #d5f4e6;
+                color: #27ae60;
+            }
+            .feedback.incorrect {
+                background: #fadbd8;
+                color: #c0392b;
+            }
+            .quiz-buttons {
+                display: flex;
+                gap: 10px;
+                margin-top: 20px;
+                justify-content: center;
+            }
+            .quiz-button {
+                background: #3498db;
+                color: white;
+                border: none;
+                padding: 12px 25px;
+                border-radius: 8px;
+                cursor: pointer;
+                font-weight: bold;
+                font-size: 1em;
+                transition: all 0.3s;
+            }
+            .quiz-button:hover {
+                background: #2980b9;
+                transform: scale(1.05);
+            }
+            .quiz-button:disabled {
+                background: #95a5a6;
+                cursor: not-allowed;
+                transform: none;
+            }
+            .quiz-button.primary {
+                background: #f093fb;
+            }
+            .quiz-button.primary:hover {
+                background: #f5576c;
+            }
+            .final-results {
+                display: none;
+                text-align: center;
+                background: white;
+                padding: 30px;
+                border-radius: 10px;
+            }
+            .final-results.show {
+                display: block;
+                animation: slideIn 0.5s ease;
+            }
+            .final-score {
+                font-size: 3em;
+                color: #f093fb;
+                margin: 20px 0;
+                font-weight: bold;
+            }
+            .result-message {
+                font-size: 1.5em;
+                color: #2c3e50;
+                margin-bottom: 20px;
+            }
+            .progress-bar {
+                background: #ecf0f1;
+                height: 10px;
+                border-radius: 5px;
+                margin-bottom: 20px;
+                overflow: hidden;
+            }
+            .progress-fill {
+                background: linear-gradient(90deg, #f093fb 0%, #f5576c 100%);
+                height: 100%;
+                transition: width 0.3s ease;
+                border-radius: 5px;
+            }
+
+            /* Console JavaScript interactive */
+            .js-console {
+                background: #1e1e1e;
+                border-radius: 10px;
+                padding: 20px;
+                margin: 30px 0;
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            }
+            .js-console-header {
+                color: #f39c12;
+                font-weight: bold;
+                margin-bottom: 15px;
+                font-size: 1.1em;
+                display: flex;
+                align-items: center;
+                gap: 10px;
+            }
+            .js-console-editor {
+                background: #2d2d2d;
+                border: 1px solid #444;
+                border-radius: 5px;
+                padding: 15px;
+                margin-bottom: 15px;
+            }
+            .js-console-editor textarea {
+                width: 100%;
+                background: transparent;
+                border: none;
+                color: #f8f8f2;
+                font-family: 'Courier New', monospace;
+                font-size: 0.95em;
+                resize: vertical;
+                min-height: 80px;
+                outline: none;
+            }
+            .js-console-output {
+                background: #000;
+                border: 1px solid #444;
+                border-radius: 5px;
+                padding: 15px;
+                color: #0f0;
+                font-family: 'Courier New', monospace;
+                font-size: 0.9em;
+                min-height: 60px;
+                max-height: 300px;
+                overflow-y: auto;
+                white-space: pre-wrap;
+            }
+            .js-console-output .error {
+                color: #e74c3c;
+            }
+            .js-console-buttons {
+                display: flex;
+                gap: 10px;
+                margin-bottom: 15px;
+            }
+            .btn-execute {
+                background: #2ecc71;
+                color: white;
+                border: none;
+                padding: 10px 20px;
+                border-radius: 5px;
+                cursor: pointer;
+                font-weight: bold;
+                transition: background 0.3s;
+            }
+            .btn-execute:hover {
+                background: #27ae60;
+            }
+            .btn-clear {
+                background: #e74c3c;
+                color: white;
+                border: none;
+                padding: 10px 20px;
+                border-radius: 5px;
+                cursor: pointer;
+                font-weight: bold;
+                transition: background 0.3s;
+            }
+            .btn-clear:hover {
+                background: #c0392b;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="demo-container">
+            <h1 class="demo-title">Semaine 3 - Jour 5 : Projet DOM Interactif</h1>
+
+            <div class="demo-intro">
+                <h3>Quiz interactif - Semaine 3 JavaScript</h3>
+                <p>
+                    Félicitations ! Vous avez appris les bases de la manipulation du DOM cette semaine.
+                    Ce <strong>quiz interactif</strong> combine tous les concepts vus : sélection d'éléments,
+                    manipulation du DOM, événements, et validation.
+                </p>
+                <p>
+                    <strong>Fonctionnalités du quiz :</strong>
+                </p>
+                <ul>
+                    <li>10 questions sur le DOM et JavaScript</li>
+                    <li>Score en temps réel avec barre de progression</li>
+                    <li>Feedback visuel immédiat (couleurs + messages)</li>
+                    <li>Navigation entre les questions</li>
+                    <li>Résultats détaillés à la fin</li>
+                </ul>
+                <p>
+                    <strong>Technologies utilisées :</strong> getElementById, querySelector, addEventListener,
+                    classList, createElement, style, innerHTML, event.preventDefault()
+                </p>
+            </div>
+
+            <!-- Quiz interactif -->
+            <div class="quiz-container">
+                <div class="quiz-header">
+                    <h2>Quiz JavaScript DOM</h2>
+                    <p>Testez vos connaissances !</p>
+                </div>
+
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progress-bar"></div>
+                </div>
+
+                <div class="score-display" id="score-display">
+                    Score : 0 / 10 | Question 1 / 10
+                </div>
+
+                <!-- Questions dynamiques -->
+                <div id="questions-container"></div>
+
+                <!-- Résultats finaux -->
+                <div class="final-results" id="final-results">
+                    <h2>Quiz terminé !</h2>
+                    <div class="final-score" id="final-score">0 / 10</div>
+                    <div class="result-message" id="result-message"></div>
+                    <button class="quiz-button primary" onclick="restartQuiz()">Recommencer</button>
+                </div>
+
+                <div class="quiz-buttons" id="navigation-buttons">
+                    <button class="quiz-button" id="prev-btn" onclick="previousQuestion()" disabled>
+                        ← Précédent
+                    </button>
+                    <button class="quiz-button primary" id="next-btn" onclick="nextQuestion()" disabled>
+                        Suivant →
+                    </button>
+                    <button class="quiz-button primary" id="finish-btn" onclick="finishQuiz()" style="display: none;">
+                        Terminer
+                    </button>
+                </div>
+            </div>
+
+            <!-- Explication du code -->
+            <div style="background: #e8f4f8; padding: 25px; border-radius: 10px; margin: 30px 0">
+                <h2 style="color: #2c3e50; text-align: center; margin-top: 0">Code source du Quiz (simplifié)</h2>
+                <div class="code-example">
+                    <span class="comment">// Structure des données du quiz</span><br />
+                    <span class="keyword">let</span> questions = [<br />
+                    &nbsp;&nbsp;{<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;question: <span class="string">'Quelle méthode sélectionne un élément par son ID ?'</span>,<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;options: [<span class="string">'querySelector()'</span>, <span class="string">'getElementById()'</span>, <span class="string">'getElement()'</span>, <span class="string">'selectById()'</span>],<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;correct: <span class="highlight">1</span>,<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;explanation: <span class="string">'getElementById() est la méthode spécifique pour sélectionner par ID'</span><br />
+                    &nbsp;&nbsp;}<br />
+                    ];<br /><br />
+
+                    <span class="comment">// Afficher une question</span><br />
+                    <span class="keyword">function</span> <span class="highlight">afficherQuestion</span>(index) {<br />
+                    &nbsp;&nbsp;<span class="keyword">let</span> q = questions[index];<br />
+                    &nbsp;&nbsp;<span class="keyword">let</span> container = <span class="highlight">document.getElementById</span>(<span class="string">'questions-container'</span>);<br /><br />
+
+                    &nbsp;&nbsp;<span class="comment">// Créer la carte de question</span><br />
+                    &nbsp;&nbsp;<span class="keyword">let</span> card = <span class="highlight">document.createElement</span>(<span class="string">'div'</span>);<br />
+                    &nbsp;&nbsp;card.<span class="highlight">classList.add</span>(<span class="string">'question-card'</span>, <span class="string">'active'</span>);<br /><br />
+
+                    &nbsp;&nbsp;<span class="comment">// Ajouter le texte de la question</span><br />
+                    &nbsp;&nbsp;card.<span class="highlight">innerHTML</span> = <span class="string">`&lt;div class="question-text"&gt;${q.question}&lt;/div&gt;`</span>;<br /><br />
+
+                    &nbsp;&nbsp;<span class="comment">// Créer les boutons d'options</span><br />
+                    &nbsp;&nbsp;q.options.<span class="highlight">forEach</span>((option, i) => {<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">let</span> btn = <span class="highlight">document.createElement</span>(<span class="string">'button'</span>);<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;btn.<span class="highlight">textContent</span> = option;<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;btn.<span class="highlight">addEventListener</span>(<span class="string">'click'</span>, () => <span class="highlight">verifierReponse</span>(i, q.correct));<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;card.<span class="highlight">appendChild</span>(btn);<br />
+                    &nbsp;&nbsp;});<br /><br />
+
+                    &nbsp;&nbsp;container.<span class="highlight">appendChild</span>(card);<br />
+                    }<br /><br />
+
+                    <span class="comment">// Vérifier la réponse</span><br />
+                    <span class="keyword">function</span> <span class="highlight">verifierReponse</span>(choix, correct) {<br />
+                    &nbsp;&nbsp;<span class="keyword">if</span> (choix === correct) {<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;score++;<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">// Feedback positif avec classList et style</span><br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;btn.<span class="highlight">classList.add</span>(<span class="string">'correct'</span>);<br />
+                    &nbsp;&nbsp;} <span class="keyword">else</span> {<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;btn.<span class="highlight">classList.add</span>(<span class="string">'incorrect'</span>);<br />
+                    &nbsp;&nbsp;}<br />
+                    &nbsp;&nbsp;<span class="highlight">mettreAJourScore</span>();<br />
+                    }
+                </div>
+                <p style="text-align: center; margin-top: 20px; color: #2c3e50;">
+                    <strong>Ce quiz utilise TOUS les concepts de la Semaine 3 :</strong><br>
+                    Sélecteurs • Manipulation DOM • Événements • Validation • Feedback visuel
+                </p>
+            </div>
+
+            <!-- Console interactive -->
+            <div class="js-console">
+                <div class="js-console-header">
+                    Console JavaScript Interactive - Analysez le code du quiz !
+                </div>
+                <div class="js-console-editor">
+                    <textarea id="js-input" placeholder="Écrivez votre code JavaScript ici..."></textarea>
+                </div>
+                <div class="js-console-buttons">
+                    <button class="btn-execute" onclick="executeCode()">Exécuter (Ctrl + Enter)</button>
+                    <button class="btn-clear" onclick="clearConsole()">Effacer</button>
+                </div>
+                <div class="js-console-output" id="js-output">Prêt à exécuter votre code...</div>
+            </div>
+        </div>
+
+        <!-- Zone Froggiesplaining -->
+        <div class="froggiesplaining">
+            <span> Froggiesplaining :</span>
+            <p>
+                <br />
+                <strong>Récapitulatif Semaine 3 :</strong><br />
+                ✅ Jour 1 : Sélection d'éléments (getElementById, querySelector, querySelectorAll)<br />
+                ✅ Jour 2 : Manipulation DOM (setAttribute, style, classList, createElement, appendChild)<br />
+                ✅ Jour 3 : Événements (addEventListener, click, input, change, event object, preventDefault)<br />
+                ✅ Jour 4 : Formulaires (.value, validation, messages d'erreur, empêcher soumission)<br />
+                ✅ Jour 5 : Projet complet combinant tous les concepts<br /><br />
+
+                <strong>Concepts clés du quiz interactif :</strong><br />
+                • <strong>Structure de données</strong> : Tableaux d'objets pour les questions<br />
+                • <strong>Création dynamique</strong> : createElement() pour générer les cartes<br />
+                • <strong>Événements</strong> : addEventListener sur chaque bouton<br />
+                • <strong>Feedback visuel</strong> : classList.add/remove pour les couleurs<br />
+                • <strong>État de l'application</strong> : Variables pour score, question actuelle<br />
+                • <strong>Navigation</strong> : Boutons précédent/suivant avec gestion d'état<br />
+                • <strong>Validation</strong> : Vérification des réponses et calcul du score<br />
+                • <strong>Interface réactive</strong> : Mise à jour en temps réel de l'affichage<br /><br />
+
+                <strong>Projet à réaliser :</strong><br />
+                Créez votre propre mini-projet DOM interactif en choisissant parmi :<br />
+                1. <strong>Todo List</strong> : Ajouter/supprimer des tâches, marquer comme terminé<br />
+                2. <strong>Calculatrice</strong> : Interface avec boutons, affichage du résultat<br />
+                3. <strong>Générateur de citations</strong> : Afficher une citation aléatoire au clic<br />
+                4. <strong>Compteur de clics</strong> : Avec historique et bouton reset<br />
+                5. <strong>Formulaire dynamique</strong> : Ajouter/supprimer des champs<br />
+                6. <strong>Galerie d'images</strong> : Navigation avec miniatures<br />
+                7. <strong>Chronomètre</strong> : Start/Stop/Reset avec affichage en temps réel<br /><br />
+
+                <strong>Bravo pour cette semaine intensive sur le DOM ! 🎉</strong>
+            </p>
+            <img src="../img/froggie-300.png" alt="Froggie explain" class="overfrog" id="Froggie" />
+        </div>
+
+        <!-- Bouton retour -->
+        <a href="index.html" id="goToIndex" title="Retour à l'index">
+            <i class="bi bi-arrow-left"></i>
+        </a>
+
+        <!-- Lien vers Froggie -->
+        <a href="#Froggie">
+            <div id="goToFroggie">
+                <img src="../img/froggie-300.png" width="50px" /><br /><i class="bi bi-arrow-bar-down"></i>
+            </div>
+        </a>
+
+        <!-- Footer -->
+        <div id="footerGit">
+            <a href="https://github.com/eCreafr/DWWM" target="_blank"><i class="bi bi-github">GitHub - eCrea</i></a>
+        </div>
+
+        <script>
+            // Questions du quiz
+            const questions = [
+                {
+                    question: 'Quelle méthode sélectionne un élément par son ID ?',
+                    options: ['querySelector()', 'getElementById()', 'getElement()', 'selectById()'],
+                    correct: 1,
+                    explanation: 'getElementById() est la méthode spécifique et la plus rapide pour sélectionner un élément par son ID.'
+                },
+                {
+                    question: 'Que retourne querySelectorAll() ?',
+                    options: ['Un élément HTML', 'Une NodeList', 'Un tableau', 'Un objet'],
+                    correct: 1,
+                    explanation: 'querySelectorAll() retourne une NodeList (similaire à un tableau) contenant tous les éléments correspondants.'
+                },
+                {
+                    question: 'Comment modifier le texte d\'un élément en JavaScript ?',
+                    options: ['element.text', 'element.textContent', 'element.setText()', 'element.changeText()'],
+                    correct: 1,
+                    explanation: 'element.textContent permet de lire ou modifier le texte brut d\'un élément.'
+                },
+                {
+                    question: 'Quelle propriété modifie le CSS d\'un élément ?',
+                    options: ['element.css', 'element.style', 'element.setStyle()', 'element.class'],
+                    correct: 1,
+                    explanation: 'element.style permet d\'accéder et de modifier les styles CSS inline d\'un élément.'
+                },
+                {
+                    question: 'Comment ajouter une classe CSS à un élément ?',
+                    options: ['element.addClass()', 'element.class.add()', 'element.classList.add()', 'element.style.add()'],
+                    correct: 2,
+                    explanation: 'element.classList.add("nom-classe") est la méthode moderne pour ajouter des classes CSS.'
+                },
+                {
+                    question: 'Quelle méthode écoute les événements ?',
+                    options: ['element.onClick()', 'element.listen()', 'element.addEventListener()', 'element.on()'],
+                    correct: 2,
+                    explanation: 'addEventListener() est la méthode standard pour écouter les événements sur un élément.'
+                },
+                {
+                    question: 'Quel événement se déclenche à chaque frappe clavier dans un champ ?',
+                    options: ['change', 'keypress', 'input', 'type'],
+                    correct: 2,
+                    explanation: 'L\'événement "input" se déclenche à chaque modification du contenu d\'un champ, en temps réel.'
+                },
+                {
+                    question: 'Comment récupérer la valeur d\'un champ input ?',
+                    options: ['input.text', 'input.value', 'input.getValue()', 'input.content'],
+                    correct: 1,
+                    explanation: 'input.value permet de lire ou modifier la valeur d\'un champ de formulaire.'
+                },
+                {
+                    question: 'Que fait event.preventDefault() ?',
+                    options: ['Supprime l\'événement', 'Empêche le comportement par défaut', 'Arrête la propagation', 'Annule le clic'],
+                    correct: 1,
+                    explanation: 'event.preventDefault() empêche le comportement par défaut du navigateur (ex: soumission de formulaire).'
+                },
+                {
+                    question: 'Comment créer un nouvel élément HTML ?',
+                    options: ['document.newElement()', 'document.create()', 'document.createElement()', 'new Element()'],
+                    correct: 2,
+                    explanation: 'document.createElement("tag") crée un nouvel élément HTML qui peut ensuite être ajouté au DOM.'
+                }
+            ];
+
+            // Variables d'état
+            let currentQuestion = 0;
+            let score = 0;
+            let userAnswers = [];
+
+            // Initialiser le quiz
+            function initQuiz() {
+                displayQuestion(currentQuestion);
+                updateScore();
+                updateProgress();
+            }
+
+            // Afficher une question
+            function displayQuestion(index) {
+                const container = document.getElementById('questions-container');
+                container.innerHTML = '';
+
+                const q = questions[index];
+                const card = document.createElement('div');
+                card.className = 'question-card active';
+                card.id = `question-${index}`;
+
+                const questionNumber = document.createElement('div');
+                questionNumber.className = 'question-number';
+                questionNumber.textContent = `Question ${index + 1} / ${questions.length}`;
+                card.appendChild(questionNumber);
+
+                const questionText = document.createElement('div');
+                questionText.className = 'question-text';
+                questionText.textContent = q.question;
+                card.appendChild(questionText);
+
+                const optionsContainer = document.createElement('div');
+                optionsContainer.className = 'options-container';
+
+                q.options.forEach((option, i) => {
+                    const button = document.createElement('button');
+                    button.className = 'option-button';
+                    button.textContent = option;
+                    button.onclick = () => selectAnswer(i, button);
+
+                    // Si déjà répondu, afficher l'état
+                    if (userAnswers[index] !== undefined) {
+                        button.disabled = true;
+                        if (i === userAnswers[index]) {
+                            button.classList.add(i === q.correct ? 'correct' : 'incorrect');
+                        }
+                        if (i === q.correct) {
+                            button.classList.add('correct');
+                        }
+                    }
+
+                    optionsContainer.appendChild(button);
+                });
+
+                card.appendChild(optionsContainer);
+
+                // Feedback
+                const feedback = document.createElement('div');
+                feedback.className = 'feedback';
+                feedback.id = `feedback-${index}`;
+                if (userAnswers[index] !== undefined) {
+                    feedback.classList.add('show', userAnswers[index] === q.correct ? 'correct' : 'incorrect');
+                    feedback.innerHTML = `<strong>${userAnswers[index] === q.correct ? '✅ Correct !' : '❌ Incorrect'}</strong><br>${q.explanation}`;
+                }
+                card.appendChild(feedback);
+
+                container.appendChild(card);
+
+                // Gérer les boutons de navigation
+                updateNavigationButtons();
+            }
+
+            // Sélectionner une réponse
+            function selectAnswer(answerIndex, button) {
+                const q = questions[currentQuestion];
+                userAnswers[currentQuestion] = answerIndex;
+
+                // Désactiver tous les boutons
+                const buttons = document.querySelectorAll('.option-button');
+                buttons.forEach(btn => btn.disabled = true);
+
+                // Appliquer les classes
+                if (answerIndex === q.correct) {
+                    button.classList.add('correct');
+                    score++;
+                } else {
+                    button.classList.add('incorrect');
+                    // Montrer la bonne réponse
+                    buttons[q.correct].classList.add('correct');
+                }
+
+                // Afficher le feedback
+                const feedback = document.getElementById(`feedback-${currentQuestion}`);
+                feedback.classList.add('show', answerIndex === q.correct ? 'correct' : 'incorrect');
+                feedback.innerHTML = `<strong>${answerIndex === q.correct ? '✅ Correct !' : '❌ Incorrect'}</strong><br>${q.explanation}`;
+
+                updateScore();
+                updateProgress();
+                updateNavigationButtons();
+            }
+
+            // Mettre à jour le score
+            function updateScore() {
+                const display = document.getElementById('score-display');
+                display.textContent = `Score : ${score} / ${questions.length} | Question ${currentQuestion + 1} / ${questions.length}`;
+            }
+
+            // Mettre à jour la barre de progression
+            function updateProgress() {
+                const progress = document.getElementById('progress-bar');
+                const percentage = ((currentQuestion + 1) / questions.length) * 100;
+                progress.style.width = percentage + '%';
+            }
+
+            // Mettre à jour les boutons de navigation
+            function updateNavigationButtons() {
+                const prevBtn = document.getElementById('prev-btn');
+                const nextBtn = document.getElementById('next-btn');
+                const finishBtn = document.getElementById('finish-btn');
+
+                prevBtn.disabled = currentQuestion === 0;
+
+                if (currentQuestion === questions.length - 1) {
+                    nextBtn.style.display = 'none';
+                    finishBtn.style.display = userAnswers[currentQuestion] !== undefined ? 'inline-block' : 'none';
+                } else {
+                    nextBtn.style.display = 'inline-block';
+                    nextBtn.disabled = userAnswers[currentQuestion] === undefined;
+                    finishBtn.style.display = 'none';
+                }
+            }
+
+            // Question suivante
+            function nextQuestion() {
+                if (currentQuestion < questions.length - 1) {
+                    currentQuestion++;
+                    displayQuestion(currentQuestion);
+                    updateScore();
+                    updateProgress();
+                }
+            }
+
+            // Question précédente
+            function previousQuestion() {
+                if (currentQuestion > 0) {
+                    currentQuestion--;
+                    displayQuestion(currentQuestion);
+                    updateScore();
+                    updateProgress();
+                }
+            }
+
+            // Terminer le quiz
+            function finishQuiz() {
+                document.getElementById('questions-container').style.display = 'none';
+                document.getElementById('navigation-buttons').style.display = 'none';
+                document.getElementById('score-display').style.display = 'none';
+
+                const results = document.getElementById('final-results');
+                const finalScore = document.getElementById('final-score');
+                const message = document.getElementById('result-message');
+
+                finalScore.textContent = `${score} / ${questions.length}`;
+
+                const percentage = (score / questions.length) * 100;
+                if (percentage === 100) {
+                    message.textContent = '🏆 Parfait ! Vous maîtrisez le DOM !';
+                } else if (percentage >= 80) {
+                    message.textContent = '🎉 Excellent travail !';
+                } else if (percentage >= 60) {
+                    message.textContent = '👍 Bon résultat, continuez !';
+                } else if (percentage >= 40) {
+                    message.textContent = '📚 Pas mal, mais relisez les cours';
+                } else {
+                    message.textContent = '💪 Courage, révisez et réessayez !';
+                }
+
+                results.classList.add('show');
+            }
+
+            // Recommencer le quiz
+            function restartQuiz() {
+                currentQuestion = 0;
+                score = 0;
+                userAnswers = [];
+
+                document.getElementById('questions-container').style.display = 'block';
+                document.getElementById('navigation-buttons').style.display = 'flex';
+                document.getElementById('score-display').style.display = 'block';
+                document.getElementById('final-results').classList.remove('show');
+
+                initQuiz();
+            }
+
+            // Initialiser au chargement
+            window.addEventListener('DOMContentLoaded', initQuiz);
+
+            // Console JavaScript interactive
+            const jsInput = document.getElementById('js-input');
+            const jsOutput = document.getElementById('js-output');
+
+            function executeCode() {
+                const code = jsInput.value;
+                jsOutput.innerHTML = '';
+
+                const logs = [];
+                const originalLog = console.log;
+                console.log = function (...args) {
+                    logs.push(args.map(arg =>
+                        typeof arg === 'object' ? JSON.stringify(arg, null, 2) : String(arg)
+                    ).join(' '));
+                    originalLog.apply(console, args);
+                };
+
+                try {
+                    eval(code);
+                    if (logs.length > 0) {
+                        jsOutput.innerHTML = logs.join('\n');
+                    } else {
+                        jsOutput.innerHTML = '✅ Code exécuté sans erreur (aucune sortie console)';
+                    }
+                } catch (error) {
+                    jsOutput.innerHTML = `<span class="error">❌ Erreur : ${error.message}</span>`;
+                } finally {
+                    console.log = originalLog;
+                }
+            }
+
+            function clearConsole() {
+                jsInput.value = '';
+                jsOutput.innerHTML = 'Console effacée. Prêt à exécuter votre code...';
+            }
+
+            jsInput.addEventListener('keydown', function (e) {
+                if (e.ctrlKey && e.key === 'Enter') {
+                    e.preventDefault();
+                    executeCode();
+                }
+            });
+
+            window.addEventListener('DOMContentLoaded', function() {
+                jsInput.value = `// Analyser le quiz
+// Essayez ces exemples !
+
+// 1. Afficher toutes les questions
+console.log('Nombre de questions:', questions.length);
+console.log('\\nListe des questions:');
+questions.forEach((q, i) => {
+  console.log(\`\${i + 1}. \${q.question}\`);
+});
+
+// 2. Statistiques
+console.log('\\nVotre progression:');
+console.log('Question actuelle:', currentQuestion + 1);
+console.log('Score actuel:', score);
+console.log('Réponses données:', userAnswers.length);
+
+// 3. Analyser la structure du quiz
+let cards = document.querySelectorAll('.question-card');
+console.log('\\nCartes de question dans le DOM:', cards.length);
+
+let buttons = document.querySelectorAll('.option-button');
+console.log('Boutons d\\'options:', buttons.length);`;
+            });
+        </script>
+    </body>
+</html>

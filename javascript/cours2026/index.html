@@ -1,0 +1,435 @@
+<!doctype html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Plan de cours JavaScript - 4 semaines</title>
+        <link rel="stylesheet" href="../css/froggie.css" />
+        <style>
+            * {
+                box-sizing: border-box;
+            }
+            body {
+                font-family: Arial, sans-serif;
+                background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+                min-height: 100vh;
+                padding: 20px;
+            }
+            .container {
+                max-width: 1200px;
+                margin: 0 auto;
+            }
+            h1 {
+                text-align: center;
+                color: white;
+                font-size: 3em;
+                margin-bottom: 10px;
+                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            }
+            .subtitle {
+                text-align: center;
+                color: white;
+                font-size: 1.3em;
+                margin-bottom: 40px;
+                opacity: 0.9;
+            }
+            .week {
+                background: white;
+                border-radius: 15px;
+                padding: 30px;
+                margin-bottom: 30px;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            }
+            .week-title {
+                background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+                color: white;
+                padding: 15px 25px;
+                border-radius: 10px;
+                font-size: 1.8em;
+                margin: -30px -30px 25px -30px;
+                text-align: center;
+            }
+            .lessons {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+                gap: 20px;
+            }
+            .lesson-card {
+                border: 2px solid #e0e0e0;
+                border-radius: 10px;
+                padding: 20px;
+                background: #f8f9fa;
+                transition: all 0.3s;
+                text-decoration: none;
+                color: #2c3e50;
+                display: block;
+            }
+            .lesson-card:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 8px 20px rgba(240, 147, 251, 0.3);
+                border-color: #f093fb;
+            }
+            .lesson-number {
+                background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+                color: white;
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-weight: bold;
+                margin-bottom: 15px;
+                margin-left: auto;
+                margin-right: auto;
+                font-size: 1.2em;
+            }
+            .lesson-title {
+                font-size: 1.2em;
+                font-weight: bold;
+                margin-bottom: 10px;
+                color: #2c3e50;
+            }
+            .lesson-desc {
+                font-size: 0.95em;
+                color: #7f8c8d;
+                line-height: 1.5;
+            }
+            .status {
+                display: inline-block;
+                padding: 8px 18px;
+                border-radius: 20px;
+                font-size: 0.85em;
+                font-weight: bold;
+                margin-top: 10px;
+                cursor: pointer;
+                border: none;
+                transition: all 0.3s ease;
+                user-select: none;
+            }
+            .status-todo {
+                background: #f39c12;
+                color: white;
+            }
+            .status-todo:hover {
+                background: #e67e22;
+                transform: scale(1.05);
+            }
+            .status-done {
+                background: #1abc9c;
+                color: white;
+            }
+            .status-done:hover {
+                background: #16a085;
+                transform: scale(1.05);
+            }
+            .footer-info {
+                background: white;
+                border-radius: 15px;
+                padding: 25px;
+                margin-top: 30px;
+                text-align: center;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            }
+            .footer-info h3 {
+                color: #f5576c;
+                margin-top: 0;
+            }
+            #FroggieHeader {
+                transition: transform 0.3s ease;
+            }
+            #FroggieHeader:hover {
+                transform: scale(1.2);
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container text-center">
+            <img
+                src="../img/froggie-300.png"
+                alt="Froggie"
+                id="FroggieHeader"
+                title="Froggie est dans la place"
+                style="margin-bottom: -60px"
+            />
+            <h1>📚 Formation JavaScript</h1>
+            <p class="subtitle">Plan de cours sur 4 semaines - Du débutant à la maîtrise de JavaScript moderne</p>
+
+            <!-- SEMAINE 1 -->
+            <div class="week">
+                <h2 class="week-title">Semaine 1 : Fondamentaux JavaScript & Syntaxe de base</h2>
+                <div class="lessons">
+                    <a href="semaine1-jour1-introduction-javascript.html" class="lesson-card">
+                        <div class="lesson-number">1</div>
+                        <div class="lesson-title">Introduction à JavaScript</div>
+                        <div class="lesson-desc">Console, scripts, premiers pas avec console.log()</div>
+                        <button class="status status-todo" data-lesson="1" onclick="toggleLesson(1)">📝 À faire</button>
+                    </a>
+
+                    <a href="semaine1-jour2-variables-types.html" class="lesson-card">
+                        <div class="lesson-number">2</div>
+                        <div class="lesson-title">Variables et types de données</div>
+                        <div class="lesson-desc">let, const, string, number, boolean, null, undefined</div>
+                        <button class="status status-todo" data-lesson="2" onclick="toggleLesson(2)">📝 À faire</button>
+                    </a>
+
+                    <a href="semaine1-jour3-operateurs-expressions.html" class="lesson-card">
+                        <div class="lesson-number">3</div>
+                        <div class="lesson-title">Opérateurs et expressions</div>
+                        <div class="lesson-desc">Arithmétiques, comparaison, logiques, template literals</div>
+                        <button class="status status-todo" data-lesson="3" onclick="toggleLesson(3)">📝 À faire</button>
+                    </a>
+
+                    <a href="semaine1-jour4-structures-conditionnelles.html" class="lesson-card">
+                        <div class="lesson-number">4</div>
+                        <div class="lesson-title">Structures conditionnelles</div>
+                        <div class="lesson-desc">if/else, else if, switch, opérateur ternaire</div>
+                        <button class="status status-todo" data-lesson="4" onclick="toggleLesson(4)">📝 À faire</button>
+                    </a>
+
+                    <a href="semaine1-jour5-boucles.html" class="lesson-card">
+                        <div class="lesson-number">5</div>
+                        <div class="lesson-title">Boucles</div>
+                        <div class="lesson-desc">for, while, do...while, break, continue</div>
+                        <button class="status status-todo" data-lesson="5" onclick="toggleLesson(5)">📝 À faire</button>
+                    </a>
+                </div>
+            </div>
+
+            <!-- SEMAINE 2 -->
+            <div class="week">
+                <h2 class="week-title">Semaine 2 : Fonctions, Tableaux & Objets</h2>
+                <div class="lessons">
+                    <a href="semaine2-jour1-fonctions.html" class="lesson-card">
+                        <div class="lesson-number">6</div>
+                        <div class="lesson-title">Fonctions</div>
+                        <div class="lesson-desc">Déclaration, paramètres, return, fonctions fléchées, scope</div>
+                        <button class="status status-todo" data-lesson="6" onclick="toggleLesson(6)">📝 À faire</button>
+                    </a>
+
+                    <a href="semaine2-jour2-tableaux-base.html" class="lesson-card">
+                        <div class="lesson-number">7</div>
+                        <div class="lesson-title">Tableaux - Partie 1</div>
+                        <div class="lesson-desc">Création, accès, push, pop, shift, unshift, parcours</div>
+                        <button class="status status-todo" data-lesson="7" onclick="toggleLesson(7)">📝 À faire</button>
+                    </a>
+
+                    <a href="semaine2-jour3-tableaux-methodes.html" class="lesson-card">
+                        <div class="lesson-number">8</div>
+                        <div class="lesson-title">Tableaux - Partie 2</div>
+                        <div class="lesson-desc">map, filter, reduce, find, sort, slice, splice</div>
+                        <button class="status status-todo" data-lesson="8" onclick="toggleLesson(8)">📝 À faire</button>
+                    </a>
+
+                    <a href="semaine2-jour4-objets.html" class="lesson-card">
+                        <div class="lesson-number">9</div>
+                        <div class="lesson-title">Objets</div>
+                        <div class="lesson-desc">Création, propriétés, méthodes, this, accès dynamique</div>
+                        <button class="status status-todo" data-lesson="9" onclick="toggleLesson(9)">📝 À faire</button>
+                    </a>
+
+                    <a href="semaine2-jour5-tableaux-objets.html" class="lesson-card">
+                        <div class="lesson-number">10</div>
+                        <div class="lesson-title">Tableaux d'objets</div>
+                        <div class="lesson-desc">Manipulation complexe, destructuration, patterns</div>
+                        <button class="status status-todo" data-lesson="10" onclick="toggleLesson(10)">
+                            📝 À faire
+                        </button>
+                    </a>
+                </div>
+            </div>
+
+            <!-- SEMAINE 3 -->
+            <div class="week">
+                <h2 class="week-title">Semaine 3 : DOM & Interaction avec la page</h2>
+                <div class="lessons">
+                    <a href="semaine3-jour1-introduction-dom.html" class="lesson-card">
+                        <div class="lesson-number">11</div>
+                        <div class="lesson-title">Introduction au DOM</div>
+                        <div class="lesson-desc">Sélecteurs, querySelector, textContent, innerHTML</div>
+                        <button class="status status-todo" data-lesson="11" onclick="toggleLesson(11)">
+                            📝 À faire
+                        </button>
+                    </a>
+
+                    <a href="semaine3-jour2-manipulation-dom.html" class="lesson-card">
+                        <div class="lesson-number">12</div>
+                        <div class="lesson-title">Manipulation du DOM</div>
+                        <div class="lesson-desc">Attributs, styles, classes, création d'éléments</div>
+                        <button class="status status-todo" data-lesson="12" onclick="toggleLesson(12)">
+                            📝 À faire
+                        </button>
+                    </a>
+
+                    <a href="semaine3-jour3-evenements.html" class="lesson-card">
+                        <div class="lesson-number">13</div>
+                        <div class="lesson-title">Événements</div>
+                        <div class="lesson-desc">addEventListener, click, input, submit, event object</div>
+                        <button class="status status-todo" data-lesson="13" onclick="toggleLesson(13)">
+                            📝 À faire
+                        </button>
+                    </a>
+
+                    <a href="semaine3-jour4-formulaires-validation.html" class="lesson-card">
+                        <div class="lesson-number">14</div>
+                        <div class="lesson-title">Formulaires & Validation</div>
+                        <div class="lesson-desc">Récupération valeurs, validation côté client, messages</div>
+                        <button class="status status-todo" data-lesson="14" onclick="toggleLesson(14)">
+                            📝 À faire
+                        </button>
+                    </a>
+
+                    <a href="semaine3-jour5-projet-dom.html" class="lesson-card">
+                        <div class="lesson-number">15</div>
+                        <div class="lesson-title">Projet DOM interactif</div>
+                        <div class="lesson-desc">Quiz interactif avec score en temps réel</div>
+                        <button class="status status-todo" data-lesson="15" onclick="toggleLesson(15)">
+                            📝 À faire
+                        </button>
+                    </a>
+                </div>
+            </div>
+
+            <!-- SEMAINE 4 -->
+            <div class="week">
+                <h2 class="week-title">Semaine 4 : Concepts avancés & Asynchrone</h2>
+                <div class="lessons">
+                    <a href="semaine4-jour1-asynchronisme-intro.html" class="lesson-card">
+                        <div class="lesson-number">16</div>
+                        <div class="lesson-title">Asynchronisme - Introduction</div>
+                        <div class="lesson-desc">setTimeout, setInterval, callbacks, chronomètre</div>
+                        <button class="status status-todo" data-lesson="16" onclick="toggleLesson(16)">
+                            📝 À faire
+                        </button>
+                    </a>
+
+                    <a href="semaine4-jour2-promises-fetch.html" class="lesson-card">
+                        <div class="lesson-number">17</div>
+                        <div class="lesson-title">Promises & Fetch API</div>
+                        <div class="lesson-desc">Promises, then/catch, fetch, JSON, récupérer données API</div>
+                        <button class="status status-todo" data-lesson="17" onclick="toggleLesson(17)">
+                            📝 À faire
+                        </button>
+                    </a>
+
+                    <a href="semaine4-jour3-async-await.html" class="lesson-card">
+                        <div class="lesson-number">18</div>
+                        <div class="lesson-title">Async/Await</div>
+                        <div class="lesson-desc">Syntaxe moderne, try/catch, gestion d'erreurs async</div>
+                        <button class="status status-todo" data-lesson="18" onclick="toggleLesson(18)">
+                            📝 À faire
+                        </button>
+                    </a>
+
+                    <a href="semaine4-jour4-modules-bonnes-pratiques.html" class="lesson-card">
+                        <div class="lesson-number">19</div>
+                        <div class="lesson-title">Modules & Bonnes pratiques</div>
+                        <div class="lesson-desc">Import/export, spread operator, organisation code</div>
+                        <button class="status status-todo" data-lesson="19" onclick="toggleLesson(19)">
+                            📝 À faire
+                        </button>
+                    </a>
+
+                    <a href="semaine4-jour5-lecture-code.html" class="lesson-card">
+                        <div class="lesson-number">20</div>
+                        <div class="lesson-title">🎓 Lecture et adaptation de code</div>
+                        <div class="lesson-desc">
+                            Déboguer, comprendre patterns, adapter code existant
+                        </div>
+                        <button class="status status-todo" data-lesson="20" onclick="toggleLesson(20)">
+                            📝 À faire
+                        </button>
+                    </a>
+                </div>
+            </div>
+
+            <!-- FOOTER INFO -->
+            <div class="footer-info">
+                <h3>📖 Progression recommandée</h3>
+                <p style="color: #7f8c8d; line-height: 1.8">
+                    <strong>Semaine 1 :</strong> Bases JavaScript et syntaxe fondamentale<br />
+                    <strong>Semaine 2 :</strong> Fonctions, tableaux et objets<br />
+                    <strong>Semaine 3 :</strong> Manipulation du DOM et interactions<br />
+                    <strong>Semaine 4 :</strong> Asynchronisme et concepts avancés<br /><br />
+
+                    <strong style="color: #f5576c">💡 Conseil :</strong> Utilisez la console interactive dans chaque
+                    cours !<br />
+                    <strong style="color: #f5576c">🎯 Objectif :</strong> Savoir lire et adapter tout code JavaScript
+                    existant.
+                </p>
+            </div>
+
+            <div style="text-align: center; margin-top: 30px">
+                <a href="https://github.com/eCreafr/DWWM" target="_blank" style="color: white; text-decoration: none">
+                    <div
+                        style="
+                            background: rgba(255, 255, 255, 0.2);
+                            display: inline-block;
+                            padding: 15px 30px;
+                            border-radius: 50px;
+                            backdrop-filter: blur(10px);
+                        "
+                    >
+                        <i class="bi bi-github"></i> GitHub - eCrea
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <script>
+            // Fonction pour gérer les cookies
+            function setCookie(name, value, days) {
+                const date = new Date();
+                date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
+                const expires = 'expires=' + date.toUTCString();
+                document.cookie = name + '=' + value + ';' + expires + ';path=/';
+            }
+
+            function getCookie(name) {
+                const nameEQ = name + '=';
+                const ca = document.cookie.split(';');
+                for (let i = 0; i < ca.length; i++) {
+                    let c = ca[i];
+                    while (c.charAt(0) === ' ') c = c.substring(1, c.length);
+                    if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length);
+                }
+                return null;
+            }
+
+            // Fonction pour basculer le statut d'une leçon
+            function toggleLesson(lessonNumber) {
+                const button = document.querySelector(`button[data-lesson="${lessonNumber}"]`);
+                const currentStatus = getCookie(`lesson_js_${lessonNumber}`);
+
+                if (currentStatus === 'done') {
+                    // Passer de "Fait" à "À faire"
+                    button.className = 'status status-todo';
+                    button.innerHTML = '📝 À faire';
+                    setCookie(`lesson_js_${lessonNumber}`, 'todo', 365);
+                } else {
+                    // Passer de "À faire" à "Fait"
+                    button.className = 'status status-done';
+                    button.innerHTML = '✅ Fait';
+                    setCookie(`lesson_js_${lessonNumber}`, 'done', 365);
+                }
+            }
+
+            // Charger les statuts sauvegardés au chargement de la page
+            window.addEventListener('DOMContentLoaded', function () {
+                const buttons = document.querySelectorAll('button[data-lesson]');
+                buttons.forEach((button) => {
+                    const lessonNumber = button.getAttribute('data-lesson');
+                    const savedStatus = getCookie(`lesson_js_${lessonNumber}`);
+
+                    if (savedStatus === 'done') {
+                        button.className = 'status status-done';
+                        button.innerHTML = '✅ Fait';
+                    } else {
+                        button.className = 'status status-todo';
+                        button.innerHTML = '📝 À faire';
+                    }
+                });
+            });
+        </script>
+    </body>
+</html>

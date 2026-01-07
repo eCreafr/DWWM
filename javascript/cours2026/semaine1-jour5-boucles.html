@@ -1,0 +1,433 @@
+<!doctype html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Semaine 1 - Jour 5 | Boucles</title>
+        <link rel="stylesheet" href="../css/froggie.css" />
+        <style>
+            .demo-container {
+                max-width: 1200px;
+                margin: 40px auto;
+                padding: 20px;
+                font-family: Arial, sans-serif;
+            }
+            .demo-title {
+                text-align: center;
+                font-size: 2.5em;
+                margin-bottom: 20px;
+                color: #2c3e50;
+            }
+            .demo-intro {
+                background: #ecf0f1;
+                padding: 20px;
+                border-radius: 10px;
+                margin-bottom: 40px;
+                line-height: 1.6;
+            }
+            .demo-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                gap: 30px;
+                margin-bottom: 40px;
+            }
+            .demo-item {
+                border: 2px solid #f093fb;
+                border-radius: 10px;
+                padding: 20px;
+                background: white;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            }
+            .demo-item h2 {
+                margin-top: 0;
+                color: #f093fb;
+                font-size: 1.5em;
+            }
+            .code-example {
+                background: #2c3e50;
+                color: #ecf0f1;
+                padding: 15px;
+                border-radius: 5px;
+                font-family: 'Courier New', monospace;
+                font-size: 0.9em;
+                margin: 15px 0;
+                overflow-x: auto;
+            }
+            .highlight {
+                color: #f39c12;
+                font-weight: bold;
+            }
+            .keyword {
+                color: #e74c3c;
+            }
+            .string {
+                color: #2ecc71;
+            }
+            .comment {
+                color: #95a5a6;
+                font-style: italic;
+            }
+
+            /* Console JavaScript interactive */
+            .js-console {
+                background: #1e1e1e;
+                border-radius: 10px;
+                padding: 20px;
+                margin: 30px 0;
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            }
+            .js-console-header {
+                color: #f39c12;
+                font-weight: bold;
+                margin-bottom: 15px;
+                font-size: 1.1em;
+                display: flex;
+                align-items: center;
+                gap: 10px;
+            }
+            .js-console-editor {
+                background: #2d2d2d;
+                border: 1px solid #444;
+                border-radius: 5px;
+                padding: 15px;
+                margin-bottom: 15px;
+            }
+            .js-console-editor textarea {
+                width: 100%;
+                background: transparent;
+                border: none;
+                color: #f8f8f2;
+                font-family: 'Courier New', monospace;
+                font-size: 0.95em;
+                resize: vertical;
+                min-height: 80px;
+                outline: none;
+            }
+            .js-console-output {
+                background: #000;
+                border: 1px solid #444;
+                border-radius: 5px;
+                padding: 15px;
+                color: #0f0;
+                font-family: 'Courier New', monospace;
+                font-size: 0.9em;
+                min-height: 60px;
+                max-height: 300px;
+                overflow-y: auto;
+                white-space: pre-wrap;
+            }
+            .js-console-output .error {
+                color: #e74c3c;
+            }
+            .js-console-output .warning {
+                color: #f39c12;
+            }
+            .js-console-buttons {
+                display: flex;
+                gap: 10px;
+                margin-bottom: 15px;
+            }
+            .btn-execute {
+                background: #2ecc71;
+                color: white;
+                border: none;
+                padding: 10px 20px;
+                border-radius: 5px;
+                cursor: pointer;
+                font-weight: bold;
+                transition: background 0.3s;
+            }
+            .btn-execute:hover {
+                background: #27ae60;
+            }
+            .btn-clear {
+                background: #e74c3c;
+                color: white;
+                border: none;
+                padding: 10px 20px;
+                border-radius: 5px;
+                cursor: pointer;
+                font-weight: bold;
+                transition: background 0.3s;
+            }
+            .btn-clear:hover {
+                background: #c0392b;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="demo-container">
+            <h1 class="demo-title">🔁 Semaine 1 - Jour 5 : Boucles</h1>
+
+            <div class="demo-intro">
+                <h3>🔄 Répéter des actions automatiquement</h3>
+                <p>
+                    Les <strong>boucles</strong> permettent de répéter du code plusieurs fois sans avoir à le réécrire.
+                </p>
+                <p>
+                    <strong>Types de boucles :</strong> for (nombre d'itérations connu), while (tant que condition vraie), do...while (au moins une fois), avec break et continue pour contrôler le flux.
+                </p>
+                <p>
+                    <strong>Important :</strong> Attention aux <strong>boucles infinies</strong> qui ne s'arrêtent jamais (risque de plantage) !
+                </p>
+            </div>
+
+            <!-- Concepts de base -->
+            <div class="demo-grid">
+                <div class="demo-item">
+                    <h2>1. Boucle for (pour)</h2>
+                    <p>La boucle la plus utilisée, pour un nombre d'itérations connu :</p>
+                    <div class="code-example">
+                        <span class="comment">// Structure : for (initialisation; condition; incrémentation)</span><br />
+                        <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="highlight">0</span>; i < <span class="highlight">5</span>; i++) {<br />
+                        &nbsp;&nbsp;console.<span class="highlight">log</span>(<span class="string">'Tour numéro'</span>, i);<br />
+                        }<br />
+                        <span class="comment">// Affiche : 0, 1, 2, 3, 4</span><br /><br />
+
+                        <span class="comment">// Exemple pratique : table de multiplication</span><br />
+                        <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="highlight">1</span>; i <= <span class="highlight">10</span>; i++) {<br />
+                        &nbsp;&nbsp;console.<span class="highlight">log</span>(<span class="string">`5 x ${i} = ${5 * i}`</span>);<br />
+                        }
+                    </div>
+                    <p><strong>💡 Astuce :</strong> <code>i++</code> signifie <code>i = i + 1</code> (incrémenter de 1).</p>
+                </div>
+
+                <div class="demo-item">
+                    <h2>2. Boucle while (tant que)</h2>
+                    <p>Répète tant que la condition est vraie :</p>
+                    <div class="code-example">
+                        <span class="comment">// Structure : while (condition)</span><br />
+                        <span class="keyword">let</span> compteur = <span class="highlight">0</span>;<br /><br />
+
+                        <span class="keyword">while</span> (compteur < <span class="highlight">5</span>) {<br />
+                        &nbsp;&nbsp;console.<span class="highlight">log</span>(<span class="string">'Compteur :'</span>, compteur);<br />
+                        &nbsp;&nbsp;compteur++; <span class="comment">// ⚠️ Ne pas oublier d'incrémenter !</span><br />
+                        }<br /><br />
+
+                        <span class="comment">// Exemple pratique : deviner un nombre</span><br />
+                        <span class="keyword">let</span> secret = <span class="highlight">7</span>;<br />
+                        <span class="keyword">let</span> essai = <span class="highlight">0</span>;<br />
+                        <span class="keyword">while</span> (essai !== secret) {<br />
+                        &nbsp;&nbsp;essai++;<br />
+                        &nbsp;&nbsp;console.<span class="highlight">log</span>(<span class="string">`Essai : ${essai}`</span>);<br />
+                        }
+                    </div>
+                    <p><strong>⚠️ Danger :</strong> Si la condition reste toujours vraie, boucle infinie !</p>
+                </div>
+
+                <div class="demo-item">
+                    <h2>3. Boucle do...while</h2>
+                    <p>Exécute le code au moins une fois, puis vérifie la condition :</p>
+                    <div class="code-example">
+                        <span class="comment">// Structure : do { ... } while (condition)</span><br />
+                        <span class="keyword">let</span> nombre = <span class="highlight">10</span>;<br /><br />
+
+                        <span class="keyword">do</span> {<br />
+                        &nbsp;&nbsp;console.<span class="highlight">log</span>(<span class="string">'Nombre :'</span>, nombre);<br />
+                        &nbsp;&nbsp;nombre++;<br />
+                        } <span class="keyword">while</span> (nombre < <span class="highlight">5</span>);<br />
+                        <span class="comment">// Affiche "Nombre : 10" une seule fois</span><br /><br />
+
+                        <span class="comment">// Différence avec while : s'exécute au moins 1 fois</span><br />
+                        <span class="keyword">let</span> x = <span class="highlight">10</span>;<br />
+                        <span class="keyword">while</span> (x < <span class="highlight">5</span>) {<br />
+                        &nbsp;&nbsp;console.<span class="highlight">log</span>(x); <span class="comment">// Ne s'exécute jamais</span><br />
+                        }
+                    </div>
+                    <p><strong>✅ Usage :</strong> Utile quand on veut exécuter le code au moins une fois avant de tester.</p>
+                </div>
+
+                <div class="demo-item">
+                    <h2>4. break et continue</h2>
+                    <p>
+                        <strong>break</strong> : sort de la boucle<br />
+                        <strong>continue</strong> : passe à l'itération suivante
+                    </p>
+                    <div class="code-example">
+                        <span class="comment">// break : arrêter la boucle</span><br />
+                        <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="highlight">0</span>; i < <span class="highlight">10</span>; i++) {<br />
+                        &nbsp;&nbsp;<span class="keyword">if</span> (i === <span class="highlight">5</span>) {<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">break</span>; <span class="comment">// Sort de la boucle</span><br />
+                        &nbsp;&nbsp;}<br />
+                        &nbsp;&nbsp;console.<span class="highlight">log</span>(i); <span class="comment">// 0, 1, 2, 3, 4</span><br />
+                        }<br /><br />
+
+                        <span class="comment">// continue : passer au suivant</span><br />
+                        <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="highlight">0</span>; i < <span class="highlight">5</span>; i++) {<br />
+                        &nbsp;&nbsp;<span class="keyword">if</span> (i === <span class="highlight">2</span>) {<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">continue</span>; <span class="comment">// Saute cette itération</span><br />
+                        &nbsp;&nbsp;}<br />
+                        &nbsp;&nbsp;console.<span class="highlight">log</span>(i); <span class="comment">// 0, 1, 3, 4 (pas 2)</span><br />
+                        }
+                    </div>
+                    <p><strong>💡 Utilité :</strong> break pour chercher une valeur, continue pour filtrer des valeurs.</p>
+                </div>
+            </div>
+
+            <!-- Console interactive -->
+            <div class="js-console">
+                <div class="js-console-header">
+                    ⚡ Console JavaScript Interactive - Testez les boucles !
+                </div>
+                <div class="js-console-editor">
+                    <textarea id="js-input" placeholder="Écrivez votre code JavaScript ici...
+Exemple : for (let i = 0; i < 5; i++) { console.log(i); }"></textarea>
+                </div>
+                <div class="js-console-buttons">
+                    <button class="btn-execute" onclick="executeCode()">▶️ Exécuter (Ctrl + Enter)</button>
+                    <button class="btn-clear" onclick="clearConsole()">🗑️ Effacer</button>
+                </div>
+                <div class="js-console-output" id="js-output">Prêt à exécuter votre code...</div>
+            </div>
+
+            <!-- Exemples pratiques -->
+            <div style="background: #e8f4f8; padding: 25px; border-radius: 10px; margin: 30px 0">
+                <h2 style="color: #2c3e50; text-align: center; margin-top: 0">💻 Exemples à tester</h2>
+                <div class="code-example">
+                    <span class="comment">// Exemple 1 : Compter de 1 à 10</span><br />
+                    <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="highlight">1</span>; i <= <span class="highlight">10</span>; i++) {<br />
+                    &nbsp;&nbsp;console.<span class="highlight">log</span>(<span class="string">`Numéro ${i}`</span>);<br />
+                    }<br /><br />
+
+                    <span class="comment">// Exemple 2 : Afficher les nombres pairs de 0 à 20</span><br />
+                    <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="highlight">0</span>; i <= <span class="highlight">20</span>; i++) {<br />
+                    &nbsp;&nbsp;<span class="keyword">if</span> (i % <span class="highlight">2</span> === <span class="highlight">0</span>) {<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;console.<span class="highlight">log</span>(<span class="string">`${i} est pair`</span>);<br />
+                    &nbsp;&nbsp;}<br />
+                    }<br /><br />
+
+                    <span class="comment">// Exemple 3 : Décompte (compte à rebours)</span><br />
+                    <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="highlight">10</span>; i >= <span class="highlight">0</span>; i--) {<br />
+                    &nbsp;&nbsp;console.<span class="highlight">log</span>(i);<br />
+                    }<br />
+                    console.<span class="highlight">log</span>(<span class="string">'🚀 Décollage !'</span>);<br /><br />
+
+                    <span class="comment">// Exemple 4 : Table de multiplication</span><br />
+                    <span class="keyword">let</span> nombre = <span class="highlight">7</span>;<br />
+                    <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="highlight">1</span>; i <= <span class="highlight">10</span>; i++) {<br />
+                    &nbsp;&nbsp;console.<span class="highlight">log</span>(<span class="string">`${nombre} x ${i} = ${nombre * i}`</span>);<br />
+                    }
+                </div>
+                <p style="text-align: center; margin-top: 20px">
+                    <strong>👆 Copiez ces exemples dans la console interactive ci-dessus !</strong>
+                </p>
+            </div>
+        </div>
+
+        <!-- Zone Froggiesplaining -->
+        <div class="froggiesplaining">
+            <span> Froggiesplaining :</span>
+            <p>
+                <br />
+                <strong>🎯 Objectifs de ce cours :</strong><br />
+                ✅ Comprendre le principe des boucles et leur utilité<br />
+                ✅ Maîtriser la boucle for pour un nombre d'itérations connu<br />
+                ✅ Utiliser while et do...while pour des conditions dynamiques<br />
+                ✅ Contrôler le flux avec break et continue<br />
+                ✅ Éviter les boucles infinies<br /><br />
+
+                <strong>📖 Points clés à retenir :</strong><br />
+                • <strong>for</strong> : quand on connaît le nombre de tours à l'avance<br />
+                • <strong>while</strong> : tant qu'une condition est vraie (tester avant d'exécuter)<br />
+                • <strong>do...while</strong> : au moins une fois, puis tant que condition vraie<br />
+                • <strong>break</strong> : sort de la boucle immédiatement<br />
+                • <strong>continue</strong> : passe à l'itération suivante (saute le reste du code)<br />
+                • Toujours vérifier que la boucle peut se terminer (éviter les boucles infinies) !<br /><br />
+
+                <strong>🏋️ Exercice pratique :</strong><br />
+                1. Créez une boucle for qui affiche les nombres de 1 à 20<br />
+                2. Modifiez-la pour n'afficher que les nombres impairs (utilisez % 2)<br />
+                3. Créez une boucle qui calcule la somme des nombres de 1 à 100<br />
+                4. Utilisez break pour arrêter la boucle quand la somme dépasse 500<br />
+                5. Affichez le résultat final avec un message<br />
+                6. Bonus : Créez une boucle while qui simule le lancer d'un dé (nombre aléatoire 1-6) jusqu'à obtenir un 6
+            </p>
+            <img src="../img/froggie-300.png" alt="Froggie explain" class="overfrog" id="Froggie" />
+        </div>
+
+        <!-- Bouton retour -->
+        <a href="index.html" id="goToIndex" title="Retour à l'index">
+            <i class="bi bi-arrow-left"></i>
+        </a>
+
+        <!-- Lien vers Froggie -->
+        <a href="#Froggie">
+            <div id="goToFroggie">
+                <img src="../img/froggie-300.png" width="50px" /><br /><i class="bi bi-arrow-bar-down"></i>
+            </div>
+        </a>
+
+        <!-- Footer -->
+        <div id="footerGit">
+            <a href="https://github.com/eCreafr/DWWM" target="_blank"><i class="bi bi-github">GitHub - eCrea</i></a>
+        </div>
+
+        <script>
+            // Console JavaScript interactive
+            const jsInput = document.getElementById('js-input');
+            const jsOutput = document.getElementById('js-output');
+
+            // Exécuter le code
+            function executeCode() {
+                const code = jsInput.value;
+                jsOutput.innerHTML = '';
+
+                // Capturer console.log
+                const logs = [];
+                const originalLog = console.log;
+                console.log = function (...args) {
+                    logs.push(args.map(arg =>
+                        typeof arg === 'object' ? JSON.stringify(arg, null, 2) : String(arg)
+                    ).join(' '));
+                    originalLog.apply(console, args);
+                };
+
+                try {
+                    // Exécuter le code
+                    eval(code);
+
+                    // Afficher les logs
+                    if (logs.length > 0) {
+                        jsOutput.innerHTML = logs.join('\n');
+                    } else {
+                        jsOutput.innerHTML = '✅ Code exécuté sans erreur (aucune sortie console)';
+                    }
+                } catch (error) {
+                    jsOutput.innerHTML = `<span class="error">❌ Erreur : ${error.message}</span>`;
+                } finally {
+                    // Restaurer console.log
+                    console.log = originalLog;
+                }
+            }
+
+            // Effacer la console
+            function clearConsole() {
+                jsInput.value = '';
+                jsOutput.innerHTML = 'Console effacée. Prêt à exécuter votre code...';
+            }
+
+            // Raccourci clavier Ctrl + Enter
+            jsInput.addEventListener('keydown', function (e) {
+                if (e.ctrlKey && e.key === 'Enter') {
+                    e.preventDefault();
+                    executeCode();
+                }
+            });
+
+            // Exemple au chargement
+            window.addEventListener('DOMContentLoaded', function() {
+                jsInput.value = `// Testez les boucles !
+// Compter de 1 à 10
+for (let i = 1; i <= 10; i++) {
+    console.log('Tour', i);
+}
+
+// Afficher les nombres pairs
+console.log('\\nNombres pairs de 0 à 10 :');
+for (let i = 0; i <= 10; i += 2) {
+    console.log(i);
+}`;
+            });
+        </script>
+    </body>
+</html>
