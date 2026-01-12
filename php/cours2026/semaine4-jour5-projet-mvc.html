@@ -1,0 +1,698 @@
+<!doctype html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>PHP - Semaine 4 Jour 5 : Projet MVC Complet</title>
+        <link rel="stylesheet" href="../../html/css/froggie.css" />
+        <style>
+            .demo-container {
+                max-width: 1200px;
+                margin: 40px auto;
+                padding: 20px;
+                font-family: Arial, sans-serif;
+            }
+            .demo-title {
+                text-align: center;
+                font-size: 2.5em;
+                margin-bottom: 20px;
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                background-clip: text;
+            }
+            .demo-intro {
+                background: #ecf0f1;
+                padding: 20px;
+                border-radius: 10px;
+                margin-bottom: 40px;
+                line-height: 1.6;
+            }
+            .demo-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+                gap: 30px;
+                margin-bottom: 40px;
+            }
+            .demo-item {
+                border: 2px solid #667eea;
+                border-radius: 10px;
+                padding: 20px;
+                background: white;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            }
+            .demo-item h2 {
+                margin-top: 0;
+                color: #667eea;
+                font-size: 1.5em;
+            }
+            .code-example {
+                background: #2c3e50;
+                color: #ecf0f1;
+                padding: 15px;
+                border-radius: 5px;
+                font-family: 'Courier New', monospace;
+                font-size: 0.9em;
+                margin: 15px 0;
+                overflow-x: auto;
+            }
+            .result-box {
+                background: #e8f5e9;
+                border-left: 4px solid #4caf50;
+                padding: 10px;
+                margin: 10px 0;
+                border-radius: 3px;
+            }
+            .security-note {
+                background: #fff3cd;
+                border-left: 4px solid #ffc107;
+                padding: 10px;
+                margin: 10px 0;
+                border-radius: 3px;
+            }
+            .highlight {
+                color: #f39c12;
+                font-weight: bold;
+            }
+            .keyword {
+                color: #e74c3c;
+            }
+            .string {
+                color: #2ecc71;
+            }
+            .comment {
+                color: #95a5a6;
+                font-style: italic;
+            }
+            .variable {
+                color: #3498db;
+            }
+            .info-note {
+                background: #fff3cd;
+                border-left: 4px solid #ffc107;
+                padding: 15px;
+                margin: 15px 0;
+            }
+            .warning-note {
+                background: #f8d7da;
+                border-left: 4px solid #dc3545;
+                padding: 15px;
+                margin: 15px 0;
+            }
+            .btn {
+                display: inline-block;
+                padding: 10px 20px;
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                color: white;
+                text-decoration: none;
+                border-radius: 5px;
+                transition: transform 0.2s;
+            }
+            .btn:hover {
+                transform: translateY(-2px);
+            }
+            table {
+                width: 100%;
+                border-collapse: collapse;
+                margin: 15px 0;
+            }
+            th,
+            td {
+                border: 1px solid #ddd;
+                padding: 12px;
+                text-align: left;
+            }
+            th {
+                background: #667eea;
+                color: white;
+            }
+            tr:nth-child(even) {
+                background: #f9f9f9;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="demo-container">
+            <h1 class="demo-title">Semaine 4 - Jour 5 : Projet MVC Complet (Blog)</h1>
+
+            <div class="demo-intro">
+                <p>
+                    Aujourd'hui, nous construisons un projet MVC complet : un blog avec authentification, CRUD
+                    d'articles, et toutes les bonnes pratiques professionnelles.
+                </p>
+            </div>
+
+            <div class="demo-grid">
+                <div class="demo-item">
+                    <h2>1. Architecture complète du projet</h2>
+                    <h3>Structure des dossiers</h3>
+                    <div class="code-example">
+                        blog-mvc/ │<br />
+                        ├── <strong>public/</strong> <span class="comment">// Seul dossier accessible publiquement</span
+                        ><br />
+                        │ ├── index.php <span class="comment">// Point d'entrée unique</span><br />
+                        │ ├── css/ <br />│ │ └── style.css <br />│ └── .htaccess
+                        <span class="comment">// Réécriture d'URL (Apache)</span><br />
+                        │ ├── <strong>src/</strong> <br />│ ├── <strong>Controllers/</strong> <br />│ │ ├──
+                        HomeController.php<br />
+                        │ │ ├── ArticleController.php<br />
+                        │ │ └── AuthController.php<br />
+                        │ │ │ ├── <strong>Models/</strong><br />
+                        │ │ ├── Article.php<br />
+                        │ │ └── User.php <br />│ │ │ ├── <strong>Views/</strong><br />
+                        │ │ ├── layout/ <br />│ │ │ ├── header.php<br />
+                        │ │ │ └── footer.php<br />
+                        │ │ ├── home/ <br />│ │ │ └── index.php<br />
+                        │ │ ├── articles/ <br />│ │ │ ├── index.php <br />│ │ │ ├── show.php<br />
+                        │ │ │ ├── create.php<br />
+                        │ │ │ └── edit.php │ │ └── auth/<br />
+                        │ │ ├── login.php<br />
+                        │ │ └── register.php<br />
+                        │ │ │ └── <strong>Core/</strong><br />
+                        │ ├── Router.php <span class="comment">// Routeur amélioré</span> <br />│ └── Database.php
+                        <span class="comment">// Connexion PDO</span> <br />│ ├── <strong>config/</strong><br />│ └──
+                        config.php <span class="comment">// Configuration globale</span><br />
+                        │ ├── autoload.php <span class="comment">// Autoloader PSR-4</span> <br />├── composer.json
+                        <span class="comment">// Dépendances Composer</span> <br />└── database.sql
+                        <span class="comment">// Structure de la BDD</span>
+                    </div>
+                </div>
+
+                <div class="demo-item">
+                    <h2>2. Configuration</h2>
+                    <h3>config/config.php</h3>
+                    <div class="code-example">
+                        <span class="keyword">&lt;?php</span>
+                        <span class="comment">// config/config.php - Configuration globale</span>
+
+                        <span class="keyword">define</span>(<span class="string">'DB_HOST'</span>,
+                        <span class="string">'localhost'</span>); <span class="keyword">define</span>(<span
+                            class="string"
+                            >'DB_NAME'</span
+                        >, <span class="string">'blog_mvc'</span>); <span class="keyword">define</span>(<span
+                            class="string"
+                            >'DB_USER'</span
+                        >, <span class="string">'root'</span>); <span class="keyword">define</span>(<span class="string"
+                            >'DB_PASS'</span
+                        >, <span class="string">''</span>);
+
+                        <span class="keyword">define</span>(<span class="string">'BASE_URL'</span>,
+                        <span class="string">'http://localhost/blog-mvc/public'</span>);
+                        <span class="keyword">define</span>(<span class="string">'ROOT_PATH'</span>,
+                        <span class="keyword">dirname</span>(__DIR__));
+
+                        <span class="comment">// Démarrer la session</span>
+                        <span class="keyword">if</span> (<span class="keyword">session_status</span>() ===
+                        PHP_SESSION_NONE) { <span class="keyword">session_start</span>(); }
+                        <span class="keyword">?&gt;</span>
+                    </div>
+
+                    <h3>database.sql - Structure de la BDD</h3>
+                    <div class="code-example">
+                        <span class="comment">-- Création de la base de données</span>
+                        CREATE DATABASE IF NOT EXISTS blog_mvc CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci; USE
+                        blog_mvc;
+
+                        <span class="comment">-- Table users</span>
+                        CREATE TABLE users ( id INT AUTO_INCREMENT PRIMARY KEY, nom VARCHAR(100) NOT NULL, prenom
+                        VARCHAR(100) NOT NULL, email VARCHAR(255) NOT NULL UNIQUE, password VARCHAR(255) NOT NULL, role
+                        ENUM(<span class="string">'user'</span>, <span class="string">'admin'</span>) DEFAULT
+                        <span class="string">'user'</span>, date_inscription DATETIME DEFAULT CURRENT_TIMESTAMP, INDEX
+                        idx_email (email) );
+
+                        <span class="comment">-- Table articles</span>
+                        CREATE TABLE articles ( id INT AUTO_INCREMENT PRIMARY KEY, titre VARCHAR(200) NOT NULL, contenu
+                        TEXT NOT NULL, user_id INT NOT NULL, date_creation DATETIME DEFAULT CURRENT_TIMESTAMP,
+                        date_modification DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP, FOREIGN KEY
+                        (user_id) REFERENCES users(id) ON DELETE CASCADE );
+
+                        <span class="comment">-- Données de test</span>
+                        INSERT INTO users (nom, prenom, email, password, role) VALUES (<span class="string"
+                            >'Admin'</span
+                        >, <span class="string">'Super'</span>, <span class="string">'admin@blog.com'</span>,
+                        <span class="string">'$2y$10$hash...'</span>, <span class="string">'admin'</span>), (<span
+                            class="string"
+                            >'Dupont'</span
+                        >, <span class="string">'Jean'</span>, <span class="string">'jean@example.com'</span>,
+                        <span class="string">'$2y$10$hash...'</span>, <span class="string">'user'</span>);
+                    </div>
+                </div>
+
+                <div class="demo-item">
+                    <h2>3. Core - Database (Singleton)</h2>
+                    <h3>src/Core/Database.php</h3>
+                    <div class="code-example">
+                        <span class="keyword">&lt;?php</span>
+                        <span class="keyword">namespace</span> Core;
+
+                        <span class="keyword">use</span> PDO; <span class="keyword">use</span> PDOException;
+
+                        <span class="keyword">class</span> Database { <span class="keyword">private static</span>
+                        <span class="variable">$instance</span> = <span class="keyword">null</span>;
+                        <span class="keyword">private</span> <span class="variable">$pdo</span>;
+
+                        <span class="keyword">private function</span> __construct() { <span class="keyword">try</span> {
+                        <span class="variable">$this</span>->pdo = <span class="keyword">new</span> PDO(
+                        <span class="string">"mysql:host="</span> . DB_HOST . <span class="string">";dbname="</span> .
+                        DB_NAME . <span class="string">";charset=utf8mb4"</span>, DB_USER, DB_PASS, [ PDO::ATTR_ERRMODE
+                        => PDO::ERRMODE_EXCEPTION, PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+                        PDO::ATTR_EMULATE_PREPARES => <span class="keyword">false</span> ] ); }
+                        <span class="keyword">catch</span> (PDOException <span class="variable">$e</span>) {
+                        <span class="keyword">error_log</span>(<span class="variable">$e</span>->getMessage());
+                        <span class="keyword">die</span>(<span class="string"
+                            >"Erreur de connexion à la base de données"</span
+                        >); } }
+
+                        <span class="keyword">public static function</span> getInstance() {
+                        <span class="keyword">if</span> (<span class="keyword">self</span>::<span class="variable"
+                            >$instance</span
+                        >
+                        === <span class="keyword">null</span>) { <span class="keyword">self</span>::<span
+                            class="variable"
+                            >$instance</span
+                        >
+                        = <span class="keyword">new</span> <span class="keyword">self</span>(); }
+                        <span class="keyword">return</span> <span class="keyword">self</span>::<span class="variable"
+                            >$instance</span
+                        >->pdo; } }
+                        <span class="keyword">?&gt;</span>
+                    </div>
+                </div>
+
+                <div class="demo-item">
+                    <h2>4. Modèle Article</h2>
+                    <h3>src/Models/Article.php</h3>
+                    <div class="code-example">
+                        <span class="keyword">&lt;?php</span>
+                        <span class="keyword">namespace</span> Models;
+
+                        <span class="keyword">use</span> Core\Database;
+
+                        <span class="keyword">class</span> Article { <span class="keyword">private</span>
+                        <span class="variable">$pdo</span>;
+
+                        <span class="keyword">public function</span> __construct() {
+                        <span class="variable">$this</span>->pdo = Database::getInstance(); }
+
+                        <span class="keyword">public function</span> getAll() { <span class="variable">$sql</span> =
+                        <span class="string"
+                            >"SELECT a.*, u.prenom, u.nom FROM articles a JOIN users u ON a.user_id = u.id ORDER BY
+                            a.date_creation DESC"</span
+                        >; <span class="keyword">return</span> <span class="variable">$this</span>->pdo->query(<span
+                            class="variable"
+                            >$sql</span
+                        >)->fetchAll(); }
+
+                        <span class="keyword">public function</span> getById(<span class="variable">$id</span>) {
+                        <span class="variable">$sql</span> =
+                        <span class="string"
+                            >"SELECT a.*, u.prenom, u.nom FROM articles a JOIN users u ON a.user_id = u.id WHERE a.id =
+                            :id"</span
+                        >; <span class="variable">$stmt</span> = <span class="variable">$this</span>->pdo->prepare(<span
+                            class="variable"
+                            >$sql</span
+                        >); <span class="variable">$stmt</span>->execute([<span class="string">'id'</span> =>
+                        <span class="variable">$id</span>]); <span class="keyword">return</span>
+                        <span class="variable">$stmt</span>->fetch(); }
+
+                        <span class="keyword">public function</span> create(<span class="variable">$titre</span>,
+                        <span class="variable">$contenu</span>, <span class="variable">$userId</span>) {
+                        <span class="variable">$sql</span> =
+                        <span class="string"
+                            >"INSERT INTO articles (titre, contenu, user_id) VALUES (:titre, :contenu, :user_id)"</span
+                        >; <span class="variable">$stmt</span> = <span class="variable">$this</span>->pdo->prepare(<span
+                            class="variable"
+                            >$sql</span
+                        >); <span class="variable">$stmt</span>->execute([ <span class="string">'titre'</span> =>
+                        <span class="variable">$titre</span>, <span class="string">'contenu'</span> =>
+                        <span class="variable">$contenu</span>, <span class="string">'user_id'</span> =>
+                        <span class="variable">$userId</span>
+                        ]);
+                        <span class="keyword">return</span> <span class="variable">$this</span>->pdo->lastInsertId(); }
+
+                        <span class="keyword">public function</span> update(<span class="variable">$id</span>,
+                        <span class="variable">$titre</span>, <span class="variable">$contenu</span>) {
+                        <span class="variable">$sql</span> =
+                        <span class="string"
+                            >"UPDATE articles SET titre = :titre, contenu = :contenu WHERE id = :id"</span
+                        >; <span class="variable">$stmt</span> = <span class="variable">$this</span>->pdo->prepare(<span
+                            class="variable"
+                            >$sql</span
+                        >); <span class="keyword">return</span> <span class="variable">$stmt</span>->execute([<span
+                            class="string"
+                            >'id'</span
+                        >
+                        => <span class="variable">$id</span>, <span class="string">'titre'</span> =>
+                        <span class="variable">$titre</span>, <span class="string">'contenu'</span> =>
+                        <span class="variable">$contenu</span>]); }
+
+                        <span class="keyword">public function</span> delete(<span class="variable">$id</span>) {
+                        <span class="variable">$sql</span> =
+                        <span class="string">"DELETE FROM articles WHERE id = :id"</span>;
+                        <span class="variable">$stmt</span> = <span class="variable">$this</span>->pdo->prepare(<span
+                            class="variable"
+                            >$sql</span
+                        >); <span class="keyword">return</span> <span class="variable">$stmt</span>->execute([<span
+                            class="string"
+                            >'id'</span
+                        >
+                        => <span class="variable">$id</span>]); } }
+                        <span class="keyword">?&gt;</span>
+                    </div>
+                </div>
+
+                <div class="demo-item">
+                    <h2>5. Modèle User (Authentification)</h2>
+                    <h3>src/Models/User.php</h3>
+                    <div class="code-example">
+                        <span class="keyword">&lt;?php</span>
+                        <span class="keyword">namespace</span> Models;
+
+                        <span class="keyword">use</span> Core\Database;
+
+                        <span class="keyword">class</span> User { <span class="keyword">private</span>
+                        <span class="variable">$pdo</span>;
+
+                        <span class="keyword">public function</span> __construct() {
+                        <span class="variable">$this</span>->pdo = Database::getInstance(); }
+
+                        <span class="keyword">public function</span> register(<span class="variable">$nom</span>,
+                        <span class="variable">$prenom</span>, <span class="variable">$email</span>,
+                        <span class="variable">$password</span>) { <span class="variable">$hashedPassword</span> =
+                        <span class="keyword">password_hash</span>(<span class="variable">$password</span>,
+                        PASSWORD_DEFAULT); <span class="variable">$sql</span> =
+                        <span class="string"
+                            >"INSERT INTO users (nom, prenom, email, password) VALUES (:nom, :prenom, :email,
+                            :password)"</span
+                        >; <span class="variable">$stmt</span> = <span class="variable">$this</span>->pdo->prepare(<span
+                            class="variable"
+                            >$sql</span
+                        >); <span class="keyword">return</span> <span class="variable">$stmt</span>->execute([
+                        <span class="string">'nom'</span> => <span class="variable">$nom</span>,
+                        <span class="string">'prenom'</span> => <span class="variable">$prenom</span>,
+                        <span class="string">'email'</span> => <span class="variable">$email</span>,
+                        <span class="string">'password'</span> => <span class="variable">$hashedPassword</span>
+                        ]); }
+
+                        <span class="keyword">public function</span> login(<span class="variable">$email</span>,
+                        <span class="variable">$password</span>) { <span class="variable">$sql</span> =
+                        <span class="string">"SELECT * FROM users WHERE email = :email"</span>;
+                        <span class="variable">$stmt</span> = <span class="variable">$this</span>->pdo->prepare(<span
+                            class="variable"
+                            >$sql</span
+                        >); <span class="variable">$stmt</span>->execute([<span class="string">'email'</span> =>
+                        <span class="variable">$email</span>]); <span class="variable">$user</span> =
+                        <span class="variable">$stmt</span>->fetch();
+
+                        <span class="keyword">if</span> (<span class="variable">$user</span> &&
+                        <span class="keyword">password_verify</span>(<span class="variable">$password</span>,
+                        <span class="variable">$user</span>[<span class="string">'password'</span>])) {
+                        <span class="keyword">return</span> <span class="variable">$user</span>; }
+                        <span class="keyword">return</span> <span class="keyword">false</span>; }
+
+                        <span class="keyword">public function</span> findByEmail(<span class="variable">$email</span>) {
+                        <span class="variable">$sql</span> =
+                        <span class="string">"SELECT * FROM users WHERE email = :email"</span>;
+                        <span class="variable">$stmt</span> = <span class="variable">$this</span>->pdo->prepare(<span
+                            class="variable"
+                            >$sql</span
+                        >); <span class="variable">$stmt</span>->execute([<span class="string">'email'</span> =>
+                        <span class="variable">$email</span>]); <span class="keyword">return</span>
+                        <span class="variable">$stmt</span>->fetch(); } }
+                        <span class="keyword">?&gt;</span>
+                    </div>
+                </div>
+
+                <div class="demo-item">
+                    <h2>6. Contrôleurs</h2>
+                    <h3>src/Controllers/ArticleController.php</h3>
+                    <div class="code-example">
+                        <span class="keyword">&lt;?php</span>
+                        <span class="keyword">namespace</span> Controllers;
+
+                        <span class="keyword">use</span> Models\Article;
+
+                        <span class="keyword">class</span> ArticleController { <span class="keyword">private</span>
+                        <span class="variable">$articleModel</span>;
+
+                        <span class="keyword">public function</span> __construct() {
+                        <span class="variable">$this</span>->articleModel = <span class="keyword">new</span> Article();
+                        }
+
+                        <span class="keyword">public function</span> index() { <span class="variable">$articles</span> =
+                        <span class="variable">$this</span>->articleModel->getAll();
+                        <span class="keyword">require</span> ROOT_PATH .
+                        <span class="string">'/src/Views/articles/index.php'</span>; }
+
+                        <span class="keyword">public function</span> show(<span class="variable">$id</span>) {
+                        <span class="variable">$article</span> =
+                        <span class="variable">$this</span>->articleModel->getById(<span class="variable">$id</span>);
+                        <span class="keyword">if</span> (!<span class="variable">$article</span>) {
+                        <span class="keyword">die</span>(<span class="string">"Article non trouvé"</span>); }
+                        <span class="keyword">require</span> ROOT_PATH .
+                        <span class="string">'/src/Views/articles/show.php'</span>; }
+
+                        <span class="keyword">public function</span> create() { <span class="keyword">if</span> (!<span
+                            class="keyword"
+                            >isset</span
+                        >(<span class="variable">$_SESSION</span>[<span class="string">'user_id'</span>])) {
+                        <span class="keyword">header</span>(<span class="string"
+                            >'Location: ' . BASE_URL . '/index.php?action=login'</span
+                        >); <span class="keyword">exit</span>(); }
+
+                        <span class="keyword">if</span> (<span class="variable">$_SERVER</span>[<span class="string"
+                            >'REQUEST_METHOD'</span
+                        >] === <span class="string">'POST'</span>) { <span class="variable">$titre</span> =
+                        <span class="keyword">trim</span>(<span class="variable">$_POST</span>[<span class="string"
+                            >'titre'</span
+                        >] ?? <span class="string">''</span>); <span class="variable">$contenu</span> =
+                        <span class="keyword">trim</span>(<span class="variable">$_POST</span>[<span class="string"
+                            >'contenu'</span
+                        >] ?? <span class="string">''</span>);
+
+                        <span class="keyword">if</span> (!<span class="keyword">empty</span>(<span class="variable"
+                            >$titre</span
+                        >) && !<span class="keyword">empty</span>(<span class="variable">$contenu</span>)) {
+                        <span class="variable">$id</span> =
+                        <span class="variable">$this</span>->articleModel->create(<span class="variable">$titre</span>,
+                        <span class="variable">$contenu</span>, <span class="variable">$_SESSION</span>[<span
+                            class="string"
+                            >'user_id'</span
+                        >]); <span class="keyword">header</span>(<span class="string"
+                            >'Location: ' . BASE_URL . '/index.php?action=show&id=' .
+                            <span class="variable">$id</span></span
+                        >); <span class="keyword">exit</span>(); } } <span class="keyword">require</span> ROOT_PATH .
+                        <span class="string">'/src/Views/articles/create.php'</span>; } }
+                        <span class="keyword">?&gt;</span>
+                    </div>
+
+                    <h3>src/Controllers/AuthController.php</h3>
+                    <div class="code-example">
+                        <span class="keyword">&lt;?php</span>
+                        <span class="keyword">namespace</span> Controllers;
+
+                        <span class="keyword">use</span> Models\User;
+
+                        <span class="keyword">class</span> AuthController { <span class="keyword">private</span>
+                        <span class="variable">$userModel</span>;
+
+                        <span class="keyword">public function</span> __construct() {
+                        <span class="variable">$this</span>->userModel = <span class="keyword">new</span> User(); }
+
+                        <span class="keyword">public function</span> login() { <span class="keyword">if</span> (<span
+                            class="variable"
+                            >$_SERVER</span
+                        >[<span class="string">'REQUEST_METHOD'</span>] === <span class="string">'POST'</span>) {
+                        <span class="variable">$email</span> = <span class="keyword">trim</span>(<span class="variable"
+                            >$_POST</span
+                        >[<span class="string">'email'</span>] ?? <span class="string">''</span>);
+                        <span class="variable">$password</span> = <span class="variable">$_POST</span>[<span
+                            class="string"
+                            >'password'</span
+                        >] ?? <span class="string">''</span>;
+
+                        <span class="variable">$user</span> =
+                        <span class="variable">$this</span>->userModel->login(<span class="variable">$email</span>,
+                        <span class="variable">$password</span>);
+
+                        <span class="keyword">if</span> (<span class="variable">$user</span>) {
+                        <span class="keyword">session_regenerate_id</span>(<span class="keyword">true</span>);
+                        <span class="variable">$_SESSION</span>[<span class="string">'user_id'</span>] =
+                        <span class="variable">$user</span>[<span class="string">'id'</span>];
+                        <span class="variable">$_SESSION</span>[<span class="string">'user_nom'</span>] =
+                        <span class="variable">$user</span>[<span class="string">'prenom'</span>] .
+                        <span class="string">' '</span> . <span class="variable">$user</span>[<span class="string"
+                            >'nom'</span
+                        >]; <span class="keyword">header</span>(<span class="string"
+                            >'Location: ' . BASE_URL . '/index.php'</span
+                        >); <span class="keyword">exit</span>(); } } <span class="keyword">require</span> ROOT_PATH .
+                        <span class="string">'/src/Views/auth/login.php'</span>; }
+
+                        <span class="keyword">public function</span> logout() {
+                        <span class="keyword">session_destroy</span>(); <span class="keyword">header</span>(<span
+                            class="string"
+                            >'Location: ' . BASE_URL . '/index.php'</span
+                        >); <span class="keyword">exit</span>(); } }
+                        <span class="keyword">?&gt;</span>
+                    </div>
+                </div>
+
+                <div class="demo-item">
+                    <h2>7. Point d'entrée</h2>
+                    <h3>public/index.php</h3>
+                    <div class="code-example">
+                        <span class="keyword">&lt;?php</span>
+                        <span class="keyword">require_once</span> __DIR__ .
+                        <span class="string">'/../config/config.php'</span>;
+                        <span class="keyword">require_once</span> __DIR__ .
+                        <span class="string">'/../autoload.php'</span>;
+
+                        <span class="keyword">use</span> Controllers\HomeController;
+                        <span class="keyword">use</span> Controllers\ArticleController;
+                        <span class="keyword">use</span> Controllers\AuthController;
+
+                        <span class="variable">$action</span> = <span class="variable">$_GET</span>[<span class="string"
+                            >'action'</span
+                        >] ?? <span class="string">'home'</span>; <span class="variable">$id</span> =
+                        <span class="variable">$_GET</span>[<span class="string">'id'</span>] ??
+                        <span class="keyword">null</span>;
+
+                        <span class="keyword">try</span> { <span class="keyword">switch</span> (<span class="variable"
+                            >$action</span
+                        >) { <span class="keyword">case</span> <span class="string">'home'</span>:
+                        <span class="variable">$controller</span> = <span class="keyword">new</span> HomeController();
+                        <span class="variable">$controller</span>->index(); <span class="keyword">break</span>;
+
+                        <span class="keyword">case</span> <span class="string">'articles'</span>:
+                        <span class="variable">$controller</span> =
+                        <span class="keyword">new</span> ArticleController();
+                        <span class="variable">$controller</span>->index(); <span class="keyword">break</span>;
+
+                        <span class="keyword">case</span> <span class="string">'show'</span>:
+                        <span class="keyword">if</span> (<span class="variable">$id</span>) {
+                        <span class="variable">$controller</span> =
+                        <span class="keyword">new</span> ArticleController();
+                        <span class="variable">$controller</span>->show(<span class="variable">$id</span>); }
+                        <span class="keyword">break</span>;
+
+                        <span class="keyword">case</span> <span class="string">'create'</span>:
+                        <span class="variable">$controller</span> =
+                        <span class="keyword">new</span> ArticleController();
+                        <span class="variable">$controller</span>->create(); <span class="keyword">break</span>;
+
+                        <span class="keyword">case</span> <span class="string">'login'</span>:
+                        <span class="variable">$controller</span> = <span class="keyword">new</span> AuthController();
+                        <span class="variable">$controller</span>->login(); <span class="keyword">break</span>;
+
+                        <span class="keyword">case</span> <span class="string">'logout'</span>:
+                        <span class="variable">$controller</span> = <span class="keyword">new</span> AuthController();
+                        <span class="variable">$controller</span>->logout(); <span class="keyword">break</span>;
+
+                        <span class="keyword">default</span>: <span class="keyword">die</span>(<span class="string"
+                            >"Action inconnue"</span
+                        >); } } <span class="keyword">catch</span> (\Exception <span class="variable">$e</span>) {
+                        <span class="keyword">error_log</span>(<span class="variable">$e</span>->getMessage());
+                        <span class="keyword">die</span>(<span class="string">"Une erreur s'est produite"</span>); }
+                        <span class="keyword">?&gt;</span>
+                    </div>
+                </div>
+
+                <div class="demo-item">
+                    <h2>8. Bonnes pratiques</h2>
+                    <div class="info-note">
+                        <h4>Sécurité</h4>
+                        <ul>
+                            <li>PDO avec requêtes préparées</li>
+                            <li>password_hash() / password_verify()</li>
+                            <li>htmlspecialchars() partout</li>
+                            <li>session_regenerate_id()</li>
+                            <li>Validation côté serveur</li>
+                        </ul>
+                    </div>
+                    <div class="info-note">
+                        <h4>Architecture</h4>
+                        <ul>
+                            <li>Séparation MVC stricte</li>
+                            <li>Namespaces PSR-4</li>
+                            <li>Autoloading automatique</li>
+                            <li>Singleton pour Database</li>
+                            <li>Point d'entrée unique</li>
+                        </ul>
+                    </div>
+                    <div class="security-note">
+                        <h4>Checklist de sécurité finale</h4>
+                        <ul>
+                            <li>Toutes les requêtes SQL sont préparées</li>
+                            <li>Tous les affichages utilisent htmlspecialchars()</li>
+                            <li>Les mots de passe sont hachés avec password_hash()</li>
+                            <li>Les sessions sont régénérées après connexion</li>
+                            <li>Les pages protégées vérifient $_SESSION['user_id']</li>
+                            <li>Les erreurs sont loggées, pas affichées</li>
+                            <li>Validation côté serveur obligatoire</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Zone Froggiesplaining -->
+            <div class="froggiesplaining">
+                <span> Froggiesplaining :</span>
+                <p>
+                    <br />
+                    <strong>Objectifs de ce cours :</strong><br />
+                    ✅ Construire un projet MVC complet de A à Z<br />
+                    ✅ Implémenter un blog avec CRUD d'articles<br />
+                    ✅ Ajouter un système d'authentification sécurisé<br />
+                    ✅ Appliquer toutes les bonnes pratiques professionnelles<br />
+                    ✅ Utiliser Database Singleton et pattern MVC strict<br />
+                    ✅ Sécuriser l'application (PDO, password_hash, htmlspecialchars)<br /><br />
+
+                    <strong>Points clés à retenir :</strong><br />
+                    • <strong>config/</strong> = Les règles de la mare (DB_HOST, DB_NAME, sessions)<br />
+                    • <strong>src/Models/</strong> = Réserve de données (Article, User avec méthodes CRUD)<br />
+                    • <strong>src/Controllers/</strong> = Orchestrateurs (ArticleController, AuthController)<br />
+                    • <strong>src/Views/</strong> = Miroirs d'affichage (articles/index.php, auth/login.php)<br />
+                    • <strong>public/</strong> = Point d'entrée unique accessible (index.php avec router)<br />
+                    • <strong>Singleton Database</strong> = Une seule instance PDO partagée partout<br />
+                    • <strong>Sécurité</strong> = PDO préparé + password_hash() + htmlspecialchars() + sessions<br />
+                    • <strong>Authentification</strong> = register(), login(), logout(), session_regenerate_id()<br /><br />
+
+                    <strong>Exercice pratique :</strong><br />
+                    1. Créer la structure complète du blog MVC (config, src, public)<br />
+                    2. Créer la base de données avec tables users et articles<br />
+                    3. Implémenter Core\Database avec pattern Singleton<br />
+                    4. Créer Models\User avec register(), login(), findByEmail()<br />
+                    5. Créer Models\Article avec getAll(), getById(), create(), update(), delete()<br />
+                    6. Créer Controllers\AuthController pour gérer connexion/inscription<br />
+                    7. Créer Controllers\ArticleController pour gérer les articles<br />
+                    8. Créer toutes les vues nécessaires (login, liste articles, détail article)<br />
+                    9. Implémenter le router dans public/index.php avec switch sur action<br />
+                    10. Tester tout le flux: inscription → connexion → créer article → voir article<br />
+                    11. Conseil final de Froggie: Tu as maintenant toutes les bases pour créer des applications PHP
+                    professionnelles ! Continue à pratiquer, explore les frameworks (Laravel, Symfony), et surtout:
+                    CODE, CODE, CODE ! La pratique rend parfait. Bravo pour avoir complété cette formation PHP !
+                </p>
+                <img src="../../html/img/froggie-300.png" alt="Froggie explain" class="overfrog" id="Froggie" />
+            </div>
+
+            <!-- Bouton retour -->
+            <a href="index.html" id="goToIndex" title="Retour à l'index">
+                <i class="bi bi-arrow-left"></i>
+            </a>
+
+            <!-- Lien vers Froggie -->
+            <a href="#Froggie">
+                <div id="goToFroggie">
+                    <img src="../../html/img/froggie-300.png" width="50px" /><br /><i class="bi bi-arrow-bar-down"></i>
+                </div>
+            </a>
+
+            <!-- Footer -->
+            <div id="footerGit">
+                <a href="https://github.com/eCreafr/DWWM" target="_blank"><i class="bi bi-github">GitHub - eCrea</i></a>
+            </div>
+        </div>
+
+        <script src="../../html/js/froggie.js"></script>
+    </body>
+</html>

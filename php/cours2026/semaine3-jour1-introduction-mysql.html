@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PHP - Semaine 3 Jour 1 : Introduction à MySQL</title>
+    <link rel="stylesheet" href="../../html/css/froggie.css">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #667eea;
+            border-bottom: 3px solid #764ba2;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #764ba2;
+            margin-top: 30px;
+        }
+        .code-block {
+            background: #f4f4f4;
+            border-left: 4px solid #667eea;
+            padding: 15px;
+            margin: 15px 0;
+            font-family: 'Courier New', monospace;
+            overflow-x: auto;
+        }
+        .sql-keyword {
+            color: #0000bb;
+            font-weight: bold;
+        }
+        .sql-string {
+            color: #dd0000;
+        }
+        .sql-comment {
+            color: #ff8000;
+            font-style: italic;
+        }
+        .result-box {
+            background: #e8f4f8;
+            border: 2px solid #667eea;
+            border-radius: 5px;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        .result-box h4 {
+            margin-top: 0;
+            color: #667eea;
+        }
+        .demo-container {
+            background: #f9f9f9;
+            border: 2px solid #764ba2;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        .demo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+        .demo-item {
+            background: white;
+            padding: 15px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+        .note {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        .warning {
+            background: #f8d7da;
+            border-left: 4px solid #dc3545;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        .nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 2px solid #eee;
+        }
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: transform 0.2s;
+        }
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background: #667eea;
+            color: white;
+        }
+        tr:nth-child(even) {
+            background: #f9f9f9;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Semaine 3 - Jour 1 : Introduction à MySQL</h1>
+
+        <h2>1. Qu'est-ce que MySQL ?</h2>
+        <p>MySQL est un système de gestion de base de données relationnelle (SGBDR) open-source. Il permet de stocker, organiser et récupérer des données de manière structurée.</p>
+
+        <div class="demo-container">
+            <h3>Concepts clés</h3>
+            <ul>
+                <li><strong>Base de données (Database)</strong> : Conteneur principal qui regroupe des tables</li>
+                <li><strong>Table</strong> : Structure organisée en lignes et colonnes, comme un tableau Excel</li>
+                <li><strong>Colonne (Champ)</strong> : Définit un type de données (nom, email, age...)</li>
+                <li><strong>Ligne (Enregistrement)</strong> : Une entrée complète dans la table</li>
+                <li><strong>Clé primaire (PRIMARY KEY)</strong> : Identifiant unique pour chaque enregistrement</li>
+                <li><strong>Clé étrangère (FOREIGN KEY)</strong> : Relie deux tables entre elles</li>
+            </ul>
+        </div>
+
+        <h2>2. Types de données MySQL</h2>
+
+        <div class="demo-container">
+            <h3>Types numériques</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Type</th>
+                        <th>Description</th>
+                        <th>Exemple</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>INT</td>
+                        <td>Nombre entier (-2 147 483 648 à 2 147 483 647)</td>
+                        <td>42</td>
+                    </tr>
+                    <tr>
+                        <td>BIGINT</td>
+                        <td>Grand nombre entier</td>
+                        <td>9223372036854775807</td>
+                    </tr>
+                    <tr>
+                        <td>DECIMAL(10,2)</td>
+                        <td>Nombre décimal exact (10 chiffres, 2 après virgule)</td>
+                        <td>12345.67</td>
+                    </tr>
+                    <tr>
+                        <td>FLOAT / DOUBLE</td>
+                        <td>Nombre décimal approximatif</td>
+                        <td>3.14159</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="demo-container">
+            <h3>Types texte</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Type</th>
+                        <th>Taille max</th>
+                        <th>Usage</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>CHAR(n)</td>
+                        <td>n caractères (fixe)</td>
+                        <td>Code postal, code pays</td>
+                    </tr>
+                    <tr>
+                        <td>VARCHAR(n)</td>
+                        <td>n caractères (variable)</td>
+                        <td>Nom, email, titre</td>
+                    </tr>
+                    <tr>
+                        <td>TEXT</td>
+                        <td>65 535 caractères</td>
+                        <td>Description, commentaire</td>
+                    </tr>
+                    <tr>
+                        <td>LONGTEXT</td>
+                        <td>4 GB</td>
+                        <td>Articles, contenu long</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="demo-container">
+            <h3>Types date et heure</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Type</th>
+                        <th>Format</th>
+                        <th>Exemple</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>DATE</td>
+                        <td>YYYY-MM-DD</td>
+                        <td>2026-01-08</td>
+                    </tr>
+                    <tr>
+                        <td>TIME</td>
+                        <td>HH:MM:SS</td>
+                        <td>14:30:00</td>
+                    </tr>
+                    <tr>
+                        <td>DATETIME</td>
+                        <td>YYYY-MM-DD HH:MM:SS</td>
+                        <td>2026-01-08 14:30:00</td>
+                    </tr>
+                    <tr>
+                        <td>TIMESTAMP</td>
+                        <td>Horodatage Unix</td>
+                        <td>Auto-généré</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h2>3. Créer une base de données</h2>
+
+        <div class="demo-container">
+            <h3>CREATE DATABASE</h3>
+            <div class="code-block">
+<span class="sql-comment">-- Créer une nouvelle base de données</span>
+<span class="sql-keyword">CREATE DATABASE</span> mon_site;
+
+<span class="sql-comment">-- Créer une base de données avec encodage UTF-8</span>
+<span class="sql-keyword">CREATE DATABASE</span> mon_site
+<span class="sql-keyword">CHARACTER SET</span> utf8mb4
+<span class="sql-keyword">COLLATE</span> utf8mb4_unicode_ci;
+
+<span class="sql-comment">-- Supprimer une base de données</span>
+<span class="sql-keyword">DROP DATABASE</span> mon_site;
+
+<span class="sql-comment">-- Sélectionner une base de données</span>
+<span class="sql-keyword">USE</span> mon_site;
+            </div>
+        </div>
+
+        <h2>4. Créer des tables</h2>
+
+        <div class="demo-container">
+            <h3>CREATE TABLE - Table utilisateurs</h3>
+            <div class="code-block">
+<span class="sql-keyword">CREATE TABLE</span> users (
+    id <span class="sql-keyword">INT</span> <span class="sql-keyword">AUTO_INCREMENT PRIMARY KEY</span>,
+    nom <span class="sql-keyword">VARCHAR</span>(100) <span class="sql-keyword">NOT NULL</span>,
+    prenom <span class="sql-keyword">VARCHAR</span>(100) <span class="sql-keyword">NOT NULL</span>,
+    email <span class="sql-keyword">VARCHAR</span>(255) <span class="sql-keyword">NOT NULL UNIQUE</span>,
+    password <span class="sql-keyword">VARCHAR</span>(255) <span class="sql-keyword">NOT NULL</span>,
+    date_naissance <span class="sql-keyword">DATE</span>,
+    ville <span class="sql-keyword">VARCHAR</span>(100),
+    actif <span class="sql-keyword">BOOLEAN DEFAULT</span> 1,
+    created_at <span class="sql-keyword">TIMESTAMP DEFAULT CURRENT_TIMESTAMP</span>,
+    updated_at <span class="sql-keyword">TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP</span>
+);
+            </div>
+            <div class="result-box">
+                <h4>Explication :</h4>
+                <ul>
+                    <li><code>AUTO_INCREMENT</code> : L'id s'incrémente automatiquement (1, 2, 3...)</li>
+                    <li><code>PRIMARY KEY</code> : Identifiant unique obligatoire</li>
+                    <li><code>NOT NULL</code> : Le champ ne peut pas être vide</li>
+                    <li><code>UNIQUE</code> : Pas de doublons (ici, un email = un utilisateur)</li>
+                    <li><code>DEFAULT</code> : Valeur par défaut si non spécifiée</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="demo-container">
+            <h3>CREATE TABLE - Table articles avec clé étrangère</h3>
+            <div class="code-block">
+<span class="sql-keyword">CREATE TABLE</span> articles (
+    id <span class="sql-keyword">INT AUTO_INCREMENT PRIMARY KEY</span>,
+    titre <span class="sql-keyword">VARCHAR</span>(200) <span class="sql-keyword">NOT NULL</span>,
+    contenu <span class="sql-keyword">TEXT NOT NULL</span>,
+    user_id <span class="sql-keyword">INT NOT NULL</span>,
+    statut <span class="sql-keyword">ENUM</span>(<span class="sql-string">'brouillon'</span>, <span class="sql-string">'publié'</span>, <span class="sql-string">'archivé'</span>) <span class="sql-keyword">DEFAULT</span> <span class="sql-string">'brouillon'</span>,
+    created_at <span class="sql-keyword">TIMESTAMP DEFAULT CURRENT_TIMESTAMP</span>,
+
+    <span class="sql-comment">-- Clé étrangère : relie user_id à la table users</span>
+    <span class="sql-keyword">FOREIGN KEY</span> (user_id) <span class="sql-keyword">REFERENCES</span> users(id) <span class="sql-keyword">ON DELETE CASCADE</span>
+);
+            </div>
+            <div class="result-box">
+                <h4>ON DELETE CASCADE :</h4>
+                <p>Si un utilisateur est supprimé, tous ses articles seront automatiquement supprimés.</p>
+            </div>
+        </div>
+
+        <h2>5. Opérations CRUD de base</h2>
+
+        <div class="demo-container">
+            <h3>INSERT - Insérer des données</h3>
+            <div class="code-block">
+<span class="sql-comment">-- Insérer un utilisateur</span>
+<span class="sql-keyword">INSERT INTO</span> users (nom, prenom, email, password, ville)
+<span class="sql-keyword">VALUES</span> (<span class="sql-string">'Dupont'</span>, <span class="sql-string">'Jean'</span>, <span class="sql-string">'jean.dupont@example.com'</span>, <span class="sql-string">'hashed_password'</span>, <span class="sql-string">'Paris'</span>);
+
+<span class="sql-comment">-- Insérer plusieurs utilisateurs</span>
+<span class="sql-keyword">INSERT INTO</span> users (nom, prenom, email, password)
+<span class="sql-keyword">VALUES</span>
+    (<span class="sql-string">'Martin'</span>, <span class="sql-string">'Marie'</span>, <span class="sql-string">'marie.martin@example.com'</span>, <span class="sql-string">'pass123'</span>),
+    (<span class="sql-string">'Durand'</span>, <span class="sql-string">'Paul'</span>, <span class="sql-string">'paul.durand@example.com'</span>, <span class="sql-string">'pass456'</span>);
+            </div>
+        </div>
+
+        <div class="demo-container">
+            <h3>SELECT - Récupérer des données</h3>
+            <div class="code-block">
+<span class="sql-comment">-- Sélectionner tous les utilisateurs</span>
+<span class="sql-keyword">SELECT</span> * <span class="sql-keyword">FROM</span> users;
+
+<span class="sql-comment">-- Sélectionner uniquement certaines colonnes</span>
+<span class="sql-keyword">SELECT</span> nom, prenom, email <span class="sql-keyword">FROM</span> users;
+
+<span class="sql-comment">-- Sélectionner avec condition WHERE</span>
+<span class="sql-keyword">SELECT</span> * <span class="sql-keyword">FROM</span> users <span class="sql-keyword">WHERE</span> ville = <span class="sql-string">'Paris'</span>;
+
+<span class="sql-comment">-- Sélectionner avec plusieurs conditions</span>
+<span class="sql-keyword">SELECT</span> * <span class="sql-keyword">FROM</span> users
+<span class="sql-keyword">WHERE</span> ville = <span class="sql-string">'Paris'</span> <span class="sql-keyword">AND</span> actif = 1;
+
+<span class="sql-comment">-- Sélectionner avec LIKE (recherche partielle)</span>
+<span class="sql-keyword">SELECT</span> * <span class="sql-keyword">FROM</span> users <span class="sql-keyword">WHERE</span> email <span class="sql-keyword">LIKE</span> <span class="sql-string">'%@example.com'</span>;
+
+<span class="sql-comment">-- Limiter les résultats</span>
+<span class="sql-keyword">SELECT</span> * <span class="sql-keyword">FROM</span> users <span class="sql-keyword">LIMIT</span> 10;
+
+<span class="sql-comment">-- Trier les résultats</span>
+<span class="sql-keyword">SELECT</span> * <span class="sql-keyword">FROM</span> users <span class="sql-keyword">ORDER BY</span> nom <span class="sql-keyword">ASC</span>;
+<span class="sql-keyword">SELECT</span> * <span class="sql-keyword">FROM</span> users <span class="sql-keyword">ORDER BY</span> created_at <span class="sql-keyword">DESC</span>;
+            </div>
+        </div>
+
+        <div class="demo-container">
+            <h3>UPDATE - Modifier des données</h3>
+            <div class="code-block">
+<span class="sql-comment">-- Mettre à jour un utilisateur spécifique</span>
+<span class="sql-keyword">UPDATE</span> users
+<span class="sql-keyword">SET</span> ville = <span class="sql-string">'Lyon'</span>, updated_at = <span class="sql-keyword">NOW</span>()
+<span class="sql-keyword">WHERE</span> id = 1;
+
+<span class="sql-comment">-- Mettre à jour plusieurs champs</span>
+<span class="sql-keyword">UPDATE</span> users
+<span class="sql-keyword">SET</span> nom = <span class="sql-string">'Nouveau Nom'</span>, prenom = <span class="sql-string">'Nouveau Prenom'</span>
+<span class="sql-keyword">WHERE</span> email = <span class="sql-string">'jean.dupont@example.com'</span>;
+
+<span class="sql-comment">-- ATTENTION : sans WHERE, toutes les lignes seront modifiées !</span>
+<span class="sql-keyword">UPDATE</span> users <span class="sql-keyword">SET</span> actif = 0; <span class="sql-comment">-- ❌ Désactive TOUS les utilisateurs</span>
+            </div>
+        </div>
+
+        <div class="demo-container">
+            <h3>DELETE - Supprimer des données</h3>
+            <div class="code-block">
+<span class="sql-comment">-- Supprimer un utilisateur spécifique</span>
+<span class="sql-keyword">DELETE FROM</span> users <span class="sql-keyword">WHERE</span> id = 5;
+
+<span class="sql-comment">-- Supprimer avec condition</span>
+<span class="sql-keyword">DELETE FROM</span> users <span class="sql-keyword">WHERE</span> actif = 0 <span class="sql-keyword">AND</span> created_at < <span class="sql-string">'2025-01-01'</span>;
+
+<span class="sql-comment">-- ATTENTION : sans WHERE, toutes les lignes seront supprimées !</span>
+<span class="sql-keyword">DELETE FROM</span> users; <span class="sql-comment">-- ❌ Supprime TOUT</span>
+            </div>
+        </div>
+
+        <div class="warning">
+            <strong>Attention !</strong> Utilisez toujours une clause <code>WHERE</code> avec <code>UPDATE</code> et <code>DELETE</code>, sinon TOUTES les lignes seront affectées ! Testez d'abord avec un <code>SELECT</code> pour vérifier votre condition.
+        </div>
+
+        <h2>6. Jointures (JOIN)</h2>
+
+        <div class="demo-container">
+            <h3>INNER JOIN - Récupérer des données de plusieurs tables</h3>
+            <div class="code-block">
+<span class="sql-comment">-- Récupérer les articles avec les informations de l'auteur</span>
+<span class="sql-keyword">SELECT</span>
+    articles.titre,
+    articles.contenu,
+    users.nom,
+    users.prenom
+<span class="sql-keyword">FROM</span> articles
+<span class="sql-keyword">INNER JOIN</span> users <span class="sql-keyword">ON</span> articles.user_id = users.id;
+
+<span class="sql-comment">-- Avec des alias pour simplifier</span>
+<span class="sql-keyword">SELECT</span>
+    a.titre,
+    a.contenu,
+    u.nom,
+    u.prenom
+<span class="sql-keyword">FROM</span> articles <span class="sql-keyword">AS</span> a
+<span class="sql-keyword">INNER JOIN</span> users <span class="sql-keyword">AS</span> u <span class="sql-keyword">ON</span> a.user_id = u.id;
+            </div>
+        </div>
+
+        <div class="demo-container">
+            <h3>LEFT JOIN - Inclure les lignes sans correspondance</h3>
+            <div class="code-block">
+<span class="sql-comment">-- Récupérer tous les utilisateurs, même ceux sans articles</span>
+<span class="sql-keyword">SELECT</span>
+    u.nom,
+    u.prenom,
+    <span class="sql-keyword">COUNT</span>(a.id) <span class="sql-keyword">AS</span> nb_articles
+<span class="sql-keyword">FROM</span> users u
+<span class="sql-keyword">LEFT JOIN</span> articles a <span class="sql-keyword">ON</span> u.id = a.user_id
+<span class="sql-keyword">GROUP BY</span> u.id;
+            </div>
+        </div>
+
+        <h2>7. Fonctions d'agrégation</h2>
+
+        <div class="demo-container">
+            <h3>COUNT, SUM, AVG, MIN, MAX</h3>
+            <div class="code-block">
+<span class="sql-comment">-- Compter le nombre d'utilisateurs</span>
+<span class="sql-keyword">SELECT COUNT</span>(*) <span class="sql-keyword">AS</span> total_users <span class="sql-keyword">FROM</span> users;
+
+<span class="sql-comment">-- Nombre d'utilisateurs actifs</span>
+<span class="sql-keyword">SELECT COUNT</span>(*) <span class="sql-keyword">FROM</span> users <span class="sql-keyword">WHERE</span> actif = 1;
+
+<span class="sql-comment">-- Nombre d'articles par utilisateur</span>
+<span class="sql-keyword">SELECT</span>
+    u.nom,
+    <span class="sql-keyword">COUNT</span>(a.id) <span class="sql-keyword">AS</span> nb_articles
+<span class="sql-keyword">FROM</span> users u
+<span class="sql-keyword">LEFT JOIN</span> articles a <span class="sql-keyword">ON</span> u.id = a.user_id
+<span class="sql-keyword">GROUP BY</span> u.id;
+
+<span class="sql-comment">-- Utilisateurs avec plus de 5 articles</span>
+<span class="sql-keyword">SELECT</span>
+    u.nom,
+    <span class="sql-keyword">COUNT</span>(a.id) <span class="sql-keyword">AS</span> nb_articles
+<span class="sql-keyword">FROM</span> users u
+<span class="sql-keyword">LEFT JOIN</span> articles a <span class="sql-keyword">ON</span> u.id = a.user_id
+<span class="sql-keyword">GROUP BY</span> u.id
+<span class="sql-keyword">HAVING</span> nb_articles > 5;
+            </div>
+        </div>
+
+        <h2>8. Modifier une table existante</h2>
+
+        <div class="demo-container">
+            <h3>ALTER TABLE</h3>
+            <div class="code-block">
+<span class="sql-comment">-- Ajouter une colonne</span>
+<span class="sql-keyword">ALTER TABLE</span> users <span class="sql-keyword">ADD</span> telephone <span class="sql-keyword">VARCHAR</span>(20);
+
+<span class="sql-comment">-- Modifier une colonne</span>
+<span class="sql-keyword">ALTER TABLE</span> users <span class="sql-keyword">MODIFY</span> telephone <span class="sql-keyword">VARCHAR</span>(15);
+
+<span class="sql-comment">-- Renommer une colonne</span>
+<span class="sql-keyword">ALTER TABLE</span> users <span class="sql-keyword">CHANGE</span> telephone tel <span class="sql-keyword">VARCHAR</span>(15);
+
+<span class="sql-comment">-- Supprimer une colonne</span>
+<span class="sql-keyword">ALTER TABLE</span> users <span class="sql-keyword">DROP</span> tel;
+
+<span class="sql-comment">-- Supprimer une table</span>
+<span class="sql-keyword">DROP TABLE</span> articles;
+            </div>
+        </div>
+
+        <div class="note">
+            <strong>Note :</strong> MySQL stocke les données de manière persistante sur le disque dur, contrairement aux variables PHP qui disparaissent après l'exécution du script. C'est essentiel pour les applications web !
+        </div>
+
+        <div class="demo-container froggie-section">
+            <h2>Froggiesplaining</h2>
+            <div style="display: flex; align-items: start; gap: 20px; margin-top: 20px;">
+                <img src="../../html/img/froggie-300.png" alt="Froggie" style="width: 150px; height: 150px; object-fit: contain;">
+                <div style="flex: 1;">
+                    <p><strong>Ribbit ribbit !</strong> 🐸</p>
+                    <p>Les bases de données, c'est comme mon journal de chasse aux mouches ! Chaque table est comme une catégorie (mouches bleues, mouches vertes...), et chaque ligne est une mouche que j'ai attrapée avec ses caractéristiques (taille, goût, heure de capture).</p>
+                    <p><strong>Types de données :</strong></p>
+                    <ul>
+                        <li><strong>INT</strong> = Nombre de mouches attrapées (1, 2, 3...)</li>
+                        <li><strong>VARCHAR</strong> = Type de mouche ("bleue", "verte")</li>
+                        <li><strong>TEXT</strong> = Mes commentaires détaillés sur chaque mouche</li>
+                        <li><strong>DATETIME</strong> = Quand j'ai attrapé la mouche</li>
+                    </ul>
+                    <p><strong>Clé primaire (PRIMARY KEY) :</strong> C'est comme le numéro unique de chaque mouche dans mon journal - impossible d'avoir deux mouches avec le même numéro !</p>
+                    <p><strong>Clé étrangère (FOREIGN KEY) :</strong> Si j'ai une table "mares" et une table "mouches", la clé étrangère relie chaque mouche à sa mare d'origine. Comme ça, je sais d'où vient chaque mouche !</p>
+                    <p><strong>Astuce SQL :</strong> Testez toujours vos requêtes <code>UPDATE</code> et <code>DELETE</code> avec un <code>SELECT</code> d'abord ! Comme moi, je regarde bien avant de sauter sur un nénuphar !</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="nav-buttons">
+            <a href="index.html" class="btn">Retour à l'index</a>
+            <a href="../../html/css/froggie.html" class="btn">Voir Froggie</a>
+        </div>
+    </div>
+</body>
+</html>

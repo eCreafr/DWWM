@@ -1,0 +1,257 @@
+<!doctype html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Semaine 3 - Jour 2 | PDO et Connexion à MySQL</title>
+        <link rel="stylesheet" href="../../html/css/froggie.css" />
+        <style>
+            .demo-container {
+                max-width: 1200px;
+                margin: 40px auto;
+                padding: 20px;
+                font-family: Arial, sans-serif;
+            }
+            .demo-title {
+                text-align: center;
+                font-size: 2.5em;
+                margin-bottom: 20px;
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                background-clip: text;
+            }
+            .demo-intro {
+                background: #ecf0f1;
+                padding: 20px;
+                border-radius: 10px;
+                margin-bottom: 40px;
+                line-height: 1.6;
+            }
+            .demo-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                gap: 30px;
+                margin-bottom: 40px;
+            }
+            .demo-item {
+                border: 2px solid #667eea;
+                border-radius: 10px;
+                padding: 20px;
+                background: white;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            }
+            .demo-item h2 {
+                margin-top: 0;
+                color: #667eea;
+                font-size: 1.5em;
+            }
+            .code-example {
+                background: #2c3e50;
+                color: #ecf0f1;
+                padding: 15px;
+                border-radius: 5px;
+                font-family: 'Courier New', monospace;
+                font-size: 0.9em;
+                margin: 15px 0;
+                overflow-x: auto;
+            }
+            .result-box {
+                background: #e8f5e9;
+                border-left: 4px solid #4caf50;
+                padding: 10px;
+                margin: 10px 0;
+                border-radius: 3px;
+            }
+            .security-note {
+                background: #fff3cd;
+                border-left: 4px solid #ffc107;
+                padding: 10px;
+                margin: 10px 0;
+                border-radius: 3px;
+            }
+            .highlight {
+                color: #f39c12;
+                font-weight: bold;
+            }
+            .keyword {
+                color: #e74c3c;
+            }
+            .string {
+                color: #2ecc71;
+            }
+            .comment {
+                color: #95a5a6;
+                font-style: italic;
+            }
+            .variable {
+                color: #3498db;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="demo-container">
+            <h1 class="demo-title">Semaine 3 - Jour 2 : PDO et Connexion à MySQL</h1>
+
+            <div class="demo-intro">
+                <h3>Introduction à PDO</h3>
+                <p>
+                    <strong>PDO (PHP Data Objects)</strong> est une interface légère pour accéder aux bases de données en PHP. Il supporte plusieurs systèmes de gestion de bases de données (MySQL, PostgreSQL, SQLite...) et utilise des <strong>requêtes préparées</strong> pour protéger contre les injections SQL.
+                </p>
+                <p>
+                    Dans ce cours, nous allons apprendre à nous connecter à une base de données MySQL de manière sécurisée, à comprendre la différence entre PDO et mysqli, et à maîtriser les requêtes préparées pour manipuler les données en toute sécurité.
+                </p>
+            </div>
+
+            <!-- Concepts de base -->
+            <div class="demo-grid">
+                <div class="demo-item">
+                    <h2>1. PDO vs mysqli</h2>
+                    <p><strong>Pourquoi choisir PDO ?</strong></p>
+                    <div class="code-example">
+                        <span class="comment">// PDO (PHP Data Objects)</span><br />
+                        <span class="keyword">✅ Supporte plusieurs SGBD</span><br />
+                        <span class="keyword">✅ Syntaxe orientée objet claire</span><br />
+                        <span class="keyword">✅ Requêtes préparées natives</span><br />
+                        <span class="keyword">✅ Gestion d'erreurs avec exceptions</span><br />
+                        <span class="keyword">✅ Plus moderne et recommandé</span><br /><br />
+
+                        <span class="comment">// mysqli</span><br />
+                        <span class="keyword">❌ Uniquement pour MySQL</span><br />
+                        <span class="keyword">⚠️ Syntaxe procédurale ou objet</span><br />
+                        <span class="keyword">✅ Requêtes préparées disponibles</span><br />
+                        <span class="keyword">⚠️ Gestion d'erreurs basique</span><br />
+                        <span class="keyword">⚠️ Plus ancien</span>
+                    </div>
+                    <div class="security-note">
+                        <strong>Recommandation :</strong> Utilisez PDO pour tous vos nouveaux projets. Il offre plus de flexibilité et une meilleure sécurité.
+                    </div>
+                </div>
+
+                <div class="demo-item">
+                    <h2>2. Connexion sécurisée avec PDO</h2>
+                    <p><strong>Exemple de connexion basique</strong></p>
+                    <div class="code-example">
+                        <span class="comment">// config.php - Fichier de configuration</span><br />
+                        <span class="keyword">&lt;?php</span><br />
+                        <span class="variable">$host</span> = <span class="string">'localhost'</span>;<br />
+                        <span class="variable">$dbname</span> = <span class="string">'mon_site'</span>;<br />
+                        <span class="variable">$username</span> = <span class="string">'root'</span>;<br />
+                        <span class="variable">$password</span> = <span class="string">''</span>;<br /><br />
+
+                        <span class="keyword">try</span> {<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="variable">$pdo</span> = <span class="keyword">new</span> PDO(<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"mysql:host=<span class="variable">$host</span>;dbname=<span class="variable">$dbname</span>;charset=utf8mb4"</span>,<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="variable">$username</span>,<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="variable">$password</span><br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;);<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="variable">$pdo</span>->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">echo</span> <span class="string">"Connexion réussie !"</span>;<br />
+                        } <span class="keyword">catch</span> (PDOException <span class="variable">$e</span>) {<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">die</span>(<span class="string">"Erreur : "</span> . <span class="variable">$e</span>->getMessage());<br />
+                        }<br />
+                        <span class="keyword">?&gt;</span>
+                    </div>
+                    <div class="result-box">
+                        <strong>Résultat :</strong> Connexion réussie !
+                    </div>
+                </div>
+
+                <div class="demo-item">
+                    <h2>3. Requêtes préparées</h2>
+                    <p><strong>Protection contre les injections SQL</strong></p>
+                    <div class="code-example">
+                        <span class="keyword">&lt;?php</span><br />
+                        <span class="comment">// ❌ DANGEREUX : Vulnérable aux injections</span><br />
+                        <span class="variable">$email</span> = <span class="variable">$_POST</span>[<span class="string">'email'</span>];<br />
+                        <span class="variable">$query</span> = <span class="string">"SELECT * FROM users WHERE email = '<span class="variable">$email</span>'"</span>;<br /><br />
+
+                        <span class="comment">// ✅ SÉCURISÉ : Requête préparée</span><br />
+                        <span class="variable">$email</span> = <span class="variable">$_POST</span>[<span class="string">'email'</span>];<br />
+                        <span class="variable">$query</span> = <span class="string">"SELECT * FROM users WHERE email = :email"</span>;<br />
+                        <span class="variable">$stmt</span> = <span class="variable">$pdo</span>->prepare(<span class="variable">$query</span>);<br />
+                        <span class="variable">$stmt</span>->execute([<span class="string">'email'</span> => <span class="variable">$email</span>]);<br />
+                        <span class="variable">$user</span> = <span class="variable">$stmt</span>->fetch();<br />
+                        <span class="keyword">?&gt;</span>
+                    </div>
+                    <div class="security-note">
+                        <strong>Important :</strong> Les requêtes préparées empêchent les hackers d'injecter du code SQL malveillant dans vos requêtes.
+                    </div>
+                </div>
+
+                <div class="demo-item">
+                    <h2>4. Les 3 étapes d'une requête préparée</h2>
+                    <p><strong>PREPARE → EXECUTE → FETCH</strong></p>
+                    <div class="code-example">
+                        <span class="keyword">&lt;?php</span><br />
+                        <span class="comment">// 1. PREPARE : Préparer la requête</span><br />
+                        <span class="variable">$stmt</span> = <span class="variable">$pdo</span>->prepare(<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"SELECT * FROM users WHERE id = :id"</span><br />
+                        );<br /><br />
+
+                        <span class="comment">// 2. EXECUTE : Exécuter avec les valeurs</span><br />
+                        <span class="variable">$stmt</span>->execute([<span class="string">'id'</span> => <span class="variable">$id</span>]);<br /><br />
+
+                        <span class="comment">// 3. FETCH : Récupérer le résultat</span><br />
+                        <span class="variable">$user</span> = <span class="variable">$stmt</span>->fetch();<br />
+                        <span class="keyword">?&gt;</span>
+                    </div>
+                    <div class="result-box">
+                        <strong>Méthodes de récupération :</strong><br />
+                        • <code>fetch()</code> : Une seule ligne<br />
+                        • <code>fetchAll()</code> : Toutes les lignes<br />
+                        • <code>fetchColumn()</code> : Une seule colonne
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Zone Froggiesplaining -->
+        <div class="froggiesplaining">
+            <span> Froggiesplaining :</span>
+            <p>
+                <br />
+                <strong>Objectifs de ce cours :</strong><br />
+                ✅ Comprendre PDO vs mysqli<br />
+                ✅ Se connecter à MySQL de manière sécurisée<br />
+                ✅ Maîtriser les requêtes préparées<br />
+                ✅ Protéger contre les injections SQL<br />
+                ✅ Gérer les erreurs avec try/catch<br /><br />
+
+                <strong>Points clés à retenir :</strong><br />
+                • PDO supporte plusieurs bases de données (MySQL, PostgreSQL, SQLite...)<br />
+                • Les requêtes préparées protègent contre les injections SQL<br />
+                • TOUJOURS utiliser charset=utf8mb4 pour les caractères spéciaux<br />
+                • Activer ERRMODE_EXCEPTION pour détecter les erreurs<br />
+                • Utiliser htmlspecialchars() avant d'afficher des données<br />
+                • Ne JAMAIS afficher les messages d'erreur détaillés en production<br /><br />
+
+                <strong>Exercice pratique :</strong><br />
+                1. Créez une connexion PDO à votre base de données<br />
+                2. Créez une table "users" avec id, nom, email<br />
+                3. Insérez 3 utilisateurs avec des requêtes préparées<br />
+                4. Affichez tous les utilisateurs avec fetchAll()<br />
+                5. Recherchez un utilisateur par email avec fetch()<br />
+                6. Gérez les erreurs avec try/catch
+            </p>
+            <img src="../../html/img/froggie-300.png" alt="Froggie explain" class="overfrog" id="Froggie" />
+        </div>
+
+        <!-- Bouton retour -->
+        <a href="index.html" id="goToIndex" title="Retour à l'index">
+            <i class="bi bi-arrow-left"></i>
+        </a>
+
+        <!-- Lien vers Froggie -->
+        <a href="#Froggie">
+            <div id="goToFroggie">
+                <img src="../../html/img/froggie-300.png" width="50px" /><br /><i class="bi bi-arrow-bar-down"></i>
+            </div>
+        </a>
+
+        <!-- Footer -->
+        <div id="footerGit">
+            <a href="https://github.com/eCreafr/DWWM" target="_blank"><i class="bi bi-github">GitHub - eCrea</i></a>
+        </div>
+    </body>
+</html>

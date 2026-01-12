@@ -3,8 +3,8 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Plan de cours HTML/CSS - 4 semaines</title>
-        <link rel="stylesheet" href="../css/froggie.css" />
+        <title>Plan de cours PHP - 4 semaines</title>
+        <link rel="stylesheet" href="../../html/css/froggie.css" />
         <style>
             * {
                 box-sizing: border-box;
@@ -70,7 +70,7 @@
                 border-color: #667eea;
             }
             .lesson-number {
-                background: #667eea;
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
                 color: white;
                 width: 40px;
                 height: 40px;
@@ -146,53 +146,51 @@
     <body>
         <div class="container text-center">
             <img
-                src="../img/froggie-300.png"
+                src="../../html/img/froggie-300.png"
                 alt="Froggie"
                 id="FroggieHeader"
                 title="Froggie est dans la place"
                 style="margin-bottom: -60px"
             />
-            <h1>📚 Formation HTML & CSS</h1>
-            <p class="subtitle">Plan de cours sur 4 semaines - Du débutant à Flexbox, Grid et Bootstrap</p>
+            <h1>📚 Formation PHP</h1>
+            <p class="subtitle">Plan de cours sur 4 semaines - Du débutant à la maîtrise de la POO et du MVC</p>
 
             <!-- SEMAINE 1 -->
             <div class="week">
-                <h2 class="week-title">Semaine 1 : Fondamentaux HTML & CSS de base</h2>
+                <h2 class="week-title">Semaine 1 : Fondamentaux PHP & Syntaxe de base</h2>
                 <div class="lessons">
-                    <a href="semaine1-jour1-structure-page-html.html" class="lesson-card">
+                    <a href="semaine1-jour1-introduction-php.html" class="lesson-card">
                         <div class="lesson-number">1</div>
-                        <div class="lesson-title">Structure HTML</div>
-                        <div class="lesson-desc">DOCTYPE, html, head, body, métadonnées essentielles</div>
+                        <div class="lesson-title">Introduction à PHP</div>
+                        <div class="lesson-desc">Installation, syntaxe de base, echo, var_dump, premiers scripts</div>
                         <button class="status status-todo" data-lesson="1" onclick="toggleLesson(1)">📝 À faire</button>
                     </a>
 
-                    <a href="semaine1-jour2-balises-semantiques.html" class="lesson-card">
+                    <a href="semaine1-jour2-variables-types.html" class="lesson-card">
                         <div class="lesson-number">2</div>
-                        <div class="lesson-title">Balises sémantiques</div>
-                        <div class="lesson-desc">header, nav, main, section, article, aside, footer</div>
+                        <div class="lesson-title">Variables et types de données</div>
+                        <div class="lesson-desc">Variables, string, int, float, bool, array, conversion types</div>
                         <button class="status status-todo" data-lesson="2" onclick="toggleLesson(2)">📝 À faire</button>
                     </a>
 
-                    <a href="semaine1-jour3-texte-listes-liens.html" class="lesson-card">
+                    <a href="semaine1-jour3-operateurs-expressions.html" class="lesson-card">
                         <div class="lesson-number">3</div>
-                        <div class="lesson-title">Texte, Listes & Liens</div>
-                        <div class="lesson-desc">Titres (h1-h6), paragraphes, listes (ul/ol), liens (a), emphases</div>
+                        <div class="lesson-title">Opérateurs et expressions</div>
+                        <div class="lesson-desc">Arithmétiques, comparaison, logiques, concaténation</div>
                         <button class="status status-todo" data-lesson="3" onclick="toggleLesson(3)">📝 À faire</button>
                     </a>
 
-                    <a href="semaine1-jour4-images-tableaux-formulaires.html" class="lesson-card">
+                    <a href="semaine1-jour4-structures-conditionnelles.html" class="lesson-card">
                         <div class="lesson-number">4</div>
-                        <div class="lesson-title">Images, Tableaux & Formulaires</div>
-                        <div class="lesson-desc">img, figure, table, form, input, select, textarea, button</div>
+                        <div class="lesson-title">Structures conditionnelles</div>
+                        <div class="lesson-desc">if/else, switch, ternaire, match (PHP 8)</div>
                         <button class="status status-todo" data-lesson="4" onclick="toggleLesson(4)">📝 À faire</button>
                     </a>
 
-                    <a href="semaine1-jour5-introduction-css.html" class="lesson-card">
+                    <a href="semaine1-jour5-boucles.html" class="lesson-card">
                         <div class="lesson-number">5</div>
-                        <div class="lesson-title">Introduction CSS</div>
-                        <div class="lesson-desc">
-                            Sélecteurs, propriétés, couleurs, typographie, 3 méthodes d'intégration
-                        </div>
+                        <div class="lesson-title">Boucles</div>
+                        <div class="lesson-desc">for, while, foreach, break, continue</div>
                         <button class="status status-todo" data-lesson="5" onclick="toggleLesson(5)">📝 À faire</button>
                     </a>
                 </div>
@@ -200,40 +198,40 @@
 
             <!-- SEMAINE 2 -->
             <div class="week">
-                <h2 class="week-title">Semaine 2 : CSS approfondi & Box Model</h2>
+                <h2 class="week-title">Semaine 2 : Fonctions, Tableaux & Formulaires</h2>
                 <div class="lessons">
-                    <a href="semaine2-jour1-box-model.html" class="lesson-card">
+                    <a href="semaine2-jour1-fonctions.html" class="lesson-card">
                         <div class="lesson-number">6</div>
-                        <div class="lesson-title">Box Model</div>
-                        <div class="lesson-desc">padding, border, margin, box-sizing, width/height, display</div>
+                        <div class="lesson-title">Fonctions</div>
+                        <div class="lesson-desc">Déclaration, paramètres, return, scope, fonctions anonymes</div>
                         <button class="status status-todo" data-lesson="6" onclick="toggleLesson(6)">📝 À faire</button>
                     </a>
 
-                    <a href="semaine2-jour2-positionnement.html" class="lesson-card">
+                    <a href="semaine2-jour2-tableaux-base.html" class="lesson-card">
                         <div class="lesson-number">7</div>
-                        <div class="lesson-title">Positionnement CSS</div>
-                        <div class="lesson-desc">static, relative, absolute, fixed, sticky, z-index, float</div>
+                        <div class="lesson-title">Tableaux - Partie 1</div>
+                        <div class="lesson-desc">Indexés, associatifs, multidimensionnels, count()</div>
                         <button class="status status-todo" data-lesson="7" onclick="toggleLesson(7)">📝 À faire</button>
                     </a>
 
-                    <a href="semaine2-jour3-responsive-design.html" class="lesson-card">
+                    <a href="semaine2-jour3-tableaux-methodes.html" class="lesson-card">
                         <div class="lesson-number">8</div>
-                        <div class="lesson-title">Responsive Design</div>
-                        <div class="lesson-desc">Unités relatives (%, rem, vw/vh), Media queries, Mobile First</div>
+                        <div class="lesson-title">Tableaux - Partie 2</div>
+                        <div class="lesson-desc">array_map, array_filter, sort, implode, explode</div>
                         <button class="status status-todo" data-lesson="8" onclick="toggleLesson(8)">📝 À faire</button>
                     </a>
 
-                    <a href="semaine2-jour4-backgrounds-pseudo-classes.html" class="lesson-card">
+                    <a href="semaine2-jour4-formulaires-get-post.html" class="lesson-card">
                         <div class="lesson-number">9</div>
-                        <div class="lesson-title">Backgrounds & Pseudo-classes</div>
-                        <div class="lesson-desc">background-image, gradients, :hover, :focus, :nth-child</div>
+                        <div class="lesson-title">Formulaires GET & POST</div>
+                        <div class="lesson-desc">$_GET, $_POST, $_REQUEST, traitement formulaires</div>
                         <button class="status status-todo" data-lesson="9" onclick="toggleLesson(9)">📝 À faire</button>
                     </a>
 
-                    <a href="semaine2-jour5-pseudo-elements-transitions.html" class="lesson-card">
+                    <a href="semaine2-jour5-validation-securite.html" class="lesson-card">
                         <div class="lesson-number">10</div>
-                        <div class="lesson-title">Pseudo-éléments & Transitions</div>
-                        <div class="lesson-desc">::before, ::after, transition, transform basics</div>
+                        <div class="lesson-title">Validation et sécurité</div>
+                        <div class="lesson-desc">Validation, htmlspecialchars, filter_var, CSRF</div>
                         <button class="status status-todo" data-lesson="10" onclick="toggleLesson(10)">
                             📝 À faire
                         </button>
@@ -243,48 +241,48 @@
 
             <!-- SEMAINE 3 -->
             <div class="week">
-                <h2 class="week-title">Semaine 3 : Flexbox & Grid</h2>
+                <h2 class="week-title">Semaine 3 : Base de données & Sessions</h2>
                 <div class="lessons">
-                    <a href="semaine3-jour1-flexbox-introduction.html" class="lesson-card">
+                    <a href="semaine3-jour1-introduction-mysql.html" class="lesson-card">
                         <div class="lesson-number">11</div>
-                        <div class="lesson-title">Introduction Flexbox</div>
-                        <div class="lesson-desc">display: flex, flex-direction, justify-content, align-items</div>
+                        <div class="lesson-title">Introduction MySQL</div>
+                        <div class="lesson-desc">SQL, CREATE, INSERT, SELECT, UPDATE, DELETE</div>
                         <button class="status status-todo" data-lesson="11" onclick="toggleLesson(11)">
                             📝 À faire
                         </button>
                     </a>
 
-                    <a href="semaine3-jour2-flexbox-avance.html" class="lesson-card">
+                    <a href="semaine3-jour2-pdo-connexion.html" class="lesson-card">
                         <div class="lesson-number">12</div>
-                        <div class="lesson-title">Flexbox Avancé</div>
-                        <div class="lesson-desc">flex-wrap, flex-grow, flex-shrink, flex-basis, gap, order</div>
+                        <div class="lesson-title">PDO & Connexion BDD</div>
+                        <div class="lesson-desc">PDO, connexion sécurisée, requêtes préparées</div>
                         <button class="status status-todo" data-lesson="12" onclick="toggleLesson(12)">
                             📝 À faire
                         </button>
                     </a>
 
-                    <a href="semaine3-jour3-grid-introduction.html" class="lesson-card">
+                    <a href="semaine3-jour3-crud-complet.html" class="lesson-card">
                         <div class="lesson-number">13</div>
-                        <div class="lesson-title">Introduction Grid</div>
-                        <div class="lesson-desc">display: grid, grid-template-columns/rows, gap</div>
+                        <div class="lesson-title">CRUD complet</div>
+                        <div class="lesson-desc">Create, Read, Update, Delete avec PDO</div>
                         <button class="status status-todo" data-lesson="13" onclick="toggleLesson(13)">
                             📝 À faire
                         </button>
                     </a>
 
-                    <a href="semaine3-jour4-grid-avance.html" class="lesson-card">
+                    <a href="semaine3-jour4-sessions-cookies.html" class="lesson-card">
                         <div class="lesson-number">14</div>
-                        <div class="lesson-title">Grid Avancé</div>
-                        <div class="lesson-desc">grid-area, grid-template-areas, auto-fill, auto-fit</div>
+                        <div class="lesson-title">Sessions & Cookies</div>
+                        <div class="lesson-desc">session_start(), $_SESSION, $_COOKIE</div>
                         <button class="status status-todo" data-lesson="14" onclick="toggleLesson(14)">
                             📝 À faire
                         </button>
                     </a>
 
-                    <a href="semaine3-jour5-flexbox-grid-combines.html" class="lesson-card">
+                    <a href="semaine3-jour5-authentification.html" class="lesson-card">
                         <div class="lesson-number">15</div>
-                        <div class="lesson-title">Flexbox + Grid combinés</div>
-                        <div class="lesson-desc">Quand utiliser l'un ou l'autre, nesting, layouts complexes</div>
+                        <div class="lesson-title">Système d'authentification</div>
+                        <div class="lesson-desc">Login, logout, password_hash(), protection pages</div>
                         <button class="status status-todo" data-lesson="15" onclick="toggleLesson(15)">
                             📝 À faire
                         </button>
@@ -294,49 +292,49 @@
 
             <!-- SEMAINE 4 -->
             <div class="week">
-                <h2 class="week-title">Semaine 4 : Bootstrap & Projet final</h2>
+                <h2 class="week-title">Semaine 4 : POO & Architecture MVC</h2>
                 <div class="lessons">
-                    <a href="semaine4-jour1-bootstrap-introduction.html" class="lesson-card">
+                    <a href="semaine4-jour1-introduction-poo.html" class="lesson-card">
                         <div class="lesson-number">16</div>
-                        <div class="lesson-title">Introduction Bootstrap</div>
-                        <div class="lesson-desc">Installation (CDN), système de grille, container, row, col</div>
+                        <div class="lesson-title">Introduction POO</div>
+                        <div class="lesson-desc">Classes, objets, propriétés, méthodes, constructeur</div>
                         <button class="status status-todo" data-lesson="16" onclick="toggleLesson(16)">
                             📝 À faire
                         </button>
                     </a>
 
-                    <a href="semaine4-jour2-composants-bootstrap.html" class="lesson-card">
+                    <a href="semaine4-jour2-poo-avancee.html" class="lesson-card">
                         <div class="lesson-number">17</div>
-                        <div class="lesson-title">Composants Bootstrap</div>
-                        <div class="lesson-desc">navbar, cards, buttons, forms, classes utilitaires</div>
+                        <div class="lesson-title">POO avancée</div>
+                        <div class="lesson-desc">Héritage, visibilité, static, interfaces, traits</div>
                         <button class="status status-todo" data-lesson="17" onclick="toggleLesson(17)">
                             📝 À faire
                         </button>
                     </a>
 
-                    <a href="semaine4-jour3-bootstrap-avance.html" class="lesson-card">
+                    <a href="semaine4-jour3-namespaces-autoload.html" class="lesson-card">
                         <div class="lesson-number">18</div>
-                        <div class="lesson-title">Bootstrap Avancé</div>
-                        <div class="lesson-desc">carousel, modal, accordion, responsive utilities, icônes</div>
+                        <div class="lesson-title">Namespaces & Autoload</div>
+                        <div class="lesson-desc">Namespaces, use, autoload PSR-4, Composer</div>
                         <button class="status status-todo" data-lesson="18" onclick="toggleLesson(18)">
                             📝 À faire
                         </button>
                     </a>
 
-                    <a href="semaine4-jour4-personnalisation-bootstrap.html" class="lesson-card">
+                    <a href="semaine4-jour4-introduction-mvc.html" class="lesson-card">
                         <div class="lesson-number">19</div>
-                        <div class="lesson-title">Personnalisation Bootstrap</div>
-                        <div class="lesson-desc">Surcharger les styles, custom colors, combiner avec CSS perso</div>
+                        <div class="lesson-title">Introduction MVC</div>
+                        <div class="lesson-desc">Pattern MVC, routing, contrôleurs, vues, modèles</div>
                         <button class="status status-todo" data-lesson="19" onclick="toggleLesson(19)">
                             📝 À faire
                         </button>
                     </a>
 
-                    <a href="semaine4-jour5-projet-final.html" class="lesson-card">
+                    <a href="semaine4-jour5-projet-mvc.html" class="lesson-card">
                         <div class="lesson-number">20</div>
-                        <div class="lesson-title">🎓 Projet Final</div>
+                        <div class="lesson-title">🎓 Projet MVC complet</div>
                         <div class="lesson-desc">
-                            Site web complet multi-pages responsive avec Bootstrap + CSS custom
+                            Application MVC complète avec POO, BDD, authentification
                         </div>
                         <button class="status status-todo" data-lesson="20" onclick="toggleLesson(20)">
                             📝 À faire
@@ -349,15 +347,14 @@
             <div class="footer-info">
                 <h3>📖 Progression recommandée</h3>
                 <p style="color: #7f8c8d; line-height: 1.8">
-                    <strong>Semaine 1 :</strong> Bases HTML et premier contact avec CSS<br />
-                    <strong>Semaine 2 :</strong> Maîtrise du Box Model et positionnement<br />
-                    <strong>Semaine 3 :</strong> Layouts modernes avec Flexbox et Grid<br />
-                    <strong>Semaine 4 :</strong> Framework Bootstrap et projet complet<br /><br />
+                    <strong>Semaine 1 :</strong> Bases PHP et syntaxe fondamentale<br />
+                    <strong>Semaine 2 :</strong> Fonctions, tableaux et formulaires<br />
+                    <strong>Semaine 3 :</strong> Base de données et authentification<br />
+                    <strong>Semaine 4 :</strong> POO et architecture MVC<br /><br />
 
-                    <strong style="color: #667eea">💡 Conseil :</strong> Pratiquez chaque jour avec les exercices
-                    proposés !<br />
-                    <strong style="color: #667eea">🎯 Objectif :</strong> À la fin, vous serez capable de créer des
-                    sites web responsive modernes.
+                    <strong style="color: #667eea">💡 Conseil :</strong> Installez XAMPP/WAMP pour tester le code PHP !<br />
+                    <strong style="color: #667eea">🎯 Objectif :</strong> Créer des applications web complètes et
+                    professionnelles.
                 </p>
             </div>
 
@@ -407,31 +404,31 @@
                 }
 
                 const button = document.querySelector(`button[data-lesson="${lessonNumber}"]`);
-                const currentStatus = getCookie(`lesson_${lessonNumber}`);
+                const currentStatus = getCookie(`lesson_php_${lessonNumber}`);
 
                 if (currentStatus === 'done') {
                     // Passer de "Fait" à "À faire"
                     button.className = 'status status-todo';
                     button.innerHTML = '📝 À faire';
-                    setCookie(`lesson_${lessonNumber}`, 'todo', 365);
+                    setCookie(`lesson_php_${lessonNumber}`, 'todo', 365);
                 } else {
                     // Passer de "À faire" à "Fait"
                     button.className = 'status status-done';
                     button.innerHTML = '✅ Fait';
-                    setCookie(`lesson_${lessonNumber}`, 'done', 365);
+                    setCookie(`lesson_php_${lessonNumber}`, 'done', 365);
                 }
             }
 
             // Fonction pour marquer une leçon comme faite (au clic sur la carte)
             function markLessonAsDone(lessonNumber) {
                 const button = document.querySelector(`button[data-lesson="${lessonNumber}"]`);
-                const currentStatus = getCookie(`lesson_${lessonNumber}`);
+                const currentStatus = getCookie(`lesson_php_${lessonNumber}`);
 
                 // Marquer comme fait seulement si ce n'est pas déjà fait
                 if (currentStatus !== 'done') {
                     button.className = 'status status-done';
                     button.innerHTML = '✅ Fait';
-                    setCookie(`lesson_${lessonNumber}`, 'done', 365);
+                    setCookie(`lesson_php_${lessonNumber}`, 'done', 365);
                 }
             }
 
@@ -441,7 +438,7 @@
                 const buttons = document.querySelectorAll('button[data-lesson]');
                 buttons.forEach((button) => {
                     const lessonNumber = button.getAttribute('data-lesson');
-                    const savedStatus = getCookie(`lesson_${lessonNumber}`);
+                    const savedStatus = getCookie(`lesson_php_${lessonNumber}`);
 
                     if (savedStatus === 'done') {
                         button.className = 'status status-done';

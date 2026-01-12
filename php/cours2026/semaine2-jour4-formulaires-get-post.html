@@ -1,0 +1,344 @@
+<!doctype html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Semaine 2 - Jour 4 | Formulaires GET et POST</title>
+        <link rel="stylesheet" href="../../html/css/froggie.css" />
+        <style>
+            .demo-container {
+                max-width: 1200px;
+                margin: 40px auto;
+                padding: 20px;
+                font-family: Arial, sans-serif;
+            }
+            .demo-title {
+                text-align: center;
+                font-size: 2.5em;
+                margin-bottom: 20px;
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                background-clip: text;
+            }
+            .demo-intro {
+                background: #ecf0f1;
+                padding: 20px;
+                border-radius: 10px;
+                margin-bottom: 40px;
+                line-height: 1.6;
+            }
+            .demo-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+                gap: 30px;
+                margin-bottom: 40px;
+            }
+            .demo-item {
+                border: 2px solid #667eea;
+                border-radius: 10px;
+                padding: 20px;
+                background: white;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            }
+            .demo-item h2 {
+                margin-top: 0;
+                color: #667eea;
+                font-size: 1.5em;
+            }
+            .code-example {
+                background: #2c3e50;
+                color: #ecf0f1;
+                padding: 15px;
+                border-radius: 5px;
+                font-family: 'Courier New', monospace;
+                font-size: 0.9em;
+                margin: 15px 0;
+                overflow-x: auto;
+            }
+            .result-box {
+                background: #e8f5e9;
+                border-left: 4px solid #4caf50;
+                padding: 10px;
+                margin: 10px 0;
+                border-radius: 3px;
+            }
+            .security-note {
+                background: #fff3cd;
+                border-left: 4px solid #ffc107;
+                padding: 10px;
+                margin: 10px 0;
+                border-radius: 3px;
+            }
+            .highlight {
+                color: #f39c12;
+                font-weight: bold;
+            }
+            .keyword {
+                color: #e74c3c;
+            }
+            .string {
+                color: #2ecc71;
+            }
+            .comment {
+                color: #95a5a6;
+                font-style: italic;
+            }
+            .variable {
+                color: #3498db;
+            }
+            table {
+                width: 100%;
+                border-collapse: collapse;
+                margin: 15px 0;
+            }
+            th,
+            td {
+                border: 1px solid #ddd;
+                padding: 12px;
+                text-align: left;
+            }
+            th {
+                background: #667eea;
+                color: white;
+            }
+            tr:nth-child(even) {
+                background: #f9f9f9;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="demo-container">
+            <h1 class="demo-title">Semaine 2 - Jour 4 : Formulaires GET et POST en PHP</h1>
+
+            <div class="demo-intro">
+                <h3>Les méthodes HTTP GET et POST</h3>
+                <p>
+                    Les formulaires HTML peuvent envoyer des données au serveur via deux méthodes principales :
+                    <strong>GET</strong> et <strong>POST</strong>. Chaque méthode a ses avantages et ses cas d'usage
+                    spécifiques.
+                </p>
+                <p>
+                    GET affiche les données dans l'URL (visible) et convient aux recherches, tandis que POST les cache
+                    dans le corps de la requête (invisible) et convient aux données sensibles ou volumineuses.
+                </p>
+            </div>
+
+            <!-- Concepts de base -->
+            <div class="demo-grid">
+                <div class="demo-item">
+                    <h2>1. GET vs POST - Comparaison</h2>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Caractéristique</th>
+                                <th>GET</th>
+                                <th>POST</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Visibilité</td>
+                                <td>Dans l'URL</td>
+                                <td>Dans le corps HTTP</td>
+                            </tr>
+                            <tr>
+                                <td>Taille</td>
+                                <td>~2000 caractères</td>
+                                <td>Illimitée</td>
+                            </tr>
+                            <tr>
+                                <td>Sécurité</td>
+                                <td>Moins sécurisé</td>
+                                <td>Plus sécurisé</td>
+                            </tr>
+                            <tr>
+                                <td>Usage</td>
+                                <td>Recherches, filtres</td>
+                                <td>Connexion, données</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="demo-item">
+                    <h2>2. Méthode GET - Recherche</h2>
+                    <p><strong>Formulaire GET :</strong> Les données sont visibles dans l'URL</p>
+                    <div class="code-example">
+                        <span class="comment">&lt;!-- formulaire.html --&gt;</span><br />
+                        &lt;form <span class="keyword">action=</span><span class="string">"traitement.php"</span>
+                        <span class="keyword">method=</span><span class="string">"GET"</span>&gt;<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;&lt;input <span class="keyword">type=</span
+                        ><span class="string">"text"</span> <span class="keyword">name=</span
+                        ><span class="string">"q"</span> placeholder=<span class="string">"Rechercher..."</span
+                        >&gt;<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;&lt;button <span class="keyword">type=</span
+                        ><span class="string">"submit"</span>&gt;Rechercher&lt;/button&gt;<br />
+                        &lt;/form&gt;<br /><br />
+
+                        <span class="keyword">&lt;?php</span><br />
+                        <span class="comment">// traitement.php</span><br />
+                        <span class="variable">$recherche</span> = <span class="variable">$_GET</span>[<span
+                            class="string"
+                            >'q'</span
+                        >] ?? <span class="string">''</span>;<br />
+                        <span class="keyword">echo</span> <span class="string">"Recherche : "</span> .
+                        <span class="keyword">htmlspecialchars</span>(<span class="variable">$recherche</span>);<br />
+                        <span class="keyword">?&gt;</span>
+                    </div>
+                    <div class="result-box"><strong>URL générée :</strong> traitement.php?q=php</div>
+                </div>
+
+                <div class="demo-item">
+                    <h2>3. Méthode POST - Inscription</h2>
+                    <p><strong>Formulaire POST :</strong> Les données sont cachées et sécurisées</p>
+                    <div class="code-example">
+                        <span class="comment">&lt;!-- inscription.html --&gt;</span><br />
+                        &lt;form <span class="keyword">method=</span><span class="string">"POST"</span>
+                        <span class="keyword">action=</span><span class="string">"inscription.php"</span>&gt;<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;&lt;input <span class="keyword">type=</span
+                        ><span class="string">"email"</span> <span class="keyword">name=</span
+                        ><span class="string">"email"</span> <span class="keyword">required</span>&gt;<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;&lt;input <span class="keyword">type=</span
+                        ><span class="string">"password"</span> <span class="keyword">name=</span
+                        ><span class="string">"password"</span> <span class="keyword">required</span>&gt;<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;&lt;button <span class="keyword">type=</span
+                        ><span class="string">"submit"</span>&gt;S'inscrire&lt;/button&gt;<br />
+                        &lt;/form&gt;<br /><br />
+
+                        <span class="keyword">&lt;?php</span><br />
+                        <span class="comment">// inscription.php</span><br />
+                        <span class="keyword">if</span> (<span class="variable">$_SERVER</span>[<span class="string"
+                            >'REQUEST_METHOD'</span
+                        >] === <span class="string">'POST'</span>) {<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="variable">$email</span> =
+                        <span class="variable">$_POST</span>[<span class="string">'email'</span>];<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="variable">$password</span> =
+                        <span class="variable">$_POST</span>[<span class="string">'password'</span>];<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">echo</span>
+                        <span class="string">"Inscription : "</span> .
+                        <span class="keyword">htmlspecialchars</span>(<span class="variable">$email</span>);<br />
+                        }<br />
+                        <span class="keyword">?&gt;</span>
+                    </div>
+                    <div class="security-note">
+                        <strong>Note :</strong> Les mots de passe ne sont JAMAIS visibles dans l'URL avec POST
+                    </div>
+                </div>
+
+                <div class="demo-item">
+                    <h2>4. Types de champs & Upload</h2>
+                    <p><strong>Checkboxes multiples :</strong></p>
+                    <div class="code-example">
+                        <span class="comment">&lt;!-- Utiliser [] pour tableaux --&gt;</span><br />
+                        &lt;input <span class="keyword">type=</span><span class="string">"checkbox"</span>
+                        <span class="keyword">name=</span><span class="string">"hobbies[]"</span>
+                        <span class="keyword">value=</span><span class="string">"sport"</span>&gt; Sport<br />
+                        &lt;input <span class="keyword">type=</span><span class="string">"checkbox"</span>
+                        <span class="keyword">name=</span><span class="string">"hobbies[]"</span>
+                        <span class="keyword">value=</span><span class="string">"lecture"</span>&gt; Lecture<br /><br />
+
+                        <span class="keyword">&lt;?php</span><br />
+                        <span class="variable">$hobbies</span> = <span class="variable">$_POST</span>[<span
+                            class="string"
+                            >'hobbies'</span
+                        >] ?? [];<br />
+                        <span class="keyword">foreach</span> (<span class="variable">$hobbies</span>
+                        <span class="keyword">as</span> <span class="variable">$hobby</span>) {<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">echo</span>
+                        <span class="keyword">htmlspecialchars</span>(<span class="variable">$hobby</span>) .
+                        <span class="string">" "</span>;<br />
+                        }<br />
+                        <span class="keyword">?&gt;</span>
+                    </div>
+                    <p><strong>Upload de fichiers :</strong></p>
+                    <div class="code-example">
+                        &lt;form <span class="keyword">method=</span><span class="string">"POST"</span>
+                        <span class="keyword">enctype=</span><span class="string">"multipart/form-data"</span>&gt;<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;&lt;input <span class="keyword">type=</span
+                        ><span class="string">"file"</span> <span class="keyword">name=</span
+                        ><span class="string">"fichier"</span>&gt;<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;&lt;button <span class="keyword">type=</span
+                        ><span class="string">"submit"</span>&gt;Uploader&lt;/button&gt;<br />
+                        &lt;/form&gt;<br /><br />
+
+                        <span class="keyword">&lt;?php</span><br />
+                        <span class="variable">$fichier</span> = <span class="variable">$_FILES</span>[<span
+                            class="string"
+                            >'fichier'</span
+                        >];<br />
+                        <span class="keyword">if</span> (<span class="variable">$fichier</span>[<span class="string"
+                            >'error'</span
+                        >] === UPLOAD_ERR_OK) {<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="variable">$dest</span> =
+                        <span class="string">"uploads/"</span> . <span class="keyword">basename</span>(<span
+                            class="variable"
+                            >$fichier</span
+                        >[<span class="string">'name'</span>]);<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">move_uploaded_file</span>(<span class="variable"
+                            >$fichier</span
+                        >[<span class="string">'tmp_name'</span>], <span class="variable">$dest</span>);<br />
+                        }<br />
+                        <span class="keyword">?&gt;</span>
+                    </div>
+                    <div class="security-note">
+                        <strong>Important :</strong> Toujours valider le type et la taille des fichiers uploadés
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Zone Froggiesplaining -->
+        <div class="froggiesplaining">
+            <span> Froggiesplaining :</span>
+            <p>
+                <br />
+                <strong>Objectifs de ce cours :</strong><br />
+                ✅ Comprendre les différences entre GET et POST<br />
+                ✅ Savoir quand utiliser chaque méthode<br />
+                ✅ Récupérer les données avec $_GET et $_POST<br />
+                ✅ Gérer les formulaires avec différents types de champs<br />
+                ✅ Uploader des fichiers avec $_FILES<br /><br />
+
+                <strong>Points clés à retenir :</strong><br />
+                • GET = Données visibles dans l'URL (recherches, filtres, pagination)<br />
+                • POST = Données cachées (connexion, inscription, envoi de données)<br />
+                • Toujours utiliser htmlspecialchars() pour afficher les données<br />
+                • Ne jamais faire confiance aux données utilisateur<br />
+                • Les checkboxes multiples nécessitent [] dans le name<br />
+                • Upload de fichiers = method POST + enctype multipart/form-data<br /><br />
+
+                <strong>Règle d'or :</strong><br />
+                GET pour LIRE des données (lecture seule), POST pour MODIFIER des données (création, mise à jour,
+                suppression). Comme moi : je regarde les mouches avec mes yeux (GET), mais je les attrape avec ma langue
+                (POST) !<br /><br />
+
+                <strong>Exercice pratique :</strong><br />
+                1. Créez un formulaire de recherche avec GET<br />
+                2. Créez un formulaire d'inscription avec POST (email, password)<br />
+                3. Affichez les résultats avec htmlspecialchars()<br />
+                4. Créez un formulaire avec checkboxes multiples (hobbies[])<br />
+                5. Créez un formulaire d'upload de fichiers<br />
+                6. Vérifiez toujours $_SERVER['REQUEST_METHOD']
+            </p>
+            <img src="../../html/img/froggie-300.png" alt="Froggie explain" class="overfrog" id="Froggie" />
+        </div>
+
+        <!-- Bouton retour -->
+        <a href="index.html" id="goToIndex" title="Retour à l'index">
+            <i class="bi bi-arrow-left"></i>
+        </a>
+
+        <!-- Lien vers Froggie -->
+        <a href="#Froggie">
+            <div id="goToFroggie">
+                <img src="../../html/img/froggie-300.png" width="50px" /><br /><i class="bi bi-arrow-bar-down"></i>
+            </div>
+        </a>
+
+        <!-- Footer -->
+        <div id="footerGit">
+            <a href="https://github.com/eCreafr/DWWM" target="_blank"><i class="bi bi-github">GitHub - eCrea</i></a>
+        </div>
+    </body>
+</html>

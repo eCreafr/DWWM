@@ -4,7 +4,7 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Semaine 3 - Jour 2 | Manipulation du DOM</title>
-        <link rel="stylesheet" href="../css/froggie.css" />
+        <link rel="stylesheet" href="../../html/css/froggie.css" />
         <style>
             .demo-container {
                 max-width: 1200px;
@@ -244,7 +244,7 @@
 
                     <div class="interactive-demo">
                         <h3>Démo interactive</h3>
-                        <img src="https://via.placeholder.com/150/f093fb/ffffff?text=Image+1"
+                        <img src="https://picsum.photos/150/150?random=1"
                              id="demo-img" class="demo-image" alt="Demo" />
                         <div>
                             <button class="demo-button" onclick="changeImage(1)">Image 1</button>
@@ -453,7 +453,7 @@
                 6. Bonus : Créez une liste de 5 éléments dynamiquement<br />
                 7. Bonus 2 : Créez un bouton qui change de couleur au clic avec classList.toggle
             </p>
-            <img src="../img/froggie-300.png" alt="Froggie explain" class="overfrog" id="Froggie" />
+            <img src="../../html/img/froggie-300.png" alt="Froggie explain" class="overfrog" id="Froggie" />
         </div>
 
         <!-- Bouton retour -->
@@ -464,7 +464,7 @@
         <!-- Lien vers Froggie -->
         <a href="#Froggie">
             <div id="goToFroggie">
-                <img src="../img/froggie-300.png" width="50px" /><br /><i class="bi bi-arrow-bar-down"></i>
+                <img src="../../html/img/froggie-300.png" width="50px" /><br /><i class="bi bi-arrow-bar-down"></i>
             </div>
         </a>
 
@@ -477,8 +477,7 @@
             // Démos interactives
             function changeImage(num) {
                 const img = document.getElementById('demo-img');
-                const colors = ['f093fb', 'f5576c', '2ecc71'];
-                img.src = `https://via.placeholder.com/150/${colors[num-1]}/ffffff?text=Image+${num}`;
+                img.src = `https://picsum.photos/150/150?random=${num}`;
             }
 
             function changeStyle(type) {

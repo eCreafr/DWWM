@@ -1,0 +1,255 @@
+<!doctype html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Semaine 2 - Jour 3 | Méthodes avancées des tableaux</title>
+        <link rel="stylesheet" href="../../html/css/froggie.css" />
+        <style>
+            .demo-container {
+                max-width: 1200px;
+                margin: 40px auto;
+                padding: 20px;
+                font-family: Arial, sans-serif;
+            }
+            .demo-title {
+                text-align: center;
+                font-size: 2.5em;
+                margin-bottom: 20px;
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                background-clip: text;
+            }
+            .demo-intro {
+                background: #ecf0f1;
+                padding: 20px;
+                border-radius: 10px;
+                margin-bottom: 40px;
+                line-height: 1.6;
+            }
+            .demo-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                gap: 30px;
+                margin-bottom: 40px;
+            }
+            .demo-item {
+                border: 2px solid #667eea;
+                border-radius: 10px;
+                padding: 20px;
+                background: white;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            }
+            .demo-item h2 {
+                margin-top: 0;
+                color: #667eea;
+                font-size: 1.5em;
+            }
+            .code-example {
+                background: #2c3e50;
+                color: #ecf0f1;
+                padding: 15px;
+                border-radius: 5px;
+                font-family: 'Courier New', monospace;
+                font-size: 0.9em;
+                margin: 15px 0;
+                overflow-x: auto;
+            }
+            .result-box {
+                background: #e8f5e9;
+                border-left: 4px solid #4caf50;
+                padding: 10px;
+                margin: 10px 0;
+                border-radius: 3px;
+            }
+            .security-note {
+                background: #fff3cd;
+                border-left: 4px solid #ffc107;
+                padding: 10px;
+                margin: 10px 0;
+                border-radius: 3px;
+            }
+            .highlight {
+                color: #f39c12;
+                font-weight: bold;
+            }
+            .keyword {
+                color: #e74c3c;
+            }
+            .string {
+                color: #2ecc71;
+            }
+            .comment {
+                color: #95a5a6;
+                font-style: italic;
+            }
+            .variable {
+                color: #3498db;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="demo-container">
+            <h1 class="demo-title">Semaine 2 - Jour 3 : Méthodes et fonctions avancées des tableaux</h1>
+
+            <div class="demo-intro">
+                <h3>Fonctions avancées pour manipuler les tableaux</h3>
+                <p>
+                    PHP offre une bibliothèque riche de fonctions pour manipuler les tableaux : <strong>trier, filtrer, transformer, fusionner</strong>... Ces fonctions sont essentielles pour traiter efficacement des données complexes.
+                </p>
+                <p>
+                    Nous allons découvrir les fonctions les plus utiles : sort/asort/ksort pour le tri, array_filter/array_map pour la transformation, array_merge pour la fusion, et bien d'autres.
+                </p>
+            </div>
+
+            <!-- Concepts de base -->
+            <div class="demo-grid">
+                <div class="demo-item">
+                    <h2>1. Tri de tableaux</h2>
+                    <p><strong>sort/rsort :</strong> Trier les valeurs en ordre croissant/décroissant</p>
+                    <div class="code-example">
+                        <span class="keyword">&lt;?php</span><br />
+                        <span class="variable">$nombres</span> = [5, 2, 8, 1, 9];<br />
+                        <span class="keyword">sort</span>(<span class="variable">$nombres</span>);  <span class="comment">// [1, 2, 5, 8, 9]</span><br />
+                        <span class="keyword">rsort</span>(<span class="variable">$nombres</span>); <span class="comment">// [9, 8, 5, 2, 1]</span><br /><br />
+
+                        <span class="comment">// asort : Tri en conservant les clés</span><br />
+                        <span class="variable">$notes</span> = [<span class="string">"Jean"</span> => 15, <span class="string">"Marie"</span> => 18, <span class="string">"Paul"</span> => 12];<br />
+                        <span class="keyword">asort</span>(<span class="variable">$notes</span>);<br />
+                        <span class="comment">// ["Paul" => 12, "Jean" => 15, "Marie" => 18]</span><br /><br />
+
+                        <span class="comment">// ksort : Tri par clés</span><br />
+                        <span class="keyword">ksort</span>(<span class="variable">$notes</span>);<br />
+                        <span class="comment">// ["Jean" => 15, "Marie" => 18, "Paul" => 12]</span><br />
+                        <span class="keyword">?&gt;</span>
+                    </div>
+                    <div class="security-note">
+                        <strong>Note :</strong> Les fonctions de tri modifient le tableau original, elles ne retournent pas un nouveau tableau.
+                    </div>
+                </div>
+
+                <div class="demo-item">
+                    <h2>2. Filtrage et transformation</h2>
+                    <p><strong>array_filter :</strong> Filtrer les éléments selon une condition</p>
+                    <div class="code-example">
+                        <span class="keyword">&lt;?php</span><br />
+                        <span class="comment">// Filtrer les nombres pairs</span><br />
+                        <span class="variable">$nombres</span> = [1, 2, 3, 4, 5, 6];<br />
+                        <span class="variable">$pairs</span> = <span class="keyword">array_filter</span>(<span class="variable">$nombres</span>, <span class="keyword">function</span>(<span class="variable">$n</span>) {<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span> <span class="variable">$n</span> % 2 == 0;<br />
+                        });<br />
+                        <span class="comment">// $pairs = [1 => 2, 3 => 4, 5 => 6]</span><br /><br />
+
+                        <span class="comment">// array_map : Transformer chaque élément</span><br />
+                        <span class="variable">$doubles</span> = <span class="keyword">array_map</span>(<span class="keyword">function</span>(<span class="variable">$n</span>) {<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span> <span class="variable">$n</span> * 2;<br />
+                        }, <span class="variable">$nombres</span>);<br />
+                        <span class="comment">// [2, 4, 6, 8, 10, 12]</span><br />
+                        <span class="keyword">?&gt;</span>
+                    </div>
+                    <div class="result-box">
+                        <strong>Astuce :</strong> array_filter et array_map ne modifient pas le tableau original, ils retournent un nouveau tableau.
+                    </div>
+                </div>
+
+                <div class="demo-item">
+                    <h2>3. Fusion et combinaison</h2>
+                    <p><strong>array_merge :</strong> Fusionner plusieurs tableaux</p>
+                    <div class="code-example">
+                        <span class="keyword">&lt;?php</span><br />
+                        <span class="variable">$fruits1</span> = [<span class="string">"Pomme"</span>, <span class="string">"Banane"</span>];<br />
+                        <span class="variable">$fruits2</span> = [<span class="string">"Orange"</span>, <span class="string">"Kiwi"</span>];<br />
+                        <span class="variable">$tous</span> = <span class="keyword">array_merge</span>(<span class="variable">$fruits1</span>, <span class="variable">$fruits2</span>);<br />
+                        <span class="comment">// ["Pomme", "Banane", "Orange", "Kiwi"]</span><br /><br />
+
+                        <span class="comment">// array_combine : Créer tableau clé => valeur</span><br />
+                        <span class="variable">$cles</span> = [<span class="string">"nom"</span>, <span class="string">"prenom"</span>, <span class="string">"age"</span>];<br />
+                        <span class="variable">$valeurs</span> = [<span class="string">"Dupont"</span>, <span class="string">"Jean"</span>, 30];<br />
+                        <span class="variable">$personne</span> = <span class="keyword">array_combine</span>(<span class="variable">$cles</span>, <span class="variable">$valeurs</span>);<br />
+                        <span class="comment">// ["nom" => "Dupont", "prenom" => "Jean", "age" => 30]</span><br />
+                        <span class="keyword">?&gt;</span>
+                    </div>
+                </div>
+
+                <div class="demo-item">
+                    <h2>4. Fonctions mathématiques & Exemple pratique</h2>
+                    <p><strong>array_sum, max, min :</strong> Calculs sur les tableaux</p>
+                    <div class="code-example">
+                        <span class="keyword">&lt;?php</span><br />
+                        <span class="variable">$notes</span> = [12, 15, 18, 14, 16];<br /><br />
+
+                        <span class="variable">$somme</span> = <span class="keyword">array_sum</span>(<span class="variable">$notes</span>);     <span class="comment">// 75</span><br />
+                        <span class="variable">$moyenne</span> = <span class="variable">$somme</span> / <span class="keyword">count</span>(<span class="variable">$notes</span>); <span class="comment">// 15</span><br />
+                        <span class="variable">$max</span> = <span class="keyword">max</span>(<span class="variable">$notes</span>);              <span class="comment">// 18</span><br />
+                        <span class="variable">$min</span> = <span class="keyword">min</span>(<span class="variable">$notes</span>);              <span class="comment">// 12</span><br /><br />
+
+                        <span class="comment">// Exemple : Filtrer notes >= 10</span><br />
+                        <span class="variable">$etudiants</span> = [<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;[<span class="string">"nom"</span> => <span class="string">"Martin"</span>, <span class="string">"note"</span> => 15],<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;[<span class="string">"nom"</span> => <span class="string">"Durand"</span>, <span class="string">"note"</span> => 8],<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;[<span class="string">"nom"</span> => <span class="string">"Petit"</span>, <span class="string">"note"</span> => 12]<br />
+                        ];<br /><br />
+
+                        <span class="variable">$admis</span> = <span class="keyword">array_filter</span>(<span class="variable">$etudiants</span>, <span class="keyword">function</span>(<span class="variable">$e</span>) {<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span> <span class="variable">$e</span>[<span class="string">"note"</span>] >= 10;<br />
+                        });<br />
+                        <span class="comment">// 2 étudiants admis</span><br />
+                        <span class="keyword">?&gt;</span>
+                    </div>
+                    <div class="result-box">
+                        <strong>Résultat :</strong> Moyenne = 15, Max = 18, Min = 12, Admis = 2
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Zone Froggiesplaining -->
+        <div class="froggiesplaining">
+            <span> Froggiesplaining :</span>
+            <p>
+                <br />
+                <strong>Objectifs de ce cours :</strong><br />
+                ✅ Maîtriser les fonctions de tri (sort, asort, ksort)<br />
+                ✅ Filtrer des données avec array_filter<br />
+                ✅ Transformer des tableaux avec array_map<br />
+                ✅ Fusionner des tableaux avec array_merge<br />
+                ✅ Utiliser les fonctions mathématiques (sum, max, min)<br /><br />
+
+                <strong>Points clés à retenir :</strong><br />
+                • sort() modifie le tableau original (pas de return)<br />
+                • array_filter() et array_map() retournent un nouveau tableau<br />
+                • asort() conserve les clés, sort() réindexe<br />
+                • array_merge() fusionne plusieurs tableaux<br />
+                • array_sum(), max(), min() pour les calculs<br />
+                • Les fonctions avec callback permettent des transformations puissantes<br /><br />
+
+                <strong>Exercice pratique :</strong><br />
+                1. Créez un tableau de 10 nombres aléatoires<br />
+                2. Triez-les avec sort() et rsort()<br />
+                3. Filtrez les nombres > 5 avec array_filter()<br />
+                4. Doublez chaque nombre avec array_map()<br />
+                5. Calculez la somme avec array_sum()<br />
+                6. Trouvez le maximum et le minimum
+            </p>
+            <img src="../../html/img/froggie-300.png" alt="Froggie explain" class="overfrog" id="Froggie" />
+        </div>
+
+        <!-- Bouton retour -->
+        <a href="index.html" id="goToIndex" title="Retour à l'index">
+            <i class="bi bi-arrow-left"></i>
+        </a>
+
+        <!-- Lien vers Froggie -->
+        <a href="#Froggie">
+            <div id="goToFroggie">
+                <img src="../../html/img/froggie-300.png" width="50px" /><br /><i class="bi bi-arrow-bar-down"></i>
+            </div>
+        </a>
+
+        <!-- Footer -->
+        <div id="footerGit">
+            <a href="https://github.com/eCreafr/DWWM" target="_blank"><i class="bi bi-github">GitHub - eCrea</i></a>
+        </div>
+    </body>
+</html>

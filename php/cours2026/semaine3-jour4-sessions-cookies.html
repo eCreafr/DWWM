@@ -1,0 +1,367 @@
+<!doctype html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Semaine 3 - Jour 4 | Sessions et Cookies</title>
+        <link rel="stylesheet" href="../../html/css/froggie.css" />
+        <style>
+            .demo-container {
+                max-width: 1200px;
+                margin: 40px auto;
+                padding: 20px;
+                font-family: Arial, sans-serif;
+            }
+            .demo-title {
+                text-align: center;
+                font-size: 2.5em;
+                margin-bottom: 20px;
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                background-clip: text;
+            }
+            .demo-intro {
+                background: #ecf0f1;
+                padding: 20px;
+                border-radius: 10px;
+                margin-bottom: 40px;
+                line-height: 1.6;
+            }
+            .demo-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                gap: 30px;
+                margin-bottom: 40px;
+            }
+            .demo-item {
+                border: 2px solid #667eea;
+                border-radius: 10px;
+                padding: 20px;
+                background: white;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            }
+            .demo-item h2 {
+                margin-top: 0;
+                color: #667eea;
+                font-size: 1.5em;
+            }
+            .code-example {
+                background: #2c3e50;
+                color: #ecf0f1;
+                padding: 15px;
+                border-radius: 5px;
+                font-family: 'Courier New', monospace;
+                font-size: 0.9em;
+                margin: 15px 0;
+                overflow-x: auto;
+            }
+            .result-box {
+                background: #e8f5e9;
+                border-left: 4px solid #4caf50;
+                padding: 10px;
+                margin: 10px 0;
+                border-radius: 3px;
+            }
+            .security-note {
+                background: #fff3cd;
+                border-left: 4px solid #ffc107;
+                padding: 10px;
+                margin: 10px 0;
+                border-radius: 3px;
+            }
+            .highlight {
+                color: #f39c12;
+                font-weight: bold;
+            }
+            .keyword {
+                color: #e74c3c;
+            }
+            .string {
+                color: #2ecc71;
+            }
+            .comment {
+                color: #95a5a6;
+                font-style: italic;
+            }
+            .variable {
+                color: #3498db;
+            }
+            table {
+                width: 100%;
+                border-collapse: collapse;
+                margin: 15px 0;
+            }
+            th, td {
+                border: 1px solid #ddd;
+                padding: 12px;
+                text-align: left;
+            }
+            th {
+                background: #667eea;
+                color: white;
+            }
+            tr:nth-child(even) {
+                background: #f9f9f9;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="demo-container">
+            <h1 class="demo-title">Semaine 3 - Jour 4 : Sessions et Cookies</h1>
+
+            <div class="demo-intro">
+                <h3>Qu'est-ce qu'une session ?</h3>
+                <p>
+                    <strong>Sessions : Mémoire côté serveur</strong><br>
+                    Une session permet de <strong>stocker des informations</strong> sur un utilisateur pendant qu'il navigue sur votre site.
+                    Les données sont stockées sur le <strong>serveur</strong>, pas sur l'ordinateur du visiteur.
+                </p>
+                <p>
+                    <strong>Fonctionnement :</strong><br>
+                    1. L'utilisateur visite le site<br>
+                    2. PHP génère un ID de session unique<br>
+                    3. Cet ID est envoyé au navigateur (cookie PHPSESSID)<br>
+                    4. Les données sont stockées sur le serveur
+                </p>
+                <p class="security-note">
+                    <strong>Exemple concret :</strong> Quand vous vous connectez sur un site, votre nom d'utilisateur est stocké en session. Vous restez connecté sur toutes les pages jusqu'à la déconnexion.
+                </p>
+            </div>
+
+            <!-- Concepts de base -->
+            <div class="demo-grid">
+                <div class="demo-item">
+                    <h2>1. session_start() et $_SESSION</h2>
+                    <p><strong>Démarrer une session</strong></p>
+                    <div class="code-example">
+<span class="keyword">&lt;?php</span>
+<span class="comment">// session_exemple.php</span>
+
+<span class="comment">// TOUJOURS appeler session_start() en PREMIER</span>
+<span class="comment">// Avant tout code HTML ou echo !</span>
+<span class="keyword">session_start</span>();
+
+<span class="comment">// Maintenant on peut utiliser $_SESSION</span>
+<span class="keyword">echo</span> <span class="string">"Session démarrée !"</span>;
+<span class="keyword">echo</span> <span class="string">"&lt;br&gt;ID de session : "</span> . session_id();
+<span class="keyword">?&gt;</span>
+                    </div>
+                    <div class="security-note">
+                        <strong>Attention :</strong> session_start() doit être appelé AVANT tout output HTML, même un simple espace ou saut de ligne !
+                    </div>
+                </div>
+
+                <div class="demo-item">
+                    <h2>2. Stocker et lire des données</h2>
+                    <p><strong>Page 1 : Stocker des données</strong></p>
+                    <div class="code-example">
+<span class="keyword">&lt;?php</span>
+<span class="comment">// page1.php - Stocker des données</span>
+<span class="keyword">session_start</span>();
+
+<span class="comment">// Stocker des informations</span>
+<span class="variable">$_SESSION</span>[<span class="string">'prenom'</span>] = <span class="string">'Jean'</span>;
+<span class="variable">$_SESSION</span>[<span class="string">'nom'</span>] = <span class="string">'Dupont'</span>;
+<span class="variable">$_SESSION</span>[<span class="string">'role'</span>] = <span class="string">'admin'</span>;
+<span class="variable">$_SESSION</span>[<span class="string">'connecte'</span>] = <span class="keyword">true</span>;
+
+<span class="keyword">echo</span> <span class="string">"Données stockées en session !"</span>;
+<span class="keyword">?&gt;</span>
+                    </div>
+                    <p><strong>Page 2 : Lire les données</strong></p>
+                    <div class="code-example">
+<span class="keyword">&lt;?php</span>
+<span class="comment">// page2.php - Lire les données</span>
+<span class="keyword">session_start</span>();
+
+<span class="comment">// Lire les informations</span>
+<span class="keyword">if</span> (<span class="keyword">isset</span>(<span class="variable">$_SESSION</span>[<span class="string">'prenom'</span>])) {
+    <span class="keyword">echo</span> <span class="string">"Bonjour "</span> . htmlspecialchars(<span class="variable">$_SESSION</span>[<span class="string">'prenom'</span>]) . <span class="string">" !"</span>;
+}
+<span class="keyword">?&gt;</span>
+                    </div>
+                    <div class="result-box">
+                        <strong>Résultat attendu :</strong><br>
+                        Bonjour Jean !<br>
+                        Nom complet : Dupont<br>
+                        Rôle : admin
+                    </div>
+                </div>
+
+                <div class="demo-item">
+                    <h2>3. Cookies : $_COOKIE et setcookie()</h2>
+                    <p><strong>Cookies : Mémoire côté client</strong></p>
+                    <p>Un cookie est un <strong>petit fichier texte</strong> stocké sur l'<strong>ordinateur du visiteur</strong>.</p>
+                    <div class="code-example">
+<span class="keyword">&lt;?php</span>
+<span class="comment">// Créer un cookie simple</span>
+<span class="keyword">setcookie</span>(<span class="string">'prenom'</span>, <span class="string">'Jean'</span>);
+
+<span class="comment">// Cookie qui expire dans 7 jours</span>
+<span class="variable">$expiration</span> = <span class="keyword">time</span>() + (7 * 24 * 60 * 60);
+<span class="keyword">setcookie</span>(<span class="string">'utilisateur'</span>, <span class="string">'Jean Dupont'</span>, <span class="variable">$expiration</span>);
+
+<span class="comment">// Cookie avec options de sécurité</span>
+<span class="keyword">setcookie</span>(
+    <span class="string">'theme'</span>,
+    <span class="string">'sombre'</span>,
+    <span class="keyword">time</span>() + (30 * 24 * 60 * 60),
+    <span class="string">'/'</span>,
+    <span class="string">''</span>,
+    <span class="keyword">true</span>,  <span class="comment">// Secure (HTTPS)</span>
+    <span class="keyword">true</span>   <span class="comment">// HttpOnly</span>
+);
+<span class="keyword">?&gt;</span>
+                    </div>
+                </div>
+
+                <div class="demo-item">
+                    <h2>4. Différence Sessions vs Cookies</h2>
+                    <table>
+                        <tr>
+                            <th>Critère</th>
+                            <th>Sessions</th>
+                            <th>Cookies</th>
+                        </tr>
+                        <tr>
+                            <td><strong>Stockage</strong></td>
+                            <td>Sur le serveur</td>
+                            <td>Sur l'ordinateur du visiteur</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Sécurité</strong></td>
+                            <td>Plus sécurisé</td>
+                            <td>Moins sécurisé</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Taille</strong></td>
+                            <td>Illimitée</td>
+                            <td>4 Ko max</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Durée de vie</strong></td>
+                            <td>Jusqu'à fermeture navigateur</td>
+                            <td>Jusqu'à expiration définie</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Utilisation</strong></td>
+                            <td>Données sensibles</td>
+                            <td>Préférences</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Exemples pratiques -->
+            <div style="background: #e8f4f8; padding: 25px; border-radius: 10px; margin: 30px 0">
+                <h2 style="color: #2c3e50; text-align: center; margin-top: 0">Exemple : Panier d'achat simple</h2>
+                <div class="code-example">
+<span class="keyword">&lt;?php</span>
+<span class="comment">// panier.php - Système de panier simple</span>
+<span class="keyword">session_start</span>();
+
+<span class="comment">// Initialiser le panier s'il n'existe pas</span>
+<span class="keyword">if</span> (!<span class="keyword">isset</span>(<span class="variable">$_SESSION</span>[<span class="string">'panier'</span>])) {
+    <span class="variable">$_SESSION</span>[<span class="string">'panier'</span>] = [];
+}
+
+<span class="comment">// Ajouter un produit au panier</span>
+<span class="keyword">if</span> (<span class="keyword">isset</span>(<span class="variable">$_POST</span>[<span class="string">'ajouter'</span>])) {
+    <span class="variable">$produit_id</span> = <span class="variable">$_POST</span>[<span class="string">'produit_id'</span>] ?? 0;
+    <span class="variable">$nom</span> = <span class="variable">$_POST</span>[<span class="string">'nom'</span>] ?? <span class="string">''</span>;
+    <span class="variable">$prix</span> = <span class="variable">$_POST</span>[<span class="string">'prix'</span>] ?? 0;
+
+    <span class="comment">// Vérifier si le produit existe déjà</span>
+    <span class="keyword">if</span> (<span class="keyword">isset</span>(<span class="variable">$_SESSION</span>[<span class="string">'panier'</span>][<span class="variable">$produit_id</span>])) {
+        <span class="variable">$_SESSION</span>[<span class="string">'panier'</span>][<span class="variable">$produit_id</span>][<span class="string">'quantite'</span>]++;
+    } <span class="keyword">else</span> {
+        <span class="variable">$_SESSION</span>[<span class="string">'panier'</span>][<span class="variable">$produit_id</span>] = [
+            <span class="string">'nom'</span> => <span class="variable">$nom</span>,
+            <span class="string">'prix'</span> => <span class="variable">$prix</span>,
+            <span class="string">'quantite'</span> => 1
+        ];
+    }
+}
+<span class="keyword">?&gt;</span>
+                </div>
+                <div class="result-box">
+                    <strong>Fonctionnalités :</strong>
+                    <ul>
+                        <li>Ajouter des produits avec quantité automatique</li>
+                        <li>Afficher le contenu avec calcul du total</li>
+                        <li>Supprimer un produit individuel</li>
+                        <li>Vider tout le panier</li>
+                        <li>Les données persistent entre les pages</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Erreurs courantes -->
+            <div style="background: #ffebee; padding: 25px; border-radius: 10px; margin: 30px 0">
+                <h2 style="color: #c62828; text-align: center; margin-top: 0">Règle de sécurité</h2>
+                <div class="security-note">
+                    <ul>
+                        <li><strong>Sessions</strong> : Pour les données sensibles (ID utilisateur, rôle, panier)</li>
+                        <li><strong>Cookies</strong> : Pour les préférences non sensibles (langue, thème, "se souvenir")</li>
+                        <li>Ne JAMAIS stocker de mot de passe ou données sensibles dans un cookie</li>
+                        <li>Toujours utiliser htmlspecialchars() sur les données de cookies</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Zone Froggiesplaining -->
+        <div class="froggiesplaining">
+            <span> Froggiesplaining :</span>
+            <p>
+                <br />
+                <strong>Objectifs de ce cours :</strong><br />
+                ✅ Comprendre la différence entre sessions et cookies<br />
+                ✅ Utiliser session_start() et $_SESSION<br />
+                ✅ Créer et lire des cookies avec setcookie() et $_COOKIE<br />
+                ✅ Gérer un panier d'achat simple<br />
+                ✅ Savoir quand utiliser sessions vs cookies<br /><br />
+
+                <strong>Points clés à retenir :</strong><br />
+                • Les <strong>sessions</strong> stockent les données sur le serveur (sécurisé)<br />
+                • Les <strong>cookies</strong> stockent les données chez le client (moins sécurisé)<br />
+                • session_start() doit être appelé <strong>avant tout HTML</strong><br />
+                • setcookie() doit aussi être appelé <strong>avant tout HTML</strong><br />
+                • Les cookies sont disponibles au <strong>prochain chargement de page</strong><br />
+                • Utiliser <strong>sessions pour données sensibles</strong>, cookies pour préférences<br />
+                • Toujours utiliser <strong>htmlspecialchars()</strong> sur les données affichées<br />
+                • Pour supprimer un cookie, définir une date d'expiration passée<br /><br />
+
+                <strong>Analogie de Froggie :</strong><br />
+                <strong>Sessions = Ma mémoire à court terme :</strong> Je me souviens de toi tant que tu es dans ma mare (site web). Stocké dans mon cerveau (serveur) - personne ne peut y accéder !<br /><br />
+                <strong>Cookies = Ma mémoire à long terme :</strong> Je te donne un petit nénuphar (cookie) que tu gardes chez toi. Quand tu reviens, tu me le montres : "Ah oui, je me souviens de toi !"<br /><br />
+
+                <strong>Exercice pratique :</strong><br />
+                1. Créez deux fichiers : page1.php et page2.php<br />
+                2. Dans page1.php, utilisez session_start() et stockez votre nom en session<br />
+                3. Dans page2.php, utilisez session_start() et affichez le nom stocké<br />
+                4. Créez un cookie pour sauvegarder une préférence de thème<br />
+                5. Testez la persistance des données entre les pages
+            </p>
+            <img src="../../html/img/froggie-300.png" alt="Froggie explain" class="overfrog" id="Froggie" />
+        </div>
+
+        <!-- Bouton retour -->
+        <a href="index.html" id="goToIndex" title="Retour à l'index">
+            <i class="bi bi-arrow-left"></i>
+        </a>
+
+        <!-- Lien vers Froggie -->
+        <a href="#Froggie">
+            <div id="goToFroggie">
+                <img src="../../html/img/froggie-300.png" width="50px" /><br /><i class="bi bi-arrow-bar-down"></i>
+            </div>
+        </a>
+
+        <!-- Footer -->
+        <div id="footerGit">
+            <a href="https://github.com/eCreafr/DWWM" target="_blank"><i class="bi bi-github">GitHub - eCrea</i></a>
+        </div>
+    </body>
+</html>

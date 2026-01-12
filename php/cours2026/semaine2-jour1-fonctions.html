@@ -1,0 +1,399 @@
+<!doctype html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Semaine 2 - Jour 1 | Fonctions</title>
+        <link rel="stylesheet" href="../../html/css/froggie.css" />
+        <style>
+            .demo-container {
+                max-width: 1200px;
+                margin: 40px auto;
+                padding: 20px;
+                font-family: Arial, sans-serif;
+            }
+            .demo-title {
+                text-align: center;
+                font-size: 2.5em;
+                margin-bottom: 20px;
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                background-clip: text;
+            }
+            .demo-intro {
+                background: #ecf0f1;
+                padding: 20px;
+                border-radius: 10px;
+                margin-bottom: 40px;
+                line-height: 1.6;
+            }
+            .demo-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                gap: 30px;
+                margin-bottom: 40px;
+            }
+            .demo-item {
+                border: 2px solid #667eea;
+                border-radius: 10px;
+                padding: 20px;
+                background: white;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            }
+            .demo-item h2 {
+                margin-top: 0;
+                color: #667eea;
+                font-size: 1.5em;
+            }
+            .code-example {
+                background: #2c3e50;
+                color: #ecf0f1;
+                padding: 15px;
+                border-radius: 5px;
+                font-family: 'Courier New', monospace;
+                font-size: 0.9em;
+                margin: 15px 0;
+                overflow-x: auto;
+            }
+            .result-box {
+                background: #e8f5e9;
+                border-left: 4px solid #4caf50;
+                padding: 10px;
+                margin: 10px 0;
+                border-radius: 3px;
+            }
+            .security-note {
+                background: #fff3cd;
+                border-left: 4px solid #ffc107;
+                padding: 10px;
+                margin: 10px 0;
+                border-radius: 3px;
+            }
+            .highlight {
+                color: #f39c12;
+                font-weight: bold;
+            }
+            .keyword {
+                color: #e74c3c;
+            }
+            .string {
+                color: #2ecc71;
+            }
+            .comment {
+                color: #95a5a6;
+                font-style: italic;
+            }
+            .variable {
+                color: #3498db;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="demo-container">
+            <h1 class="demo-title">Semaine 2 - Jour 1 : Fonctions</h1>
+
+            <div class="demo-intro">
+                <h3>Les Fonctions en PHP</h3>
+                <p>
+                    Une <strong>fonction</strong> est un bloc de code réutilisable qui effectue une tâche spécifique.
+                    Les fonctions évitent la répétition de code et rendent votre programme plus organisé et maintenable.
+                </p>
+                <p>
+                    <strong>Avantages des fonctions :</strong><br>
+                    • Réutilisabilité : écrire une fois, utiliser plusieurs fois<br>
+                    • Organisation : découper le code en petites parties logiques<br>
+                    • Maintenance : modifier à un seul endroit<br>
+                    • Lisibilité : code plus clair avec des noms de fonctions explicites
+                </p>
+            </div>
+
+            <!-- Concepts de base -->
+            <div class="demo-grid">
+                <div class="demo-item">
+                    <h2>1. Déclaration de Fonctions</h2>
+                    <p>Créer et appeler une fonction :</p>
+                    <div class="code-example">
+                        <span class="keyword">&lt;?php</span><br />
+                        <span class="comment">// Déclaration d'une fonction simple</span><br />
+                        <span class="keyword">function</span> <span class="highlight">direBonjour</span>() {<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">echo</span> <span class="string">"Bonjour le monde !"</span>;<br />
+                        }<br /><br />
+
+                        <span class="comment">// Appel de la fonction</span><br />
+                        <span class="highlight">direBonjour</span>(); <span class="comment">// Bonjour le monde !</span><br /><br />
+
+                        <span class="comment">// Fonction avec paramètres</span><br />
+                        <span class="keyword">function</span> <span class="highlight">saluer</span>(<span class="variable">$nom</span>) {<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">echo</span> <span class="string">"Bonjour "</span> . <span class="variable">$nom</span> . <span class="string">" !"</span>;<br />
+                        }<br /><br />
+
+                        <span class="highlight">saluer</span>(<span class="string">"Alice"</span>); <span class="comment">// Bonjour Alice !</span><br />
+                        <span class="highlight">saluer</span>(<span class="string">"Bob"</span>);   <span class="comment">// Bonjour Bob !</span><br /><br />
+
+                        <span class="comment">// Plusieurs paramètres</span><br />
+                        <span class="keyword">function</span> <span class="highlight">presenter</span>(<span class="variable">$prenom</span>, <span class="variable">$age</span>) {<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">echo</span> <span class="string">"Je m'appelle "</span> . <span class="variable">$prenom</span> . <span class="string">" et j'ai "</span> . <span class="variable">$age</span> . <span class="string">" ans"</span>;<br />
+                        }<br /><br />
+
+                        <span class="highlight">presenter</span>(<span class="string">"Marie"</span>, <span class="highlight">25</span>);<br />
+                        <span class="keyword">?&gt;</span>
+                    </div>
+                    <div class="result-box">
+                        <strong>Résultat :</strong><br>
+                        Bonjour le monde !<br>
+                        Bonjour Alice !<br>
+                        Bonjour Bob !<br>
+                        Je m'appelle Marie et j'ai 25 ans
+                    </div>
+                </div>
+
+                <div class="demo-item">
+                    <h2>2. Valeurs de Retour</h2>
+                    <p>Retourner une valeur avec <strong>return</strong> :</p>
+                    <div class="code-example">
+                        <span class="keyword">&lt;?php</span><br />
+                        <span class="comment">// Fonction qui retourne un résultat</span><br />
+                        <span class="keyword">function</span> <span class="highlight">additionner</span>(<span class="variable">$a</span>, <span class="variable">$b</span>) {<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span> <span class="variable">$a</span> + <span class="variable">$b</span>;<br />
+                        }<br /><br />
+
+                        <span class="variable">$resultat</span> = <span class="highlight">additionner</span>(<span class="highlight">5</span>, <span class="highlight">3</span>);<br />
+                        <span class="keyword">echo</span> <span class="variable">$resultat</span>; <span class="comment">// 8</span><br /><br />
+
+                        <span class="comment">// Utiliser directement le résultat</span><br />
+                        <span class="keyword">echo</span> <span class="highlight">additionner</span>(<span class="highlight">10</span>, <span class="highlight">20</span>); <span class="comment">// 30</span><br /><br />
+
+                        <span class="comment">// Fonction avec condition</span><br />
+                        <span class="keyword">function</span> <span class="highlight">estMajeur</span>(<span class="variable">$age</span>) {<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span> (<span class="variable">$age</span> &gt;= <span class="highlight">18</span>) {<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span> <span class="keyword">true</span>;<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;} <span class="keyword">else</span> {<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span> <span class="keyword">false</span>;<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;}<br />
+                        }<br /><br />
+
+                        <span class="keyword">if</span> (<span class="highlight">estMajeur</span>(<span class="highlight">20</span>)) {<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">echo</span> <span class="string">"Accès autorisé"</span>;<br />
+                        }<br />
+                        <span class="keyword">?&gt;</span>
+                    </div>
+                    <div class="result-box">
+                        <strong>Résultat :</strong><br>
+                        8<br>
+                        30<br>
+                        Accès autorisé
+                    </div>
+                </div>
+
+                <div class="demo-item">
+                    <h2>3. Paramètres par Défaut</h2>
+                    <p>Définir des valeurs par défaut pour les paramètres :</p>
+                    <div class="code-example">
+                        <span class="keyword">&lt;?php</span><br />
+                        <span class="comment">// Paramètre avec valeur par défaut</span><br />
+                        <span class="keyword">function</span> <span class="highlight">saluerAvecPolitesse</span>(<span class="variable">$nom</span>, <span class="variable">$titre</span> = <span class="string">"M./Mme"</span>) {<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">echo</span> <span class="string">"Bonjour "</span> . <span class="variable">$titre</span> . <span class="string">" "</span> . <span class="variable">$nom</span>;<br />
+                        }<br /><br />
+
+                        <span class="highlight">saluerAvecPolitesse</span>(<span class="string">"Dupont"</span>); <span class="comment">// Bonjour M./Mme Dupont</span><br />
+                        <span class="highlight">saluerAvecPolitesse</span>(<span class="string">"Martin"</span>, <span class="string">"Dr."</span>); <span class="comment">// Bonjour Dr. Martin</span><br /><br />
+
+                        <span class="comment">// Calculer le prix TTC</span><br />
+                        <span class="keyword">function</span> <span class="highlight">calculerPrixTTC</span>(<span class="variable">$prixHT</span>, <span class="variable">$tauxTVA</span> = <span class="highlight">0.20</span>) {<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span> <span class="variable">$prixHT</span> * (<span class="highlight">1</span> + <span class="variable">$tauxTVA</span>);<br />
+                        }<br /><br />
+
+                        <span class="keyword">echo</span> <span class="highlight">calculerPrixTTC</span>(<span class="highlight">100</span>);      <span class="comment">// 120 (TVA 20%)</span><br />
+                        <span class="keyword">echo</span> <span class="highlight">calculerPrixTTC</span>(<span class="highlight">100</span>, <span class="highlight">0.055</span>); <span class="comment">// 105.5 (TVA 5.5%)</span><br /><br />
+
+                        <span class="comment">// Plusieurs paramètres par défaut</span><br />
+                        <span class="keyword">function</span> <span class="highlight">creerUtilisateur</span>(<span class="variable">$nom</span>, <span class="variable">$role</span> = <span class="string">"user"</span>, <span class="variable">$actif</span> = <span class="keyword">true</span>) {<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span> [<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"nom"</span> =&gt; <span class="variable">$nom</span>,<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"role"</span> =&gt; <span class="variable">$role</span>,<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"actif"</span> =&gt; <span class="variable">$actif</span><br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;];<br />
+                        }<br /><br />
+
+                        <span class="keyword">print_r</span>(<span class="highlight">creerUtilisateur</span>(<span class="string">"Alice"</span>));<br />
+                        <span class="keyword">?&gt;</span>
+                    </div>
+                    <div class="security-note">
+                        <strong>Bonne pratique :</strong> Les paramètres par défaut doivent être placés
+                        APRÈS les paramètres obligatoires.
+                    </div>
+                </div>
+
+                <div class="demo-item">
+                    <h2>4. Portée (Scope) & Fonctions Anonymes</h2>
+                    <p>Variables locales vs globales :</p>
+                    <div class="code-example">
+                        <span class="keyword">&lt;?php</span><br />
+                        <span class="comment">// Portée locale</span><br />
+                        <span class="variable">$x</span> = <span class="highlight">10</span>; <span class="comment">// Variable globale</span><br /><br />
+
+                        <span class="keyword">function</span> <span class="highlight">tester</span>() {<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="variable">$y</span> = <span class="highlight">5</span>; <span class="comment">// Variable locale</span><br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">echo</span> <span class="variable">$y</span>; <span class="comment">// 5 (fonctionne)</span><br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">// echo $x; // Erreur ! $x n'existe pas ici</span><br />
+                        }<br /><br />
+
+                        <span class="comment">// Utiliser une variable globale</span><br />
+                        <span class="keyword">function</span> <span class="highlight">utiliserGlobale</span>() {<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">global</span> <span class="variable">$x</span>;<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">echo</span> <span class="variable">$x</span>; <span class="comment">// 10</span><br />
+                        }<br /><br />
+
+                        <span class="comment">// Fonction anonyme (closure)</span><br />
+                        <span class="variable">$multiplier</span> = <span class="keyword">function</span>(<span class="variable">$n</span>) {<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span> <span class="variable">$n</span> * <span class="highlight">2</span>;<br />
+                        };<br /><br />
+
+                        <span class="keyword">echo</span> <span class="variable">$multiplier</span>(<span class="highlight">5</span>); <span class="comment">// 10</span><br /><br />
+
+                        <span class="comment">// Fonction fléchée (PHP 7.4+)</span><br />
+                        <span class="variable">$carre</span> = <span class="keyword">fn</span>(<span class="variable">$n</span>) =&gt; <span class="variable">$n</span> * <span class="variable">$n</span>;<br />
+                        <span class="keyword">echo</span> <span class="variable">$carre</span>(<span class="highlight">4</span>); <span class="comment">// 16</span><br />
+                        <span class="keyword">?&gt;</span>
+                    </div>
+                    <div class="result-box">
+                        <strong>Résultat :</strong><br>
+                        5<br>
+                        10<br>
+                        10<br>
+                        16
+                    </div>
+                </div>
+            </div>
+
+            <!-- Exemples pratiques -->
+            <div style="background: #e8f4f8; padding: 25px; border-radius: 10px; margin: 30px 0">
+                <h2 style="color: #2c3e50; text-align: center; margin-top: 0">Exemples Pratiques</h2>
+                <div class="code-example">
+                    <span class="keyword">&lt;?php</span><br />
+                    <span class="comment">// Exemple 1 : Calculatrice</span><br />
+                    <span class="keyword">function</span> <span class="highlight">calculer</span>(<span class="variable">$a</span>, <span class="variable">$b</span>, <span class="variable">$operation</span>) {<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">switch</span> (<span class="variable">$operation</span>) {<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">case</span> <span class="string">"+"</span>:<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span> <span class="variable">$a</span> + <span class="variable">$b</span>;<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">case</span> <span class="string">"-"</span>:<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span> <span class="variable">$a</span> - <span class="variable">$b</span>;<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">case</span> <span class="string">"*"</span>:<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span> <span class="variable">$a</span> * <span class="variable">$b</span>;<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">case</span> <span class="string">"/"</span>:<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span> <span class="variable">$b</span> != <span class="highlight">0</span> ? <span class="variable">$a</span> / <span class="variable">$b</span> : <span class="string">"Division par zéro !"</span>;<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">default</span>:<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span> <span class="string">"Opération invalide"</span>;<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;}<br />
+                    }<br /><br />
+
+                    <span class="keyword">echo</span> <span class="highlight">calculer</span>(<span class="highlight">10</span>, <span class="highlight">5</span>, <span class="string">"+"</span>);  <span class="comment">// 15</span><br />
+                    <span class="keyword">echo</span> <span class="highlight">calculer</span>(<span class="highlight">10</span>, <span class="highlight">5</span>, <span class="string">"-"</span>);  <span class="comment">// 5</span><br />
+                    <span class="keyword">echo</span> <span class="highlight">calculer</span>(<span class="highlight">10</span>, <span class="highlight">5</span>, <span class="string">"*"</span>);  <span class="comment">// 50</span><br />
+                    <span class="keyword">echo</span> <span class="highlight">calculer</span>(<span class="highlight">10</span>, <span class="highlight">5</span>, <span class="string">"/"</span>);  <span class="comment">// 2</span><br /><br />
+
+                    <span class="comment">// Exemple 2 : Validation email</span><br />
+                    <span class="keyword">function</span> <span class="highlight">validerEmail</span>(<span class="variable">$email</span>) {<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span> (<span class="keyword">filter_var</span>(<span class="variable">$email</span>, <span class="highlight">FILTER_VALIDATE_EMAIL</span>)) {<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span> <span class="keyword">true</span>;<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;}<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span> <span class="keyword">false</span>;<br />
+                    }<br /><br />
+
+                    <span class="variable">$email</span> = <span class="string">"test@example.com"</span>;<br />
+                    <span class="keyword">echo</span> <span class="highlight">validerEmail</span>(<span class="variable">$email</span>) ? <span class="string">"Email valide"</span> : <span class="string">"Email invalide"</span>;<br /><br />
+
+                    <span class="comment">// Exemple 3 : Générer un mot de passe aléatoire</span><br />
+                    <span class="keyword">function</span> <span class="highlight">genererMotDePasse</span>(<span class="variable">$longueur</span> = <span class="highlight">8</span>) {<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="variable">$caracteres</span> = <span class="string">"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"</span>;<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="variable">$mdp</span> = <span class="string">""</span>;<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">for</span> (<span class="variable">$i</span> = <span class="highlight">0</span>; <span class="variable">$i</span> &lt; <span class="variable">$longueur</span>; <span class="variable">$i</span>++) {<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="variable">$mdp</span> .= <span class="variable">$caracteres</span>[<span class="keyword">rand</span>(<span class="highlight">0</span>, <span class="keyword">strlen</span>(<span class="variable">$caracteres</span>) - <span class="highlight">1</span>)];<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;}<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span> <span class="variable">$mdp</span>;<br />
+                    }<br /><br />
+
+                    <span class="keyword">echo</span> <span class="highlight">genererMotDePasse</span>();     <span class="comment">// Ex: aB3xK9zL</span><br />
+                    <span class="keyword">echo</span> <span class="highlight">genererMotDePasse</span>(<span class="highlight">12</span>);  <span class="comment">// Ex: xY8mN2pQ5rT9</span><br />
+                    <span class="keyword">?&gt;</span>
+                </div>
+            </div>
+
+            <!-- Erreurs courantes -->
+            <div style="background: #ffebee; padding: 25px; border-radius: 10px; margin: 30px 0">
+                <h2 style="color: #c62828; text-align: center; margin-top: 0">Erreurs Courantes</h2>
+                <div class="code-example">
+                    <span class="comment">// ❌ ERREUR : Oublier de retourner une valeur</span><br />
+                    <span class="keyword">function</span> <span class="highlight">addition</span>(<span class="variable">$a</span>, <span class="variable">$b</span>) {<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="variable">$resultat</span> = <span class="variable">$a</span> + <span class="variable">$b</span>;<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">// Oubli du return !</span><br />
+                    }<br />
+                    <span class="variable">$x</span> = <span class="highlight">addition</span>(<span class="highlight">5</span>, <span class="highlight">3</span>); <span class="comment">// $x = null</span><br /><br />
+
+                    <span class="comment">// ✅ CORRECT</span><br />
+                    <span class="keyword">function</span> <span class="highlight">addition</span>(<span class="variable">$a</span>, <span class="variable">$b</span>) {<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span> <span class="variable">$a</span> + <span class="variable">$b</span>;<br />
+                    }<br /><br />
+
+                    <span class="comment">// ❌ ERREUR : Mauvais ordre des paramètres par défaut</span><br />
+                    <span class="keyword">function</span> <span class="highlight">test</span>(<span class="variable">$a</span> = <span class="highlight">10</span>, <span class="variable">$b</span>) { <span class="comment">// Erreur !</span><br /><br />
+
+                    <span class="comment">// ✅ CORRECT : Paramètres par défaut à la fin</span><br />
+                    <span class="keyword">function</span> <span class="highlight">test</span>(<span class="variable">$b</span>, <span class="variable">$a</span> = <span class="highlight">10</span>) {
+                </div>
+            </div>
+        </div>
+
+        <!-- Zone Froggiesplaining -->
+        <div class="froggiesplaining">
+            <span> Froggiesplaining :</span>
+            <p>
+                <br />
+                <strong>Objectifs de ce cours :</strong><br />
+                ✅ Comprendre ce qu'est une fonction et pourquoi l'utiliser<br />
+                ✅ Savoir déclarer une fonction avec des paramètres<br />
+                ✅ Utiliser return pour retourner des valeurs<br />
+                ✅ Définir des valeurs par défaut pour les paramètres<br />
+                ✅ Comprendre la portée (scope) des variables<br /><br />
+
+                <strong>Points clés à retenir :</strong><br />
+                • Une fonction = bloc de code réutilisable avec un nom<br />
+                • <strong>function nomFonction($param1, $param2) { ... }</strong><br />
+                • <strong>return</strong> : renvoie une valeur et arrête l'exécution de la fonction<br />
+                • Paramètres par défaut : <strong>function test($a, $b = 10)</strong> (à la fin !)<br />
+                • Variables locales : existent uniquement dans la fonction<br />
+                • Variables globales : utilisez <strong>global $variable</strong> pour y accéder<br />
+                • Fonctions anonymes : <strong>$fn = function($x) { return $x * 2; };</strong><br />
+                • Fonctions fléchées (PHP 7.4+) : <strong>$fn = fn($x) => $x * 2;</strong><br />
+                • Nommez vos fonctions de façon explicite : <strong>calculerPrixTTC()</strong> plutôt que <strong>calcul()</strong><br /><br />
+
+                <strong>Exercice pratique :</strong><br />
+                1. Créez un fichier <code>fonctions.php</code><br />
+                2. Créez une fonction <code>aire_rectangle($longueur, $largeur)</code> qui retourne l'aire<br />
+                3. Créez une fonction <code>estPair($nombre)</code> qui retourne true si le nombre est pair<br />
+                4. Créez une fonction <code>afficherTableau($tableau, $separateur = ", ")</code> qui affiche les éléments<br />
+                5. Testez toutes vos fonctions avec différentes valeurs<br />
+                6. (Bonus) Créez une fonction <code>moyenne(...$notes)</code> qui calcule la moyenne de notes
+            </p>
+            <img src="../../html/img/froggie-300.png" alt="Froggie explain" class="overfrog" id="Froggie" />
+        </div>
+
+        <!-- Bouton retour -->
+        <a href="index.html" id="goToIndex" title="Retour à l'index">
+            <i class="bi bi-arrow-left"></i>
+        </a>
+
+        <!-- Lien vers Froggie -->
+        <a href="#Froggie">
+            <div id="goToFroggie">
+                <img src="../../html/img/froggie-300.png" width="50px" /><br /><i class="bi bi-arrow-bar-down"></i>
+            </div>
+        </a>
+
+        <!-- Footer -->
+        <div id="footerGit">
+            <a href="https://github.com/eCreafr/DWWM" target="_blank"><i class="bi bi-github">GitHub - eCrea</i></a>
+        </div>
+    </body>
+</html>

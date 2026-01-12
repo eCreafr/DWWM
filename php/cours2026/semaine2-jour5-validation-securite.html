@@ -1,0 +1,296 @@
+<!doctype html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Semaine 2 - Jour 5 | Validation et sécurité des formulaires</title>
+        <link rel="stylesheet" href="../../html/css/froggie.css" />
+        <style>
+            .demo-container {
+                max-width: 1200px;
+                margin: 40px auto;
+                padding: 20px;
+                font-family: Arial, sans-serif;
+            }
+            .demo-title {
+                text-align: center;
+                font-size: 2.5em;
+                margin-bottom: 20px;
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                background-clip: text;
+            }
+            .demo-intro {
+                background: #ecf0f1;
+                padding: 20px;
+                border-radius: 10px;
+                margin-bottom: 40px;
+                line-height: 1.6;
+            }
+            .demo-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                gap: 30px;
+                margin-bottom: 40px;
+            }
+            .demo-item {
+                border: 2px solid #667eea;
+                border-radius: 10px;
+                padding: 20px;
+                background: white;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            }
+            .demo-item h2 {
+                margin-top: 0;
+                color: #667eea;
+                font-size: 1.5em;
+            }
+            .code-example {
+                background: #2c3e50;
+                color: #ecf0f1;
+                padding: 15px;
+                border-radius: 5px;
+                font-family: 'Courier New', monospace;
+                font-size: 0.9em;
+                margin: 15px 0;
+                overflow-x: auto;
+            }
+            .result-box {
+                background: #e8f5e9;
+                border-left: 4px solid #4caf50;
+                padding: 10px;
+                margin: 10px 0;
+                border-radius: 3px;
+            }
+            .security-note {
+                background: #fff3cd;
+                border-left: 4px solid #ffc107;
+                padding: 10px;
+                margin: 10px 0;
+                border-radius: 3px;
+            }
+            .warning-note {
+                background: #f8d7da;
+                border-left: 4px solid #dc3545;
+                padding: 10px;
+                margin: 10px 0;
+                border-radius: 3px;
+            }
+            .highlight {
+                color: #f39c12;
+                font-weight: bold;
+            }
+            .keyword {
+                color: #e74c3c;
+            }
+            .string {
+                color: #2ecc71;
+            }
+            .comment {
+                color: #95a5a6;
+                font-style: italic;
+            }
+            .variable {
+                color: #3498db;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="demo-container">
+            <h1 class="demo-title">Semaine 2 - Jour 5 : Validation et sécurité des formulaires</h1>
+
+            <div class="demo-intro">
+                <h3>Pourquoi sécuriser les formulaires ?</h3>
+                <p>
+                    La sécurité des formulaires est <strong>cruciale</strong> en développement web. Les données envoyées par les utilisateurs peuvent contenir du code malveillant, des tentatives d'injection SQL, ou du JavaScript dangereux (attaques XSS).
+                </p>
+                <p>
+                    Dans ce cours, nous allons apprendre à <strong>valider</strong> les données (vérifier qu'elles sont correctes) et à les <strong>sécuriser</strong> (les protéger contre les attaques). La règle d'or : <strong>ne jamais faire confiance aux données utilisateur !</strong>
+                </p>
+            </div>
+
+            <!-- Concepts de base -->
+            <div class="demo-grid">
+                <div class="demo-item">
+                    <h2>1. Validation des champs</h2>
+                    <p><strong>Définition :</strong> Vérifier que les données sont présentes et au bon format.</p>
+                    <div class="code-example">
+                        <span class="keyword">&lt;?php</span><br />
+                        <span class="variable">$erreurs</span> = [];<br /><br />
+
+                        <span class="comment">// Vérifier si le champ est vide</span><br />
+                        <span class="keyword">if</span> (<span class="keyword">empty</span>(<span class="variable">$_POST</span>[<span class="string">'nom'</span>])) {<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="variable">$erreurs</span>[] = <span class="string">"Le nom est obligatoire"</span>;<br />
+                        }<br /><br />
+
+                        <span class="comment">// Alternative avec trim()</span><br />
+                        <span class="variable">$nom</span> = <span class="keyword">trim</span>(<span class="variable">$_POST</span>[<span class="string">'nom'</span>] ?? <span class="string">''</span>);<br />
+                        <span class="keyword">if</span> (<span class="variable">$nom</span> === <span class="string">''</span>) {<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="variable">$erreurs</span>[] = <span class="string">"Le nom est obligatoire"</span>;<br />
+                        }<br /><br />
+
+                        <span class="comment">// Afficher les erreurs</span><br />
+                        <span class="keyword">foreach</span> (<span class="variable">$erreurs</span> <span class="keyword">as</span> <span class="variable">$erreur</span>) {<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">echo</span> <span class="string">"❌ "</span> . <span class="variable">$erreur</span> . <span class="string">"\n"</span>;<br />
+                        }<br />
+                        <span class="keyword">?&gt;</span>
+                    </div>
+                    <div class="security-note">
+                        <strong>Astuce :</strong> Utilisez <code>trim()</code> pour enlever les espaces au début et à la fin.
+                    </div>
+                </div>
+
+                <div class="demo-item">
+                    <h2>2. Validation d'email</h2>
+                    <p><strong>Définition :</strong> Vérifier qu'une adresse email est valide avec <code>filter_var()</code>.</p>
+                    <div class="code-example">
+                        <span class="keyword">&lt;?php</span><br />
+                        <span class="variable">$email</span> = <span class="variable">$_POST</span>[<span class="string">'email'</span>];<br /><br />
+
+                        <span class="comment">// Validation avec filter_var()</span><br />
+                        <span class="keyword">if</span> (!<span class="keyword">filter_var</span>(<span class="variable">$email</span>, FILTER_VALIDATE_EMAIL)) {<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">echo</span> <span class="string">"❌ Email invalide"</span>;<br />
+                        } <span class="keyword">else</span> {<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">echo</span> <span class="string">"✅ Email valide : "</span> . <span class="variable">$email</span>;<br />
+                        }<br /><br />
+
+                        <span class="comment">// Exemples de validation</span><br />
+                        <span class="keyword">filter_var</span>(<span class="string">"user@example.com"</span>, FILTER_VALIDATE_EMAIL);<br />
+                        <span class="comment">// ✅ Valide</span><br /><br />
+
+                        <span class="keyword">filter_var</span>(<span class="string">"userexample.com"</span>, FILTER_VALIDATE_EMAIL);<br />
+                        <span class="comment">// ❌ Invalide (pas de @)</span><br /><br />
+
+                        <span class="keyword">filter_var</span>(<span class="string">"user@"</span>, FILTER_VALIDATE_EMAIL);<br />
+                        <span class="comment">// ❌ Invalide (pas de domaine)</span><br />
+                        <span class="keyword">?&gt;</span>
+                    </div>
+                    <div class="result-box">
+                        <strong>Résultat :</strong> filter_var() retourne l'email si valide, ou false sinon.
+                    </div>
+                </div>
+
+                <div class="demo-item">
+                    <h2>3. Protection XSS</h2>
+                    <p><strong>XSS (Cross-Site Scripting) :</strong> Injection de code JavaScript malveillant dans une page.</p>
+                    <div class="code-example">
+                        <span class="keyword">&lt;?php</span><br />
+                        <span class="comment">// ❌ DANGEREUX - Ne JAMAIS faire ça !</span><br />
+                        <span class="variable">$nom</span> = <span class="variable">$_POST</span>[<span class="string">'nom'</span>];<br />
+                        <span class="keyword">echo</span> <span class="string">"Bonjour "</span> . <span class="variable">$nom</span>;<br />
+                        <span class="comment">// Si l'utilisateur entre : &lt;script&gt;alert('XSS')&lt;/script&gt;</span><br />
+                        <span class="comment">// Le script sera exécuté !</span><br /><br />
+
+                        <span class="comment">// ✅ SÉCURISÉ avec htmlspecialchars()</span><br />
+                        <span class="variable">$nom</span> = <span class="variable">$_POST</span>[<span class="string">'nom'</span>];<br />
+                        <span class="keyword">echo</span> <span class="string">"Bonjour "</span> . <span class="keyword">htmlspecialchars</span>(<span class="variable">$nom</span>, ENT_QUOTES, <span class="string">'UTF-8'</span>);<br />
+                        <span class="comment">// Le code HTML est converti en texte</span><br />
+                        <span class="comment">// &lt;script&gt; devient &amp;lt;script&amp;gt;</span><br /><br />
+
+                        <span class="comment">// Autres fonctions utiles</span><br />
+                        <span class="keyword">strip_tags</span>(<span class="variable">$texte</span>);<br />
+                        <span class="comment">// Enlève toutes les balises HTML</span><br />
+                        <span class="keyword">?&gt;</span>
+                    </div>
+                    <div class="warning-note">
+                        <strong>Règle d'or :</strong> Toujours utiliser <code>htmlspecialchars()</code> avant d'afficher des données utilisateur.
+                    </div>
+                </div>
+
+                <div class="demo-item">
+                    <h2>4. Protection CSRF</h2>
+                    <p><strong>CSRF (Cross-Site Request Forgery) :</strong> Forcer un utilisateur à exécuter une action non désirée.</p>
+                    <div class="code-example">
+                        <span class="keyword">&lt;?php</span><br />
+                        <span class="keyword">session_start</span>();<br /><br />
+
+                        <span class="comment">// Générer un token unique</span><br />
+                        <span class="keyword">if</span> (!<span class="keyword">isset</span>(<span class="variable">$_SESSION</span>[<span class="string">'csrf_token'</span>])) {<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="variable">$_SESSION</span>[<span class="string">'csrf_token'</span>] = <span class="keyword">bin2hex</span>(<span class="keyword">random_bytes</span>(32));<br />
+                        }<br />
+                        <span class="keyword">?&gt;</span><br /><br />
+
+                        <span class="comment">&lt;!-- Ajouter le token dans le formulaire --&gt;</span><br />
+                        &lt;form method="POST"&gt;<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;&lt;input type="hidden" name="csrf_token"<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;value="<span class="keyword">&lt;?=</span> <span class="variable">$_SESSION</span>[<span class="string">'csrf_token'</span>] <span class="keyword">?&gt;</span>"&gt;<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;&lt;button type="submit"&gt;Envoyer&lt;/button&gt;<br />
+                        &lt;/form&gt;<br /><br />
+
+                        <span class="keyword">&lt;?php</span><br />
+                        <span class="comment">// Vérifier le token lors du traitement</span><br />
+                        <span class="keyword">if</span> (<span class="variable">$_POST</span>[<span class="string">'csrf_token'</span>] !== <span class="variable">$_SESSION</span>[<span class="string">'csrf_token'</span>]) {<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">die</span>(<span class="string">"❌ Erreur CSRF : token invalide"</span>);<br />
+                        }<br />
+                        <span class="keyword">?&gt;</span>
+                    </div>
+                    <div class="security-note">
+                        <strong>Comment ça marche :</strong> Le token est unique à chaque session et impossible à deviner.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Zone Froggiesplaining -->
+        <div class="froggiesplaining">
+            <span> Froggiesplaining :</span>
+            <p>
+                <br />
+                <strong>Objectifs de ce cours :</strong><br />
+                ✅ Comprendre les risques de sécurité (XSS, CSRF)<br />
+                ✅ Valider les données avec filter_var() et preg_match()<br />
+                ✅ Protéger contre les attaques XSS avec htmlspecialchars()<br />
+                ✅ Implémenter des tokens CSRF pour sécuriser les formulaires<br />
+                ✅ Utiliser password_hash() pour hasher les mots de passe<br /><br />
+
+                <strong>Points clés à retenir :</strong><br />
+                • NEVER TRUST USER INPUT - ne jamais faire confiance aux données utilisateur<br />
+                • Toujours utiliser htmlspecialchars() avant d'afficher des données<br />
+                • Valider côté serveur (la validation JavaScript peut être contournée)<br />
+                • Utiliser filter_var() pour valider emails, URLs, nombres<br />
+                • Implémenter des tokens CSRF pour les actions sensibles<br />
+                • password_hash() pour les mots de passe, JAMAIS MD5 ou SHA1<br />
+                • trim() pour enlever les espaces inutiles<br />
+                • empty() vérifie si une variable est vide<br /><br />
+
+                <strong>Checklist de sécurité :</strong><br />
+                ✅ Validation côté serveur (obligatoire)<br />
+                ✅ htmlspecialchars() pour afficher les données utilisateur<br />
+                ✅ filter_var() pour valider emails, URLs, nombres<br />
+                ✅ Tokens CSRF pour les formulaires sensibles<br />
+                ✅ password_hash() et password_verify() pour les mots de passe<br />
+                ✅ HTTPS pour transmettre des données sensibles<br />
+                ✅ Limiter les tentatives de soumission (rate limiting)<br />
+                ✅ Requêtes préparées PDO pour les bases de données<br /><br />
+
+                <strong>Exercice pratique :</strong><br />
+                1. Créez un formulaire d'inscription avec nom, email, mot de passe<br />
+                2. Validez que tous les champs sont remplis<br />
+                3. Validez l'email avec filter_var()<br />
+                4. Validez le mot de passe (8+ caractères, maj, min, chiffre)<br />
+                5. Ajoutez un token CSRF<br />
+                6. Utilisez htmlspecialchars() pour afficher les données<br />
+                7. Hashez le mot de passe avec password_hash()
+            </p>
+            <img src="../../html/img/froggie-300.png" alt="Froggie explain" class="overfrog" id="Froggie" />
+        </div>
+
+        <!-- Bouton retour -->
+        <a href="index.html" id="goToIndex" title="Retour à l'index">
+            <i class="bi bi-arrow-left"></i>
+        </a>
+
+        <!-- Lien vers Froggie -->
+        <a href="#Froggie">
+            <div id="goToFroggie">
+                <img src="../../html/img/froggie-300.png" width="50px" /><br /><i class="bi bi-arrow-bar-down"></i>
+            </div>
+        </a>
+
+        <!-- Footer -->
+        <div id="footerGit">
+            <a href="https://github.com/eCreafr/DWWM" target="_blank"><i class="bi bi-github">GitHub - eCrea</i></a>
+        </div>
+    </body>
+</html>

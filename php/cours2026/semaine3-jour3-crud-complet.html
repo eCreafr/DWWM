@@ -1,0 +1,267 @@
+<!doctype html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Semaine 3 - Jour 3 | CRUD Complet avec PDO</title>
+        <link rel="stylesheet" href="../../html/css/froggie.css" />
+        <style>
+            .demo-container {
+                max-width: 1200px;
+                margin: 40px auto;
+                padding: 20px;
+                font-family: Arial, sans-serif;
+            }
+            .demo-title {
+                text-align: center;
+                font-size: 2.5em;
+                margin-bottom: 20px;
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                background-clip: text;
+            }
+            .demo-intro {
+                background: #ecf0f1;
+                padding: 20px;
+                border-radius: 10px;
+                margin-bottom: 40px;
+                line-height: 1.6;
+            }
+            .demo-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                gap: 30px;
+                margin-bottom: 40px;
+            }
+            .demo-item {
+                border: 2px solid #667eea;
+                border-radius: 10px;
+                padding: 20px;
+                background: white;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            }
+            .demo-item h2 {
+                margin-top: 0;
+                color: #667eea;
+                font-size: 1.5em;
+            }
+            .code-example {
+                background: #2c3e50;
+                color: #ecf0f1;
+                padding: 15px;
+                border-radius: 5px;
+                font-family: 'Courier New', monospace;
+                font-size: 0.85em;
+                margin: 15px 0;
+                overflow-x: auto;
+            }
+            .result-box {
+                background: #e8f5e9;
+                border-left: 4px solid #4caf50;
+                padding: 10px;
+                margin: 10px 0;
+                border-radius: 3px;
+            }
+            .security-note {
+                background: #fff3cd;
+                border-left: 4px solid #ffc107;
+                padding: 10px;
+                margin: 10px 0;
+                border-radius: 3px;
+            }
+            .highlight {
+                color: #f39c12;
+                font-weight: bold;
+            }
+            .keyword {
+                color: #e74c3c;
+            }
+            .string {
+                color: #2ecc71;
+            }
+            .comment {
+                color: #95a5a6;
+                font-style: italic;
+            }
+            .variable {
+                color: #3498db;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="demo-container">
+            <h1 class="demo-title">Semaine 3 - Jour 3 : CRUD Complet avec PDO</h1>
+
+            <div class="demo-intro">
+                <h3>Introduction au CRUD</h3>
+                <p>
+                    <strong>CRUD</strong> signifie <strong>Create, Read, Update, Delete</strong> - les 4 opérations fondamentales pour manipuler des données dans une base de données. Dans ce cours, nous allons créer une application complète de gestion d'articles avec PDO et MySQL.
+                </p>
+                <p>
+                    Chaque opération CRUD correspond à une requête SQL : INSERT (Create), SELECT (Read), UPDATE (Update), DELETE (Delete). Nous allons apprendre à les sécuriser avec des requêtes préparées et à gérer les erreurs proprement.
+                </p>
+            </div>
+
+            <!-- Concepts de base -->
+            <div class="demo-grid">
+                <div class="demo-item">
+                    <h2>1. CREATE - INSERT</h2>
+                    <p><strong>Insérer des données</strong></p>
+                    <div class="code-example">
+                        <span class="keyword">&lt;?php</span><br />
+                        <span class="variable">$sql</span> = <span class="string">"INSERT INTO articles (titre, contenu, auteur, date_creation) VALUES (:titre, :contenu, :auteur, NOW())"</span>;<br /><br />
+
+                        <span class="variable">$stmt</span> = <span class="variable">$pdo</span>->prepare(<span class="variable">$sql</span>);<br /><br />
+
+                        <span class="variable">$stmt</span>->execute([<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="string">'titre'</span> => <span class="variable">$titre</span>,<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="string">'contenu'</span> => <span class="variable">$contenu</span>,<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="string">'auteur'</span> => <span class="variable">$auteur</span><br />
+                        ]);<br /><br />
+
+                        <span class="comment">// Récupérer l'ID généré</span><br />
+                        <span class="variable">$id</span> = <span class="variable">$pdo</span>->lastInsertId();<br />
+                        <span class="keyword">?&gt;</span>
+                    </div>
+                    <div class="security-note">
+                        <strong>Sécurité :</strong> Toujours utiliser des requêtes préparées + valider les données avec trim() et empty()
+                    </div>
+                </div>
+
+                <div class="demo-item">
+                    <h2>2. READ - SELECT</h2>
+                    <p><strong>Lire et afficher les données</strong></p>
+                    <div class="code-example">
+                        <span class="keyword">&lt;?php</span><br />
+                        <span class="comment">// Lire UN article (fetch)</span><br />
+                        <span class="variable">$sql</span> = <span class="string">"SELECT * FROM articles WHERE id = :id"</span>;<br />
+                        <span class="variable">$stmt</span> = <span class="variable">$pdo</span>->prepare(<span class="variable">$sql</span>);<br />
+                        <span class="variable">$stmt</span>->execute([<span class="string">'id'</span> => <span class="variable">$id</span>]);<br />
+                        <span class="variable">$article</span> = <span class="variable">$stmt</span>->fetch(PDO::FETCH_ASSOC);<br /><br />
+
+                        <span class="comment">// Lire TOUS les articles (fetchAll)</span><br />
+                        <span class="variable">$sql</span> = <span class="string">"SELECT * FROM articles ORDER BY date_creation DESC"</span>;<br />
+                        <span class="variable">$stmt</span> = <span class="variable">$pdo</span>->query(<span class="variable">$sql</span>);<br />
+                        <span class="variable">$articles</span> = <span class="variable">$stmt</span>->fetchAll(PDO::FETCH_ASSOC);<br />
+                        <span class="keyword">?&gt;</span>
+                    </div>
+                    <div class="result-box">
+                        <strong>Modes de récupération :</strong><br />
+                        • fetch() : Une ligne<br />
+                        • fetchAll() : Toutes les lignes<br />
+                        • FETCH_ASSOC : Tableau associatif
+                    </div>
+                </div>
+
+                <div class="demo-item">
+                    <h2>3. UPDATE - Modifier</h2>
+                    <p><strong>Mettre à jour des données</strong></p>
+                    <div class="code-example">
+                        <span class="keyword">&lt;?php</span><br />
+                        <span class="variable">$sql</span> = <span class="string">"UPDATE articles SET titre = :titre, contenu = :contenu WHERE id = :id"</span>;<br /><br />
+
+                        <span class="variable">$stmt</span> = <span class="variable">$pdo</span>->prepare(<span class="variable">$sql</span>);<br /><br />
+
+                        <span class="variable">$stmt</span>->execute([<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="string">'titre'</span> => <span class="variable">$titre</span>,<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="string">'contenu'</span> => <span class="variable">$contenu</span>,<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="string">'id'</span> => <span class="variable">$id</span><br />
+                        ]);<br /><br />
+
+                        <span class="comment">// Vérifier combien de lignes modifiées</span><br />
+                        <span class="variable">$nbLignes</span> = <span class="variable">$stmt</span>->rowCount();<br />
+                        <span class="keyword">?&gt;</span>
+                    </div>
+                    <div class="security-note">
+                        <strong>Attention :</strong> TOUJOURS utiliser WHERE avec UPDATE, sinon toutes les lignes sont modifiées !
+                    </div>
+                </div>
+
+                <div class="demo-item">
+                    <h2>4. DELETE - Supprimer</h2>
+                    <p><strong>Supprimer des données</strong></p>
+                    <div class="code-example">
+                        <span class="keyword">&lt;?php</span><br />
+                        <span class="variable">$sql</span> = <span class="string">"DELETE FROM articles WHERE id = :id"</span>;<br /><br />
+
+                        <span class="variable">$stmt</span> = <span class="variable">$pdo</span>->prepare(<span class="variable">$sql</span>);<br />
+                        <span class="variable">$stmt</span>->execute([<span class="string">'id'</span> => <span class="variable">$id</span>]);<br /><br />
+
+                        <span class="comment">// Vérifier si supprimé</span><br />
+                        <span class="variable">$nbLignes</span> = <span class="variable">$stmt</span>->rowCount();<br /><br />
+
+                        <span class="keyword">if</span> (<span class="variable">$nbLignes</span> > 0) {<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">echo</span> <span class="string">"Supprimé avec succès !"</span>;<br />
+                        }<br />
+                        <span class="keyword">?&gt;</span>
+                    </div>
+                    <div class="security-note">
+                        <strong>Important :</strong> Toujours demander confirmation avant suppression + utiliser POST (jamais GET)
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Zone Froggiesplaining -->
+        <div class="froggiesplaining">
+            <span> Froggiesplaining :</span>
+            <p>
+                <br />
+                <strong>Objectifs de ce cours :</strong><br />
+                ✅ Maîtriser les 4 opérations CRUD<br />
+                ✅ CREATE : Insérer avec lastInsertId()<br />
+                ✅ READ : fetch() vs fetchAll()<br />
+                ✅ UPDATE : Modifier avec rowCount()<br />
+                ✅ DELETE : Supprimer avec confirmation<br /><br />
+
+                <strong>Méthodes PDO essentielles :</strong><br />
+                • <code>lastInsertId()</code> : ID du dernier enregistrement inséré<br />
+                • <code>fetch()</code> : Récupère UNE ligne<br />
+                • <code>fetchAll()</code> : Récupère TOUTES les lignes<br />
+                • <code>rowCount()</code> : Nombre de lignes affectées (UPDATE/DELETE)<br />
+                • <code>PDO::FETCH_ASSOC</code> : Retourne un tableau associatif<br /><br />
+
+                <strong>Sécurité CRUD :</strong><br />
+                • INSERT : Requêtes préparées + validation trim() et empty()<br />
+                • SELECT : htmlspecialchars() à l'affichage pour éviter XSS<br />
+                • UPDATE : TOUJOURS avec WHERE sinon toutes les lignes changent !<br />
+                • DELETE : Confirmation obligatoire + méthode POST<br /><br />
+
+                <strong>Bonnes pratiques :</strong><br />
+                • try/catch sur toutes les requêtes<br />
+                • error_log() pour enregistrer les erreurs<br />
+                • Messages génériques pour l'utilisateur<br />
+                • Vérifier les permissions utilisateur<br />
+                • Formulaires pré-remplis pour UPDATE<br />
+                • Considérer la suppression logique (deleted_at) plutôt que physique<br /><br />
+
+                <strong>Exercice pratique :</strong><br />
+                1. Créez une table "articles" avec id, titre, contenu, auteur, date_creation<br />
+                2. Créez create.php pour insérer un article<br />
+                3. Créez index.php pour lister tous les articles<br />
+                4. Créez edit.php pour modifier un article<br />
+                5. Créez delete.php pour supprimer avec confirmation<br />
+                6. Ajoutez la gestion d'erreurs avec try/catch partout
+            </p>
+            <img src="../../html/img/froggie-300.png" alt="Froggie explain" class="overfrog" id="Froggie" />
+        </div>
+
+        <!-- Bouton retour -->
+        <a href="index.html" id="goToIndex" title="Retour à l'index">
+            <i class="bi bi-arrow-left"></i>
+        </a>
+
+        <!-- Lien vers Froggie -->
+        <a href="#Froggie">
+            <div id="goToFroggie">
+                <img src="../../html/img/froggie-300.png" width="50px" /><br /><i class="bi bi-arrow-bar-down"></i>
+            </div>
+        </a>
+
+        <!-- Footer -->
+        <div id="footerGit">
+            <a href="https://github.com/eCreafr/DWWM" target="_blank"><i class="bi bi-github">GitHub - eCrea</i></a>
+        </div>
+    </body>
+</html>

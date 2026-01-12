@@ -1,0 +1,413 @@
+<!doctype html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Semaine 1 - Jour 5 | Boucles</title>
+        <link rel="stylesheet" href="../../html/css/froggie.css" />
+        <style>
+            .demo-container {
+                max-width: 1200px;
+                margin: 40px auto;
+                padding: 20px;
+                font-family: Arial, sans-serif;
+            }
+            .demo-title {
+                text-align: center;
+                font-size: 2.5em;
+                margin-bottom: 20px;
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                background-clip: text;
+            }
+            .demo-intro {
+                background: #ecf0f1;
+                padding: 20px;
+                border-radius: 10px;
+                margin-bottom: 40px;
+                line-height: 1.6;
+            }
+            .demo-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                gap: 30px;
+                margin-bottom: 40px;
+            }
+            .demo-item {
+                border: 2px solid #667eea;
+                border-radius: 10px;
+                padding: 20px;
+                background: white;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            }
+            .demo-item h2 {
+                margin-top: 0;
+                color: #667eea;
+                font-size: 1.5em;
+            }
+            .code-example {
+                background: #2c3e50;
+                color: #ecf0f1;
+                padding: 15px;
+                border-radius: 5px;
+                font-family: 'Courier New', monospace;
+                font-size: 0.9em;
+                margin: 15px 0;
+                overflow-x: auto;
+            }
+            .result-box {
+                background: #e8f5e9;
+                border-left: 4px solid #4caf50;
+                padding: 10px;
+                margin: 10px 0;
+                border-radius: 3px;
+            }
+            .security-note {
+                background: #fff3cd;
+                border-left: 4px solid #ffc107;
+                padding: 10px;
+                margin: 10px 0;
+                border-radius: 3px;
+            }
+            .highlight {
+                color: #f39c12;
+                font-weight: bold;
+            }
+            .keyword {
+                color: #e74c3c;
+            }
+            .string {
+                color: #2ecc71;
+            }
+            .comment {
+                color: #95a5a6;
+                font-style: italic;
+            }
+            .variable {
+                color: #3498db;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="demo-container">
+            <h1 class="demo-title">Semaine 1 - Jour 5 : Boucles</h1>
+
+            <div class="demo-intro">
+                <h3>Répéter des Actions</h3>
+                <p>
+                    Les <strong>boucles</strong> permettent d'exécuter du code plusieurs fois sans le réécrire.
+                    Elles sont essentielles pour parcourir des tableaux, répéter des opérations, ou générer du contenu dynamique.
+                </p>
+                <p>
+                    <strong>Les types de boucles en PHP :</strong><br>
+                    • <strong>for</strong> : nombre d'itérations connu à l'avance<br>
+                    • <strong>while</strong> : tant qu'une condition est vraie<br>
+                    • <strong>do...while</strong> : comme while, mais exécuté au moins une fois<br>
+                    • <strong>foreach</strong> : parcourir les éléments d'un tableau (le plus utilisé !)
+                </p>
+            </div>
+
+            <!-- Concepts de base -->
+            <div class="demo-grid">
+                <div class="demo-item">
+                    <h2>1. Boucle for</h2>
+                    <p>Quand on connaît le nombre d'itérations :</p>
+                    <div class="code-example">
+                        <span class="keyword">&lt;?php</span><br />
+                        <span class="comment">// Syntaxe : for (init; condition; incrémentation)</span><br /><br />
+
+                        <span class="comment">// Compter de 1 à 5</span><br />
+                        <span class="keyword">for</span> (<span class="variable">$i</span> = <span class="highlight">1</span>; <span class="variable">$i</span> &lt;= <span class="highlight">5</span>; <span class="variable">$i</span>++) {<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">echo</span> <span class="string">"Itération "</span> . <span class="variable">$i</span> . <span class="string">"&lt;br&gt;"</span>;<br />
+                        }<br /><br />
+
+                        <span class="comment">// Table de multiplication</span><br />
+                        <span class="variable">$nombre</span> = <span class="highlight">7</span>;<br />
+                        <span class="keyword">for</span> (<span class="variable">$i</span> = <span class="highlight">1</span>; <span class="variable">$i</span> &lt;= <span class="highlight">10</span>; <span class="variable">$i</span>++) {<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">echo</span> <span class="variable">$nombre</span> . <span class="string">" x "</span> . <span class="variable">$i</span> . <span class="string">" = "</span> . (<span class="variable">$nombre</span> * <span class="variable">$i</span>) . <span class="string">"&lt;br&gt;"</span>;<br />
+                        }<br /><br />
+
+                        <span class="comment">// Compter à rebours</span><br />
+                        <span class="keyword">for</span> (<span class="variable">$i</span> = <span class="highlight">5</span>; <span class="variable">$i</span> &gt;= <span class="highlight">1</span>; <span class="variable">$i</span>--) {<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">echo</span> <span class="variable">$i</span> . <span class="string">"... "</span>;<br />
+                        }<br />
+                        <span class="keyword">echo</span> <span class="string">"Décollage !"</span>;<br />
+                        <span class="keyword">?&gt;</span>
+                    </div>
+                    <div class="result-box">
+                        <strong>Résultat :</strong><br>
+                        Itération 1<br>Itération 2<br>... (jusqu'à 5)<br>
+                        7 x 1 = 7<br>7 x 2 = 14<br>... (jusqu'à 70)<br>
+                        5... 4... 3... 2... 1... Décollage !
+                    </div>
+                </div>
+
+                <div class="demo-item">
+                    <h2>2. Boucle while</h2>
+                    <p>Tant qu'une condition est vraie :</p>
+                    <div class="code-example">
+                        <span class="keyword">&lt;?php</span><br />
+                        <span class="comment">// Syntaxe : while (condition) { ... }</span><br /><br />
+
+                        <span class="variable">$compteur</span> = <span class="highlight">1</span>;<br />
+                        <span class="keyword">while</span> (<span class="variable">$compteur</span> &lt;= <span class="highlight">5</span>) {<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">echo</span> <span class="string">"Compteur : "</span> . <span class="variable">$compteur</span> . <span class="string">"&lt;br&gt;"</span>;<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="variable">$compteur</span>++;<br />
+                        }<br /><br />
+
+                        <span class="comment">// Exemple : lire des données jusqu'à une condition</span><br />
+                        <span class="variable">$total</span> = <span class="highlight">0</span>;<br />
+                        <span class="variable">$nombre</span> = <span class="highlight">10</span>;<br /><br />
+
+                        <span class="keyword">while</span> (<span class="variable">$nombre</span> &gt; <span class="highlight">0</span>) {<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="variable">$total</span> += <span class="variable">$nombre</span>;<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="variable">$nombre</span>--;<br />
+                        }<br />
+                        <span class="keyword">echo</span> <span class="string">"Somme de 1 à 10 : "</span> . <span class="variable">$total</span>; <span class="comment">// 55</span><br />
+                        <span class="keyword">?&gt;</span>
+                    </div>
+                    <div class="result-box">
+                        <strong>Résultat :</strong><br>
+                        Compteur : 1<br>Compteur : 2<br>... (jusqu'à 5)<br>
+                        Somme de 1 à 10 : 55
+                    </div>
+                    <div class="security-note">
+                        <strong>Attention :</strong> Assurez-vous que la condition devient fausse, sinon boucle infinie !
+                    </div>
+                </div>
+
+                <div class="demo-item">
+                    <h2>3. Boucle do...while</h2>
+                    <p>Exécute le code AU MOINS une fois :</p>
+                    <div class="code-example">
+                        <span class="keyword">&lt;?php</span><br />
+                        <span class="comment">// Syntaxe : do { ... } while (condition);</span><br /><br />
+
+                        <span class="variable">$nombre</span> = <span class="highlight">1</span>;<br />
+                        <span class="keyword">do</span> {<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">echo</span> <span class="string">"Nombre : "</span> . <span class="variable">$nombre</span> . <span class="string">"&lt;br&gt;"</span>;<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="variable">$nombre</span>++;<br />
+                        } <span class="keyword">while</span> (<span class="variable">$nombre</span> &lt;= <span class="highlight">3</span>);<br /><br />
+
+                        <span class="comment">// Différence avec while : s'exécute même si condition fausse</span><br />
+                        <span class="variable">$x</span> = <span class="highlight">10</span>;<br />
+                        <span class="keyword">do</span> {<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">echo</span> <span class="string">"Exécuté une fois ! x = "</span> . <span class="variable">$x</span>;<br />
+                        } <span class="keyword">while</span> (<span class="variable">$x</span> &lt; <span class="highlight">5</span>); <span class="comment">// Faux, mais exécuté quand même</span><br /><br />
+
+                        <span class="comment">// Cas d'usage : menu avec validation</span><br />
+                        <span class="variable">$choix</span> = <span class="highlight">0</span>;<br />
+                        <span class="keyword">do</span> {<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">echo</span> <span class="string">"Menu : 1-Accueil 2-Contact 3-Quitter&lt;br&gt;"</span>;<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="variable">$choix</span> = <span class="highlight">3</span>; <span class="comment">// Simule l'entrée utilisateur</span><br />
+                        } <span class="keyword">while</span> (<span class="variable">$choix</span> != <span class="highlight">3</span>);<br />
+                        <span class="keyword">?&gt;</span>
+                    </div>
+                    <div class="result-box">
+                        <strong>Résultat :</strong><br>
+                        Nombre : 1<br>Nombre : 2<br>Nombre : 3<br>
+                        Exécuté une fois ! x = 10<br>
+                        Menu : 1-Accueil 2-Contact 3-Quitter
+                    </div>
+                </div>
+
+                <div class="demo-item">
+                    <h2>4. Boucle foreach</h2>
+                    <p>Parcourir les éléments d'un tableau :</p>
+                    <div class="code-example">
+                        <span class="keyword">&lt;?php</span><br />
+                        <span class="comment">// Tableau indexé</span><br />
+                        <span class="variable">$fruits</span> = [<span class="string">"Pomme"</span>, <span class="string">"Banane"</span>, <span class="string">"Orange"</span>];<br /><br />
+
+                        <span class="keyword">foreach</span> (<span class="variable">$fruits</span> <span class="keyword">as</span> <span class="variable">$fruit</span>) {<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">echo</span> <span class="string">"J'aime les "</span> . <span class="variable">$fruit</span> . <span class="string">"s&lt;br&gt;"</span>;<br />
+                        }<br /><br />
+
+                        <span class="comment">// Tableau associatif (clé =&gt; valeur)</span><br />
+                        <span class="variable">$personne</span> = [<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"prenom"</span> =&gt; <span class="string">"Alice"</span>,<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"age"</span> =&gt; <span class="highlight">25</span>,<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"ville"</span> =&gt; <span class="string">"Paris"</span><br />
+                        ];<br /><br />
+
+                        <span class="keyword">foreach</span> (<span class="variable">$personne</span> <span class="keyword">as</span> <span class="variable">$cle</span> =&gt; <span class="variable">$valeur</span>) {<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">echo</span> <span class="variable">$cle</span> . <span class="string">" : "</span> . <span class="variable">$valeur</span> . <span class="string">"&lt;br&gt;"</span>;<br />
+                        }<br /><br />
+
+                        <span class="comment">// Avec index manuel</span><br />
+                        <span class="variable">$couleurs</span> = [<span class="string">"rouge"</span>, <span class="string">"vert"</span>, <span class="string">"bleu"</span>];<br />
+                        <span class="keyword">foreach</span> (<span class="variable">$couleurs</span> <span class="keyword">as</span> <span class="variable">$index</span> =&gt; <span class="variable">$couleur</span>) {<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">echo</span> <span class="string">"Couleur "</span> . (<span class="variable">$index</span> + <span class="highlight">1</span>) . <span class="string">" : "</span> . <span class="variable">$couleur</span> . <span class="string">"&lt;br&gt;"</span>;<br />
+                        }<br />
+                        <span class="keyword">?&gt;</span>
+                    </div>
+                    <div class="result-box">
+                        <strong>Résultat :</strong><br>
+                        J'aime les Pommes<br>J'aime les Bananes<br>J'aime les Oranges<br>
+                        prenom : Alice<br>age : 25<br>ville : Paris<br>
+                        Couleur 1 : rouge<br>Couleur 2 : vert<br>Couleur 3 : bleu
+                    </div>
+                </div>
+            </div>
+
+            <!-- break et continue -->
+            <div style="background: #e8f4f8; padding: 25px; border-radius: 10px; margin: 30px 0">
+                <h2 style="color: #2c3e50; text-align: center; margin-top: 0">break et continue</h2>
+                <div class="code-example">
+                    <span class="keyword">&lt;?php</span><br />
+                    <span class="comment">// break : sort de la boucle</span><br />
+                    <span class="keyword">for</span> (<span class="variable">$i</span> = <span class="highlight">1</span>; <span class="variable">$i</span> &lt;= <span class="highlight">10</span>; <span class="variable">$i</span>++) {<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span> (<span class="variable">$i</span> == <span class="highlight">5</span>) {<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">break</span>; <span class="comment">// Arrête la boucle ici</span><br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;}<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">echo</span> <span class="variable">$i</span> . <span class="string">" "</span>;<br />
+                    }<br />
+                    <span class="comment">// Affiche : 1 2 3 4</span><br /><br />
+
+                    <span class="comment">// continue : passe à l'itération suivante</span><br />
+                    <span class="keyword">for</span> (<span class="variable">$i</span> = <span class="highlight">1</span>; <span class="variable">$i</span> &lt;= <span class="highlight">10</span>; <span class="variable">$i</span>++) {<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span> (<span class="variable">$i</span> % <span class="highlight">2</span> == <span class="highlight">0</span>) {<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">continue</span>; <span class="comment">// Saute les nombres pairs</span><br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;}<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">echo</span> <span class="variable">$i</span> . <span class="string">" "</span>;<br />
+                    }<br />
+                    <span class="comment">// Affiche : 1 3 5 7 9</span><br /><br />
+
+                    <span class="comment">// Exemple pratique : chercher dans un tableau</span><br />
+                    <span class="variable">$nombres</span> = [<span class="highlight">3</span>, <span class="highlight">7</span>, <span class="highlight">12</span>, <span class="highlight">18</span>, <span class="highlight">25</span>];<br />
+                    <span class="variable">$cible</span> = <span class="highlight">12</span>;<br /><br />
+
+                    <span class="keyword">foreach</span> (<span class="variable">$nombres</span> <span class="keyword">as</span> <span class="variable">$index</span> =&gt; <span class="variable">$nombre</span>) {<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span> (<span class="variable">$nombre</span> == <span class="variable">$cible</span>) {<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">echo</span> <span class="string">"Trouvé à l'index "</span> . <span class="variable">$index</span>;<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">break</span>;<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;}<br />
+                    }<br />
+                    <span class="keyword">?&gt;</span>
+                </div>
+                <div class="result-box">
+                    <strong>Résultat :</strong><br>
+                    1 2 3 4<br>
+                    1 3 5 7 9<br>
+                    Trouvé à l'index 2
+                </div>
+            </div>
+
+            <!-- Boucles imbriquées -->
+            <div style="background: #fff3e0; padding: 25px; border-radius: 10px; margin: 30px 0">
+                <h2 style="color: #e65100; text-align: center; margin-top: 0">Boucles Imbriquées</h2>
+                <div class="code-example">
+                    <span class="keyword">&lt;?php</span><br />
+                    <span class="comment">// Table de multiplication complète</span><br />
+                    <span class="keyword">echo</span> <span class="string">"&lt;table border='1' style='border-collapse: collapse;'&gt;"</span>;<br />
+                    <span class="keyword">for</span> (<span class="variable">$i</span> = <span class="highlight">1</span>; <span class="variable">$i</span> &lt;= <span class="highlight">5</span>; <span class="variable">$i</span>++) {<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">echo</span> <span class="string">"&lt;tr&gt;"</span>;<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">for</span> (<span class="variable">$j</span> = <span class="highlight">1</span>; <span class="variable">$j</span> &lt;= <span class="highlight">5</span>; <span class="variable">$j</span>++) {<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="variable">$resultat</span> = <span class="variable">$i</span> * <span class="variable">$j</span>;<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">echo</span> <span class="string">"&lt;td style='padding: 5px; text-align: center;'&gt;"</span> . <span class="variable">$resultat</span> . <span class="string">"&lt;/td&gt;"</span>;<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;}<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">echo</span> <span class="string">"&lt;/tr&gt;"</span>;<br />
+                    }<br />
+                    <span class="keyword">echo</span> <span class="string">"&lt;/table&gt;"</span>;<br /><br />
+
+                    <span class="comment">// Pyramide d'étoiles</span><br />
+                    <span class="variable">$hauteur</span> = <span class="highlight">5</span>;<br />
+                    <span class="keyword">for</span> (<span class="variable">$i</span> = <span class="highlight">1</span>; <span class="variable">$i</span> &lt;= <span class="variable">$hauteur</span>; <span class="variable">$i</span>++) {<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">for</span> (<span class="variable">$j</span> = <span class="highlight">1</span>; <span class="variable">$j</span> &lt;= <span class="variable">$i</span>; <span class="variable">$j</span>++) {<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">echo</span> <span class="string">"* "</span>;<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;}<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">echo</span> <span class="string">"&lt;br&gt;"</span>;<br />
+                    }<br />
+                    <span class="keyword">?&gt;</span>
+                </div>
+                <div class="result-box">
+                    <strong>Résultat :</strong><br>
+                    Table 5x5 avec les produits<br>
+                    *<br>
+                    * *<br>
+                    * * *<br>
+                    * * * *<br>
+                    * * * * *
+                </div>
+            </div>
+
+            <!-- Erreurs courantes -->
+            <div style="background: #ffebee; padding: 25px; border-radius: 10px; margin: 30px 0">
+                <h2 style="color: #c62828; text-align: center; margin-top: 0">Erreurs Courantes</h2>
+                <div class="code-example">
+                    <span class="comment">// ❌ ERREUR : Boucle infinie</span><br />
+                    <span class="variable">$i</span> = <span class="highlight">0</span>;<br />
+                    <span class="keyword">while</span> (<span class="variable">$i</span> &lt; <span class="highlight">10</span>) {<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">echo</span> <span class="variable">$i</span>;<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">// Oubli de $i++ !</span><br />
+                    } <span class="comment">// Ne s'arrête jamais !</span><br /><br />
+
+                    <span class="comment">// ✅ CORRECT</span><br />
+                    <span class="variable">$i</span> = <span class="highlight">0</span>;<br />
+                    <span class="keyword">while</span> (<span class="variable">$i</span> &lt; <span class="highlight">10</span>) {<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">echo</span> <span class="variable">$i</span>;<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="variable">$i</span>++;<br />
+                    }<br /><br />
+
+                    <span class="comment">// ❌ ERREUR : Mauvaise condition dans for</span><br />
+                    <span class="keyword">for</span> (<span class="variable">$i</span> = <span class="highlight">0</span>; <span class="variable">$i</span> &lt; <span class="highlight">5</span>; <span class="variable">$i</span>--) { <span class="comment">// Décrémente au lieu d'incrémenter !</span><br /><br />
+
+                    <span class="comment">// ✅ CORRECT</span><br />
+                    <span class="keyword">for</span> (<span class="variable">$i</span> = <span class="highlight">0</span>; <span class="variable">$i</span> &lt; <span class="highlight">5</span>; <span class="variable">$i</span>++) {
+                </div>
+            </div>
+        </div>
+
+        <!-- Zone Froggiesplaining -->
+        <div class="froggiesplaining">
+            <span> Froggiesplaining :</span>
+            <p>
+                <br />
+                <strong>Objectifs de ce cours :</strong><br />
+                ✅ Maîtriser la boucle for pour un nombre d'itérations connu<br />
+                ✅ Utiliser while quand on ne connaît pas le nombre d'itérations<br />
+                ✅ Comprendre do...while (exécuté au moins une fois)<br />
+                ✅ Utiliser foreach pour parcourir les tableaux (le plus important !)<br />
+                ✅ Savoir utiliser break et continue pour contrôler les boucles<br /><br />
+
+                <strong>Points clés à retenir :</strong><br />
+                • <strong>for</strong> : utiliser quand on connaît le nombre d'itérations (ex: 1 à 10)<br />
+                • <strong>while</strong> : tant que la condition est vraie (vérification avant exécution)<br />
+                • <strong>do...while</strong> : comme while, mais s'exécute AU MOINS une fois<br />
+                • <strong>foreach</strong> : LE PLUS UTILISÉ pour parcourir des tableaux<br />
+                • <strong>break</strong> : sort immédiatement de la boucle<br />
+                • <strong>continue</strong> : passe à l'itération suivante (saute le reste du code)<br />
+                • Attention aux <strong>boucles infinies</strong> : toujours s'assurer que la condition devient fausse !<br />
+                • <strong>Boucles imbriquées</strong> : une boucle dans une autre (ex: tables de multiplication)<br /><br />
+
+                <strong>Exercice pratique :</strong><br />
+                1. Créez un fichier <code>boucles.php</code><br />
+                2. Affichez les nombres de 1 à 10 avec une boucle for<br />
+                3. Calculez la somme de 1 à 100 avec une boucle while<br />
+                4. Créez un tableau : <code>$villes = ["Paris", "Lyon", "Marseille"];</code><br />
+                5. Parcourez-le avec foreach et affichez chaque ville<br />
+                6. Affichez seulement les nombres impairs de 1 à 20 (utilisez continue)<br />
+                7. (Bonus) Créez une table de multiplication de 1 à 10 avec des boucles imbriquées
+            </p>
+            <img src="../../html/img/froggie-300.png" alt="Froggie explain" class="overfrog" id="Froggie" />
+        </div>
+
+        <!-- Bouton retour -->
+        <a href="index.html" id="goToIndex" title="Retour à l'index">
+            <i class="bi bi-arrow-left"></i>
+        </a>
+
+        <!-- Lien vers Froggie -->
+        <a href="#Froggie">
+            <div id="goToFroggie">
+                <img src="../../html/img/froggie-300.png" width="50px" /><br /><i class="bi bi-arrow-bar-down"></i>
+            </div>
+        </a>
+
+        <!-- Footer -->
+        <div id="footerGit">
+            <a href="https://github.com/eCreafr/DWWM" target="_blank"><i class="bi bi-github">GitHub - eCrea</i></a>
+        </div>
+    </body>
+</html>

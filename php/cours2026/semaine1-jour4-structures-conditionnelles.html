@@ -1,0 +1,408 @@
+<!doctype html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Semaine 1 - Jour 4 | Structures Conditionnelles</title>
+        <link rel="stylesheet" href="../../html/css/froggie.css" />
+        <style>
+            .demo-container {
+                max-width: 1200px;
+                margin: 40px auto;
+                padding: 20px;
+                font-family: Arial, sans-serif;
+            }
+            .demo-title {
+                text-align: center;
+                font-size: 2.5em;
+                margin-bottom: 20px;
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                background-clip: text;
+            }
+            .demo-intro {
+                background: #ecf0f1;
+                padding: 20px;
+                border-radius: 10px;
+                margin-bottom: 40px;
+                line-height: 1.6;
+            }
+            .demo-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                gap: 30px;
+                margin-bottom: 40px;
+            }
+            .demo-item {
+                border: 2px solid #667eea;
+                border-radius: 10px;
+                padding: 20px;
+                background: white;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            }
+            .demo-item h2 {
+                margin-top: 0;
+                color: #667eea;
+                font-size: 1.5em;
+            }
+            .code-example {
+                background: #2c3e50;
+                color: #ecf0f1;
+                padding: 15px;
+                border-radius: 5px;
+                font-family: 'Courier New', monospace;
+                font-size: 0.9em;
+                margin: 15px 0;
+                overflow-x: auto;
+            }
+            .result-box {
+                background: #e8f5e9;
+                border-left: 4px solid #4caf50;
+                padding: 10px;
+                margin: 10px 0;
+                border-radius: 3px;
+            }
+            .security-note {
+                background: #fff3cd;
+                border-left: 4px solid #ffc107;
+                padding: 10px;
+                margin: 10px 0;
+                border-radius: 3px;
+            }
+            .highlight {
+                color: #f39c12;
+                font-weight: bold;
+            }
+            .keyword {
+                color: #e74c3c;
+            }
+            .string {
+                color: #2ecc71;
+            }
+            .comment {
+                color: #95a5a6;
+                font-style: italic;
+            }
+            .variable {
+                color: #3498db;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="demo-container">
+            <h1 class="demo-title">Semaine 1 - Jour 4 : Structures Conditionnelles</h1>
+
+            <div class="demo-intro">
+                <h3>Prendre des Décisions dans le Code</h3>
+                <p>
+                    Les <strong>structures conditionnelles</strong> permettent d'exécuter du code selon qu'une condition
+                    est vraie ou fausse. Elles sont essentielles pour rendre votre programme intelligent et réactif.
+                </p>
+                <p>
+                    <strong>Les structures principales :</strong><br>
+                    • <strong>if/else/elseif</strong> : conditions simples ou multiples<br>
+                    • <strong>switch/case</strong> : choix multiples sur une même variable<br>
+                    • <strong>Opérateur ternaire</strong> : condition sur une ligne<br>
+                    • <strong>match</strong> : nouvelle syntaxe PHP 8+ (plus stricte que switch)
+                </p>
+            </div>
+
+            <!-- Concepts de base -->
+            <div class="demo-grid">
+                <div class="demo-item">
+                    <h2>1. if / else / elseif</h2>
+                    <p>La structure de base pour tester une condition :</p>
+                    <div class="code-example">
+                        <span class="keyword">&lt;?php</span><br />
+                        <span class="variable">$age</span> = <span class="highlight">20</span>;<br /><br />
+
+                        <span class="comment">// if simple</span><br />
+                        <span class="keyword">if</span> (<span class="variable">$age</span> &gt;= <span class="highlight">18</span>) {<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">echo</span> <span class="string">"Vous êtes majeur"</span>;<br />
+                        }<br /><br />
+
+                        <span class="comment">// if...else</span><br />
+                        <span class="keyword">if</span> (<span class="variable">$age</span> &gt;= <span class="highlight">18</span>) {<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">echo</span> <span class="string">"Majeur"</span>;<br />
+                        } <span class="keyword">else</span> {<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">echo</span> <span class="string">"Mineur"</span>;<br />
+                        }<br /><br />
+
+                        <span class="comment">// if...elseif...else</span><br />
+                        <span class="keyword">if</span> (<span class="variable">$age</span> &lt; <span class="highlight">13</span>) {<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">echo</span> <span class="string">"Enfant"</span>;<br />
+                        } <span class="keyword">elseif</span> (<span class="variable">$age</span> &lt; <span class="highlight">18</span>) {<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">echo</span> <span class="string">"Adolescent"</span>;<br />
+                        } <span class="keyword">else</span> {<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">echo</span> <span class="string">"Adulte"</span>;<br />
+                        }<br />
+                        <span class="keyword">?&gt;</span>
+                    </div>
+                    <div class="result-box">
+                        <strong>Résultat :</strong><br>
+                        Vous êtes majeur<br>
+                        Majeur<br>
+                        Adulte
+                    </div>
+                </div>
+
+                <div class="demo-item">
+                    <h2>2. switch / case</h2>
+                    <p>Comparer une variable à plusieurs valeurs :</p>
+                    <div class="code-example">
+                        <span class="keyword">&lt;?php</span><br />
+                        <span class="variable">$jour</span> = <span class="string">"mardi"</span>;<br /><br />
+
+                        <span class="keyword">switch</span> (<span class="variable">$jour</span>) {<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">case</span> <span class="string">"lundi"</span>:<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">echo</span> <span class="string">"Début de semaine"</span>;<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">break</span>;<br /><br />
+
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">case</span> <span class="string">"mardi"</span>:<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">case</span> <span class="string">"mercredi"</span>:<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">case</span> <span class="string">"jeudi"</span>:<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">echo</span> <span class="string">"Milieu de semaine"</span>;<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">break</span>;<br /><br />
+
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">case</span> <span class="string">"vendredi"</span>:<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">echo</span> <span class="string">"Presque le weekend !"</span>;<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">break</span>;<br /><br />
+
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">default</span>:<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">echo</span> <span class="string">"Weekend !"</span>;<br />
+                        }<br />
+                        <span class="keyword">?&gt;</span>
+                    </div>
+                    <div class="result-box">
+                        <strong>Résultat :</strong><br>
+                        Milieu de semaine
+                    </div>
+                    <div class="security-note">
+                        <strong>Important :</strong> N'oubliez pas le <strong>break;</strong> sinon le code continue
+                        dans les case suivants (fall-through) !
+                    </div>
+                </div>
+
+                <div class="demo-item">
+                    <h2>3. Opérateur Ternaire</h2>
+                    <p>Condition courte sur une seule ligne :</p>
+                    <div class="code-example">
+                        <span class="keyword">&lt;?php</span><br />
+                        <span class="comment">// Syntaxe : condition ? valeur_si_vrai : valeur_si_faux</span><br /><br />
+
+                        <span class="variable">$age</span> = <span class="highlight">25</span>;<br />
+                        <span class="variable">$statut</span> = (<span class="variable">$age</span> &gt;= <span class="highlight">18</span>) ? <span class="string">"Majeur"</span> : <span class="string">"Mineur"</span>;<br />
+                        <span class="keyword">echo</span> <span class="variable">$statut</span>; <span class="comment">// Majeur</span><br /><br />
+
+                        <span class="comment">// Équivalent à :</span><br />
+                        <span class="keyword">if</span> (<span class="variable">$age</span> &gt;= <span class="highlight">18</span>) {<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="variable">$statut</span> = <span class="string">"Majeur"</span>;<br />
+                        } <span class="keyword">else</span> {<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="variable">$statut</span> = <span class="string">"Mineur"</span>;<br />
+                        }<br /><br />
+
+                        <span class="comment">// Ternaire imbriqué (éviter si possible)</span><br />
+                        <span class="variable">$note</span> = <span class="highlight">14</span>;<br />
+                        <span class="variable">$mention</span> = (<span class="variable">$note</span> &gt;= <span class="highlight">16</span>) ? <span class="string">"TB"</span> :<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;((<span class="variable">$note</span> &gt;= <span class="highlight">14</span>) ? <span class="string">"B"</span> :<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;((<span class="variable">$note</span> &gt;= <span class="highlight">12</span>) ? <span class="string">"AB"</span> : <span class="string">"Passable"</span>));<br />
+                        <span class="keyword">echo</span> <span class="variable">$mention</span>; <span class="comment">// B</span><br />
+                        <span class="keyword">?&gt;</span>
+                    </div>
+                    <div class="result-box">
+                        <strong>Résultat :</strong><br>
+                        Majeur<br>
+                        B
+                    </div>
+                </div>
+
+                <div class="demo-item">
+                    <h2>4. match (PHP 8+)</h2>
+                    <p>Alternative moderne et stricte à switch :</p>
+                    <div class="code-example">
+                        <span class="keyword">&lt;?php</span><br />
+                        <span class="variable">$statut</span> = <span class="highlight">404</span>;<br /><br />
+
+                        <span class="comment">// match retourne une valeur directement</span><br />
+                        <span class="variable">$message</span> = <span class="keyword">match</span> (<span class="variable">$statut</span>) {<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="highlight">200</span> =&gt; <span class="string">"OK"</span>,<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="highlight">404</span> =&gt; <span class="string">"Page non trouvée"</span>,<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="highlight">500</span> =&gt; <span class="string">"Erreur serveur"</span>,<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">default</span> =&gt; <span class="string">"Statut inconnu"</span><br />
+                        };<br />
+                        <span class="keyword">echo</span> <span class="variable">$message</span>; <span class="comment">// Page non trouvée</span><br /><br />
+
+                        <span class="comment">// Multiples valeurs</span><br />
+                        <span class="variable">$jour</span> = <span class="highlight">3</span>;<br />
+                        <span class="variable">$type</span> = <span class="keyword">match</span> (<span class="variable">$jour</span>) {<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="highlight">1</span>, <span class="highlight">2</span>, <span class="highlight">3</span>, <span class="highlight">4</span>, <span class="highlight">5</span> =&gt; <span class="string">"Semaine"</span>,<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="highlight">6</span>, <span class="highlight">7</span> =&gt; <span class="string">"Weekend"</span>,<br />
+                        };<br />
+                        <span class="keyword">echo</span> <span class="variable">$type</span>; <span class="comment">// Semaine</span><br />
+                        <span class="keyword">?&gt;</span>
+                    </div>
+                    <div class="result-box">
+                        <strong>Résultat :</strong><br>
+                        Page non trouvée<br>
+                        Semaine
+                    </div>
+                    <div class="security-note">
+                        <strong>Différences match vs switch :</strong><br>
+                        • match utilise <strong>===</strong> (strict), switch utilise <strong>==</strong><br>
+                        • match retourne directement une valeur<br>
+                        • Pas besoin de break dans match<br>
+                        • match lève une erreur si aucun cas ne correspond (sans default)
+                    </div>
+                </div>
+            </div>
+
+            <!-- Exemples pratiques -->
+            <div style="background: #e8f4f8; padding: 25px; border-radius: 10px; margin: 30px 0">
+                <h2 style="color: #2c3e50; text-align: center; margin-top: 0">Exemples Pratiques</h2>
+                <div class="code-example">
+                    <span class="keyword">&lt;?php</span><br />
+                    <span class="comment">// Exemple 1 : Système de notes</span><br />
+                    <span class="variable">$note</span> = <span class="highlight">15</span>;<br /><br />
+
+                    <span class="keyword">if</span> (<span class="variable">$note</span> &gt;= <span class="highlight">16</span>) {<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="variable">$mention</span> = <span class="string">"Très bien"</span>;<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="variable">$couleur</span> = <span class="string">"gold"</span>;<br />
+                    } <span class="keyword">elseif</span> (<span class="variable">$note</span> &gt;= <span class="highlight">14</span>) {<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="variable">$mention</span> = <span class="string">"Bien"</span>;<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="variable">$couleur</span> = <span class="string">"green"</span>;<br />
+                    } <span class="keyword">elseif</span> (<span class="variable">$note</span> &gt;= <span class="highlight">12</span>) {<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="variable">$mention</span> = <span class="string">"Assez bien"</span>;<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="variable">$couleur</span> = <span class="string">"blue"</span>;<br />
+                    } <span class="keyword">elseif</span> (<span class="variable">$note</span> &gt;= <span class="highlight">10</span>) {<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="variable">$mention</span> = <span class="string">"Passable"</span>;<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="variable">$couleur</span> = <span class="string">"orange"</span>;<br />
+                    } <span class="keyword">else</span> {<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="variable">$mention</span> = <span class="string">"Insuffisant"</span>;<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="variable">$couleur</span> = <span class="string">"red"</span>;<br />
+                    }<br /><br />
+
+                    <span class="keyword">echo</span> <span class="string">"&lt;p style='color: "</span> . <span class="variable">$couleur</span> . <span class="string">"'&gt;"</span>;<br />
+                    <span class="keyword">echo</span> <span class="string">"Note : "</span> . <span class="variable">$note</span> . <span class="string">"/20 - "</span> . <span class="variable">$mention</span>;<br />
+                    <span class="keyword">echo</span> <span class="string">"&lt;/p&gt;"</span>;<br /><br />
+
+                    <span class="comment">// Exemple 2 : Menu de navigation</span><br />
+                    <span class="variable">$page</span> = <span class="string">"contact"</span>;<br /><br />
+
+                    <span class="keyword">switch</span> (<span class="variable">$page</span>) {<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">case</span> <span class="string">"accueil"</span>:<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="variable">$titre</span> = <span class="string">"Bienvenue"</span>;<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="variable">$contenu</span> = <span class="string">"Page d'accueil"</span>;<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">break</span>;<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">case</span> <span class="string">"contact"</span>:<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="variable">$titre</span> = <span class="string">"Nous contacter"</span>;<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="variable">$contenu</span> = <span class="string">"Formulaire de contact"</span>;<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">break</span>;<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">case</span> <span class="string">"about"</span>:<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="variable">$titre</span> = <span class="string">"À propos"</span>;<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="variable">$contenu</span> = <span class="string">"Qui sommes-nous ?"</span>;<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">break</span>;<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">default</span>:<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="variable">$titre</span> = <span class="string">"Erreur 404"</span>;<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="variable">$contenu</span> = <span class="string">"Page non trouvée"</span>;<br />
+                    }<br /><br />
+
+                    <span class="keyword">echo</span> <span class="string">"&lt;h1&gt;"</span> . <span class="variable">$titre</span> . <span class="string">"&lt;/h1&gt;"</span>;<br />
+                    <span class="keyword">echo</span> <span class="string">"&lt;p&gt;"</span> . <span class="variable">$contenu</span> . <span class="string">"&lt;/p&gt;"</span>;<br />
+                    <span class="keyword">?&gt;</span>
+                </div>
+                <div class="result-box">
+                    <strong>Résultat attendu :</strong><br>
+                    <span style="color: green;">Note : 15/20 - Bien</span><br>
+                    <strong style="font-size: 1.5em;">Nous contacter</strong><br>
+                    Formulaire de contact
+                </div>
+            </div>
+
+            <!-- Erreurs courantes -->
+            <div style="background: #ffebee; padding: 25px; border-radius: 10px; margin: 30px 0">
+                <h2 style="color: #c62828; text-align: center; margin-top: 0">Erreurs Courantes</h2>
+                <div class="code-example">
+                    <span class="comment">// ❌ ERREUR : Oublier les accolades avec plusieurs instructions</span><br />
+                    <span class="keyword">if</span> (<span class="variable">$age</span> &gt;= <span class="highlight">18</span>)<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">echo</span> <span class="string">"Majeur"</span>;<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">echo</span> <span class="string">"Bienvenue"</span>; <span class="comment">// Toujours exécuté !</span><br /><br />
+
+                    <span class="comment">// ✅ CORRECT : Utilisez des accolades</span><br />
+                    <span class="keyword">if</span> (<span class="variable">$age</span> &gt;= <span class="highlight">18</span>) {<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">echo</span> <span class="string">"Majeur"</span>;<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">echo</span> <span class="string">"Bienvenue"</span>;<br />
+                    }<br /><br />
+
+                    <span class="comment">// ❌ ERREUR : Oublier break dans switch</span><br />
+                    <span class="keyword">switch</span> (<span class="variable">$jour</span>) {<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">case</span> <span class="string">"lundi"</span>:<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">echo</span> <span class="string">"Lundi"</span>;<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">case</span> <span class="string">"mardi"</span>: <span class="comment">// Aussi exécuté si $jour = "lundi" !</span><br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">echo</span> <span class="string">"Mardi"</span>;<br />
+                    }<br /><br />
+
+                    <span class="comment">// ✅ CORRECT</span><br />
+                    <span class="keyword">switch</span> (<span class="variable">$jour</span>) {<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">case</span> <span class="string">"lundi"</span>:<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">echo</span> <span class="string">"Lundi"</span>;<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">break</span>;<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">case</span> <span class="string">"mardi"</span>:<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">echo</span> <span class="string">"Mardi"</span>;<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">break</span>;<br />
+                    }
+                </div>
+            </div>
+        </div>
+
+        <!-- Zone Froggiesplaining -->
+        <div class="froggiesplaining">
+            <span> Froggiesplaining :</span>
+            <p>
+                <br />
+                <strong>Objectifs de ce cours :</strong><br />
+                ✅ Maîtriser if, else et elseif pour des conditions multiples<br />
+                ✅ Utiliser switch/case pour comparer une variable à plusieurs valeurs<br />
+                ✅ Comprendre et utiliser l'opérateur ternaire pour des conditions simples<br />
+                ✅ Découvrir match (PHP 8+) comme alternative moderne à switch<br /><br />
+
+                <strong>Points clés à retenir :</strong><br />
+                • <strong>if/else</strong> : pour des conditions simples ou complexes<br />
+                • <strong>elseif</strong> : pour tester plusieurs conditions séquentiellement<br />
+                • <strong>switch</strong> : pratique quand on compare UNE variable à plusieurs valeurs<br />
+                • N'oubliez JAMAIS le <strong>break;</strong> dans switch (sauf si volontaire)<br />
+                • <strong>Opérateur ternaire</strong> : condition ? vrai : faux (pour conditions simples)<br />
+                • <strong>match</strong> (PHP 8+) : plus strict (===), retourne une valeur, pas de break<br />
+                • Utilisez toujours des <strong>accolades {}</strong> même pour une seule instruction (bonne pratique)<br />
+                • <strong>default</strong> dans switch/match : cas par défaut si aucun ne correspond<br /><br />
+
+                <strong>Exercice pratique :</strong><br />
+                1. Créez un fichier <code>conditions.php</code><br />
+                2. Demandez l'âge : <code>$age = 16;</code><br />
+                3. Affichez "Enfant" (0-12), "Ado" (13-17), "Adulte" (18+) avec if/elseif/else<br />
+                4. Créez une variable <code>$jour = "mercredi";</code><br />
+                5. Utilisez switch pour afficher un message selon le jour de la semaine<br />
+                6. Testez l'opérateur ternaire : <code>$message = ($age >= 18) ? "Accès autorisé" : "Accès refusé";</code><br />
+                7. (Bonus PHP 8+) Testez match avec un code HTTP : 200, 404, 500
+            </p>
+            <img src="../../html/img/froggie-300.png" alt="Froggie explain" class="overfrog" id="Froggie" />
+        </div>
+
+        <!-- Bouton retour -->
+        <a href="index.html" id="goToIndex" title="Retour à l'index">
+            <i class="bi bi-arrow-left"></i>
+        </a>
+
+        <!-- Lien vers Froggie -->
+        <a href="#Froggie">
+            <div id="goToFroggie">
+                <img src="../../html/img/froggie-300.png" width="50px" /><br /><i class="bi bi-arrow-bar-down"></i>
+            </div>
+        </a>
+
+        <!-- Footer -->
+        <div id="footerGit">
+            <a href="https://github.com/eCreafr/DWWM" target="_blank"><i class="bi bi-github">GitHub - eCrea</i></a>
+        </div>
+    </body>
+</html>

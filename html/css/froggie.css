@@ -60,7 +60,8 @@ body {
 .froggiesplaining {
     background-color: #282836;
     padding: 16px;
-    margin: 16px;
+    margin: 16px auto;
+    max-width: 1200px;
     color: #15acff;
     position: relative;
     margin-top: 150px;

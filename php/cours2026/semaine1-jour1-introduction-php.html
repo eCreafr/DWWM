@@ -1,0 +1,327 @@
+<!doctype html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Semaine 1 - Jour 1 | Introduction à PHP</title>
+        <link rel="stylesheet" href="../../html/css/froggie.css" />
+        <style>
+            .demo-container {
+                max-width: 1200px;
+                margin: 40px auto;
+                padding: 20px;
+                font-family: Arial, sans-serif;
+            }
+            .demo-title {
+                text-align: center;
+                font-size: 2.5em;
+                margin-bottom: 20px;
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                background-clip: text;
+            }
+            .demo-intro {
+                background: #ecf0f1;
+                padding: 20px;
+                border-radius: 10px;
+                margin-bottom: 40px;
+                line-height: 1.6;
+            }
+            .demo-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+                gap: 30px;
+                margin-bottom: 40px;
+            }
+            .demo-item {
+                border: 2px solid #667eea;
+                border-radius: 10px;
+                padding: 20px;
+                background: white;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            }
+            .demo-item h2 {
+                margin-top: 0;
+                color: #667eea;
+                font-size: 1.5em;
+            }
+            .code-example {
+                background: #2c3e50;
+                color: #ecf0f1;
+                padding: 15px;
+                border-radius: 5px;
+                font-family: 'Courier New', monospace;
+                font-size: 0.9em;
+                margin: 15px 0;
+                overflow-x: auto;
+            }
+            .result-box {
+                background: #e8f5e9;
+                border-left: 4px solid #4caf50;
+                padding: 10px;
+                margin: 10px 0;
+                border-radius: 3px;
+            }
+            .security-note {
+                background: #fff3cd;
+                border-left: 4px solid #ffc107;
+                padding: 10px;
+                margin: 10px 0;
+                border-radius: 3px;
+            }
+            .highlight {
+                color: #f39c12;
+                font-weight: bold;
+            }
+            .keyword {
+                color: #e74c3c;
+            }
+            .string {
+                color: #2ecc71;
+            }
+            .comment {
+                color: #95a5a6;
+                font-style: italic;
+            }
+            .variable {
+                color: #3498db;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="demo-container">
+            <h1 class="demo-title">Semaine 1 - Jour 1 : Introduction à PHP</h1>
+
+            <div class="demo-intro">
+                <h3>Qu'est-ce que PHP ?</h3>
+                <p>
+                    <strong>PHP (Hypertext Preprocessor)</strong> est un langage de programmation
+                    <strong>côté serveur</strong>
+                    créé en 1994. Contrairement à JavaScript qui s'exécute dans le navigateur, PHP s'exécute sur le
+                    serveur et génère du HTML.
+                </p>
+                <p>
+                    <strong>Différence client vs serveur :</strong><br />
+                    • <strong>Client (JavaScript) :</strong> Le code s'exécute dans le navigateur de l'utilisateur<br />
+                    • <strong>Serveur (PHP) :</strong> Le code s'exécute sur le serveur, l'utilisateur ne voit que le
+                    résultat HTML
+                </p>
+                <p>
+                    <strong>Utilisé par :</strong> WordPress, Facebook, Wikipedia, Slack, et des millions de sites web !
+                </p>
+            </div>
+
+            <!-- Concepts de base -->
+            <div class="demo-grid">
+                <div class="demo-item">
+                    <h2>1. Installation & Environnement</h2>
+                    <p><strong>Pour exécuter PHP, il faut :</strong></p>
+                    <ul style="line-height: 1.8">
+                        <li><strong>Un serveur web</strong> (Apache, Nginx)</li>
+                        <li><strong>PHP installé</strong> sur le serveur</li>
+                        <li><strong>Optionnel :</strong> MySQL pour les bases de données</li>
+                    </ul>
+                    <p><strong>Solutions tout-en-un :</strong></p>
+                    <ul style="line-height: 1.8">
+                        <li><strong>XAMPP</strong> (Windows, Mac, Linux)</li>
+                        <li><strong>WAMP</strong> (Windows uniquement)</li>
+                        <li><strong>MAMP</strong> (Mac principalement)</li>
+                    </ul>
+                    <div class="security-note">
+                        <strong>Important :</strong> Les fichiers PHP doivent être dans le dossier "htdocs" (XAMPP) ou
+                        "www" (WAMP) !
+                    </div>
+                </div>
+
+                <div class="demo-item">
+                    <h2>2. Premier script PHP</h2>
+                    <p>Un fichier PHP commence par <code>&lt;?php</code> et peut se terminer par <code>?&gt;</code></p>
+                    <div class="code-example">
+                        <span class="keyword">&lt;?php</span><br />
+                        <span class="comment">// Mon premier script PHP</span><br />
+                        <span class="keyword">echo</span> <span class="string">"Hello World!"</span>;<br />
+                        <span class="keyword">?&gt;</span>
+                    </div>
+                    <div class="result-box">
+                        <strong>Résultat attendu :</strong><br />
+                        Hello World!
+                    </div>
+                    <p><strong>Notes importantes :</strong></p>
+                    <ul style="line-height: 1.8">
+                        <li>Extension de fichier : <strong>.php</strong></li>
+                        <li>Chaque instruction se termine par <strong>;</strong></li>
+                        <li>Le <code>?&gt;</code> final est optionnel (et souvent omis)</li>
+                    </ul>
+                </div>
+
+                <div class="demo-item">
+                    <h2>3. echo vs print</h2>
+                    <p>
+                        <strong>echo</strong> et <strong>print</strong> affichent du contenu, mais avec des différences
+                        :
+                    </p>
+                    <div class="code-example">
+                        <span class="keyword">&lt;?php</span><br />
+                        <span class="comment">// echo : plus rapide, peut afficher plusieurs valeurs</span><br />
+                        <span class="keyword">echo</span> <span class="string">"Bonjour"</span>,
+                        <span class="string">" le monde"</span>;<br /><br />
+
+                        <span class="comment">// print : retourne 1, une seule valeur</span><br />
+                        <span class="keyword">print</span> <span class="string">"Salut !"</span>;<br /><br />
+
+                        <span class="comment">// echo avec HTML</span><br />
+                        <span class="keyword">echo</span>
+                        <span class="string">"&lt;h1&gt;Titre&lt;/h1&gt;"</span>;<br />
+                        <span class="keyword">?&gt;</span>
+                    </div>
+                    <div class="result-box">
+                        <strong>Résultat attendu :</strong><br />
+                        Bonjour le monde<br />
+                        Salut !<br />
+                        <strong style="font-size: 1.5em">Titre</strong>
+                    </div>
+                </div>
+
+                <div class="demo-item">
+                    <h2>4. Commentaires & var_dump()</h2>
+                    <p><strong>Les commentaires :</strong></p>
+                    <div class="code-example">
+                        <span class="keyword">&lt;?php</span><br />
+                        <span class="comment">// Commentaire sur une ligne</span><br /><br />
+
+                        <span class="comment">/* Commentaire</span><br />
+                        <span class="comment">&nbsp;&nbsp;&nbsp;sur plusieurs</span><br />
+                        <span class="comment">&nbsp;&nbsp;&nbsp;lignes */</span><br /><br />
+
+                        <span class="comment"># Aussi un commentaire (style Unix)</span><br />
+                        <span class="keyword">?&gt;</span>
+                    </div>
+
+                    <p><strong>var_dump() : debug et inspection</strong></p>
+                    <div class="code-example">
+                        <span class="keyword">&lt;?php</span><br />
+                        <span class="variable">$age</span> = <span class="highlight">25</span>;<br />
+                        <span class="keyword">var_dump</span>(<span class="variable">$age</span>);
+                        <span class="comment">// int(25)</span><br />
+                        <span class="keyword">?&gt;</span>
+                    </div>
+                    <div class="result-box">
+                        <strong>Résultat attendu :</strong><br />
+                        int(25)
+                    </div>
+                </div>
+            </div>
+
+            <!-- Exemples pratiques -->
+            <div style="background: #e8f4f8; padding: 25px; border-radius: 10px; margin: 30px 0">
+                <h2 style="color: #2c3e50; text-align: center; margin-top: 0">Exemples à tester</h2>
+                <div class="code-example">
+                    <span class="keyword">&lt;?php</span><br />
+                    <span class="comment">// 1. Afficher un message simple</span><br />
+                    <span class="keyword">echo</span> <span class="string">"Bienvenue dans PHP !"</span>;<br /><br />
+
+                    <span class="comment">// 2. Afficher plusieurs éléments</span><br />
+                    <span class="keyword">echo</span> <span class="string">"Prénom : "</span>,
+                    <span class="string">"Jean"</span>, <span class="string">" | Age : "</span>,
+                    <span class="highlight">30</span>;<br /><br />
+
+                    <span class="comment">// 3. Mélanger PHP et HTML</span><br />
+                    <span class="keyword">echo</span>
+                    <span class="string">"&lt;p style='color: blue;'&gt;Texte en bleu&lt;/p&gt;"</span>;<br /><br />
+
+                    <span class="comment">// 4. Afficher la version de PHP</span><br />
+                    <span class="keyword">echo</span> <span class="string">"Version PHP : "</span> .
+                    <span class="keyword">phpversion</span>();<br /><br />
+
+                    <span class="comment">// 5. Utiliser var_dump pour déboguer</span><br />
+                    <span class="keyword">var_dump</span>(<span class="string">"Hello"</span>,
+                    <span class="highlight">123</span>, <span class="keyword">true</span>);<br />
+                    <span class="keyword">?&gt;</span>
+                </div>
+                <div class="result-box">
+                    <strong>Résultat attendu :</strong><br />
+                    Bienvenue dans PHP !<br />
+                    Prénom : Jean | Age : 30<br />
+                    <span style="color: blue">Texte en bleu</span><br />
+                    Version PHP : 8.x.x<br />
+                    string(5) "Hello" int(123) bool(true)
+                </div>
+            </div>
+
+            <!-- Erreurs courantes -->
+            <div style="background: #ffebee; padding: 25px; border-radius: 10px; margin: 30px 0">
+                <h2 style="color: #c62828; text-align: center; margin-top: 0">Erreurs courantes à éviter</h2>
+                <div class="code-example">
+                    <span class="comment">// ❌ ERREUR : Oublier le point-virgule</span><br />
+                    <span class="keyword">echo</span> <span class="string">"Hello"</span>
+                    <span class="comment">// Parse error!</span><br /><br />
+
+                    <span class="comment">// ✅ CORRECT</span><br />
+                    <span class="keyword">echo</span> <span class="string">"Hello"</span>;<br /><br />
+
+                    <span class="comment">// ❌ ERREUR : Fichier PHP pas sur le serveur</span><br />
+                    <span class="comment">// Ouvrir directement file:///C:/mon-fichier.php ne marche pas !</span
+                    ><br /><br />
+
+                    <span class="comment">// ✅ CORRECT : Utiliser localhost</span><br />
+                    <span class="comment">// http://localhost/mon-fichier.php</span><br /><br />
+
+                    <span class="comment">// ❌ ERREUR : Mélanger &lt;?php et &lt;script&gt;</span><br />
+                    <span class="comment">// PHP n'est PAS JavaScript !</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Zone Froggiesplaining -->
+        <div class="froggiesplaining">
+            <span> Froggiesplaining :</span>
+            <p>
+                <br />
+                <strong>Objectifs de ce cours :</strong><br />
+                ✅ Comprendre la différence entre code côté client (JavaScript) et côté serveur (PHP)<br />
+                ✅ Installer un environnement de développement PHP (XAMPP/WAMP)<br />
+                ✅ Écrire et exécuter un premier script PHP<br />
+                ✅ Utiliser echo, print et var_dump()<br />
+                ✅ Comprendre la syntaxe de base et les commentaires<br /><br />
+
+                <strong>Points clés à retenir :</strong><br />
+                • PHP s'exécute sur le <strong>serveur</strong>, pas dans le navigateur<br />
+                • Les fichiers PHP ont l'extension <strong>.php</strong><br />
+                • Le code PHP commence par <strong>&lt;?php</strong><br />
+                • <strong>echo</strong> affiche du contenu (HTML, texte, variables)<br />
+                • <strong>var_dump()</strong> est parfait pour déboguer et voir le type de données<br />
+                • Chaque instruction se termine par un <strong>;</strong><br />
+                • Les fichiers doivent être dans <strong>htdocs/</strong> ou <strong>www/</strong><br />
+                • On accède aux fichiers via <strong>http://localhost/</strong><br /><br />
+
+                <strong>Exercice pratique :</strong><br />
+                1. Installez XAMPP ou WAMP sur votre ordinateur<br />
+                2. Créez un fichier <code>test.php</code> dans <strong>htdocs/</strong><br />
+                3. Écrivez ce code :<br />
+                <code>&lt;?php echo "Bonjour " . "tout le monde !"; ?&gt;</code><br />
+                4. Ouvrez <strong>http://localhost/test.php</strong> dans votre navigateur<br />
+                5. Modifiez le message et rechargez la page<br />
+                6. Essayez var_dump() avec différentes valeurs : <code>var_dump(42, "test", true);</code>
+            </p>
+            <img src="../../html/img/froggie-300.png" alt="Froggie explain" class="overfrog" id="Froggie" />
+        </div>
+
+        <!-- Bouton retour -->
+        <a href="index.html" id="goToIndex" title="Retour à l'index">
+            <i class="bi bi-arrow-left"></i>
+        </a>
+
+        <!-- Lien vers Froggie -->
+        <a href="#Froggie">
+            <div id="goToFroggie">
+                <img src="../../html/img/froggie-300.png" width="50px" /><br /><i class="bi bi-arrow-bar-down"></i>
+            </div>
+        </a>
+
+        <!-- Footer -->
+        <div id="footerGit">
+            <a href="https://github.com/eCreafr/DWWM" target="_blank"><i class="bi bi-github">GitHub - eCrea</i></a>
+        </div>
+    </body>
+</html>

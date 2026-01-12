@@ -1,0 +1,571 @@
+<!doctype html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PHP - Semaine 4 Jour 4 : Introduction au MVC</title>
+    <link rel="stylesheet" href="../../html/css/froggie.css">
+    <style>
+        .demo-container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+        }
+        .demo-title {
+            text-align: center;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .demo-intro {
+            background: #ecf0f1;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 40px;
+            line-height: 1.6;
+        }
+        .demo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        .demo-item {
+            border: 2px solid #667eea;
+            border-radius: 10px;
+            padding: 20px;
+            background: white;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .demo-item h2 {
+            margin-top: 0;
+            color: #667eea;
+            font-size: 1.5em;
+        }
+        .code-example {
+            background: #2c3e50;
+            color: #ecf0f1;
+            padding: 15px;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            margin: 15px 0;
+            overflow-x: auto;
+        }
+        .result-box {
+            background: #e8f5e9;
+            border-left: 4px solid #4caf50;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 3px;
+        }
+        .security-note {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 3px;
+        }
+        .highlight {
+            color: #f39c12;
+            font-weight: bold;
+        }
+        .keyword {
+            color: #e74c3c;
+        }
+        .string {
+            color: #2ecc71;
+        }
+        .comment {
+            color: #95a5a6;
+            font-style: italic;
+        }
+        .variable {
+            color: #3498db;
+        }
+        .info-note {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        .warning-note {
+            background: #f8d7da;
+            border-left: 4px solid #dc3545;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: transform 0.2s;
+        }
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background: #667eea;
+            color: white;
+        }
+        tr:nth-child(even) {
+            background: #f9f9f9;
+        }
+    </style>
+</head>
+<body>
+    <div class="demo-container">
+        <h1 class="demo-title">Semaine 4 - Jour 4 : Introduction au Pattern MVC</h1>
+
+        <div class="demo-intro">
+            <p>Aujourd'hui, nous découvrons le pattern MVC (Modèle-Vue-Contrôleur), une architecture logicielle qui sépare les responsabilités de notre application en trois composants distincts.</p>
+        </div>
+
+        <div class="demo-grid">
+            <div class="demo-item">
+                <h2>1. Qu'est-ce que le pattern MVC ?</h2>
+                <h3>Modèle-Vue-Contrôleur</h3>
+                <div class="info-note">
+                    <h4>Modèle (Model)</h4>
+                    <p><strong>Rôle :</strong> Gère les données et la logique métier</p>
+                    <ul>
+                        <li>Accès à la base de données</li>
+                        <li>Validation des données</li>
+                        <li>Logique métier</li>
+                    </ul>
+                </div>
+                <div class="info-note">
+                    <h4>Vue (View)</h4>
+                    <p><strong>Rôle :</strong> Affiche les données</p>
+                    <ul>
+                        <li>HTML, CSS</li>
+                        <li>Présentation visuelle</li>
+                        <li>Interface utilisateur</li>
+                    </ul>
+                </div>
+                <div class="info-note">
+                    <h4>Contrôleur (Controller)</h4>
+                    <p><strong>Rôle :</strong> Fait le lien entre Modèle et Vue</p>
+                    <ul>
+                        <li>Reçoit les requêtes</li>
+                        <li>Appelle le Modèle</li>
+                        <li>Passe les données à la Vue</li>
+                    </ul>
+                </div>
+
+                <h3>Flux d'une requête MVC</h3>
+                <div class="code-example">
+1. L'utilisateur visite : index.php?action=show&id=1
+
+2. Le <strong>Contrôleur</strong> reçoit la requête
+   → Quelle action ? show
+   → Quel ID ? 1
+
+3. Le Contrôleur appelle le <strong>Modèle</strong>
+   → "Donne-moi l'article avec l'ID 1"
+
+4. Le Modèle interroge la base de données
+   → SELECT * FROM articles WHERE id = 1
+
+5. Le Modèle retourne les données au Contrôleur
+   → ["id" => 1, "titre" => "Mon article", "contenu" => "..."]
+
+6. Le Contrôleur passe les données à la <strong>Vue</strong>
+   → "Affiche cet article"
+
+7. La Vue génère le HTML
+   → &lt;h1&gt;Mon article&lt;/h1&gt;&lt;p&gt;...&lt;/p&gt;
+
+8. L'utilisateur voit la page HTML
+                </div>
+
+                <div class="info-note">
+                    <h4>Avantages du MVC :</h4>
+                    <ul>
+                        <li><strong>Séparation des responsabilités</strong> : Chaque partie a un rôle clair</li>
+                        <li><strong>Maintenabilité</strong> : Facile de modifier une partie sans casser les autres</li>
+                        <li><strong>Réutilisabilité</strong> : Un même Modèle peut servir plusieurs Vues</li>
+                        <li><strong>Travail en équipe</strong> : Design (Vue), Back-end (Modèle), Logique (Contrôleur)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="demo-item">
+                <h2>2. Structure des dossiers MVC</h2>
+                <h3>Organisation recommandée</h3>
+                <div class="code-example">
+projet-mvc/
+│
+├── public/
+│   └── index.php              <span class="comment">// Point d'entrée unique</span>
+│
+├── src/
+│   ├── Controllers/
+│   │   ├── HomeController.php
+│   │   └── ArticleController.php
+│   │
+│   ├── Models/
+│   │   ├── Article.php
+│   │   └── User.php
+│   │
+│   └── Views/
+│       ├── home/
+│       │   └── index.php
+│       ├── articles/
+│       │   ├── list.php
+│       │   └── show.php
+│       └── layout/
+│           ├── header.php
+│           └── footer.php
+│
+├── config/
+│   └── database.php           <span class="comment">// Configuration BDD</span>
+│
+└── autoload.php               <span class="comment">// Autoloader</span>
+                </div>
+            </div>
+
+            <div class="demo-item">
+                <h2>3. Le Modèle (Model)</h2>
+                <h3>Exemple : Modèle Article</h3>
+                <div class="code-example">
+<span class="keyword">&lt;?php</span>
+<span class="comment">// src/Models/Article.php</span>
+<span class="keyword">namespace</span> Models;
+
+<span class="keyword">class</span> Article {
+    <span class="keyword">private</span> <span class="variable">$pdo</span>;
+
+    <span class="keyword">public function</span> __construct(<span class="variable">$pdo</span>) {
+        <span class="variable">$this</span>->pdo = <span class="variable">$pdo</span>;
+    }
+
+    <span class="comment">// Récupérer tous les articles</span>
+    <span class="keyword">public function</span> getAll() {
+        <span class="variable">$sql</span> = <span class="string">"SELECT * FROM articles ORDER BY date_creation DESC"</span>;
+        <span class="variable">$stmt</span> = <span class="variable">$this</span>->pdo->query(<span class="variable">$sql</span>);
+        <span class="keyword">return</span> <span class="variable">$stmt</span>->fetchAll(\PDO::FETCH_ASSOC);
+    }
+
+    <span class="comment">// Récupérer un article par son ID</span>
+    <span class="keyword">public function</span> getById(<span class="variable">$id</span>) {
+        <span class="variable">$sql</span> = <span class="string">"SELECT * FROM articles WHERE id = :id"</span>;
+        <span class="variable">$stmt</span> = <span class="variable">$this</span>->pdo->prepare(<span class="variable">$sql</span>);
+        <span class="variable">$stmt</span>->execute([<span class="string">'id'</span> => <span class="variable">$id</span>]);
+        <span class="keyword">return</span> <span class="variable">$stmt</span>->fetch(\PDO::FETCH_ASSOC);
+    }
+
+    <span class="comment">// Créer un nouvel article</span>
+    <span class="keyword">public function</span> create(<span class="variable">$titre</span>, <span class="variable">$contenu</span>, <span class="variable">$auteur</span>) {
+        <span class="variable">$sql</span> = <span class="string">"INSERT INTO articles (titre, contenu, auteur, date_creation)
+                 VALUES (:titre, :contenu, :auteur, NOW())"</span>;
+        <span class="variable">$stmt</span> = <span class="variable">$this</span>->pdo->prepare(<span class="variable">$sql</span>);
+        <span class="variable">$stmt</span>->execute([
+            <span class="string">'titre'</span> => <span class="variable">$titre</span>,
+            <span class="string">'contenu'</span> => <span class="variable">$contenu</span>,
+            <span class="string">'auteur'</span> => <span class="variable">$auteur</span>
+        ]);
+        <span class="keyword">return</span> <span class="variable">$this</span>->pdo->lastInsertId();
+    }
+
+    <span class="comment">// Mettre à jour un article</span>
+    <span class="keyword">public function</span> update(<span class="variable">$id</span>, <span class="variable">$titre</span>, <span class="variable">$contenu</span>) {
+        <span class="variable">$sql</span> = <span class="string">"UPDATE articles SET titre = :titre, contenu = :contenu WHERE id = :id"</span>;
+        <span class="variable">$stmt</span> = <span class="variable">$this</span>->pdo->prepare(<span class="variable">$sql</span>);
+        <span class="keyword">return</span> <span class="variable">$stmt</span>->execute([
+            <span class="string">'id'</span> => <span class="variable">$id</span>,
+            <span class="string">'titre'</span> => <span class="variable">$titre</span>,
+            <span class="string">'contenu'</span> => <span class="variable">$contenu</span>
+        ]);
+    }
+
+    <span class="comment">// Supprimer un article</span>
+    <span class="keyword">public function</span> delete(<span class="variable">$id</span>) {
+        <span class="variable">$sql</span> = <span class="string">"DELETE FROM articles WHERE id = :id"</span>;
+        <span class="variable">$stmt</span> = <span class="variable">$this</span>->pdo->prepare(<span class="variable">$sql</span>);
+        <span class="keyword">return</span> <span class="variable">$stmt</span>->execute([<span class="string">'id'</span> => <span class="variable">$id</span>]);
+    }
+}
+<span class="keyword">?&gt;</span>
+                </div>
+            </div>
+
+            <div class="demo-item">
+                <h2>4. Le Contrôleur (Controller)</h2>
+                <h3>Exemple : Contrôleur Article</h3>
+                <div class="code-example">
+<span class="keyword">&lt;?php</span>
+<span class="comment">// src/Controllers/ArticleController.php</span>
+<span class="keyword">namespace</span> Controllers;
+
+<span class="keyword">use</span> Models\Article;
+
+<span class="keyword">class</span> ArticleController {
+    <span class="keyword">private</span> <span class="variable">$articleModel</span>;
+
+    <span class="keyword">public function</span> __construct(<span class="variable">$pdo</span>) {
+        <span class="variable">$this</span>->articleModel = <span class="keyword">new</span> Article(<span class="variable">$pdo</span>);
+    }
+
+    <span class="comment">// Action : Afficher la liste des articles</span>
+    <span class="keyword">public function</span> index() {
+        <span class="comment">// 1. Récupérer les données du Modèle</span>
+        <span class="variable">$articles</span> = <span class="variable">$this</span>->articleModel->getAll();
+
+        <span class="comment">// 2. Passer les données à la Vue</span>
+        <span class="keyword">require</span> __DIR__ . <span class="string">'/../Views/articles/list.php'</span>;
+    }
+
+    <span class="comment">// Action : Afficher un article</span>
+    <span class="keyword">public function</span> show(<span class="variable">$id</span>) {
+        <span class="comment">// 1. Récupérer l'article</span>
+        <span class="variable">$article</span> = <span class="variable">$this</span>->articleModel->getById(<span class="variable">$id</span>);
+
+        <span class="comment">// 2. Vérifier si l'article existe</span>
+        <span class="keyword">if</span> (!<span class="variable">$article</span>) {
+            <span class="keyword">die</span>(<span class="string">"Article non trouvé"</span>);
+        }
+
+        <span class="comment">// 3. Afficher la Vue</span>
+        <span class="keyword">require</span> __DIR__ . <span class="string">'/../Views/articles/show.php'</span>;
+    }
+
+    <span class="comment">// Action : Créer un article</span>
+    <span class="keyword">public function</span> create() {
+        <span class="keyword">if</span> (<span class="variable">$_SERVER</span>[<span class="string">'REQUEST_METHOD'</span>] === <span class="string">'POST'</span>) {
+            <span class="variable">$titre</span> = <span class="keyword">trim</span>(<span class="variable">$_POST</span>[<span class="string">'titre'</span>] ?? <span class="string">''</span>);
+            <span class="variable">$contenu</span> = <span class="keyword">trim</span>(<span class="variable">$_POST</span>[<span class="string">'contenu'</span>] ?? <span class="string">''</span>);
+            <span class="variable">$auteur</span> = <span class="keyword">trim</span>(<span class="variable">$_POST</span>[<span class="string">'auteur'</span>] ?? <span class="string">''</span>);
+
+            <span class="keyword">if</span> (!<span class="keyword">empty</span>(<span class="variable">$titre</span>) && !<span class="keyword">empty</span>(<span class="variable">$contenu</span>) && !<span class="keyword">empty</span>(<span class="variable">$auteur</span>)) {
+                <span class="variable">$id</span> = <span class="variable">$this</span>->articleModel->create(<span class="variable">$titre</span>, <span class="variable">$contenu</span>, <span class="variable">$auteur</span>);
+                <span class="keyword">header</span>(<span class="string">"Location: index.php?action=show&id=</span><span class="variable">$id</span><span class="string">"</span>);
+                <span class="keyword">exit</span>();
+            }
+        }
+        <span class="keyword">require</span> __DIR__ . <span class="string">'/../Views/articles/create.php'</span>;
+    }
+
+    <span class="comment">// Action : Supprimer un article</span>
+    <span class="keyword">public function</span> delete(<span class="variable">$id</span>) {
+        <span class="variable">$this</span>->articleModel->delete(<span class="variable">$id</span>);
+        <span class="keyword">header</span>(<span class="string">"Location: index.php?action=index"</span>);
+        <span class="keyword">exit</span>();
+    }
+}
+<span class="keyword">?&gt;</span>
+                </div>
+            </div>
+
+            <div class="demo-item">
+                <h2>5. La Vue (View)</h2>
+                <h3>Exemple : Vue Liste des articles</h3>
+                <div class="code-example">
+<span class="keyword">&lt;?php</span> <span class="comment">// src/Views/articles/list.php</span> <span class="keyword">?&gt;</span>
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;Liste des articles&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;Liste des articles&lt;/h1&gt;
+    &lt;a href="index.php?action=create"&gt;Créer un article&lt;/a&gt;
+
+    &lt;?php <span class="keyword">foreach</span> (<span class="variable">$articles</span> <span class="keyword">as</span> <span class="variable">$article</span>): ?&gt;
+        &lt;div&gt;
+            &lt;h2&gt;
+                &lt;a href="index.php?action=show&id=&lt;?php echo <span class="variable">$article</span>[<span class="string">'id'</span>]; ?&gt;"&gt;
+                    &lt;?php echo htmlspecialchars(<span class="variable">$article</span>[<span class="string">'titre'</span>]); ?&gt;
+                &lt;/a&gt;
+            &lt;/h2&gt;
+            &lt;p&gt;&lt;?php echo nl2br(htmlspecialchars(<span class="keyword">substr</span>(<span class="variable">$article</span>[<span class="string">'contenu'</span>], 0, 200))); ?&gt;...&lt;/p&gt;
+        &lt;/div&gt;
+    &lt;?php <span class="keyword">endforeach</span>; ?&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+                </div>
+
+                <h3>Exemple : Vue Article détaillé</h3>
+                <div class="code-example">
+<span class="keyword">&lt;?php</span> <span class="comment">// src/Views/articles/show.php</span> <span class="keyword">?&gt;</span>
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;&lt;?php echo htmlspecialchars(<span class="variable">$article</span>[<span class="string">'titre'</span>]); ?&gt;&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;a href="index.php?action=index"&gt;← Retour à la liste&lt;/a&gt;
+
+    &lt;h1&gt;&lt;?php echo htmlspecialchars(<span class="variable">$article</span>[<span class="string">'titre'</span>]); ?&gt;&lt;/h1&gt;
+
+    &lt;p&gt;
+        &lt;strong&gt;Auteur :&lt;/strong&gt; &lt;?php echo htmlspecialchars(<span class="variable">$article</span>[<span class="string">'auteur'</span>]); ?&gt;&lt;br&gt;
+        &lt;strong&gt;Date :&lt;/strong&gt; &lt;?php echo date(<span class="string">'d/m/Y'</span>, strtotime(<span class="variable">$article</span>[<span class="string">'date_creation'</span>])); ?&gt;
+    &lt;/p&gt;
+
+    &lt;div&gt;
+        &lt;?php echo nl2br(htmlspecialchars(<span class="variable">$article</span>[<span class="string">'contenu'</span>])); ?&gt;
+    &lt;/div&gt;
+
+    &lt;a href="index.php?action=delete&id=&lt;?php echo <span class="variable">$article</span>[<span class="string">'id'</span>]; ?&gt;"
+       onclick="return confirm('Supprimer cet article ?')"&gt;Supprimer&lt;/a&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+                </div>
+            </div>
+
+            <div class="demo-item">
+                <h2>6. Routing simple avec $_GET</h2>
+                <h3>Point d'entrée : index.php</h3>
+                <div class="code-example">
+<span class="keyword">&lt;?php</span>
+<span class="comment">// public/index.php - Point d'entrée unique</span>
+
+<span class="keyword">require_once</span> __DIR__ . <span class="string">'/../autoload.php'</span>;
+<span class="keyword">require_once</span> __DIR__ . <span class="string">'/../config/database.php'</span>;
+
+<span class="keyword">use</span> Controllers\ArticleController;
+<span class="keyword">use</span> Controllers\HomeController;
+
+<span class="variable">$action</span> = <span class="variable">$_GET</span>[<span class="string">'action'</span>] ?? <span class="string">'home'</span>;
+<span class="variable">$id</span> = <span class="variable">$_GET</span>[<span class="string">'id'</span>] ?? <span class="keyword">null</span>;
+
+<span class="keyword">try</span> {
+    <span class="keyword">switch</span> (<span class="variable">$action</span>) {
+        <span class="keyword">case</span> <span class="string">'home'</span>:
+            <span class="variable">$controller</span> = <span class="keyword">new</span> HomeController();
+            <span class="variable">$controller</span>->index();
+            <span class="keyword">break</span>;
+
+        <span class="keyword">case</span> <span class="string">'index'</span>:
+            <span class="variable">$controller</span> = <span class="keyword">new</span> ArticleController(<span class="variable">$pdo</span>);
+            <span class="variable">$controller</span>->index();
+            <span class="keyword">break</span>;
+
+        <span class="keyword">case</span> <span class="string">'show'</span>:
+            <span class="keyword">if</span> (<span class="variable">$id</span>) {
+                <span class="variable">$controller</span> = <span class="keyword">new</span> ArticleController(<span class="variable">$pdo</span>);
+                <span class="variable">$controller</span>->show(<span class="variable">$id</span>);
+            }
+            <span class="keyword">break</span>;
+
+        <span class="keyword">default</span>:
+            <span class="keyword">die</span>(<span class="string">"Action inconnue"</span>);
+    }
+} <span class="keyword">catch</span> (\Exception <span class="variable">$e</span>) {
+    <span class="keyword">error_log</span>(<span class="variable">$e</span>->getMessage());
+    <span class="keyword">die</span>(<span class="string">"Une erreur s'est produite"</span>);
+}
+<span class="keyword">?&gt;</span>
+                </div>
+
+                <h3>Exemples d'URLs</h3>
+                <table>
+                    <tr>
+                        <th>URL</th>
+                        <th>Contrôleur</th>
+                        <th>Action</th>
+                        <th>Description</th>
+                    </tr>
+                    <tr>
+                        <td>index.php</td>
+                        <td>HomeController</td>
+                        <td>index()</td>
+                        <td>Page d'accueil</td>
+                    </tr>
+                    <tr>
+                        <td>index.php?action=index</td>
+                        <td>ArticleController</td>
+                        <td>index()</td>
+                        <td>Liste des articles</td>
+                    </tr>
+                    <tr>
+                        <td>index.php?action=show&id=1</td>
+                        <td>ArticleController</td>
+                        <td>show(1)</td>
+                        <td>Article détaillé</td>
+                    </tr>
+                    <tr>
+                        <td>index.php?action=create</td>
+                        <td>ArticleController</td>
+                        <td>create()</td>
+                        <td>Créer un article</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <!-- Zone Froggiesplaining -->
+        <div class="froggiesplaining">
+            <span> Froggiesplaining :</span>
+            <p>
+                <br />
+                <strong>Objectifs de ce cours :</strong><br />
+                ✅ Comprendre le pattern MVC (Modèle-Vue-Contrôleur)<br />
+                ✅ Organiser un projet avec une structure MVC claire<br />
+                ✅ Créer des Modèles pour gérer les données (CRUD)<br />
+                ✅ Créer des Contrôleurs pour orchestrer la logique<br />
+                ✅ Créer des Vues pour afficher les données<br />
+                ✅ Implémenter un système de routing simple<br /><br />
+
+                <strong>Points clés à retenir :</strong><br />
+                • <strong>Modèle</strong> = Ma réserve de mouches (base de données, getAll(), getById())<br />
+                • <strong>Vue</strong> = Mon miroir d'eau (HTML/CSS, affichage uniquement)<br />
+                • <strong>Contrôleur</strong> = Moi qui décide (reçoit requête, appelle Modèle, passe à Vue)<br />
+                • <strong>Routing</strong> = Panneau de signalisation (?action=show&id=5)<br />
+                • <strong>Flux MVC</strong> = User → Router → Controller → Model → Controller → View → User<br />
+                • <strong>Séparation des responsabilités</strong> = Modèle ne fait pas de HTML, Vue ne fait pas de SQL<br />
+                • Structure: src/Models/, src/Controllers/, src/Views/<br />
+                • Point d'entrée unique: public/index.php<br /><br />
+
+                <strong>Exercice pratique :</strong><br />
+                1. Créer la structure MVC complète (Models, Controllers, Views)<br />
+                2. Créer Models\Article.php avec getAll(), getById(), create(), update(), delete()<br />
+                3. Créer Controllers\ArticleController.php avec index(), show(), create()<br />
+                4. Créer Views\articles\index.php pour lister les articles<br />
+                5. Créer Views\articles\show.php pour afficher un article détaillé<br />
+                6. Créer public\index.php avec switch sur $_GET['action']<br />
+                7. Tester: index.php?action=index puis index.php?action=show&id=1<br />
+                8. Conseil de Froggie: Respecte les responsabilités ! Le Modèle ne fait pas de HTML, la Vue ne fait pas de SQL. Chacun sa mare !
+            </p>
+            <img src="../../html/img/froggie-300.png" alt="Froggie explain" class="overfrog" id="Froggie" />
+        </div>
+
+        <!-- Bouton retour -->
+        <a href="index.html" id="goToIndex" title="Retour à l'index">
+            <i class="bi bi-arrow-left"></i>
+        </a>
+
+        <!-- Lien vers Froggie -->
+        <a href="#Froggie">
+            <div id="goToFroggie">
+                <img src="../../html/img/froggie-300.png" width="50px" /><br /><i class="bi bi-arrow-bar-down"></i>
+            </div>
+        </a>
+
+        <!-- Footer -->
+        <div id="footerGit">
+            <a href="https://github.com/eCreafr/DWWM" target="_blank"><i class="bi bi-github">GitHub - eCrea</i></a>
+        </div>
+    </div>
+
+    <script src="../../html/js/froggie.js"></script>
+</body>
+</html>

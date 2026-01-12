@@ -1,0 +1,400 @@
+<!doctype html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Semaine 1 - Jour 2 | Variables et Types de Données</title>
+        <link rel="stylesheet" href="../../html/css/froggie.css" />
+        <style>
+            .demo-container {
+                max-width: 1200px;
+                margin: 40px auto;
+                padding: 20px;
+                font-family: Arial, sans-serif;
+            }
+            .demo-title {
+                text-align: center;
+                font-size: 2.5em;
+                margin-bottom: 20px;
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                background-clip: text;
+            }
+            .demo-intro {
+                background: #ecf0f1;
+                padding: 20px;
+                border-radius: 10px;
+                margin-bottom: 40px;
+                line-height: 1.6;
+            }
+            .demo-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+                gap: 30px;
+                margin-bottom: 40px;
+            }
+            .demo-item {
+                border: 2px solid #667eea;
+                border-radius: 10px;
+                padding: 20px;
+                background: white;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            }
+            .demo-item h2 {
+                margin-top: 0;
+                color: #667eea;
+                font-size: 1.5em;
+            }
+            .code-example {
+                background: #2c3e50;
+                color: #ecf0f1;
+                padding: 15px;
+                border-radius: 5px;
+                font-family: 'Courier New', monospace;
+                font-size: 0.9em;
+                margin: 15px 0;
+                overflow-x: auto;
+            }
+            .result-box {
+                background: #e8f5e9;
+                border-left: 4px solid #4caf50;
+                padding: 10px;
+                margin: 10px 0;
+                border-radius: 3px;
+            }
+            .security-note {
+                background: #fff3cd;
+                border-left: 4px solid #ffc107;
+                padding: 10px;
+                margin: 10px 0;
+                border-radius: 3px;
+            }
+            .highlight {
+                color: #f39c12;
+                font-weight: bold;
+            }
+            .keyword {
+                color: #e74c3c;
+            }
+            .string {
+                color: #2ecc71;
+            }
+            .comment {
+                color: #95a5a6;
+                font-style: italic;
+            }
+            .variable {
+                color: #3498db;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="demo-container">
+            <h1 class="demo-title">Semaine 1 - Jour 2 : Variables et Types de Données</h1>
+
+            <div class="demo-intro">
+                <h3>Les Variables en PHP</h3>
+                <p>
+                    Une <strong>variable</strong> est un conteneur qui stocke une valeur. En PHP, toutes les variables
+                    commencent par le symbole <strong>$</strong> (dollar).
+                </p>
+                <p>
+                    <strong>Règles de nommage :</strong><br />
+                    • Commence toujours par <strong>$</strong><br />
+                    • Peut contenir des lettres, chiffres et underscore (_)<br />
+                    • Ne peut PAS commencer par un chiffre<br />
+                    • Sensible à la casse : <code>$age</code> ≠ <code>$Age</code><br />
+                    • Pas d'espaces ni de caractères spéciaux
+                </p>
+            </div>
+
+            <!-- Concepts de base -->
+            <div class="demo-grid">
+                <div class="demo-item">
+                    <h2>1. Déclaration de Variables</h2>
+                    <p>Pas besoin de déclarer le type, PHP le détecte automatiquement :</p>
+                    <div class="code-example">
+                        <span class="keyword">&lt;?php</span><br />
+                        <span class="comment">// Déclaration simple</span><br />
+                        <span class="variable">$prenom</span> = <span class="string">"Marie"</span>;<br />
+                        <span class="variable">$age</span> = <span class="highlight">25</span>;<br />
+                        <span class="variable">$taille</span> = <span class="highlight">1.75</span>;<br />
+                        <span class="variable">$estEtudiant</span> = <span class="keyword">true</span>;<br /><br />
+
+                        <span class="comment">// Afficher les variables</span><br />
+                        <span class="keyword">echo</span> <span class="variable">$prenom</span>;
+                        <span class="comment">// Marie</span><br />
+                        <span class="keyword">echo</span> <span class="variable">$age</span>;
+                        <span class="comment">// 25</span><br />
+                        <span class="keyword">?&gt;</span>
+                    </div>
+                    <div class="security-note">
+                        <strong>Conventions :</strong><br />
+                        • camelCase : <code>$nomComplet</code><br />
+                        • snake_case : <code>$nom_complet</code><br />
+                        Choisissez un style et restez cohérent !
+                    </div>
+                </div>
+
+                <div class="demo-item">
+                    <h2>2. Les Types de Données</h2>
+                    <p>PHP a 8 types principaux :</p>
+                    <div class="code-example">
+                        <span class="keyword">&lt;?php</span><br />
+                        <span class="comment">// 1. String (chaîne de caractères)</span><br />
+                        <span class="variable">$texte</span> = <span class="string">"Bonjour"</span>;<br /><br />
+
+                        <span class="comment">// 2. Integer (nombre entier)</span><br />
+                        <span class="variable">$nombre</span> = <span class="highlight">42</span>;<br /><br />
+
+                        <span class="comment">// 3. Float (nombre décimal)</span><br />
+                        <span class="variable">$prix</span> = <span class="highlight">19.99</span>;<br /><br />
+
+                        <span class="comment">// 4. Boolean (vrai/faux)</span><br />
+                        <span class="variable">$actif</span> = <span class="keyword">true</span>;<br /><br />
+
+                        <span class="comment">// 5. Array (tableau)</span><br />
+                        <span class="variable">$fruits</span> = [<span class="string">"pomme"</span>,
+                        <span class="string">"banane"</span>];<br /><br />
+
+                        <span class="comment">// 6. NULL (valeur nulle)</span><br />
+                        <span class="variable">$vide</span> = <span class="keyword">null</span>;<br />
+                        <span class="keyword">?&gt;</span>
+                    </div>
+                </div>
+
+                <div class="demo-item">
+                    <h2>3. gettype() et var_dump()</h2>
+                    <p>Pour connaître le type d'une variable :</p>
+                    <div class="code-example">
+                        <span class="keyword">&lt;?php</span><br />
+                        <span class="variable">$nom</span> = <span class="string">"Alice"</span>;<br />
+                        <span class="variable">$age</span> = <span class="highlight">30</span>;<br />
+                        <span class="variable">$actif</span> = <span class="keyword">true</span>;<br /><br />
+
+                        <span class="comment">// gettype() retourne le type</span><br />
+                        <span class="keyword">echo</span> <span class="keyword">gettype</span>(<span class="variable"
+                            >$nom</span
+                        >); <span class="comment">// string</span><br />
+                        <span class="keyword">echo</span> <span class="keyword">gettype</span>(<span class="variable"
+                            >$age</span
+                        >); <span class="comment">// integer</span><br />
+                        <span class="keyword">echo</span> <span class="keyword">gettype</span>(<span class="variable"
+                            >$actif</span
+                        >); <span class="comment">// boolean</span><br /><br />
+
+                        <span class="comment">// var_dump() affiche type + valeur</span><br />
+                        <span class="keyword">var_dump</span>(<span class="variable">$nom</span>);
+                        <span class="comment">// string(5) "Alice"</span><br />
+                        <span class="keyword">var_dump</span>(<span class="variable">$age</span>);
+                        <span class="comment">// int(30)</span><br /><br />
+
+                        <span class="comment">// print_r() affiche de façon lisible</span><br />
+                        <span class="keyword">print_r</span>(<span class="variable">$nom</span>);
+                        <span class="comment">// Alice</span><br />
+                        <span class="keyword">?&gt;</span>
+                    </div>
+                    <div class="result-box">
+                        <strong>Résultat attendu :</strong><br />
+                        string<br />
+                        integer<br />
+                        boolean<br />
+                        string(5) "Alice"<br />
+                        int(30)<br />
+                        Alice
+                    </div>
+                </div>
+
+                <div class="demo-item">
+                    <h2>4. Conversion de Types (Casting)</h2>
+                    <p>Forcer la conversion d'un type vers un autre :</p>
+                    <div class="code-example">
+                        <span class="keyword">&lt;?php</span><br />
+                        <span class="variable">$nombre</span> = <span class="string">"42"</span>;
+                        <span class="comment">// string</span><br />
+                        <span class="variable">$entier</span> = (<span class="keyword">int</span>)<span class="variable"
+                            >$nombre</span
+                        >; <span class="comment">// int</span><br />
+                        <span class="keyword">var_dump</span>(<span class="variable">$entier</span>);
+                        <span class="comment">// int(42)</span><br /><br />
+
+                        <span class="variable">$prix</span> = <span class="highlight">19.99</span>;<br />
+                        <span class="variable">$texte</span> = (<span class="keyword">string</span>)<span
+                            class="variable"
+                            >$prix</span
+                        >; <span class="comment">// "19.99"</span><br />
+                        <span class="keyword">var_dump</span>(<span class="variable">$texte</span>);
+                        <span class="comment">// string(5) "19.99"</span><br /><br />
+
+                        <span class="variable">$valeur</span> = <span class="highlight">0</span>;<br />
+                        <span class="variable">$bool</span> = (<span class="keyword">bool</span>)<span class="variable"
+                            >$valeur</span
+                        >; <span class="comment">// false</span><br />
+                        <span class="keyword">var_dump</span>(<span class="variable">$bool</span>);
+                        <span class="comment">// bool(false)</span><br /><br />
+
+                        <span class="comment">// Fonctions de conversion</span><br />
+                        <span class="variable">$x</span> = <span class="keyword">intval</span>(<span class="string"
+                            >"123"</span
+                        >); <span class="comment">// 123</span><br />
+                        <span class="variable">$y</span> = <span class="keyword">floatval</span>(<span class="string"
+                            >"12.5"</span
+                        >); <span class="comment">// 12.5</span><br />
+                        <span class="variable">$z</span> = <span class="keyword">strval</span>(<span class="highlight"
+                            >456</span
+                        >); <span class="comment">// "456"</span><br />
+                        <span class="keyword">?&gt;</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Exemples pratiques -->
+            <div style="background: #e8f4f8; padding: 25px; border-radius: 10px; margin: 30px 0">
+                <h2 style="color: #2c3e50; text-align: center; margin-top: 0">Exemples Pratiques</h2>
+                <div class="code-example">
+                    <span class="keyword">&lt;?php</span><br />
+                    <span class="comment">// Exemple 1 : Informations utilisateur</span><br />
+                    <span class="variable">$prenom</span> = <span class="string">"Thomas"</span>;<br />
+                    <span class="variable">$nom</span> = <span class="string">"Dupont"</span>;<br />
+                    <span class="variable">$age</span> = <span class="highlight">28</span>;<br />
+                    <span class="variable">$ville</span> = <span class="string">"Paris"</span>;<br /><br />
+
+                    <span class="keyword">echo</span> <span class="string">"Bonjour "</span> .
+                    <span class="variable">$prenom</span> . <span class="string">" "</span> .
+                    <span class="variable">$nom</span>;<br />
+                    <span class="keyword">echo</span> <span class="string">"Vous avez "</span> .
+                    <span class="variable">$age</span> . <span class="string">" ans et habitez à "</span> .
+                    <span class="variable">$ville</span>;<br /><br />
+
+                    <span class="comment">// Exemple 2 : Calcul avec variables</span><br />
+                    <span class="variable">$prixHT</span> = <span class="highlight">100</span>;<br />
+                    <span class="variable">$tauxTVA</span> = <span class="highlight">0.20</span>;
+                    <span class="comment">// 20%</span><br />
+                    <span class="variable">$prixTTC</span> = <span class="variable">$prixHT</span> * (<span
+                        class="highlight"
+                        >1</span
+                    >
+                    + <span class="variable">$tauxTVA</span>);<br />
+                    <span class="keyword">echo</span> <span class="string">"Prix TTC : "</span> .
+                    <span class="variable">$prixTTC</span> . <span class="string">"€"</span>;
+                    <span class="comment">// 120€</span><br /><br />
+
+                    <span class="comment">// Exemple 3 : Vérification de type</span><br />
+                    <span class="variable">$donnee</span> = <span class="string">"123"</span>;<br />
+                    <span class="keyword">echo</span> <span class="keyword">is_string</span>(<span class="variable"
+                        >$donnee</span
+                    >) ? <span class="string">"C'est une chaîne"</span> :
+                    <span class="string">"Pas une chaîne"</span>;<br />
+                    <span class="keyword">echo</span> <span class="keyword">is_numeric</span>(<span class="variable"
+                        >$donnee</span
+                    >) ? <span class="string">"C'est numérique"</span> :
+                    <span class="string">"Pas numérique"</span>;<br /><br />
+
+                    <span class="comment">// Exemple 4 : Constantes (valeurs non modifiables)</span><br />
+                    <span class="keyword">define</span>(<span class="string">"SITE_NAME"</span>,
+                    <span class="string">"Mon Site"</span>);<br />
+                    <span class="keyword">echo</span> <span class="highlight">SITE_NAME</span>;
+                    <span class="comment">// Mon Site</span><br />
+                    <span class="keyword">?&gt;</span>
+                </div>
+                <div class="result-box">
+                    <strong>Résultat attendu :</strong><br />
+                    Bonjour Thomas Dupont<br />
+                    Vous avez 28 ans et habitez à Paris<br />
+                    Prix TTC : 120€<br />
+                    C'est une chaîne<br />
+                    C'est numérique<br />
+                    Mon Site
+                </div>
+            </div>
+
+            <!-- Erreurs courantes -->
+            <div style="background: #ffebee; padding: 25px; border-radius: 10px; margin: 30px 0">
+                <h2 style="color: #c62828; text-align: center; margin-top: 0">Erreurs Courantes</h2>
+                <div class="code-example">
+                    <span class="comment">// ❌ ERREUR : Oublier le $ devant la variable</span><br />
+                    nom = <span class="string">"Jean"</span>; <span class="comment">// Parse error!</span><br /><br />
+
+                    <span class="comment">// ✅ CORRECT</span><br />
+                    <span class="variable">$nom</span> = <span class="string">"Jean"</span>;<br /><br />
+
+                    <span class="comment">// ❌ ERREUR : Utiliser une variable non définie</span><br />
+                    <span class="keyword">echo</span> <span class="variable">$variableInexistante</span>;
+                    <span class="comment">// Warning!</span><br /><br />
+
+                    <span class="comment">// ✅ CORRECT : Vérifier si la variable existe</span><br />
+                    <span class="keyword">if</span> (<span class="keyword">isset</span>(<span class="variable"
+                        >$maVariable</span
+                    >)) {<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">echo</span>
+                    <span class="variable">$maVariable</span>;<br />
+                    }<br /><br />
+
+                    <span class="comment">// ❌ ERREUR : Confondre = (assignation) et == (comparaison)</span><br />
+                    <span class="keyword">if</span> (<span class="variable">$age</span> =
+                    <span class="highlight">18</span>) { <span class="comment">// Assigne 18 à $age !</span><br /><br />
+
+                    <span class="comment">// ✅ CORRECT</span><br />
+                    <span class="keyword">if</span> (<span class="variable">$age</span> ==
+                    <span class="highlight">18</span>) { <span class="comment">// Compare $age avec 18</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Zone Froggiesplaining -->
+        <div class="froggiesplaining">
+            <span> Froggiesplaining :</span>
+            <p>
+                <br />
+                <strong>Objectifs de ce cours :</strong><br />
+                ✅ Comprendre ce qu'est une variable et comment la déclarer<br />
+                ✅ Connaître les différents types de données en PHP<br />
+                ✅ Utiliser gettype(), var_dump() et print_r() pour déboguer<br />
+                ✅ Savoir convertir un type en un autre (casting)<br />
+                ✅ Respecter les conventions de nommage<br /><br />
+
+                <strong>Points clés à retenir :</strong><br />
+                • Toutes les variables commencent par <strong>$</strong><br />
+                • PHP est un langage à <strong>typage dynamique</strong> (détecte automatiquement le type)<br />
+                • Les 8 types principaux : <strong>string, int, float, bool, array, object, resource, null</strong
+                ><br />
+                • <strong>var_dump()</strong> montre le type ET la valeur (parfait pour déboguer)<br />
+                • <strong>gettype()</strong> retourne uniquement le nom du type<br />
+                • <strong>Casting</strong> : (int), (string), (float), (bool) ou fonctions intval(), strval(), etc.<br />
+                • Les constantes se déclarent avec <strong>define()</strong> et ne changent jamais<br />
+                • Attention à la casse : <strong>$Age</strong> ≠ <strong>$age</strong><br /><br />
+
+                <strong>Exercice pratique :</strong><br />
+                1. Créez un fichier <code>variables.php</code><br />
+                2. Déclarez ces variables :<br />
+                <code>$prenom = "Votre prénom";</code><br />
+                <code>$age = votre_age;</code><br />
+                <code>$taille = votre_taille_en_metres;</code><br />
+                <code>$aimePhp = true;</code><br />
+                3. Affichez-les avec <code>echo</code><br />
+                4. Utilisez <code>var_dump()</code> sur chaque variable<br />
+                5. Convertissez <code>$age</code> en string : <code>$ageTexte = (string)$age;</code><br />
+                6. Vérifiez le type avec <code>gettype($ageTexte);</code>
+            </p>
+            <img src="../../html/img/froggie-300.png" alt="Froggie explain" class="overfrog" id="Froggie" />
+        </div>
+
+        <!-- Bouton retour -->
+        <a href="index.html" id="goToIndex" title="Retour à l'index">
+            <i class="bi bi-arrow-left"></i>
+        </a>
+
+        <!-- Lien vers Froggie -->
+        <a href="#Froggie">
+            <div id="goToFroggie">
+                <img src="../../html/img/froggie-300.png" width="50px" /><br /><i class="bi bi-arrow-bar-down"></i>
+            </div>
+        </a>
+
+        <!-- Footer -->
+        <div id="footerGit">
+            <a href="https://github.com/eCreafr/DWWM" target="_blank"><i class="bi bi-github">GitHub - eCrea</i></a>
+        </div>
+    </body>
+</html>

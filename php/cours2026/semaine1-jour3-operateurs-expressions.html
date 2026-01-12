@@ -1,0 +1,375 @@
+<!doctype html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Semaine 1 - Jour 3 | Opérateurs et Expressions</title>
+        <link rel="stylesheet" href="../../html/css/froggie.css" />
+        <style>
+            .demo-container {
+                max-width: 1200px;
+                margin: 40px auto;
+                padding: 20px;
+                font-family: Arial, sans-serif;
+            }
+            .demo-title {
+                text-align: center;
+                font-size: 2.5em;
+                margin-bottom: 20px;
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                background-clip: text;
+            }
+            .demo-intro {
+                background: #ecf0f1;
+                padding: 20px;
+                border-radius: 10px;
+                margin-bottom: 40px;
+                line-height: 1.6;
+            }
+            .demo-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                gap: 30px;
+                margin-bottom: 40px;
+            }
+            .demo-item {
+                border: 2px solid #667eea;
+                border-radius: 10px;
+                padding: 20px;
+                background: white;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            }
+            .demo-item h2 {
+                margin-top: 0;
+                color: #667eea;
+                font-size: 1.5em;
+            }
+            .code-example {
+                background: #2c3e50;
+                color: #ecf0f1;
+                padding: 15px;
+                border-radius: 5px;
+                font-family: 'Courier New', monospace;
+                font-size: 0.9em;
+                margin: 15px 0;
+                overflow-x: auto;
+            }
+            .result-box {
+                background: #e8f5e9;
+                border-left: 4px solid #4caf50;
+                padding: 10px;
+                margin: 10px 0;
+                border-radius: 3px;
+            }
+            .security-note {
+                background: #fff3cd;
+                border-left: 4px solid #ffc107;
+                padding: 10px;
+                margin: 10px 0;
+                border-radius: 3px;
+            }
+            .highlight {
+                color: #f39c12;
+                font-weight: bold;
+            }
+            .keyword {
+                color: #e74c3c;
+            }
+            .string {
+                color: #2ecc71;
+            }
+            .comment {
+                color: #95a5a6;
+                font-style: italic;
+            }
+            .variable {
+                color: #3498db;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="demo-container">
+            <h1 class="demo-title">Semaine 1 - Jour 3 : Opérateurs et Expressions</h1>
+
+            <div class="demo-intro">
+                <h3>Les Opérateurs en PHP</h3>
+                <p>
+                    Les <strong>opérateurs</strong> permettent d'effectuer des opérations sur des variables et des valeurs.
+                    PHP propose plusieurs catégories d'opérateurs : arithmétiques, comparaison, logiques, et concaténation.
+                </p>
+                <p>
+                    <strong>Une expression</strong> est une combinaison de valeurs, variables et opérateurs qui produit
+                    un résultat : <code>$total = $prix * $quantite;</code>
+                </p>
+            </div>
+
+            <!-- Concepts de base -->
+            <div class="demo-grid">
+                <div class="demo-item">
+                    <h2>1. Opérateurs Arithmétiques</h2>
+                    <p>Pour effectuer des calculs mathématiques :</p>
+                    <div class="code-example">
+                        <span class="keyword">&lt;?php</span><br />
+                        <span class="variable">$a</span> = <span class="highlight">10</span>;<br />
+                        <span class="variable">$b</span> = <span class="highlight">3</span>;<br /><br />
+
+                        <span class="comment">// Addition</span><br />
+                        <span class="keyword">echo</span> <span class="variable">$a</span> + <span class="variable">$b</span>;  <span class="comment">// 13</span><br /><br />
+
+                        <span class="comment">// Soustraction</span><br />
+                        <span class="keyword">echo</span> <span class="variable">$a</span> - <span class="variable">$b</span>;  <span class="comment">// 7</span><br /><br />
+
+                        <span class="comment">// Multiplication</span><br />
+                        <span class="keyword">echo</span> <span class="variable">$a</span> * <span class="variable">$b</span>;  <span class="comment">// 30</span><br /><br />
+
+                        <span class="comment">// Division</span><br />
+                        <span class="keyword">echo</span> <span class="variable">$a</span> / <span class="variable">$b</span>;  <span class="comment">// 3.33333...</span><br /><br />
+
+                        <span class="comment">// Modulo (reste de la division)</span><br />
+                        <span class="keyword">echo</span> <span class="variable">$a</span> % <span class="variable">$b</span>;  <span class="comment">// 1</span><br /><br />
+
+                        <span class="comment">// Puissance (PHP 5.6+)</span><br />
+                        <span class="keyword">echo</span> <span class="highlight">2</span> ** <span class="highlight">3</span>;   <span class="comment">// 8 (2³)</span><br />
+                        <span class="keyword">?&gt;</span>
+                    </div>
+                    <div class="result-box">
+                        <strong>Résultat :</strong><br>
+                        13, 7, 30, 3.3333333333333, 1, 8
+                    </div>
+                </div>
+
+                <div class="demo-item">
+                    <h2>2. Opérateurs de Comparaison</h2>
+                    <p>Comparer des valeurs (retourne true ou false) :</p>
+                    <div class="code-example">
+                        <span class="keyword">&lt;?php</span><br />
+                        <span class="variable">$x</span> = <span class="highlight">5</span>;<br />
+                        <span class="variable">$y</span> = <span class="string">"5"</span>;<br /><br />
+
+                        <span class="comment">// Égalité (valeur)</span><br />
+                        <span class="keyword">var_dump</span>(<span class="variable">$x</span> == <span class="variable">$y</span>);   <span class="comment">// true</span><br /><br />
+
+                        <span class="comment">// Identité (valeur ET type)</span><br />
+                        <span class="keyword">var_dump</span>(<span class="variable">$x</span> === <span class="variable">$y</span>);  <span class="comment">// false</span><br /><br />
+
+                        <span class="comment">// Différent (valeur)</span><br />
+                        <span class="keyword">var_dump</span>(<span class="variable">$x</span> != <span class="variable">$y</span>);   <span class="comment">// false</span><br /><br />
+
+                        <span class="comment">// Non identique</span><br />
+                        <span class="keyword">var_dump</span>(<span class="variable">$x</span> !== <span class="variable">$y</span>);  <span class="comment">// true</span><br /><br />
+
+                        <span class="comment">// Supérieur, inférieur</span><br />
+                        <span class="keyword">var_dump</span>(<span class="highlight">10</span> &gt; <span class="highlight">5</span>);    <span class="comment">// true</span><br />
+                        <span class="keyword">var_dump</span>(<span class="highlight">10</span> &lt; <span class="highlight">5</span>);    <span class="comment">// false</span><br />
+                        <span class="keyword">var_dump</span>(<span class="highlight">10</span> &gt;= <span class="highlight">10</span>);  <span class="comment">// true</span><br />
+                        <span class="keyword">var_dump</span>(<span class="highlight">10</span> &lt;= <span class="highlight">9</span>);   <span class="comment">// false</span><br />
+                        <span class="keyword">?&gt;</span>
+                    </div>
+                    <div class="security-note">
+                        <strong>Important :</strong> Utilisez <strong>===</strong> (identité) au lieu de <strong>==</strong>
+                        pour éviter les surprises liées à la conversion automatique de types !
+                    </div>
+                </div>
+
+                <div class="demo-item">
+                    <h2>3. Opérateurs Logiques</h2>
+                    <p>Combiner plusieurs conditions :</p>
+                    <div class="code-example">
+                        <span class="keyword">&lt;?php</span><br />
+                        <span class="variable">$age</span> = <span class="highlight">25</span>;<br />
+                        <span class="variable">$permis</span> = <span class="keyword">true</span>;<br /><br />
+
+                        <span class="comment">// AND (&&) : les deux doivent être vrais</span><br />
+                        <span class="keyword">var_dump</span>(<span class="variable">$age</span> &gt;= <span class="highlight">18</span> && <span class="variable">$permis</span>); <span class="comment">// true</span><br /><br />
+
+                        <span class="comment">// OR (||) : au moins un doit être vrai</span><br />
+                        <span class="keyword">var_dump</span>(<span class="variable">$age</span> &lt; <span class="highlight">18</span> || <span class="variable">$permis</span>);  <span class="comment">// true</span><br /><br />
+
+                        <span class="comment">// NOT (!) : inverse le résultat</span><br />
+                        <span class="keyword">var_dump</span>(!<span class="variable">$permis</span>);         <span class="comment">// false</span><br /><br />
+
+                        <span class="comment">// Combinaison complexe</span><br />
+                        <span class="variable">$majeur</span> = <span class="variable">$age</span> &gt;= <span class="highlight">18</span>;<br />
+                        <span class="variable">$peutConduire</span> = <span class="variable">$majeur</span> && <span class="variable">$permis</span>;<br />
+                        <span class="keyword">echo</span> <span class="variable">$peutConduire</span> ? <span class="string">"Peut conduire"</span> : <span class="string">"Ne peut pas"</span>;<br />
+                        <span class="keyword">?&gt;</span>
+                    </div>
+                    <div class="result-box">
+                        <strong>Résultat :</strong><br>
+                        bool(true)<br>
+                        bool(true)<br>
+                        bool(false)<br>
+                        Peut conduire
+                    </div>
+                </div>
+
+                <div class="demo-item">
+                    <h2>4. Concaténation de Chaînes</h2>
+                    <p>Assembler des chaînes de caractères :</p>
+                    <div class="code-example">
+                        <span class="keyword">&lt;?php</span><br />
+                        <span class="variable">$prenom</span> = <span class="string">"Alice"</span>;<br />
+                        <span class="variable">$nom</span> = <span class="string">"Dupont"</span>;<br /><br />
+
+                        <span class="comment">// Opérateur . (point)</span><br />
+                        <span class="variable">$nomComplet</span> = <span class="variable">$prenom</span> . <span class="string">" "</span> . <span class="variable">$nom</span>;<br />
+                        <span class="keyword">echo</span> <span class="variable">$nomComplet</span>; <span class="comment">// Alice Dupont</span><br /><br />
+
+                        <span class="comment">// Opérateur .= (concaténation et assignation)</span><br />
+                        <span class="variable">$message</span> = <span class="string">"Bonjour "</span>;<br />
+                        <span class="variable">$message</span> .= <span class="variable">$prenom</span>;<br />
+                        <span class="variable">$message</span> .= <span class="string">", bienvenue !"</span>;<br />
+                        <span class="keyword">echo</span> <span class="variable">$message</span>; <span class="comment">// Bonjour Alice, bienvenue !</span><br /><br />
+
+                        <span class="comment">// Interpolation dans les guillemets doubles</span><br />
+                        <span class="keyword">echo</span> <span class="string">"Bonjour <span class="variable">$prenom</span> <span class="variable">$nom</span> !"</span>;<br /><br />
+
+                        <span class="comment">// Attention avec les guillemets simples</span><br />
+                        <span class="keyword">echo</span> <span class="string">'Bonjour $prenom $nom !'</span>; <span class="comment">// Littéral !</span><br />
+                        <span class="keyword">?&gt;</span>
+                    </div>
+                    <div class="result-box">
+                        <strong>Résultat :</strong><br>
+                        Alice Dupont<br>
+                        Bonjour Alice, bienvenue !<br>
+                        Bonjour Alice Dupont !<br>
+                        Bonjour $prenom $nom !
+                    </div>
+                </div>
+            </div>
+
+            <!-- Exemples pratiques -->
+            <div style="background: #e8f4f8; padding: 25px; border-radius: 10px; margin: 30px 0">
+                <h2 style="color: #2c3e50; text-align: center; margin-top: 0">Exemples Pratiques</h2>
+                <div class="code-example">
+                    <span class="keyword">&lt;?php</span><br />
+                    <span class="comment">// Exemple 1 : Calcul d'un panier</span><br />
+                    <span class="variable">$prixUnitaire</span> = <span class="highlight">15.99</span>;<br />
+                    <span class="variable">$quantite</span> = <span class="highlight">3</span>;<br />
+                    <span class="variable">$reduction</span> = <span class="highlight">0.10</span>; <span class="comment">// 10%</span><br /><br />
+
+                    <span class="variable">$sousTotal</span> = <span class="variable">$prixUnitaire</span> * <span class="variable">$quantite</span>;<br />
+                    <span class="variable">$montantReduction</span> = <span class="variable">$sousTotal</span> * <span class="variable">$reduction</span>;<br />
+                    <span class="variable">$total</span> = <span class="variable">$sousTotal</span> - <span class="variable">$montantReduction</span>;<br /><br />
+
+                    <span class="keyword">echo</span> <span class="string">"Sous-total : "</span> . <span class="variable">$sousTotal</span> . <span class="string">"€"</span>;<br />
+                    <span class="keyword">echo</span> <span class="string">"Réduction : "</span> . <span class="variable">$montantReduction</span> . <span class="string">"€"</span>;<br />
+                    <span class="keyword">echo</span> <span class="string">"Total à payer : "</span> . <span class="variable">$total</span> . <span class="string">"€"</span>;<br /><br />
+
+                    <span class="comment">// Exemple 2 : Vérification d'accès</span><br />
+                    <span class="variable">$age</span> = <span class="highlight">20</span>;<br />
+                    <span class="variable">$abonnement</span> = <span class="keyword">true</span>;<br />
+                    <span class="variable">$creditsSuffisants</span> = <span class="keyword">true</span>;<br /><br />
+
+                    <span class="variable">$acces</span> = (<span class="variable">$age</span> &gt;= <span class="highlight">18</span>) && (<span class="variable">$abonnement</span> || <span class="variable">$creditsSuffisants</span>);<br />
+                    <span class="keyword">echo</span> <span class="variable">$acces</span> ? <span class="string">"Accès autorisé"</span> : <span class="string">"Accès refusé"</span>;<br /><br />
+
+                    <span class="comment">// Exemple 3 : Opérateurs d'incrémentation</span><br />
+                    <span class="variable">$compteur</span> = <span class="highlight">5</span>;<br />
+                    <span class="variable">$compteur</span>++;  <span class="comment">// $compteur = $compteur + 1</span><br />
+                    <span class="keyword">echo</span> <span class="variable">$compteur</span>; <span class="comment">// 6</span><br /><br />
+
+                    <span class="variable">$compteur</span>--;  <span class="comment">// $compteur = $compteur - 1</span><br />
+                    <span class="keyword">echo</span> <span class="variable">$compteur</span>; <span class="comment">// 5</span><br /><br />
+
+                    <span class="variable">$compteur</span> += <span class="highlight">10</span>; <span class="comment">// $compteur = $compteur + 10</span><br />
+                    <span class="keyword">echo</span> <span class="variable">$compteur</span>; <span class="comment">// 15</span><br /><br />
+
+                    <span class="comment">// Exemple 4 : Opérateur ternaire</span><br />
+                    <span class="variable">$note</span> = <span class="highlight">14</span>;<br />
+                    <span class="variable">$resultat</span> = (<span class="variable">$note</span> &gt;= <span class="highlight">10</span>) ? <span class="string">"Admis"</span> : <span class="string">"Recalé"</span>;<br />
+                    <span class="keyword">echo</span> <span class="string">"Résultat : "</span> . <span class="variable">$resultat</span>; <span class="comment">// Admis</span><br />
+                    <span class="keyword">?&gt;</span>
+                </div>
+                <div class="result-box">
+                    <strong>Résultat attendu :</strong><br>
+                    Sous-total : 47.97€<br>
+                    Réduction : 4.797€<br>
+                    Total à payer : 43.173€<br>
+                    Accès autorisé<br>
+                    6<br>
+                    5<br>
+                    15<br>
+                    Résultat : Admis
+                </div>
+            </div>
+
+            <!-- Erreurs courantes -->
+            <div style="background: #ffebee; padding: 25px; border-radius: 10px; margin: 30px 0">
+                <h2 style="color: #c62828; text-align: center; margin-top: 0">Erreurs Courantes</h2>
+                <div class="code-example">
+                    <span class="comment">// ❌ ERREUR : Confondre = (assignation) et == (comparaison)</span><br />
+                    <span class="keyword">if</span> (<span class="variable">$age</span> = <span class="highlight">18</span>) { <span class="comment">// Assigne 18 au lieu de comparer !</span><br /><br />
+
+                    <span class="comment">// ✅ CORRECT</span><br />
+                    <span class="keyword">if</span> (<span class="variable">$age</span> == <span class="highlight">18</span>) {<br /><br />
+
+                    <span class="comment">// ❌ ERREUR : Utiliser + au lieu de . pour les chaînes</span><br />
+                    <span class="variable">$nom</span> = <span class="string">"Jean"</span> + <span class="string">"Dupont"</span>; <span class="comment">// 0 (conversion en nombre !)</span><br /><br />
+
+                    <span class="comment">// ✅ CORRECT</span><br />
+                    <span class="variable">$nom</span> = <span class="string">"Jean"</span> . <span class="string">"Dupont"</span>; <span class="comment">// JeanDupont</span><br /><br />
+
+                    <span class="comment">// ❌ ERREUR : Oublier les parenthèses dans les conditions complexes</span><br />
+                    <span class="variable">$result</span> = <span class="variable">$a</span> &gt; <span class="highlight">5</span> && <span class="variable">$b</span> &lt; <span class="highlight">10</span> || <span class="variable">$c</span> == <span class="highlight">0</span>; <span class="comment">// Ambigu !</span><br /><br />
+
+                    <span class="comment">// ✅ CORRECT : Utilisez des parenthèses</span><br />
+                    <span class="variable">$result</span> = (<span class="variable">$a</span> &gt; <span class="highlight">5</span> && <span class="variable">$b</span> &lt; <span class="highlight">10</span>) || (<span class="variable">$c</span> == <span class="highlight">0</span>);
+                </div>
+            </div>
+        </div>
+
+        <!-- Zone Froggiesplaining -->
+        <div class="froggiesplaining">
+            <span> Froggiesplaining :</span>
+            <p>
+                <br />
+                <strong>Objectifs de ce cours :</strong><br />
+                ✅ Maîtriser les opérateurs arithmétiques (+, -, *, /, %, **)<br />
+                ✅ Comprendre la différence entre == et === (=== est plus strict !)<br />
+                ✅ Utiliser les opérateurs logiques (&&, ||, !) pour combiner des conditions<br />
+                ✅ Savoir concaténer des chaînes avec . et .=<br />
+                ✅ Utiliser l'opérateur ternaire pour des conditions simples<br /><br />
+
+                <strong>Points clés à retenir :</strong><br />
+                • <strong>=</strong> : assignation | <strong>==</strong> : égalité (valeur) | <strong>===</strong> : identité (valeur + type)<br />
+                • Préférez <strong>===</strong> pour éviter les conversions automatiques inattendues<br />
+                • <strong>&&</strong> (AND) : toutes les conditions doivent être vraies<br />
+                • <strong>||</strong> (OR) : au moins une condition doit être vraie<br />
+                • <strong>!</strong> (NOT) : inverse le résultat (true devient false)<br />
+                • <strong>.</strong> (point) : concatène des chaînes de caractères<br />
+                • <strong>++</strong> : incrémente de 1 | <strong>--</strong> : décrémente de 1<br />
+                • <strong>+=, -=, *=, /=</strong> : opérateurs combinés (ex: $x += 5 équivaut à $x = $x + 5)<br />
+                • Ternaire : <strong>condition ? valeur_si_vrai : valeur_si_faux</strong><br /><br />
+
+                <strong>Exercice pratique :</strong><br />
+                1. Créez un fichier <code>operateurs.php</code><br />
+                2. Déclarez : <code>$prix = 50; $quantite = 3; $tauxTVA = 0.20;</code><br />
+                3. Calculez le total TTC : <code>$totalTTC = $prix * $quantite * (1 + $tauxTVA);</code><br />
+                4. Testez les comparaisons : <code>var_dump(5 == "5"); var_dump(5 === "5");</code><br />
+                5. Créez une condition : Si l'âge est >= 18 ET a un permis, afficher "Peut conduire"<br />
+                6. Utilisez l'opérateur ternaire : <code>$statut = ($age >= 18) ? "Majeur" : "Mineur";</code>
+            </p>
+            <img src="../../html/img/froggie-300.png" alt="Froggie explain" class="overfrog" id="Froggie" />
+        </div>
+
+        <!-- Bouton retour -->
+        <a href="index.html" id="goToIndex" title="Retour à l'index">
+            <i class="bi bi-arrow-left"></i>
+        </a>
+
+        <!-- Lien vers Froggie -->
+        <a href="#Froggie">
+            <div id="goToFroggie">
+                <img src="../../html/img/froggie-300.png" width="50px" /><br /><i class="bi bi-arrow-bar-down"></i>
+            </div>
+        </a>
+
+        <!-- Footer -->
+        <div id="footerGit">
+            <a href="https://github.com/eCreafr/DWWM" target="_blank"><i class="bi bi-github">GitHub - eCrea</i></a>
+        </div>
+    </body>
+</html>

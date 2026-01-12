@@ -1,0 +1,334 @@
+<!doctype html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Semaine 2 - Jour 2 | Tableaux - Les bases</title>
+        <link rel="stylesheet" href="../../html/css/froggie.css" />
+        <style>
+            .demo-container {
+                max-width: 1200px;
+                margin: 40px auto;
+                padding: 20px;
+                font-family: Arial, sans-serif;
+            }
+            .demo-title {
+                text-align: center;
+                font-size: 2.5em;
+                margin-bottom: 20px;
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                background-clip: text;
+            }
+            .demo-intro {
+                background: #ecf0f1;
+                padding: 20px;
+                border-radius: 10px;
+                margin-bottom: 40px;
+                line-height: 1.6;
+            }
+            .demo-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+                gap: 30px;
+                margin-bottom: 40px;
+            }
+            .demo-item {
+                border: 2px solid #667eea;
+                border-radius: 10px;
+                padding: 20px;
+                background: white;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            }
+            .demo-item h2 {
+                margin-top: 0;
+                color: #667eea;
+                font-size: 1.5em;
+            }
+            .code-example {
+                background: #2c3e50;
+                color: #ecf0f1;
+                padding: 15px;
+                border-radius: 5px;
+                font-family: 'Courier New', monospace;
+                font-size: 0.9em;
+                margin: 15px 0;
+                overflow-x: auto;
+            }
+            .result-box {
+                background: #e8f5e9;
+                border-left: 4px solid #4caf50;
+                padding: 10px;
+                margin: 10px 0;
+                border-radius: 3px;
+            }
+            .security-note {
+                background: #fff3cd;
+                border-left: 4px solid #ffc107;
+                padding: 10px;
+                margin: 10px 0;
+                border-radius: 3px;
+            }
+            .highlight {
+                color: #f39c12;
+                font-weight: bold;
+            }
+            .keyword {
+                color: #e74c3c;
+            }
+            .string {
+                color: #2ecc71;
+            }
+            .comment {
+                color: #95a5a6;
+                font-style: italic;
+            }
+            .variable {
+                color: #3498db;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="demo-container">
+            <h1 class="demo-title">Semaine 2 - Jour 2 : Les tableaux en PHP - Les bases</h1>
+
+            <div class="demo-intro">
+                <h3>Introduction aux tableaux</h3>
+                <p>
+                    Les tableaux (arrays) sont des structures de données qui permettent de stocker plusieurs valeurs
+                    dans une seule variable. PHP propose deux types principaux : les
+                    <strong>tableaux indexés</strong> et les <strong>tableaux associatifs</strong>.
+                </p>
+                <p>
+                    Les tableaux sont essentiels en programmation car ils permettent de gérer des collections de données
+                    (liste de fruits, panier d'achats, informations d'utilisateurs...) de manière organisée et efficace.
+                </p>
+            </div>
+
+            <!-- Concepts de base -->
+            <div class="demo-grid">
+                <div class="demo-item">
+                    <h2>1. Tableaux indexés</h2>
+                    <p>
+                        <strong>Définition :</strong> Les tableaux indexés utilisent des indices numériques (commençant
+                        à 0) pour accéder aux éléments.
+                    </p>
+                    <div class="code-example">
+                        <span class="keyword">&lt;?php</span><br />
+                        <span class="comment">// Méthode 1 : syntaxe array()</span><br />
+                        <span class="variable">$fruits</span> = <span class="keyword">array</span>(<span class="string"
+                            >"Pomme"</span
+                        >, <span class="string">"Banane"</span>, <span class="string">"Orange"</span>);<br /><br />
+
+                        <span class="comment">// Méthode 2 : syntaxe courte [] (recommandée)</span><br />
+                        <span class="variable">$couleurs</span> = [<span class="string">"Rouge"</span>,
+                        <span class="string">"Vert"</span>, <span class="string">"Bleu"</span>];<br /><br />
+
+                        <span class="comment">// Méthode 3 : ajout progressif</span><br />
+                        <span class="variable">$nombres</span> = [];<br />
+                        <span class="variable">$nombres</span>[] = 10;<br />
+                        <span class="variable">$nombres</span>[] = 20;<br />
+                        <span class="variable">$nombres</span>[] = 30;<br /><br />
+
+                        <span class="keyword">echo</span> <span class="variable">$fruits</span>[0];
+                        <span class="comment">// Pomme</span><br />
+                        <span class="keyword">echo</span> <span class="variable">$couleurs</span>[2];
+                        <span class="comment">// Bleu</span><br />
+                        <span class="keyword">echo</span> <span class="variable">$nombres</span>[1];
+                        <span class="comment">// 20</span><br />
+                        <span class="keyword">?&gt;</span>
+                    </div>
+                    <div class="result-box"><strong>Résultat :</strong> Pomme, Bleu, 20</div>
+                </div>
+
+                <div class="demo-item">
+                    <h2>2. Tableaux associatifs</h2>
+                    <p>
+                        <strong>Définition :</strong> Les tableaux associatifs utilisent des clés nommées pour accéder
+                        aux éléments.
+                    </p>
+                    <div class="code-example">
+                        <span class="keyword">&lt;?php</span><br />
+                        <span class="comment">// Informations sur une personne</span><br />
+                        <span class="variable">$personne</span> = [<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"nom"</span> =>
+                        <span class="string">"Dupont"</span>,<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"prenom"</span> =>
+                        <span class="string">"Jean"</span>,<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"age"</span> => 30,<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"ville"</span> =>
+                        <span class="string">"Paris"</span><br />
+                        ];<br /><br />
+
+                        <span class="comment">// Accès aux éléments</span><br />
+                        <span class="keyword">echo</span> <span class="variable">$personne</span>[<span class="string"
+                            >"nom"</span
+                        >]; <span class="comment">// Dupont</span><br />
+                        <span class="keyword">echo</span> <span class="variable">$personne</span>[<span class="string"
+                            >"prenom"</span
+                        >]; <span class="comment">// Jean</span><br />
+                        <span class="keyword">echo</span> <span class="variable">$personne</span>[<span class="string"
+                            >"age"</span
+                        >]; <span class="comment">// 30</span><br /><br />
+
+                        <span class="comment">// Modification</span><br />
+                        <span class="variable">$personne</span>[<span class="string">"age"</span>] = 31;<br /><br />
+
+                        <span class="comment">// Ajout</span><br />
+                        <span class="variable">$personne</span>[<span class="string">"email"</span>] =
+                        <span class="string">"jean@example.com"</span>;<br />
+                        <span class="keyword">?&gt;</span>
+                    </div>
+                    <div class="security-note">
+                        <strong>Note :</strong> Utilisez la syntaxe courte [] car elle est plus lisible et recommandée
+                        depuis PHP 5.4+
+                    </div>
+                </div>
+
+                <div class="demo-item">
+                    <h2>3. Tableaux multidimensionnels</h2>
+                    <p>
+                        <strong>Définition :</strong> Les tableaux peuvent contenir d'autres tableaux, créant des
+                        structures à plusieurs dimensions.
+                    </p>
+                    <div class="code-example">
+                        <span class="keyword">&lt;?php</span><br />
+                        <span class="comment">// Tableau d'étudiants</span><br />
+                        <span class="variable">$etudiants</span> = [<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;[<span class="string">"nom"</span> =>
+                        <span class="string">"Martin"</span>, <span class="string">"note"</span> => 15],<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;[<span class="string">"nom"</span> =>
+                        <span class="string">"Durand"</span>, <span class="string">"note"</span> => 18],<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;[<span class="string">"nom"</span> =>
+                        <span class="string">"Petit"</span>, <span class="string">"note"</span> => 12]<br />
+                        ];<br /><br />
+
+                        <span class="comment">// Accès aux éléments</span><br />
+                        <span class="keyword">echo</span> <span class="variable">$etudiants</span>[0][<span
+                            class="string"
+                            >"nom"</span
+                        >]; <span class="comment">// Martin</span><br />
+                        <span class="keyword">echo</span> <span class="variable">$etudiants</span>[1][<span
+                            class="string"
+                            >"note"</span
+                        >]; <span class="comment">// 18</span><br /><br />
+
+                        <span class="comment">// Parcourir le tableau</span><br />
+                        <span class="keyword">foreach</span> (<span class="variable">$etudiants</span>
+                        <span class="keyword">as</span> <span class="variable">$etudiant</span>) {<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">echo</span>
+                        <span class="variable">$etudiant</span>[<span class="string">"nom"</span>] .
+                        <span class="string">" : "</span> . <span class="variable">$etudiant</span>[<span class="string"
+                            >"note"</span
+                        >] . <span class="string">"/20\n"</span>;<br />
+                        }<br />
+                        <span class="keyword">?&gt;</span>
+                    </div>
+                    <div class="result-box">
+                        <strong>Résultat :</strong><br />
+                        Martin : 15/20<br />
+                        Durand : 18/20<br />
+                        Petit : 12/20
+                    </div>
+                </div>
+
+                <div class="demo-item">
+                    <h2>4. Fonctions utiles & Panier d'achats</h2>
+                    <p><strong>Fonctions essentielles :</strong></p>
+                    <ul>
+                        <li><code>count()</code> - Compter les éléments</li>
+                        <li><code>in_array()</code> - Vérifier si une valeur existe</li>
+                        <li><code>array_push()</code> - Ajouter à la fin</li>
+                        <li><code>array_pop()</code> - Retirer le dernier</li>
+                    </ul>
+                    <div class="code-example">
+                        <span class="keyword">&lt;?php</span><br />
+                        <span class="comment">// Panier d'achats simplifié</span><br />
+                        <span class="variable">$panier</span> = [<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;[<span class="string">"nom"</span> =>
+                        <span class="string">"T-shirt"</span>, <span class="string">"prix"</span> => 19.99,
+                        <span class="string">"qte"</span> => 2],<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;[<span class="string">"nom"</span> =>
+                        <span class="string">"Jean"</span>, <span class="string">"prix"</span> => 49.99,
+                        <span class="string">"qte"</span> => 1]<br />
+                        ];<br /><br />
+
+                        <span class="variable">$total</span> = 0;<br />
+                        <span class="keyword">foreach</span> (<span class="variable">$panier</span>
+                        <span class="keyword">as</span> <span class="variable">$article</span>) {<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="variable">$sousTotal</span> =
+                        <span class="variable">$article</span>[<span class="string">"prix"</span>] *
+                        <span class="variable">$article</span>[<span class="string">"qte"</span>];<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="variable">$total</span> +=
+                        <span class="variable">$sousTotal</span>;<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">echo</span>
+                        <span class="variable">$article</span>[<span class="string">"nom"</span>] .
+                        <span class="string">" : "</span> . <span class="variable">$sousTotal</span> .
+                        <span class="string">" €\n"</span>;<br />
+                        }<br /><br />
+
+                        <span class="keyword">echo</span> <span class="string">"Total : "</span> .
+                        <span class="variable">$total</span> . <span class="string">" €"</span>;<br />
+                        <span class="keyword">?&gt;</span>
+                    </div>
+                    <div class="result-box">
+                        <strong>Résultat :</strong><br />
+                        T-shirt : 39.98 €<br />
+                        Jean : 49.99 €<br />
+                        Total : 89.97 €
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Zone Froggiesplaining -->
+        <div class="froggiesplaining">
+            <span> Froggiesplaining :</span>
+            <p>
+                <br />
+                <strong>Objectifs de ce cours :</strong><br />
+                ✅ Comprendre les tableaux indexés et associatifs<br />
+                ✅ Créer et manipuler des tableaux en PHP<br />
+                ✅ Utiliser les tableaux multidimensionnels<br />
+                ✅ Maîtriser les fonctions de base (count, in_array, etc.)<br />
+                ✅ Parcourir les tableaux avec foreach<br /><br />
+
+                <strong>Points clés à retenir :</strong><br />
+                • Les tableaux indexés utilisent des indices numériques (0, 1, 2...)<br />
+                • Les tableaux associatifs utilisent des clés nommées ("nom", "age"...)<br />
+                • Utilisez la syntaxe courte [] au lieu de array()<br />
+                • count() pour compter les éléments<br />
+                • in_array() pour vérifier l'existence d'une valeur<br />
+                • foreach pour parcourir facilement tous les éléments<br />
+                • Les tableaux peuvent contenir d'autres tableaux (multidimensionnels)<br /><br />
+
+                <strong>Exercice pratique :</strong><br />
+                1. Créez un tableau indexé de 5 fruits<br />
+                2. Créez un tableau associatif avec vos informations (nom, prénom, ville)<br />
+                3. Créez un tableau de 3 produits avec nom et prix<br />
+                4. Calculez le prix total avec foreach<br />
+                5. Affichez le nombre de produits avec count()<br />
+                6. Vérifiez si "Pomme" existe dans votre tableau de fruits avec in_array()
+            </p>
+            <img src="../../html/img/froggie-300.png" alt="Froggie explain" class="overfrog" id="Froggie" />
+        </div>
+
+        <!-- Bouton retour -->
+        <a href="index.html" id="goToIndex" title="Retour à l'index">
+            <i class="bi bi-arrow-left"></i>
+        </a>
+
+        <!-- Lien vers Froggie -->
+        <a href="#Froggie">
+            <div id="goToFroggie">
+                <img src="../../html/img/froggie-300.png" width="50px" /><br /><i class="bi bi-arrow-bar-down"></i>
+            </div>
+        </a>
+
+        <!-- Footer -->
+        <div id="footerGit">
+            <a href="https://github.com/eCreafr/DWWM" target="_blank"><i class="bi bi-github">GitHub - eCrea</i></a>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,617 @@
+<!doctype html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>PHP - Semaine 4 Jour 1 : Introduction à la POO</title>
+        <link rel="stylesheet" href="../../html/css/froggie.css" />
+        <style>
+            .demo-container {
+                max-width: 1200px;
+                margin: 40px auto;
+                padding: 20px;
+                font-family: Arial, sans-serif;
+            }
+            .demo-title {
+                text-align: center;
+                font-size: 2.5em;
+                margin-bottom: 20px;
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                background-clip: text;
+            }
+            .demo-intro {
+                background: #ecf0f1;
+                padding: 20px;
+                border-radius: 10px;
+                margin-bottom: 40px;
+                line-height: 1.6;
+            }
+            .demo-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+                gap: 30px;
+                margin-bottom: 40px;
+            }
+            .demo-item {
+                border: 2px solid #667eea;
+                border-radius: 10px;
+                padding: 20px;
+                background: white;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            }
+            .demo-item h2 {
+                margin-top: 0;
+                color: #667eea;
+                font-size: 1.5em;
+            }
+            .code-example {
+                background: #2c3e50;
+                color: #ecf0f1;
+                padding: 15px;
+                border-radius: 5px;
+                font-family: 'Courier New', monospace;
+                font-size: 0.9em;
+                margin: 15px 0;
+                overflow-x: auto;
+            }
+            .result-box {
+                background: #e8f5e9;
+                border-left: 4px solid #4caf50;
+                padding: 10px;
+                margin: 10px 0;
+                border-radius: 3px;
+            }
+            .security-note {
+                background: #fff3cd;
+                border-left: 4px solid #ffc107;
+                padding: 10px;
+                margin: 10px 0;
+                border-radius: 3px;
+            }
+            .highlight {
+                color: #f39c12;
+                font-weight: bold;
+            }
+            .keyword {
+                color: #e74c3c;
+            }
+            .string {
+                color: #2ecc71;
+            }
+            .comment {
+                color: #95a5a6;
+                font-style: italic;
+            }
+            .variable {
+                color: #3498db;
+            }
+            h1 {
+                color: #667eea;
+                border-bottom: 3px solid #764ba2;
+                padding-bottom: 10px;
+            }
+            h2 {
+                color: #764ba2;
+                margin-top: 30px;
+            }
+            .info-note {
+                background: #fff3cd;
+                border-left: 4px solid #ffc107;
+                padding: 15px;
+                margin: 15px 0;
+            }
+            .warning-note {
+                background: #f8d7da;
+                border-left: 4px solid #dc3545;
+                padding: 15px;
+                margin: 15px 0;
+            }
+            table {
+                width: 100%;
+                border-collapse: collapse;
+                margin: 15px 0;
+            }
+            th,
+            td {
+                border: 1px solid #ddd;
+                padding: 12px;
+                text-align: left;
+            }
+            th {
+                background: #667eea;
+                color: white;
+            }
+            tr:nth-child(even) {
+                background: #f9f9f9;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="demo-container">
+            <h1 class="demo-title">Semaine 4 - Jour 1 : Introduction à la Programmation Orientée Objet (POO)</h1>
+
+            <div class="demo-intro">
+                <p>
+                    La POO permet d'organiser le code en classes et objets pour une meilleure structure, réutilisabilité
+                    et maintenance.
+                </p>
+            </div>
+
+            <div class="demo-grid">
+                <div class="demo-item">
+                    <h2>1. Qu'est-ce que la POO ?</h2>
+                    <h3>Programmation Procédurale vs POO</h3>
+                    <h4>Procédurale (classique)</h4>
+                    <p>Code organisé en <strong>fonctions</strong> et <strong>variables globales</strong>.</p>
+                    <div class="code-example">
+                        <span class="keyword">&lt;?php</span>
+                        <span class="variable">$nom</span> = <span class="string">"Jean"</span>;
+                        <span class="variable">$age</span> = 25;
+
+                        <span class="keyword">function</span> afficherUtilisateur() {
+                        <span class="keyword">global</span> <span class="variable">$nom</span>,
+                        <span class="variable">$age</span>; <span class="keyword">echo</span>
+                        <span class="string">"</span><span class="variable">$nom</span><span class="string">, </span
+                        ><span class="variable">$age</span><span class="string"> ans"</span>; }
+                        <span class="keyword">?&gt;</span>
+                    </div>
+                    <h4>POO (Orientée Objet)</h4>
+                    <p>Code organisé en <strong>classes</strong> et <strong>objets</strong>.</p>
+                    <div class="code-example">
+                        <span class="keyword">&lt;?php</span>
+                        <span class="keyword">class</span> Utilisateur { <span class="keyword">public</span>
+                        <span class="variable">$nom</span>; <span class="keyword">public</span>
+                        <span class="variable">$age</span>;
+
+                        <span class="keyword">public function</span> afficher() { <span class="keyword">echo</span>
+                        <span class="string">"</span><span class="variable">$this</span
+                        ><span class="string">->nom, </span><span class="variable">$this</span
+                        ><span class="string">->age ans"</span>; } }
+                        <span class="keyword">?&gt;</span>
+                    </div>
+                    <div class="info-note">
+                        <strong>Avantages de la POO :</strong>
+                        <ul>
+                            <li>Code mieux organisé et réutilisable</li>
+                            <li>Données et fonctions regroupées logiquement</li>
+                            <li>Facilite la maintenance et l'évolution</li>
+                            <li>Standard de l'industrie (frameworks, CMS...)</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="demo-item">
+                    <h2>2. Classes et Objets</h2>
+                    <h3>Créer une classe</h3>
+                    <div class="code-example">
+                        <span class="keyword">&lt;?php</span>
+                        <span class="comment">// Définir une classe (plan / modèle)</span>
+                        <span class="keyword">class</span> Utilisateur {
+                        <span class="comment">// Propriétés (variables de la classe)</span>
+                        <span class="keyword">public</span> <span class="variable">$nom</span>;
+                        <span class="keyword">public</span> <span class="variable">$prenom</span>;
+                        <span class="keyword">public</span> <span class="variable">$email</span>;
+
+                        <span class="comment">// Méthodes (fonctions de la classe)</span>
+                        <span class="keyword">public function</span> afficherNomComplet() {
+                        <span class="keyword">return</span> <span class="variable">$this</span>->prenom .
+                        <span class="string">" "</span> . <span class="variable">$this</span>->nom; }
+
+                        <span class="keyword">public function</span> envoyerEmail(<span class="variable">$message</span
+                        >) { <span class="keyword">return</span> <span class="string">"Email envoyé à "</span> .
+                        <span class="variable">$this</span>->email . <span class="string">": "</span> .
+                        <span class="variable">$message</span>; } }
+                        <span class="keyword">?&gt;</span>
+                    </div>
+
+                    <h3>Créer des objets (instances)</h3>
+                    <div class="code-example">
+                        <span class="keyword">&lt;?php</span>
+                        <span class="comment">// Créer un objet avec 'new'</span>
+                        <span class="variable">$user1</span> = <span class="keyword">new</span> Utilisateur();
+                        <span class="variable">$user1</span>->nom = <span class="string">"Dupont"</span>;
+                        <span class="variable">$user1</span>->prenom = <span class="string">"Jean"</span>;
+                        <span class="variable">$user1</span>->email =
+                        <span class="string">"jean.dupont@example.com"</span>;
+
+                        <span class="keyword">echo</span> <span class="variable">$user1</span>->afficherNomComplet();
+                        <span class="comment">// Jean Dupont</span> <span class="keyword">echo</span>
+                        <span class="variable">$user1</span>->envoyerEmail(<span class="string">"Bonjour !"</span>);
+
+                        <span class="comment">// Créer un autre objet indépendant</span>
+                        <span class="variable">$user2</span> = <span class="keyword">new</span> Utilisateur();
+                        <span class="variable">$user2</span>->nom = <span class="string">"Martin"</span>;
+                        <span class="variable">$user2</span>->prenom = <span class="string">"Marie"</span>;
+                        <span class="variable">$user2</span>->email =
+                        <span class="string">"marie.martin@example.com"</span>;
+
+                        <span class="keyword">echo</span> <span class="variable">$user2</span>->afficherNomComplet();
+                        <span class="comment">// Marie Martin</span>
+                        <span class="keyword">?&gt;</span>
+                    </div>
+                    <div class="result-box">
+                        <h4>Résultat :</h4>
+                        <pre>
+Jean Dupont
+Email envoyé à jean.dupont@example.com: Bonjour !
+Marie Martin</pre
+                        >
+                    </div>
+
+                    <div class="info-note">
+                        <h4>Vocabulaire POO :</h4>
+                        <ul>
+                            <li><strong>Classe</strong> : Modèle / Plan (comme un plan de maison)</li>
+                            <li>
+                                <strong>Objet</strong> : Instance de la classe (une maison construite selon le plan)
+                            </li>
+                            <li><strong>Propriété</strong> : Variable d'un objet (nom, email...)</li>
+                            <li><strong>Méthode</strong> : Fonction d'un objet (afficher(), envoyer()...)</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="demo-item">
+                    <h2>3. Le constructeur __construct()</h2>
+                    <h3>Initialiser un objet automatiquement</h3>
+                    <div class="code-example">
+                        <span class="keyword">&lt;?php</span>
+                        <span class="comment">// Classe avec constructeur</span>
+                        <span class="keyword">class</span> Utilisateur { <span class="keyword">public</span>
+                        <span class="variable">$nom</span>; <span class="keyword">public</span>
+                        <span class="variable">$prenom</span>; <span class="keyword">public</span>
+                        <span class="variable">$email</span>;
+
+                        <span class="comment">// Constructeur : appelé automatiquement à la création</span>
+                        <span class="keyword">public function</span> __construct(<span class="variable">$nom</span>,
+                        <span class="variable">$prenom</span>, <span class="variable">$email</span>) {
+                        <span class="variable">$this</span>->nom = <span class="variable">$nom</span>;
+                        <span class="variable">$this</span>->prenom = <span class="variable">$prenom</span>;
+                        <span class="variable">$this</span>->email = <span class="variable">$email</span>;
+
+                        <span class="keyword">echo</span> <span class="string">"Nouvel utilisateur créé : </span
+                        ><span class="variable">$prenom</span><span class="string"> </span
+                        ><span class="variable">$nom</span><span class="string">&lt;br&gt;"</span>; }
+
+                        <span class="keyword">public function</span> afficherInfo() {
+                        <span class="keyword">return</span> <span class="string">"</span
+                        ><span class="variable">$this</span><span class="string">->prenom </span
+                        ><span class="variable">$this</span><span class="string">->nom (</span
+                        ><span class="variable">$this</span><span class="string">->email)"</span>; } }
+
+                        <span class="comment">// Créer des objets avec le constructeur</span>
+                        <span class="variable">$user1</span> = <span class="keyword">new</span> Utilisateur(<span
+                            class="string"
+                            >"Dupont"</span
+                        >, <span class="string">"Jean"</span>, <span class="string">"jean@example.com"</span>);
+                        <span class="variable">$user2</span> = <span class="keyword">new</span> Utilisateur(<span
+                            class="string"
+                            >"Martin"</span
+                        >, <span class="string">"Marie"</span>, <span class="string">"marie@example.com"</span>);
+
+                        <span class="keyword">echo</span> <span class="variable">$user1</span>->afficherInfo();
+                        <span class="keyword">echo</span> <span class="string">"&lt;br&gt;"</span>;
+                        <span class="keyword">echo</span> <span class="variable">$user2</span>->afficherInfo();
+                        <span class="keyword">?&gt;</span>
+                    </div>
+                    <div class="result-box">
+                        <h4>Résultat :</h4>
+                        <pre>
+Nouvel utilisateur créé : Jean Dupont
+Nouvel utilisateur créé : Marie Martin
+Jean Dupont (jean@example.com)
+Marie Martin (marie@example.com)</pre
+                        >
+                    </div>
+
+                    <h3>Constructeur avec valeurs par défaut</h3>
+                    <div class="code-example">
+                        <span class="keyword">&lt;?php</span>
+                        <span class="keyword">class</span> Utilisateur { <span class="keyword">public</span>
+                        <span class="variable">$nom</span>; <span class="keyword">public</span>
+                        <span class="variable">$prenom</span>; <span class="keyword">public</span>
+                        <span class="variable">$role</span>;
+
+                        <span class="comment">// Paramètres avec valeurs par défaut</span>
+                        <span class="keyword">public function</span> __construct(<span class="variable">$nom</span>,
+                        <span class="variable">$prenom</span>, <span class="variable">$role</span> =
+                        <span class="string">"utilisateur"</span>) { <span class="variable">$this</span>->nom =
+                        <span class="variable">$nom</span>; <span class="variable">$this</span>->prenom =
+                        <span class="variable">$prenom</span>; <span class="variable">$this</span>->role =
+                        <span class="variable">$role</span>; } }
+
+                        <span class="variable">$user1</span> = <span class="keyword">new</span> Utilisateur(<span
+                            class="string"
+                            >"Dupont"</span
+                        >, <span class="string">"Jean"</span>); <span class="comment">// role = "utilisateur"</span>
+                        <span class="variable">$user2</span> = <span class="keyword">new</span> Utilisateur(<span
+                            class="string"
+                            >"Admin"</span
+                        >, <span class="string">"Super"</span>, <span class="string">"admin"</span>);
+                        <span class="comment">// role = "admin"</span>
+
+                        <span class="keyword">echo</span> <span class="variable">$user1</span>->role;
+                        <span class="comment">// utilisateur</span> <span class="keyword">echo</span>
+                        <span class="variable">$user2</span>->role; <span class="comment">// admin</span>
+                        <span class="keyword">?&gt;</span>
+                    </div>
+                </div>
+
+                <div class="demo-item">
+                    <h2>4. $this : Référence à l'objet courant</h2>
+                    <h3>Comprendre $this</h3>
+                    <div class="code-example">
+                        <span class="keyword">&lt;?php</span>
+                        <span class="keyword">class</span> Compteur { <span class="keyword">public</span>
+                        <span class="variable">$valeur</span> = 0;
+
+                        <span class="keyword">public function</span> incrementer() {
+                        <span class="comment">// $this fait référence à l'objet en cours</span>
+                        <span class="variable">$this</span>->valeur++; <span class="keyword">return</span>
+                        <span class="variable">$this</span>->valeur; }
+
+                        <span class="keyword">public function</span> decrementer() {
+                        <span class="variable">$this</span>->valeur--; <span class="keyword">return</span>
+                        <span class="variable">$this</span>->valeur; }
+
+                        <span class="keyword">public function</span> afficher() { <span class="keyword">echo</span>
+                        <span class="string">"Valeur actuelle : </span><span class="variable">$this</span
+                        ><span class="string">->valeur&lt;br&gt;"</span>; } }
+
+                        <span class="comment">// Créer deux compteurs indépendants</span>
+                        <span class="variable">$compteur1</span> = <span class="keyword">new</span> Compteur();
+                        <span class="variable">$compteur2</span> = <span class="keyword">new</span> Compteur();
+
+                        <span class="variable">$compteur1</span>->incrementer();
+                        <span class="variable">$compteur1</span>->incrementer();
+                        <span class="variable">$compteur1</span>->incrementer();
+
+                        <span class="variable">$compteur2</span>->incrementer();
+
+                        <span class="variable">$compteur1</span>->afficher();
+                        <span class="comment">// Valeur actuelle : 3</span>
+                        <span class="variable">$compteur2</span>->afficher();
+                        <span class="comment">// Valeur actuelle : 1</span>
+                        <span class="keyword">?&gt;</span>
+                    </div>
+                    <div class="info-note">
+                        <strong>$this</strong> permet d'accéder aux propriétés et méthodes de l'objet depuis l'intérieur
+                        de la classe. C'est comme dire "moi-même".
+                    </div>
+                </div>
+
+                <div class="demo-item">
+                    <h2>5. Exemple complet : Classe Utilisateur</h2>
+                    <h3>Application pratique</h3>
+                    <div class="code-example">
+                        <span class="keyword">&lt;?php</span>
+                        <span class="comment">// Utilisateur.php</span>
+                        <span class="keyword">class</span> Utilisateur {
+                        <span class="comment">// Propriétés</span>
+                        <span class="keyword">public</span> <span class="variable">$id</span>;
+                        <span class="keyword">public</span> <span class="variable">$nom</span>;
+                        <span class="keyword">public</span> <span class="variable">$prenom</span>;
+                        <span class="keyword">public</span> <span class="variable">$email</span>;
+                        <span class="keyword">public</span> <span class="variable">$dateInscription</span>;
+
+                        <span class="comment">// Constructeur</span>
+                        <span class="keyword">public function</span> __construct(<span class="variable">$id</span>,
+                        <span class="variable">$nom</span>, <span class="variable">$prenom</span>,
+                        <span class="variable">$email</span>) { <span class="variable">$this</span>->id =
+                        <span class="variable">$id</span>; <span class="variable">$this</span>->nom =
+                        <span class="variable">$nom</span>; <span class="variable">$this</span>->prenom =
+                        <span class="variable">$prenom</span>; <span class="variable">$this</span>->email =
+                        <span class="variable">$email</span>; <span class="variable">$this</span>->dateInscription =
+                        <span class="keyword">date</span>(<span class="string">"Y-m-d H:i:s"</span>); }
+
+                        <span class="comment">// Méthode pour afficher le nom complet</span>
+                        <span class="keyword">public function</span> getNomComplet() {
+                        <span class="keyword">return</span> <span class="variable">$this</span>->prenom .
+                        <span class="string">" "</span> . <span class="variable">$this</span>->nom; }
+
+                        <span class="comment">// Méthode pour obtenir les initiales</span>
+                        <span class="keyword">public function</span> getInitiales() {
+                        <span class="keyword">return</span> <span class="keyword">strtoupper</span>(<span
+                            class="variable"
+                            >$this</span
+                        >->prenom[0] . <span class="variable">$this</span>->nom[0]); }
+
+                        <span class="comment">// Méthode pour envoyer un email</span>
+                        <span class="keyword">public function</span> envoyerEmail(<span class="variable">$sujet</span>,
+                        <span class="variable">$message</span>) { <span class="keyword">return</span>
+                        <span class="string">"Email envoyé à "</span> . <span class="variable">$this</span>->email .
+                        <span class="string">"\n"</span> . <span class="string">"Sujet : </span
+                        ><span class="variable">$sujet</span><span class="string">\n"</span> .
+                        <span class="string">"Message : </span><span class="variable">$message</span
+                        ><span class="string">"</span>; }
+
+                        <span class="comment">// Méthode pour afficher toutes les infos</span>
+                        <span class="keyword">public function</span> afficherProfil() {
+                        <span class="keyword">echo</span> <span class="string">"&lt;div class='profil'&gt;"</span>;
+                        <span class="keyword">echo</span> <span class="string">" &lt;h3&gt;</span
+                        ><span class="variable">$this</span><span class="string">->prenom </span
+                        ><span class="variable">$this</span><span class="string">->nom&lt;/h3&gt;"</span>;
+                        <span class="keyword">echo</span> <span class="string">" &lt;p&gt;Email : "</span> .
+                        htmlspecialchars(<span class="variable">$this</span>->email) .
+                        <span class="string">"&lt;/p&gt;"</span>; <span class="keyword">echo</span>
+                        <span class="string">" &lt;p&gt;Initiales : "</span> .
+                        <span class="variable">$this</span>->getInitiales() . <span class="string">"&lt;/p&gt;"</span>;
+                        <span class="keyword">echo</span> <span class="string">" &lt;p&gt;Inscrit le : "</span> .
+                        <span class="variable">$this</span>->dateInscription . <span class="string">"&lt;/p&gt;"</span>;
+                        <span class="keyword">echo</span> <span class="string">"&lt;/div&gt;"</span>; } }
+
+                        <span class="comment">// Utilisation</span>
+                        <span class="variable">$user1</span> = <span class="keyword">new</span> Utilisateur(1,
+                        <span class="string">"Dupont"</span>, <span class="string">"Jean"</span>,
+                        <span class="string">"jean.dupont@example.com"</span>); <span class="variable">$user2</span> =
+                        <span class="keyword">new</span> Utilisateur(2, <span class="string">"Martin"</span>,
+                        <span class="string">"Marie"</span>, <span class="string">"marie.martin@example.com"</span>);
+
+                        <span class="keyword">echo</span> <span class="variable">$user1</span>->getNomComplet() .
+                        <span class="string">"&lt;br&gt;"</span>; <span class="keyword">echo</span>
+                        <span class="variable">$user1</span>->getInitiales() . <span class="string">"&lt;br&gt;"</span>;
+
+                        <span class="variable">$user1</span>->afficherProfil();
+                        <span class="variable">$user2</span>->afficherProfil();
+
+                        <span class="keyword">echo</span> <span class="variable">$user1</span>->envoyerEmail(<span
+                            class="string"
+                            >"Bienvenue"</span
+                        >, <span class="string">"Merci de vous être inscrit !"</span>);
+                        <span class="keyword">?&gt;</span>
+                    </div>
+                </div>
+
+                <div class="demo-item">
+                    <h2>6. Instanciation et manipulation d'objets</h2>
+                    <h3>Créer et utiliser plusieurs objets</h3>
+                    <div class="code-example">
+                        <span class="keyword">&lt;?php</span>
+                        <span class="comment">// Créer un tableau d'utilisateurs</span>
+                        <span class="variable">$utilisateurs</span> = [];
+
+                        <span class="variable">$utilisateurs</span>[] = <span class="keyword">new</span> Utilisateur(1,
+                        <span class="string">"Dupont"</span>, <span class="string">"Jean"</span>,
+                        <span class="string">"jean@example.com"</span>); <span class="variable">$utilisateurs</span>[] =
+                        <span class="keyword">new</span> Utilisateur(2, <span class="string">"Martin"</span>,
+                        <span class="string">"Marie"</span>, <span class="string">"marie@example.com"</span>);
+                        <span class="variable">$utilisateurs</span>[] = <span class="keyword">new</span> Utilisateur(3,
+                        <span class="string">"Durand"</span>, <span class="string">"Paul"</span>,
+                        <span class="string">"paul@example.com"</span>);
+
+                        <span class="comment">// Afficher tous les utilisateurs</span>
+                        <span class="keyword">foreach</span> (<span class="variable">$utilisateurs</span>
+                        <span class="keyword">as</span> <span class="variable">$user</span>) {
+                        <span class="variable">$user</span>->afficherProfil(); }
+
+                        <span class="comment">// Compter les utilisateurs</span>
+                        <span class="keyword">echo</span> <span class="string">"Total : "</span> .
+                        <span class="keyword">count</span>(<span class="variable">$utilisateurs</span>) .
+                        <span class="string">" utilisateurs"</span>;
+                        <span class="keyword">?&gt;</span>
+                    </div>
+
+                    <h3>Vérifier le type d'un objet</h3>
+                    <div class="code-example">
+                        <span class="keyword">&lt;?php</span>
+                        <span class="variable">$user</span> = <span class="keyword">new</span> Utilisateur(1,
+                        <span class="string">"Test"</span>, <span class="string">"User"</span>,
+                        <span class="string">"test@example.com"</span>);
+
+                        <span class="comment">// Vérifier si c'est un objet</span>
+                        <span class="keyword">var_dump</span>(<span class="keyword">is_object</span>(<span
+                            class="variable"
+                            >$user</span
+                        >)); <span class="comment">// true</span>
+
+                        <span class="comment">// Vérifier la classe de l'objet</span>
+                        <span class="keyword">var_dump</span>(<span class="variable">$user</span>
+                        <span class="keyword">instanceof</span> Utilisateur); <span class="comment">// true</span>
+
+                        <span class="comment">// Obtenir le nom de la classe</span>
+                        <span class="keyword">echo</span> <span class="keyword">get_class</span>(<span class="variable"
+                            >$user</span
+                        >); <span class="comment">// Utilisateur</span>
+
+                        <span class="comment">// Lister toutes les propriétés</span>
+                        <span class="keyword">print_r</span>(<span class="keyword">get_object_vars</span>(<span
+                            class="variable"
+                            >$user</span
+                        >));
+
+                        <span class="comment">// Lister toutes les méthodes</span>
+                        <span class="keyword">print_r</span>(<span class="keyword">get_class_methods</span>(<span
+                            class="string"
+                            >'Utilisateur'</span
+                        >));
+                        <span class="keyword">?&gt;</span>
+                    </div>
+                </div>
+
+                <div class="demo-item">
+                    <h2>7. Bonnes pratiques POO</h2>
+                    <h4>Nommage</h4>
+                    <ul>
+                        <li>Classes : PascalCase (Utilisateur, ArticleManager)</li>
+                        <li>Méthodes : camelCase (getNom, envoyerEmail)</li>
+                        <li>Propriétés : camelCase ($nom, $dateCreation)</li>
+                        <li>Un fichier = Une classe</li>
+                    </ul>
+                    <h4>Organisation</h4>
+                    <ul>
+                        <li>Propriétés en haut de la classe</li>
+                        <li>Constructeur juste après</li>
+                        <li>Méthodes publiques</li>
+                        <li>Méthodes privées en dernier</li>
+                    </ul>
+                    <h4>Responsabilités</h4>
+                    <ul>
+                        <li>Une classe = une responsabilité claire</li>
+                        <li>Méthodes courtes et focalisées</li>
+                        <li>Éviter les dépendances complexes</li>
+                        <li>Privilégier la réutilisation</li>
+                    </ul>
+                    <h4>Sécurité</h4>
+                    <ul>
+                        <li>Valider les données dans le constructeur</li>
+                        <li>htmlspecialchars() à l'affichage</li>
+                        <li>Ne pas exposer de données sensibles</li>
+                        <li>Filtrer les entrées utilisateur</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Zone Froggiesplaining -->
+            <div class="froggiesplaining">
+                <span> Froggiesplaining :</span>
+                <p>
+                    <br />
+                    <strong>Objectifs de ce cours :</strong><br />
+                    ✅ Comprendre la différence entre classe et objet<br />
+                    ✅ Créer des classes avec propriétés et méthodes<br />
+                    ✅ Utiliser le constructeur __construct()<br />
+                    ✅ Maîtriser $this pour accéder aux propriétés<br />
+                    ✅ Instancier plusieurs objets indépendants<br /><br />
+
+                    <strong>Points clés à retenir :</strong><br />
+                    • <strong>Classe</strong> = Le plan/modèle (comme un plan génétique des grenouilles)<br />
+                    • <strong>Objet</strong> = Une instance réelle de la classe (une grenouille particulière)<br />
+                    • <strong>Propriétés</strong> = Les caractéristiques (nom, couleur, âge)<br />
+                    • <strong>Méthodes</strong> = Les actions possibles (sauter(), coasser(), nager())<br />
+                    • <strong>$this</strong> = Référence à l'objet courant ("moi-même")<br />
+                    • <strong>Constructeur</strong> = Méthode appelée automatiquement à la création (new)<br />
+                    • La POO permet d'organiser le code de manière réutilisable et maintenable<br /><br />
+
+                    <strong>Exercice pratique :</strong><br />
+                    1. Créer une classe Grenouille avec propriétés: nom, couleur, âge<br />
+                    2. Ajouter un constructeur pour initialiser ces propriétés<br />
+                    3. Créer une méthode coasser() qui affiche "Ribbit !"<br />
+                    4. Instancier 3 grenouilles différentes avec des caractéristiques variées<br />
+                    5. Faire coasser chaque grenouille et afficher leurs infos<br />
+                    6. Conseil de Froggie: La POO c'est comme un moule à gaufres (classe) qui crée plein de gaufres
+                    différentes (objets) avec des garnitures variées (propriétés) !
+                </p>
+                <img src="../../html/img/froggie-300.png" alt="Froggie explain" class="overfrog" id="Froggie" />
+            </div>
+
+            <!-- Bouton retour -->
+            <a href="index.html" id="goToIndex" title="Retour à l'index">
+                <i class="bi bi-arrow-left"></i>
+            </a>
+
+            <!-- Lien vers Froggie -->
+            <a href="#Froggie">
+                <div id="goToFroggie">
+                    <img src="../../html/img/froggie-300.png" width="50px" /><br /><i class="bi bi-arrow-bar-down"></i>
+                </div>
+            </a>
+
+            <!-- Footer -->
+            <div id="footerGit">
+                <a href="https://github.com/eCreafr/DWWM" target="_blank"><i class="bi bi-github">GitHub - eCrea</i></a>
+            </div>
+        </div>
+    </body>
+</html>

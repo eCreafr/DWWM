@@ -4,7 +4,7 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Plan de cours JavaScript - 4 semaines</title>
-        <link rel="stylesheet" href="../css/froggie.css" />
+        <link rel="stylesheet" href="../../html/css/froggie.css" />
         <style>
             * {
                 box-sizing: border-box;
@@ -146,7 +146,7 @@
     <body>
         <div class="container text-center">
             <img
-                src="../img/froggie-300.png"
+                src="../../html/img/froggie-300.png"
                 alt="Froggie"
                 id="FroggieHeader"
                 title="Froggie est dans la place"
@@ -397,7 +397,13 @@
             }
 
             // Fonction pour basculer le statut d'une leçon
-            function toggleLesson(lessonNumber) {
+            function toggleLesson(lessonNumber, event) {
+                // Empêcher la propagation pour ne pas déclencher le clic sur la carte
+                if (event) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                }
+
                 const button = document.querySelector(`button[data-lesson="${lessonNumber}"]`);
                 const currentStatus = getCookie(`lesson_js_${lessonNumber}`);
 
@@ -414,8 +420,22 @@
                 }
             }
 
+            // Fonction pour marquer une leçon comme faite (au clic sur la carte)
+            function markLessonAsDone(lessonNumber) {
+                const button = document.querySelector(`button[data-lesson="${lessonNumber}"]`);
+                const currentStatus = getCookie(`lesson_js_${lessonNumber}`);
+
+                // Marquer comme fait seulement si ce n'est pas déjà fait
+                if (currentStatus !== 'done') {
+                    button.className = 'status status-done';
+                    button.innerHTML = '✅ Fait';
+                    setCookie(`lesson_js_${lessonNumber}`, 'done', 365);
+                }
+            }
+
             // Charger les statuts sauvegardés au chargement de la page
             window.addEventListener('DOMContentLoaded', function () {
+                // Charger les statuts sauvegardés
                 const buttons = document.querySelectorAll('button[data-lesson]');
                 buttons.forEach((button) => {
                     const lessonNumber = button.getAttribute('data-lesson');
@@ -428,6 +448,34 @@
                         button.className = 'status status-todo';
                         button.innerHTML = '📝 À faire';
                     }
+                });
+
+                // Ajouter l'événement de clic sur toutes les cartes de leçon
+                const lessonCards = document.querySelectorAll('.lesson-card');
+                lessonCards.forEach((card) => {
+                    card.addEventListener('click', function(e) {
+                        // Si le clic est sur le bouton, ne rien faire (le bouton gère lui-même)
+                        if (e.target.classList.contains('status') || e.target.closest('.status')) {
+                            return;
+                        }
+
+                        // Récupérer le numéro de leçon du bouton dans la carte
+                        const button = card.querySelector('button[data-lesson]');
+                        if (button) {
+                            const lessonNumber = button.getAttribute('data-lesson');
+                            markLessonAsDone(lessonNumber);
+                        }
+
+                        // Laisser le lien se déclencher normalement
+                    });
+                });
+
+                // Modifier les boutons pour utiliser le nouveau paramètre event
+                buttons.forEach((button) => {
+                    const lessonNumber = button.getAttribute('data-lesson');
+                    button.onclick = function(e) {
+                        toggleLesson(lessonNumber, e);
+                    };
                 });
             });
         </script>

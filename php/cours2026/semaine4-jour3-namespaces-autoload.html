@@ -1,0 +1,572 @@
+<!doctype html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PHP - Semaine 4 Jour 3 : Namespaces et Autoload</title>
+    <link rel="stylesheet" href="../../html/css/froggie.css">
+    <style>
+        .demo-container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+        }
+        .demo-title {
+            text-align: center;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .demo-intro {
+            background: #ecf0f1;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 40px;
+            line-height: 1.6;
+        }
+        .demo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        .demo-item {
+            border: 2px solid #667eea;
+            border-radius: 10px;
+            padding: 20px;
+            background: white;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .demo-item h2 {
+            margin-top: 0;
+            color: #667eea;
+            font-size: 1.5em;
+        }
+        .code-example {
+            background: #2c3e50;
+            color: #ecf0f1;
+            padding: 15px;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            margin: 15px 0;
+            overflow-x: auto;
+        }
+        .result-box {
+            background: #e8f5e9;
+            border-left: 4px solid #4caf50;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 3px;
+        }
+        .security-note {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 3px;
+        }
+        .highlight {
+            color: #f39c12;
+            font-weight: bold;
+        }
+        .keyword {
+            color: #e74c3c;
+        }
+        .string {
+            color: #2ecc71;
+        }
+        .comment {
+            color: #95a5a6;
+            font-style: italic;
+        }
+        .variable {
+            color: #3498db;
+        }
+        .info-note {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        .warning-note {
+            background: #f8d7da;
+            border-left: 4px solid #dc3545;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: transform 0.2s;
+        }
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background: #667eea;
+            color: white;
+        }
+        tr:nth-child(even) {
+            background: #f9f9f9;
+        }
+    </style>
+</head>
+<body>
+    <div class="demo-container">
+        <h1 class="demo-title">Semaine 4 - Jour 3 : Namespaces et Autoload</h1>
+
+        <div class="demo-intro">
+            <p>Aujourd'hui, nous apprenons à organiser notre code PHP avec les namespaces et à charger automatiquement nos classes avec l'autoloading, en suivant le standard PSR-4.</p>
+        </div>
+
+        <div class="demo-grid">
+            <div class="demo-item">
+                <h2>1. Pourquoi les Namespaces ?</h2>
+                <h3>Le problème : Conflits de noms</h3>
+                <div class="warning-note">
+                    <div class="code-example">
+<span class="keyword">&lt;?php</span>
+<span class="comment">// Fichier1.php</span>
+<span class="keyword">class</span> Database {
+    <span class="keyword">public function</span> connect() {
+        <span class="keyword">return</span> <span class="string">"Connexion MySQL"</span>;
+    }
+}
+
+<span class="comment">// Fichier2.php (librairie externe)</span>
+<span class="keyword">class</span> Database {  <span class="comment">// ❌ ERREUR : Classe déjà déclarée !</span>
+    <span class="keyword">public function</span> connect() {
+        <span class="keyword">return</span> <span class="string">"Connexion PostgreSQL"</span>;
+    }
+}
+<span class="keyword">?&gt;</span>
+                    </div>
+                    <p><strong>Problème :</strong> Impossible d'avoir deux classes avec le même nom dans le même projet !</p>
+                </div>
+
+                <h3>Solution : Les Namespaces</h3>
+                <div class="code-example">
+<span class="keyword">&lt;?php</span>
+<span class="comment">// src/MonApp/Database.php</span>
+<span class="keyword">namespace</span> MonApp;
+
+<span class="keyword">class</span> Database {
+    <span class="keyword">public function</span> connect() {
+        <span class="keyword">return</span> <span class="string">"Connexion MySQL"</span>;
+    }
+}
+
+<span class="comment">// vendor/Librairie/Database.php</span>
+<span class="keyword">namespace</span> Librairie;
+
+<span class="keyword">class</span> Database {  <span class="comment">// ✅ OK : Namespace différent !</span>
+    <span class="keyword">public function</span> connect() {
+        <span class="keyword">return</span> <span class="string">"Connexion PostgreSQL"</span>;
+    }
+}
+<span class="keyword">?&gt;</span>
+                </div>
+            </div>
+
+            <div class="demo-item">
+                <h2>2. Déclarer et utiliser des Namespaces</h2>
+                <h3>Syntaxe de base</h3>
+                <div class="code-example">
+<span class="keyword">&lt;?php</span>
+<span class="comment">// src/Models/Utilisateur.php</span>
+
+<span class="comment">// Déclarer le namespace (TOUJOURS en premier, après &lt;?php)</span>
+<span class="keyword">namespace</span> Models;
+
+<span class="keyword">class</span> Utilisateur {
+    <span class="keyword">private</span> <span class="variable">$nom</span>;
+
+    <span class="keyword">public function</span> __construct(<span class="variable">$nom</span>) {
+        <span class="variable">$this</span>->nom = <span class="variable">$nom</span>;
+    }
+
+    <span class="keyword">public function</span> getNom() {
+        <span class="keyword">return</span> <span class="variable">$this</span>->nom;
+    }
+}
+<span class="keyword">?&gt;</span>
+                </div>
+
+                <h3>Utiliser une classe avec namespace</h3>
+                <div class="code-example">
+<span class="keyword">&lt;?php</span>
+<span class="comment">// index.php</span>
+
+<span class="keyword">require</span> <span class="string">'src/Models/Utilisateur.php'</span>;
+
+<span class="comment">// Méthode 1 : Nom complet qualifié (FQCN)</span>
+<span class="variable">$user1</span> = <span class="keyword">new</span> \Models\Utilisateur(<span class="string">"Jean"</span>);
+
+<span class="comment">// Méthode 2 : Utiliser 'use' pour importer</span>
+<span class="keyword">use</span> Models\Utilisateur;
+
+<span class="variable">$user2</span> = <span class="keyword">new</span> Utilisateur(<span class="string">"Marie"</span>);
+
+<span class="comment">// Méthode 3 : Utiliser un alias</span>
+<span class="keyword">use</span> Models\Utilisateur <span class="keyword">as</span> User;
+
+<span class="variable">$user3</span> = <span class="keyword">new</span> User(<span class="string">"Paul"</span>);
+
+<span class="keyword">echo</span> <span class="variable">$user1</span>->getNom() . <span class="string">"&lt;br&gt;"</span>;
+<span class="keyword">echo</span> <span class="variable">$user2</span>->getNom() . <span class="string">"&lt;br&gt;"</span>;
+<span class="keyword">echo</span> <span class="variable">$user3</span>->getNom();
+<span class="keyword">?&gt;</span>
+                </div>
+                <div class="result-box">
+                    <h4>Résultat :</h4>
+                    <pre>Jean
+Marie
+Paul</pre>
+                </div>
+            </div>
+
+            <div class="demo-item">
+                <h2>3. Organisation du code avec Namespaces</h2>
+                <h3>Structure recommandée</h3>
+                <div class="code-example">
+projet/
+│
+├── src/
+│   ├── Controllers/
+│   │   ├── HomeController.php      <span class="comment">// namespace Controllers;</span>
+│   │   └── UserController.php      <span class="comment">// namespace Controllers;</span>
+│   │
+│   ├── Models/
+│   │   ├── User.php                <span class="comment">// namespace Models;</span>
+│   │   └── Article.php             <span class="comment">// namespace Models;</span>
+│   │
+│   ├── Views/
+│   │   └── home.php
+│   │
+│   └── Database/
+│       ├── Connection.php          <span class="comment">// namespace Database;</span>
+│       └── QueryBuilder.php        <span class="comment">// namespace Database;</span>
+│
+├── public/
+│   └── index.php
+│
+└── vendor/                         <span class="comment">// Bibliothèques tierces (Composer)</span>
+                </div>
+
+                <h3>Exemple complet avec sous-namespaces</h3>
+                <div class="code-example">
+<span class="keyword">&lt;?php</span>
+<span class="comment">// src/Models/User.php</span>
+<span class="keyword">namespace</span> Models;
+
+<span class="keyword">class</span> User {
+    <span class="keyword">public</span> <span class="variable">$nom</span>;
+}
+
+<span class="comment">// src/Controllers/UserController.php</span>
+<span class="keyword">namespace</span> Controllers;
+
+<span class="keyword">use</span> Models\User;  <span class="comment">// Importer la classe User</span>
+
+<span class="keyword">class</span> UserController {
+    <span class="keyword">public function</span> index() {
+        <span class="variable">$user</span> = <span class="keyword">new</span> User();
+        <span class="variable">$user</span>->nom = <span class="string">"Jean Dupont"</span>;
+        <span class="keyword">return</span> <span class="variable">$user</span>;
+    }
+}
+
+<span class="comment">// public/index.php</span>
+<span class="keyword">use</span> Controllers\UserController;
+
+<span class="variable">$controller</span> = <span class="keyword">new</span> UserController();
+<span class="variable">$user</span> = <span class="variable">$controller</span>->index();
+<span class="keyword">echo</span> <span class="variable">$user</span>->nom;
+<span class="keyword">?&gt;</span>
+                </div>
+            </div>
+
+            <div class="demo-item">
+                <h2>4. Autoloading avec spl_autoload_register()</h2>
+                <h3>Le problème des require multiples</h3>
+                <div class="warning-note">
+                    <div class="code-example">
+<span class="keyword">&lt;?php</span>
+<span class="comment">// ❌ MAUVAIS : Trop de require manuels !</span>
+<span class="keyword">require</span> <span class="string">'src/Models/User.php'</span>;
+<span class="keyword">require</span> <span class="string">'src/Models/Article.php'</span>;
+<span class="keyword">require</span> <span class="string">'src/Models/Comment.php'</span>;
+<span class="keyword">require</span> <span class="string">'src/Controllers/HomeController.php'</span>;
+<span class="keyword">require</span> <span class="string">'src/Controllers/UserController.php'</span>;
+<span class="comment">// ... et 50 autres fichiers</span>
+<span class="keyword">?&gt;</span>
+                    </div>
+                </div>
+
+                <h3>Solution : Autoloader automatique</h3>
+                <div class="code-example">
+<span class="keyword">&lt;?php</span>
+<span class="comment">// autoload.php - Charger automatiquement les classes</span>
+
+<span class="keyword">spl_autoload_register</span>(<span class="keyword">function</span> (<span class="variable">$class</span>) {
+    <span class="comment">// Exemple : $class = "Models\User"</span>
+
+    <span class="comment">// Remplacer les \ par / pour le chemin de fichier</span>
+    <span class="variable">$class</span> = <span class="keyword">str_replace</span>(<span class="string">'\\'</span>, <span class="string">'/'</span>, <span class="variable">$class</span>);
+    <span class="comment">// Résultat : "Models/User"</span>
+
+    <span class="comment">// Construire le chemin du fichier</span>
+    <span class="variable">$file</span> = __DIR__ . <span class="string">'/src/'</span> . <span class="variable">$class</span> . <span class="string">'.php'</span>;
+    <span class="comment">// Résultat : "/chemin/projet/src/Models/User.php"</span>
+
+    <span class="comment">// Charger le fichier s'il existe</span>
+    <span class="keyword">if</span> (<span class="keyword">file_exists</span>(<span class="variable">$file</span>)) {
+        <span class="keyword">require</span> <span class="variable">$file</span>;
+    }
+});
+
+<span class="comment">// Maintenant, plus besoin de require !</span>
+<span class="keyword">use</span> Models\User;
+<span class="keyword">use</span> Controllers\UserController;
+
+<span class="variable">$user</span> = <span class="keyword">new</span> User();              <span class="comment">// ✅ Chargé automatiquement !</span>
+<span class="variable">$controller</span> = <span class="keyword">new</span> UserController(); <span class="comment">// ✅ Chargé automatiquement !</span>
+<span class="keyword">?&gt;</span>
+                </div>
+            </div>
+
+            <div class="demo-item">
+                <h2>5. PSR-4 : Standard d'autoloading</h2>
+                <h3>Qu'est-ce que PSR-4 ?</h3>
+                <div class="info-note">
+                    <p><strong>PSR-4</strong> (PHP Standards Recommendation 4) est un standard qui définit comment organiser vos classes et namespaces.</p>
+                    <p><strong>Règle simple :</strong> Le namespace doit correspondre à la structure des dossiers.</p>
+                </div>
+
+                <table>
+                    <tr>
+                        <th>Namespace</th>
+                        <th>Chemin du fichier</th>
+                    </tr>
+                    <tr>
+                        <td>Models\User</td>
+                        <td>src/Models/User.php</td>
+                    </tr>
+                    <tr>
+                        <td>Controllers\UserController</td>
+                        <td>src/Controllers/UserController.php</td>
+                    </tr>
+                    <tr>
+                        <td>Database\MySQL\Connection</td>
+                        <td>src/Database/MySQL/Connection.php</td>
+                    </tr>
+                </table>
+
+                <h3>Autoloader conforme PSR-4</h3>
+                <div class="code-example">
+<span class="keyword">&lt;?php</span>
+<span class="comment">// autoload-psr4.php</span>
+
+<span class="keyword">spl_autoload_register</span>(<span class="keyword">function</span> (<span class="variable">$class</span>) {
+    <span class="comment">// Préfixe de namespace de base</span>
+    <span class="variable">$prefix</span> = <span class="string">''</span>;
+
+    <span class="comment">// Répertoire de base pour le préfixe de namespace</span>
+    <span class="variable">$baseDir</span> = __DIR__ . <span class="string">'/src/'</span>;
+
+    <span class="comment">// Obtenir le nom de classe relatif</span>
+    <span class="variable">$relativeClass</span> = <span class="variable">$class</span>;
+
+    <span class="comment">// Remplacer le namespace par le séparateur de répertoire</span>
+    <span class="variable">$file</span> = <span class="variable">$baseDir</span> . <span class="keyword">str_replace</span>(<span class="string">'\\'</span>, <span class="string">'/'</span>, <span class="variable">$relativeClass</span>) . <span class="string">'.php'</span>;
+
+    <span class="comment">// Si le fichier existe, le charger</span>
+    <span class="keyword">if</span> (<span class="keyword">file_exists</span>(<span class="variable">$file</span>)) {
+        <span class="keyword">require</span> <span class="variable">$file</span>;
+    }
+});
+<span class="keyword">?&gt;</span>
+                </div>
+            </div>
+
+            <div class="demo-item">
+                <h2>6. Introduction à Composer</h2>
+                <h3>Qu'est-ce que Composer ?</h3>
+                <div class="info-note">
+                    <p><strong>Gestionnaire de dépendances :</strong> Composer installe et gère les bibliothèques PHP de votre projet, comme npm pour Node.js.</p>
+                    <p><strong>Autoloader intégré :</strong> Composer génère automatiquement un autoloader PSR-4 pour vous ! Plus besoin d'écrire votre propre autoloader.</p>
+                </div>
+
+                <h3>Fichier composer.json</h3>
+                <div class="code-example">
+{
+    <span class="string">"name"</span>: <span class="string">"monprojet/monapp"</span>,
+    <span class="string">"description"</span>: <span class="string">"Mon application PHP"</span>,
+    <span class="string">"autoload"</span>: {
+        <span class="string">"psr-4"</span>: {
+            <span class="string">""</span>: <span class="string">"src/"</span>
+        }
+    },
+    <span class="string">"require"</span>: {
+        <span class="string">"php"</span>: <span class="string">">=7.4"</span>
+    }
+}
+                </div>
+
+                <h3>Utiliser l'autoloader de Composer</h3>
+                <div class="code-example">
+<span class="keyword">&lt;?php</span>
+<span class="comment">// public/index.php</span>
+
+<span class="comment">// Charger l'autoloader généré par Composer</span>
+<span class="keyword">require_once</span> __DIR__ . <span class="string">'/../vendor/autoload.php'</span>;
+
+<span class="comment">// Maintenant toutes vos classes sont chargées automatiquement !</span>
+<span class="keyword">use</span> Models\User;
+<span class="keyword">use</span> Controllers\UserController;
+
+<span class="variable">$user</span> = <span class="keyword">new</span> User();
+<span class="variable">$controller</span> = <span class="keyword">new</span> UserController();
+<span class="keyword">?&gt;</span>
+                </div>
+                <div class="info-note">
+                    <p><strong>Commandes Composer essentielles :</strong></p>
+                    <ul>
+                        <li><code>composer install</code> : Installer les dépendances</li>
+                        <li><code>composer require vendor/package</code> : Ajouter une bibliothèque</li>
+                        <li><code>composer dump-autoload</code> : Régénérer l'autoloader</li>
+                        <li><code>composer update</code> : Mettre à jour les dépendances</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="demo-item">
+                <h2>7. Exemple complet</h2>
+                <h3>Structure du projet</h3>
+                <div class="code-example">
+monprojet/
+│
+├── src/
+│   ├── Models/
+│   │   └── User.php              <span class="comment">// namespace Models;</span>
+│   ├── Controllers/
+│   │   └── UserController.php    <span class="comment">// namespace Controllers;</span>
+│   └── Database/
+│       └── Connection.php        <span class="comment">// namespace Database;</span>
+│
+├── public/
+│   └── index.php
+│
+├── autoload.php
+└── composer.json
+                </div>
+
+                <h3>Code complet</h3>
+                <div class="code-example">
+<span class="keyword">&lt;?php</span>
+<span class="comment">// autoload.php</span>
+<span class="keyword">spl_autoload_register</span>(<span class="keyword">function</span> (<span class="variable">$class</span>) {
+    <span class="variable">$file</span> = __DIR__ . <span class="string">'/src/'</span> . <span class="keyword">str_replace</span>(<span class="string">'\\'</span>, <span class="string">'/'</span>, <span class="variable">$class</span>) . <span class="string">'.php'</span>;
+    <span class="keyword">if</span> (<span class="keyword">file_exists</span>(<span class="variable">$file</span>)) {
+        <span class="keyword">require_once</span> <span class="variable">$file</span>;
+    }
+});
+
+<span class="comment">// public/index.php</span>
+<span class="keyword">require_once</span> __DIR__ . <span class="string">'/../autoload.php'</span>;
+
+<span class="keyword">use</span> Controllers\UserController;
+<span class="keyword">use</span> Database\Connection;
+
+<span class="variable">$controller</span> = <span class="keyword">new</span> UserController();
+<span class="variable">$user</span> = <span class="variable">$controller</span>->show(1);
+
+<span class="keyword">echo</span> <span class="string">"Utilisateur : "</span> . htmlspecialchars(<span class="variable">$user</span>->getNom()) . <span class="string">"&lt;br&gt;"</span>;
+
+<span class="variable">$db</span> = <span class="keyword">new</span> Connection();
+<span class="keyword">echo</span> <span class="variable">$db</span>->connect();
+<span class="keyword">?&gt;</span>
+                </div>
+                <div class="result-box">
+                    <h4>Résultat :</h4>
+                    <pre>Utilisateur : Jean Dupont
+Connexion établie</pre>
+                </div>
+            </div>
+        </div>
+
+        <!-- Zone Froggiesplaining -->
+        <div class="froggiesplaining">
+            <span> Froggiesplaining :</span>
+            <p>
+                <br />
+                <strong>Objectifs de ce cours :</strong><br />
+                ✅ Comprendre le problème des conflits de noms de classes<br />
+                ✅ Déclarer et utiliser des namespaces<br />
+                ✅ Organiser le code selon le standard PSR-4<br />
+                ✅ Créer un autoloader avec spl_autoload_register()<br />
+                ✅ Utiliser Composer pour l'autoloading automatique<br /><br />
+
+                <strong>Points clés à retenir :</strong><br />
+                • <strong>Namespaces</strong> = Quartiers de la mare (MareNord\Froggie vs MareSud\Froggie)<br />
+                • <strong>use</strong> = Raccourci pour importer une classe sans écrire le chemin complet<br />
+                • <strong>Autoloading</strong> = Majordome magique qui charge les classes automatiquement<br />
+                • <strong>PSR-4</strong> = Standard qui fait correspondre namespace et structure de dossiers<br />
+                • <strong>spl_autoload_register()</strong> = Fonction PHP pour créer un autoloader custom<br />
+                • <strong>Composer</strong> = Super majordome qui gère tout (classes + bibliothèques tierces)<br />
+                • Un seul require 'vendor/autoload.php' et tout est chargé automatiquement<br />
+                • Organisation: namespace Models; dans src/Models/User.php<br /><br />
+
+                <strong>Exercice pratique :</strong><br />
+                1. Créer la structure: src/Models/, src/Controllers/, src/Views/<br />
+                2. Créer Models\User.php avec namespace Models;<br />
+                3. Créer Controllers\UserController.php avec namespace Controllers;<br />
+                4. Créer un autoload.php avec spl_autoload_register()<br />
+                5. Dans index.php, require l'autoload puis use Models\User;<br />
+                6. Instancier un User sans require manuel du fichier<br />
+                7. Bonus: Installer Composer et configurer composer.json avec PSR-4<br />
+                8. Conseil de Froggie: Utilise Composer dès que possible ! C'est comme avoir un GPS dans la mare, tu ne te perds jamais.
+            </p>
+            <img src="../../html/img/froggie-300.png" alt="Froggie explain" class="overfrog" id="Froggie" />
+        </div>
+
+        <!-- Bouton retour -->
+        <a href="index.html" id="goToIndex" title="Retour à l'index">
+            <i class="bi bi-arrow-left"></i>
+        </a>
+
+        <!-- Lien vers Froggie -->
+        <a href="#Froggie">
+            <div id="goToFroggie">
+                <img src="../../html/img/froggie-300.png" width="50px" /><br /><i class="bi bi-arrow-bar-down"></i>
+            </div>
+        </a>
+
+        <!-- Footer -->
+        <div id="footerGit">
+            <a href="https://github.com/eCreafr/DWWM" target="_blank"><i class="bi bi-github">GitHub - eCrea</i></a>
+        </div>
+    </div>
+
+    <script src="../../html/js/froggie.js"></script>
+</body>
+</html>

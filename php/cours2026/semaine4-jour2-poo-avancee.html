@@ -1,0 +1,636 @@
+<!doctype html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PHP - Semaine 4 Jour 2 : POO Avancée</title>
+    <link rel="stylesheet" href="../../html/css/froggie.css">
+    <style>
+        .demo-container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+        }
+        .demo-title {
+            text-align: center;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .demo-intro {
+            background: #ecf0f1;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 40px;
+            line-height: 1.6;
+        }
+        .demo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        .demo-item {
+            border: 2px solid #667eea;
+            border-radius: 10px;
+            padding: 20px;
+            background: white;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .demo-item h2 {
+            margin-top: 0;
+            color: #667eea;
+            font-size: 1.5em;
+        }
+        .code-example {
+            background: #2c3e50;
+            color: #ecf0f1;
+            padding: 15px;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            margin: 15px 0;
+            overflow-x: auto;
+        }
+        .result-box {
+            background: #e8f5e9;
+            border-left: 4px solid #4caf50;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 3px;
+        }
+        .security-note {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 3px;
+        }
+        .highlight {
+            color: #f39c12;
+            font-weight: bold;
+        }
+        .keyword {
+            color: #e74c3c;
+        }
+        .string {
+            color: #2ecc71;
+        }
+        .comment {
+            color: #95a5a6;
+            font-style: italic;
+        }
+        .variable {
+            color: #3498db;
+        }
+        .info-note {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        .warning-note {
+            background: #f8d7da;
+            border-left: 4px solid #dc3545;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: transform 0.2s;
+        }
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background: #667eea;
+            color: white;
+        }
+        tr:nth-child(even) {
+            background: #f9f9f9;
+        }
+    </style>
+</head>
+<body>
+    <div class="demo-container">
+        <h1 class="demo-title">Semaine 4 - Jour 2 : POO Avancée</h1>
+
+        <div class="demo-intro">
+            <p>Aujourd'hui, nous explorons les concepts avancés de la Programmation Orientée Objet en PHP : l'héritage, la visibilité, les méthodes statiques, les constantes, les interfaces et les traits.</p>
+        </div>
+
+        <div class="demo-grid">
+            <div class="demo-item">
+                <h2>1. Héritage avec extends</h2>
+                <h3>Créer une hiérarchie de classes</h3>
+                <div class="code-example">
+<span class="keyword">&lt;?php</span>
+<span class="comment">// Classe parente (classe de base)</span>
+<span class="keyword">class</span> Personne {
+    <span class="keyword">protected</span> <span class="variable">$nom</span>;
+    <span class="keyword">protected</span> <span class="variable">$prenom</span>;
+    <span class="keyword">protected</span> <span class="variable">$age</span>;
+
+    <span class="keyword">public function</span> __construct(<span class="variable">$nom</span>, <span class="variable">$prenom</span>, <span class="variable">$age</span>) {
+        <span class="variable">$this</span>->nom = <span class="variable">$nom</span>;
+        <span class="variable">$this</span>->prenom = <span class="variable">$prenom</span>;
+        <span class="variable">$this</span>->age = <span class="variable">$age</span>;
+    }
+
+    <span class="keyword">public function</span> sePresenter() {
+        <span class="keyword">return</span> <span class="string">"Je m'appelle </span><span class="variable">$this</span><span class="string">->prenom </span><span class="variable">$this</span><span class="string">->nom et j'ai </span><span class="variable">$this</span><span class="string">->age ans."</span>;
+    }
+}
+
+<span class="comment">// Classe enfant (hérite de Personne)</span>
+<span class="keyword">class</span> Etudiant <span class="keyword">extends</span> Personne {
+    <span class="keyword">private</span> <span class="variable">$ecole</span>;
+    <span class="keyword">private</span> <span class="variable">$niveau</span>;
+
+    <span class="keyword">public function</span> __construct(<span class="variable">$nom</span>, <span class="variable">$prenom</span>, <span class="variable">$age</span>, <span class="variable">$ecole</span>, <span class="variable">$niveau</span>) {
+        <span class="comment">// Appeler le constructeur parent</span>
+        <span class="keyword">parent</span>::__construct(<span class="variable">$nom</span>, <span class="variable">$prenom</span>, <span class="variable">$age</span>);
+        <span class="variable">$this</span>->ecole = <span class="variable">$ecole</span>;
+        <span class="variable">$this</span>->niveau = <span class="variable">$niveau</span>;
+    }
+
+    <span class="comment">// Méthode spécifique à l'étudiant</span>
+    <span class="keyword">public function</span> etudier() {
+        <span class="keyword">return</span> <span class="string">"</span><span class="variable">$this</span><span class="string">->prenom étudie en </span><span class="variable">$this</span><span class="string">->niveau à </span><span class="variable">$this</span><span class="string">->ecole."</span>;
+    }
+
+    <span class="comment">// Redéfinir (override) une méthode du parent</span>
+    <span class="keyword">public function</span> sePresenter() {
+        <span class="keyword">return</span> <span class="keyword">parent</span>::sePresenter() . <span class="string">" Je suis étudiant en </span><span class="variable">$this</span><span class="string">->niveau."</span>;
+    }
+}
+
+<span class="comment">// Utilisation</span>
+<span class="variable">$personne</span> = <span class="keyword">new</span> Personne(<span class="string">"Dupont"</span>, <span class="string">"Jean"</span>, 45);
+<span class="variable">$etudiant</span> = <span class="keyword">new</span> Etudiant(<span class="string">"Martin"</span>, <span class="string">"Marie"</span>, 20, <span class="string">"Sorbonne"</span>, <span class="string">"Master 2"</span>);
+
+<span class="keyword">echo</span> <span class="variable">$personne</span>->sePresenter() . <span class="string">"&lt;br&gt;"</span>;
+<span class="keyword">echo</span> <span class="variable">$etudiant</span>->sePresenter() . <span class="string">"&lt;br&gt;"</span>;
+<span class="keyword">echo</span> <span class="variable">$etudiant</span>->etudier();
+<span class="keyword">?&gt;</span>
+                </div>
+                <div class="result-box">
+                    <h4>Résultat :</h4>
+                    <pre>Je m'appelle Jean Dupont et j'ai 45 ans.
+Je m'appelle Marie Martin et j'ai 20 ans. Je suis étudiant en Master 2.
+Marie étudie en Master 2 à Sorbonne.</pre>
+                </div>
+                <div class="info-note">
+                    <h4>Concepts clés de l'héritage :</h4>
+                    <ul>
+                        <li><strong>extends</strong> : Hériter d'une classe parente</li>
+                        <li><strong>parent::</strong> : Appeler une méthode de la classe parente</li>
+                        <li><strong>override</strong> : Redéfinir une méthode du parent dans l'enfant</li>
+                        <li>La classe enfant hérite de TOUTES les propriétés et méthodes publiques/protected du parent</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="demo-item">
+                <h2>2. Visibilité : public, private, protected</h2>
+                <h3>Contrôler l'accès aux propriétés et méthodes</h3>
+                <table>
+                    <tr>
+                        <th>Visibilité</th>
+                        <th>Accessible depuis la classe</th>
+                        <th>Accessible depuis une classe enfant</th>
+                        <th>Accessible depuis l'extérieur</th>
+                    </tr>
+                    <tr>
+                        <td><strong>public</strong></td>
+                        <td>Oui</td>
+                        <td>Oui</td>
+                        <td>Oui</td>
+                    </tr>
+                    <tr>
+                        <td><strong>protected</strong></td>
+                        <td>Oui</td>
+                        <td>Oui</td>
+                        <td>Non</td>
+                    </tr>
+                    <tr>
+                        <td><strong>private</strong></td>
+                        <td>Oui</td>
+                        <td>Non</td>
+                        <td>Non</td>
+                    </tr>
+                </table>
+                <h3>Exemple pratique</h3>
+                <div class="code-example">
+<span class="keyword">&lt;?php</span>
+<span class="keyword">class</span> CompteBancaire {
+    <span class="keyword">public</span> <span class="variable">$titulaire</span>;        <span class="comment">// Accessible partout</span>
+    <span class="keyword">protected</span> <span class="variable">$numero</span>;       <span class="comment">// Accessible dans cette classe et ses enfants</span>
+    <span class="keyword">private</span> <span class="variable">$solde</span>;          <span class="comment">// Accessible uniquement dans cette classe</span>
+
+    <span class="keyword">public function</span> __construct(<span class="variable">$titulaire</span>, <span class="variable">$numero</span>, <span class="variable">$soldeInitial</span>) {
+        <span class="variable">$this</span>->titulaire = <span class="variable">$titulaire</span>;
+        <span class="variable">$this</span>->numero = <span class="variable">$numero</span>;
+        <span class="variable">$this</span>->solde = <span class="variable">$soldeInitial</span>;
+    }
+
+    <span class="comment">// Méthode publique pour accéder au solde privé</span>
+    <span class="keyword">public function</span> getSolde() {
+        <span class="keyword">return</span> <span class="variable">$this</span>->solde;
+    }
+
+    <span class="comment">// Méthode publique pour modifier le solde de manière contrôlée</span>
+    <span class="keyword">public function</span> deposer(<span class="variable">$montant</span>) {
+        <span class="keyword">if</span> (<span class="variable">$montant</span> > 0) {
+            <span class="variable">$this</span>->solde += <span class="variable">$montant</span>;
+            <span class="keyword">return</span> <span class="string">"Dépôt de </span><span class="variable">$montant</span><span class="string">€ effectué. Nouveau solde : "</span> . <span class="variable">$this</span>->solde . <span class="string">"€"</span>;
+        }
+        <span class="keyword">return</span> <span class="string">"Montant invalide."</span>;
+    }
+
+    <span class="keyword">public function</span> retirer(<span class="variable">$montant</span>) {
+        <span class="keyword">if</span> (<span class="variable">$montant</span> > 0 && <span class="variable">$montant</span> <= <span class="variable">$this</span>->solde) {
+            <span class="variable">$this</span>->solde -= <span class="variable">$montant</span>;
+            <span class="keyword">return</span> <span class="string">"Retrait de </span><span class="variable">$montant</span><span class="string">€ effectué. Nouveau solde : "</span> . <span class="variable">$this</span>->solde . <span class="string">"€"</span>;
+        }
+        <span class="keyword">return</span> <span class="string">"Solde insuffisant ou montant invalide."</span>;
+    }
+
+    <span class="comment">// Méthode privée (utilisable uniquement dans cette classe)</span>
+    <span class="keyword">private function</span> verifierSolde() {
+        <span class="keyword">return</span> <span class="variable">$this</span>->solde >= 0;
+    }
+}
+
+<span class="variable">$compte</span> = <span class="keyword">new</span> CompteBancaire(<span class="string">"Jean Dupont"</span>, <span class="string">"FR123456"</span>, 1000);
+
+<span class="keyword">echo</span> <span class="variable">$compte</span>->titulaire . <span class="string">"&lt;br&gt;"</span>;        <span class="comment">// ✅ OK : public</span>
+<span class="keyword">echo</span> <span class="variable">$compte</span>->getSolde() . <span class="string">"&lt;br&gt;"</span>;       <span class="comment">// ✅ OK : via méthode publique</span>
+<span class="keyword">echo</span> <span class="variable">$compte</span>->deposer(500) . <span class="string">"&lt;br&gt;"</span>;     <span class="comment">// ✅ OK</span>
+
+<span class="comment">// ❌ ERREUR : $compte->solde (private, pas accessible depuis l'extérieur)</span>
+<span class="comment">// ❌ ERREUR : $compte->numero (protected, pas accessible depuis l'extérieur)</span>
+<span class="comment">// ❌ ERREUR : $compte->verifierSolde() (private, pas accessible)</span>
+<span class="keyword">?&gt;</span>
+                </div>
+                <div class="security-note">
+                    <h4>Pourquoi utiliser private/protected ?</h4>
+                    <ul>
+                        <li><strong>Encapsulation</strong> : Protéger les données sensibles (solde bancaire)</li>
+                        <li><strong>Contrôle</strong> : Valider les données avant modification</li>
+                        <li><strong>Maintenance</strong> : Changer l'implémentation interne sans casser le code externe</li>
+                        <li><strong>Sécurité</strong> : Empêcher la modification directe de propriétés critiques</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="demo-item">
+                <h2>3. Méthodes et propriétés static</h2>
+                <h3>Membres partagés entre toutes les instances</h3>
+                <div class="code-example">
+<span class="keyword">&lt;?php</span>
+<span class="keyword">class</span> Utilisateur {
+    <span class="keyword">public</span> <span class="variable">$nom</span>;
+    <span class="keyword">private static</span> <span class="variable">$compteur</span> = 0; <span class="comment">// Partagé par TOUS les objets</span>
+
+    <span class="keyword">public function</span> __construct(<span class="variable">$nom</span>) {
+        <span class="variable">$this</span>->nom = <span class="variable">$nom</span>;
+        <span class="keyword">self</span>::<span class="variable">$compteur</span>++; <span class="comment">// self:: pour accéder aux membres static</span>
+    }
+
+    <span class="comment">// Méthode static (appelable sans créer d'objet)</span>
+    <span class="keyword">public static function</span> getNombreUtilisateurs() {
+        <span class="keyword">return</span> <span class="keyword">self</span>::<span class="variable">$compteur</span>;
+    }
+
+    <span class="comment">// Méthode static utilitaire</span>
+    <span class="keyword">public static function</span> validerEmail(<span class="variable">$email</span>) {
+        <span class="keyword">return</span> <span class="keyword">filter_var</span>(<span class="variable">$email</span>, FILTER_VALIDATE_EMAIL) !== <span class="keyword">false</span>;
+    }
+}
+
+<span class="comment">// Appeler une méthode static SANS créer d'objet</span>
+<span class="keyword">echo</span> <span class="string">"Utilisateurs au départ : "</span> . Utilisateur::getNombreUtilisateurs() . <span class="string">"&lt;br&gt;"</span>;
+
+<span class="comment">// Créer des objets</span>
+<span class="variable">$user1</span> = <span class="keyword">new</span> Utilisateur(<span class="string">"Jean"</span>);
+<span class="variable">$user2</span> = <span class="keyword">new</span> Utilisateur(<span class="string">"Marie"</span>);
+<span class="variable">$user3</span> = <span class="keyword">new</span> Utilisateur(<span class="string">"Paul"</span>);
+
+<span class="keyword">echo</span> <span class="string">"Utilisateurs créés : "</span> . Utilisateur::getNombreUtilisateurs() . <span class="string">"&lt;br&gt;"</span>;
+
+<span class="comment">// Utiliser une méthode static utilitaire</span>
+<span class="keyword">if</span> (Utilisateur::validerEmail(<span class="string">"test@example.com"</span>)) {
+    <span class="keyword">echo</span> <span class="string">"Email valide !"</span>;
+}
+<span class="keyword">?&gt;</span>
+                </div>
+                <div class="result-box">
+                    <h4>Résultat :</h4>
+                    <pre>Utilisateurs au départ : 0
+Utilisateurs créés : 3
+Email valide !</pre>
+                </div>
+                <div class="info-note">
+                    <h4>Quand utiliser static ?</h4>
+                    <ul>
+                        <li><strong>Compteurs</strong> : Compter les instances créées</li>
+                        <li><strong>Utilitaires</strong> : Fonctions qui ne dépendent pas d'un objet (validation, formatage)</li>
+                        <li><strong>Configuration</strong> : Stocker des valeurs partagées</li>
+                        <li><strong>Factory methods</strong> : Créer des objets de manière spécialisée</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="demo-item">
+                <h2>4. Constantes de classe</h2>
+                <h3>Valeurs immuables au niveau de la classe</h3>
+                <div class="code-example">
+<span class="keyword">&lt;?php</span>
+<span class="keyword">class</span> Configuration {
+    <span class="comment">// Constantes (toujours en MAJUSCULES)</span>
+    <span class="keyword">const</span> VERSION = <span class="string">"1.0.0"</span>;
+    <span class="keyword">const</span> NOM_APP = <span class="string">"MonSuperSite"</span>;
+    <span class="keyword">const</span> MAX_UPLOAD_SIZE = 5242880; <span class="comment">// 5 Mo en octets</span>
+
+    <span class="keyword">public static function</span> afficherInfo() {
+        <span class="keyword">echo</span> <span class="string">"Application : "</span> . <span class="keyword">self</span>::NOM_APP . <span class="string">"&lt;br&gt;"</span>;
+        <span class="keyword">echo</span> <span class="string">"Version : "</span> . <span class="keyword">self</span>::VERSION . <span class="string">"&lt;br&gt;"</span>;
+        <span class="keyword">echo</span> <span class="string">"Taille max upload : "</span> . (<span class="keyword">self</span>::MAX_UPLOAD_SIZE / 1024 / 1024) . <span class="string">" Mo"</span>;
+    }
+}
+
+<span class="comment">// Accéder aux constantes depuis l'extérieur</span>
+<span class="keyword">echo</span> Configuration::VERSION . <span class="string">"&lt;br&gt;"</span>;
+<span class="keyword">echo</span> Configuration::NOM_APP . <span class="string">"&lt;br&gt;"</span>;
+
+Configuration::afficherInfo();
+<span class="keyword">?&gt;</span>
+                </div>
+                <h3>Exemple : Statuts d'utilisateur</h3>
+                <div class="code-example">
+<span class="keyword">&lt;?php</span>
+<span class="keyword">class</span> Utilisateur {
+    <span class="comment">// Constantes pour les statuts</span>
+    <span class="keyword">const</span> STATUT_ACTIF = 1;
+    <span class="keyword">const</span> STATUT_INACTIF = 0;
+    <span class="keyword">const</span> STATUT_SUSPENDU = 2;
+
+    <span class="comment">// Constantes pour les rôles</span>
+    <span class="keyword">const</span> ROLE_USER = <span class="string">"user"</span>;
+    <span class="keyword">const</span> ROLE_ADMIN = <span class="string">"admin"</span>;
+    <span class="keyword">const</span> ROLE_MODERATEUR = <span class="string">"moderateur"</span>;
+
+    <span class="keyword">private</span> <span class="variable">$nom</span>;
+    <span class="keyword">private</span> <span class="variable">$statut</span>;
+    <span class="keyword">private</span> <span class="variable">$role</span>;
+
+    <span class="keyword">public function</span> __construct(<span class="variable">$nom</span>, <span class="variable">$role</span> = <span class="keyword">self</span>::ROLE_USER) {
+        <span class="variable">$this</span>->nom = <span class="variable">$nom</span>;
+        <span class="variable">$this</span>->statut = <span class="keyword">self</span>::STATUT_ACTIF;
+        <span class="variable">$this</span>->role = <span class="variable">$role</span>;
+    }
+
+    <span class="keyword">public function</span> estActif() {
+        <span class="keyword">return</span> <span class="variable">$this</span>->statut === <span class="keyword">self</span>::STATUT_ACTIF;
+    }
+
+    <span class="keyword">public function</span> estAdmin() {
+        <span class="keyword">return</span> <span class="variable">$this</span>->role === <span class="keyword">self</span>::ROLE_ADMIN;
+    }
+}
+
+<span class="comment">// Utilisation claire et lisible</span>
+<span class="variable">$user</span> = <span class="keyword">new</span> Utilisateur(<span class="string">"Jean"</span>, Utilisateur::ROLE_ADMIN);
+
+<span class="keyword">if</span> (<span class="variable">$user</span>->estAdmin()) {
+    <span class="keyword">echo</span> <span class="string">"Accès administrateur accordé."</span>;
+}
+<span class="keyword">?&gt;</span>
+                </div>
+            </div>
+
+            <div class="demo-item">
+                <h2>5. Interfaces</h2>
+                <h3>Définir un contrat</h3>
+                <div class="code-example">
+<span class="keyword">&lt;?php</span>
+<span class="comment">// Interface = Contrat que les classes doivent respecter</span>
+<span class="keyword">interface</span> Affichable {
+    <span class="keyword">public function</span> afficher();
+    <span class="keyword">public function</span> afficherResume();
+}
+
+<span class="comment">// Classe qui implémente l'interface</span>
+<span class="keyword">class</span> Article <span class="keyword">implements</span> Affichable {
+    <span class="keyword">private</span> <span class="variable">$titre</span>;
+    <span class="keyword">private</span> <span class="variable">$contenu</span>;
+
+    <span class="keyword">public function</span> __construct(<span class="variable">$titre</span>, <span class="variable">$contenu</span>) {
+        <span class="variable">$this</span>->titre = <span class="variable">$titre</span>;
+        <span class="variable">$this</span>->contenu = <span class="variable">$contenu</span>;
+    }
+
+    <span class="comment">// DOIT implémenter toutes les méthodes de l'interface</span>
+    <span class="keyword">public function</span> afficher() {
+        <span class="keyword">return</span> <span class="string">"&lt;h2&gt;</span><span class="variable">$this</span><span class="string">->titre&lt;/h2&gt;&lt;p&gt;</span><span class="variable">$this</span><span class="string">->contenu&lt;/p&gt;"</span>;
+    }
+
+    <span class="keyword">public function</span> afficherResume() {
+        <span class="keyword">return</span> <span class="string">"</span><span class="variable">$this</span><span class="string">->titre : "</span> . <span class="keyword">substr</span>(<span class="variable">$this</span>->contenu, 0, 50) . <span class="string">"..."</span>;
+    }
+}
+
+<span class="keyword">class</span> Produit <span class="keyword">implements</span> Affichable {
+    <span class="keyword">private</span> <span class="variable">$nom</span>;
+    <span class="keyword">private</span> <span class="variable">$prix</span>;
+
+    <span class="keyword">public function</span> __construct(<span class="variable">$nom</span>, <span class="variable">$prix</span>) {
+        <span class="variable">$this</span>->nom = <span class="variable">$nom</span>;
+        <span class="variable">$this</span>->prix = <span class="variable">$prix</span>;
+    }
+
+    <span class="keyword">public function</span> afficher() {
+        <span class="keyword">return</span> <span class="string">"&lt;h3&gt;</span><span class="variable">$this</span><span class="string">->nom&lt;/h3&gt;&lt;p&gt;Prix : </span><span class="variable">$this</span><span class="string">->prix €&lt;/p&gt;"</span>;
+    }
+
+    <span class="keyword">public function</span> afficherResume() {
+        <span class="keyword">return</span> <span class="string">"</span><span class="variable">$this</span><span class="string">->nom (</span><span class="variable">$this</span><span class="string">->prix €)"</span>;
+    }
+}
+
+<span class="comment">// Fonction qui accepte n'importe quel objet Affichable</span>
+<span class="keyword">function</span> afficherElement(Affichable <span class="variable">$element</span>) {
+    <span class="keyword">echo</span> <span class="variable">$element</span>->afficher();
+}
+
+<span class="variable">$article</span> = <span class="keyword">new</span> Article(<span class="string">"PHP POO"</span>, <span class="string">"Apprendre la programmation orientée objet..."</span>);
+<span class="variable">$produit</span> = <span class="keyword">new</span> Produit(<span class="string">"Laptop"</span>, 999.99);
+
+afficherElement(<span class="variable">$article</span>);
+afficherElement(<span class="variable">$produit</span>);
+<span class="keyword">?&gt;</span>
+                </div>
+                <div class="info-note">
+                    <h4>Interfaces vs Classes abstraites :</h4>
+                    <ul>
+                        <li><strong>Interface</strong> : Définit QUOI faire (aucune implémentation)</li>
+                        <li><strong>Classe abstraite</strong> : Définit QUOI et peut définir COMMENT (peut avoir des méthodes implémentées)</li>
+                        <li>Une classe peut implémenter PLUSIEURS interfaces, mais hériter d'UNE SEULE classe</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="demo-item">
+                <h2>6. Traits</h2>
+                <h3>Réutiliser du code entre classes</h3>
+                <div class="code-example">
+<span class="keyword">&lt;?php</span>
+<span class="comment">// Trait = Morceau de code réutilisable</span>
+<span class="keyword">trait</span> Horodatage {
+    <span class="keyword">private</span> <span class="variable">$dateCreation</span>;
+    <span class="keyword">private</span> <span class="variable">$dateModification</span>;
+
+    <span class="keyword">public function</span> setDateCreation() {
+        <span class="variable">$this</span>->dateCreation = <span class="keyword">date</span>(<span class="string">"Y-m-d H:i:s"</span>);
+    }
+
+    <span class="keyword">public function</span> setDateModification() {
+        <span class="variable">$this</span>->dateModification = <span class="keyword">date</span>(<span class="string">"Y-m-d H:i:s"</span>);
+    }
+
+    <span class="keyword">public function</span> getDateCreation() {
+        <span class="keyword">return</span> <span class="variable">$this</span>->dateCreation;
+    }
+}
+
+<span class="keyword">trait</span> Identifiable {
+    <span class="keyword">private</span> <span class="variable">$id</span>;
+
+    <span class="keyword">public function</span> setId(<span class="variable">$id</span>) {
+        <span class="variable">$this</span>->id = <span class="variable">$id</span>;
+    }
+
+    <span class="keyword">public function</span> getId() {
+        <span class="keyword">return</span> <span class="variable">$this</span>->id;
+    }
+}
+
+<span class="comment">// Utiliser plusieurs traits</span>
+<span class="keyword">class</span> Article {
+    <span class="keyword">use</span> Horodatage, Identifiable;
+
+    <span class="keyword">private</span> <span class="variable">$titre</span>;
+    <span class="keyword">private</span> <span class="variable">$contenu</span>;
+
+    <span class="keyword">public function</span> __construct(<span class="variable">$id</span>, <span class="variable">$titre</span>, <span class="variable">$contenu</span>) {
+        <span class="variable">$this</span>->setId(<span class="variable">$id</span>);
+        <span class="variable">$this</span>->titre = <span class="variable">$titre</span>;
+        <span class="variable">$this</span>->contenu = <span class="variable">$contenu</span>;
+        <span class="variable">$this</span>->setDateCreation();
+    }
+}
+
+<span class="keyword">class</span> Utilisateur {
+    <span class="keyword">use</span> Horodatage, Identifiable;
+
+    <span class="keyword">private</span> <span class="variable">$nom</span>;
+
+    <span class="keyword">public function</span> __construct(<span class="variable">$id</span>, <span class="variable">$nom</span>) {
+        <span class="variable">$this</span>->setId(<span class="variable">$id</span>);
+        <span class="variable">$this</span>->nom = <span class="variable">$nom</span>;
+        <span class="variable">$this</span>->setDateCreation();
+    }
+}
+
+<span class="variable">$article</span> = <span class="keyword">new</span> Article(1, <span class="string">"Mon article"</span>, <span class="string">"Contenu..."</span>);
+<span class="keyword">echo</span> <span class="string">"Article ID : "</span> . <span class="variable">$article</span>->getId() . <span class="string">"&lt;br&gt;"</span>;
+<span class="keyword">echo</span> <span class="string">"Créé le : "</span> . <span class="variable">$article</span>->getDateCreation();
+<span class="keyword">?&gt;</span>
+                </div>
+                <div class="info-note">
+                    <h4>Quand utiliser les traits ?</h4>
+                    <ul>
+                        <li>Partager du code entre classes sans héritage</li>
+                        <li>Éviter la duplication de code</li>
+                        <li>Ajouter des fonctionnalités transversales (logs, timestamps...)</li>
+                        <li>Alternative à l'héritage multiple (PHP ne supporte pas l'héritage multiple)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Zone Froggiesplaining -->
+        <div class="froggiesplaining">
+            <span> Froggiesplaining :</span>
+            <p>
+                <br />
+                <strong>Objectifs de ce cours :</strong><br />
+                ✅ Maîtriser l'héritage avec extends et parent::<br />
+                ✅ Comprendre les modificateurs de visibilité (public, protected, private)<br />
+                ✅ Utiliser les membres static et les constantes<br />
+                ✅ Implémenter des interfaces pour définir des contrats<br />
+                ✅ Utiliser les traits pour partager du code entre classes<br /><br />
+
+                <strong>Points clés à retenir :</strong><br />
+                • <strong>Héritage</strong> = Etudiant extends Personne (grenouille savante qui hérite des capacités de base)<br />
+                • <strong>public</strong> = Accessible partout (ma couleur verte visible par tous)<br />
+                • <strong>protected</strong> = Accessible dans la classe et ses enfants (mon ADN familial)<br />
+                • <strong>private</strong> = Accessible uniquement dans la classe (mes pensées secrètes)<br />
+                • <strong>static</strong> = Partagé par toutes les instances (compteur de grenouilles dans la mare)<br />
+                • <strong>const</strong> = Valeurs immuables (COULEUR_DEFAUT = "vert")<br />
+                • <strong>Interface</strong> = Contrat définissant QUOI faire (Nageable impose nager())<br />
+                • <strong>Trait</strong> = Code réutilisable sans héritage (lunettes portables par tous)<br /><br />
+
+                <strong>Exercice pratique :</strong><br />
+                1. Créer une classe CompteBancaire avec propriétés private (solde, titulaire)<br />
+                2. Ajouter des méthodes public pour accéder/modifier le solde de façon contrôlée<br />
+                3. Créer une classe CompteEpargne qui extends CompteBancaire<br />
+                4. Ajouter une constante TAUX_INTERET et une méthode static calculerInterets()<br />
+                5. Créer une interface Transferable avec méthode transferer()<br />
+                6. Implémenter l'interface dans CompteBancaire<br />
+                7. Conseil de Froggie: Utilise private pour protéger les données sensibles comme mon solde bancaire de mouches !
+            </p>
+            <img src="../../html/img/froggie-300.png" alt="Froggie explain" class="overfrog" id="Froggie" />
+        </div>
+
+        <!-- Bouton retour -->
+        <a href="index.html" id="goToIndex" title="Retour à l'index">
+            <i class="bi bi-arrow-left"></i>
+        </a>
+
+        <!-- Lien vers Froggie -->
+        <a href="#Froggie">
+            <div id="goToFroggie">
+                <img src="../../html/img/froggie-300.png" width="50px" /><br /><i class="bi bi-arrow-bar-down"></i>
+            </div>
+        </a>
+
+        <!-- Footer -->
+        <div id="footerGit">
+            <a href="https://github.com/eCreafr/DWWM" target="_blank"><i class="bi bi-github">GitHub - eCrea</i></a>
+        </div>
+    </div>
+
+    <script src="../../html/js/froggie.js"></script>
+</body>
+</html>
