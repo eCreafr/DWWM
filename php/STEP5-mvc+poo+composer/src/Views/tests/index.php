@@ -165,25 +165,27 @@
                     <h5 class="mb-0">ℹ Informations sur les Tests</h5>
                 </div>
                 <div class="card-body">
-                    <h6>Tests Implémentés (92 tests, 147 assertions) :</h6>
+                    <h6>Tests Implémentés (<?= $results['total_tests'] ?> tests, <?= $results['assertions'] ?> assertions) :</h6>
                     <ul>
-                        <li><strong>Helpers (60 tests)</strong>
+                        <li><strong>Helpers</strong> — Tests unitaires sans dépendance externe
                             <ul>
-                                <li>EmailValidator (15 tests) : Validation stricte des emails (RFC + DNS + MX)</li>
-                                <li>StringHelper (16 tests) : Manipulation de chaînes (slugify, truncate, sanitize, escape)</li>
-                                <li>UrlHelper (12 tests) : Génération d'URLs (createArticleUrl, url, getCurrentUrl)</li>
-                                <li>AuthHelper (17 tests) : Authentification et autorisations</li>
+                                <li>AuthHelper : Authentification et autorisations (session)</li>
+                                <li>EmailValidator : Validation stricte des emails (RFC + DNS + MX)</li>
+                                <li>StringHelper : Manipulation de chaînes (slugify, truncate, sanitize, escape)</li>
+                                <li>UrlHelper : Génération d'URLs (createArticleUrl, url, getCurrentUrl)</li>
                             </ul>
                         </li>
-                        <li><strong>Models (21 tests)</strong>
+                        <li><strong>Models</strong> — Tests avec mock PDO (injection de dépendance, sans BDD)
                             <ul>
-                                <li>User (11 tests) : Gestion des utilisateurs, rôles, authentification</li>
-                                <li>Article (10 tests) : Structure et validation des articles</li>
+                                <li>User : CRUD, rôles, authentification, hashage de mot de passe</li>
+                                <li>Article : CRUD complet, gestion des matchs associés</li>
                             </ul>
                         </li>
-                        <li><strong>Integration (11 tests)</strong>
+                        <li><strong>Router</strong> — Tests de la logique de routage
                             <ul>
-                                <li>RouterIntegration : Tests de routing complet, sécurité (SQL injection, path traversal)</li>
+                                <li>Résolution des routes (page → contrôleur/action)</li>
+                                <li>Whitelist des pages autorisées</li>
+                                <li>Sécurité : rejet des path traversal et injections SQL</li>
                             </ul>
                         </li>
                     </ul>

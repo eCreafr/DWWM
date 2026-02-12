@@ -27,13 +27,21 @@ class Article
     /**
      * Constructeur - Initialise la connexion à la base de données
      *
-     * On utilise le pattern Singleton de Database pour obtenir
-     * la connexion unique à la base de données
+     * Accepte une connexion PDO optionnelle (injection de dépendance).
+     * Si aucune connexion n'est fournie, utilise le Singleton Database.
+     *
+     * L'injection de dépendance permet :
+     * - De tester la classe sans base de données réelle (en injectant un mock)
+     * - De changer facilement de source de données
+     * - De respecter le principe d'inversion de dépendance (SOLID)
+     *
+     * @param PDO|null $db Connexion PDO optionnelle
      */
-    public function __construct()
+    public function __construct(?PDO $db = null)
     {
-        // Récupère l'instance unique de Database et sa connexion PDO
-        $this->db = Database::getInstance()->getConnection();
+        // Si une connexion est fournie, on l'utilise directement
+        // Sinon, on récupère la connexion via le Singleton Database
+        $this->db = $db ?? Database::getInstance()->getConnection();
     }
 
     /**
