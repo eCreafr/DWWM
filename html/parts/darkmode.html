@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Dark mode in css only</title>
+    </head>
+    <body>
+        <input type="checkbox" id="darkmode" />
+        <label for="darkmode">Dark mode</label>
+
+        <style>
+            :root {
+                --c-text: #493c37;
+                --c-background: #eddfe0;
+            }
+
+            :root:has(#darkmode:checked) {
+                --c-text: #eddfe0;
+                --c-background: #493c37;
+            }
+
+            body {
+                background-color: var(--c-background);
+                color: var(--c-text);
+                transition:
+                    background-color 0.3s,
+                    color 0.3s;
+            }
+        </style>
+    </body>
+</html>
