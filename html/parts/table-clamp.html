@@ -1,0 +1,342 @@
+<!doctype html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>CSS clamp() sur un tableau — Exemple pédagogique</title>
+        <style>
+            * {
+                box-sizing: border-box;
+                margin: 0;
+                padding: 0;
+            }
+
+            body {
+                background-color: #0d0d0f;
+                color: #f5f5f7;
+                font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+                padding: 40px 20px;
+            }
+
+            h1 {
+                text-align: center;
+                font-size: 2rem;
+                font-weight: 700;
+                margin-bottom: 8px;
+                background: linear-gradient(90deg, #a78bfa, #38bdf8);
+                -webkit-background-clip: text;
+                background-clip: text;
+                -webkit-text-fill-color: transparent;
+            }
+
+            .subtitle {
+                text-align: center;
+                color: #6e6e73;
+                font-size: 0.95rem;
+                margin-bottom: 40px;
+            }
+
+            /* ─── EXPLICATION CLAMP ───────────────────────────────────────────────
+               clamp(MIN, PREFERE, MAX)
+               · MIN   : jamais plus petit que cette valeur
+               · PREFER: valeur fluide (%, vw, em…) utilisée entre les deux bornes
+               · MAX   : jamais plus grand que cette valeur
+               Ici : clamp(400px, 90%, 960px)
+               → le tableau fait 90% du conteneur, mais jamais < 400 px ni > 960 px.
+            ──────────────────────────────────────────────────────────────────────── */
+
+            .table-wrapper {
+                /* Centre le tableau dans la page */
+                display: flex;
+                justify-content: center;
+            }
+
+            table {
+                /* 🎯 La propriété vedette de cet exemple */
+                width: clamp(400px, 90%, 960px);
+
+                border-collapse: collapse;
+                background: #1c1c1e;
+                border-radius: 16px;
+                overflow: hidden;       /* pour que le border-radius s'applique */
+                border: 1px solid #2c2c2e;
+            }
+
+            thead tr {
+                background: #111113;
+                border-bottom: 1px solid #3a3a3c;
+            }
+
+            th {
+                padding: 12px 16px;
+                text-align: left;
+                font-size: 0.78rem;
+                font-weight: 600;
+                text-transform: uppercase;
+                letter-spacing: 0.08em;
+                color: #6e6e73;
+                white-space: nowrap;
+            }
+
+            td {
+                padding: 16px;
+                border-bottom: 1px solid #2c2c2e;
+                font-size: 0.9rem;
+                color: #aeaeb2;
+                vertical-align: middle;
+            }
+
+            tbody tr:last-child td {
+                border-bottom: none;
+            }
+
+            tbody tr {
+                transition: background 0.2s;
+            }
+
+            tbody tr:hover {
+                background: #222226;
+            }
+
+            /* ── Cellule icône ── */
+            .col-icon {
+                font-size: 1.8rem;
+                text-align: center;
+                width: 56px;
+            }
+
+            /* ── Cellule nom ── */
+            .col-name strong {
+                display: block;
+                font-size: 0.95rem;
+                font-weight: 600;
+                color: #f5f5f7;
+                margin-bottom: 2px;
+            }
+
+            .col-name span {
+                font-size: 0.78rem;
+                color: #6e6e73;
+            }
+
+            /* ── Cellule prix ── */
+            .col-price {
+                font-size: 1rem;
+                font-weight: 700;
+                color: #a78bfa;
+                white-space: nowrap;
+            }
+
+            /* ── Cellule stockage ── */
+            .col-storage {
+                white-space: nowrap;
+            }
+
+            /* ── Pastilles de couleurs ── */
+            .colors {
+                display: flex;
+                gap: 5px;
+                flex-wrap: wrap;
+            }
+
+            .color-dot {
+                width: 16px;
+                height: 16px;
+                border-radius: 50%;
+                border: 2px solid #3a3a3c;
+                display: inline-block;
+            }
+
+            /* ── Bouton ── */
+            .col-action {
+                text-align: right;
+            }
+
+            .col-action button {
+                background: linear-gradient(135deg, #6d28d9, #2563eb);
+                color: #fff;
+                border: none;
+                padding: 7px 16px;
+                border-radius: 20px;
+                font-size: 0.82rem;
+                font-weight: 600;
+                cursor: pointer;
+                transition: opacity 0.2s, transform 0.1s;
+                white-space: nowrap;
+            }
+
+            .col-action button:hover {
+                opacity: 0.85;
+                transform: scale(1.03);
+            }
+
+            /* ── Note pédagogique ── */
+            .note {
+                width: clamp(400px, 90%, 960px);  /* même clamp que le tableau */
+                margin: 36px auto 0;
+                background: #1c1c1e;
+                border: 1px solid #2c2c2e;
+                border-left: 3px solid #a78bfa;
+                border-radius: 12px;
+                padding: 16px 20px;
+                font-size: 0.85rem;
+                color: #aeaeb2;
+                line-height: 1.6;
+            }
+
+            .note strong {
+                color: #a78bfa;
+            }
+
+            code {
+                background: #2c2c2e;
+                color: #38bdf8;
+                padding: 1px 6px;
+                border-radius: 4px;
+                font-family: "SF Mono", "Fira Code", monospace;
+                font-size: 0.82rem;
+            }
+
+            .clamp-formula {
+                display: flex;
+                gap: 8px;
+                flex-wrap: wrap;
+                margin: 12px 0 4px;
+            }
+
+            .clamp-formula .part {
+                background: #2c2c2e;
+                border-radius: 8px;
+                padding: 6px 12px;
+                font-size: 0.8rem;
+                font-family: "SF Mono", "Fira Code", monospace;
+            }
+
+            .clamp-formula .part.min  { color: #f87171; }
+            .clamp-formula .part.pref { color: #facc15; }
+            .clamp-formula .part.max  { color: #4ade80; }
+            .clamp-formula .sep       { color: #6e6e73; align-self: center; }
+        </style>
+    </head>
+    <body>
+        <h1>Comparatif Apple 2025</h1>
+        <p class="subtitle">Exemple pédagogique CSS <code>clamp()</code> sur un tableau</p>
+
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th class="col-icon"></th>
+                        <th class="col-name">Produit</th>
+                        <th class="col-price">Prix dès</th>
+                        <th class="col-storage">Stockage</th>
+                        <th>Couleurs</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="col-icon">📱</td>
+                        <td class="col-name">
+                            <strong>iPhone 16 Pro</strong>
+                            <span>Puce A18 Pro · Caméra 48 Mpx · ProMotion 120 Hz</span>
+                        </td>
+                        <td class="col-price">1 329 €</td>
+                        <td class="col-storage">128 Go — 1 To</td>
+                        <td>
+                            <div class="colors">
+                                <span class="color-dot" style="background:#3b3833" title="Titane noir"></span>
+                                <span class="color-dot" style="background:#e8e0d5" title="Titane naturel"></span>
+                                <span class="color-dot" style="background:#c2b8a8" title="Titane blanc"></span>
+                                <span class="color-dot" style="background:#6b7c6e" title="Titane désert"></span>
+                            </div>
+                        </td>
+                        <td class="col-action"><button>Acheter</button></td>
+                    </tr>
+                    <tr>
+                        <td class="col-icon">💻</td>
+                        <td class="col-name">
+                            <strong>MacBook Pro 14"</strong>
+                            <span>Puce M4 Pro · Écran Liquid Retina XDR · 24 Go RAM</span>
+                        </td>
+                        <td class="col-price">2 199 €</td>
+                        <td class="col-storage">512 Go — 8 To</td>
+                        <td>
+                            <div class="colors">
+                                <span class="color-dot" style="background:#2d2d2d" title="Noir sidéral"></span>
+                                <span class="color-dot" style="background:#d4cfc9" title="Argent"></span>
+                            </div>
+                        </td>
+                        <td class="col-action"><button>Acheter</button></td>
+                    </tr>
+                    <tr>
+                        <td class="col-icon">🖥️</td>
+                        <td class="col-name">
+                            <strong>iPad Pro M4 11"</strong>
+                            <span>Puce M4 · Écran Ultra Retina XDR OLED · Apple Pencil Pro</span>
+                        </td>
+                        <td class="col-price">1 199 €</td>
+                        <td class="col-storage">256 Go — 2 To</td>
+                        <td>
+                            <div class="colors">
+                                <span class="color-dot" style="background:#2d2d2d" title="Noir sidéral"></span>
+                                <span class="color-dot" style="background:#e8e4de" title="Argent"></span>
+                            </div>
+                        </td>
+                        <td class="col-action"><button>Acheter</button></td>
+                    </tr>
+                    <tr>
+                        <td class="col-icon">🎧</td>
+                        <td class="col-name">
+                            <strong>AirPods Pro 2</strong>
+                            <span>Puce H2 · Réduction de bruit adaptative · Audio spatial</span>
+                        </td>
+                        <td class="col-price">279 €</td>
+                        <td class="col-storage">—</td>
+                        <td>
+                            <div class="colors">
+                                <span class="color-dot" style="background:#f0ede8" title="Blanc"></span>
+                            </div>
+                        </td>
+                        <td class="col-action"><button>Acheter</button></td>
+                    </tr>
+                    <tr>
+                        <td class="col-icon">⌚</td>
+                        <td class="col-name">
+                            <strong>Apple Watch Ultra 2</strong>
+                            <span>Puce S9 · Titane · GPS double fréquence · 60 h autonomie</span>
+                        </td>
+                        <td class="col-price">899 €</td>
+                        <td class="col-storage">—</td>
+                        <td>
+                            <div class="colors">
+                                <span class="color-dot" style="background:#b5b5b5" title="Titane naturel"></span>
+                                <span class="color-dot" style="background:#1a1a1a" title="Titane noir"></span>
+                            </div>
+                        </td>
+                        <td class="col-action"><button>Acheter</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="note">
+            <strong>Pourquoi clamp() ?</strong><br>
+            La fonction <code>clamp(MIN, PRÉFÉRÉ, MAX)</code> permet de définir une valeur
+            <strong>fluide et bornée</strong> en une seule déclaration, sans media queries.
+            <div class="clamp-formula">
+                <span class="part min">400px &nbsp;← min</span>
+                <span class="sep">,</span>
+                <span class="part pref">90% &nbsp;&nbsp;← préféré</span>
+                <span class="sep">,</span>
+                <span class="part max">960px &nbsp;← max</span>
+            </div>
+            Le tableau fait <strong>90 % de son conteneur</strong>, mais ne descend jamais
+            sous <strong>400 px</strong> (lisibilité) et ne dépasse jamais <strong>960 px</strong>
+            (confort de lecture sur grand écran).<br><br>
+            Équivalent sans <code>clamp()</code> :
+            <code>width: 90%; min-width: 400px; max-width: 960px;</code> —
+            <code>clamp()</code> regroupe les trois propriétés en une.
+        </div>
+    </body>
+</html>

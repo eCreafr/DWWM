@@ -1,0 +1,290 @@
+<!doctype html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>CSS Subgrid — Exemple pédagogique</title>
+        <style>
+            * {
+                box-sizing: border-box;
+                margin: 0;
+                padding: 0;
+            }
+
+            body {
+                background-color: #0d0d0f;
+                color: #f5f5f7;
+                font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+                padding: 40px 20px;
+            }
+
+            h1 {
+                text-align: center;
+                font-size: 2rem;
+                font-weight: 700;
+                margin-bottom: 8px;
+                background: linear-gradient(90deg, #a78bfa, #38bdf8);
+                -webkit-background-clip: text;
+                background-clip: text;
+                -webkit-text-fill-color: transparent;
+            }
+
+            .subtitle {
+                text-align: center;
+                color: #6e6e73;
+                font-size: 0.95rem;
+                margin-bottom: 40px;
+            }
+
+            /* ─── EXPLICATION SUBGRID ─────────────────────────────────────────────
+               Le parent (.product-list) définit 6 colonnes.
+               Chaque enfant (.product-row) s'étend sur TOUTES les colonnes (span 6)
+               puis déclare grid-template-columns: subgrid pour hériter des mêmes
+               tracks → les cellules internes s'alignent parfaitement entre les lignes.
+            ──────────────────────────────────────────────────────────────────────── */
+
+            .product-list {
+                display: grid;
+                /* 6 colonnes : icone | nom | prix | stockage | couleurs | bouton */
+                grid-template-columns: 80px 1fr 110px 150px 180px 130px;
+                gap: 12px 0;
+                max-width: 960px;
+                margin: 0 auto;
+            }
+
+            /* ── Ligne d'en-tête ── */
+            .product-header {
+                grid-column: 1 / -1;      /* span toutes les colonnes */
+                display: grid;
+                grid-template-columns: subgrid; /* hérite les 6 tracks du parent */
+                padding: 0 20px 10px;
+                border-bottom: 1px solid #3a3a3c;
+                color: #6e6e73;
+                font-size: 0.78rem;
+                font-weight: 600;
+                text-transform: uppercase;
+                letter-spacing: 0.08em;
+                align-items: center;
+            }
+
+            /* ── Ligne produit ── */
+            .product-row {
+                grid-column: 1 / -1;      /* span toutes les colonnes */
+                display: grid;
+                grid-template-columns: subgrid; /* hérite les 6 tracks du parent */
+                align-items: center;
+                padding: 18px 20px;
+                background: #1c1c1e;
+                border-radius: 16px;
+                border: 1px solid #2c2c2e;
+                transition: border-color 0.2s, background 0.2s;
+            }
+
+            .product-row:hover {
+                background: #222226;
+                border-color: #48484a;
+            }
+
+            /* ── Cellules ── */
+            .cell-icon {
+                font-size: 2.2rem;
+                text-align: center;
+            }
+
+            .cell-name {
+                padding-right: 16px;
+            }
+
+            .cell-name strong {
+                display: block;
+                font-size: 1rem;
+                font-weight: 600;
+                color: #f5f5f7;
+                margin-bottom: 3px;
+            }
+
+            .cell-name span {
+                font-size: 0.8rem;
+                color: #6e6e73;
+            }
+
+            .cell-price {
+                font-size: 1rem;
+                font-weight: 700;
+                color: #a78bfa;
+            }
+
+            .cell-storage {
+                font-size: 0.85rem;
+                color: #aeaeb2;
+            }
+
+            .cell-colors {
+                display: flex;
+                gap: 6px;
+                flex-wrap: wrap;
+            }
+
+            .color-dot {
+                width: 18px;
+                height: 18px;
+                border-radius: 50%;
+                border: 2px solid #3a3a3c;
+                display: inline-block;
+            }
+
+            .cell-action button {
+                background: linear-gradient(135deg, #6d28d9, #2563eb);
+                color: #fff;
+                border: none;
+                padding: 8px 18px;
+                border-radius: 20px;
+                font-size: 0.85rem;
+                font-weight: 600;
+                cursor: pointer;
+                transition: opacity 0.2s, transform 0.1s;
+                white-space: nowrap;
+            }
+
+            .cell-action button:hover {
+                opacity: 0.85;
+                transform: scale(1.03);
+            }
+
+            /* ── Note pédagogique ── */
+            .note {
+                max-width: 960px;
+                margin: 36px auto 0;
+                background: #1c1c1e;
+                border: 1px solid #2c2c2e;
+                border-left: 3px solid #a78bfa;
+                border-radius: 12px;
+                padding: 16px 20px;
+                font-size: 0.85rem;
+                color: #aeaeb2;
+                line-height: 1.6;
+            }
+
+            .note strong {
+                color: #a78bfa;
+            }
+
+            code {
+                background: #2c2c2e;
+                color: #38bdf8;
+                padding: 1px 6px;
+                border-radius: 4px;
+                font-family: "SF Mono", "Fira Code", monospace;
+                font-size: 0.82rem;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Comparatif Apple 2025</h1>
+        <p class="subtitle">Exemple pédagogique CSS Subgrid</p>
+
+        <div class="product-list">
+
+            <!-- En-tête : span 1/-1 + subgrid pour aligner sur les tracks du parent -->
+            <div class="product-header">
+                <div></div>
+                <div>Produit</div>
+                <div>Prix dès</div>
+                <div>Stockage</div>
+                <div>Couleurs</div>
+                <div></div>
+            </div>
+
+            <!-- iPhone 16 Pro -->
+            <div class="product-row">
+                <div class="cell-icon">📱</div>
+                <div class="cell-name">
+                    <strong>iPhone 16 Pro</strong>
+                    <span>Puce A18 Pro · Caméra 48 Mpx · ProMotion 120 Hz</span>
+                </div>
+                <div class="cell-price">1 329 €</div>
+                <div class="cell-storage">128 Go — 1 To</div>
+                <div class="cell-colors">
+                    <span class="color-dot" style="background:#3b3833" title="Titane noir"></span>
+                    <span class="color-dot" style="background:#e8e0d5" title="Titane naturel"></span>
+                    <span class="color-dot" style="background:#c2b8a8" title="Titane blanc"></span>
+                    <span class="color-dot" style="background:#6b7c6e" title="Titane désert"></span>
+                </div>
+                <div class="cell-action"><button>Acheter</button></div>
+            </div>
+
+            <!-- MacBook Pro 14" -->
+            <div class="product-row">
+                <div class="cell-icon">💻</div>
+                <div class="cell-name">
+                    <strong>MacBook Pro 14"</strong>
+                    <span>Puce M4 Pro · Écran Liquid Retina XDR · 24 Go RAM</span>
+                </div>
+                <div class="cell-price">2 199 €</div>
+                <div class="cell-storage">512 Go — 8 To</div>
+                <div class="cell-colors">
+                    <span class="color-dot" style="background:#2d2d2d" title="Noir sidéral"></span>
+                    <span class="color-dot" style="background:#d4cfc9" title="Argent"></span>
+                </div>
+                <div class="cell-action"><button>Acheter</button></div>
+            </div>
+
+            <!-- iPad Pro M4 -->
+            <div class="product-row">
+                <div class="cell-icon">🖥️</div>
+                <div class="cell-name">
+                    <strong>iPad Pro M4 11"</strong>
+                    <span>Puce M4 · Écran Ultra Retina XDR OLED · Apple Pencil Pro</span>
+                </div>
+                <div class="cell-price">1 199 €</div>
+                <div class="cell-storage">256 Go — 2 To</div>
+                <div class="cell-colors">
+                    <span class="color-dot" style="background:#2d2d2d" title="Noir sidéral"></span>
+                    <span class="color-dot" style="background:#e8e4de" title="Argent"></span>
+                </div>
+                <div class="cell-action"><button>Acheter</button></div>
+            </div>
+
+            <!-- AirPods Pro 2 -->
+            <div class="product-row">
+                <div class="cell-icon">🎧</div>
+                <div class="cell-name">
+                    <strong>AirPods Pro 2</strong>
+                    <span>Puce H2 · Réduction de bruit adaptative · Audio spatial</span>
+                </div>
+                <div class="cell-price">279 €</div>
+                <div class="cell-storage">—</div>
+                <div class="cell-colors">
+                    <span class="color-dot" style="background:#f0ede8" title="Blanc"></span>
+                </div>
+                <div class="cell-action"><button>Acheter</button></div>
+            </div>
+
+            <!-- Apple Watch Ultra 2 -->
+            <div class="product-row">
+                <div class="cell-icon">⌚</div>
+                <div class="cell-name">
+                    <strong>Apple Watch Ultra 2</strong>
+                    <span>Puce S9 · Titane · GPS double fréquence · 60 h autonomie</span>
+                </div>
+                <div class="cell-price">899 €</div>
+                <div class="cell-storage">—</div>
+                <div class="cell-colors">
+                    <span class="color-dot" style="background:#b5b5b5" title="Titane naturel"></span>
+                    <span class="color-dot" style="background:#1a1a1a" title="Titane noir"></span>
+                </div>
+                <div class="cell-action"><button>Acheter</button></div>
+            </div>
+
+        </div>
+
+        <div class="note">
+            <strong>Pourquoi subgrid ?</strong><br>
+            Le parent <code>.product-list</code> définit 6 colonnes avec <code>grid-template-columns</code>.
+            Chaque <code>.product-row</code> s'étend sur toutes les colonnes via <code>grid-column: 1 / -1</code>,
+            puis déclare <code>grid-template-columns: subgrid</code> pour <strong>hériter exactement les mêmes tracks</strong> que son parent.
+            Résultat : le prix, le stockage et les couleurs de chaque ligne s'alignent parfaitement,
+            sans avoir à dupliquer les tailles de colonnes dans chaque enfant.
+        </div>
+    </body>
+</html>

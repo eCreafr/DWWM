@@ -21,7 +21,7 @@ try {
     $mysqlClient = new PDO(
         'mysql:host=localhost;dbname=sport_2000;charset=utf8',  // DSN (Data Source Name) : informations de connexion
         'root',                                                   // Nom d'utilisateur MySQL (ici root = admin)
-        ''                                                        // Mot de passe (vide en local, mais devrait être sécurisé en production !)
+        'root'                                                        // Mot de passe (vide en local, mais devrait être sécurisé en production !)
     );
 
     // Configuration optionnelle : activer les erreurs PDO sous forme d'exceptions

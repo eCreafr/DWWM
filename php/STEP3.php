@@ -1,3 +1,3 @@
 <?php
-header("Location: STEP3-procedural/index.php");
+header("Location: STEP3-procedural/public/index.php");
 exit;

@@ -22,7 +22,7 @@ try {
      * ⚠️ ATTENTION : En production, ne JAMAIS mettre les identifiants en dur dans le code !
      * Utilisez plutôt des variables d'environnement ou un fichier de configuration sécurisé.
      */
-    $mysqlClient = new PDO('mysql:host=localhost;dbname=sport_2000;charset=utf8', 'lateste33260', '123456');
+    $mysqlClient = new PDO('mysql:host=localhost;dbname=sport_2000;charset=utf8', 'root', '');
 } catch (Exception $e) {
     /*
      * Gestion des erreurs de connexion

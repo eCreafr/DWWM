@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Gradient Border in CSS</title>
+        <style>
+            body {
+                background-color: #171936;
+            }
+
+            .gradient-border {
+                color: #00f7ff;
+                border: 8px solid;
+                border-image: linear-gradient(-45deg, #8c00ff, #00f7ff, #0000ff) 1;
+                padding: 20px;
+                width: 300px;
+                margin: 50px auto;
+                text-align: center;
+                background-color: rgb(30, 25, 64);
+            }
+        </style>
+    </head>
+    <body>
+        <div class="gradient-border">
+            <p>
+                voila une div avec un bord dégradé. <br /><br />
+                pour memo border-radius ne peut pas être utilisé avec les bordures gradient.
+            </p>
+        </div>
+    </body>
+</html>
