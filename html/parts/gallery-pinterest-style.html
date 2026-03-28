@@ -1,0 +1,650 @@
+<!doctype html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>CSS Columns — Galerie Pinterest</title>
+        <style>
+            /* ── Reset & base ──────────────────────────────────────────────────────── */
+            * {
+                box-sizing: border-box;
+                margin: 0;
+                padding: 0;
+            }
+
+            body {
+                background-color: #0d0d0f;
+                color: #f5f5f7;
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+                padding: 48px 24px 64px;
+            }
+
+            /* ── En-tête de page ───────────────────────────────────────────────────── */
+            h1 {
+                text-align: center;
+                font-size: 2rem;
+                font-weight: 700;
+                margin-bottom: 8px;
+                background: linear-gradient(90deg, #f472b6, #a78bfa, #38bdf8);
+                -webkit-background-clip: text;
+                background-clip: text;
+                -webkit-text-fill-color: transparent;
+            }
+
+            .subtitle {
+                text-align: center;
+                color: #6e6e73;
+                font-size: 0.95rem;
+                margin-bottom: 48px;
+            }
+
+            /* ════════════════════════════════════════════════════════════════════════
+               LE CŒUR DE LA TECHNIQUE — CSS COLUMNS (multi-colonnes)
+
+               column-width: 260px
+                 → le navigateur calcule AUTOMATIQUEMENT combien de colonnes tiennent
+                   dans la largeur disponible. Pas besoin de fixer un nombre fixe.
+
+               column-gap: 16px
+                 → espace entre les colonnes (identique à gap en Grid/Flex).
+
+               Résultat : layout en colonnes verticales, exactement comme Pinterest.
+            ════════════════════════════════════════════════════════════════════════ */
+            .gallery {
+                column-width: 260px; /* largeur indicative de chaque colonne       */
+                column-gap: 16px; /* gouttière entre les colonnes                */
+                max-width: 1200px;
+                margin: 0 auto;
+            }
+
+            /* ── Carte ─────────────────────────────────────────────────────────────
+               break-inside: avoid
+                 → ESSENTIEL : empêche une carte d'être coupée en deux sur deux
+                   colonnes. Sans cette règle, une carte peut être "fragmentée".
+
+               margin-bottom: 16px
+                 → gouttière verticale entre les cartes d'une même colonne.
+
+               display: inline-block  (ou width: 100%)
+                 → force chaque carte à occuper toute la largeur de sa colonne
+                   et à participer correctement au flux multi-colonnes.
+            ──────────────────────────────────────────────────────────────────────── */
+            .card {
+                break-inside: avoid; /* ne pas couper la carte entre 2 colonnes */
+                margin-bottom: 16px; /* espace vertical entre cartes             */
+                width: 100%; /* largeur = largeur de la colonne          */
+                background: #1c1c1e;
+                border: 1px solid #2c2c2e;
+                border-radius: 16px;
+                overflow: hidden;
+                transition:
+                    transform 0.2s ease,
+                    border-color 0.2s ease,
+                    box-shadow 0.2s ease;
+                cursor: pointer;
+            }
+
+            .card:hover {
+                transform: translateY(-4px);
+                border-color: #48484a;
+                box-shadow: 0 12px 32px rgba(0, 0, 0, 0.5);
+            }
+
+            /* ── "Photo" simulée par un dégradé CSS ────────────────────────────────
+               Pas d'image externe : on utilise des background gradients variés
+               pour représenter une image et donner des hauteurs différentes.
+               C'est la VARIATION DE HAUTEUR qui crée l'effet Pinterest.
+            ──────────────────────────────────────────────────────────────────────── */
+            .card-img {
+                width: 100%;
+                display: block;
+            }
+
+            /* ── Corps de la carte ─────────────────────────────────────────────── */
+            .card-body {
+                padding: 14px 16px 16px;
+            }
+
+            .card-tag {
+                display: inline-block;
+                font-size: 0.7rem;
+                font-weight: 600;
+                text-transform: uppercase;
+                letter-spacing: 0.08em;
+                padding: 3px 8px;
+                border-radius: 20px;
+                margin-bottom: 8px;
+            }
+
+            .card-title {
+                font-size: 0.95rem;
+                font-weight: 600;
+                color: #f5f5f7;
+                line-height: 1.4;
+                margin-bottom: 6px;
+            }
+
+            .card-desc {
+                font-size: 0.8rem;
+                color: #8e8e93;
+                line-height: 1.5;
+            }
+
+            .card-footer {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                padding: 10px 16px 14px;
+                border-top: 1px solid #2c2c2e;
+                font-size: 0.78rem;
+                color: #636366;
+            }
+
+            .card-footer .likes {
+                display: flex;
+                align-items: center;
+                gap: 5px;
+            }
+
+            .card-footer .likes svg {
+                width: 14px;
+                height: 14px;
+                fill: #f472b6;
+            }
+
+            /* ── Note pédagogique ──────────────────────────────────────────────── */
+            .note {
+                max-width: 860px;
+                margin: 48px auto 0;
+                background: #1c1c1e;
+                border: 1px solid #2c2c2e;
+                border-left: 3px solid #a78bfa;
+                border-radius: 12px;
+                padding: 20px 24px;
+                font-size: 0.85rem;
+                color: #aeaeb2;
+                line-height: 1.7;
+            }
+
+            .note h2 {
+                font-size: 0.95rem;
+                font-weight: 700;
+                color: #a78bfa;
+                margin-bottom: 12px;
+            }
+
+            .note ul {
+                padding-left: 18px;
+                margin-top: 10px;
+            }
+
+            .note li {
+                margin-bottom: 6px;
+            }
+
+            code {
+                background: #2c2c2e;
+                color: #38bdf8;
+                padding: 1px 6px;
+                border-radius: 4px;
+                font-family: 'SF Mono', 'Fira Code', monospace;
+                font-size: 0.82rem;
+            }
+
+            .hl {
+                color: #f5f5f7;
+                font-weight: 600;
+            }
+
+            /* ── Comparaison visuelle : sans vs avec break-inside ──────────────── */
+            .compare {
+                max-width: 860px;
+                margin: 24px auto 0;
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 16px;
+            }
+
+            .compare-box {
+                background: #1c1c1e;
+                border: 1px solid #2c2c2e;
+                border-radius: 12px;
+                padding: 16px;
+                font-size: 0.82rem;
+                color: #aeaeb2;
+            }
+
+            .compare-box h3 {
+                font-size: 0.82rem;
+                font-weight: 700;
+                margin-bottom: 10px;
+                padding-bottom: 8px;
+                border-bottom: 1px solid #2c2c2e;
+            }
+
+            .compare-box.bad h3 {
+                color: #f87171;
+            }
+            .compare-box.good h3 {
+                color: #4ade80;
+            }
+
+            .mini-gallery {
+                column-width: 90px;
+                column-gap: 8px;
+            }
+
+            .mini-card {
+                width: 100%;
+                border-radius: 6px;
+                margin-bottom: 8px;
+                font-size: 0.68rem;
+                text-align: center;
+                color: #fff;
+                font-weight: 600;
+                padding: 4px;
+            }
+
+            .mini-gallery.fix .mini-card {
+                break-inside: avoid;
+            }
+
+            @media (max-width: 500px) {
+                .compare {
+                    grid-template-columns: 1fr;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Galerie Pinterest en CSS pur</h1>
+        <p class="subtitle">Technique CSS Columns — aucun JavaScript requis</p>
+        <p class="subtitle">
+            inspiration :
+            <a
+                href="https://www.linkedin.com/posts/utsavmeena_how-to-make-a-pinterest-style-grid-in-css-share-7440787462685360128-XHbE/?utm_source=share&utm_medium=member_android&rcm=ACoAAEu6iUAB9elnzXEulgk7hIWqA_NQGxkAbbs"
+                target="_blank"
+                >Post Linkedin</a
+            ><br />
+            Production par prompt Claude IA
+        </p>
+        <!-- ══════════════════════════════════════════════════════════════════════
+             GALERIE PRINCIPALE
+             Les cartes ont des hauteurs d'image volontairement variées pour
+             reproduire l'effet "masonry" (maçonnerie) de Pinterest.
+        ══════════════════════════════════════════════════════════════════════════ -->
+        <div class="gallery">
+            <!-- Carte 1 — grande image -->
+            <div class="card">
+                <div
+                    class="card-img"
+                    style="height: 320px; background: linear-gradient(160deg, #1e3a5f, #0ea5e9, #7dd3fc)"
+                ></div>
+                <div class="card-body">
+                    <span class="card-tag" style="background: #0c2340; color: #38bdf8">Voyage</span>
+                    <p class="card-title">Les fjords de Norvège au lever du soleil</p>
+                    <p class="card-desc">
+                        Reflets dorés sur l'eau calme, montagnes enneigées — un paysage coupé du monde.
+                    </p>
+                </div>
+                <div class="card-footer">
+                    <span>Sara K.</span>
+                    <span class="likes"
+                        ><svg viewBox="0 0 24 24">
+                            <path
+                                d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.27 2 8.5 2 5.41 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.08C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.41 22 8.5c0 3.77-3.4 6.86-8.55 11.53L12 21.35z"
+                            /></svg
+                        >2 841</span
+                    >
+                </div>
+            </div>
+
+            <!-- Carte 2 — petite image -->
+            <div class="card">
+                <div
+                    class="card-img"
+                    style="height: 160px; background: linear-gradient(135deg, #3b0764, #7c3aed, #c084fc)"
+                ></div>
+                <div class="card-body">
+                    <span class="card-tag" style="background: #2e1065; color: #c084fc">Design</span>
+                    <p class="card-title">Typographie variable en CSS</p>
+                    <p class="card-desc">font-variation-settings ouvre une nouvelle ère du texte adaptatif.</p>
+                </div>
+                <div class="card-footer">
+                    <span>Marc D.</span>
+                    <span class="likes"
+                        ><svg viewBox="0 0 24 24">
+                            <path
+                                d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.27 2 8.5 2 5.41 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.08C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.41 22 8.5c0 3.77-3.4 6.86-8.55 11.53L12 21.35z"
+                            /></svg
+                        >987</span
+                    >
+                </div>
+            </div>
+
+            <!-- Carte 3 — image moyenne -->
+            <div class="card">
+                <div
+                    class="card-img"
+                    style="height: 220px; background: linear-gradient(135deg, #064e3b, #10b981, #6ee7b7)"
+                ></div>
+                <div class="card-body">
+                    <span class="card-tag" style="background: #022c22; color: #34d399">Nature</span>
+                    <p class="card-title">Forêt de bambous — Kyoto, Japon</p>
+                    <p class="card-desc">Les 500 mètres du chemin d'Arashiyama, une cathédrale de verdure.</p>
+                </div>
+                <div class="card-footer">
+                    <span>Léa T.</span>
+                    <span class="likes"
+                        ><svg viewBox="0 0 24 24">
+                            <path
+                                d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.27 2 8.5 2 5.41 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.08C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.41 22 8.5c0 3.77-3.4 6.86-8.55 11.53L12 21.35z"
+                            /></svg
+                        >3 124</span
+                    >
+                </div>
+            </div>
+
+            <!-- Carte 4 — sans image, texte seul -->
+            <div class="card">
+                <div class="card-body" style="padding-top: 20px">
+                    <span class="card-tag" style="background: #1c1917; color: #fb923c">Astuce CSS</span>
+                    <p class="card-title">La règle des 3 propriétés Pinterest</p>
+                    <p class="card-desc" style="margin-top: 4px">
+                        <code>column-width</code>, <code>column-gap</code> et <code>break-inside: avoid</code> — c'est
+                        tout ce qu'il faut pour reproduire un layout masonry sans JavaScript.
+                    </p>
+                </div>
+                <div class="card-footer">
+                    <span>Dev Tips</span>
+                    <span class="likes"
+                        ><svg viewBox="0 0 24 24">
+                            <path
+                                d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.27 2 8.5 2 5.41 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.08C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.41 22 8.5c0 3.77-3.4 6.86-8.55 11.53L12 21.35z"
+                            /></svg
+                        >6 550</span
+                    >
+                </div>
+            </div>
+
+            <!-- Carte 5 — grande image -->
+            <div class="card">
+                <div
+                    class="card-img"
+                    style="height: 280px; background: linear-gradient(160deg, #450a0a, #dc2626, #fca5a5)"
+                ></div>
+                <div class="card-body">
+                    <span class="card-tag" style="background: #3b0808; color: #f87171">Architecture</span>
+                    <p class="card-title">Briques et lumière — Marrakech</p>
+                    <p class="card-desc">
+                        Le jeu des ombres portées dans la médina, entre 16h et le coucher du soleil.
+                    </p>
+                </div>
+                <div class="card-footer">
+                    <span>Amine B.</span>
+                    <span class="likes"
+                        ><svg viewBox="0 0 24 24">
+                            <path
+                                d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.27 2 8.5 2 5.41 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.08C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.41 22 8.5c0 3.77-3.4 6.86-8.55 11.53L12 21.35z"
+                            /></svg
+                        >1 792</span
+                    >
+                </div>
+            </div>
+
+            <!-- Carte 6 — image moyenne -->
+            <div class="card">
+                <div
+                    class="card-img"
+                    style="height: 190px; background: linear-gradient(135deg, #1e1b4b, #4f46e5, #818cf8)"
+                ></div>
+                <div class="card-body">
+                    <span class="card-tag" style="background: #1e1b4b; color: #818cf8">Dev</span>
+                    <p class="card-title">CSS Grid vs Flexbox — guide 2025</p>
+                    <p class="card-desc">Choisir le bon outil : tableau comparatif et cas d'usage réels.</p>
+                </div>
+                <div class="card-footer">
+                    <span>Julie M.</span>
+                    <span class="likes"
+                        ><svg viewBox="0 0 24 24">
+                            <path
+                                d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.27 2 8.5 2 5.41 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.08C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.41 22 8.5c0 3.77-3.4 6.86-8.55 11.53L12 21.35z"
+                            /></svg
+                        >4 208</span
+                    >
+                </div>
+            </div>
+
+            <!-- Carte 7 — petite image -->
+            <div class="card">
+                <div
+                    class="card-img"
+                    style="height: 140px; background: linear-gradient(135deg, #422006, #d97706, #fcd34d)"
+                ></div>
+                <div class="card-body">
+                    <span class="card-tag" style="background: #2d1600; color: #fbbf24">Food</span>
+                    <p class="card-title">Souk aux épices</p>
+                    <p class="card-desc">Ocre, safran, carmin — une palette naturelle éblouissante.</p>
+                </div>
+                <div class="card-footer">
+                    <span>Nadia R.</span>
+                    <span class="likes"
+                        ><svg viewBox="0 0 24 24">
+                            <path
+                                d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.27 2 8.5 2 5.41 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.08C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.41 22 8.5c0 3.77-3.4 6.86-8.55 11.53L12 21.35z"
+                            /></svg
+                        >5 017</span
+                    >
+                </div>
+            </div>
+
+            <!-- Carte 8 — très grande image -->
+            <div class="card">
+                <div
+                    class="card-img"
+                    style="
+                        height: 360px;
+                        background: linear-gradient(160deg, #0c0a1e, #312e81, #6d28d9, #c084fc, #f9a8d4);
+                    "
+                ></div>
+                <div class="card-body">
+                    <span class="card-tag" style="background: #1e0a3c; color: #e879f9">Art</span>
+                    <p class="card-title">Aurore boréale — Tromsø</p>
+                    <p class="card-desc">Pose longue de 25 secondes, ISO 3200, f/2.8. Aucun filtre.</p>
+                </div>
+                <div class="card-footer">
+                    <span>Piotr W.</span>
+                    <span class="likes"
+                        ><svg viewBox="0 0 24 24">
+                            <path
+                                d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.27 2 8.5 2 5.41 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.08C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.41 22 8.5c0 3.77-3.4 6.86-8.55 11.53L12 21.35z"
+                            /></svg
+                        >12 403</span
+                    >
+                </div>
+            </div>
+
+            <!-- Carte 9 — image moyenne -->
+            <div class="card">
+                <div
+                    class="card-img"
+                    style="height: 200px; background: linear-gradient(135deg, #042f2e, #0d9488, #5eead4)"
+                ></div>
+                <div class="card-body">
+                    <span class="card-tag" style="background: #022020; color: #2dd4bf">UI</span>
+                    <p class="card-title">Microinteractions — l'âme du produit</p>
+                    <p class="card-desc">
+                        Ce hover subtil, cette animation de 180 ms qui change tout dans la perception utilisateur.
+                    </p>
+                </div>
+                <div class="card-footer">
+                    <span>Camille V.</span>
+                    <span class="likes"
+                        ><svg viewBox="0 0 24 24">
+                            <path
+                                d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.27 2 8.5 2 5.41 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.08C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.41 22 8.5c0 3.77-3.4 6.86-8.55 11.53L12 21.35z"
+                            /></svg
+                        >2 309</span
+                    >
+                </div>
+            </div>
+
+            <!-- Carte 10 — sans image -->
+            <div class="card">
+                <div class="card-body" style="padding-top: 20px; padding-bottom: 20px">
+                    <span class="card-tag" style="background: #1c1917; color: #a8a29e">Citation</span>
+                    <p
+                        class="card-title"
+                        style="
+                            font-size: 1.05rem;
+                            font-style: italic;
+                            color: #e2e8f0;
+                            line-height: 1.6;
+                            margin-top: 8px;
+                        "
+                    >
+                        "Simplicity is the ultimate sophistication."
+                    </p>
+                    <p class="card-desc" style="margin-top: 10px">— Leonardo da Vinci</p>
+                </div>
+                <div class="card-footer">
+                    <span>Inspiration</span>
+                    <span class="likes"
+                        ><svg viewBox="0 0 24 24">
+                            <path
+                                d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.27 2 8.5 2 5.41 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.08C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.41 22 8.5c0 3.77-3.4 6.86-8.55 11.53L12 21.35z"
+                            /></svg
+                        >8 761</span
+                    >
+                </div>
+            </div>
+
+            <!-- Carte 11 — petite image -->
+            <div class="card">
+                <div
+                    class="card-img"
+                    style="height: 170px; background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460, #e94560)"
+                ></div>
+                <div class="card-body">
+                    <span class="card-tag" style="background: #1a0010; color: #f43f5e">Photo</span>
+                    <p class="card-title">Néon urbain — Tokyo, Shibuya</p>
+                    <p class="card-desc">Le croisement le plus fréquenté du monde, 3h du matin.</p>
+                </div>
+                <div class="card-footer">
+                    <span>Yuki H.</span>
+                    <span class="likes"
+                        ><svg viewBox="0 0 24 24">
+                            <path
+                                d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.27 2 8.5 2 5.41 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.08C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.41 22 8.5c0 3.77-3.4 6.86-8.55 11.53L12 21.35z"
+                            /></svg
+                        >7 345</span
+                    >
+                </div>
+            </div>
+
+            <!-- Carte 12 — grande image -->
+            <div class="card">
+                <div
+                    class="card-img"
+                    style="height: 300px; background: linear-gradient(160deg, #0f172a, #1e3a5f, #0284c7, #bae6fd)"
+                ></div>
+                <div class="card-body">
+                    <span class="card-tag" style="background: #0c1a30; color: #7dd3fc">Astro</span>
+                    <p class="card-title">Voie lactée — désert de l'Atacama</p>
+                    <p class="card-desc">
+                        L'endroit le plus sec et le plus clair du monde. 8 000 étoiles visibles à l'œil nu.
+                    </p>
+                </div>
+                <div class="card-footer">
+                    <span>Carlos M.</span>
+                    <span class="likes"
+                        ><svg viewBox="0 0 24 24">
+                            <path
+                                d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.27 2 8.5 2 5.41 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.08C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.41 22 8.5c0 3.77-3.4 6.86-8.55 11.53L12 21.35z"
+                            /></svg
+                        >9 882</span
+                    >
+                </div>
+            </div>
+        </div>
+        <!-- / .gallery -->
+
+        <!-- ══════════════════════════════════════════════════════════════════════
+             DÉMO COMPARÉE : sans vs avec break-inside: avoid
+        ══════════════════════════════════════════════════════════════════════════ -->
+        <div class="compare">
+            <div class="compare-box bad">
+                <h3>✗ Sans <code>break-inside: avoid</code></h3>
+                <p style="margin-bottom: 12px; font-size: 0.78rem">
+                    Une carte peut être fragmentée entre deux colonnes — l'image est coupée.
+                </p>
+                <div class="mini-gallery no-fix">
+                    <div class="mini-card" style="height: 80px; background: linear-gradient(135deg, #7c3aed, #c084fc)">
+                        A
+                    </div>
+                    <div class="mini-card" style="height: 130px; background: linear-gradient(135deg, #0d9488, #5eead4)">
+                        B<br /><span style="font-weight: 400; font-size: 0.6rem">↑ coupé ici</span>
+                    </div>
+                    <div class="mini-card" style="height: 60px; background: linear-gradient(135deg, #d97706, #fcd34d)">
+                        C
+                    </div>
+                </div>
+            </div>
+
+            <div class="compare-box good">
+                <h3>✓ Avec <code>break-inside: avoid</code></h3>
+                <p style="margin-bottom: 12px; font-size: 0.78rem">
+                    Chaque carte reste entière dans sa colonne, quel que soit son contenu.
+                </p>
+                <div class="mini-gallery fix">
+                    <div class="mini-card" style="height: 80px; background: linear-gradient(135deg, #7c3aed, #c084fc)">
+                        A
+                    </div>
+                    <div class="mini-card" style="height: 130px; background: linear-gradient(135deg, #0d9488, #5eead4)">
+                        B
+                    </div>
+                    <div class="mini-card" style="height: 60px; background: linear-gradient(135deg, #d97706, #fcd34d)">
+                        C
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ══════════════════════════════════════════════════════════════════════
+             NOTE PÉDAGOGIQUE
+        ══════════════════════════════════════════════════════════════════════════ -->
+        <div class="note">
+            <h2>Comment fonctionne ce layout ?</h2>
+
+            <p>
+                L'effet Pinterest (aussi appelé <span class="hl">masonry</span> = "maçonnerie") repose sur
+                <span class="hl">CSS Multi-Column Layout</span>, une propriété CSS native, sans JavaScript.
+            </p>
+
+            <ul>
+                <li>
+                    <code>column-width: 260px</code> — le navigateur calcule <span class="hl">automatiquement</span> le
+                    nombre de colonnes qui tiennent dans la largeur disponible. Sur un grand écran → 4 colonnes ; sur
+                    mobile → 1 seule. C'est le comportement <strong>responsive intégré</strong>.
+                </li>
+                <li>
+                    <code>column-gap: 16px</code> — gouttière entre les colonnes, identique à <code>gap</code> en Grid
+                    ou Flexbox.
+                </li>
+                <li>
+                    <code>break-inside: avoid</code> — propriété <span class="hl">essentielle</span> à placer sur chaque
+                    carte. Sans elle, une carte peut être "fragmentée" : la moitié apparaît en bas d'une colonne et
+                    l'autre moitié en haut de la suivante.
+                </li>
+            </ul>
+
+            <p style="margin-top: 12px">
+                <span class="hl">Limite à connaître :</span> les éléments sont distribués
+                <strong>verticalement colonne par colonne</strong> (comme un journal), pas horizontalement ligne par
+                ligne. L'ordre de lecture est donc : 1→2→3 dans la colonne 1, puis 4→5→6 dans la colonne 2, etc. Si
+                l'ordre de lecture gauche→droite est critique (ex : timeline), préférez CSS Grid avec
+                <code>grid-template-rows: masonry</code> (encore expérimental en 2025) ou une solution JavaScript.
+            </p>
+        </div>
+    </body>
+</html>
