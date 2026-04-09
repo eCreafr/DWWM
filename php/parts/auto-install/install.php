@@ -5,7 +5,7 @@ session_start();
 $config = [
     'db_host' => 'localhost',
     'db_user' => 'root',
-    'db_password' => '',
+    'db_password' => 'root',
     'db_name' => 'autoinstalltest',
     'site_path' => __DIR__ . '/',
     'zip_file' => 'site.zip',

@@ -12,7 +12,7 @@ return [
     'host' => 'localhost',           // Adresse du serveur MySQL
     'dbname' => 'sport_2000',        // Nom de la base de données
     'username' => 'root',             // Nom d'utilisateur MySQL
-    'password' => '',                 // Mot de passe MySQL
+    'password' => 'root',                 // Mot de passe MySQL
     'charset' => 'utf8',              // Encodage des caractères
     'options' => [
         // Active le mode d'erreur par exception pour PDO

@@ -17,7 +17,7 @@ try {
     // - charset=utf8 : encodage des caractères (permet les accents français)
     // - 'root' : nom d'utilisateur MySQL (par défaut en local)
     // - '' : mot de passe vide (par défaut en local, À CHANGER EN PRODUCTION !)
-    $mysqlClient = new PDO('mysql:host=localhost;dbname=sport_2000;charset=utf8', 'root', '');
+    $mysqlClient = new PDO('mysql:host=localhost;dbname=sport_2000;charset=utf8', 'root', 'root');
 
 } catch (Exception $e) {
     // En cas d'erreur de connexion (base de données inexistante, mauvais identifiants, etc.)
