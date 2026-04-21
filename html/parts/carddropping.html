@@ -1,0 +1,437 @@
+<!doctype html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Scroll-driven + @starting-style</title>
+        <style>
+            * {
+                box-sizing: border-box;
+                margin: 0;
+                padding: 0;
+            }
+
+            body {
+                background-color: #0d0d0f;
+                color: #f5f5f7;
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+                padding: 60px 24px 140px;
+            }
+
+            /* ── 1. Propriété custom animable par le scroll ─────────────────────── */
+            @property --progress {
+                syntax: '<number>';
+                inherits: false;
+                initial-value: 0;
+            }
+
+            /* ── Keyframe qui pilote --progress ────────────────────────────────── */
+            @keyframes progress {
+                from {
+                    --progress: 0;
+                }
+                to {
+                    --progress: 1;
+                }
+            }
+
+            /* ─── Hero ───────────────────────────────────────────────────────────── */
+            .hero {
+                max-width: 680px;
+                margin: 0 auto 80px;
+                text-align: center;
+            }
+
+            h1 {
+                font-size: clamp(1.8rem, 5vw, 2.8rem);
+                font-weight: 700;
+                line-height: 1.15;
+                margin-bottom: 16px;
+                background: linear-gradient(90deg, #a78bfa, #38bdf8);
+                -webkit-background-clip: text;
+                background-clip: text;
+                -webkit-text-fill-color: transparent;
+            }
+
+            .hero p {
+                color: #6e6e73;
+                font-size: 1rem;
+                line-height: 1.65;
+            }
+
+            .hero p strong {
+                color: #aeaeb2;
+            }
+
+            /* ─── Mur masonry 3 colonnes ────────────────────────────────────────── */
+            .cards {
+                columns: 3;
+                column-gap: 20px;
+                max-width: 1100px;
+                margin: 0 auto;
+            }
+
+            @media (max-width: 780px) {
+                .cards {
+                    columns: 2;
+                }
+            }
+
+            @media (max-width: 500px) {
+                .cards {
+                    columns: 1;
+                }
+            }
+
+            /* ── 2. La carte : @starting-style + scroll-timeline ────────────────── */
+            .card {
+                break-inside: avoid; /* ne jamais couper une carte entre deux colonnes */
+                display: block;
+                margin-bottom: 20px;
+                background: #1c1c1e;
+                border: 1px solid #2c2c2e;
+                border-radius: 16px;
+                padding: 24px;
+
+                /* scroll-driven animation sur --progress */
+                animation: progress linear both;
+                animation-timeline: view();
+                animation-range: entry 0% cover 60%;
+
+                /* effets visuels pilotés par --progress */
+                opacity: var(--progress);
+                transform: translateY(calc((1 - var(--progress)) * 120px)) scale(calc(0.82 + var(--progress) * 0.18));
+                filter: blur(calc((1 - var(--progress)) * 8px));
+            }
+
+            /* ── 3. État initial : l'élément entre dans le DOM invisible ────────── */
+            @starting-style {
+                .card {
+                    opacity: 0;
+                }
+            }
+
+            /* ─── Contenu des cartes ────────────────────────────────────────────── */
+            .card-icon {
+                font-size: 1.8rem;
+                margin-bottom: 12px;
+                display: block;
+            }
+
+            .card h2 {
+                font-size: 1rem;
+                font-weight: 600;
+                color: #f5f5f7;
+                margin-bottom: 10px;
+                line-height: 1.3;
+            }
+
+            .card p {
+                font-size: 0.85rem;
+                color: #aeaeb2;
+                line-height: 1.7;
+                margin-bottom: 10px;
+            }
+
+            .card p:last-of-type {
+                margin-bottom: 0;
+            }
+
+            .card code {
+                background: #2c2c2e;
+                color: #38bdf8;
+                padding: 1px 6px;
+                border-radius: 4px;
+                font-family: 'SF Mono', 'Fira Code', monospace;
+                font-size: 0.78rem;
+            }
+
+            .card pre {
+                background: #161618;
+                border: 1px solid #2c2c2e;
+                border-radius: 10px;
+                padding: 14px 16px;
+                margin: 12px 0 0;
+                overflow-x: auto;
+                font-family: 'SF Mono', 'Fira Code', monospace;
+                font-size: 0.78rem;
+                color: #38bdf8;
+                line-height: 1.7;
+            }
+
+            .card pre .kw {
+                color: #a78bfa;
+            }
+            .card pre .val {
+                color: #34d399;
+            }
+            .card pre .com {
+                color: #48484a;
+            }
+
+            .card ul {
+                margin: 10px 0 0 0;
+                padding-left: 18px;
+                font-size: 0.85rem;
+                color: #aeaeb2;
+                line-height: 1.8;
+            }
+
+            .card ul li::marker {
+                color: #a78bfa;
+            }
+
+            .card-tag {
+                display: inline-block;
+                margin-top: 14px;
+                padding: 3px 10px;
+                border-radius: 20px;
+                font-size: 0.73rem;
+                font-weight: 600;
+                background: #2c2c2e;
+                color: #a78bfa;
+                border: 1px solid #3a3a4e;
+            }
+
+            .card-tag.blue {
+                color: #38bdf8;
+                border-color: #1e3a4e;
+            }
+
+            .card-tag.green {
+                color: #34d399;
+                border-color: #1a3a2e;
+            }
+
+            /* ─── Note pédagogique ──────────────────────────────────────────────── */
+            .note {
+                max-width: 1100px;
+                margin: 50px auto 0;
+                background: #1c1c1e;
+                border: 1px solid #2c2c2e;
+                border-left: 3px solid #a78bfa;
+                border-radius: 12px;
+                padding: 20px 24px;
+                font-size: 0.84rem;
+                color: #aeaeb2;
+                line-height: 1.75;
+            }
+
+            .note strong {
+                color: #a78bfa;
+            }
+
+            .note code {
+                background: #2c2c2e;
+                color: #38bdf8;
+                padding: 1px 6px;
+                border-radius: 4px;
+                font-family: 'SF Mono', 'Fira Code', monospace;
+                font-size: 0.78rem;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="hero">
+            <h1>Scroll-driven<br />+ @starting-style</h1>
+            <p>
+                Deux animations CSS en une : <strong>fade-in à l'apparition</strong>, puis
+                <strong>motion lié au scroll</strong>.<br />
+                Le secret ? Une propriété custom <code>--progress</code> pour découpler les deux effets.
+            </p>
+        </div>
+
+        <div class="cards">
+            <!-- Carte 1 — courte -->
+            <div class="card">
+                <span class="card-icon">🎯</span>
+                <h2>Le problème</h2>
+                <p>
+                    Animer <code>opacity</code> directement avec un scroll-timeline écrase l'état défini par
+                    <code>@starting-style</code>. Les deux effets entrent en conflit.
+                </p>
+                <span class="card-tag">Contexte</span>
+            </div>
+
+            <!-- Carte 2 — avec bloc de code -->
+            <div class="card">
+                <span class="card-icon">🔑</span>
+                <h2>Déclarer @property</h2>
+                <p>On enregistre une propriété typée pour que le navigateur puisse l'interpoler.</p>
+                <pre><span class="kw">@property</span> --progress {
+  syntax: <span class="val">"&lt;number&gt;"</span>;
+  inherits: <span class="val">false</span>;
+  initial-value: <span class="val">0</span>;
+}</pre>
+                <span class="card-tag">@property</span>
+            </div>
+
+            <!-- Carte 3 — courte -->
+            <div class="card">
+                <span class="card-icon">✨</span>
+                <h2>@starting-style</h2>
+                <p>
+                    Définit l'état de l'élément <em>avant</em> son premier rendu. Le navigateur transite depuis cet état
+                    dès l'insertion dans le DOM.
+                </p>
+                <pre><span class="kw">@starting-style</span> {
+  .card { opacity: <span class="val">0</span>; }
+}</pre>
+                <span class="card-tag">@starting-style</span>
+            </div>
+
+            <!-- Carte 4 — liste -->
+            <div class="card">
+                <span class="card-icon">📜</span>
+                <h2>Connecter le scroll</h2>
+                <p>On lie l'animation à la position de la carte dans le viewport.</p>
+                <ul>
+                    <li><code>animation-timeline: view()</code></li>
+                    <li><code>animation-range: entry 0% cover 60%</code></li>
+                    <li><code>animation: progress linear both</code></li>
+                </ul>
+                <span class="card-tag blue">scroll-driven</span>
+            </div>
+
+            <!-- Carte 5 — avec bloc de code long -->
+            <div class="card">
+                <span class="card-icon">🔗</span>
+                <h2>Les effets visuels</h2>
+                <p>Tout lit <code>--progress</code> au lieu d'être animé directement.</p>
+                <pre>opacity: <span class="kw">var</span>(--progress);
+
+transform:
+  translateY(<span class="kw">calc</span>(
+    (1 - <span class="kw">var</span>(--progress)) * 120px
+  ))
+  scale(<span class="kw">calc</span>(
+    0.82 + <span class="kw">var</span>(--progress) * 0.18
+  ));
+
+filter: blur(<span class="kw">calc</span>(
+  (1 - <span class="kw">var</span>(--progress)) * 10px
+));</pre>
+                <span class="card-tag blue">var()</span>
+            </div>
+
+            <!-- Carte 6 — courte -->
+            <div class="card">
+                <span class="card-icon">📐</span>
+                <h2>animation-range</h2>
+                <p>
+                    Délimite la fenêtre d'animation dans le viewport.
+                    <code>entry 0%</code> = le bord bas de la carte entre dans le viewport. <code>cover 60%</code> = la
+                    carte couvre 60 % du viewport.
+                </p>
+                <span class="card-tag">animation-range</span>
+            </div>
+
+            <!-- Carte 7 — longue avec deux §§ -->
+            <div class="card">
+                <span class="card-icon">🏗️</span>
+                <h2>Le patron complet</h2>
+                <p>
+                    <strong style="color: #f5f5f7">1.</strong> <code>@starting-style</code> — état invisible avant le
+                    premier rendu.
+                </p>
+                <p>
+                    <strong style="color: #f5f5f7">2.</strong> <code>@property --progress</code> — valeur interpolable
+                    par le moteur CSS.
+                </p>
+                <p>
+                    <strong style="color: #f5f5f7">3.</strong> <code>animation-timeline: view()</code> — le scroll
+                    pilote <code>--progress</code>.
+                </p>
+                <p>
+                    <strong style="color: #f5f5f7">4.</strong> <code>opacity / transform / filter</code> lisent la
+                    valeur custom.
+                </p>
+                <span class="card-tag green">Pattern</span>
+            </div>
+
+            <!-- Carte 8 — courte -->
+            <div class="card">
+                <span class="card-icon">🚀</span>
+                <h2>CSS natif, zéro JS</h2>
+                <p>
+                    Aucun <code>IntersectionObserver</code>, aucune librairie. Tout repose sur des fonctionnalités CSS
+                    modernes, performantes et composables.
+                </p>
+                <span class="card-tag green">No JS</span>
+            </div>
+
+            <!-- Carte 9 — avec bloc de code -->
+            <div class="card">
+                <span class="card-icon">⚡</span>
+                <h2>Pourquoi ça fonctionne</h2>
+                <p>
+                    <code>@starting-style</code> agit sur <code>opacity</code> à l'instant zéro. Le scroll-timeline
+                    n'anime jamais <code>opacity</code> lui-même, seulement <code>--progress</code>. Pas de conflit.
+                </p>
+                <pre><span class="com">/* scroll anime ceci */</span>
+<span class="kw">@keyframes</span> progress {
+  from { --progress: <span class="val">0</span>; }
+  to   { --progress: <span class="val">1</span>; }
+}
+
+<span class="com">/* pas opacity directement */</span></pre>
+                <span class="card-tag">Mécanique</span>
+            </div>
+
+            <!-- Carte 10 — liste -->
+            <div class="card">
+                <span class="card-icon">🌐</span>
+                <h2>Support navigateur</h2>
+                <p>Les trois briques sont disponibles dans les navigateurs modernes :</p>
+                <ul>
+                    <li>Chrome 115+ / Edge 115+</li>
+                    <li>Firefox 110+ (<code>@property</code>)</li>
+                    <li>Safari 17.2+ (<code>@starting-style</code>)</li>
+                    <li>Safari 18+ (scroll-driven)</li>
+                </ul>
+                <span class="card-tag blue">Compat</span>
+            </div>
+
+            <!-- Carte 11 — courte -->
+            <div class="card">
+                <span class="card-icon">🎨</span>
+                <h2>Autres propriétés pilotables</h2>
+                <p>
+                    <code>--progress</code> peut alimenter n'importe quelle propriété : <code>border-color</code>,
+                    <code>background</code>, <code>letter-spacing</code>, <code>clip-path</code>…
+                </p>
+                <span class="card-tag green">Créatif</span>
+            </div>
+
+            <!-- Carte 12 — longue -->
+            <div class="card">
+                <span class="card-icon">💡</span>
+                <h2>Plusieurs propriétés, un seul scroll</h2>
+                <p>
+                    On peut déclarer plusieurs propriétés custom et les animer sur des plages différentes avec
+                    <code>animation-range</code>.
+                </p>
+                <p>
+                    Par exemple : <code>--enter</code> de <code>entry 0%</code> à <code>cover 40%</code>, et
+                    <code>--highlight</code> de <code>cover 40%</code> à <code>exit 0%</code>. Deux effets distincts sur
+                    la même carte, sans JS.
+                </p>
+                <span class="card-tag">Avancé</span>
+            </div>
+        </div>
+
+        <div class="note">
+            <strong>Récapitulatif technique</strong><br />
+            <strong>1.</strong> <code>@property --progress</code> — propriété custom typée <code>&lt;number&gt;</code>,
+            valeur initiale <code>0</code>.<br />
+            <strong>2.</strong> <code>@starting-style { opacity: 0 }</code> — l'élément entre invisible, transite vers
+            son état normal.<br />
+            <strong>3.</strong> <code>animation: progress linear both; animation-timeline: view();</code> — le scroll
+            drive <code>--progress</code> de 0 → 1.<br />
+            <strong>4.</strong> <code>opacity / transform / filter</code> lisent <code>--progress</code> via
+            <code>var()</code> — jamais animées directement par le scroll.<br /><br />
+            Résultat : un <strong>fade-in</strong> à l'apparition (géré par <code>@starting-style</code>), puis un
+            <strong>motion de chute</strong> lié au défilement — deux mécanismes qui ne se marchent pas dessus.
+        </div>
+    </body>
+</html>

@@ -42,6 +42,9 @@
                 width: 100px;
                 height: 100px;
                 margin: 0 auto; /* Centre le conteneur */
+                position: sticky;
+                top: 20px; /* Requis : déclenche le sticky à 20px du haut du viewport */
+                align-self: flex-start; /* Empêche le flex parent (align-items-center) d'écraser le sticky */
             }
 
             /* Style pour le cercle extérieur du visage */
