@@ -165,6 +165,17 @@ function Meteo(commune) {
                 tempsElt.textContent = 'Min : ' + jour.tmin + '°C - Max : ' + jour.tmax + '°C';
                 colElt.appendChild(tempsElt);
             }
+            /*
+             *  AFFICHAGE PÉDAGOGIQUE DU JSON BRUT
+             *
+             *  JSON.stringify(myData, null, 2) convertit l'objet JS
+             *  en texte JSON lisible, avec une indentation de 2 espaces.
+             *  On l'injecte dans le <pre> dédié, et on rend la section visible.
+             */
+            const jsonSection = document.getElementById('json-section');
+            const jsonOutput  = document.getElementById('json-output');
+            jsonOutput.textContent = JSON.stringify(myData, null, 2);
+            jsonSection.style.display = 'block';
         })
 
         /*
@@ -183,5 +194,6 @@ function Meteo(commune) {
             const mainElt = document.getElementById('main');
             mainElt.innerHTML = '';
             mainElt.textContent = 'Pas de météo pour la commune de ' + commune + ' !';
+            document.getElementById('json-section').style.display = 'none';
         });
 }

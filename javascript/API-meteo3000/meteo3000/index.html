@@ -91,6 +91,31 @@
     <main id="main" class="container">
     </main>
 
+    <!--
+        ZONE PÉDAGOGIQUE : RÉPONSE BRUTE DE L'API
+        Cette section affiche le JSON tel que l'API le renvoie,
+        pour que l'on puisse explorer sa structure directement dans la page.
+        La balise <details> est native HTML5 : elle crée un bloc repliable
+        sans JavaScript ni bibliothèque externe.
+    -->
+    <section id="json-section" class="container my-5" style="display:none; text-align:left">
+        <details>
+            <summary style="cursor:pointer; font-weight:bold; margin-bottom:0.5rem">
+                Réponse brute de l'API (JSON)
+            </summary>
+            <pre id="json-output" style="
+                background:#1e1e1e;
+                color:#d4d4d4;
+                padding:1rem;
+                border-radius:6px;
+                overflow-x:auto;
+                font-size:0.8rem;
+                max-height:400px;
+                overflow-y:auto;
+            "></pre>
+        </details>
+    </section>
+
     <footer class="container-fluid">
         <p>Merci à <a href="https://prevision-meteo.ch">prevision-meteo.ch</a> pour le service</p>
     </footer>
