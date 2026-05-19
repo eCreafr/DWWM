@@ -15,8 +15,7 @@
             <?php
 
             //ne fonctionne qu'avec un vrai certificat SSL, donc en ligne sur votre ovh par exemple
-            // voir démo live ici de ce tp https://ecrea.fr/php/apimeteo.php
-            // ou tp final https://meteo.ecrea.fr/ 
+            // voir tp final https://meteo.ecrea.fr/ 
 
 
             // Clé API et emplacement

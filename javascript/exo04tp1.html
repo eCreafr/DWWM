@@ -36,9 +36,9 @@
 
                 // Stocke les notes et leurs labels dans un tableau
                 const notes = [
-                    { valeur: noteMath, label: 'aux Maths' },
-                    { valeur: noteHistoire, label: 'à ton Histoire' },
-                    { valeur: noteGeo, label: 'à ta Geo' },
+                    { valeur: noteMath, label: 'tes Maths' },
+                    { valeur: noteHistoire, label: 'ton Histoire' },
+                    { valeur: noteGeo, label: 'ta Geo' },
                 ];
 
                 // on peut utiliser "Math.min" pour trouver la plus petite note
@@ -63,7 +63,7 @@
 
                 document.getElementById('result').textContent =
                     `${note} en moyenne : "${mention}"\n` +
-                    `(attention, ${noteMin.valeur} c'est pas ouf, travaille ton  ${noteMin.label}  en passant)`;
+                    `(attention, ${noteMin.valeur} c'est pas ouf, travaille ${noteMin.label}  en passant)`;
             }
         </script>
         <div class="froggiesplaining">

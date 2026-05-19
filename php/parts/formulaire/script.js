@@ -37,7 +37,8 @@ document.getElementById('contactForm').addEventListener('submit', function (even
      * - Génère un score de 0 (bot) à 1 (humain)
      * - Pas de challenge visuel (contrairement à v2)
      */
-    grecaptcha.execute('votre-clef-pub', { action: 'submit' }).then(function (token) {
+    // RECAPTCHA_SITE_KEY est une variable globale injectée par index.php depuis le .env
+    grecaptcha.execute(RECAPTCHA_SITE_KEY, { action: 'submit' }).then(function (token) {
         // Le token est généré et sera vérifié côté serveur par formulaire.php
 
         // ==================== ENVOI ASYNCHRONE DES DONNÉES (AJAX/FETCH) ==================== //
@@ -45,7 +46,7 @@ document.getElementById('contactForm').addEventListener('submit', function (even
          * fetch() : API moderne pour les requêtes HTTP
          * Permet d'envoyer des données sans recharger la page
          */
-        fetch('https://votresite.fr/formulaire.php', {
+        fetch('formulaire.php', {
             method: 'POST', // Méthode HTTP POST pour envoyer des données
             headers: {
                 // Indique au serveur le format des données envoyées

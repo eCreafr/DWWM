@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>page test javascript</title>
+        <link rel="stylesheet" href="css/styles.css" />
+        <link rel="stylesheet" href="../html/css/froggie.css" />
+
+        <style>
+            #scroll-progress {
+                color: blanchedalmond;
+                text-align: center;
+                font-size: 16px;
+                line-height: 32px;
+                background-color: blueviolet;
+                position: sticky;
+                z-index: 2;
+                top: 0px;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="scroll-progress"></div>
+
+        <div class="container-cible" style="height: 100vh">
+            <h2>Petit compteur JS</h2>
+            <p id="compteur">Compteur : 0</p>
+            <button id="boutonIncr">Incrémenter</button>
+        </div>
+
+        <script>
+            // petit compteur
+            // setup le compteur 0
+            let counter = 0;
+            // preparation, selection des elements html
+            const compteur = document.getElementById('compteur');
+            const boutonIncr = document.getElementById('boutonIncr');
+
+            // notre evenement compteur :
+            boutonIncr.addEventListener('click', () => {
+                counter++;
+                // on met a jour l'affichage du compteur texte
+                compteur.textContent = `compteur : ${counter}`;
+            });
+        </script>
+
+        <div class="container" style="height: 100vh">
+            <h1>Page de test JavaScript</h1>
+            <p>Cette page est utilisée pour tester des fonctionnalités JavaScript.</p>
+        </div>
+
+        <div class="container" style="height: 100vh">
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Et, perspiciatis quae quam, sequi cupiditate
+            maxime ut eos soluta quos deserunt suscipit. Amet, nisi ut quaerat consequuntur iure quis nesciunt dolorem!
+        </div>
+
+        <script>
+            // script bouton créé par js
+            window.onload = function () {
+                // on declare nos variables
+
+                const monConteneur = document.querySelector('.container');
+                const maZonedeTexte = document.querySelector('p');
+                const monBouton = document.createElement('button');
+                const monTexte = document.createTextNode('Mon Bouton créé par JavaScript');
+
+                //on passe a l'action
+                monConteneur.appendChild(monBouton);
+                monBouton.appendChild(monTexte);
+                monBouton.style.padding = '16px 8px';
+                monBouton.style.fontSize = '16px';
+                monBouton.style.fontWeight = 'bold';
+                monBouton.style.color = 'white';
+                monBouton.style.border = 'none';
+                monBouton.style.borderRadius = '16px';
+                monBouton.style.display = 'none';
+
+                maZonedeTexte.addEventListener('mouseover', () => {
+                    monBouton.style.display = 'block';
+                });
+            };
+        </script>
+
+        <script>
+            // scroll progression
+
+            function updateScroll() {
+                // calculer la progression du scroll
+                // position actuelle
+                const scrollPosition = window.pageYOffset || document.documentElement.scrollTop;
+
+                // hauteur totale sous plafond
+                const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+
+                // on compare les 2 infos récoltées et on l'arrondis pour faire propre
+                const scrollPercentage = Math.round((scrollPosition / scrollHeight) * 100);
+
+                // on envoie l'info dans la div du meme nom
+                document.getElementById('scroll-progress').textContent =
+                    `Progression de lecture de la page : ${scrollPercentage}%`;
+            }
+
+            // on ecoute le scroll :
+            window.addEventListener('scroll', updateScroll);
+
+            // on initie au chargement de la page
+            updateScroll();
+        </script>
+    </body>
+</html>

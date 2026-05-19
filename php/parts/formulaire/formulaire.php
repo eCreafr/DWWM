@@ -4,10 +4,15 @@
  * Ce fichier PHP traite les données reçues du formulaire :
  * 1. Vérifie que la requête est bien de type POST
  * 2. Valide le token reCAPTCHA avec l'API Google
- * 3. Envoie l'email via l'API Mandrill (Mailchimp)
+ * 3. Sanitize les données reçues (sécurité)
+ * 4. Envoie l'email via l'API Mandrill (Mailchimp)
  *
  * SÉCURITÉ : Toujours valider côté serveur, jamais uniquement côté client !
  */
+
+// Charge les variables d'environnement depuis le fichier .env
+// Les clés API sont ainsi hors du code source versionné sur Git
+require_once 'config.php';
 
 // Vérifie que la requête HTTP utilisée est POST (et non GET ou autre)
 // $_SERVER : variable superglobale contenant les informations du serveur
@@ -20,12 +25,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
      */
 
     // Récupère le token envoyé par le formulaire
-    // $_POST : variable superglobale contenant les données POST
-    $recaptchaToken = $_POST['recaptcha_token'];
+    // ?? '' : opérateur null-coalescent — valeur par défaut si la clé n'existe pas
+    $recaptchaToken = $_POST['recaptcha_token'] ?? '';
 
-    // Clé secrète reCAPTCHA (à garder confidentielle côté serveur)
-    // IMPORTANT : Remplacer par votre vraie clé secrète
-    $secretKey = 'votre-clé';
+    // Clé secrète reCAPTCHA chargée depuis le fichier .env
+    $secretKey = $_ENV['RECAPTCHA_SECRET_KEY'];
 
     // Appel à l'API Google pour vérifier le token
     // file_get_contents() : fait une requête HTTP GET
@@ -42,12 +46,32 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit; // Arrête l'exécution du script
     }
 
-    // ==================== RÉCUPÉRATION DES DONNÉES DU FORMULAIRE ==================== //
-    // Les données ont été validées par reCAPTCHA, on peut maintenant les récupérer
-    $name = $_POST['name'];
-    $email = $_POST['email'];
-    $phone = $_POST['phone'];
-    $message = $_POST['message'];
+    // ==================== RÉCUPÉRATION ET SANITIZATION DES DONNÉES ==================== //
+    /*
+     * SANITIZATION : nettoyer les données reçues avant de les utiliser
+     * - strip_tags()       : supprime toutes les balises HTML/PHP
+     * - trim()             : supprime les espaces en début et fin de chaîne
+     * - htmlspecialchars() : convertit les caractères spéciaux (<, >, &, "...) en entités HTML
+     * - filter_var()       : valide et nettoie selon un filtre prédéfini PHP
+     * - preg_replace()     : supprime les caractères non autorisés (ex : téléphone)
+     *
+     * Sans sanitization, un utilisateur malveillant pourrait injecter du code
+     * dans les emails ou tenter une attaque XSS / injection de headers.
+     */
+    $name    = htmlspecialchars(strip_tags(trim($_POST['name']    ?? '')));
+    $email   = filter_var(trim($_POST['email']   ?? ''), FILTER_SANITIZE_EMAIL);
+    $phone   = preg_replace('/[^0-9+\s\-\(\)]/', '', trim($_POST['phone'] ?? ''));
+    $message = htmlspecialchars(strip_tags(trim($_POST['message'] ?? '')));
+
+    // Validation supplémentaire : vérifie que l'email est bien formé
+    // FILTER_VALIDATE_EMAIL : retourne false si le format email est invalide
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        echo 'Adresse email invalide.';
+        exit;
+    }
+
+    // Adresse email chargée depuis le fichier .env
+    $contactEmail = $_ENV['CONTACT_EMAIL'];
 
     // ==================== MÉTHODE 1 : ENVOI EMAIL AVEC LA FONCTION mail() DE PHP (DÉSACTIVÉE) ==================== //
     /*
@@ -61,15 +85,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
      * Fonctionne uniquement si le serveur PHP est configuré pour envoyer des emails
      */
 
-    // Destinataire de l'email
-    $to = 'votre@email.fr';
-
-    // Sujet de l'email
+    /*
+    $to      = $contactEmail;
     $subject = 'Nouveau message de contact';
 
     // Corps du message (contenu de l'email)
-    // Opérateur de concaténation : . (point)
-    // \n : retour à la ligne
+    // Opérateur de concaténation : . (point) — \n : retour à la ligne
     $body = "Vous avez reçu un nouveau message de contact :\n\n" .
         "Nom : $name\n" .
         "Email : $email\n" .
@@ -77,23 +98,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         "Message : $message";
 
     // En-têtes HTTP de l'email
-    // From : adresse d'expéditeur
-    // Reply-To : adresse de réponse
-    // X-Mailer : identifie le logiciel utilisé pour envoyer l'email
+    // From : adresse d'expéditeur — Reply-To : adresse de réponse
     // \r\n : retour chariot + nouvelle ligne (standard email)
-    $headers = 'From: votre@email.fr' . "\r\n" .
-        'Reply-To: votre@email.fr' . "\r\n" .
+    $headers = 'From: ' . $contactEmail . "\r\n" .
+        'Reply-To: ' . $contactEmail . "\r\n" .
         'X-Mailer: PHP/' . phpversion();
 
-    // Tentative d'envoi de l'email
     // La fonction mail() retourne true en cas de succès, false en cas d'échec
     if (mail($to, $subject, $body, $headers)) {
         echo 'Email envoyé avec succes !';
     } else {
         echo 'Erreur lors de l\'envoi de l\'email.';
     }
-
-    // Fin de la section mail()
+    */
 
     // ==================== MÉTHODE 2 : ENVOI EMAIL VIA API MANDRILL (ACTIVE) ==================== //
     /*
@@ -106,13 +123,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
      *
      * PRÉREQUIS :
      * 1. Créer un compte Mailchimp
-     * 2. Activer Mandrill (service payant)
-     * 3. Générer une clé API
+     * 2. Activer Mandrill (offre gratuite disponible)
+     * 3. Générer une clé API → à renseigner dans le fichier .env
+     * 4. Vérifier l'adresse email d'expédition dans Mandrill
      */
 
-    // Clé API Mandrill (à garder secrète)
-    // IMPORTANT : Remplacer par votre vraie clé API
-    $mandrillKey = 'votre-clé-mandrill';
+    // Clé API Mandrill chargée depuis le fichier .env
+    $mandrillKey = $_ENV['MANDRILL_API_KEY'];
 
     // URL de l'endpoint API Mandrill pour l'envoi de messages
     $url = 'https://mandrillapp.com/api/1.0/messages/send.json';
@@ -124,15 +141,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         // Structure du message
         'message' => [
-            'from_email' => 'votre@email.fr', // Expéditeur (doit être vérifié dans Mandrill)
+            'from_email' => $contactEmail, // Expéditeur (doit être vérifié dans Mandrill)
 
             // Tableau des destinataires
             'to' => [
-                ['email' => 'votre@email.fr', 'type' => 'to']
+                ['email' => $contactEmail, 'type' => 'to']
             ],
 
             // Sujet de l'email
-            'subject' => 'Nouveau message depuis votresite.fr',
+            'subject' => 'Nouveau message depuis votre site',
 
             // Corps du message en texte brut
             // \n : retour à la ligne
@@ -160,13 +177,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     ];
 
     // Crée un contexte de flux avec les options définies
-    $context  = stream_context_create($options);
+    $context = stream_context_create($options);
 
     // ==================== ENVOI DE LA REQUÊTE API ==================== //
     // file_get_contents() : peut aussi faire des requêtes POST avec un contexte
-    // $url : endpoint de l'API
-    // false : pas de include_path
-    // $context : contexte avec les options HTTP
+    // $url : endpoint de l'API — false : pas de include_path — $context : options HTTP
     $result = file_get_contents($url, false, $context);
 
     // ==================== GESTION DE LA RÉPONSE ==================== //
@@ -179,6 +194,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         echo 'Email envoyé avec succes !';
     }
     // Fin de la section Mandrill
-
 
 } // Fin du if ($_SERVER['REQUEST_METHOD'] === 'POST')

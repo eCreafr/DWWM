@@ -1,3 +1,8 @@
+<?php
+// Charge les variables d'environnement depuis le fichier .env
+// La clé publique reCAPTCHA sera injectée dans le HTML ci-dessous
+require_once 'config.php';
+?>
 <!doctype html>
 <html lang="fr">
     <head>
@@ -40,9 +45,12 @@
         />
 
         <!-- ==================== SÉCURITÉ ==================== -->
-        <!-- Google reCAPTCHA v3 : Protection anti-spam et anti-robots -->
-        <!-- IMPORTANT : Remplacer 'votre-clef' par votre clé de site reCAPTCHA -->
-        <script src="https://www.google.com/recaptcha/api.js?render=votre-clef"></script>
+        <!--
+            Google reCAPTCHA v3 : Protection anti-spam et anti-robots
+            La clé publique (RECAPTCHA_SITE_KEY) est injectée depuis le fichier .env par PHP
+            Elle est publique par nature : Google en a besoin côté navigateur
+        -->
+        <script src="https://www.google.com/recaptcha/api.js?render=<?= htmlspecialchars($_ENV['RECAPTCHA_SITE_KEY'] ?? '') ?>"></script>
     </head>
     <body>
         <!-- ==================== EN-TÊTE / NAVIGATION ==================== -->
@@ -199,6 +207,15 @@
             integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
             crossorigin="anonymous"
         ></script>
+
+        <!--
+            Injection de la clé publique reCAPTCHA dans une variable globale JavaScript
+            PHP écrit la valeur du .env directement dans le HTML généré
+            script.js pourra ainsi l'utiliser sans qu'elle soit codée en dur dans le fichier JS
+        -->
+        <script>
+            const RECAPTCHA_SITE_KEY = '<?= htmlspecialchars($_ENV['RECAPTCHA_SITE_KEY'] ?? '') ?>';
+        </script>
 
         <!-- Script personnalisé pour gérer l'envoi du formulaire avec reCAPTCHA -->
         <script src="script.js"></script>
