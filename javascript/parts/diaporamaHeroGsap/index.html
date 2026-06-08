@@ -1,0 +1,291 @@
+<!doctype html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>GSAP — Hero Diaporama</title>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+        <style>
+            *,
+            *::before,
+            *::after {
+                box-sizing: border-box;
+                margin: 0;
+                padding: 0;
+            }
+
+            body {
+                background: #111;
+                font-family: 'Segoe UI', system-ui, sans-serif;
+                color: #fff;
+            }
+
+            /* ── HERO ─────────────────────────────── */
+            .hero {
+                position: relative;
+                width: 100%;
+                height: 100vh;
+                overflow: hidden;
+            }
+
+            /* ── SLIDES ───────────────────────────── */
+            .slide {
+                position: absolute;
+                inset: 0;
+                opacity: 0;
+                display: flex;
+                flex-direction: column;
+            }
+
+            .slide.is-active {
+                z-index: 1;
+            }
+
+            .slide__img {
+                flex: 1;
+                width: 100%;
+                object-fit: cover;
+                display: block;
+            }
+
+            .slide__caption {
+                flex-shrink: 0;
+                background: #111;
+                padding: 0.75rem 1.5rem;
+                font-size: 0.9rem;
+                letter-spacing: 0.12em;
+                text-transform: uppercase;
+                color: #ccc;
+                border-top: 1px solid #2a2a2a;
+            }
+
+            /* ── CRÉDIT PHOTOGRAPHE ───────────── */
+            .slide__credit {
+                position: absolute;
+                bottom: 3.2rem; /* au-dessus de la barre caption */
+                right: 1rem;
+                font-size: 0.72rem;
+                color: rgba(255, 255, 255, 0.6);
+                background: rgba(0, 0, 0, 0.45);
+                padding: 0.2rem 0.55rem;
+                border-radius: 3px;
+                letter-spacing: 0.06em;
+                backdrop-filter: blur(4px);
+                pointer-events: none;
+                z-index: 2;
+            }
+
+            /* ── DOTS NAV ─────────────────────────── */
+            .hero__dots {
+                position: absolute;
+                bottom: 3.5rem;
+                left: 50%;
+                transform: translateX(-50%);
+                display: flex;
+                gap: 10px;
+                z-index: 10;
+            }
+
+            .hero__dot {
+                width: 8px;
+                height: 8px;
+                border-radius: 50%;
+                background: rgba(255, 255, 255, 0.35);
+                border: none;
+                cursor: pointer;
+                transition: background 0.3s;
+            }
+
+            .hero__dot.is-active {
+                background: #fff;
+            }
+
+            /* ── PROGRESS BAR ─────────────────────── */
+            .hero__progress {
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                height: 3px;
+                width: 0%;
+                background: #fff;
+                z-index: 10;
+            }
+        </style>
+    </head>
+    <body>
+        <section class="hero" id="hero">
+            <!-- les slides sont générées par JS -->
+
+            <nav class="hero__dots" id="dots"></nav>
+            <div class="hero__progress" id="progress"></div>
+        </section>
+
+        <script>
+            // ─── données slides ────────────────────────────────────────────────────────
+            // picsum.photos/seed/{mot}/{w}/{h}  → image déterministe par seed
+            const slides = [
+                {
+                    src: 'https://picsum.photos/seed/mountain/1920/1080',
+                    caption: 'Paysages de montagne',
+                    credit: '© Lena Fischer / Unsplash',
+                },
+                {
+                    src: 'https://picsum.photos/seed/city42/1920/1080',
+                    caption: 'Urbanisme moderne',
+                    credit: '© Marco Rossi / Pexels',
+                },
+                {
+                    src: 'https://picsum.photos/seed/forest7/1920/1080',
+                    caption: 'Forêts profondes',
+                    credit: '© Yuki Tanaka / Unsplash',
+                },
+                {
+                    src: 'https://picsum.photos/seed/ocean99/1920/1080',
+                    caption: 'Horizons marins',
+                    credit: '© Sofia Andrade / Pexels',
+                },
+                {
+                    src: 'https://picsum.photos/seed/desert3/1920/1080',
+                    caption: 'Terres arides',
+                    credit: '© Omar Al-Rashid / Getty',
+                },
+            ];
+
+            const DURATION = 4; // secondes d'affichage par slide
+            const FADE_TIME = 1.5; // durée du fondu
+
+            // ─── construction du DOM ───────────────────────────────────────────────────
+            const hero = document.getElementById('hero');
+            const dotsNav = document.getElementById('dots');
+            const bar = document.getElementById('progress');
+
+            const slideEls = slides.map((data, i) => {
+                // slide
+                const div = document.createElement('div');
+                div.className = 'slide';
+                div.dataset.index = i;
+
+                const img = document.createElement('img');
+                img.className = 'slide__img';
+                img.src = data.src;
+                img.alt = data.caption;
+
+                const cap = document.createElement('p');
+                cap.className = 'slide__caption';
+                cap.textContent = data.caption;
+
+                const credit = document.createElement('span');
+                credit.className = 'slide__credit';
+                credit.textContent = data.credit;
+
+                div.append(img, credit, cap);
+                hero.insertBefore(div, dotsNav);
+
+                // dot
+                const dot = document.createElement('button');
+                dot.className = 'hero__dot';
+                dot.setAttribute('aria-label', `Slide ${i + 1}`);
+                dot.addEventListener('click', () => goTo(i));
+                dotsNav.appendChild(dot);
+
+                return div;
+            });
+
+            const dotEls = dotsNav.querySelectorAll('.hero__dot');
+
+            // ─── état ──────────────────────────────────────────────────────────────────
+            let current = 0;
+            let timeline = null;
+
+            // ─── helpers ───────────────────────────────────────────────────────────────
+            function setDot(idx) {
+                dotEls.forEach((d, i) => d.classList.toggle('is-active', i === idx));
+            }
+
+            function goTo(next) {
+                if (next === current) return;
+
+                // kill l'autoplay en cours
+                if (timeline) timeline.kill();
+
+                const from = slideEls[current];
+                const to = slideEls[next];
+
+                to.classList.add('is-active');
+                setDot(next);
+
+                // reset barre de progression
+                gsap.set(bar, { width: '0%' });
+
+                const tl = gsap.timeline({
+                    onComplete: () => {
+                        from.classList.remove('is-active');
+                        current = next;
+                        startAutoplay();
+                    },
+                });
+
+                tl.to(from, { opacity: 0, duration: FADE_TIME, ease: 'power1.inOut' }).to(
+                    to,
+                    { opacity: 1, duration: FADE_TIME, ease: 'power1.inOut' },
+                    0
+                );
+
+                timeline = tl;
+            }
+
+            // ─── autoplay ──────────────────────────────────────────────────────────────
+            function startAutoplay() {
+                const next = (current + 1) % slides.length;
+
+                // on rend la slide courante visible si besoin
+                gsap.set(slideEls[current], { opacity: 1 });
+                slideEls[current].classList.add('is-active');
+                setDot(current);
+
+                // barre de progression
+                gsap.fromTo(
+                    bar,
+                    { width: '0%' },
+                    {
+                        width: '100%',
+                        duration: DURATION,
+                        ease: 'none',
+                    }
+                );
+
+                // attente puis fondu vers la suivante
+                timeline = gsap.delayedCall(DURATION, () => {
+                    const from = slideEls[current];
+                    const to = slideEls[next];
+
+                    to.classList.add('is-active');
+                    gsap.set(bar, { width: '0%' });
+
+                    const tl = gsap.timeline({
+                        onComplete: () => {
+                            from.classList.remove('is-active');
+                            gsap.set(from, { opacity: 0 });
+                            current = next;
+                            startAutoplay();
+                        },
+                    });
+
+                    tl.to(from, { opacity: 0, duration: FADE_TIME, ease: 'power1.inOut' }).to(
+                        to,
+                        { opacity: 1, duration: FADE_TIME, ease: 'power1.inOut' },
+                        0
+                    );
+
+                    timeline = tl;
+                });
+            }
+
+            // ─── init ──────────────────────────────────────────────────────────────────
+            // toutes les slides à 0, la première à 1 pour éviter le flash
+            gsap.set(slideEls, { opacity: 0 });
+            gsap.set(slideEls[0], { opacity: 1 });
+            startAutoplay();
+        </script>
+    </body>
+</html>
