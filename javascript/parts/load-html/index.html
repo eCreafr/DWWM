@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Démo jQuery .load()</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 0; }
+    header { background: #2c3e50; color: white; padding: 1rem 2rem; }
+    header h1 { margin: 0 0 0.5rem; }
+    nav ul { list-style: none; display: flex; gap: 1.5rem; margin: 0; padding: 0; }
+    nav a { color: white; text-decoration: none; }
+    nav a:hover { text-decoration: underline; }
+    main { padding: 2rem; }
+    footer { background: #ecf0f1; text-align: center; padding: 1rem; margin-top: 2rem; }
+  </style>
+</head>
+<body>
+
+  <!-- Le header (qui lui-même charge navbar.html) est chargé ici -->
+  <div id="header"></div>
+
+  <main>
+    <h2>Contenu principal</h2>
+    <p>
+      Cette page utilise <strong>jQuery <code>.load()</code></strong> pour importer
+      des fragments HTML externes sans recharger la page.
+    </p>
+    <ul>
+      <li><code>index.html</code> charge <code>header.html</code> et <code>footer.html</code></li>
+      <li><code>header.html</code> charge <code>navbar.html</code></li>
+    </ul>
+  </main>
+
+  <!-- Le footer est chargé ici -->
+  <div id="footer"></div>
+
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script>
+    // .load() injecte le contenu HTML du fichier dans l'élément ciblé
+    $("#header").load("header.html");
+    $("#footer").load("footer.html");
+  </script>
+
+</body>
+</html>

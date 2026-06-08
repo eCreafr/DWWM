@@ -1,4 +1,5 @@
 node_modules
+vite-project
 eslint.config.mjs
 package-lock.json
 package.json
