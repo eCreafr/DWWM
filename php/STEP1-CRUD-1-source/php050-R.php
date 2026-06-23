@@ -103,20 +103,20 @@
 
     ?>
         <!-- Affichage de l'ID unique de l'article (clé primaire en BDD) -->
-        id unique : <?= $new['id']; ?>
+        id unique : <?= htmlspecialchars($new['id']); ?>
 
         <!-- Affichage du titre tronqué à 20 caractères -->
-        <h2><?= truncateString($new['titre'], 20); ?> :</h2>
+        <h2><?= htmlspecialchars(truncateString($new['titre'], 20)); ?> :</h2>
 
         <!-- Affichage du score en rouge (peut être NULL si pas de match associé) -->
-        <strong style="color:#FF0000"> <?= $new['score']; ?></strong>
-        (lieu : <?= $new['lieu']; ?>)
+        <strong style="color:#FF0000"> <?= htmlspecialchars($new['score'] ?? ''); ?></strong>
+        (lieu : <?= htmlspecialchars($new['lieu'] ?? ''); ?>)
 
         <!-- Affichage du contenu tronqué à 100 caractères -->
-        <?= truncateString($new['contenu'], 100); ?>
+        <?= htmlspecialchars(truncateString($new['contenu'], 100)); ?>
 
         <!-- Affichage de la date (avec l'alias "textequejeveux") -->
-        <p>-<?= $new['textequejeveux']; ?>
+        <p>-<?= htmlspecialchars($new['textequejeveux']); ?>
         </p><br><br><br><br>
         <hr>
     <?php
@@ -158,7 +158,6 @@ NOTES PÉDAGOGIQUES :
    - Plus rapide à écrire pour l'affichage simple
 
 6. AMÉLIORATION POSSIBLE :
-   - Ajouter htmlspecialchars() pour sécuriser l'affichage (éviter XSS)
    - Paginer les résultats si beaucoup d'articles (LIMIT et OFFSET en SQL)
    - Ajouter des boutons Modifier/Supprimer pour chaque article
    - Utiliser un vrai template HTML/CSS (Bootstrap) pour un meilleur rendu

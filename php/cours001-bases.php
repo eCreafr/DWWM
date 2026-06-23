@@ -51,7 +51,7 @@ multi lignes
         <div class="cadre">
             <strong>Afficher un message, du html avec echo</strong><br><br>
             <?php     // echo :
-            echo "coucou 1";
+            echo "<h1> coucou 1</h1>";
             echo 'coucou 2<br>';
             echo ("coucou 3<br>");  // on affiche coucou dans le html
             echo ("<br><strong>coucou</strong><br><br>"); // on affiche du code html  
