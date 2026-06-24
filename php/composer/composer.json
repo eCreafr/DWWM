@@ -11,6 +11,6 @@
         }
     },
     "require-dev": {
-        "phpunit/phpunit": "^11.5.50"
+        "phpunit/phpunit": "^12.5.22"
     }
 }
