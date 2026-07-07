@@ -12,7 +12,11 @@ if (!$connexion){
     die('Erreur connexion entre la chaise et le clavier je penses : ' .mysqli_connect_error());
 }
 
-$requete = 'SELECT `prenom` FROM `stagiaires`';
+$requete = "SELECT s.formation, CONCAT(s.prenom,' ', s.nom) AS nomcomplet, ROUND(AVG(n.note) , 2) AS moyenne
+FROM `stagiaires` s
+LEFT JOIN `notes` n 
+ON s.id = n.stagiaire_id
+GROUP BY s.id";
 $resultat = mysqli_query($connexion, $requete);
 
 if (!$resultat){
@@ -33,12 +37,13 @@ if (!$resultat){
         h1   { color: #129800; }
         ul   { list-style: disc; padding-left: 1.5rem; }
         li   { padding: .3rem 0; font-size: 1.1rem; }
+        em { color: grey;}
     </style>
 </head>
 <body>
     
 
-    <h1>Prénoms des stagiaires Afpa</h1>
+    <h1>Noms & Moyenne des stagiaires Afpa</h1>
 
 
 <?php if (mysqli_num_rows($resultat) === 0) : ?>
@@ -50,8 +55,16 @@ if (!$resultat){
     <ul>
         <?php while ($ligne = mysqli_fetch_assoc($resultat)) : ?>
         
-            <li><?= htmlspecialchars($ligne['prenom']); ?></li>
-          
+            <li><?= htmlspecialchars($ligne['nomcomplet']); ?>
+
+            <?php if ($ligne['moyenne'] != 0) : ?>
+             <?= htmlspecialchars($ligne['moyenne']); ?>
+          <?php endif; ?>
+
+           <?php if (!empty($ligne['formation'])) : ?>
+           <em>  <?= htmlspecialchars($ligne['formation']); ?></em>
+          <?php endif; ?>
+          </li>
         <?php endwhile; ?>
     </ul>
 <?php endif; ?>

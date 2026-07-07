@@ -37,7 +37,7 @@
             $date = new DateTime();
 
             // Ajouter 1 heure
-            $date->modify('+2 hour');
+            $date->modify('+1 hour');
 
             // Afficher la date formatée
             echo $date->format('d/m/Y H:i:s');

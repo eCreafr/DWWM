@@ -45,8 +45,8 @@ https://www.php.net/manual/fr/reserved.variables.get.php">
             ?>
 
         </p>
-        <a href="http://localhost:3000/php/php004.php?name=Sullivan%20range%20ta%20chambre">
-            http://localhost:3000/php/php004.php?name=Sullivan%20range%20ta%20chambre
+        <a href="http://localhost:8080/php/cours004-get-post.php?name=Sullivan%20range%20ta%20chambre">
+            http://localhost:8080/php/cours004-get-post.php?name=Sullivan%20range%20ta%20chambre
 
         </a>
         <br><br>nb : parler des abus possible avec cette méthode vulnérable à l'interception et à la manipulation et de htmlspecialchars
@@ -99,14 +99,12 @@ https://www.php.net/manual/fr/reserved.variables.get.php">
         ?>
 
 
-        <form action="php004.php" method="POST">
+        <form action="cours004-get-post.php" method="POST">
 
 
             <label for="name">Votre nom :</label>
-            <input type="text" id="name" name="name" required>
+            <input type="text" id="name" name="name">
             <button type="submit">Envoyer</button>
-
-
 
         </form>
 

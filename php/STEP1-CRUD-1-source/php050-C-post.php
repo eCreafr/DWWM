@@ -95,7 +95,7 @@ $insertcontenu->execute([
         <!-- Carte Bootstrap pour afficher un aperçu de l'article créé -->
         <div class="card">
             <div class="card-body">
-                <!-- <?= ?> est un raccourci pour <?php echo ?> -->
+              
                 <h5 class="card-title"><?= $titre; ?></h5>
 
                 <!-- Affichage de l'auteur -->

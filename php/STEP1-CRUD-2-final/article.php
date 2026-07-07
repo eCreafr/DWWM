@@ -57,7 +57,6 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
 
     ?>
 
-
      <!DOCTYPE html>
      <html lang="fr">
 
@@ -76,7 +75,7 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
 
      <body>
 
-         <div class="container text-center d-flex  flex-wrap justify-content-center">
+         <div class="container text-center d-flex flex-wrap justify-content-center">
 
          <?php
         // ============================================================

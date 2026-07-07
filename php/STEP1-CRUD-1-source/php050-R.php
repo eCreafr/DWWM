@@ -153,11 +153,8 @@ NOTES PÉDAGOGIQUES :
    - fetchAll() : récupère tous les résultats SQL d'un coup
    - prepare() + execute() : requête préparée (même si ici pas de paramètres utilisateur)
 
-5. <?= ?> vs <?php echo ?> :
-   - <?= $variable ?> est un raccourci pour <?php echo $variable ?>
-   - Plus rapide à écrire pour l'affichage simple
 
-6. AMÉLIORATION POSSIBLE :
+5. AMÉLIORATION POSSIBLE :
    - Paginer les résultats si beaucoup d'articles (LIMIT et OFFSET en SQL)
    - Ajouter des boutons Modifier/Supprimer pour chaque article
    - Utiliser un vrai template HTML/CSS (Bootstrap) pour un meilleur rendu
