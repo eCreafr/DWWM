@@ -144,46 +144,42 @@
                 <h3>Le problème : Conflits de noms</h3>
                 <div class="warning-note">
                     <div class="code-example">
-<span class="keyword">&lt;?php</span>
-<span class="comment">// Fichier1.php</span>
-<span class="keyword">class</span> Database {
-    <span class="keyword">public function</span> connect() {
-        <span class="keyword">return</span> <span class="string">"Connexion MySQL"</span>;
-    }
-}
-
-<span class="comment">// Fichier2.php (librairie externe)</span>
-<span class="keyword">class</span> Database {  <span class="comment">// ❌ ERREUR : Classe déjà déclarée !</span>
-    <span class="keyword">public function</span> connect() {
-        <span class="keyword">return</span> <span class="string">"Connexion PostgreSQL"</span>;
-    }
-}
-<span class="keyword">?&gt;</span>
+                        <span class="keyword">&lt;?php</span><br />
+                        <span class="comment">// Fichier1.php</span><br />
+                        <span class="keyword">class</span> Database {<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">public function</span> connect() {<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span> <span class="string">"Connexion MySQL"</span>;<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;}<br />
+                        }<br /><br />
+                        <span class="comment">// Fichier2.php (librairie externe)</span><br />
+                        <span class="keyword">class</span> Database {  <span class="comment">// ❌ ERREUR : Classe déjà déclarée !</span><br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">public function</span> connect() {<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span> <span class="string">"Connexion PostgreSQL"</span>;<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;}<br />
+                        }<br />
+                        <span class="keyword">?&gt;</span>
                     </div>
                     <p><strong>Problème :</strong> Impossible d'avoir deux classes avec le même nom dans le même projet !</p>
                 </div>
 
                 <h3>Solution : Les Namespaces</h3>
                 <div class="code-example">
-<span class="keyword">&lt;?php</span>
-<span class="comment">// src/MonApp/Database.php</span>
-<span class="keyword">namespace</span> MonApp;
-
-<span class="keyword">class</span> Database {
-    <span class="keyword">public function</span> connect() {
-        <span class="keyword">return</span> <span class="string">"Connexion MySQL"</span>;
-    }
-}
-
-<span class="comment">// vendor/Librairie/Database.php</span>
-<span class="keyword">namespace</span> Librairie;
-
-<span class="keyword">class</span> Database {  <span class="comment">// ✅ OK : Namespace différent !</span>
-    <span class="keyword">public function</span> connect() {
-        <span class="keyword">return</span> <span class="string">"Connexion PostgreSQL"</span>;
-    }
-}
-<span class="keyword">?&gt;</span>
+                    <span class="keyword">&lt;?php</span><br />
+                    <span class="comment">// src/MonApp/Database.php</span><br />
+                    <span class="keyword">namespace</span> MonApp;<br /><br />
+                    <span class="keyword">class</span> Database {<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">public function</span> connect() {<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span> <span class="string">"Connexion MySQL"</span>;<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;}<br />
+                    }<br /><br />
+                    <span class="comment">// vendor/Librairie/Database.php</span><br />
+                    <span class="keyword">namespace</span> Librairie;<br /><br />
+                    <span class="keyword">class</span> Database {  <span class="comment">// ✅ OK : Namespace différent !</span><br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">public function</span> connect() {<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span> <span class="string">"Connexion PostgreSQL"</span>;<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;}<br />
+                    }<br />
+                    <span class="keyword">?&gt;</span>
                 </div>
             </div>
 
@@ -191,50 +187,39 @@
                 <h2>2. Déclarer et utiliser des Namespaces</h2>
                 <h3>Syntaxe de base</h3>
                 <div class="code-example">
-<span class="keyword">&lt;?php</span>
-<span class="comment">// src/Models/Utilisateur.php</span>
-
-<span class="comment">// Déclarer le namespace (TOUJOURS en premier, après &lt;?php)</span>
-<span class="keyword">namespace</span> Models;
-
-<span class="keyword">class</span> Utilisateur {
-    <span class="keyword">private</span> <span class="variable">$nom</span>;
-
-    <span class="keyword">public function</span> __construct(<span class="variable">$nom</span>) {
-        <span class="variable">$this</span>->nom = <span class="variable">$nom</span>;
-    }
-
-    <span class="keyword">public function</span> getNom() {
-        <span class="keyword">return</span> <span class="variable">$this</span>->nom;
-    }
-}
-<span class="keyword">?&gt;</span>
+                    <span class="keyword">&lt;?php</span><br />
+                    <span class="comment">// src/Models/Utilisateur.php</span><br /><br />
+                    <span class="comment">// Déclarer le namespace (TOUJOURS en premier, après &lt;?php)</span><br />
+                    <span class="keyword">namespace</span> Models;<br /><br />
+                    <span class="keyword">class</span> Utilisateur {<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">private</span> <span class="variable">$nom</span>;<br /><br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">public function</span> __construct(<span class="variable">$nom</span>) {<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="variable">$this</span>->nom = <span class="variable">$nom</span>;<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;}<br /><br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">public function</span> getNom() {<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span> <span class="variable">$this</span>->nom;<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;}<br />
+                    }<br />
+                    <span class="keyword">?&gt;</span>
                 </div>
 
                 <h3>Utiliser une classe avec namespace</h3>
                 <div class="code-example">
-<span class="keyword">&lt;?php</span>
-<span class="comment">// index.php</span>
-
-<span class="keyword">require</span> <span class="string">'src/Models/Utilisateur.php'</span>;
-
-<span class="comment">// Méthode 1 : Nom complet qualifié (FQCN)</span>
-<span class="variable">$user1</span> = <span class="keyword">new</span> \Models\Utilisateur(<span class="string">"Jean"</span>);
-
-<span class="comment">// Méthode 2 : Utiliser 'use' pour importer</span>
-<span class="keyword">use</span> Models\Utilisateur;
-
-<span class="variable">$user2</span> = <span class="keyword">new</span> Utilisateur(<span class="string">"Marie"</span>);
-
-<span class="comment">// Méthode 3 : Utiliser un alias</span>
-<span class="keyword">use</span> Models\Utilisateur <span class="keyword">as</span> User;
-
-<span class="variable">$user3</span> = <span class="keyword">new</span> User(<span class="string">"Paul"</span>);
-
-<span class="keyword">echo</span> <span class="variable">$user1</span>->getNom() . <span class="string">"&lt;br&gt;"</span>;
-<span class="keyword">echo</span> <span class="variable">$user2</span>->getNom() . <span class="string">"&lt;br&gt;"</span>;
-<span class="keyword">echo</span> <span class="variable">$user3</span>->getNom();
-<span class="keyword">?&gt;</span>
+                    <span class="keyword">&lt;?php</span><br />
+                    <span class="comment">// index.php</span><br /><br />
+                    <span class="keyword">require</span> <span class="string">'src/Models/Utilisateur.php'</span>;<br /><br />
+                    <span class="comment">// Méthode 1 : Nom complet qualifié (FQCN)</span><br />
+                    <span class="variable">$user1</span> = <span class="keyword">new</span> \Models\Utilisateur(<span class="string">"Jean"</span>);<br /><br />
+                    <span class="comment">// Méthode 2 : Utiliser 'use' pour importer</span><br />
+                    <span class="keyword">use</span> Models\Utilisateur;<br /><br />
+                    <span class="variable">$user2</span> = <span class="keyword">new</span> Utilisateur(<span class="string">"Marie"</span>);<br /><br />
+                    <span class="comment">// Méthode 3 : Utiliser un alias</span><br />
+                    <span class="keyword">use</span> Models\Utilisateur <span class="keyword">as</span> User;<br /><br />
+                    <span class="variable">$user3</span> = <span class="keyword">new</span> User(<span class="string">"Paul"</span>);<br /><br />
+                    <span class="keyword">echo</span> <span class="variable">$user1</span>->getNom() . <span class="string">"&lt;br&gt;"</span>;<br />
+                    <span class="keyword">echo</span> <span class="variable">$user2</span>->getNom() . <span class="string">"&lt;br&gt;"</span>;<br />
+                    <span class="keyword">echo</span> <span class="variable">$user3</span>->getNom();<br />
+                    <span class="keyword">?&gt;</span>
                 </div>
                 <div class="result-box">
                     <h4>Résultat :</h4>
@@ -248,60 +233,54 @@ Paul</pre>
                 <h2>3. Organisation du code avec Namespaces</h2>
                 <h3>Structure recommandée</h3>
                 <div class="code-example">
-projet/
-│
-├── src/
-│   ├── Controllers/
-│   │   ├── HomeController.php      <span class="comment">// namespace Controllers;</span>
-│   │   └── UserController.php      <span class="comment">// namespace Controllers;</span>
-│   │
-│   ├── Models/
-│   │   ├── User.php                <span class="comment">// namespace Models;</span>
-│   │   └── Article.php             <span class="comment">// namespace Models;</span>
-│   │
-│   ├── Views/
-│   │   └── home.php
-│   │
-│   └── Database/
-│       ├── Connection.php          <span class="comment">// namespace Database;</span>
-│       └── QueryBuilder.php        <span class="comment">// namespace Database;</span>
-│
-├── public/
-│   └── index.php
-│
-└── vendor/                         <span class="comment">// Bibliothèques tierces (Composer)</span>
+                    projet/<br />
+                    │<br />
+                    ├── src/<br />
+                    │&nbsp;&nbsp;├── Controllers/<br />
+                    │&nbsp;&nbsp;│&nbsp;&nbsp;├── HomeController.php&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">// namespace Controllers;</span><br />
+                    │&nbsp;&nbsp;│&nbsp;&nbsp;└── UserController.php&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">// namespace Controllers;</span><br />
+                    │&nbsp;&nbsp;│<br />
+                    │&nbsp;&nbsp;├── Models/<br />
+                    │&nbsp;&nbsp;│&nbsp;&nbsp;├── User.php&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">// namespace Models;</span><br />
+                    │&nbsp;&nbsp;│&nbsp;&nbsp;└── Article.php&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">// namespace Models;</span><br />
+                    │&nbsp;&nbsp;│<br />
+                    │&nbsp;&nbsp;├── Views/<br />
+                    │&nbsp;&nbsp;│&nbsp;&nbsp;└── home.php<br />
+                    │&nbsp;&nbsp;│<br />
+                    │&nbsp;&nbsp;└── Database/<br />
+                    │&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├── Connection.php&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">// namespace Database;</span><br />
+                    │&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└── QueryBuilder.php&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">// namespace Database;</span><br />
+                    │<br />
+                    ├── public/<br />
+                    │&nbsp;&nbsp;└── index.php<br />
+                    │<br />
+                    └── vendor/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">// Bibliothèques tierces (Composer)</span>
                 </div>
 
                 <h3>Exemple complet avec sous-namespaces</h3>
                 <div class="code-example">
-<span class="keyword">&lt;?php</span>
-<span class="comment">// src/Models/User.php</span>
-<span class="keyword">namespace</span> Models;
-
-<span class="keyword">class</span> User {
-    <span class="keyword">public</span> <span class="variable">$nom</span>;
-}
-
-<span class="comment">// src/Controllers/UserController.php</span>
-<span class="keyword">namespace</span> Controllers;
-
-<span class="keyword">use</span> Models\User;  <span class="comment">// Importer la classe User</span>
-
-<span class="keyword">class</span> UserController {
-    <span class="keyword">public function</span> index() {
-        <span class="variable">$user</span> = <span class="keyword">new</span> User();
-        <span class="variable">$user</span>->nom = <span class="string">"Jean Dupont"</span>;
-        <span class="keyword">return</span> <span class="variable">$user</span>;
-    }
-}
-
-<span class="comment">// public/index.php</span>
-<span class="keyword">use</span> Controllers\UserController;
-
-<span class="variable">$controller</span> = <span class="keyword">new</span> UserController();
-<span class="variable">$user</span> = <span class="variable">$controller</span>->index();
-<span class="keyword">echo</span> <span class="variable">$user</span>->nom;
-<span class="keyword">?&gt;</span>
+                    <span class="keyword">&lt;?php</span><br />
+                    <span class="comment">// src/Models/User.php</span><br />
+                    <span class="keyword">namespace</span> Models;<br /><br />
+                    <span class="keyword">class</span> User {<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">public</span> <span class="variable">$nom</span>;<br />
+                    }<br /><br />
+                    <span class="comment">// src/Controllers/UserController.php</span><br />
+                    <span class="keyword">namespace</span> Controllers;<br /><br />
+                    <span class="keyword">use</span> Models\User;  <span class="comment">// Importer la classe User</span><br /><br />
+                    <span class="keyword">class</span> UserController {<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">public function</span> index() {<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="variable">$user</span> = <span class="keyword">new</span> User();<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="variable">$user</span>->nom = <span class="string">"Jean Dupont"</span>;<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span> <span class="variable">$user</span>;<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;}<br />
+                    }<br /><br />
+                    <span class="comment">// public/index.php</span><br />
+                    <span class="keyword">use</span> Controllers\UserController;<br /><br />
+                    <span class="variable">$controller</span> = <span class="keyword">new</span> UserController();<br />
+                    <span class="variable">$user</span> = <span class="variable">$controller</span>->index();<br />
+                    <span class="keyword">echo</span> <span class="variable">$user</span>->nom;<br />
+                    <span class="keyword">?&gt;</span>
                 </div>
             </div>
 
@@ -310,47 +289,41 @@ projet/
                 <h3>Le problème des require multiples</h3>
                 <div class="warning-note">
                     <div class="code-example">
-<span class="keyword">&lt;?php</span>
-<span class="comment">// ❌ MAUVAIS : Trop de require manuels !</span>
-<span class="keyword">require</span> <span class="string">'src/Models/User.php'</span>;
-<span class="keyword">require</span> <span class="string">'src/Models/Article.php'</span>;
-<span class="keyword">require</span> <span class="string">'src/Models/Comment.php'</span>;
-<span class="keyword">require</span> <span class="string">'src/Controllers/HomeController.php'</span>;
-<span class="keyword">require</span> <span class="string">'src/Controllers/UserController.php'</span>;
-<span class="comment">// ... et 50 autres fichiers</span>
-<span class="keyword">?&gt;</span>
+                        <span class="keyword">&lt;?php</span><br />
+                        <span class="comment">// ❌ MAUVAIS : Trop de require manuels !</span><br />
+                        <span class="keyword">require</span> <span class="string">'src/Models/User.php'</span>;<br />
+                        <span class="keyword">require</span> <span class="string">'src/Models/Article.php'</span>;<br />
+                        <span class="keyword">require</span> <span class="string">'src/Models/Comment.php'</span>;<br />
+                        <span class="keyword">require</span> <span class="string">'src/Controllers/HomeController.php'</span>;<br />
+                        <span class="keyword">require</span> <span class="string">'src/Controllers/UserController.php'</span>;<br />
+                        <span class="comment">// ... et 50 autres fichiers</span><br />
+                        <span class="keyword">?&gt;</span>
                     </div>
                 </div>
 
                 <h3>Solution : Autoloader automatique</h3>
                 <div class="code-example">
-<span class="keyword">&lt;?php</span>
-<span class="comment">// autoload.php - Charger automatiquement les classes</span>
-
-<span class="keyword">spl_autoload_register</span>(<span class="keyword">function</span> (<span class="variable">$class</span>) {
-    <span class="comment">// Exemple : $class = "Models\User"</span>
-
-    <span class="comment">// Remplacer les \ par / pour le chemin de fichier</span>
-    <span class="variable">$class</span> = <span class="keyword">str_replace</span>(<span class="string">'\\'</span>, <span class="string">'/'</span>, <span class="variable">$class</span>);
-    <span class="comment">// Résultat : "Models/User"</span>
-
-    <span class="comment">// Construire le chemin du fichier</span>
-    <span class="variable">$file</span> = __DIR__ . <span class="string">'/src/'</span> . <span class="variable">$class</span> . <span class="string">'.php'</span>;
-    <span class="comment">// Résultat : "/chemin/projet/src/Models/User.php"</span>
-
-    <span class="comment">// Charger le fichier s'il existe</span>
-    <span class="keyword">if</span> (<span class="keyword">file_exists</span>(<span class="variable">$file</span>)) {
-        <span class="keyword">require</span> <span class="variable">$file</span>;
-    }
-});
-
-<span class="comment">// Maintenant, plus besoin de require !</span>
-<span class="keyword">use</span> Models\User;
-<span class="keyword">use</span> Controllers\UserController;
-
-<span class="variable">$user</span> = <span class="keyword">new</span> User();              <span class="comment">// ✅ Chargé automatiquement !</span>
-<span class="variable">$controller</span> = <span class="keyword">new</span> UserController(); <span class="comment">// ✅ Chargé automatiquement !</span>
-<span class="keyword">?&gt;</span>
+                    <span class="keyword">&lt;?php</span><br />
+                    <span class="comment">// autoload.php - Charger automatiquement les classes</span><br /><br />
+                    <span class="keyword">spl_autoload_register</span>(<span class="keyword">function</span> (<span class="variable">$class</span>) {<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">// Exemple : $class = "Models\User"</span><br /><br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">// Remplacer les \ par / pour le chemin de fichier</span><br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="variable">$class</span> = <span class="keyword">str_replace</span>(<span class="string">'\\'</span>, <span class="string">'/'</span>, <span class="variable">$class</span>);<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">// Résultat : "Models/User"</span><br /><br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">// Construire le chemin du fichier</span><br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="variable">$file</span> = __DIR__ . <span class="string">'/src/'</span> . <span class="variable">$class</span> . <span class="string">'.php'</span>;<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">// Résultat : "/chemin/projet/src/Models/User.php"</span><br /><br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">// Charger le fichier s'il existe</span><br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span> (<span class="keyword">file_exists</span>(<span class="variable">$file</span>)) {<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">require</span> <span class="variable">$file</span>;<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;}<br />
+                    });<br /><br />
+                    <span class="comment">// Maintenant, plus besoin de require !</span><br />
+                    <span class="keyword">use</span> Models\User;<br />
+                    <span class="keyword">use</span> Controllers\UserController;<br /><br />
+                    <span class="variable">$user</span> = <span class="keyword">new</span> User();              <span class="comment">// ✅ Chargé automatiquement !</span><br />
+                    <span class="variable">$controller</span> = <span class="keyword">new</span> UserController(); <span class="comment">// ✅ Chargé automatiquement !</span><br />
+                    <span class="keyword">?&gt;</span>
                 </div>
             </div>
 
@@ -383,28 +356,23 @@ projet/
 
                 <h3>Autoloader conforme PSR-4</h3>
                 <div class="code-example">
-<span class="keyword">&lt;?php</span>
-<span class="comment">// autoload-psr4.php</span>
-
-<span class="keyword">spl_autoload_register</span>(<span class="keyword">function</span> (<span class="variable">$class</span>) {
-    <span class="comment">// Préfixe de namespace de base</span>
-    <span class="variable">$prefix</span> = <span class="string">''</span>;
-
-    <span class="comment">// Répertoire de base pour le préfixe de namespace</span>
-    <span class="variable">$baseDir</span> = __DIR__ . <span class="string">'/src/'</span>;
-
-    <span class="comment">// Obtenir le nom de classe relatif</span>
-    <span class="variable">$relativeClass</span> = <span class="variable">$class</span>;
-
-    <span class="comment">// Remplacer le namespace par le séparateur de répertoire</span>
-    <span class="variable">$file</span> = <span class="variable">$baseDir</span> . <span class="keyword">str_replace</span>(<span class="string">'\\'</span>, <span class="string">'/'</span>, <span class="variable">$relativeClass</span>) . <span class="string">'.php'</span>;
-
-    <span class="comment">// Si le fichier existe, le charger</span>
-    <span class="keyword">if</span> (<span class="keyword">file_exists</span>(<span class="variable">$file</span>)) {
-        <span class="keyword">require</span> <span class="variable">$file</span>;
-    }
-});
-<span class="keyword">?&gt;</span>
+                    <span class="keyword">&lt;?php</span><br />
+                    <span class="comment">// autoload-psr4.php</span><br /><br />
+                    <span class="keyword">spl_autoload_register</span>(<span class="keyword">function</span> (<span class="variable">$class</span>) {<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">// Préfixe de namespace de base</span><br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="variable">$prefix</span> = <span class="string">''</span>;<br /><br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">// Répertoire de base pour le préfixe de namespace</span><br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="variable">$baseDir</span> = __DIR__ . <span class="string">'/src/'</span>;<br /><br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">// Obtenir le nom de classe relatif</span><br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="variable">$relativeClass</span> = <span class="variable">$class</span>;<br /><br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">// Remplacer le namespace par le séparateur de répertoire</span><br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="variable">$file</span> = <span class="variable">$baseDir</span> . <span class="keyword">str_replace</span>(<span class="string">'\\'</span>, <span class="string">'/'</span>, <span class="variable">$relativeClass</span>) . <span class="string">'.php'</span>;<br /><br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">// Si le fichier existe, le charger</span><br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span> (<span class="keyword">file_exists</span>(<span class="variable">$file</span>)) {<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">require</span> <span class="variable">$file</span>;<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;}<br />
+                    });<br />
+                    <span class="keyword">?&gt;</span>
                 </div>
             </div>
 
@@ -418,35 +386,32 @@ projet/
 
                 <h3>Fichier composer.json</h3>
                 <div class="code-example">
-{
-    <span class="string">"name"</span>: <span class="string">"monprojet/monapp"</span>,
-    <span class="string">"description"</span>: <span class="string">"Mon application PHP"</span>,
-    <span class="string">"autoload"</span>: {
-        <span class="string">"psr-4"</span>: {
-            <span class="string">""</span>: <span class="string">"src/"</span>
-        }
-    },
-    <span class="string">"require"</span>: {
-        <span class="string">"php"</span>: <span class="string">">=7.4"</span>
-    }
-}
+                    {<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"name"</span>: <span class="string">"monprojet/monapp"</span>,<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"description"</span>: <span class="string">"Mon application PHP"</span>,<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"autoload"</span>: {<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"psr-4"</span>: {<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">""</span>: <span class="string">"src/"</span><br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;},<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"require"</span>: {<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"php"</span>: <span class="string">">=7.4"</span><br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;}<br />
+                    }
                 </div>
 
                 <h3>Utiliser l'autoloader de Composer</h3>
                 <div class="code-example">
-<span class="keyword">&lt;?php</span>
-<span class="comment">// public/index.php</span>
-
-<span class="comment">// Charger l'autoloader généré par Composer</span>
-<span class="keyword">require_once</span> __DIR__ . <span class="string">'/../vendor/autoload.php'</span>;
-
-<span class="comment">// Maintenant toutes vos classes sont chargées automatiquement !</span>
-<span class="keyword">use</span> Models\User;
-<span class="keyword">use</span> Controllers\UserController;
-
-<span class="variable">$user</span> = <span class="keyword">new</span> User();
-<span class="variable">$controller</span> = <span class="keyword">new</span> UserController();
-<span class="keyword">?&gt;</span>
+                    <span class="keyword">&lt;?php</span><br />
+                    <span class="comment">// public/index.php</span><br /><br />
+                    <span class="comment">// Charger l'autoloader généré par Composer</span><br />
+                    <span class="keyword">require_once</span> __DIR__ . <span class="string">'/../vendor/autoload.php'</span>;<br /><br />
+                    <span class="comment">// Maintenant toutes vos classes sont chargées automatiquement !</span><br />
+                    <span class="keyword">use</span> Models\User;<br />
+                    <span class="keyword">use</span> Controllers\UserController;<br /><br />
+                    <span class="variable">$user</span> = <span class="keyword">new</span> User();<br />
+                    <span class="variable">$controller</span> = <span class="keyword">new</span> UserController();<br />
+                    <span class="keyword">?&gt;</span>
                 </div>
                 <div class="info-note">
                     <p><strong>Commandes Composer essentielles :</strong></p>
@@ -463,48 +428,43 @@ projet/
                 <h2>7. Exemple complet</h2>
                 <h3>Structure du projet</h3>
                 <div class="code-example">
-monprojet/
-│
-├── src/
-│   ├── Models/
-│   │   └── User.php              <span class="comment">// namespace Models;</span>
-│   ├── Controllers/
-│   │   └── UserController.php    <span class="comment">// namespace Controllers;</span>
-│   └── Database/
-│       └── Connection.php        <span class="comment">// namespace Database;</span>
-│
-├── public/
-│   └── index.php
-│
-├── autoload.php
-└── composer.json
+                    monprojet/<br />
+                    │<br />
+                    ├── src/<br />
+                    │&nbsp;&nbsp;├── Models/<br />
+                    │&nbsp;&nbsp;│&nbsp;&nbsp;└── User.php&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">// namespace Models;</span><br />
+                    │&nbsp;&nbsp;├── Controllers/<br />
+                    │&nbsp;&nbsp;│&nbsp;&nbsp;└── UserController.php&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">// namespace Controllers;</span><br />
+                    │&nbsp;&nbsp;└── Database/<br />
+                    │&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└── Connection.php&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">// namespace Database;</span><br />
+                    │<br />
+                    ├── public/<br />
+                    │&nbsp;&nbsp;└── index.php<br />
+                    │<br />
+                    ├── autoload.php<br />
+                    └── composer.json
                 </div>
 
                 <h3>Code complet</h3>
                 <div class="code-example">
-<span class="keyword">&lt;?php</span>
-<span class="comment">// autoload.php</span>
-<span class="keyword">spl_autoload_register</span>(<span class="keyword">function</span> (<span class="variable">$class</span>) {
-    <span class="variable">$file</span> = __DIR__ . <span class="string">'/src/'</span> . <span class="keyword">str_replace</span>(<span class="string">'\\'</span>, <span class="string">'/'</span>, <span class="variable">$class</span>) . <span class="string">'.php'</span>;
-    <span class="keyword">if</span> (<span class="keyword">file_exists</span>(<span class="variable">$file</span>)) {
-        <span class="keyword">require_once</span> <span class="variable">$file</span>;
-    }
-});
-
-<span class="comment">// public/index.php</span>
-<span class="keyword">require_once</span> __DIR__ . <span class="string">'/../autoload.php'</span>;
-
-<span class="keyword">use</span> Controllers\UserController;
-<span class="keyword">use</span> Database\Connection;
-
-<span class="variable">$controller</span> = <span class="keyword">new</span> UserController();
-<span class="variable">$user</span> = <span class="variable">$controller</span>->show(1);
-
-<span class="keyword">echo</span> <span class="string">"Utilisateur : "</span> . htmlspecialchars(<span class="variable">$user</span>->getNom()) . <span class="string">"&lt;br&gt;"</span>;
-
-<span class="variable">$db</span> = <span class="keyword">new</span> Connection();
-<span class="keyword">echo</span> <span class="variable">$db</span>->connect();
-<span class="keyword">?&gt;</span>
+                    <span class="keyword">&lt;?php</span><br />
+                    <span class="comment">// autoload.php</span><br />
+                    <span class="keyword">spl_autoload_register</span>(<span class="keyword">function</span> (<span class="variable">$class</span>) {<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="variable">$file</span> = __DIR__ . <span class="string">'/src/'</span> . <span class="keyword">str_replace</span>(<span class="string">'\\'</span>, <span class="string">'/'</span>, <span class="variable">$class</span>) . <span class="string">'.php'</span>;<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span> (<span class="keyword">file_exists</span>(<span class="variable">$file</span>)) {<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">require_once</span> <span class="variable">$file</span>;<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;}<br />
+                    });<br /><br />
+                    <span class="comment">// public/index.php</span><br />
+                    <span class="keyword">require_once</span> __DIR__ . <span class="string">'/../autoload.php'</span>;<br /><br />
+                    <span class="keyword">use</span> Controllers\UserController;<br />
+                    <span class="keyword">use</span> Database\Connection;<br /><br />
+                    <span class="variable">$controller</span> = <span class="keyword">new</span> UserController();<br />
+                    <span class="variable">$user</span> = <span class="variable">$controller</span>->show(1);<br /><br />
+                    <span class="keyword">echo</span> <span class="string">"Utilisateur : "</span> . htmlspecialchars(<span class="variable">$user</span>->getNom()) . <span class="string">"&lt;br&gt;"</span>;<br /><br />
+                    <span class="variable">$db</span> = <span class="keyword">new</span> Connection();<br />
+                    <span class="keyword">echo</span> <span class="variable">$db</span>->connect();<br />
+                    <span class="keyword">?&gt;</span>
                 </div>
                 <div class="result-box">
                     <h4>Résultat :</h4>

@@ -451,5 +451,123 @@
         },
         "ip": "::1",
         "user_agent": "Mozilla\/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit\/537.36 (KHTML, like Gecko) Chrome\/149.0.0.0 Safari\/537.36"
+    },
+    {
+        "timestamp": "2026-07-07 13:20:33",
+        "action": "update_article_start",
+        "data": {
+            "post_data": {
+                "id": "27",
+                "titre": "Le Golf Frisbee \u00e0 Libourne,  Une Activit\u00e9 \u00c9cologique",
+                "contenu": "eh bey c'est bieng  !                ",
+                "modifierMatch": "on",
+                "equipe1": "Sainte Foy",
+                "equipe2": "Lyon",
+                "score": "0-1",
+                "lieu": "Libourne parc des Dagueys",
+                "resume": "j;gdgxdte du joueur fran\u00e7ais"
+            }
+        },
+        "ip": "::1",
+        "user_agent": "Mozilla\/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit\/537.36 (KHTML, like Gecko) Chrome\/149.0.0.0 Safari\/537.36"
+    },
+    {
+        "timestamp": "2026-07-07 13:20:33",
+        "action": "update_article_attempt",
+        "data": {
+            "id": 27,
+            "titre": "Le Golf Frisbee \u00e0 Libourne,  Une Activit\u00e9 \u00c9cologique",
+            "contenu_length": 21
+        },
+        "ip": "::1",
+        "user_agent": "Mozilla\/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit\/537.36 (KHTML, like Gecko) Chrome\/149.0.0.0 Safari\/537.36"
+    },
+    {
+        "timestamp": "2026-07-07 13:20:33",
+        "action": "update_article_success",
+        "data": {
+            "id": 27,
+            "rows_affected": 0
+        },
+        "ip": "::1",
+        "user_agent": "Mozilla\/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit\/537.36 (KHTML, like Gecko) Chrome\/149.0.0.0 Safari\/537.36"
+    },
+    {
+        "timestamp": "2026-07-07 13:20:33",
+        "action": "update_match_attempt",
+        "data": {
+            "article_id": 27
+        },
+        "ip": "::1",
+        "user_agent": "Mozilla\/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit\/537.36 (KHTML, like Gecko) Chrome\/149.0.0.0 Safari\/537.36"
+    },
+    {
+        "timestamp": "2026-07-07 13:20:33",
+        "action": "update_match_success",
+        "data": {
+            "match_id": 9,
+            "rows_affected": 1
+        },
+        "ip": "::1",
+        "user_agent": "Mozilla\/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit\/537.36 (KHTML, like Gecko) Chrome\/149.0.0.0 Safari\/537.36"
+    },
+    {
+        "timestamp": "2026-07-07 13:22:56",
+        "action": "update_article_start",
+        "data": {
+            "post_data": {
+                "id": "48",
+                "titre": "Le PSG triomphe \u00e0 domicile ! whaouh !",
+                "contenu": "                    qefqegqeg                ",
+                "modifierMatch": "on",
+                "equipe1": "Paris Saint-Germain",
+                "equipe2": "Olympique de Marseille",
+                "score": "2-1",
+                "lieu": "Paris",
+                "resume": "     Match intense avec des buts spectaculaires et une domination globale du PSG."
+            }
+        },
+        "ip": "::1",
+        "user_agent": "Mozilla\/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit\/537.36 (KHTML, like Gecko) Chrome\/149.0.0.0 Safari\/537.36"
+    },
+    {
+        "timestamp": "2026-07-07 13:22:56",
+        "action": "update_article_attempt",
+        "data": {
+            "id": 48,
+            "titre": "Le PSG triomphe \u00e0 domicile ! whaouh !",
+            "contenu_length": 9
+        },
+        "ip": "::1",
+        "user_agent": "Mozilla\/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit\/537.36 (KHTML, like Gecko) Chrome\/149.0.0.0 Safari\/537.36"
+    },
+    {
+        "timestamp": "2026-07-07 13:22:56",
+        "action": "update_article_success",
+        "data": {
+            "id": 48,
+            "rows_affected": 0
+        },
+        "ip": "::1",
+        "user_agent": "Mozilla\/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit\/537.36 (KHTML, like Gecko) Chrome\/149.0.0.0 Safari\/537.36"
+    },
+    {
+        "timestamp": "2026-07-07 13:22:56",
+        "action": "update_match_attempt",
+        "data": {
+            "article_id": 48
+        },
+        "ip": "::1",
+        "user_agent": "Mozilla\/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit\/537.36 (KHTML, like Gecko) Chrome\/149.0.0.0 Safari\/537.36"
+    },
+    {
+        "timestamp": "2026-07-07 13:22:56",
+        "action": "update_match_success",
+        "data": {
+            "match_id": 1,
+            "rows_affected": 1
+        },
+        "ip": "::1",
+        "user_agent": "Mozilla\/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit\/537.36 (KHTML, like Gecko) Chrome\/149.0.0.0 Safari\/537.36"
     }
 ]

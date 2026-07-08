@@ -24,9 +24,9 @@ CREATE TABLE `s2_abonnes` (
 ) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- Données de la table `s2_abonnes`
-INSERT INTO `s2_abonnes` VALUES ('1', 'Dupont', 'Jean', 'jean.dupont@example.com', 'e10adc3949ba59abbe56e057f20f883e', '25', 'Homme', 'France', '2024-01-01', '2024-12-31');
-INSERT INTO `s2_abonnes` VALUES ('2', 'Martin', 'Julie', 'julie.martin@example.com', 'e10adc3949ba59abbe56e057f20f883e', '30', 'Femme', 'Canada', '2024-03-01', '2024-12-31');
-INSERT INTO `s2_abonnes` VALUES ('3', 'Doe', 'John', 'john.doe@example.com', '123', '35', 'Homme', 'États-Unis', '2024-05-01', '2025-05-01');
+INSERT INTO `s2_abonnes` VALUES ('1', 'Dupont', 'Jean', 'jean.dupont@example.com', '$2y$12$skRaAbC.hGND0ua7fJqDkeLNoqkEHfoM/WhvY5HCmVvVfDUxqyxoS', '25', 'Homme', 'France', '2024-01-01', '2024-12-31');
+INSERT INTO `s2_abonnes` VALUES ('2', 'Martin', 'Julie', 'julie.martin@example.com', '$2y$12$skRaAbC.hGND0ua7fJqDkeLNoqkEHfoM/WhvY5HCmVvVfDUxqyxoS', '30', 'Femme', 'Canada', '2024-03-01', '2024-12-31');
+INSERT INTO `s2_abonnes` VALUES ('3', 'Doe', 'John', 'john.doe@example.com', '$2y$12$5.PJr1o2MBcuSHBKSqVoMeAAwm.EYoeckpHb5hmDex5OxEPM6GUjy', '35', 'Homme', 'États-Unis', '2024-05-01', '2025-05-01');
 
 
 -- Structure de la table `s2_administrateurs`

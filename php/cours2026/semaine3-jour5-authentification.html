@@ -30,7 +30,7 @@
             }
             .demo-grid {
                 display: grid;
-                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                grid-template-columns: repeat(auto-fit, minmax(375px, 1fr));
                 gap: 30px;
                 margin-bottom: 40px;
             }
@@ -108,16 +108,17 @@
             <div class="demo-intro">
                 <h3>Introduction</h3>
                 <p>
-                    L'<strong>authentification</strong> est un système essentiel pour sécuriser l'accès à votre application web.
-                    Elle permet de vérifier l'identité d'un utilisateur et de protéger les données sensibles.
+                    L'<strong>authentification</strong> est un système essentiel pour sécuriser l'accès à votre
+                    application web. Elle permet de vérifier l'identité d'un utilisateur et de protéger les données
+                    sensibles.
                 </p>
                 <p>
-                    <strong>Dans ce cours, vous apprendrez à :</strong><br>
-                    • Hacher les mots de passe de manière sécurisée avec <code>password_hash()</code><br>
-                    • Vérifier les mots de passe avec <code>password_verify()</code><br>
-                    • Créer un formulaire d'inscription complet<br>
-                    • Implémenter un système de connexion sécurisé<br>
-                    • Protéger des pages avec les sessions<br>
+                    <strong>Dans ce cours, vous apprendrez à :</strong><br />
+                    • Hacher les mots de passe de manière sécurisée avec <code>password_hash()</code><br />
+                    • Vérifier les mots de passe avec <code>password_verify()</code><br />
+                    • Créer un formulaire d'inscription complet<br />
+                    • Implémenter un système de connexion sécurisé<br />
+                    • Protéger des pages avec les sessions<br />
                     • Gérer la déconnexion proprement
                 </p>
             </div>
@@ -128,29 +129,47 @@
                     <h2>1. password_hash() : Hacher les mots de passe</h2>
                     <div class="warning-note">
                         <h4>Ne JAMAIS stocker les mots de passe en clair !</h4>
-                        <div class="code-example"><span class="comment">// ❌ DANGER : Mot de passe en clair dans la base de données</span>
-INSERT INTO users (email, password) VALUES ('jean@example.com', 'monmotdepasse123');
-
-<span class="comment">// Si quelqu'un accède à la BDD, il voit TOUS les mots de passe !</span></div>
+                        <div class="code-example">
+                            <span class="comment">// ❌ DANGER : Mot de passe en clair dans la base de données</span
+                            ><br />
+                            INSERT INTO users (email, password) VALUES ('jean@example.com', 'monmotdepasse123');<br /><br />
+                            <span class="comment"
+                                >// Si quelqu'un accède à la BDD, il voit TOUS les mots de passe !</span
+                            >
+                        </div>
                     </div>
 
                     <div class="security-note">
                         <h4>Solution : password_hash()</h4>
-                        <p>PHP fournit une fonction sécurisée pour hacher (transformer) les mots de passe de manière irréversible.</p>
-                        <div class="code-example"><span class="keyword">&lt;?php</span>
-<span class="comment">// Hacher un mot de passe</span>
-<span class="variable">$password</span> = <span class="string">'monmotdepasse123'</span>;
-<span class="variable">$hash</span> = <span class="keyword">password_hash</span>(<span class="variable">$password</span>, PASSWORD_DEFAULT);
-
-<span class="keyword">echo</span> <span class="string">"Mot de passe original : "</span> . <span class="variable">$password</span> . <span class="string">"&lt;br&gt;"</span>;
-<span class="keyword">echo</span> <span class="string">"Hash sécurisé : "</span> . <span class="variable">$hash</span>;
-<span class="keyword">?&gt;</span>
+                        <p>
+                            PHP fournit une fonction sécurisée pour hacher (transformer) les mots de passe de manière
+                            irréversible.
+                        </p>
+                        <div class="code-example">
+                            <span class="keyword">&lt;?php</span><br />
+                            <span class="comment">// Hacher un mot de passe</span><br />
+                            <span class="variable">$password</span> =
+                            <span class="string">'monmotdepasse123'</span>;<br />
+                            <span class="variable">$hash</span> = <span class="keyword">password_hash</span>(<span
+                                class="variable"
+                                >$password</span
+                            >, PASSWORD_DEFAULT);<br /><br />
+                            <span class="keyword">echo</span> <span class="string">"Mot de passe original : "</span> .
+                            <span class="variable">$password</span> . <span class="string">"&lt;br&gt;"</span>;<br />
+                            <span class="keyword">echo</span> <span class="string">"Hash sécurisé : "</span> .
+                            <span class="variable">$hash</span>;<br />
+                            <span class="keyword">?&gt;</span>
                         </div>
                         <div class="result-box">
                             <h4>Résultat :</h4>
-                            <pre>Mot de passe original : monmotdepasse123
-Hash sécurisé : $2y$10$X8ZQe7O7r7r2abcdefghijklmnopqrstuvwxyz123456789ABCDEFG</pre>
-                            <p><strong>Important :</strong> Le hash est différent à chaque fois (grâce au "salt" automatique) !</p>
+                            <pre>
+Mot de passe original : monmotdepasse123
+Hash sécurisé : $2y$10$X8ZQe7O7r7r2abcdefghijklmnopqrstuvwxyz123456789ABCDEFG</pre
+                            >
+                            <p>
+                                <strong>Important :</strong> Le hash est différent à chaque fois (grâce au "salt"
+                                automatique) !
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -158,147 +177,245 @@ Hash sécurisé : $2y$10$X8ZQe7O7r7r2abcdefghijklmnopqrstuvwxyz123456789ABCDEFG<
                 <div class="demo-item">
                     <h2>2. password_verify() : Vérifier un mot de passe</h2>
                     <p>Comparer un mot de passe avec son hash de manière sécurisée.</p>
-                    <div class="code-example"><span class="keyword">&lt;?php</span>
-<span class="comment">// Le hash stocké en base de données</span>
-<span class="variable">$hash_bdd</span> = <span class="string">'$2y$10$X8ZQe7O7r7r2abcdefghijklmnopqrstuvwxyz123456789ABCDEFG'</span>;
-
-<span class="comment">// L'utilisateur essaie de se connecter</span>
-<span class="variable">$password_saisi</span> = <span class="string">'monmotdepasse123'</span>;
-
-<span class="comment">// Vérifier si le mot de passe correspond</span>
-<span class="keyword">if</span> (<span class="keyword">password_verify</span>(<span class="variable">$password_saisi</span>, <span class="variable">$hash_bdd</span>)) {
-    <span class="keyword">echo</span> <span class="string">"Mot de passe correct ! Connexion réussie."</span>;
-} <span class="keyword">else</span> {
-    <span class="keyword">echo</span> <span class="string">"Mot de passe incorrect !"</span>;
-}
-<span class="keyword">?&gt;</span>
+                    <div class="code-example">
+                        <span class="keyword">&lt;?php</span><br />
+                        <span class="comment">// Le hash stocké en base de données</span><br />
+                        <span class="variable">$hash_bdd</span> =
+                        <span class="string">'$2y$10$X8ZQe7O7r7r2abcdefghijklmnopqrstuvwxyz123456789ABCDEFG'</span
+                        >;<br /><br />
+                        <span class="comment">// L'utilisateur essaie de se connecter</span><br />
+                        <span class="variable">$password_saisi</span> =
+                        <span class="string">'monmotdepasse123'</span>;<br /><br />
+                        <span class="comment">// Vérifier si le mot de passe correspond</span><br />
+                        <span class="keyword">if</span> (<span class="keyword">password_verify</span>(<span
+                            class="variable"
+                            >$password_saisi</span
+                        >, <span class="variable">$hash_bdd</span>)) {<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">echo</span>
+                        <span class="string">"Mot de passe correct ! Connexion réussie."</span>;<br />
+                        } <span class="keyword">else</span> {<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">echo</span>
+                        <span class="string">"Mot de passe incorrect !"</span>;<br />
+                        }<br />
+                        <span class="keyword">?&gt;</span>
                     </div>
                     <div class="info-note">
-                        <strong>Important :</strong> <code>password_verify()</code> compare le mot de passe en clair avec le hash de manière sécurisée. Ne jamais comparer directement avec <code>==</code> !
+                        <strong>Important :</strong> <code>password_verify()</code> compare le mot de passe en clair
+                        avec le hash de manière sécurisée. Ne jamais comparer directement avec <code>==</code> !
                     </div>
                 </div>
 
                 <div class="demo-item">
                     <h2>3. Formulaire d'inscription (register.php)</h2>
                     <p>Créer un compte utilisateur avec validation complète.</p>
-                    <div class="code-example"><span class="keyword">&lt;?php</span>
-<span class="comment">// register.php - Inscription</span>
-<span class="keyword">require_once</span> <span class="string">'db.php'</span>; <span class="comment">// Connexion PDO</span>
-
-<span class="variable">$errors</span> = [];
-<span class="variable">$success</span> = <span class="string">''</span>;
-
-<span class="keyword">if</span> (<span class="variable">$_SERVER</span>[<span class="string">'REQUEST_METHOD'</span>] === <span class="string">'POST'</span>) {
-    <span class="comment">// Récupération et nettoyage des données</span>
-    <span class="variable">$nom</span> = <span class="keyword">trim</span>(<span class="variable">$_POST</span>[<span class="string">'nom'</span>] ?? <span class="string">''</span>);
-    <span class="variable">$prenom</span> = <span class="keyword">trim</span>(<span class="variable">$_POST</span>[<span class="string">'prenom'</span>] ?? <span class="string">''</span>);
-    <span class="variable">$email</span> = <span class="keyword">trim</span>(<span class="variable">$_POST</span>[<span class="string">'email'</span>] ?? <span class="string">''</span>);
-    <span class="variable">$password</span> = <span class="variable">$_POST</span>[<span class="string">'password'</span>] ?? <span class="string">''</span>;
-
-    <span class="comment">// VALIDATION</span>
-    <span class="keyword">if</span> (<span class="keyword">empty</span>(<span class="variable">$nom</span>)) <span class="variable">$errors</span>[] = <span class="string">"Le nom est requis."</span>;
-    <span class="keyword">if</span> (<span class="keyword">empty</span>(<span class="variable">$email</span>) || !<span class="keyword">filter_var</span>(<span class="variable">$email</span>, FILTER_VALIDATE_EMAIL)) {
-        <span class="variable">$errors</span>[] = <span class="string">"Email invalide."</span>;
-    }
-    <span class="keyword">if</span> (<span class="keyword">strlen</span>(<span class="variable">$password</span>) < 8) {
-        <span class="variable">$errors</span>[] = <span class="string">"Le mot de passe doit contenir au moins 8 caractères."</span>;
-    }
-
-    <span class="comment">// Si pas d'erreurs, créer le compte</span>
-    <span class="keyword">if</span> (<span class="keyword">empty</span>(<span class="variable">$errors</span>)) {
-        <span class="comment">// Hacher le mot de passe</span>
-        <span class="variable">$password_hash</span> = <span class="keyword">password_hash</span>(<span class="variable">$password</span>, PASSWORD_DEFAULT);
-
-        <span class="comment">// Insérer l'utilisateur</span>
-        <span class="variable">$sql</span> = <span class="string">"INSERT INTO users (nom, prenom, email, password, date_inscription)
-                 VALUES (:nom, :prenom, :email, :password, NOW())"</span>;
-        <span class="variable">$stmt</span> = <span class="variable">$pdo</span>->prepare(<span class="variable">$sql</span>);
-        <span class="variable">$stmt</span>->execute([
-            <span class="string">'nom'</span> => <span class="variable">$nom</span>,
-            <span class="string">'prenom'</span> => <span class="variable">$prenom</span>,
-            <span class="string">'email'</span> => <span class="variable">$email</span>,
-            <span class="string">'password'</span> => <span class="variable">$password_hash</span>
-        ]);
-
-        <span class="variable">$success</span> = <span class="string">"Compte créé avec succès !"</span>;
-    }
-}
-<span class="keyword">?&gt;</span>
+                    <div class="code-example">
+                        <span class="keyword">&lt;?php</span><br />
+                        <span class="comment">// register.php - Inscription</span><br />
+                        <span class="keyword">require_once</span> <span class="string">'db.php'</span>;
+                        <span class="comment">// Connexion PDO</span><br /><br />
+                        <span class="variable">$errors</span> = [];<br />
+                        <span class="variable">$success</span> = <span class="string">''</span>;<br /><br />
+                        <span class="keyword">if</span> (<span class="variable">$_SERVER</span>[<span class="string"
+                            >'REQUEST_METHOD'</span
+                        >] === <span class="string">'POST'</span>) {<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">// Récupération et nettoyage des données</span
+                        ><br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="variable">$nom</span> =
+                        <span class="keyword">trim</span>(<span class="variable">$_POST</span>[<span class="string"
+                            >'nom'</span
+                        >] ?? <span class="string">''</span>);<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="variable">$prenom</span> =
+                        <span class="keyword">trim</span>(<span class="variable">$_POST</span>[<span class="string"
+                            >'prenom'</span
+                        >] ?? <span class="string">''</span>);<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="variable">$email</span> =
+                        <span class="keyword">trim</span>(<span class="variable">$_POST</span>[<span class="string"
+                            >'email'</span
+                        >] ?? <span class="string">''</span>);<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="variable">$password</span> =
+                        <span class="variable">$_POST</span>[<span class="string">'password'</span>] ??
+                        <span class="string">''</span>;<br /><br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">// VALIDATION</span><br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span> (<span class="keyword">empty</span
+                        >(<span class="variable">$nom</span>)) <span class="variable">$errors</span>[] =
+                        <span class="string">"Le nom est requis."</span>;<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span> (<span class="keyword">empty</span
+                        >(<span class="variable">$email</span>) || !<span class="keyword">filter_var</span>(<span
+                            class="variable"
+                            >$email</span
+                        >, FILTER_VALIDATE_EMAIL)) {<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="variable">$errors</span>[] =
+                        <span class="string">"Email invalide."</span>;<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;}<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span> (<span class="keyword">strlen</span
+                        >(<span class="variable">$password</span>) < 8) {<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="variable">$errors</span>[] =
+                        <span class="string">"Le mot de passe doit contenir au moins 8 caractères."</span>;<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;}<br /><br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">// Si pas d'erreurs, créer le compte</span><br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span> (<span class="keyword">empty</span
+                        >(<span class="variable">$errors</span>)) {<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment"
+                            >// Hacher le mot de passe</span
+                        ><br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="variable">$password_hash</span> =
+                        <span class="keyword">password_hash</span>(<span class="variable">$password</span>,
+                        PASSWORD_DEFAULT);<br /><br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment"
+                            >// Insérer l'utilisateur</span
+                        ><br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="variable">$sql</span> =
+                        <span class="string"
+                            >"INSERT INTO users (nom, prenom, email, password, date_inscription)<br />
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;VALUES
+                            (:nom, :prenom, :email, :password, NOW())"</span
+                        >;<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="variable">$stmt</span> =
+                        <span class="variable">$pdo</span>->prepare(<span class="variable">$sql</span>);<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="variable">$stmt</span
+                        >->execute([<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string"
+                            >'nom'</span
+                        >
+                        => <span class="variable">$nom</span>,<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string"
+                            >'prenom'</span
+                        >
+                        => <span class="variable">$prenom</span>,<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string"
+                            >'email'</span
+                        >
+                        => <span class="variable">$email</span>,<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string"
+                            >'password'</span
+                        >
+                        => <span class="variable">$password_hash</span><br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;]);<br /><br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="variable">$success</span> =
+                        <span class="string">"Compte créé avec succès !"</span>;<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;}<br />
+                        }<br />
+                        <span class="keyword">?&gt;</span>
                     </div>
                 </div>
 
                 <div class="demo-item">
                     <h2>4. Formulaire de connexion (login.php)</h2>
                     <p>Système de connexion sécurisé avec sessions.</p>
-                    <div class="code-example"><span class="keyword">&lt;?php</span>
-<span class="comment">// login.php - Connexion</span>
-<span class="keyword">session_start</span>();
-<span class="keyword">require_once</span> <span class="string">'db.php'</span>;
-
-<span class="variable">$error</span> = <span class="string">''</span>;
-
-<span class="keyword">if</span> (<span class="variable">$_SERVER</span>[<span class="string">'REQUEST_METHOD'</span>] === <span class="string">'POST'</span>) {
-    <span class="variable">$email</span> = <span class="keyword">trim</span>(<span class="variable">$_POST</span>[<span class="string">'email'</span>] ?? <span class="string">''</span>);
-    <span class="variable">$password</span> = <span class="variable">$_POST</span>[<span class="string">'password'</span>] ?? <span class="string">''</span>;
-
-    <span class="comment">// Rechercher l'utilisateur par email</span>
-    <span class="variable">$sql</span> = <span class="string">"SELECT id, nom, prenom, email, password FROM users WHERE email = :email"</span>;
-    <span class="variable">$stmt</span> = <span class="variable">$pdo</span>->prepare(<span class="variable">$sql</span>);
-    <span class="variable">$stmt</span>->execute([<span class="string">'email'</span> => <span class="variable">$email</span>]);
-
-    <span class="variable">$user</span> = <span class="variable">$stmt</span>->fetch(PDO::FETCH_ASSOC);
-
-    <span class="comment">// Vérifier si l'utilisateur existe et le mot de passe est correct</span>
-    <span class="keyword">if</span> (<span class="variable">$user</span> && <span class="keyword">password_verify</span>(<span class="variable">$password</span>, <span class="variable">$user</span>[<span class="string">'password'</span>])) {
-        <span class="comment">// Régénérer l'ID de session (protection contre le session fixation)</span>
-        <span class="keyword">session_regenerate_id</span>(<span class="keyword">true</span>);
-
-        <span class="comment">// Stocker les informations en session</span>
-        <span class="variable">$_SESSION</span>[<span class="string">'user_id'</span>] = <span class="variable">$user</span>[<span class="string">'id'</span>];
-        <span class="variable">$_SESSION</span>[<span class="string">'user_nom'</span>] = <span class="variable">$user</span>[<span class="string">'nom'</span>];
-        <span class="variable">$_SESSION</span>[<span class="string">'user_prenom'</span>] = <span class="variable">$user</span>[<span class="string">'prenom'</span>];
-
-        <span class="comment">// Redirection vers le tableau de bord</span>
-        <span class="keyword">header</span>(<span class="string">'Location: dashboard.php'</span>);
-        <span class="keyword">exit</span>();
-    } <span class="keyword">else</span> {
-        <span class="variable">$error</span> = <span class="string">"Email ou mot de passe incorrect."</span>;
-    }
-}
-<span class="keyword">?&gt;</span>
+                    <div class="code-example">
+                        <span class="keyword">&lt;?php</span><br />
+                        <span class="comment">// login.php - Connexion</span><br />
+                        <span class="keyword">session_start</span>();<br />
+                        <span class="keyword">require_once</span> <span class="string">'db.php'</span>;<br /><br />
+                        <span class="variable">$error</span> = <span class="string">''</span>;<br /><br />
+                        <span class="keyword">if</span> (<span class="variable">$_SERVER</span>[<span class="string"
+                            >'REQUEST_METHOD'</span
+                        >] === <span class="string">'POST'</span>) {<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="variable">$email</span> =
+                        <span class="keyword">trim</span>(<span class="variable">$_POST</span>[<span class="string"
+                            >'email'</span
+                        >] ?? <span class="string">''</span>);<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="variable">$password</span> =
+                        <span class="variable">$_POST</span>[<span class="string">'password'</span>] ??
+                        <span class="string">''</span>;<br /><br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">// Rechercher l'utilisateur par email</span><br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="variable">$sql</span> =
+                        <span class="string"
+                            >"SELECT id, nom, prenom, email, password FROM users WHERE email = :email"</span
+                        >;<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="variable">$stmt</span> =
+                        <span class="variable">$pdo</span>->prepare(<span class="variable">$sql</span>);<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="variable">$stmt</span>->execute([<span class="string"
+                            >'email'</span
+                        >
+                        => <span class="variable">$email</span>]);<br /><br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="variable">$user</span> =
+                        <span class="variable">$stmt</span>->fetch(PDO::FETCH_ASSOC);<br /><br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="comment"
+                            >// Vérifier si l'utilisateur existe et le mot de passe est correct</span
+                        ><br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span> (<span class="variable">$user</span> &&
+                        <span class="keyword">password_verify</span>(<span class="variable">$password</span>,
+                        <span class="variable">$user</span>[<span class="string">'password'</span>])) {<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment"
+                            >// Régénérer l'ID de session (protection contre le session fixation)</span
+                        ><br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword"
+                            >session_regenerate_id</span
+                        >(<span class="keyword">true</span>);<br /><br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment"
+                            >// Stocker les informations en session</span
+                        ><br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="variable">$_SESSION</span>[<span
+                            class="string"
+                            >'user_id'</span
+                        >] = <span class="variable">$user</span>[<span class="string">'id'</span>];<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="variable">$_SESSION</span>[<span
+                            class="string"
+                            >'user_nom'</span
+                        >] = <span class="variable">$user</span>[<span class="string">'nom'</span>];<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="variable">$_SESSION</span>[<span
+                            class="string"
+                            >'user_prenom'</span
+                        >] = <span class="variable">$user</span>[<span class="string">'prenom'</span>];<br /><br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment"
+                            >// Redirection vers le tableau de bord</span
+                        ><br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">header</span>(<span
+                            class="string"
+                            >'Location: dashboard.php'</span
+                        >);<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">exit</span>();<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;} <span class="keyword">else</span> {<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="variable">$error</span> =
+                        <span class="string">"Email ou mot de passe incorrect."</span>;<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;}<br />
+                        }<br />
+                        <span class="keyword">?&gt;</span>
                     </div>
                 </div>
 
                 <div class="demo-item">
                     <h2>5. Protection de pages (dashboard.php)</h2>
                     <p>Vérifier qu'un utilisateur est connecté avant d'afficher le contenu.</p>
-                    <div class="code-example"><span class="keyword">&lt;?php</span>
-<span class="comment">// dashboard.php - Page protégée</span>
-<span class="keyword">session_start</span>();
-
-<span class="comment">// Vérifier si l'utilisateur est connecté</span>
-<span class="keyword">if</span> (!<span class="keyword">isset</span>(<span class="variable">$_SESSION</span>[<span class="string">'user_id'</span>])) {
-    <span class="comment">// Si non connecté, rediriger vers la page de connexion</span>
-    <span class="keyword">header</span>(<span class="string">'Location: login.php'</span>);
-    <span class="keyword">exit</span>();
-}
-
-<span class="comment">// L'utilisateur est connecté, afficher le contenu</span>
-<span class="variable">$prenom</span> = htmlspecialchars(<span class="variable">$_SESSION</span>[<span class="string">'user_prenom'</span>]);
-<span class="keyword">echo</span> <span class="string">"Bienvenue, </span><span class="variable">$prenom</span><span class="string"> !"</span>;
-<span class="keyword">?&gt;</span>
+                    <div class="code-example">
+                        <span class="keyword">&lt;?php</span><br />
+                        <span class="comment">// dashboard.php - Page protégée</span><br />
+                        <span class="keyword">session_start</span>();<br /><br />
+                        <span class="comment">// Vérifier si l'utilisateur est connecté</span><br />
+                        <span class="keyword">if</span> (!<span class="keyword">isset</span>(<span class="variable"
+                            >$_SESSION</span
+                        >[<span class="string">'user_id'</span>])) {<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="comment"
+                            >// Si non connecté, rediriger vers la page de connexion</span
+                        ><br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">header</span>(<span class="string"
+                            >'Location: login.php'</span
+                        >);<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">exit</span>();<br />
+                        }<br /><br />
+                        <span class="comment">// L'utilisateur est connecté, afficher le contenu</span><br />
+                        <span class="variable">$prenom</span> = htmlspecialchars(<span class="variable">$_SESSION</span
+                        >[<span class="string">'user_prenom'</span>]);<br />
+                        <span class="keyword">echo</span> <span class="string">"Bienvenue, </span
+                        ><span class="variable">$prenom</span><span class="string"> !"</span>;<br />
+                        <span class="keyword">?&gt;</span>
                     </div>
                     <div class="security-note">
                         <h4>Fichier de protection réutilisable (check_auth.php)</h4>
-                        <div class="code-example"><span class="keyword">&lt;?php</span>
-<span class="comment">// check_auth.php - À inclure sur chaque page protégée</span>
-<span class="keyword">session_start</span>();
-
-<span class="keyword">if</span> (!<span class="keyword">isset</span>(<span class="variable">$_SESSION</span>[<span class="string">'user_id'</span>])) {
-    <span class="keyword">header</span>(<span class="string">'Location: login.php'</span>);
-    <span class="keyword">exit</span>();
-}
-<span class="keyword">?&gt;</span>
+                        <div class="code-example">
+                            <span class="keyword">&lt;?php</span><br />
+                            <span class="comment">// check_auth.php - À inclure sur chaque page protégée</span><br />
+                            <span class="keyword">session_start</span>();<br /><br />
+                            <span class="keyword">if</span> (!<span class="keyword">isset</span>(<span class="variable"
+                                >$_SESSION</span
+                            >[<span class="string">'user_id'</span>])) {<br />
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">header</span>(<span class="string"
+                                >'Location: login.php'</span
+                            >);<br />
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">exit</span>();<br />
+                            }<br />
+                            <span class="keyword">?&gt;</span>
                         </div>
                     </div>
                 </div>
@@ -306,25 +423,27 @@ Hash sécurisé : $2y$10$X8ZQe7O7r7r2abcdefghijklmnopqrstuvwxyz123456789ABCDEFG<
                 <div class="demo-item">
                     <h2>6. Déconnexion (logout.php)</h2>
                     <p>Détruire la session complètement et rediriger.</p>
-                    <div class="code-example"><span class="keyword">&lt;?php</span>
-<span class="comment">// logout.php - Déconnexion complète</span>
-<span class="keyword">session_start</span>();
-
-<span class="comment">// Détruire toutes les variables de session</span>
-<span class="variable">$_SESSION</span> = [];
-
-<span class="comment">// Détruire le cookie de session si il existe</span>
-<span class="keyword">if</span> (<span class="keyword">isset</span>(<span class="variable">$_COOKIE</span>[<span class="keyword">session_name</span>()])) {
-    <span class="keyword">setcookie</span>(<span class="keyword">session_name</span>(), <span class="string">''</span>, <span class="keyword">time</span>() - 3600, <span class="string">'/'</span>);
-}
-
-<span class="comment">// Détruire la session</span>
-<span class="keyword">session_destroy</span>();
-
-<span class="comment">// Rediriger vers la page de connexion</span>
-<span class="keyword">header</span>(<span class="string">'Location: login.php'</span>);
-<span class="keyword">exit</span>();
-<span class="keyword">?&gt;</span>
+                    <div class="code-example">
+                        <span class="keyword">&lt;?php</span><br />
+                        <span class="comment">// logout.php - Déconnexion complète</span><br />
+                        <span class="keyword">session_start</span>();<br /><br />
+                        <span class="comment">// Détruire toutes les variables de session</span><br />
+                        <span class="variable">$_SESSION</span> = [];<br /><br />
+                        <span class="comment">// Détruire le cookie de session si il existe</span><br />
+                        <span class="keyword">if</span> (<span class="keyword">isset</span>(<span class="variable"
+                            >$_COOKIE</span
+                        >[<span class="keyword">session_name</span>()])) {<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">setcookie</span>(<span class="keyword"
+                            >session_name</span
+                        >(), <span class="string">''</span>, <span class="keyword">time</span>() - 3600,
+                        <span class="string">'/'</span>);<br />
+                        }<br /><br />
+                        <span class="comment">// Détruire la session</span><br />
+                        <span class="keyword">session_destroy</span>();<br /><br />
+                        <span class="comment">// Rediriger vers la page de connexion</span><br />
+                        <span class="keyword">header</span>(<span class="string">'Location: login.php'</span>);<br />
+                        <span class="keyword">exit</span>();<br />
+                        <span class="keyword">?&gt;</span>
                     </div>
                     <div class="info-note">
                         <strong>Ordre des opérations de déconnexion :</strong>
@@ -343,14 +462,19 @@ Hash sécurisé : $2y$10$X8ZQe7O7r7r2abcdefghijklmnopqrstuvwxyz123456789ABCDEFG<
                     <p>Régénérer l'ID de session après une connexion réussie.</p>
                     <div class="security-note">
                         <h4>Qu'est-ce que le session fixation ?</h4>
-                        <p>Une attaque où un hacker force l'utilisateur à utiliser un ID de session connu. En régénérant l'ID après la connexion, on empêche cette attaque.</p>
-                        <div class="code-example"><span class="keyword">&lt;?php</span>
-<span class="comment">// Après une connexion réussie</span>
-<span class="keyword">session_regenerate_id</span>(<span class="keyword">true</span>); <span class="comment">// true = détruire l'ancien ID</span>
-
-<span class="comment">// Maintenant stocker les données de l'utilisateur</span>
-<span class="variable">$_SESSION</span>[<span class="string">'user_id'</span>] = <span class="variable">$user_id</span>;
-<span class="keyword">?&gt;</span>
+                        <p>
+                            Une attaque où un hacker force l'utilisateur à utiliser un ID de session connu. En
+                            régénérant l'ID après la connexion, on empêche cette attaque.
+                        </p>
+                        <div class="code-example">
+                            <span class="keyword">&lt;?php</span><br />
+                            <span class="comment">// Après une connexion réussie</span><br />
+                            <span class="keyword">session_regenerate_id</span>(<span class="keyword">true</span>);
+                            <span class="comment">// true = détruire l'ancien ID</span><br /><br />
+                            <span class="comment">// Maintenant stocker les données de l'utilisateur</span><br />
+                            <span class="variable">$_SESSION</span>[<span class="string">'user_id'</span>] =
+                            <span class="variable">$user_id</span>;<br />
+                            <span class="keyword">?&gt;</span>
                         </div>
                     </div>
                 </div>
@@ -358,27 +482,29 @@ Hash sécurisé : $2y$10$X8ZQe7O7r7r2abcdefghijklmnopqrstuvwxyz123456789ABCDEFG<
                 <div class="demo-item">
                     <h2>8. Structure SQL pour le système d'authentification</h2>
                     <p>Table users pour stocker les comptes utilisateurs.</p>
-                    <div class="code-example"><span class="comment">-- Création de la table users</span>
-CREATE TABLE users (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    nom VARCHAR(100) NOT NULL,
-    prenom VARCHAR(100) NOT NULL,
-    email VARCHAR(255) NOT NULL UNIQUE,
-    password VARCHAR(255) NOT NULL,
-    date_inscription DATETIME DEFAULT CURRENT_TIMESTAMP,
-    derniere_connexion DATETIME,
-    actif TINYINT(1) DEFAULT 1
-);
-
-<span class="comment">-- Index pour optimiser les recherches par email</span>
-CREATE INDEX idx_email ON users(email);
+                    <div class="code-example">
+                        <span class="comment">-- Création de la table users</span><br />
+                        CREATE TABLE users (<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;id INT AUTO_INCREMENT PRIMARY KEY,<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;nom VARCHAR(100) NOT NULL,<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;prenom VARCHAR(100) NOT NULL,<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;email VARCHAR(255) NOT NULL UNIQUE,<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;password VARCHAR(255) NOT NULL,<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;date_inscription DATETIME DEFAULT CURRENT_TIMESTAMP,<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;derniere_connexion DATETIME,<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;actif TINYINT(1) DEFAULT 1<br />
+                        );<br /><br />
+                        <span class="comment">-- Index pour optimiser les recherches par email</span><br />
+                        CREATE INDEX idx_email ON users(email);
                     </div>
                 </div>
             </div>
 
             <!-- Récapitulatif du flux -->
             <div style="background: #e8f4f8; padding: 25px; border-radius: 10px; margin: 30px 0">
-                <h2 style="color: #2c3e50; text-align: center; margin-top: 0">Récapitulatif du flux d'authentification</h2>
+                <h2 style="color: #2c3e50; text-align: center; margin-top: 0">
+                    Récapitulatif du flux d'authentification
+                </h2>
                 <div class="demo-grid">
                     <div class="demo-item">
                         <h4>1. Inscription</h4>
@@ -424,7 +550,9 @@ CREATE INDEX idx_email ON users(email);
 
             <!-- Checklist de sécurité -->
             <div style="background: #ffebee; padding: 25px; border-radius: 10px; margin: 30px 0">
-                <h2 style="color: #c62828; text-align: center; margin-top: 0">Checklist de sécurité pour l'authentification</h2>
+                <h2 style="color: #c62828; text-align: center; margin-top: 0">
+                    Checklist de sécurité pour l'authentification
+                </h2>
                 <ul style="line-height: 2">
                     <li>✅ Toujours utiliser <code>password_hash()</code> et <code>password_verify()</code></li>
                     <li>✅ Requêtes préparées PDO pour toutes les requêtes SQL</li>

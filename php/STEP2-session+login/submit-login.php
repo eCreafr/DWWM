@@ -12,14 +12,11 @@
  * 📚 Concepts abordés :
  * - Traitement de formulaire POST
  * - Validation des données
- * - Authentification simple (sans hachage de mot de passe)
+ * - Authentification avec mot de passe hashé (password_hash / password_verify)
  * - Stockage d'informations en session
  * - Redirection après traitement
  *
- * ⚠️ SÉCURITÉ : Cette méthode est PÉDAGOGIQUE uniquement !
- * En production, il faudrait :
- * - Hasher les mots de passe avec password_hash()
- * - Utiliser password_verify() pour la vérification
+ * ⚠️ SÉCURITÉ : Pour aller plus loin en production, il faudrait aussi :
  * - Limiter les tentatives de connexion
  * - Protéger contre les attaques par force brute
  */
@@ -71,12 +68,12 @@ if (isset($postData['email']) && isset($postData['mdp'])) {
             /*
              * Vérification des identifiants
              *
-             * ⚠️ ATTENTION : Comparaison du mot de passe en clair (NON SÉCURISÉ)
-             * En production, utilisez password_verify() avec des mots de passe hachés
+             * password_verify() compare le mot de passe en clair saisi par
+             * l'utilisateur avec le hash stocké en base (généré par password_hash())
              */
             if (
                 $user['mail'] === $postData['email'] &&
-                $user['pswd'] === $postData['mdp']
+                password_verify($postData['mdp'], $user['pswd'])
             ) {
                 /*
                  * ✅ AUTHENTIFICATION RÉUSSIE
@@ -88,6 +85,7 @@ if (isset($postData['email']) && isset($postData['mdp'])) {
                     'email' => $user['mail'],
                     'nom' => $user['nom'],
                     'prenom' => $user['prenom'],
+                    'role' => $user['role'],
                 ];
             }
         }

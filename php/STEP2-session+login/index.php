@@ -43,7 +43,7 @@
                 Si $_SESSION['LOGGED_USER'] existe, on affiche le prénom
             -->
             <h1><?php if (isset($_SESSION['LOGGED_USER'])) : echo $_SESSION['LOGGED_USER']['prenom'];
-                endif; ?>bienvenue sur le site de l'équipe</h1>
+                endif; ?> bienvenue sur le site de l'équipe</h1>
             <h2>à la une :</h2>
         </div>
 
