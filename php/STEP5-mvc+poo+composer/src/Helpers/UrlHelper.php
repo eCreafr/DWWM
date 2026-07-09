@@ -38,6 +38,17 @@ class UrlHelper
     }
 
     /**
+     * Génère l'URL de la liste des articles filtrée par auteur
+     *
+     * @param string $auteur Le nom de l'auteur à filtrer
+     * @return string L'URL relative (ex: "home.html?auteur=Jean+Dupont")
+     */
+    public static function createAuthorFilterUrl(string $auteur): string
+    {
+        return 'home.html?auteur=' . urlencode($auteur);
+    }
+
+    /**
      * Génère une URL complète avec BASE_URL
      *
      * @param string $path Le chemin relatif (ex: "home.html")

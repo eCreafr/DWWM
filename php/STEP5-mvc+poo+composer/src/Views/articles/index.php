@@ -36,6 +36,18 @@
     use App\Helpers\UrlHelper;
     use App\Helpers\ImageHelper;
 
+    // Si un filtre par auteur est actif, affiche un bandeau avec un lien pour le retirer
+    if (!empty($auteur)):
+    ?>
+        <div class="alert alert-info my-4 col-12 d-flex justify-content-between align-items-center">
+            <span>Articles de <strong><?= htmlspecialchars($auteur); ?></strong></span>
+            <a href="<?= BASE_URL ?>/home.html" class="btn btn-sm btn-outline-secondary rounded-pill">
+                Voir tous les articles
+            </a>
+        </div>
+    <?php endif; ?>
+
+    <?php
     // Boucle sur tous les articles récupérés par le contrôleur
     foreach ($articles as $article):
         // Récupère le chemin de l'image uploadée ou utilise picsum par défaut
@@ -60,6 +72,16 @@
 
                     <!-- Titre de l'article -->
                     <h5 class="card-title"><?= htmlspecialchars($article['titre']); ?></h5>
+
+                    <!-- Auteur de l'article : cliquer filtre la liste sur cet auteur -->
+                    <?php if (!empty($article['auteur'])): ?>
+                        <p class="text-muted mb-2">
+                            Par
+                            <a href="<?= BASE_URL ?>/<?= UrlHelper::createAuthorFilterUrl($article['auteur']); ?>">
+                                <?= htmlspecialchars($article['auteur']); ?>
+                            </a>
+                        </p>
+                    <?php endif; ?>
 
                     <!-- Affichage du score si disponible -->
                     <?php if (!empty($article['score'])): ?>

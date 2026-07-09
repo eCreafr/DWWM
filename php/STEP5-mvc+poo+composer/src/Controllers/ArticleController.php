@@ -43,26 +43,35 @@ class ArticleController
     }
 
     /**
-     * Affiche la page d'accueil avec la liste de tous les articles
+     * Affiche la page d'accueil avec la liste des articles
      *
      * Cette méthode :
-     * 1. Récupère tous les articles depuis le modèle
-     * 2. Prépare les données pour la vue
-     * 3. Appelle la vue pour l'affichage
+     * 1. Lit un éventuel filtre par auteur dans l'URL (?auteur=...)
+     * 2. Récupère les articles (filtrés ou non) depuis le modèle
+     * 3. Prépare les données pour la vue
+     * 4. Appelle la vue pour l'affichage
      */
     public function index(): void
     {
-        // Récupère tous les articles depuis la base de données
-        $articles = $this->articleModel->getAll();
+        // Récupère et nettoie le filtre par auteur passé en paramètre GET (ex: home.html?auteur=Jean+Dupont)
+        $auteur = isset($_GET['auteur']) ? StringHelper::sanitize($_GET['auteur']) : null;
 
-        // Définit les métadonnées de la page
-        $title = "L'Actu avec Sport 2000";
-        $metadesc = "L'Actu avec Sport 2000 : c'est les meilleurs journalistes sportifs spécialisés qui...";
+        // Récupère les articles depuis la base de données, filtrés par auteur si demandé
+        $articles = $this->articleModel->getAll($auteur);
+
+        // Définit les métadonnées de la page, adaptées si un filtre est actif
+        if ($auteur !== null && $auteur !== '') {
+            $title = "Articles de {$auteur} - L'Actu avec Sport 2000";
+            $metadesc = "Retrouvez tous les articles écrits par {$auteur} sur L'Actu avec Sport 2000.";
+        } else {
+            $title = "L'Actu avec Sport 2000";
+            $metadesc = "L'Actu avec Sport 2000 : c'est les meilleurs journalistes sportifs spécialisés qui...";
+        }
 
         // Charge la vue avec les données
         // On utilise require pour inclure le fichier de vue
-        // Les variables $articles, $title, $metadesc seront accessibles dans la vue
-        $this->render('articles/index', compact('articles', 'title', 'metadesc'));
+        // Les variables $articles, $title, $metadesc, $auteur seront accessibles dans la vue
+        $this->render('articles/index', compact('articles', 'title', 'metadesc', 'auteur'));
     }
 
     /**

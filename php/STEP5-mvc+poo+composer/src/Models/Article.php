@@ -50,9 +50,10 @@ class Article
      * Cette méthode effectue une jointure LEFT JOIN pour récupérer
      * également les informations du match si l'article y est associé.
      *
-     * @return array Tableau contenant tous les articles
+     * @param string|null $auteur Si fourni, ne retourne que les articles de cet auteur
+     * @return array Tableau contenant tous les articles (filtrés ou non)
      */
-    public function getAll(): array
+    public function getAll(?string $auteur = null): array
     {
         // Requête SQL avec jointure LEFT JOIN :
         // - LEFT JOIN garde tous les articles, même ceux sans match associé
@@ -72,10 +73,21 @@ class Article
                 r.equipe2
             FROM s2_articles_presse a
             LEFT JOIN s2_resultats_sportifs r ON a.match_id = r.id
-            ORDER BY a.date_publication DESC
         ";
 
+        // Filtre optionnel par auteur (utilisé pour le tri/filtrage par auteur)
+        if ($auteur !== null && $auteur !== '') {
+            $query .= " WHERE a.auteur = :auteur ";
+        }
+
+        $query .= " ORDER BY a.date_publication DESC ";
+
         $statement = $this->db->prepare($query);
+
+        if ($auteur !== null && $auteur !== '') {
+            $statement->bindParam(':auteur', $auteur, PDO::PARAM_STR);
+        }
+
         $statement->execute();
 
         // fetchAll() retourne un tableau de tous les résultats
