@@ -8,6 +8,7 @@ php/old/
 .prettierrc
 .vscode
 .claude
+.DS_Store
 settings.json
 php/composer/vendor
 php/symfony/vendor

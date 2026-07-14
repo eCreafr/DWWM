@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Stack Cards - Effet d'empilement en CSS pur (sibling-index)</title>
+        <style>
+            * {
+                box-sizing: border-box;
+            }
+
+            body {
+                margin: 0;
+                font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+                background: #0f1117;
+                color: #f4f4f5;
+            }
+
+            header {
+                max-width: 700px;
+                margin: 0 auto;
+                padding: 80px 24px 40px;
+                text-align: center;
+            }
+
+            header h1 {
+                font-size: clamp(1.6rem, 3vw, 2.2rem);
+                margin-bottom: 12px;
+            }
+
+            header p {
+                color: #a1a1aa;
+                line-height: 1.5;
+            }
+
+            .support-warning {
+                max-width: 700px;
+                margin: 0 auto 40px;
+                padding: 14px 18px;
+                border: 1px solid #f59e0b55;
+                background: #f59e0b1a;
+                color: #fbbf24;
+                border-radius: 10px;
+                font-size: 0.9rem;
+                text-align: center;
+            }
+
+            /* ---- La pile de cartes ---- */
+
+            .cards {
+                display: grid;
+                gap: 20px;
+                max-width: 480px;
+                margin: 0 auto;
+                padding: 20px 24px 60vh; /* espace en bas pour pouvoir défiler jusqu'au bout de la pile */
+            }
+
+            .card {
+                position: sticky;
+                top: 20px;
+
+                /* Chaque carte reçoit un peu plus de padding-top que la précédente,
+                   ce qui crée le décalage "en escalier" visible derrière la carte du dessus. */
+                padding: calc(20px + (sibling-index() * 12px)) 28px 28px;
+
+                border-radius: 20px;
+                box-shadow: 0 20px 40px -10px rgb(0 0 0 / 0.5);
+
+                /* Rétrécissement progressif piloté par le scroll, pas de JS */
+                animation: shrink linear forwards;
+                animation-timeline: view();
+                animation-range: 25vh 80vh;
+            }
+
+            @keyframes shrink {
+                to {
+                    transform: scale(calc(1 - (sibling-index() * 0.04)));
+                }
+            }
+
+            /* Contenu de chaque carte */
+            .card h2 {
+                margin: 0 0 8px;
+                font-size: 1.3rem;
+            }
+
+            .card p {
+                margin: 0;
+                opacity: 0.9;
+                line-height: 1.5;
+            }
+
+            .card .tag {
+                display: inline-block;
+                font-size: 0.75rem;
+                text-transform: uppercase;
+                letter-spacing: 0.05em;
+                background: rgb(255 255 255 / 0.15);
+                padding: 4px 10px;
+                border-radius: 999px;
+                margin-bottom: 10px;
+            }
+
+            .card:nth-child(1) {
+                background: linear-gradient(135deg, #ff6b6b, #c44569);
+            }
+            .card:nth-child(2) {
+                background: linear-gradient(135deg, #f6b93b, #e58e26);
+            }
+            .card:nth-child(3) {
+                background: linear-gradient(135deg, #38ada9, #079992);
+            }
+            .card:nth-child(4) {
+                background: linear-gradient(135deg, #4a69bd, #1e3799);
+            }
+            .card:nth-child(5) {
+                background: linear-gradient(135deg, #8854d0, #5f27cd);
+            }
+            .card:nth-child(6) {
+                background: linear-gradient(135deg, #2c2c54, #474787);
+            }
+
+            footer {
+                text-align: center;
+                padding: 40px 24px 100px;
+                color: #71717a;
+                font-size: 0.85rem;
+            }
+
+            /* Repli propre si le navigateur ne supporte pas encore sibling-index() ou view() */
+            @supports not (animation-timeline: view()) {
+                .card {
+                    animation: none;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <header>
+            <h1>Effet de pile de cartes — CSS pur</h1>
+            <p>
+                Inspiré d'un tuto vu sur LinkedIn : uniquement <code>position: sticky</code>,
+                la fonction <code>sibling-index()</code> et une animation pilotée par
+                <code>animation-timeline: view()</code>. Aucun JavaScript, aucun écouteur de scroll.
+                Fais défiler la page pour voir les cartes s'empiler et rétrécir.
+            </p>
+        </header>
+
+        <p class="support-warning">
+            ⚠️ Nécessite un navigateur récent basé sur Chromium (Chrome/Edge). <code>sibling-index()</code>
+            et <code>animation-timeline: view()</code> ne sont pas encore supportés partout (Firefox, Safari).
+        </p>
+
+        <div class="cards">
+            <div class="card">
+                <span class="tag">Étape 1</span>
+                <h2>La grille espace les cartes</h2>
+                <p>
+                    <code>display: grid</code> avec un <code>gap</code> donne à la page assez de hauteur
+                    pour réellement défiler entre chaque carte.
+                </p>
+            </div>
+            <div class="card">
+                <span class="tag">Étape 2</span>
+                <h2>Le sticky les épingle</h2>
+                <p>
+                    <code>position: sticky; top: 20px;</code> force chaque carte à se figer exactement
+                    au même endroit en haut de l'écran.
+                </p>
+            </div>
+            <div class="card">
+                <span class="tag">Étape 3</span>
+                <h2>sibling-index() crée l'escalier</h2>
+                <p>
+                    Chaque carte reçoit un peu plus de <code>padding-top</code> que la précédente, ce qui
+                    fait apparaître les cartes du dessous décalées, comme un vrai paquet.
+                </p>
+            </div>
+            <div class="card">
+                <span class="tag">Étape 4</span>
+                <h2>view() ajoute la profondeur</h2>
+                <p>
+                    L'animation <code>shrink</code> est reliée à la progression du scroll via
+                    <code>animation-timeline: view()</code>, et rétrécit les cartes en fonction de leur index.
+                </p>
+            </div>
+            <div class="card">
+                <span class="tag">Étape 5</span>
+                <h2>Résultat : un effet fluide</h2>
+                <p>Tout le comportement dynamique est calculé par le navigateur, sans une seule ligne de JS.</p>
+            </div>
+            <div class="card">
+                <span class="tag">Étape 6</span>
+                <h2>À garder en tête</h2>
+                <p>Fonctions récentes : prévois un repli (<code>@supports</code>) pour les navigateurs plus anciens.</p>
+            </div>
+        </div>
+
+        <footer>Démo pédagogique — technique CSS pure (sticky + sibling-index() + animation-timeline: view())</footer>
+    </body>
+</html>
