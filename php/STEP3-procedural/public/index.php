@@ -19,7 +19,7 @@ $metadesc = "L'Actu avec Sport 2000 : c'est les meilleurs journalistes sportifs 
 if (isset($_GET['page']) && $_GET['page'] === 'articles' && isset($_GET['id'])) {
     include('../common/dbArticle.php');
     $title = $article['titre'];
-    $metadesc = $article['titre'] . ", " . truncateString($article['contenu'], 80);
+    $metadesc = $article['titre'] . ", " . truncateString($article['contenu'], 120);
     include('../common/header.php');
     include("../pages/article.php");
 
