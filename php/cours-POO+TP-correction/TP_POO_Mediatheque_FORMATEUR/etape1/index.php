@@ -11,10 +11,10 @@ declare(strict_types=1);
 
 require_once __DIR__ . '/src/Livre.php';
 
-echo "=== ÉTAPE 1 — Test des classes ===\n\n";
+echo "=== ÉTAPE 1 — Test des classes ===<br><br>";
 
 // ---------- NIVEAU 1 ----------
-echo "--- Niveau 1 : instanciation et getters ---\n";
+echo "--- Niveau 1 : instanciation et getters ---<br>";
 
 $livres = [
     new Livre('Dune', 'Frank Herbert', 1965),
@@ -25,27 +25,27 @@ $livres = [
 foreach ($livres as $livre) {
     echo '- ' . $livre->getTitre()
         . ' | ' . $livre->getAuteur()
-        . ' | ' . $livre->getAnnee() . "\n";
+        . ' | ' . $livre->getAnnee() . "<br>";
 }
 
-echo "\nAttendu : les 3 livres avec titre, auteur et année.\n\n";
+echo "<br>Attendu : les 3 livres avec titre, auteur et année.<br><br>";
 
 // ---------- NIVEAU 2 ----------
-echo "--- Niveau 2 : méthode afficher() ---\n";
-echo $livres[0]->afficher() . "\n";
-echo "Attendu : Dune (1965), de Frank Herbert\n\n";
+echo "--- Niveau 2 : méthode afficher() ---<br>";
+echo $livres[0]->afficher() . "<br>";
+echo "Attendu : Dune (1965), de Frank Herbert<br><br>";
 
-echo "--- Niveau 2 : setter valide ---\n";
+echo "--- Niveau 2 : setter valide ---<br>";
 $livres[0]->setTitre('Dune — Le cycle');
-echo $livres[0]->getTitre() . "\n";
-echo "Attendu : Dune — Le cycle\n\n";
+echo $livres[0]->getTitre() . "<br>";
+echo "Attendu : Dune — Le cycle<br><br>";
 
-echo "--- Niveau 2 : setter invalide (doit lever une exception) ---\n";
+echo "--- Niveau 2 : setter invalide (doit lever une exception) ---<br>";
 try {
     $livres[0]->setTitre('   ');
-    echo "ÉCHEC : aucune exception levée, la validation ne fonctionne pas.\n";
+    echo "ÉCHEC : aucune exception levée, la validation ne fonctionne pas.<br>";
 } catch (InvalidArgumentException $e) {
-    echo 'OK — exception interceptée : ' . $e->getMessage() . "\n";
+    echo 'OK — exception interceptée : ' . $e->getMessage() . "<br>";
 }
 
-echo "\n=== Fin des tests ===\n";
+echo "<br>=== Fin des tests ===<br>";

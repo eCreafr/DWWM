@@ -13,21 +13,21 @@ require_once __DIR__ . '/src/Livre.php';
 require_once __DIR__ . '/src/Dvd.php';
 require_once __DIR__ . '/src/JeuVideo.php';
 
-echo "=== ÉTAPE 2 — Hiérarchie de classes ===\n\n";
+echo "=== ÉTAPE 2 — Hiérarchie de classes ===<br><br>";
 
 // ---------- NIVEAU 1 : la classe abstraite n'est pas instanciable ----------
-echo "--- Niveau 1 : Document est abstraite ---\n";
+echo "--- Niveau 1 : Document est abstraite ---<br>";
 try {
     // @phpstan-ignore-next-line — erreur volontaire, c'est le test
     $doc = new Document('Test', 2024);
-    echo "ÉCHEC : Document a pu être instanciée, le mot-clé abstract manque.\n";
+    echo "ÉCHEC : Document a pu être instanciée, le mot-clé abstract manque.<br>";
 } catch (Error $e) {
-    echo "OK — instanciation refusée : " . $e->getMessage() . "\n";
+    echo "OK — instanciation refusée : " . $e->getMessage() . "<br>";
 }
-echo "\n";
+echo "<br>";
 
 // ---------- NIVEAU 2 : le tableau mixte ----------
-echo "--- Niveau 2 : polymorphisme sur 6 documents ---\n";
+echo "--- Niveau 2 : polymorphisme sur 6 documents ---<br>";
 
 $catalogue = [
     new Livre('Dune', 1965, 'Frank Herbert'),
@@ -41,35 +41,35 @@ $catalogue = [
 // UNE SEULE BOUCLE, TROIS FORMATS DE SORTIE.
 // PHP choisit la bonne implémentation selon le type réel de l'objet.
 foreach ($catalogue as $document) {
-    echo '- ' . $document->getDescription() . "\n";
+    echo '- ' . $document->getDescription() . "<br>";
 }
 
-echo "\nAttendu : 6 lignes, 3 formats différents.\n\n";
+echo "<br>Attendu : 6 lignes, 3 formats différents.<br><br>";
 
 // ---------- NIVEAU 2 : le contrat Empruntable ----------
-echo "--- Niveau 2 : emprunter / rendre ---\n";
+echo "--- Niveau 2 : emprunter / rendre ---<br>";
 
 $cible = $catalogue[0];
-echo 'État initial  : ' . ($cible->estDisponible() ? 'disponible' : 'emprunté') . "\n";
+echo 'État initial  : ' . ($cible->estDisponible() ? 'disponible' : 'emprunté') . "<br>";
 
 $cible->emprunter();
-echo 'Après emprunt : ' . ($cible->estDisponible() ? 'disponible' : 'emprunté') . "\n";
+echo 'Après emprunt : ' . ($cible->estDisponible() ? 'disponible' : 'emprunté') . "<br>";
 
 $cible->rendre();
-echo 'Après retour  : ' . ($cible->estDisponible() ? 'disponible' : 'emprunté') . "\n";
+echo 'Après retour  : ' . ($cible->estDisponible() ? 'disponible' : 'emprunté') . "<br>";
 
-echo "\nAttendu : disponible / emprunté / disponible\n\n";
+echo "<br>Attendu : disponible / emprunté / disponible<br><br>";
 
 // ---------- Vérification des contrats ----------
-echo "--- Vérification des types ---\n";
+echo "--- Vérification des types ---<br>";
 foreach ($catalogue as $document) {
     printf(
-        "%-24s Document:%s  Empruntable:%s\n",
+        "%-24s Document:%s  Empruntable:%s<br>",
         get_class($document),
         $document instanceof Document ? 'oui' : 'NON',
         $document instanceof Empruntable ? 'oui' : 'NON'
     );
 }
 
-echo "\nAttendu : oui / oui sur les 6 lignes.\n";
-echo "\n=== Fin des tests ===\n";
+echo "<br>Attendu : oui / oui sur les 6 lignes.<br>";
+echo "<br>=== Fin des tests ===<br>";
