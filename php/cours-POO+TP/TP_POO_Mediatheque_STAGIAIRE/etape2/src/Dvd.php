@@ -4,7 +4,8 @@ declare(strict_types=1);
 /**
  * TP POO — ÉTAPE 2 — NIVEAU 2 — À ÉCRIRE ENTIÈREMENT.
  *
- * Modèle à suivre : Livre.php (fourni dans ce même dossier).
+ * Modèle à suivre : VOTRE Livre.php, que vous venez de compléter au niveau 1.
+ * Si votre Livre fonctionne, Dvd suit exactement la même mécanique.
  *
  * CAHIER DES CHARGES
  * ------------------
