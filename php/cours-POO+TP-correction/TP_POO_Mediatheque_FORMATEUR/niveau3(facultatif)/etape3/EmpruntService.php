@@ -3,24 +3,26 @@ declare(strict_types=1);
 
 /**
  * ===================================================================
- * EXTENSION NIVEAU 3 — ÉTAPE 3 — TRANSACTION
+ * CORRIGÉ NIVEAU 3 — ÉTAPE 3 — Transaction
  * ===================================================================
- * Objectif : un emprunt doit faire DEUX choses de façon indissociable :
+ * Défi : « écrire une transaction : emprunter un document ET insérer
+ * une ligne dans une table emprunts, avec rollback en cas d'échec ».
+ *
+ * POURQUOI C'EST INDISPENSABLE
+ * Un emprunt fait DEUX écritures indissociables :
  *   1. passer le document en indisponible
- *   2. créer une ligne dans la table `emprunts`
+ *   2. créer la ligne de traçabilité dans `emprunts`
  *
- * Si la seconde échoue, la première doit être annulée. Sinon la base
- * se retrouve avec un document marqué emprunté que personne n'a
- * emprunté : incohérence de données.
+ * Si la seconde échoue sans rollback, la base garde un document marqué
+ * emprunté que personne n'a emprunté. C'est le critère REAC CP6
+ * « l'intégrité des données est maintenue » dans son sens littéral.
  *
- * C'est le critère REAC CP6 « l'intégrité des données est maintenue »
- * dans son sens le plus littéral.
- *
- * PRÉREQUIS : moteur InnoDB (MyISAM ne gère pas les transactions).
+ * PRÉREQUIS : moteur InnoDB. MyISAM ignore silencieusement les
+ * transactions — le code s'exécuterait sans erreur et sans rollback.
  * Le mediatheque.sql fourni utilise bien InnoDB.
  */
 
-require_once __DIR__ . '/../etape3/src/Database.php';
+require_once __DIR__ . '/../../etape3/src/Database.php';
 
 class EmpruntService
 {
@@ -31,15 +33,19 @@ class EmpruntService
     {
         $pdo = Database::getConnection();
 
-        // Ouverture de la transaction : à partir d'ici, rien n'est
-        // réellement écrit tant que commit() n'a pas été appelé.
+        // À partir d'ici, rien n'est réellement écrit tant que commit()
+        // n'a pas été appelé.
         $pdo->beginTransaction();
 
         try {
-            // --- Opération 1 : vérrouiller et vérifier la disponibilité ---
-            // FOR UPDATE pose un verrou sur la ligne jusqu'à la fin de la
-            // transaction : deux adhérents ne peuvent pas emprunter le
-            // même document simultanément (condition de concurrence).
+            // --- 1. Verrouiller et vérifier la disponibilité ---
+            // FOR UPDATE pose un verrou sur la ligne jusqu'à la fin de
+            // la transaction : deux adhérents ne peuvent pas emprunter
+            // le même document simultanément (condition de concurrence).
+            //
+            // Ce raffinement va au-delà de l'attendu du cours. Ne pas
+            // l'imposer — mais c'est la réponse à « et si deux personnes
+            // cliquent en même temps ? ».
             $stmt = $pdo->prepare(
                 'SELECT disponible FROM documents WHERE id = :id FOR UPDATE'
             );
@@ -54,13 +60,13 @@ class EmpruntService
                 throw new RuntimeException('Document déjà emprunté.');
             }
 
-            // --- Opération 2 : marquer indisponible ---
+            // --- 2. Marquer indisponible ---
             $stmt = $pdo->prepare(
                 'UPDATE documents SET disponible = 0 WHERE id = :id'
             );
             $stmt->execute(['id' => $documentId]);
 
-            // --- Opération 3 : tracer l'emprunt ---
+            // --- 3. Tracer l'emprunt ---
             $stmt = $pdo->prepare(
                 'INSERT INTO emprunts (document_id, emprunteur, date_emprunt)
                  VALUES (:doc, :emprunteur, CURDATE())'
@@ -74,8 +80,7 @@ class EmpruntService
             $pdo->commit();
 
         } catch (Throwable $e) {
-            // Une seule opération a échoué → on annule TOUT.
-            // Sans ce rollback, la base resterait dans un état incohérent.
+            // Une seule opération a échoué -> on annule TOUT.
             $pdo->rollBack();
 
             error_log('Emprunt échoué : ' . $e->getMessage());
@@ -83,9 +88,7 @@ class EmpruntService
         }
     }
 
-    /**
-     * Retour d'un document : même logique en sens inverse.
-     */
+    /** Retour d'un document : même logique en sens inverse. */
     public function rendre(int $documentId): void
     {
         $pdo = Database::getConnection();
@@ -116,12 +119,27 @@ class EmpruntService
     }
 }
 
-// ---------------------------------------------------------------
-// TEST À FAIRE FAIRE AUX STAGIAIRES
-// ---------------------------------------------------------------
-// 1. Faire fonctionner un emprunt normal, vérifier les deux tables.
-// 2. Renommer volontairement la table `emprunts` en `emprunts_x`.
-// 3. Relancer un emprunt : il doit échouer ET le document doit
-//    rester disponible. Si le document est passé à 0, le rollback
-//    n'est pas correctement placé.
-// ---------------------------------------------------------------
+/**
+ * =====================================================================
+ * TEST À IMPOSER AU STAGIAIRE — c'est le seul qui prouve quelque chose
+ * =====================================================================
+ *
+ * 1. Faire fonctionner un emprunt normal, vérifier les DEUX tables.
+ *
+ * 2. Renommer volontairement la table `emprunts` :
+ *      RENAME TABLE emprunts TO emprunts_x;
+ *
+ * 3. Relancer un emprunt. Il doit échouer ET le document doit
+ *    RESTER DISPONIBLE.
+ *
+ * 4. Si le document est passé à indisponible, le rollback est mal placé
+ *    ou absent. C'est exactement le bug que la transaction existe pour
+ *    empêcher.
+ *
+ * 5. Remettre la table :
+ *      RENAME TABLE emprunts_x TO emprunts;
+ *
+ * Un stagiaire qui n'a pas fait ce test n'a pas démontré que sa
+ * transaction fonctionne — il a seulement démontré que le cas nominal
+ * passe, ce qui serait aussi vrai sans transaction.
+ */

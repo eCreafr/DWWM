@@ -15,13 +15,26 @@ formateur/
 ├── etape1/                      ← corrigé niveaux 1 et 2
 ├── etape2/                      ← corrigé niveaux 1 et 2
 ├── etape3/                      ← corrigé niveaux 1 et 2
-├── extensions-niveau3/
-│   ├── 01-hydratation.php       ← Repository retournant des objets
-│   ├── 02-transaction.php       ← emprunt transactionnel + rollback
-│   ├── 03-enum-type-document.php
-│   └── 04-isbn-et-tostring.php  ← validation ISBN + jeu d'essai
+├── niveau3/                     ← corrigés des extensions, PAR ÉTAPE
+│   ├── etape1/
+│   │   ├── Livre.php            ← isbn validé + __toString()
+│   │   └── jeu-essai.php        ← 3 cas passants / 2 cas d'erreur
+│   ├── etape2/
+│   │   ├── Reservable.php       ← interface du multi-contrat
+│   │   ├── TraitReservation.php ← bonus : le trait, et pourquoi
+│   │   ├── Livre / Dvd / JeuVideo / Document / Empruntable
+│   │   ├── TypeDocument.php     ← enum PHP 8.1
+│   │   └── index.php            ← démonstration instanceof
+│   └── etape3/
+│       ├── DocumentRepositoryHydrate.php  ← hydratation + agrégations
+│       └── EmpruntService.php             ← transaction + rollback
 └── amorce-mvc/                  ← code de référence de la démo 15h45
 ```
+
+Le dossier `niveau3/` est organisé **par étape** et non à plat : chaque corrigé
+se trouve là où on le cherche. La section 6.1 du document
+`Corrige_Formateur_TP_POO_DWWM.docx` contient la matrice de traçabilité
+défi annoncé → fichier corrigé → commande de vérification.
 
 Le document `Corrige_Formateur_TP_POO_DWWM.docx` complète ce pack :
 erreurs fréquentes, points de vigilance, barème et grille de suivi.
@@ -33,13 +46,14 @@ erreurs fréquentes, points de vigilance, barème et grille de suivi.
 Tous les fichiers passent `php -l`. Les étapes 1 et 2 s'exécutent sans base de données :
 
 ```bash
-php etape1/index.php     # 4 blocs de test, tous OK attendus
-php etape2/index.php     # polymorphisme + contrats, tous OK attendus
-php extensions-niveau3/04-isbn-et-tostring.php   # 5/5 tests réussis
+php etape1/index.php                  # 4 blocs de test, tous OK attendus
+php etape2/index.php                  # test progressif, niveaux 1 puis 2
+php niveau3/etape1/jeu-essai.php      # 5/5 tests réussis
+php niveau3/etape2/index.php          # Reservable, instanceof, enum
 ```
 
-L'étape 3, l'amorce MVC et les extensions 01/02 nécessitent la base importée
-et un `config.php` adapté à la stack de la salle.
+L'étape 3, l'amorce MVC et les deux corrigés de `niveau3/etape3/` nécessitent
+la base importée et un `config.php` adapté à la stack de la salle.
 
 ---
 
