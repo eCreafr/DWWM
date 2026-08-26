@@ -455,7 +455,7 @@
                 // Ajouter l'événement de clic sur toutes les cartes de leçon
                 const lessonCards = document.querySelectorAll('.lesson-card');
                 lessonCards.forEach((card) => {
-                    card.addEventListener('click', function(e) {
+                    card.addEventListener('click', function (e) {
                         // Si le clic est sur le bouton, ne rien faire (le bouton gère lui-même)
                         if (e.target.classList.contains('status') || e.target.closest('.status')) {
                             return;
@@ -475,7 +475,7 @@
                 // Modifier les boutons pour utiliser le nouveau paramètre event
                 buttons.forEach((button) => {
                     const lessonNumber = button.getAttribute('data-lesson');
-                    button.onclick = function(e) {
+                    button.onclick = function (e) {
                         toggleLesson(lessonNumber, e);
                     };
                 });

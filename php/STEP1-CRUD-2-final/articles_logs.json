@@ -569,5 +569,14 @@
         },
         "ip": "::1",
         "user_agent": "Mozilla\/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit\/537.36 (KHTML, like Gecko) Chrome\/149.0.0.0 Safari\/537.36"
+    },
+    {
+        "timestamp": "2026-08-18 13:27:27",
+        "action": "delete_article_success",
+        "data": {
+            "id": 49
+        },
+        "ip": "::1",
+        "user_agent": "Mozilla\/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit\/537.36 (KHTML, like Gecko) Chrome\/151.0.0.0 Safari\/537.36"
     }
 ]

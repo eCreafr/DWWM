@@ -82,7 +82,7 @@ include('functions.php');
 
         ?>
             <!-- Carte Bootstrap pour afficher un article -->
-            <div class="p-3 m-3 col-lg-3">
+            <div class="col-lg-4 m-2">
                 <div class="card">
 
                     <?php

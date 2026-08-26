@@ -1,0 +1,287 @@
+[
+  {
+    "id": 1,
+    "type": "qcm",
+    "cp": "CP6",
+    "theme": "SQL — Jointures",
+    "question": "Quelle jointure retourne TOUTES les lignes de la table de gauche, même celles sans correspondance dans la table de droite ?",
+    "code": "",
+    "options": ["INNER JOIN", "LEFT JOIN", "RIGHT JOIN", "CROSS JOIN"],
+    "correct": 1,
+    "explication": "LEFT JOIN conserve la totalité des lignes de la table de gauche. Pour les lignes sans correspondance à droite, les colonnes de la table de droite valent NULL. INNER JOIN ne garderait que les lignes présentes des deux côtés, ce qui ferait disparaître les enregistrements orphelins. Piège classique en certif : bien identifier quelle table on veut conserver intégralement."
+  },
+  {
+    "id": 2,
+    "type": "sql",
+    "cp": "CP6",
+    "theme": "SQL — Ordre des clauses",
+    "question": "Laquelle de ces requêtes récupère correctement les utilisateurs majeurs, triés par nom ?",
+    "code": "-- Objectif : users dont age > 18, triés par nom",
+    "options": [
+      "SELECT * FROM users ORDER BY nom WHERE age > 18;",
+      "SELECT * FROM users WHERE age > 18 ORDER BY nom;",
+      "SELECT * FROM users WHERE age > 18 GROUP BY nom;",
+      "SELECT FROM users WHERE age > 18 ORDER BY nom;"
+    ],
+    "correct": 1,
+    "explication": "L'ordre des clauses SQL est imposé : SELECT ... FROM ... WHERE ... GROUP BY ... ORDER BY. La proposition 1 met ORDER BY avant WHERE → erreur de syntaxe. La 3 utilise GROUP BY (regroupement/agrégation) au lieu d'un tri. La 4 oublie le * après SELECT. Seule la 2 respecte la grammaire SQL."
+  },
+  {
+    "id": 3,
+    "type": "php",
+    "cp": "CP6",
+    "theme": "Sécurité — Injection SQL",
+    "question": "Quelle est la SEULE façon correcte d'insérer une donnée utilisateur dans une requête pour se protéger de l'injection SQL avec PDO ?",
+    "code": "// $email vient de $_POST",
+    "options": [
+      "$pdo->query(\"SELECT * FROM users WHERE email = '$email'\");",
+      "$stmt = $pdo->prepare(\"SELECT * FROM users WHERE email = :email\");\n$stmt->execute([':email' => $email]);",
+      "$pdo->query(\"SELECT * FROM users WHERE email = '\" . addslashes($email) . \"'\");",
+      "$pdo->query(\"SELECT * FROM users WHERE email = '\" . htmlspecialchars($email) . \"'\");"
+    ],
+    "correct": 1,
+    "explication": "La requête préparée sépare le code SQL des données : le moteur reçoit d'abord la structure de la requête, puis les valeurs, qui ne peuvent jamais être réinterprétées comme du SQL. addslashes() est insuffisant (contournable selon l'encodage). htmlspecialchars() protège du XSS à l'affichage, pas de l'injection SQL. La concaténation directe (option 1) est la faille n°1 du web. Point systématiquement vérifié par le jury."
+  },
+  {
+    "id": 4,
+    "type": "fonction",
+    "cp": "CP7",
+    "theme": "Sécurité — Mots de passe",
+    "question": "Laquelle de ces fonctions faut-il utiliser pour stocker un mot de passe de façon sécurisée en PHP ?",
+    "code": "",
+    "options": ["md5($mdp)", "sha1($mdp)", "password_hash($mdp, PASSWORD_DEFAULT)", "base64_encode($mdp)"],
+    "correct": 2,
+    "explication": "password_hash() utilise un algorithme lent et salé (bcrypt par défaut, Argon2 possible) : le sel est généré automatiquement et intégré au hash. md5 et sha1 sont rapides, sans sel, et cassables en masse par tables arc-en-ciel — interdits pour des mots de passe. base64_encode n'est même pas un chiffrement, juste un encodage réversible. Règle DWWM : un mot de passe ne se chiffre pas, il se hache — et jamais avec md5/sha1."
+  },
+  {
+    "id": 5,
+    "type": "fonction",
+    "cp": "CP7",
+    "theme": "Sécurité — Vérification mot de passe",
+    "question": "Le mot de passe est stocké via password_hash(). Comment vérifier la saisie de l'utilisateur à la connexion ?",
+    "code": "// $saisie = mot de passe tapé\n// $hash  = valeur stockée en base",
+    "options": [
+      "if ($saisie === $hash) { ... }",
+      "if (md5($saisie) === $hash) { ... }",
+      "if (password_verify($saisie, $hash)) { ... }",
+      "if (password_hash($saisie) === $hash) { ... }"
+    ],
+    "correct": 2,
+    "explication": "password_verify() re-hache la saisie avec le sel contenu dans le hash stocké, puis compare de façon sûre (temps constant, résistant aux attaques temporelles). On ne compare JAMAIS directement, car deux appels à password_hash() sur le même mot de passe produisent des hash différents (sel aléatoire) : l'option 4 échouerait donc toujours. C'est le pendant obligatoire de la question précédente."
+  },
+  {
+    "id": 6,
+    "type": "poo",
+    "cp": "CP7",
+    "theme": "POO — Encapsulation",
+    "question": "Une propriété déclarée `private` est accessible depuis...",
+    "code": "class Compte {\n    private float $solde;\n}",
+    "options": [
+      "n'importe où dans le code",
+      "uniquement à l'intérieur de la classe qui la déclare",
+      "la classe et toutes ses classes filles",
+      "uniquement le même fichier PHP"
+    ],
+    "correct": 1,
+    "explication": "private = accessible seulement dans la classe qui le déclare (encapsulation stricte). À distinguer de protected (classe + classes filles) et public (partout). L'encapsulation protège l'intégrité des données : on force le passage par des méthodes (getters/setters) plutôt que d'exposer l'état interne. Confusion private/protected très fréquente à l'oral."
+  },
+  {
+    "id": 7,
+    "type": "poo",
+    "cp": "CP7",
+    "theme": "POO — Héritage",
+    "question": "Quel mot-clé permet à une classe d'HÉRITER d'une autre classe en PHP ?",
+    "code": "class Admin ______ Utilisateur { }",
+    "options": ["implements", "extends", "use", "inherits"],
+    "correct": 1,
+    "explication": "extends établit un héritage de classe (Admin est un Utilisateur spécialisé). implements sert à réaliser une interface (contrat de méthodes). use sert à importer un trait ou un namespace. inherits n'existe pas en PHP. Piège classique : confondre extends (classe) et implements (interface)."
+  },
+  {
+    "id": 8,
+    "type": "trou",
+    "cp": "CP7",
+    "theme": "POO — Constructeur",
+    "question": "Complétez : en PHP, le constructeur d'une classe se déclare avec la méthode magique ______.",
+    "code": "class Produit {\n    public function ______(string $nom) {\n        $this->nom = $nom;\n    }\n}",
+    "options": ["__init()", "__construct()", "construct()", "__new()"],
+    "correct": 1,
+    "explication": "__construct() (deux underscores) est la méthode magique appelée automatiquement à chaque `new`. __init existe en Python, pas en PHP. construct() sans underscores ne serait qu'une méthode ordinaire jamais déclenchée à l'instanciation. Les méthodes magiques PHP commencent toujours par deux underscores : __construct, __destruct, __toString, __get, __set."
+  },
+  {
+    "id": 9,
+    "type": "poo",
+    "cp": "CP7",
+    "theme": "POO — Contexte objet",
+    "question": "À quoi fait référence `$this` à l'intérieur d'une méthode ?",
+    "code": "",
+    "options": [
+      "à la classe parente",
+      "à l'instance courante de l'objet",
+      "à une variable globale",
+      "à la dernière classe instanciée du programme"
+    ],
+    "correct": 1,
+    "explication": "$this pointe vers l'instance courante — l'objet sur lequel la méthode a été appelée. Il permet d'accéder aux propriétés et méthodes de CET objet précis. Pour la classe parente on utilise parent::, pour un membre statique de la classe self:: ou static::. $this n'a de sens que dans un contexte objet non statique."
+  },
+  {
+    "id": 10,
+    "type": "poo",
+    "cp": "CP7",
+    "theme": "POO — Membres statiques",
+    "question": "La classe Utilisateur possède une méthode statique `compter()`. Comment l'appeler ?",
+    "code": "class Utilisateur {\n    public static function compter(): int { /* ... */ }\n}",
+    "options": [
+      "$utilisateur->compter();",
+      "Utilisateur::compter();",
+      "Utilisateur->compter();",
+      "new Utilisateur()->compter();"
+    ],
+    "correct": 1,
+    "explication": "Une méthode statique appartient à la classe, pas à une instance : on l'appelle avec l'opérateur de résolution de portée `::` directement sur le nom de la classe → Utilisateur::compter(). La flèche -> ne s'utilise que sur un objet instancié. Utile pour des méthodes utilitaires ou des compteurs qui ne dépendent d'aucun objet particulier."
+  },
+  {
+    "id": 11,
+    "type": "qcm",
+    "cp": "CP7",
+    "theme": "Architecture — MVC",
+    "question": "Dans l'architecture MVC, quel composant contient la logique métier et l'accès aux données ?",
+    "code": "",
+    "options": ["le Contrôleur (Controller)", "la Vue (View)", "le Modèle (Model)", "le Routeur (Router)"],
+    "correct": 2,
+    "explication": "Le Modèle porte les données et la logique métier (règles, calculs, accès BDD). La Vue ne fait qu'afficher. Le Contrôleur orchestre : il reçoit la requête, sollicite le Modèle, puis choisit la Vue. Cette séparation des responsabilités rend le code testable et maintenable. Question de fond très prisée du jury pour vérifier que le stagiaire comprend son propre découpage."
+  },
+  {
+    "id": 12,
+    "type": "qcm",
+    "cp": "CP7",
+    "theme": "Architecture — MVC",
+    "question": "Quel est le rôle du CONTRÔLEUR dans une application MVC ?",
+    "code": "",
+    "options": [
+      "générer le HTML final affiché à l'utilisateur",
+      "recevoir la requête, appeler le modèle, puis choisir la vue à renvoyer",
+      "stocker durablement les données en base",
+      "gérer la mise en forme CSS de la page"
+    ],
+    "correct": 1,
+    "explication": "Le Contrôleur est le chef d'orchestre : il intercepte la requête HTTP, appelle le(s) modèle(s) pour obtenir/traiter les données, puis passe la main à la vue adéquate. Il ne doit contenir ni SQL brut (rôle du modèle) ni HTML (rôle de la vue). Un contrôleur qui fait tout est un signal d'alerte : mauvaise répartition des responsabilités."
+  },
+  {
+    "id": 13,
+    "type": "qcm",
+    "cp": "CP7",
+    "theme": "Architecture — Séparation des responsabilités",
+    "question": "Écrire une requête SQL directement dans un fichier de vue (template HTML) viole surtout quel principe ?",
+    "code": "<!-- vue.php -->\n<?php $r = $pdo->query(\"SELECT * FROM produits\"); ?>\n<ul><?php foreach ($r as $p): ?><li><?= $p['nom'] ?></li><?php endforeach; ?></ul>",
+    "options": [
+      "le principe DRY (Don't Repeat Yourself)",
+      "la séparation des responsabilités (separation of concerns)",
+      "le principe KISS (Keep It Simple)",
+      "le responsive design"
+    ],
+    "correct": 1,
+    "explication": "La vue doit uniquement afficher des données qu'on lui fournit ; l'accès BDD relève du modèle. Mélanger les deux casse la séparation des responsabilités, rend le code difficile à tester et à réutiliser, et duplique la logique d'accès aux données dans chaque template. C'est exactement ce que MVC cherche à éviter."
+  },
+  {
+    "id": 14,
+    "type": "qcm",
+    "cp": "CP5",
+    "theme": "SQL — Intégrité référentielle",
+    "question": "À quoi sert une clé étrangère (FOREIGN KEY) dans une base relationnelle ?",
+    "code": "",
+    "options": [
+      "à chiffrer les données sensibles d'une table",
+      "à garantir l'intégrité référentielle entre deux tables liées",
+      "à accélérer automatiquement toutes les requêtes",
+      "à empêcher les doublons dans une colonne"
+    ],
+    "correct": 1,
+    "explication": "Une clé étrangère impose qu'une valeur d'une table corresponde bien à une clé primaire existante dans une autre table : impossible de créer une commande rattachée à un client inexistant, ou de supprimer un client qui a encore des commandes (selon les règles ON DELETE). Empêcher les doublons, c'est le rôle d'une contrainte UNIQUE. Concept central de la modélisation Merise → MLD."
+  },
+  {
+    "id": 15,
+    "type": "sql",
+    "cp": "CP6",
+    "theme": "PDO — Requête préparée",
+    "question": "Laquelle de ces syntaxes exécute CORRECTEMENT une requête préparée avec un paramètre nommé ?",
+    "code": "// $id vient de l'URL",
+    "options": [
+      "$pdo->query(\"SELECT * FROM produits WHERE id = :id\");",
+      "$stmt = $pdo->prepare(\"SELECT * FROM produits WHERE id = :id\");\n$stmt->execute(['id' => $id]);",
+      "$pdo->exec(\"SELECT * FROM produits WHERE id = :id\", [$id]);",
+      "$pdo->prepare(\"SELECT * FROM produits WHERE id = :id\", $id);"
+    ],
+    "correct": 1,
+    "explication": "Le trio correct : prepare() pour compiler la requête avec le placeholder :id, puis execute() en passant les valeurs dans un tableau associatif (la clé 'id' ou ':id' fonctionne). query() n'accepte pas de paramètres liés. exec() sert aux requêtes sans résultat (INSERT/UPDATE/DELETE) et ne prend pas de tableau de params. prepare() seul ne suffit pas : il faut execute()."
+  },
+  {
+    "id": 16,
+    "type": "sql",
+    "cp": "CP6",
+    "theme": "SQL — Agrégation",
+    "question": "Quelle requête compte le nombre d'articles PAR catégorie ?",
+    "code": "-- Table articles(id, titre, categorie)",
+    "options": [
+      "SELECT categorie, COUNT(*) FROM articles;",
+      "SELECT categorie, COUNT(*) FROM articles GROUP BY categorie;",
+      "SELECT categorie, SUM(*) FROM articles GROUP BY categorie;",
+      "SELECT COUNT(categorie) FROM articles ORDER BY categorie;"
+    ],
+    "correct": 1,
+    "explication": "Compter « par catégorie » impose un GROUP BY categorie associé à COUNT(*). Sans GROUP BY (option 1), le moteur renvoie une seule ligne et une catégorie arbitraire — résultat incohérent. SUM(*) n'existe pas (SUM s'applique à une colonne numérique). L'option 4 compte les valeurs non-NULL de categorie sans regrouper. Dès qu'on veut un total « par X », le réflexe est GROUP BY X."
+  },
+  {
+    "id": 17,
+    "type": "fonction",
+    "cp": "CP7",
+    "theme": "Sécurité — Sessions",
+    "question": "Juste après une authentification réussie, quelle fonction appeler pour se protéger de la fixation de session ?",
+    "code": "// L'utilisateur vient de se connecter avec succès",
+    "options": [
+      "session_start()",
+      "session_regenerate_id(true)",
+      "session_destroy()",
+      "setcookie('auth', true)"
+    ],
+    "correct": 1,
+    "explication": "session_regenerate_id(true) attribue un nouvel identifiant de session et supprime l'ancien : un attaquant qui aurait imposé un ID de session à la victime avant connexion (fixation de session) se retrouve avec un ID devenu inutile. session_start() ouvre la session mais ne change pas l'ID. session_destroy() la détruit (utile à la déconnexion). Bonne pratique OWASP à connaître pour l'oral sécurité."
+  },
+  {
+    "id": 18,
+    "type": "fonction",
+    "cp": "CP4",
+    "theme": "Sécurité — XSS",
+    "question": "Pour afficher un commentaire saisi par un utilisateur sans risque de faille XSS, on utilise...",
+    "code": "// $commentaire vient de la base, saisi par un internaute\necho ______($commentaire);",
+    "options": ["addslashes()", "htmlspecialchars()", "password_hash()", "intval()"],
+    "correct": 1,
+    "explication": "Le XSS se combat par l'échappement en SORTIE : htmlspecialchars() convertit < > & \" en entités HTML, empêchant l'injection de balises <script>. addslashes() concerne le SQL (et de façon insuffisante). intval() force un entier — utile pour un id, pas pour du texte libre. Règle : requête préparée contre l'injection SQL (entrée), htmlspecialchars contre le XSS (sortie). Le jury adore vérifier qu'on ne confond pas les deux."
+  },
+  {
+    "id": 19,
+    "type": "trou",
+    "cp": "CP7",
+    "theme": "Sécurité — CSRF",
+    "question": "Complétez : un jeton ______ inséré dans un formulaire protège contre les requêtes falsifiées provenant d'un autre site.",
+    "code": "<form method=\"post\">\n    <input type=\"hidden\" name=\"token\" value=\"<?= $_SESSION['token'] ?>\">\n    ...\n</form>",
+    "options": ["JWT", "CSRF", "XSS", "SQL"],
+    "correct": 1,
+    "explication": "Un jeton CSRF (Cross-Site Request Forgery) est une valeur aléatoire stockée en session et injectée dans le formulaire ; au traitement, on vérifie qu'elle correspond. Un site tiers ne peut pas deviner ce jeton, donc ne peut pas forger une requête valide au nom de l'utilisateur connecté. XSS est une autre faille (injection de script). JWT est un format de jeton d'authentification, pas une protection anti-CSRF."
+  },
+  {
+    "id": 20,
+    "type": "qcm",
+    "cp": "CP8",
+    "theme": "Déploiement — Configuration",
+    "question": "Lors du déploiement, quel fichier ne doit JAMAIS être exposé publiquement ni versionné en clair sur un dépôt Git public ?",
+    "code": "",
+    "options": [
+      "index.php",
+      "le fichier de configuration contenant les identifiants de la base (ex : .env)",
+      "style.css",
+      "README.md"
+    ],
+    "correct": 1,
+    "explication": "Les identifiants de connexion à la base (hôte, utilisateur, mot de passe) ne doivent jamais fuiter : on les isole dans un fichier de config ou un .env, ajouté au .gitignore, idéalement placé hors de la racine web publique. index.php, style.css et README.md sont faits pour être publics. Fuite d'identifiants BDD = compromission directe. Point de vigilance récurrent dans la doc de déploiement attendue en CP8."
+  }
+]
